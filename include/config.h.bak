@@ -1,0 +1,392 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#include <string>
+#include <cereal/cereal.hpp>
+#include <cereal/archives/json.hpp>
+#include <cereal/types/vector.hpp>
+
+using namespace std;
+using namespace cereal;
+
+namespace netxpert {
+
+    enum SPTAlgorithm {
+
+        Dijkstra_MCFClass = 0,
+        LQueue_MCFClass = 1,
+        LDeque_MCFClass = 2,
+        Dijkstra_Heap_MCFClass = 3,
+        Dijkstra_2Heap_LEMON = 4} ;
+
+    enum MCFAlgorithm {
+        NetworkSimplex_MCF = 0,
+        NetworkSimplex_LEMON = 1
+        } ;
+
+    enum MSTAlgorithm {
+        Kruskal_QuickGraph = 0, //.NET!
+        Prim_QuickGraph = 1,    //.NET!
+        Kruskal_LEMON = 2};
+
+    /**
+    * \Class that stores the configuration for NetXpert
+    **/
+    class Config
+    {
+        public:
+
+            /**
+            * Serialize class members to json
+            **/
+            template <class Archive>
+            void serialize( Archive & ar ){
+                ar( CEREAL_NVP(sqliteDBPath), CEREAL_NVP(sqliteVersion), CEREAL_NVP(resultDBPath),
+                    CEREAL_NVP(sptHeapCard), CEREAL_NVP(sptAlgorithm),
+                    CEREAL_NVP(mcfAlgorithm), CEREAL_NVP(mstAlgorithm),  CEREAL_NVP(isDirected),
+                    CEREAL_NVP(arcsTableName), CEREAL_NVP(arcsGeomColumnName),
+                    CEREAL_NVP(edgeIDColumnName), CEREAL_NVP(fromNodeColumnName), CEREAL_NVP(toNodeColumnName),
+                    CEREAL_NVP(costColumnName), CEREAL_NVP(capColumnName), CEREAL_NVP(nodesTableName),
+                    CEREAL_NVP(nodesGeomColumnName), CEREAL_NVP(nodeIDColumnName),
+                    CEREAL_NVP(nodeSupplyColumnName), CEREAL_NVP(barrierPolyTableName),
+                    CEREAL_NVP(barrierPolyGeomColumnName),
+                    CEREAL_NVP(barrierLineTableName), CEREAL_NVP(barrierLineGeomColumnName),
+                    CEREAL_NVP(barrierPointTableName),
+                    CEREAL_NVP(barrierPointGeomColumnName), CEREAL_NVP(treshold), CEREAL_NVP(useSpatialIndex),
+                    CEREAL_NVP(cleanNetwork), CEREAL_NVP(loadDBIntoMemory), CEREAL_NVP(numberOfTests),
+                    CEREAL_NVP(spatiaLiteHome), CEREAL_NVP(spatiaLiteCoreName),
+                    CEREAL_NVP(onewayColumnName), CEREAL_NVP(cleanNetwork), CEREAL_NVP(sptAllDests));
+            }
+
+            /** Default constructor */
+            //Config();
+            /** Default destructor */
+            //virtual ~Config();
+
+            /** Access sqliteDBPath
+             * \return The current value of sqliteDBPath
+             */
+            string GetsqliteDBPath() { return sqliteDBPath; }
+            /** Set sqliteDBPath
+             * \param val New value to set
+             */
+            void SetsqliteDBPath(string val) { sqliteDBPath = val; }
+            /** Access sqliteVersion
+             * \return The current value of sqliteVersion;
+             */
+            int GetsqliteVersion() { return sqliteVersion; }
+            /** Set sqliteVersion
+             * \param val New value to set
+             */
+            void SetsqliteVersion(int val) { sqliteVersion = val; }
+            /** Access resultDBPath
+             * \return The current value of resultDBPath;
+             */
+            string GetresultDBPath() { return resultDBPath; }
+            /** Set resultDBPath
+             * \param val New value to set
+             */
+            void SetresultDBPath(string val) { resultDBPath = val; }
+            /** Access sptHeapCard
+             * \return The current value of sptHeapCard
+             */
+            int GetsptHeapCard() { return sptHeapCard; }
+            /** Set sptHeapCard
+             * \param val New value to set
+             */
+            void SetsptHeapCard(int val) { sptHeapCard = val; }
+            /** Access sptAlgorithm
+             * \return The current value of sptAlgorithm
+             */
+            SPTAlgorithm GetsptAlgorithm() { return sptAlgorithm; }
+            /** Set sptAlgorithm
+             * \param val New value to set
+             */
+            void SetsptAlgorithm(SPTAlgorithm val) { sptAlgorithm = val; }
+            /** Access mcfAlgorithm
+             * \return The current value of mcfAlgorithm;
+             */
+            MCFAlgorithm GetmcfAlgorithm() { return mcfAlgorithm; }
+            /** Set mcfAlgorithm
+             * \param val New value to set
+             */
+            void SetmcfAlgorithm(MCFAlgorithm val) { mcfAlgorithm = val; }
+            /** Access mstAlgorithm
+             * \return The current value of mstAlgorithm
+             */
+            MSTAlgorithm GetmstAlgorithm() { return mstAlgorithm; }
+            /** Set mstAlgorithm
+             * \param val New value to set
+             */
+            void SetmstAlgorithm(MSTAlgorithm val) { mstAlgorithm = val; }
+            /** Access isDirected
+             * \return The current value of isDirected
+             */
+            bool GetisDirected() { return isDirected; }
+            /** Set isDirected;
+             * \param val New value to set
+             */
+            void SetisDirected(bool val) { isDirected = val; }
+            /** Access arcsTableName
+             * \return The current value of arcsTableName
+             */
+            string GetarcsTableName() { return arcsTableName; }
+            /** Set arcsTableName
+             * \param val New value to set
+             */
+            void SetarcsTableName(string val) { arcsTableName = val; }
+            /** Access arcsGeomColumnName
+             * \return The current value of arcsGeomColumnName
+             */
+            string GetarcsGeomColumnName() { return arcsGeomColumnName; }
+            /** Set arcsGeomColumnName
+             * \param val New value to set
+             */
+            void SetarcsGeomColumnName(string val) { arcsGeomColumnName = val; }
+            /** Access edgeIDColumnName
+             * \return The current value of edgeIDColumnName
+             */
+            string GetedgeIDColumnName() { return edgeIDColumnName; }
+            /** Set edgeIDColumnName
+             * \param val New value to set
+             */
+            void SetedgeIDColumnName(string val) { edgeIDColumnName = val; }
+            /** Access fromNodeColumnName
+             * \return The current value of fromNodeColumnName
+             */
+            string GetfromNodeColumnName() { return fromNodeColumnName; }
+            /** Set fromNodeColumnName
+             * \param val New value to set
+             */
+            void SetfromNodeColumnName(string val) { fromNodeColumnName = val; }
+            /** Access toNodeColumnName;
+             * \return The current value of toNodeColumnName
+             */
+            string GettoNodeColumnName() { return toNodeColumnName; }
+            /** Set toNodeColumnName
+             * \param val New value to set
+             */
+            void SettoNodeColumnName(string val) { toNodeColumnName = val; }
+            /** Access costColumnName
+             * \return The current value of costColumnName
+             */
+            string GetcostColumnName() { return costColumnName; }
+            /** Set costColumnName
+             * \param val New value to set
+             */
+            void SetcostColumnName(string val) { costColumnName = val; }
+            /** Access capColumnName
+             * \return The current value of capColumnName
+             */
+            string GetcapColumnName() { return capColumnName; }
+            /** Set capColumnName
+             * \param val New value to set
+             */
+            void SetcapColumnName(string val) { capColumnName = val; }
+             /** Access nodesTableName
+             * \return The current value of nodesTableName
+             */
+            string GetnodesTableName() { return nodesTableName; }
+            /** Set nodesTableName
+             * \param val New value to set
+             */
+            void SetnodesTableName(string val) { nodesTableName = val; }
+            /** Access nodesGeomColumnName
+             * \return The current value of nodesGeomColumnName
+             */
+            string GetnodesGeomColumnName() { return nodesGeomColumnName; }
+            /** Set nodesGeomColumnName
+             * \param val New value to set
+             */
+            void SetnodesGeomColumnName(string val) { nodesGeomColumnName = val; }
+            /** Access nodeIDColumnName
+             * \return The current value of nodeIDColumnName
+             */
+            string GetnodeIDColumnName() { return nodeIDColumnName; }
+            /** Set nodeIDColumnName
+             * \param val New value to set
+             */
+            void SetnodeIDColumnName(string val) { nodeIDColumnName = val; }
+            /** Access nodeIDColumnName
+             * \return The current value of nodeIDColumnName
+             */
+            string GetnodeSupplyColumnName() { return nodeSupplyColumnName; }
+            /** Set nodeSupplyColumnName
+             * \param val New value to set
+             */
+            void SetnodeSupplyColumnName(string val) { nodeSupplyColumnName = val; }
+            /** Access barrierPolyTableName
+             * \return The current value of barrierPolyTableName
+             */
+            string GetbarrierPolyTableName() { return barrierPolyTableName; }
+            /** Set barrierPolyTableName
+             * \param val New value to set
+             */
+            void SetbarrierPolyTableName(string val) { barrierPolyTableName = val; }
+            /** Access barrierPolyGeomColumnName
+             * \return The current value of barrierPolyGeomColumnName
+             */
+            string GetbarrierPolyGeomColumnName() { return barrierPolyGeomColumnName; }
+            /** Set barrierPolyGeomColumnName
+             * \param val New value to set
+             */
+            void SetbarrierPolyGeomColumnName(string val) { barrierPolyGeomColumnName = val; }
+            /** Access barrierLineTableName
+             * \return The current value of barrierLineTableName
+             */
+            string GetbarrierLineTableName() { return barrierLineTableName; }
+            /** Set barrierLineTableName
+             * \param val New value to set
+             */
+            void SetbarrierLineTableName(string val) { barrierLineTableName = val; }
+            /** Access barrierLineGeomColumnName
+             * \return The current value of barrierLineGeomColumnName
+             */
+            string GetbarrierLineGeomColumnName() { return barrierLineGeomColumnName; }
+            /** Set barrierLineGeomColumnName
+             * \param val New value to set
+             */
+            void SetbarrierLineGeomColumnName(string val) { barrierLineGeomColumnName = val; }
+            /** Access barrierPointTableName
+             * \return The current value of barrierPointTableName
+             */
+            string GetbarrierPointTableName() { return barrierPointTableName; }
+            /** Set barrierPointTableName
+             * \param val New value to set
+             */
+            void SetbarrierPointTableName(string val) { barrierPointTableName = val; }
+            /** Access barrierPointGeomColumnName
+             * \return The current value of barrierPointGeomColumnName
+             */
+            string GetbarrierPointGeomColumnName() { return barrierPointGeomColumnName; }
+            /** Set barrierPointGeomColumnName
+             * \param val New value to set
+             */
+            void SetbarrierPointGeomColumnName(string val) { barrierPointGeomColumnName = val; }
+            /** Access treshold
+             * \return The current value of treshold
+             */
+            int Gettreshold() { return treshold; }
+            /** Set treshold
+             * \param val New value to set
+             */
+            void Settreshold(int val) { treshold = val; }
+            /** Access useSpatialIndex
+             * \return The current value of useSpatialIndex
+             */
+            bool GetuseSpatialIndex() { return useSpatialIndex; }
+            /** Set useSpatialIndex
+             * \param val New value to set
+             */
+            void SetuseSpatialIndex(bool val) { useSpatialIndex = val; }
+            /** Access loadDBIntoMemory
+             * \return The current value of loadDBIntoMemory
+             */
+            bool GetloadDBIntoMemory() { return loadDBIntoMemory; }
+            /** Set loadDBIntoMemory
+             * \param val New value to set
+             */
+            void SetloadDBIntoMemory(bool val) { loadDBIntoMemory = val; }
+            /** Access numberOfTests
+             * \return The current value of numberOfTests
+             */
+            int GetnumberOfTests() { return numberOfTests; }
+            /** Set numberOfTests
+             * \param val New value to set
+             */
+            void SetnumberOfTests(int val) { numberOfTests = val; }
+            /** Access spatialiteHome
+             * \return The current value of spatialiteHome
+             */
+            string GetspatiaLiteHome() { return spatiaLiteHome; }
+            /** Set spatiaLiteHome
+             * \param val New value to set
+             */
+            void SetspatiaLiteHome(string val) { spatiaLiteHome = val; }
+            /** Access spatiaLiteCoreName
+             * \return The current value of spatiaLiteCoreName
+             */
+            string GetspatiaLiteCoreName() { return spatiaLiteCoreName; }
+            /** Set spatiaLiteCoreName
+             * \param val New value to set
+             */
+            void SetspatiaLiteCoreName(string val) { spatiaLiteCoreName = val; }
+            /** Access onewayColumnName
+             * \return The current value of onewayColumnName
+             */
+            string GetonewayColumnName() { return onewayColumnName; }
+            /** Set onewayColumnName
+             * \param val New value to set
+             */
+            void SetonewayColumnName(string val) { onewayColumnName = val; }
+            /** Access cleanNetwork
+             * \return The current value of cleanNetwork
+             */
+            bool GetcleanNetwork() { return cleanNetwork; }
+            /** Set cleanNetwork
+             * \param val New value to set
+             */
+            void SetcleanNetwork(bool val) { cleanNetwork = val; }
+            /** Access sptAllDests
+             * \return The current value of sptAllDests
+             */
+            bool GetsptAllDests() { return sptAllDests; }
+            /** Set sptAllDests
+             * \param val New value to set
+             */
+            void SetsptAllDests(bool val) { sptAllDests = val; }
+         protected:
+         private:
+            string sqliteDBPath; //!< Member variable "sqliteDBPath"
+            int sqliteVersion; //!< Member variable "sqliteVersion"
+            string resultDBPath; //!< Member variable "resultDBPath"
+            int sptHeapCard; //!< Member variable "sptHeapCard"
+            SPTAlgorithm sptAlgorithm; //!< Member variable "sptAlgorithm"
+            MCFAlgorithm mcfAlgorithm; //!< Member variable "mcfAlgorithm"
+            MSTAlgorithm mstAlgorithm; //!< Member variable "mstAlgorithm"
+            bool isDirected; //!< Member variable "isDirected"
+            string arcsTableName; //!< Member variable "arcsTableName"
+            string arcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
+            string edgeIDColumnName; //!< Member variable "edgeIDColumnName"
+            string fromNodeColumnName; //!< Member variable "fromNodeColumnName"
+            string toNodeColumnName; //!< Member variable "toNodeColumnName"
+            string costColumnName; //!< Member variable "costColumnName"
+            string capColumnName; //!< Member variable "capColumnName"
+            string nodesTableName; //!< Member variable "nodesTableName"
+            string nodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
+            string nodeIDColumnName;//!< Member variable "nodeIDColumnName"
+            string nodeSupplyColumnName;//!< Member variable "nodeSupplyColumnName"
+            string barrierPolyTableName;//!< Member variable "barrierPolyTableName"
+            string barrierPolyGeomColumnName;//!< Member variable "barrierPolyGeomColumnName"
+            string barrierLineTableName;//!< Member variable "barrierLineTableName"
+            string barrierLineGeomColumnName;//!< Member variable "barrierLineGeomColumnName"
+            string barrierPointTableName;//!< Member variable "barrierPointTableName"
+            string barrierPointGeomColumnName;//!< Member variable "barrierPointGeomColumnName"
+            int treshold; //!< Member variable "treshold" for distance search: closest edge of network to given point
+            bool useSpatialIndex;//!< Member variable "useSpatialIndex"
+            bool loadDBIntoMemory;//!< Member variable "loadDBIntoMemory"
+            int numberOfTests;//!< Member variable "numberOfTests"
+
+            string spatiaLiteHome;//!< Member variable "spatiaLiteHome"
+            string spatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
+            //GeometryHandling geometryHandling;//!< Member variable "geometryHandling"
+            string onewayColumnName;//!< Member variable "onewayColumnName"
+            //TestCase testCase;//!< Member variable "testCase"
+            bool cleanNetwork;//!< Member variable "cleanNetwork"
+            bool sptAllDests;//!< Member variable "sptAllDests"
+            //ResultDBType resultDBType;//!< Member variable "resultDBType"
+    };
+
+
+    /**
+    * \Class that reads a configuration file for NetXpert
+    **/
+    class ConfigReader
+    {
+        public:
+            Config* GetConfigFromJSON(string jsonString);
+            Config* GetConfigFromJSONFile(string fileName);
+    };
+}
+
+#endif // CONFIG_H
