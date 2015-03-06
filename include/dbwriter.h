@@ -24,9 +24,9 @@ namespace NetXpert {
             virtual void CreateSolverResultTable(string _tableName) = 0;
             virtual void CreateSolverResultTable(string _tableName, bool dropFirst) = 0;
             virtual void OpenNewTransaction() = 0;
-            virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
+            /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     geos::geom::MultiLineString& route, string _tableName,
-                                    bool truncateBeforeInsert) = 0;
+                                    bool truncateBeforeInsert) = 0;*/
             /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     geos::geom::MultiLineString route, string _tableName,
                                     bool truncateBeforeInsert, SQLiteCommand cmd) = 0;*/

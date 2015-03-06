@@ -1,0 +1,276 @@
+# depslib dependency file v1.0
+1425572191 source:/home/hahne/dev/netxpert/test/main.cpp
+	<iostream>
+	"logger.h"
+	"fgdbwriter.h"
+	"slitewriter.h"
+	<fstream>
+	<geos/io/WKTReader.h>
+	<geos/io/StringTokenizer.h>
+	"data.h"
+	"network.h"
+	"dbhelper.h"
+	"test.h"
+
+1425501193 /home/hahne/dev/netxpert/include/logger.h
+	<string>
+	"config.h"
+
+1425572067 /home/hahne/dev/netxpert/include/config.h
+	<string>
+	<cereal/cereal.hpp>
+	<cereal/archives/json.hpp>
+	<cereal/types/vector.hpp>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/cereal.hpp
+	<type_traits>
+	<string>
+	<memory>
+	<unordered_map>
+	<unordered_set>
+	<vector>
+	<cstddef>
+	<cstdint>
+	<functional>
+	<cereal/macros.hpp>
+	<cereal/details/traits.hpp>
+	<cereal/details/helpers.hpp>
+	<cereal/types/base_class.hpp>
+	<cereal/types/common.hpp>
+
+1423772165 /usr/local/include/boost/type_traits
+
+1423772170 /usr/local/include/boost/functional
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/macros.hpp
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/details/traits.hpp
+	<type_traits>
+	<typeindex>
+	<cereal/macros.hpp>
+	<cereal/access.hpp>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/access.hpp
+	<type_traits>
+	<iostream>
+	<cstdint>
+	<cereal/macros.hpp>
+	<cereal/details/helpers.hpp>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/details/helpers.hpp
+	<type_traits>
+	<cstdint>
+	<utility>
+	<memory>
+	<unordered_map>
+	<stdexcept>
+	<cereal/macros.hpp>
+	<cereal/details/static_object.hpp>
+
+1423772164 /usr/local/include/boost/utility
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/details/static_object.hpp
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/types/base_class.hpp
+	<cereal/details/traits.hpp>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/types/common.hpp
+	<cereal/cereal.hpp>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/archives/json.hpp
+	<cereal/cereal.hpp>
+	<cereal/details/util.hpp>
+	<cereal/external/rapidjson/prettywriter.h>
+	<cereal/external/rapidjson/genericstream.h>
+	<cereal/external/rapidjson/reader.h>
+	<cereal/external/rapidjson/document.h>
+	<cereal/external/base64.hpp>
+	<limits>
+	<sstream>
+	<stack>
+	<vector>
+	<string>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/details/util.hpp
+	<typeinfo>
+	<string>
+	<cxxabi.h>
+	<cstdlib>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/prettywriter.h
+	"writer.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/writer.h
+	"rapidjson.h"
+	"internal/stack.h"
+	"internal/strfunc.h"
+	<cstdio>
+	<new>
+	<limits>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/rapidjson.h
+	<cstdlib>
+	<cstring>
+	<inttypes.h>
+	<cassert>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/internal/stack.h
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/internal/strfunc.h
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/genericstream.h
+	"rapidjson.h"
+	<iostream>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/reader.h
+	"rapidjson.h"
+	"internal/pow10.h"
+	"internal/stack.h"
+	<csetjmp>
+	<limits>
+	<cmath>
+	<sstream>
+	<nmmintrin.h>
+	<emmintrin.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/internal/pow10.h
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/rapidjson/document.h
+	"reader.h"
+	"internal/strfunc.h"
+	<new>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/external/base64.hpp
+	<string>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/types/vector.hpp
+	<cereal/cereal.hpp>
+	<vector>
+
+1425572668 /home/hahne/dev/netxpert/include/fgdbwriter.h
+	<string>
+	"dbwriter.h"
+	"logger.h"
+	<fstream>
+	<FileGDB_API/include/FileGDBAPI.h>
+	<boost/filesystem.hpp>
+	<boost/algorithm/string.hpp>
+
+1425572623 /home/hahne/dev/netxpert/include/dbwriter.h
+	<string>
+	<geos/geom/MultiLineString.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/CoordinateSequence.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/FileGDBAPI.h
+	"FileGDBCore.h"
+	"GeodatabaseManagement.h"
+	"Geodatabase.h"
+	"Table.h"
+	"Row.h"
+	"Util.h"
+	"Raster.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/FileGDBCore.h
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/GeodatabaseManagement.h
+	<string>
+	"FileGDBCore.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/Geodatabase.h
+	<string>
+	<vector>
+	<map>
+	"FileGDBCore.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/Table.h
+	<string>
+	<vector>
+	"FileGDBCore.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/Row.h
+	<string>
+	<vector>
+	"FileGDBCore.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/Util.h
+	<string>
+	<vector>
+	"FileGDBCore.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/FileGDB_API/include/Raster.h
+	<string>
+	"FileGDBCore.h"
+
+1425572679 /home/hahne/dev/netxpert/include/slitewriter.h
+	<string>
+	"dbwriter.h"
+	"logger.h"
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Transaction.h>
+	<boost/filesystem.hpp>
+	<geos/io/WKBWriter.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Database.h
+	"sqlite3.h"
+	"Column.h"
+	<string>
+
+1425417421 /home/hahne/dev/netxpert/libs/sqlite3.h
+	<stdarg.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Column.h
+	"sqlite3.h"
+	"Statement.h"
+	"Exception.h"
+	<string>
+
+1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.h
+	"sqlite3.h"
+	<string>
+	"Exception.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Exception.h
+	<stdexcept>
+	<string>
+
+1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
+	"Exception.h"
+
+1425417421 /home/hahne/dev/netxpert/include/data.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<unordered_map>
+	<unordered_set>
+	<list>
+	<vector>
+
+1425417421 /home/hahne/dev/netxpert/include/network.h
+	"data.h"
+	"logger.h"
+	<string>
+	<algorithm>
+
+1423772165 /usr/local/include/boost/algorithm
+
+1425560141 /home/hahne/dev/netxpert/include/dbhelper.h
+	<string>
+	"data.h"
+	"logger.h"
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Transaction.h>
+	<boost/filesystem.hpp>
+	<geos/io/WKBWriter.h>
+
+1425572326 /home/hahne/dev/netxpert/include/test.h
+	<iostream>
+	"logger.h"
+	"fgdbwriter.h"
+	"slitewriter.h"
+	<fstream>
+	<geos/io/WKTReader.h>
+	<geos/io/StringTokenizer.h>
+	"data.h"
+	"network.h"
+	"dbhelper.h"
+

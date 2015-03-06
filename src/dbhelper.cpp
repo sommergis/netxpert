@@ -7,11 +7,7 @@ SQLite::Database* DBHELPER::connPtr = nullptr;
 SQLite::Transaction* DBHELPER::currentTransactionPtr = nullptr;
 Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
-
-DBHELPER::DBHELPER()
-{
-
-}
+//bool DBHELPER::IsInitialized = false;
 
 DBHELPER::~DBHELPER()
 {
@@ -268,7 +264,6 @@ void DBHELPER::CloseConnection()
         LOGGER::LogError( ex.what() );
     }
 }
-
 
 bool DBHELPER::performInitialCommand(SQLite::Database& db)
 {
