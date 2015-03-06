@@ -21,7 +21,7 @@ namespace NetXpert
     class DBHELPER
     {
         protected:
-             DBHELPER();
+             DBHELPER(){}
         public:
             static Config NETXPERT_CNFG;
             static void Initialize();
@@ -34,8 +34,8 @@ namespace NetXpert
             static InputArcs LoadNetworkFromDB(string _tableName, ColumnMap _map);
             static InputNodes LoadNodesFromDB(string _tableName, ColumnMap _map);
             static void CloseConnection();
+            //static bool IsInitialized;
             ~DBHELPER();
-
         private:
             static SQLite::Database* connPtr;
             static SQLite::Transaction* currentTransactionPtr;

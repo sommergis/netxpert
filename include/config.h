@@ -30,7 +30,9 @@ namespace NetXpert {
         MSTCOM = 4,
         IsolinesCOM = 5,
         DumpInternalArcsToDB = 6,
-        NetworkConvert = 7
+        NetworkConvert = 7,
+        TestFileGDBWriter = 8,
+        TestSpatiaLiteWriter = 9
     };
     enum RESULT_DB_TYPE
     {

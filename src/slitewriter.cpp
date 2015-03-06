@@ -15,6 +15,7 @@
 
 using namespace NetXpert;
 using namespace geos::io;
+using namespace boost::filesystem;
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
@@ -99,6 +100,14 @@ void SpatiaLiteWriter::CreateNetXpertDB()
 {
     try
     {
+        //check for existence
+        if ( exists(NETXPERT_CNFG.ResultDBPath) )
+        {
+            //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
+            LOGGER::LogWarning("SpatiaLite DB "+ NETXPERT_CNFG.ResultDBPath + " already exists!");
+            //DeleteGeodatabase( newPath );
+            return;
+        }
         SQLite::Database db(NETXPERT_CNFG.ResultDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
         initSpatialMetaData(db);
         LOGGER::LogInfo("NetXpert SpatiaLite DB " + db.getFilename() +" created successfully.");
@@ -142,7 +151,7 @@ void SpatiaLiteWriter::CreateSolverResultTable(string _tableName, bool dropFirst
     }
     catch (std::exception& ex)
     {
-        LOGGER::LogError( "Error creating NetXpert Result Table"+ _tableName + "!" );
+        LOGGER::LogError( "Error creating NetXpert Result Table "+ _tableName + "!" );
         LOGGER::LogError( ex.what() );
     }
 }
@@ -211,34 +220,19 @@ void SpatiaLiteWriter::createTable ( string _tableName )
                             "flow DOUBLE,"
                             "geometry MULTILINESTRING)";
     //cout << strSQL << endl;
-    try
-    {
-        SQLite::Database& db = *connPtr;
-        SQLite::Statement query(db, strSQL);
 
-        query.exec();
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error creating NetXpert Result Table"+ _tableName + "!" );
-        LOGGER::LogError( ex.what() );
-    }
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement query(db, strSQL);
+
+    query.exec();
 }
 
 void SpatiaLiteWriter::dropTable (string _tableName)
 {
     const string strSQL = "DROP TABLE "+_tableName;
-    try
-    {
-        SQLite::Database& db = *connPtr;
-        SQLite::Statement query(db, strSQL);
-        query.exec();
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error deleting NetXpert result table first!" );
-        LOGGER::LogError( ex.what() );
-    }
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement query(db, strSQL);
+    query.exec();
 }
 
 void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColName, string _geomType)
@@ -312,8 +306,6 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
         stringstream::pos_type offset = oss.tellp();
         //oss.seekp(0, ios::beg); //set to the start of stream
 
-        cout << "Length of stream: " << offset << endl;
-
         //DON'T
         //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
         //const char* blob = oss.str().c_str();
@@ -333,20 +325,6 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
         LOGGER::LogError( ex.what() );
     }
 
-}
-void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::Geometry& route, string _tableName,
-                                    bool truncateBeforeInsert)
-{
-    try
-    {
-
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error saving results to NetXpert SpatiaLite DB!" );
-        LOGGER::LogError( ex.what() );
-    }
 }
 
 void SpatiaLiteWriter::CloseConnection()

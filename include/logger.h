@@ -8,6 +8,9 @@ using namespace std;
 
 namespace NetXpert {
 
+    /**
+    * \Static Class for logging
+    **/
     class LOGGER
     {
         protected:
