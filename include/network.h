@@ -28,24 +28,24 @@ namespace NetXpert
             void GetOriginalArcDataAndFlow(list<ArcDataAndFlow>& origArcDataAndFlow,
                                             list<FTNode>& startEndNodes,
                                             bool isDirected);
-            string GetOriginalNodeID(uint internalNodeID);
-            string GetOriginalStartOrEndNodeID(uint internalNodeID);
-            void GetStartOrEndNodeGeometry(Coordinate& coord, uint internalNodeID);
+            string GetOriginalNodeID(unsigned int internalNodeID);
+            string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
+            void GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID);
 
             virtual ~Network();
 
         private:
             void renameNodes();
             void readNetworkFromTable(bool autoClean, bool oneWay);
-            void processArc(InputArc arc, uint internalStartNode,
-                                    uint internalEndNode);
+            void processArc(InputArc arc, unsigned int internalStartNode,
+                                    unsigned int internalEndNode);
             void processBarriers();
 
             Config netXpertConfig;
-            uint currentNodeCount;
-            uint currentArcCount;
-            uint maxNodeCount;
-            uint maxArcCount;
+            unsigned int currentNodeCount;
+            unsigned int currentArcCount;
+            unsigned int maxNodeCount;
+            unsigned int maxArcCount;
 
             string arcIDColName;
             string fromColName;

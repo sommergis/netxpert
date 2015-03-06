@@ -3,8 +3,6 @@
 #include "fgdbwriter.h"
 #include "slitewriter.h"
 #include <fstream>
-#include <geos/io/WKTReader.h>
-#include <geos/io/StringTokenizer.h>
 
 #include "data.h"
 #include "network.h"
@@ -93,12 +91,6 @@ int main(int argc, char** argv)
     {
         LOGGER::LogError( ex.what() );
     }
-/*
-    std::ofstream os("out.json");
-    JSONOutputArchive archive1( os );
-    //cnfg config;
-    archive1( CEREAL_NVP(c) ); */
-
     return 0;
 }
 
