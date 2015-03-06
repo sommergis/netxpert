@@ -113,15 +113,15 @@ Network* Network::ConvertInputNetwork(bool autoClean)
 
 void Network::GetOriginalArcData(list<ArcData>& origArcData, list<FTNode>& startEndNodes, bool isDirected){}
 void Network::GetOriginalArcDataAndFlow(list<ArcDataAndFlow>& origArcDataAndFlow, list<FTNode>& startEndNodes, bool isDirected){}
-string Network::GetOriginalNodeID(uint internalNodeID){}
-string Network::GetOriginalStartOrEndNodeID(uint internalNodeID){}
-void Network::GetStartOrEndNodeGeometry(Coordinate& coord, uint internalNodeID){}
+string Network::GetOriginalNodeID(unsigned int internalNodeID){}
+string Network::GetOriginalStartOrEndNodeID(unsigned int internalNodeID){}
+void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID){}
 
 //private
 void Network::renameNodes()
 {
     //dynamic dataType = this.arcTbl.Columns[fromColName].DataType;
-    set<uint> sortedDistinctNodesSet;
+    set<unsigned int> sortedDistinctNodesSet;
     for (InputArcs::iterator it = arcsTbl.begin(); it != arcsTbl.end(); ++it)
     {
         auto itD = *it;
@@ -136,10 +136,10 @@ void Network::renameNodes()
         }
     }
     //copy set to vector for index access
-    vector<uint> sortedDistinctNodes(sortedDistinctNodesSet.begin(), sortedDistinctNodesSet.end());
+    vector<unsigned int> sortedDistinctNodes(sortedDistinctNodesSet.begin(), sortedDistinctNodesSet.end());
     // Count from 0 to sortedDistinctNodes.Count:
     // --> internal NodeIDs start from 1 t;o n.
-    for (uint i = 0; i < sortedDistinctNodes.size(); i++)
+    for (unsigned int i = 0; i < sortedDistinctNodes.size(); i++)
     {
         // Add [oldNodeID],[internalNodeID]
         internalDistinctNodeIDs.insert( make_pair(to_string(sortedDistinctNodes[i]), i+1) );
@@ -153,7 +153,7 @@ void Network::renameNodes()
         {
             auto itD = *it;
             string oldNodeID;
-            uint internalNodeID;
+            unsigned int internalNodeID;
             double nodeSupply;
             oldNodeID = itD.nodeID;
             nodeSupply = itD.nodeSupply;
@@ -184,8 +184,8 @@ void Network::renameNodes()
             }
         }
     }
-    maxNodeCount = static_cast<uint>(internalDistinctNodeIDs.size());
-    maxArcCount = static_cast<uint>(arcsTbl.size());
+    maxNodeCount = static_cast<unsigned int>(internalDistinctNodeIDs.size());
+    maxArcCount = static_cast<unsigned int>(arcsTbl.size());
     currentArcCount = maxArcCount;
     currentNodeCount = maxNodeCount;
 }
@@ -201,8 +201,8 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
         string externalArcID = arc.extArcID;
         string externalStartNode = to_string(arc.fromNode);
         string externalEndNode = to_string(arc.toNode);
-        uint internalStartNode;
-        uint internalEndNode;
+        unsigned int internalStartNode;
+        unsigned int internalEndNode;
         try{
             internalStartNode = internalDistinctNodeIDs.at(externalStartNode);
             internalEndNode = internalDistinctNodeIDs.at(externalEndNode);
@@ -290,8 +290,8 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
     //DBHELPER.EliminatedArcs = this.eliminatedArcs;
 }
 //TODO: isDirected evtl. von Klasse nehmen, nicht vom Config
-void Network::processArc(InputArc arc, uint internalStartNode,
-                        uint internalEndNode)
+void Network::processArc(InputArc arc, unsigned int internalStartNode,
+                        unsigned int internalEndNode)
 {
     bool isDirected = netXpertConfig.IsDirected;
     string externalArcID = arc.extArcID;

@@ -166,7 +166,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
                 double cost          = query.getColumn(3);
                 double cap           = query.getColumn(4);
                 const string _oneway = query.getColumn(5);
-                arcTbl.push_back(InputArc {id,static_cast<uint>(fNode),static_cast<uint>(tNode),
+                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
                                             cost,cap,_oneway});
             }
         }
@@ -179,7 +179,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
                 int tNode           = query.getColumn(2);
                 double cost         = query.getColumn(3);
                 double cap          = query.getColumn(4);
-                arcTbl.push_back(InputArc {id,static_cast<uint>(fNode),static_cast<uint>(tNode),
+                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
                                             cost,cap,""});
             }
         }
@@ -192,7 +192,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
                 int tNode            = query.getColumn(2);
                 double cost          = query.getColumn(3);
                 const string _oneway = query.getColumn(4);
-                arcTbl.push_back(InputArc {id,static_cast<uint>(fNode),static_cast<uint>(tNode),
+                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
                                             cost,DOUBLE_INFINITY,_oneway});
             }
         }
@@ -204,7 +204,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
                 int fNode            = query.getColumn(1);
                 int tNode            = query.getColumn(2);
                 double cost          = query.getColumn(3);
-                arcTbl.push_back(InputArc {id,static_cast<uint>(fNode),static_cast<uint>(tNode),
+                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
                                             cost, DOUBLE_INFINITY, ""});
             }
         }

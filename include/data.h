@@ -8,7 +8,7 @@
 #include <list>
 #include <vector>
 
-//Dictionary<Tuple<uint, uint>, Tuple<string, double, double>> internalArcData;
+//Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
 //TODO: data structure: LEMON? structs? maps?
 using namespace std;
 using namespace geos::geom;
@@ -38,7 +38,7 @@ namespace NetXpert {
     **/
     struct AddedNode
     {
-        uint newNodeID;
+        unsigned int newNodeID;
         string oldNodeID;
     };
     /**
@@ -54,8 +54,8 @@ namespace NetXpert {
     **/
     struct FTNode
     {
-        uint fromNode;
-        uint toNode;
+        unsigned int fromNode;
+        unsigned int toNode;
     };
     /**
     * \Custom data type for storing tuple <oldArcID,cost,capacity>
@@ -114,8 +114,8 @@ namespace NetXpert {
     struct InputArc
     {
         string extArcID;
-        uint fromNode;
-        uint toNode;
+        unsigned int fromNode;
+        unsigned int toNode;
         double cost;
         double capacity;
         string oneway;

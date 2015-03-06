@@ -40,7 +40,7 @@ void LOGGER::Initialize()
     //cout << sTime << endl;
 
     //Create File - do not append
-    FullLogFileName = sPath + boost::filesystem::path::preferred_separator
+    FullLogFileName = sPath + to_string(boost::filesystem::path::preferred_separator)
      + sTime + "_" + sFileName + ".log";
     cout << "Logfile is: " << FullLogFileName << endl;
 
