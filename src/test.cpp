@@ -57,7 +57,71 @@ void NetXpert::Test::NetworkConvert(Config& cnfg)
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("ConvertToNetwork: Unerwarteter Fehler!");
+        LOGGER::LogError("NetworkConvert: Unerwarteter Fehler!");
+        LOGGER::LogError(ex.what());
+    }
+}
+void NetXpert::Test::TestFileGDBWriter(Config& cnfg)
+{
+    try
+    {
+        string wkt = "MULTILINESTRING((1 2, 3 4), (5 6, 7 8, 9 10), (11 12, 13 14))";
+        string orig = "1";
+        string dest = "2";
+        const string resultTblName = cnfg.ArcsTableName + "_net";
+        const bool dropFirst = true;
+
+        geos::io::WKTReader reader;
+        auto geomPtr = reader.read(wkt);
+        geos::geom::MultiLineString* mlPtr = dynamic_cast<geos::geom::MultiLineString*>(geomPtr);
+
+        FGDBWriter fgdb(cnfg);
+        fgdb.CreateNetXpertDB();
+
+        fgdb.CreateSolverResultTable(resultTblName, dropFirst);
+        fgdb.OpenNewTransaction();
+        fgdb.SaveSolveQueryToDB(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, false);
+        fgdb.CommitCurrentTransaction();
+        fgdb.CloseConnection();
+
+        delete mlPtr;
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("TestFileGDBWriter: Unerwarteter Fehler!");
+        LOGGER::LogError(ex.what());
+    }
+}
+
+void NetXpert::Test::TestSpatiaLiteWriter(Config& cnfg)
+{
+    try
+    {
+        string wkt = "MULTILINESTRING((1 2, 3 4), (5 6, 7 8, 9 10), (11 12, 13 14))";
+        string orig = "1";
+        string dest = "2";
+        const string resultTblName = cnfg.ArcsTableName + "_net";
+        const bool dropFirst = true;
+
+        geos::io::WKTReader reader;
+        auto geomPtr = reader.read(wkt);
+        geos::geom::MultiLineString* mlPtr = dynamic_cast<geos::geom::MultiLineString*>(geomPtr);
+
+        SpatiaLiteWriter sldb( cnfg );
+        sldb.CreateNetXpertDB();
+        sldb.OpenNewTransaction();
+        sldb.CreateSolverResultTable(resultTblName, dropFirst);
+        auto queryPtr = sldb.PrepareSaveSolveQueryToDB(resultTblName);
+        //depointerization "on the fly"
+        sldb.SaveSolveQueryToDB(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, false, *queryPtr);
+        sldb.CommitCurrentTransaction();
+        delete queryPtr;
+
+        delete mlPtr;
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("TestSpatiaLiteWriter: Unerwarteter Fehler!");
         LOGGER::LogError(ex.what());
     }
 }

@@ -6,3 +6,7 @@ libs/FileGDB_API_32Bit/samples$
 libs/geos-3.4.2/.*\.o$
 libs/geos-3.4.2/.*\.so$
 libs/geos-3.4.2/.*\.a$
+test/bin$
+test/obj$
+test/build$
+test/data$

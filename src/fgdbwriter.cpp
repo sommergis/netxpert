@@ -191,70 +191,57 @@ void FGDBWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
 
 void FGDBWriter::createTable ( string _tableName )
 {
-    try
-    {
-        currentTblPtr = new Table();
+    currentTblPtr = new Table();
 
-        string resultTblDefStr;
-        string defLine;
+    string resultTblDefStr;
+    string defLine;
 
-        //XML loading for Table Definition
-        ifstream defFile(resultTblDefPath);
-        while ( getline(defFile, defLine) )
-        {
-           resultTblDefStr.append(defLine + "\n");
-        }
-        defFile.close();
-        //cout << resultTblDefStr << endl;
-        fgdbError hr;
-        wstring errorText;
-        //Replace Template name "netxpert_result" with real tablename
-        boost::replace_all(resultTblDefStr, "netxpert_result", _tableName);
-        if ((hr = geodatabasePtr->CreateTable(resultTblDefStr,L"", *currentTblPtr) ) == S_OK)
-        {
-            LOGGER::LogInfo("NetXpert Result Table "+ _tableName + " created.");
-        }
-        else {
-            ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
-            LOGGER::LogError("Error creating Result Table "+ _tableName + "!");
-            LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
-        }
-    }
-    catch (std::exception& ex)
+    //XML loading for Table Definition
+    ifstream defFile(resultTblDefPath);
+    while ( getline(defFile, defLine) )
     {
-        LOGGER::LogError( "Error creating NetXpert Result Table"+ _tableName + "!" );
-        LOGGER::LogError( ex.what() );
+       resultTblDefStr.append(defLine + "\n");
     }
+    defFile.close();
+    //cout << resultTblDefStr << endl;
+    fgdbError hr;
+    wstring errorText;
+    //Replace Template name "netxpert_result" with real tablename
+    boost::replace_all(resultTblDefStr, "netxpert_result", _tableName);
+    if ((hr = geodatabasePtr->CreateTable(resultTblDefStr,L"", *currentTblPtr) ) == S_OK)
+    {
+        LOGGER::LogInfo("NetXpert Result Table "+ _tableName + " created.");
+    }
+    else {
+        ErrorInfo::GetErrorDescription(hr, errorText);
+        string newErrorText;
+        WStringToString(newErrorText, errorText);
+        LOGGER::LogError("Error creating Result Table "+ _tableName + "!");
+        LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
+        throw std::runtime_error("Runtime error!");
+    }
+
 }
 
 void FGDBWriter::openTable ( string _tableName)
 {
-    try {
+    fgdbError hr;
+    wstring errorText;
 
-        fgdbError hr;
-        wstring errorText;
+    wstring newStr;
+    StringToWString(newStr, _tableName);
 
-        wstring newStr;
-        StringToWString(newStr, _tableName);
-
-        if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
-        {
-            LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
-        }
-        else {
-            ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
-            LOGGER::LogError("Error opening Result Table "+ _tableName + "!");
-            LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
-        }
-    }
-    catch (std::exception& ex)
+    if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
     {
-        LOGGER::LogError( "Error opening Result Table "+ _tableName + "!" );
-        LOGGER::LogError( ex.what() );
+        LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
+    }
+    else {
+        ErrorInfo::GetErrorDescription(hr, errorText);
+        string newErrorText;
+        WStringToString(newErrorText, errorText);
+        LOGGER::LogError("Error opening Result Table "+ _tableName + "!");
+        LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
+        throw std::runtime_error("Runtime error!");
     }
 }
 
