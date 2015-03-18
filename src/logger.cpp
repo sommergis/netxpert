@@ -17,10 +17,11 @@ string LOGGER::sPath = "";
 string LOGGER::sFileName = "";
 string LOGGER::sTime = "";
 LOG_LEVEL LOGGER::applicationLogLevel = LOG_LEVEL::All;
-Config LOGGER::NetXpertConfig;
+Config LOGGER::NETXPERT_CNFG;
 
-void LOGGER::Initialize()
+void LOGGER::Initialize(Config& cnfg)
 {
+    NETXPERT_CNFG = cnfg;
     string fileName = readConfig();
     //cout << "Log File Path: " << fileName << endl;
     sPath = getDirectoryName(fileName);
@@ -37,11 +38,22 @@ void LOGGER::Initialize()
     ss << second_clock::local_time();
 
     sTime = ss.str();
-    //cout << sTime << endl;
+
+    //cout << "sPath: "<< sPath << endl;
+    //cout << "sFileName: "<< sFileName << endl;
+    //cout << "sTime: " << sTime << endl;
 
     //Create File - do not append
-    FullLogFileName = sPath + to_string(boost::filesystem::path::preferred_separator)
-     + sTime + "_" + sFileName + ".log";
+    if (sPath.empty()) // no directory specified in config
+    {
+        FullLogFileName = sTime + "_" + sFileName + ".log";
+    }
+    else
+    {
+        FullLogFileName = sPath + to_string(boost::filesystem::path::preferred_separator)
+            + sTime + "_" + sFileName + ".log";
+    }
+
     cout << "Logfile is: " << FullLogFileName << endl;
 
     ofstream outfile(FullLogFileName.c_str());
@@ -49,7 +61,9 @@ void LOGGER::Initialize()
 }
 string LOGGER::getDirectoryName(string _filePath) {
     path p(_filePath);
+    //cout << "path p: " << p.string() << endl;
     path dir = p.parent_path();
+    //cout << "path dir: " << dir.string() << endl;
     return dir.string();
 }
 string LOGGER::getFileNameWithoutExtension(string _filePath) {
@@ -59,20 +73,20 @@ string LOGGER::getFileNameWithoutExtension(string _filePath) {
 }
 string LOGGER::readConfig()
 {
-    applicationLogLevel = NetXpertConfig.LogLevel;
+    applicationLogLevel = NETXPERT_CNFG.LogLevel;
     cout << "App Log Level: "<< applicationLogLevel <<endl;
-    cout << "Logfile: "<< NetXpertConfig.LogFileFullPath <<endl;
-    return NetXpertConfig.LogFileFullPath;
+    cout << "Logfile: "<< NETXPERT_CNFG.LogFileFullPath <<endl;
+    return NETXPERT_CNFG.LogFileFullPath;
     //return "/home/hahne/dev/netxpert/NetXpert/bin/Debug/NetXpert.log";
 }
 void LOGGER::writeLog(string _logMsg, LOG_LEVEL msgLogLevel)
 {
-    //cout << "Log Level: " << LOG_LEVEL << endl;
+    // appends every log msg to file
+    ofstream outfile;
+    outfile.open(FullLogFileName.c_str(), ios::out | ios::app);
     if (msgLogLevel >= applicationLogLevel)
     {
-        // appends every log msg to file
-        ofstream outfile;
-        outfile.open(FullLogFileName.c_str(), ios::out | ios::app);
+        cout << _logMsg << endl;
         outfile << _logMsg << endl;
     }
 }
@@ -85,7 +99,6 @@ void LOGGER::LogDebug(string _logMsg)
     ss << second_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " DEBUG " + _logMsg;
-    cout << totalMsg << endl;
     writeLog(totalMsg, Debug);
 }
 
@@ -98,8 +111,8 @@ void LOGGER::LogInfo(string _logMsg)
     ss << second_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " INFO " + _logMsg;
-    cout << totalMsg << endl;
     writeLog(totalMsg, Info);
+
 }
 void LOGGER::LogWarning(string _logMsg)
 {
@@ -110,7 +123,6 @@ void LOGGER::LogWarning(string _logMsg)
     ss << second_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " WARN " + _logMsg;
-    cout << totalMsg << endl;
     writeLog(totalMsg, Warning);
 }
 
@@ -123,7 +135,6 @@ void LOGGER::LogError(string _logMsg)
     ss << second_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " ERROR " + _logMsg;
-    cout << totalMsg << endl;
     writeLog(totalMsg, Error);
 }
 
@@ -136,6 +147,5 @@ void LOGGER::LogFatal(string _logMsg)
     ss << second_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " FATAL " + _logMsg;
-    cout << totalMsg << endl;
     writeLog(totalMsg, Fatal);
 }

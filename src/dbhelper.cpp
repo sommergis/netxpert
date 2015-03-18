@@ -7,7 +7,7 @@ SQLite::Database* DBHELPER::connPtr = nullptr;
 SQLite::Transaction* DBHELPER::currentTransactionPtr = nullptr;
 Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
-//bool DBHELPER::IsInitialized = false;
+bool DBHELPER::IsInitialized = false;
 
 DBHELPER::~DBHELPER()
 {
@@ -18,9 +18,10 @@ DBHELPER::~DBHELPER()
         delete currentTransactionPtr;
 }
 
-void DBHELPER::Initialize()
+void DBHELPER::Initialize(Config& cnfg)
 {
-
+    DBHELPER::NETXPERT_CNFG = cnfg;
+    IsInitialized = true;
 }
 
 void DBHELPER::connect( )
@@ -28,7 +29,7 @@ void DBHELPER::connect( )
     try
     {
         connPtr = new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
-        const int cache_size_kb = 20000;
+        const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
 
         string sqlStr = "PRAGMA cache_size=" + to_string(cache_size_kb); //DEFAULT: 2000
@@ -110,45 +111,45 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
 
         SQLite::Database& db = *connPtr;
 
-        if (_map.count("onewayColName")==1)
+        if (!_map.onewayColName.empty())
             oneway = true;
-        if (_map.count("capColName")==1)
+        if (!_map.capColName.empty())
             hasCapacity = true;
 
         if (oneway && hasCapacity)
         {
-            sqlStr = "SELECT "+_map.at("arcIDColName")+","+
-                               _map.at("fromColName")+","+
-                               _map.at("toColName")+","+
-                               _map.at("costColName")+","+
-                               _map.at("capColName")+","+
-                               _map.at("onewayColName") +
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.fromColName+","+
+                               _map.toColName+","+
+                               _map.costColName+","+
+                               _map.capColName +","+
+                               _map.onewayColName +
                                    " FROM "+ _tableName + ";";
         }
         if (!oneway && hasCapacity)
         {
-            sqlStr = "SELECT "+_map.at("arcIDColName")+","+
-                                            _map.at("fromColName")+","+
-                                            _map.at("toColName")+","+
-                                            _map.at("costColName")+","+
-                                            _map.at("capColName")+
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.fromColName+","+
+                               _map.toColName+","+
+                               _map.costColName+","+
+                               _map.capColName +
                                    " FROM "+ _tableName + ";";
         }
         if (oneway && !hasCapacity)
         {
-            sqlStr = "SELECT "+_map.at("arcIDColName")+","+
-                                _map.at("fromColName")+","+
-                                _map.at("toColName")+","+
-                                _map.at("costColName")+","+
-                                _map.at("onewayColName")+
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.fromColName+","+
+                               _map.toColName+","+
+                               _map.costColName+","+
+                               _map.onewayColName +
                                    " FROM "+ _tableName + ";";
         }
         if (!oneway && !hasCapacity)
         {
-            sqlStr = "SELECT "+_map.at("arcIDColName")+","+
-                                _map.at("fromColName")+","+
-                                _map.at("toColName")+","+
-                                _map.at("costColName")+
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.fromColName+","+
+                               _map.toColName+","+
+                               _map.costColName+
                                    " FROM "+ _tableName + ";";
         }
 
@@ -229,8 +230,8 @@ InputNodes DBHELPER::LoadNodesFromDB(string _tableName, ColumnMap _map)
             connect();
 
         SQLite::Database& db = *connPtr;
-        sqlStr = "SELECT "+_map.at("nodeIDColName")+","+
-                            _map.at("supplyColName")+
+        sqlStr = "SELECT "+_map.nodeIDColName+","+
+                            _map.supplyColName+
                             " FROM "+ _tableName + ";";
 
         //cout << sqlStr << endl;
@@ -268,13 +269,16 @@ void DBHELPER::CloseConnection()
 bool DBHELPER::performInitialCommand(SQLite::Database& db)
 {
     try {
+        //cout << NETXPERT_CNFG.SpatiaLiteHome << endl;
+        //cout << NETXPERT_CNFG.SpatiaLiteCoreName << endl;
+
         const string spatiaLiteHome = NETXPERT_CNFG.SpatiaLiteHome;
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
 
         const string pathBefore = boost::filesystem::current_path().string();
         //chdir to spatiallitehome
+        //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
         boost::filesystem::current_path(spatiaLiteHome);
-        //cout << boost::filesystem::current_path() << endl;
         db.enableExtensions();
 
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName);";

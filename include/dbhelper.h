@@ -23,8 +23,7 @@ namespace NetXpert
         protected:
              DBHELPER(){}
         public:
-            static Config NETXPERT_CNFG;
-            static void Initialize();
+            static void Initialize(Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
             //SQLite::Statement* PrepareSaveSolveQueryToDB(string _tableName);
@@ -34,9 +33,10 @@ namespace NetXpert
             static InputArcs LoadNetworkFromDB(string _tableName, ColumnMap _map);
             static InputNodes LoadNodesFromDB(string _tableName, ColumnMap _map);
             static void CloseConnection();
-            //static bool IsInitialized;
+            static bool IsInitialized;
             ~DBHELPER();
         private:
+            static Config NETXPERT_CNFG;
             static SQLite::Database* connPtr;
             static SQLite::Transaction* currentTransactionPtr;
             static void connect( );

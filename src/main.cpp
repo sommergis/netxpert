@@ -36,8 +36,7 @@ int main(int argc, char** argv)
         cout << "Fehler beim Config init: " << e.what() << endl;
     }
     try {
-        LOGGER::NetXpertConfig = cnfg;
-        LOGGER::Initialize();
+        LOGGER::Initialize(cnfg);
         LOGGER::LogInfo("Logging gestartet!");
     }
     catch (std::exception& e)

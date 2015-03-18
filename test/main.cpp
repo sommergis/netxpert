@@ -21,7 +21,8 @@ int main(int argc, char** argv)
     }
     else
     {
-        inFile = "./ODMatrixCnfg.json";
+        //inFile = "./ODMatrixCnfg.json";
+        inFile = "/home/hahne/dev/netxpert/bin/Release/ODMatrixCnfg.json";
     }
 
     Config cnfg;
@@ -34,8 +35,7 @@ int main(int argc, char** argv)
         cout << "Fehler beim Config init: " << e.what() << endl;
     }
     try {
-        LOGGER::NetXpertConfig = cnfg;
-        LOGGER::Initialize();
+        LOGGER::Initialize(cnfg);
         LOGGER::LogInfo("Logging gestartet!");
     }
     catch (std::exception& e)

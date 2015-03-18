@@ -21,7 +21,7 @@ namespace NetXpert
             void AddStartNode();
             void AddEndNode();
             void BuildTotalRouteGeometry();
-            Network* ConvertInputNetwork(bool autoClean);
+            void ConvertInputNetwork(bool autoClean);
             void GetOriginalArcData(list<ArcData>& origArcData,
                                     list<FTNode>& startEndNodes,
                                     bool isDirected);
