@@ -19,10 +19,10 @@ using namespace boost::filesystem;
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
-    NETXPERT_CNFG = cnfg;
+    //NETXPERT_CNFG = cnfg;
     if ( !LOGGER::IsInitialized )
     {
-        LOGGER::Initialize();
+        LOGGER::Initialize(cnfg);
     }
     LOGGER::LogInfo("SpatiaLiteWriter initialized.");
     connPtr = nullptr;

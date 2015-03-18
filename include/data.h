@@ -3,6 +3,7 @@
 
 #include <geos/geom/Coordinate.h>
 #include <geos/geom/Geometry.h>
+#include <map>
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
@@ -39,7 +40,7 @@ namespace NetXpert {
     struct AddedNode
     {
         unsigned int newNodeID;
-        string oldNodeID;
+        string extNodeID;
     };
     /**
     * \Custom data type for storing external nodes tuple <fromNode,toNode>
@@ -62,7 +63,7 @@ namespace NetXpert {
     **/
     struct DuplicateArcData
     {
-        string oldArcID;
+        string extArcID;
         double cost;
     };
     /**
@@ -89,7 +90,7 @@ namespace NetXpert {
     **/
     struct AddedPoint
     {
-        string oldArcID;
+        string extNodeID;
         Coordinate coord;
     };
     /**
@@ -97,7 +98,7 @@ namespace NetXpert {
     **/
     struct NodeSupply
     {
-        string oldArcID;
+        string extNodeID;
         double supply;
     };
     /**
@@ -123,8 +124,20 @@ namespace NetXpert {
 
     struct InputNode
     {
-        string nodeID;
+        string extNodeID;
         double nodeSupply;
+    };
+
+    struct ColumnMap
+    {
+        string arcIDColName;
+        string fromColName;
+        string toColName;
+        string costColName;
+        string capColName;
+        string onewayColName;
+        string nodeIDColName;
+        string supplyColName;
     };
 
     typedef unsigned int NodeID;
@@ -137,7 +150,7 @@ namespace NetXpert {
     typedef unordered_map<NodeID, NodeSupply> NodeSupplies;
     typedef unordered_map<FTNode, NewArc> NewArcs;
 
-    typedef unordered_map<string,string> ColumnMap;
+    //typedef map<string,string> ColumnMap;
     typedef list<InputArc> InputArcs;
     typedef list<InputNode> InputNodes;
 }
