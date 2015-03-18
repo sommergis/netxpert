@@ -8,10 +8,10 @@ using namespace FileGDBAPI;
 
 FGDBWriter::FGDBWriter(Config& netxpertConfig)
 {
-    NETXPERT_CNFG = netxpertConfig;
+    //NETXPERT_CNFG = netxpertConfig;
     if ( !LOGGER::IsInitialized )
     {
-        LOGGER::Initialize();
+        LOGGER::Initialize(netxpertConfig);
     }
     LOGGER::LogInfo("FGDBWriter initialized.");
     geodatabasePtr = nullptr;
@@ -322,8 +322,6 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
             const geos::geom::CoordinateSequence* coordsPtr = route.getCoordinates();
             const auto& coords = *coordsPtr;
             int length = static_cast<int>(coords.getSize());
-            double x;
-            double y;
             for (int i = 0; i < length; i++)
             {
                 const geos::geom::Coordinate c = coords.getAt(i);

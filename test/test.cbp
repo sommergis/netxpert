@@ -16,7 +16,11 @@
 					<Add option="-std=c++11" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="../bin/Debug" />
 				</Compiler>
+				<Linker>
+					<Add library="/home/hahne/dev/netxpert/bin/Debug/libnetxpert.so" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/test" prefix_auto="1" extension_auto="1" />
@@ -26,9 +30,11 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-std=c++11" />
+					<Add directory="../bin/Release" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="/home/hahne/dev/netxpert/bin/Release/libnetxpert.so" />
 				</Linker>
 			</Target>
 		</Build>
@@ -39,10 +45,10 @@
 			<Add option="-fPIC" />
 			<Add directory="../libs" />
 			<Add directory="../include" />
+			<Add directory="/usr/include/python2.7" />
 		</Compiler>
 		<Linker>
 			<Add option="-lboost_system" />
-			<Add library="/home/hahne/dev/netxpert/bin/Debug/libnetxpert.so" />
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>

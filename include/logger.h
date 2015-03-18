@@ -17,8 +17,7 @@ namespace NetXpert {
             LOGGER() {}
         public:
             ~LOGGER() {}
-            static Config NetXpertConfig;
-            static void Initialize();
+            static void Initialize(Config& cnfg);
             static void LogDebug(string logMsg);
             static void LogInfo(string logMsg);
             static void LogWarning(string logMsg);
@@ -28,6 +27,7 @@ namespace NetXpert {
             static string FullLogFileName;
 
         private:
+            static Config NETXPERT_CNFG;
             static void writeLog(string logMsg, LOG_LEVEL);
             static string sTime;
             static string sPath;

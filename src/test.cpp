@@ -8,14 +8,16 @@ void NetXpert::Test::NetworkConvert(Config& cnfg)
     try
     {
         //1. Config
-        DBHELPER::NETXPERT_CNFG = cnfg;
+        if (!DBHELPER::IsInitialized)
+        {
+            DBHELPER::Initialize(cnfg);
+        }
 
         try
         {
             if (!LOGGER::IsInitialized)
             {
-                LOGGER::NetXpertConfig = cnfg;
-                LOGGER::Initialize();
+                LOGGER::Initialize(cnfg);
             }
         }
         catch (exception& ex)
@@ -30,23 +32,15 @@ void NetXpert::Test::NetworkConvert(Config& cnfg)
 
         string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
-        bool isDirected = cnfg.IsDirected; //Convert.ToBoolean(args[2]); //true
 
         string nodesTableName = cnfg.NodesTableName;
         string nodesGeomColName = cnfg.NodesGeomColumnName;
 
-        int treshold = cnfg.Treshold;
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
-        ColumnMap cmap { {"fromColName", cnfg.FromNodeColumnName}, {"toColName", cnfg.ToNodeColumnName},
-            {"arcIDColName", cnfg.EdgeIDColumnName}, {"costColName", cnfg.CostColumnName},
-            {"nodeIDColName", cnfg.NodeIDColumnName},
-            {"supplyColName", cnfg.NodeSupplyColumnName}};
-
-        if (!cnfg.CapColumnName.empty())
-           cmap.insert(make_pair("capColName", cnfg.CapColumnName));
-        if (!cnfg.OnewayColumnName.empty())
-           cmap.insert(make_pair("onewayColName", cnfg.OnewayColumnName));
+        ColumnMap cmap { cnfg.EdgeIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
 
         //2. Load Network
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
@@ -54,6 +48,8 @@ void NetXpert::Test::NetworkConvert(Config& cnfg)
         LOGGER::LogInfo("Converting Data into internal network..");
         net.ConvertInputNetwork(autoCleanNetwork);
         LOGGER::LogInfo("Done!");
+
+        LOGGER::LogInfo("Original node ID of 1: " + net.GetOriginalNodeID(1) );
     }
     catch (exception& ex)
     {

@@ -1,18 +1,16 @@
 # depslib dependency file v1.0
-1425572191 source:/home/hahne/dev/netxpert/test/main.cpp
+1426593785 source:/home/hahne/dev/netxpert/test/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
 	"slitewriter.h"
 	<fstream>
-	<geos/io/WKTReader.h>
-	<geos/io/StringTokenizer.h>
 	"data.h"
 	"network.h"
 	"dbhelper.h"
 	"test.h"
 
-1425501193 /home/hahne/dev/netxpert/include/logger.h
+1426540516 /home/hahne/dev/netxpert/include/logger.h
 	<string>
 	"config.h"
 
@@ -237,15 +235,16 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1425417421 /home/hahne/dev/netxpert/include/data.h
+1426591226 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
+	<map>
 	<unordered_map>
 	<unordered_set>
 	<list>
 	<vector>
 
-1425417421 /home/hahne/dev/netxpert/include/network.h
+1426367411 /home/hahne/dev/netxpert/include/network.h
 	"data.h"
 	"logger.h"
 	<string>
@@ -253,7 +252,7 @@
 
 1423772165 /usr/local/include/boost/algorithm
 
-1425560141 /home/hahne/dev/netxpert/include/dbhelper.h
+1426540917 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"data.h"
 	"logger.h"

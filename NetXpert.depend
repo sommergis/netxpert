@@ -4105,10 +4105,10 @@
 	<fstream>
 	"config.h"
 
-1425671505 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
+1426590312 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
 	"dbhelper.h"
 
-1425560141 /home/hahne/dev/netxpert/include/dbhelper.h
+1426540917 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"data.h"
 	"logger.h"
@@ -4117,19 +4117,20 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBWriter.h>
 
-1425671505 /home/hahne/dev/netxpert/include/data.h
+1426591226 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
+	<map>
 	<unordered_map>
 	<unordered_set>
 	<list>
 	<vector>
 
-1425501193 /home/hahne/dev/netxpert/include/logger.h
+1426540516 /home/hahne/dev/netxpert/include/logger.h
 	<string>
 	"config.h"
 
-1425583531 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
+1426579050 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
 	"fgdbwriter.h"
 
 1425572668 /home/hahne/dev/netxpert/include/fgdbwriter.h
@@ -4187,7 +4188,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1425671582 source:/home/hahne/dev/netxpert/src/logger.cpp
+1426587325 source:/home/hahne/dev/netxpert/src/logger.cpp
 	"logger.h"
 	<iostream>
 	<fstream>
@@ -4195,16 +4196,16 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1425671505 source:/home/hahne/dev/netxpert/src/network.cpp
+1426591744 source:/home/hahne/dev/netxpert/src/network.cpp
 	"network.h"
 
-1425671505 /home/hahne/dev/netxpert/include/network.h
+1426367411 /home/hahne/dev/netxpert/include/network.h
 	"data.h"
 	"logger.h"
 	<string>
 	<algorithm>
 
-1425593389 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
+1426540719 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
 	"slitewriter.h"
 
 1425572679 /home/hahne/dev/netxpert/include/slitewriter.h
@@ -4216,7 +4217,7 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBWriter.h>
 
-1425592895 source:/home/hahne/dev/netxpert/src/test.cpp
+1426594083 source:/home/hahne/dev/netxpert/src/test.cpp
 	"test.h"
 
 1425572326 /home/hahne/dev/netxpert/include/test.h
@@ -4231,7 +4232,7 @@
 	"network.h"
 	"dbhelper.h"
 
-1425417426 source:/home/hahne/dev/netxpert/src/main.cpp
+1426542346 source:/home/hahne/dev/netxpert/src/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -4243,4 +4244,275 @@
 	"network.h"
 	"dbhelper.h"
 	"test.h"
+
+1426259099 source:/home/hahne/dev/netxpert/src/network_wrap.cpp
+	<Python.h>
+	<Python.h>
+	<string.h>
+	<stdexcept>
+	"network.h"
+
+1395532525 /usr/include/python2.7/Python.h
+	"patchlevel.h"
+	"pyconfig.h"
+	"pymacconfig.h"
+	<limits.h>
+	<stdio.h>
+	<string.h>
+	<errno.h>
+	<stdlib.h>
+	<unistd.h>
+	<stddef.h>
+	<assert.h>
+	"pyport.h"
+	"pymath.h"
+	"pymem.h"
+	"object.h"
+	"objimpl.h"
+	"pydebug.h"
+	"unicodeobject.h"
+	"intobject.h"
+	"boolobject.h"
+	"longobject.h"
+	"floatobject.h"
+	"complexobject.h"
+	"rangeobject.h"
+	"stringobject.h"
+	"memoryobject.h"
+	"bufferobject.h"
+	"bytesobject.h"
+	"bytearrayobject.h"
+	"tupleobject.h"
+	"listobject.h"
+	"dictobject.h"
+	"enumobject.h"
+	"setobject.h"
+	"methodobject.h"
+	"moduleobject.h"
+	"funcobject.h"
+	"classobject.h"
+	"fileobject.h"
+	"cobject.h"
+	"pycapsule.h"
+	"traceback.h"
+	"sliceobject.h"
+	"cellobject.h"
+	"iterobject.h"
+	"genobject.h"
+	"descrobject.h"
+	"warnings.h"
+	"weakrefobject.h"
+	"codecs.h"
+	"pyerrors.h"
+	"pystate.h"
+	"pyarena.h"
+	"modsupport.h"
+	"pythonrun.h"
+	"ceval.h"
+	"sysmodule.h"
+	"intrcheck.h"
+	"import.h"
+	"abstract.h"
+	"compile.h"
+	"eval.h"
+	"pyctype.h"
+	"pystrtod.h"
+	"pystrcmp.h"
+	"dtoa.h"
+	"pyfpe.h"
+	<pth.h>
+
+1395532525 /usr/include/python2.7/patchlevel.h
+
+1395532528 /usr/include/python2.7/pyconfig.h
+	<x86_64-linux-gnu/python2.7/pyconfig.h>
+	<x86_64-linux-gnux32/python2.7/pyconfig.h>
+	<i386-linux-gnu/python2.7/pyconfig.h>
+	<aarch64-linux-gnu/python2.7/pyconfig.h>
+	<alpha-linux-gnu/python2.7/pyconfig.h>
+	<arm-linux-gnueabihf/python2.7/pyconfig.h>
+	<arm-linux-gnueabi/python2.7/pyconfig.h>
+	<hppa-linux-gnu/python2.7/pyconfig.h>
+	<ia64-linux-gnu/python2.7/pyconfig.h>
+	<m68k-linux-gnu/python2.7/pyconfig.h>
+	<mipsel-linux-gnu/python2.7/pyconfig.h>
+	<mips64el-linux-gnuabin32/python2.7/pyconfig.h>
+	<mips64el-linux-gnuabi64/python2.7/pyconfig.h>
+	<mips-linux-gnu/python2.7/pyconfig.h>
+	<mips64-linux-gnuabin32/python2.7/pyconfig.h>
+	<mips64-linux-gnuabi64/python2.7/pyconfig.h>
+	<or1k-linux-gnu/python2.7/pyconfig.h>
+	<powerpc-linux-gnuspe/python2.7/pyconfig.h>
+	<powerpc64le-linux-gnu/python2.7/pyconfig.h>
+	<powerpc64-linux-gnu/python2.7/pyconfig.h>
+	<powerpc-linux-gnu/python2.7/pyconfig.h>
+	<s390x-linux-gnu/python2.7/pyconfig.h>
+	<s390-linux-gnu/python2.7/pyconfig.h>
+	<sh4-linux-gnu/python2.7/pyconfig.h>
+	<sparc64-linux-gnu/python2.7/pyconfig.h>
+	<sparc-linux-gnu/python2.7/pyconfig.h>
+	<x86_64-kfreebsd-gnu/python2.7/pyconfig.h>
+	<i386-kfreebsd-gnu/python2.7/pyconfig.h>
+	<i386-gnu/python2.7/pyconfig.h>
+
+1395532525 /usr/include/python2.7/pymacconfig.h
+
+1395532525 /usr/include/python2.7/pyport.h
+	"pyconfig.h"
+	<inttypes.h>
+	<stdint.h>
+	<stdlib.h>
+	<ieeefp.h>
+	<math.h>
+	<sys/time.h>
+	<time.h>
+	<sys/time.h>
+	<time.h>
+	<sys/select.h>
+	<sys/types.h>
+	"unixstuff.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<stat.h>
+	<sys/types.h>
+	<sys/termio.h>
+	<termios.h>
+	<osreldate.h>
+	<ctype.h>
+	<wctype.h>
+
+1395532525 /usr/include/python2.7/pymath.h
+	"pyconfig.h"
+
+1395532525 /usr/include/python2.7/pymem.h
+	"pyport.h"
+
+1395532525 /usr/include/python2.7/object.h
+
+1395532525 /usr/include/python2.7/objimpl.h
+	"pymem.h"
+
+1395532525 /usr/include/python2.7/pydebug.h
+
+1395532525 /usr/include/python2.7/unicodeobject.h
+	<stdarg.h>
+	<ctype.h>
+	<time.h>
+	<wchar.h>
+	<wctype.h>
+
+1395532525 /usr/include/python2.7/intobject.h
+
+1395532525 /usr/include/python2.7/boolobject.h
+
+1395532525 /usr/include/python2.7/longobject.h
+
+1395532525 /usr/include/python2.7/floatobject.h
+
+1395532525 /usr/include/python2.7/complexobject.h
+
+1395532525 /usr/include/python2.7/rangeobject.h
+
+1395532525 /usr/include/python2.7/stringobject.h
+	<stdarg.h>
+
+1395532525 /usr/include/python2.7/memoryobject.h
+
+1395532525 /usr/include/python2.7/bufferobject.h
+
+1395532525 /usr/include/python2.7/bytesobject.h
+
+1395532525 /usr/include/python2.7/bytearrayobject.h
+	<stdarg.h>
+
+1395532525 /usr/include/python2.7/tupleobject.h
+
+1395532525 /usr/include/python2.7/listobject.h
+
+1395532525 /usr/include/python2.7/dictobject.h
+
+1395532525 /usr/include/python2.7/enumobject.h
+
+1395532525 /usr/include/python2.7/setobject.h
+
+1395532525 /usr/include/python2.7/methodobject.h
+
+1395532525 /usr/include/python2.7/moduleobject.h
+
+1395532525 /usr/include/python2.7/funcobject.h
+
+1395532525 /usr/include/python2.7/classobject.h
+
+1395532525 /usr/include/python2.7/fileobject.h
+
+1395532525 /usr/include/python2.7/cobject.h
+
+1395532525 /usr/include/python2.7/pycapsule.h
+
+1395532525 /usr/include/python2.7/traceback.h
+
+1395532525 /usr/include/python2.7/sliceobject.h
+
+1395532525 /usr/include/python2.7/cellobject.h
+
+1395532525 /usr/include/python2.7/iterobject.h
+
+1395532525 /usr/include/python2.7/genobject.h
+
+1395532525 /usr/include/python2.7/descrobject.h
+
+1395532525 /usr/include/python2.7/warnings.h
+
+1395532525 /usr/include/python2.7/weakrefobject.h
+
+1395532525 /usr/include/python2.7/codecs.h
+
+1395532525 /usr/include/python2.7/pyerrors.h
+	<stdarg.h>
+
+1395532525 /usr/include/python2.7/pystate.h
+
+1395532525 /usr/include/python2.7/pyarena.h
+
+1395532525 /usr/include/python2.7/modsupport.h
+	<stdarg.h>
+
+1395532525 /usr/include/python2.7/pythonrun.h
+
+1395532525 /usr/include/python2.7/ceval.h
+
+1395532525 /usr/include/python2.7/sysmodule.h
+
+1395532525 /usr/include/python2.7/intrcheck.h
+
+1395532525 /usr/include/python2.7/import.h
+
+1395532525 /usr/include/python2.7/abstract.h
+
+1395532525 /usr/include/python2.7/compile.h
+	"code.h"
+
+1395532525 /usr/include/python2.7/code.h
+
+1395532525 /usr/include/python2.7/eval.h
+
+1395532525 /usr/include/python2.7/pyctype.h
+
+1395532525 /usr/include/python2.7/pystrtod.h
+
+1395532525 /usr/include/python2.7/pystrcmp.h
+
+1395532525 /usr/include/python2.7/dtoa.h
+
+1395532525 /usr/include/python2.7/pyfpe.h
+	<signal.h>
+	<setjmp.h>
+	<math.h>
+
+1426371266 source:/home/hahne/dev/netxpert/src/netxpert.i
+	"network.h"
+
+1426591677 source:/home/hahne/dev/netxpert/src/network.i
+	"network.h"
+	"dbhelper.h"
 

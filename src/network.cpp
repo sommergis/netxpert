@@ -9,21 +9,21 @@ Network::Network(InputArcs _arcsTbl, InputNodes _nodesTbl, ColumnMap _map, Confi
     //ctor
     try
     {
-        fromColName = _map.at("fromColName");
-        toColName = _map.at("toColName");
-        arcIDColName = _map.at("arcIDColName");
-        costColName = _map.at("costColName");
-        if (_map.count("capColName") == 1)
-            capColName = _map.at("capColName");
+        arcIDColName = _map.arcIDColName;
+        fromColName = _map.fromColName;
+        toColName = _map.toColName;
+        costColName = _map.costColName;
+        if (!_map.capColName.empty())
+            capColName = _map.capColName;
         else
             capColName = "";
-        if (_map.count("onewayColName") == 1)
-            onewayColName = _map.at("onewayColName");
+        if (!_map.onewayColName.empty())
+            onewayColName = _map.onewayColName;
         else
             onewayColName = "";
 
-        nodeIDColName = _map.at("nodeIDColName");
-        supplyColName = _map.at("supplyColName");
+        nodeIDColName = _map.nodeIDColName;
+        supplyColName = _map.supplyColName;
 
         netXpertConfig = cnfg;
 
@@ -44,21 +44,18 @@ Network::Network(InputArcs _arcsTbl, ColumnMap _map, Config& cnfg)
     //ctor
     try
     {
-        fromColName = _map.at("fromColName");
-        toColName = _map.at("toColName");
-        arcIDColName = _map.at("arcIDColName");
-        costColName = _map.at("costColName");
-        if (_map.count("capColName") == 1)
-            capColName = _map.at("capColName");
+        arcIDColName = _map.arcIDColName;
+        fromColName = _map.fromColName;
+        toColName = _map.toColName;
+        costColName = _map.costColName;
+        if (!_map.capColName.empty())
+            capColName = _map.capColName;
         else
             capColName = "";
-        if (_map.count("onewayColName") == 1)
-            onewayColName = _map.at("onewayColName");
+        if (!_map.onewayColName.empty())
+            onewayColName = _map.onewayColName;
         else
             onewayColName = "";
-
-        nodeIDColName = _map.at("nodeIDColName");
-        supplyColName = _map.at("supplyColName");
 
         netXpertConfig = cnfg;
 
@@ -82,11 +79,14 @@ Network::~Network()
 }
 
 //public
-void Network::AddStartNode(){}
+void Network::AddStartNode()
+{
+
+}
 void Network::AddEndNode(){}
 void Network::BuildTotalRouteGeometry(){}
 
-Network* Network::ConvertInputNetwork(bool autoClean)
+void Network::ConvertInputNetwork(bool autoClean)
 {
     renameNodes();
 
@@ -108,14 +108,59 @@ Network* Network::ConvertInputNetwork(bool autoClean)
     //LOGGER::LogDebug("Last element of eliminatedArcs: " + eliminatedArcs[i]);
     LOGGER::LogDebug("Count of eliminatedArcs: " + to_string(eliminatedArcs.size()));
     //LOGGER::LogDebug("Size of eliminatedArcsCount: "+ to_string(eliminatedArcsCount) );
-    return this;
 }
 
 void Network::GetOriginalArcData(list<ArcData>& origArcData, list<FTNode>& startEndNodes, bool isDirected){}
 void Network::GetOriginalArcDataAndFlow(list<ArcDataAndFlow>& origArcDataAndFlow, list<FTNode>& startEndNodes, bool isDirected){}
-string Network::GetOriginalNodeID(unsigned int internalNodeID){}
-string Network::GetOriginalStartOrEndNodeID(unsigned int internalNodeID){}
-void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID){}
+
+string Network::GetOriginalNodeID(unsigned int internalNodeID)
+{
+    string externalNodeID = "";
+    try
+    {
+        externalNodeID = swappedInternalDistinctNodeIDs.at(internalNodeID);
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Original node ID " +to_string(internalNodeID) +" could not be looked up!");
+        throw ex;
+    }
+    return externalNodeID;
+}
+string Network::GetOriginalStartOrEndNodeID(unsigned int internalNodeID)
+{
+    AddedPoint externalNode;
+    try
+    {
+        if (addedStartPoints.count(internalNodeID) == 1)
+            externalNode = addedStartPoints.at(internalNodeID);
+        else
+            externalNode = addedEndPoints.at(internalNodeID);
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
+        throw ex;
+    }
+    return externalNode.extNodeID;
+}
+void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID)
+{
+    AddedPoint externalNode;
+    try
+    {
+        if (addedStartPoints.count(internalNodeID) == 1)
+            externalNode = addedStartPoints.at(internalNodeID);
+        else
+            externalNode = addedEndPoints.at(internalNodeID);
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
+        throw ex;
+    }
+    coord = externalNode.coord;
+}
 
 //private
 void Network::renameNodes()
@@ -152,20 +197,21 @@ void Network::renameNodes()
         for (InputNodes::iterator it = nodesTbl.begin(); it != nodesTbl.end(); it++)
         {
             auto itD = *it;
-            string oldNodeID;
+            string extNodeID;
             unsigned int internalNodeID;
             double nodeSupply;
-            oldNodeID = itD.nodeID;
+            extNodeID = itD.extNodeID;
             nodeSupply = itD.nodeSupply;
             //Get internal node ID from dictionary:
             //add values to NodeSupply
             //throws an exception if not found!
             try {
-                internalNodeID = internalDistinctNodeIDs.at(oldNodeID);
+                internalNodeID = internalDistinctNodeIDs.at(extNodeID);
             }
             catch (exception& ex)
             {
-                LOGGER::LogError("Original node ID " +oldNodeID +" from nodes table not found in arcs!");
+                LOGGER::LogError("Original node ID " +extNodeID +" from nodes table not found in arcs!");
+                throw ex;
             }
             //filter out transshipment nodes -> they're not important here.
             //They are generated when the C++ Solver is called
@@ -173,7 +219,7 @@ void Network::renameNodes()
             {
                 if (nodeSupply != 0)
                 {
-                    NodeSupply sVal {oldNodeID, nodeSupply};
+                    NodeSupply sVal {extNodeID, nodeSupply};
                     nodeSupplies.insert( make_pair(internalNodeID, sVal) );
                 }
             }
@@ -211,6 +257,7 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
         {
             LOGGER::LogError("readNetworkFromTable(): Error getting internal Nodes from internalDistinctNodIDs!");
             LOGGER::LogError(ex.what());
+            throw ex;
         }
 
         bool isArcOneway = false;
