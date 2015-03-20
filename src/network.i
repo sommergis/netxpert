@@ -1,4 +1,5 @@
 %module pyNetXpert
+
 %include "typemaps.i"
 %include "std_string.i"
 %include "std_list.i"
@@ -120,7 +121,7 @@ namespace NetXpert
         bool IsDirected; //!< Member variable "isDirected"
         std::string ArcsTableName; //!< Member variable "arcsTableName"
         std::string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
-        std::string EdgeIDColumnName; //!< Member variable "edgeIDColumnName"
+        std::string ArcIDColumnName; //!< Member variable "edgeIDColumnName"
         std::string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
         std::string ToNodeColumnName; //!< Member variable "toNodeColumnName"
         std::string CostColumnName; //!< Member variable "costColumnName"
@@ -154,9 +155,6 @@ namespace NetXpert
         public:
             Network(InputArcs arcsTbl, ColumnMap _map, Config& cnfg);
             Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);
-            void AddStartNode();
-            void AddEndNode();
-            void BuildTotalRouteGeometry();
             void ConvertInputNetwork(bool autoClean);
             std::string GetOriginalNodeID(unsigned int internalNodeID);
             std::string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
