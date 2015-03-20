@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     else
     {
         //inFile = "./ODMatrixCnfg.json";
-        inFile = "/home/hahne/dev/netxpert/bin/Release/ODMatrixCnfg.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
     }
 
     Config cnfg;
@@ -83,6 +83,9 @@ int main(int argc, char** argv)
                 break;
             case TESTCASE::TestSpatiaLiteWriter:
                 NetXpert::Test::TestSpatiaLiteWriter(cnfg);
+                break;
+            case TESTCASE::TestAddStartNode:
+                NetXpert::Test::TestAddStartNode(cnfg);
                 break;
         }
 

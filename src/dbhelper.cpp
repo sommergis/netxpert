@@ -1,6 +1,8 @@
 #include "dbhelper.h"
+#include <exception>
 
 using namespace NetXpert;
+using namespace geos::io;
 
 //Init static member variables must be out of class scope!
 SQLite::Database* DBHELPER::connPtr = nullptr;
@@ -8,6 +10,17 @@ SQLite::Transaction* DBHELPER::currentTransactionPtr = nullptr;
 Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
+unordered_set<string> DBHELPER::EliminatedArcs;
+
+namespace NetXpert {
+    class GeometryEmptyException: public std::exception
+    {
+      virtual const char* what() const throw()
+      {
+        return "Geometry is empty!";
+      }
+    } GeometryEmptyException;
+}
 
 DBHELPER::~DBHELPER()
 {
@@ -253,6 +266,203 @@ InputNodes DBHELPER::LoadNodesFromDB(string _tableName, ColumnMap _map)
         return nodesTbl;
     }
 }
+
+std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string arcIDColName,
+                            string geomColName, ArcIDColumnDataType arcIDColDataType)
+{
+    string eliminatedArcIDs = "";
+    try
+    {
+        switch (arcIDColDataType)
+        {
+            case ArcIDColumnDataType::Std_String:
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",'", elem, "'";
+                }
+                break;
+            default: //double or int
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",", elem;
+                }
+                break;
+        }
+        //trim comma on first
+        if (eliminatedArcIDs.length() > 0)
+            eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
+
+        LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+
+        const string sqlStr = "SELECT "+ arcIDColName +", AsBinary(ST_ClosestPoint("+geomColName+", MakePoint(@XCoord, @YCoord))) as geometry"+
+                    " FROM "+tableName + " WHERE "+arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
+                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
+                    " AND ROWID IN"+
+                    " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
+                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
+                    " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
+
+        LOGGER::LogDebug(sqlStr);
+
+        SQLite::Database& db = *connPtr;
+        std::unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+        LOGGER::LogDebug("Successfully prepared query.");
+        return qryPtr;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error preparing query!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
+    }
+}
+
+ClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int treshold,
+                                                    SQLite::Statement& qry)
+{
+    string closestArcID = "";
+    std::shared_ptr<Geometry> geomPtr = nullptr;
+
+    try
+    {
+        const double x = coord.x;
+        const double y = coord.y;
+
+        // Bind values to the parameters of the SQL query
+        qry.bind("@XCoord", x);
+        qry.bind("@YCoord", y);
+        qry.bind("@Treshold", treshold);
+
+        WKBReader wkbReader;
+        std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        while (qry.executeStep())
+        {
+            SQLite::Column arcIDcol = qry.getColumn(0);
+            if (!arcIDcol.isNull())
+            {
+                if (arcIDcol.isInteger())
+                    closestArcID = to_string(arcIDcol.getInt());
+                if (arcIDcol.isFloat())
+                    closestArcID = to_string(arcIDcol.getDouble());
+                if (arcIDcol.isText())
+                    closestArcID = arcIDcol.getText();
+            }
+            SQLite::Column geoCol = qry.getColumn(1);
+            if (!geoCol.isNull())
+            {
+                const void* pVoid = geoCol.getBlob();
+                const int sizeOfwkb = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                geomPtr = std::shared_ptr<Geometry>( wkbReader.read(is) );
+            }
+        }
+        if (geomPtr)
+        {
+            std::shared_ptr<geos::geom::Point> pPtr (dynamic_pointer_cast<geos::geom::Point>(geomPtr));
+            const Coordinate* cPtr = pPtr->getCoordinate();
+            const Coordinate coord = *cPtr;
+
+            const ClosestArcAndPoint result = {closestArcID, coord};
+
+            return result;
+        }
+
+        throw GeometryEmptyException;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error getting closest Arc!" );
+        LOGGER::LogError( ex.what() );
+        throw ex;
+    }
+}
+
+std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
+                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType )
+{
+    string eliminatedArcIDs = "";
+    try
+    {
+        switch (arcIDColDataType)
+        {
+            case ArcIDColumnDataType::Std_String:
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",'", elem, "'";
+                }
+                break;
+            default: //double or int
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",", elem;
+                }
+                break;
+        }
+        //trim comma on first
+        if (eliminatedArcIDs.length() > 0)
+            eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
+
+        LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+
+        // Spatially equal is a special case..
+        // even if the text representation of two geometries can be the same (and the DB returns "equal" from the
+        // textual comparison - it does not have to mean, that they're really spatially equal!
+        // Thus SnapToGrid is needed..
+        // Tolerance: 0.000000001
+        const string sqlStr = "SELECT ST_Equals(ST_SnapToGrid(ST_ClosestPoint("+geomColumnName+
+                              ",MakePoint(@XCoord, @YCoord)),@Tolerance),"+
+                              " ST_SnapToGrid(MakePoint(@XCoord, @YCoord),@Tolerance))"+
+                              " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+                                arcIDColumnName+" = '@ArcID'";
+        LOGGER::LogDebug(sqlStr);
+
+        SQLite::Database& db = *connPtr;
+        std::unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+        LOGGER::LogDebug("Successfully prepared query.");
+        return qryPtr;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error preparing query!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
+    }
+}
+
+bool DBHELPER::IsPointOnArc(Coordinate coords, string arcID, SQLite::Statement& qry)
+{
+    bool isPointOnLine = false;
+    const double tolerance = 0.0000001;
+
+    try
+    {
+        const double x = coords.x;
+        const double y = coords.y;
+
+        // Bind values to the parameters of the SQL query
+        qry.bind("@XCoord", x);
+        qry.bind("@YCoord", y);
+        qry.bind("@Tolerance", tolerance);
+        qry.bind("@ArcID", arcID);
+
+        while (qry.executeStep())
+        {
+            SQLite::Column col = qry.getColumn(0);
+            isPointOnLine = static_cast<bool>(col.getInt());
+        }
+        return isPointOnLine;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error testing for point on line!" );
+        LOGGER::LogError( ex.what() );
+        throw ex;
+    }
+}
+
+
 void DBHELPER::CloseConnection()
 {
     try

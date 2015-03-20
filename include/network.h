@@ -1,24 +1,30 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "data.h"
-#include "logger.h"
-#include <string>
+#include "dbhelper.h"
 #include <algorithm>
+#include <geos/geom/CoordinateSequenceFactory.h>
+#include <geos/geom/GeometryFactory.h>
+#include <geos/opDistance.h>
+#include <geos/index/strtree/STRtree.h>
+#include <geos/linearref/LengthIndexedLine.h>
 
 using namespace std;
 using namespace geos::geom;
+using namespace geos::index::strtree;
+using namespace geos::operation::distance;
+using namespace geos::linearref;
 
 namespace NetXpert
 {
     class Network
     {
         public:
-            Network(Arcs arcData, unordered_map<ExtArcID,NodeID> distinctNodeIDs,
+            Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
                         NodeSupplies _nodeSupplies);
             Network(InputArcs arcsTbl, ColumnMap _map, Config& cnfg);
             Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);
-            void AddStartNode();
+            void AddStartNode(NewNode newNode, int treshold, SQLite::Statement& qry);
             void AddEndNode();
             void BuildTotalRouteGeometry();
             void ConvertInputNetwork(bool autoClean);
@@ -31,7 +37,8 @@ namespace NetXpert
             string GetOriginalNodeID(unsigned int internalNodeID);
             string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
             void GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID);
-
+            NewSplittedArc GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold,
+                                                            bool isPointOnLine, NewArcs& nArcs);
             virtual ~Network();
 
         private:
@@ -62,8 +69,8 @@ namespace NetXpert
             NodeSupplies nodeSupplies;
 
             Arcs internalArcData;
-            unordered_map<ExtNodeID,NodeID> internalDistinctNodeIDs;
-            unordered_map<NodeID,ExtNodeID> swappedInternalDistinctNodeIDs;
+            unordered_map<ExtNodeID,IntNodeID> internalDistinctNodeIDs;
+            unordered_map<IntNodeID,ExtNodeID> swappedInternalDistinctNodeIDs;
             AddedPoints addedStartPoints;
             AddedPoints addedEndPoints;
             unordered_set<string> eliminatedArcs;

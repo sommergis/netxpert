@@ -7,11 +7,13 @@
 #include <SQLiteCpp/Database.h>
 #include <SQLiteCpp/Transaction.h>
 #include <boost/filesystem.hpp>
-#include <geos/io/WKBWriter.h>
+#include <geos/io/WKBReader.h>
+#include <geos/geom/Point.h>
 
 using namespace std;
 using namespace geos::geom;
 using namespace SQLite;
+
 
 namespace NetXpert
 {
@@ -26,14 +28,18 @@ namespace NetXpert
             static void Initialize(Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
-            //SQLite::Statement* PrepareSaveSolveQueryToDB(string _tableName);
-            /*void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    Geometry& route, string _tableName,
-                                    bool truncateBeforeInsert, SQLite::Statement& query);*/
+            static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(string tableName, string arcIDColName,
+                            string geomColName, ArcIDColumnDataType arcIDColDataType);
+            static ClosestArcAndPoint GetClosestArcFromPoint(Coordinate coord, int treshold,
+                                            SQLite::Statement& qry);
+            static std::unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
+                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType );
+            static bool IsPointOnArc(Coordinate coords, string arcID, SQLite::Statement& qry);
             static InputArcs LoadNetworkFromDB(string _tableName, ColumnMap _map);
             static InputNodes LoadNodesFromDB(string _tableName, ColumnMap _map);
             static void CloseConnection();
             static bool IsInitialized;
+            static unordered_set<string> EliminatedArcs;
             ~DBHELPER();
         private:
             static Config NETXPERT_CNFG;
