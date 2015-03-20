@@ -70,7 +70,7 @@ Network::Network(InputArcs _arcsTbl, ColumnMap _map, Config& cnfg)
     }
 }
 
-Network::Network(Arcs arcData, unordered_map<ExtArcID,NodeID> distinctNodeIDs,
+Network::Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
                         NodeSupplies _nodeSupplies){}
 
 Network::~Network()
@@ -79,8 +79,23 @@ Network::~Network()
 }
 
 //public
-void Network::AddStartNode()
+void Network::AddStartNode(NewNode newNode, int treshold, SQLite::Statement& qry)
 {
+    unordered_map<string, FTNode> newSegments;
+    newSegments.reserve(2);
+
+    const string extNodeID = newNode.extNodeID;
+    const Coordinate startPoint = newNode.coord;
+    const double nodeSupply = newNode.supply;
+
+    //if (!startPoint.x)
+    //    throw new InvalidValueException("Start coordinate must not be null!");
+
+    //1. Suche die nächste Line zum temporaeren Punkt
+    ClosestArcAndPoint closestArcAndPoint = DBHELPER::GetClosestArcFromPoint(startPoint,
+            treshold, qry);
+    const string extArcID = closestArcAndPoint.extArcID;
+    const Coordinate closestPoint = closestArcAndPoint.closestPoint;
 
 }
 void Network::AddEndNode(){}
@@ -161,6 +176,115 @@ void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internal
     }
     coord = externalNode.coord;
 }
+
+NewSplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold,
+                                                            bool isPointOnLine, NewArcs& nArcs)
+{
+    try
+    {
+        const double tolerance = 0.001;
+        GeometryFactory gFac;
+        shared_ptr<const Point> p ( gFac.createPoint(coord) );
+        shared_ptr<const Geometry> gPtr ( dynamic_pointer_cast<const Geometry>(p) );
+        shared_ptr<const Geometry> buf ( gPtr->buffer(treshold) );
+        //must not defined as smart_pointer!
+        const Envelope* bufEnv = buf->getEnvelopeInternal();
+
+        map<double, pair<FTNode, NewArc> > distanceTbl;
+
+        /*// search in spatial index for relevant geometry
+        // with buffer around point (treshold)
+        auto bufGeom = gPtr->buffer(treshold);
+        const auto envBufGeom->getEnvelopeInternal();
+        newArcsSindex.insert(envBufGeom, gPtr);*/
+
+        //1. Generate Distance Table
+        for ( auto nArc : nArcs )
+        {
+            FTNode key = nArc.first;
+            NewArc val = nArc.second;
+            Geometry* g2Ptr = val.arcGeom.get();
+
+            // "spatial index like":
+            // calculate distance table only for those geometries
+            // that envelopes do intersect
+
+            //must not defined as smart_pointer!
+            const Envelope* g2Env = g2Ptr->getEnvelopeInternal() ;
+
+            if(bufEnv->intersects(g2Env)) //get for raw pointer
+            {
+                DistanceOp distCalc(*gPtr, *g2Ptr);
+                //cout << distCalc.distance() << endl << val.arcGeom.toString() << endl;
+                distanceTbl.insert( make_pair(distCalc.distance(),
+                                    make_pair(key, val) ) );
+            }
+        }
+
+        //take the nearest line = first of distanceTable, because it's ordered by distance
+        /*for (auto item : distanceTbl)
+        {
+            //auto t = *item.second;
+            cout << item.first << endl << item.second.arcGeom->toString() << endl;
+        }*/
+
+        auto elem = *distanceTbl.begin();
+        double dist = elem.first;
+        FTNode nearestArcKey = elem.second.first;
+        NewArc nearestArc = elem.second.second;
+        //must not defined as smart_pointer!
+        shared_ptr<const Geometry> nGeomPtr ( nearestArc.arcGeom );
+
+        if (!isPointOnLine) //default
+        {
+            //make a split blade (=line)
+            //do the split
+            LengthIndexedLine idxLine = geos::linearref::LengthIndexedLine( nGeomPtr.get() );//get for raw pointer
+
+            double pointIdx = idxLine.indexOf(coord);
+            double startIdx = idxLine.getStartIndex();
+            double endIdx = idxLine.getEndIndex();
+
+            //cout << "Indexes: "<< endl;
+            //cout << pointIdx << endl << startIdx << endl << endIdx << endl;
+
+            shared_ptr<Geometry> seg1 ( idxLine.extractLine(startIdx, pointIdx) );
+            shared_ptr<Geometry> seg2 ( idxLine.extractLine(pointIdx, endIdx) );
+
+            shared_ptr<MultiLineString> mLine ( gFac.createMultiLineString(
+                                                  vector<Geometry*>{ seg1.get() , seg2.get() } )
+                                                );
+
+            //cout << seg1->toString() << endl << seg2->toString() << endl;
+
+            NewSplittedArc result;
+            result.fromNode = nearestArcKey.fromNode;
+            result.toNode = nearestArcKey.toNode;
+            result.cost = nearestArc.cost;
+            result.capacity = nearestArc.capacity;
+            result.arcGeom = mLine;
+
+            return result;
+        }
+        else
+        {
+            //make a split blade (=line) with tolerance
+            //do the split
+        }
+        //DEBUG
+        /*for (auto item : distanceTbl)
+        {
+            cout << item.first << endl << item.second.arcGeom.toString() << endl;
+        }*/
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error splitting new line!" );
+        LOGGER::LogError( ex.what() );
+        throw ex;
+    }
+}
+
 
 //private
 void Network::renameNodes()

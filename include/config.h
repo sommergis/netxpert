@@ -32,7 +32,8 @@ namespace NetXpert {
         DumpInternalArcsToDB = 6,
         NetworkConvert = 7,
         TestFileGDBWriter = 8,
-        TestSpatiaLiteWriter = 9
+        TestSpatiaLiteWriter = 9,
+        TestAddStartNode = 10
     };
     enum RESULT_DB_TYPE
     {
@@ -83,11 +84,12 @@ namespace NetXpert {
         bool IsDirected; //!< Member variable "isDirected"
         string ArcsTableName; //!< Member variable "arcsTableName"
         string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
-        string EdgeIDColumnName; //!< Member variable "edgeIDColumnName"
+        string ArcIDColumnName; //!< Member variable "arcIDColumnName"
         string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
         string ToNodeColumnName; //!< Member variable "toNodeColumnName"
         string CostColumnName; //!< Member variable "costColumnName"
         string CapColumnName; //!< Member variable "capColumnName"
+        string OnewayColumnName;//!< Member variable "onewayColumnName"
         string NodesTableName; //!< Member variable "nodesTableName"
         string NodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
         string NodeIDColumnName;//!< Member variable "nodeIDColumnName"
@@ -105,7 +107,6 @@ namespace NetXpert {
         string SpatiaLiteHome;//!< Member variable "spatiaLiteHome"
         string SpatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
         GEOMETRY_HANDLING GeometryHandling;//!< Member variable "geometryHandling"
-        string OnewayColumnName;//!< Member variable "onewayColumnName"
         TESTCASE TestCase;//!< Member variable "testCase"
         bool CleanNetwork;//!< Member variable "cleanNetwork"
         LOG_LEVEL LogLevel;
@@ -129,7 +130,7 @@ namespace NetXpert {
                 CEREAL_NVP(IsDirected),
                 CEREAL_NVP(ArcsTableName),
                 CEREAL_NVP(ArcsGeomColumnName),
-                CEREAL_NVP(EdgeIDColumnName),
+                CEREAL_NVP(ArcIDColumnName),
                 CEREAL_NVP(FromNodeColumnName),
                 CEREAL_NVP(ToNodeColumnName),
                 CEREAL_NVP(CostColumnName),

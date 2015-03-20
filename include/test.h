@@ -24,6 +24,7 @@ namespace NetXpert
         void NetworkConvert(NetXpert::Config& cnfg);
         void TestFileGDBWriter(Config& cnfg);
         void TestSpatiaLiteWriter(Config& cnfg);
+        void TestAddStartNode(Config& cnfg);
     }
 }
 

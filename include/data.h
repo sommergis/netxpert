@@ -3,11 +3,13 @@
 
 #include <geos/geom/Coordinate.h>
 #include <geos/geom/Geometry.h>
+#include <geos/geom/MultiLineString.h>
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
 #include <list>
 #include <vector>
+//#include <pair>
 
 //Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
 //TODO: data structure: LEMON? structs? maps?
@@ -22,6 +24,11 @@ namespace NetXpert {
     const double DOUBLE_INFINITY = 999999;
     const double DOUBLE_NULL = -1;
 
+    enum ArcIDColumnDataType
+    {
+        Number = 0, //double or int
+        Std_String = 1
+    };
     /**
     * \Enum that reflects the type of the node that was added to break an edge of the network.
     * \Needed for building the total geometry of the route, if the network has been broken up through
@@ -34,14 +41,12 @@ namespace NetXpert {
         EndEdge = 2
     };
 
-    /**
-    * \Custom data type for storing nodes tuple <newNodeID,oldNodeID>
-    **/
-    struct AddedNode
+    struct ClosestArcAndPoint
     {
-        unsigned int newNodeID;
-        string extNodeID;
+        string extArcID;
+        Coordinate closestPoint;
     };
+
     /**
     * \Custom data type for storing external nodes tuple <fromNode,toNode>
     **/
@@ -86,7 +91,7 @@ namespace NetXpert {
         double flow;
     };
     /**
-    * \Custom data type for storing tuple <oldArcID,coord>
+    * \Custom data type for storing tuple <extNodeID,coord>
     **/
     struct AddedPoint
     {
@@ -94,20 +99,43 @@ namespace NetXpert {
         Coordinate coord;
     };
     /**
-    * \Custom data type for storing tuple <oldArcID,supply>
+    * \Custom data type for storing tuple <extNodeID,supply>
     **/
     struct NodeSupply
     {
         string extNodeID;
         double supply;
     };
+
+    /**
+    * \Custom data type for storing nodes tuple <extNodeID,<coord, supply>
+    **/
+    struct NewNode
+    {
+        string extNodeID;
+        Coordinate coord;
+        double supply;
+    };
+
     /**
     * \Custom data type for storing tuple <arcGeom,nodeType,cost,capacity>
     **/
     struct NewArc
     {
-        Geometry& arcGeom;
+        shared_ptr<Geometry> arcGeom;
         AddedNodeType nodeType;
+        double cost;
+        double capacity;
+    };
+
+    /**
+    * \Custom data type for storing tuple <fromNode,toNode,arcGeom,cost,capacity>
+    **/
+    struct NewSplittedArc
+    {
+        unsigned int fromNode;
+        unsigned int toNode;
+        shared_ptr<MultiLineString> arcGeom;
         double cost;
         double capacity;
     };
@@ -140,14 +168,13 @@ namespace NetXpert {
         string supplyColName;
     };
 
-    typedef unsigned int NodeID;
+    typedef unsigned int IntNodeID;
     typedef string ExtNodeID;
-
     typedef string ExtArcID;
 
     typedef unordered_map<FTNode, ArcData> Arcs;
-    typedef unordered_map<NodeID, AddedPoint> AddedPoints;
-    typedef unordered_map<NodeID, NodeSupply> NodeSupplies;
+    typedef unordered_map<IntNodeID, AddedPoint> AddedPoints;
+    typedef unordered_map<IntNodeID, NodeSupply> NodeSupplies;
     typedef unordered_map<FTNode, NewArc> NewArcs;
 
     //typedef map<string,string> ColumnMap;
