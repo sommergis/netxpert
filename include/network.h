@@ -8,6 +8,11 @@
 #include <geos/opDistance.h>
 #include <geos/index/strtree/STRtree.h>
 #include <geos/linearref/LengthIndexedLine.h>
+#include <geos/geom/LineString.h>
+#include <geos/linearref/ExtractLineByLocation.h>
+#include <geos/linearref/LengthIndexOfPoint.h>
+#include <geos/linearref/LocationIndexOfLine.h>
+#include <geos/io/WKTReader.h>
 
 using namespace std;
 using namespace geos::geom;
@@ -21,38 +26,62 @@ namespace NetXpert
     {
         public:
             Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
-                        NodeSupplies _nodeSupplies);
-            Network(InputArcs arcsTbl, ColumnMap _map, Config& cnfg);
-            Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);
-            void AddStartNode(NewNode newNode, int treshold, SQLite::Statement& qry);
+                       NodeSupplies _nodeSupplies);
+
+            //Default constructor
+            Network(const InputArcs& arcsTbl, const ColumnMap& _map, const Config& cnfg);
+            Network(const InputArcs& arcsTbl, const InputNodes& nodesTbl, const ColumnMap& _map, const Config& cnfg);
+
+            unsigned int AddStartNode(const NewNode& newNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity);
             void AddEndNode();
             void BuildTotalRouteGeometry();
             void ConvertInputNetwork(bool autoClean);
-            void GetOriginalArcData(list<ArcData>& origArcData,
-                                    list<FTNode>& startEndNodes,
+
+            //Network Helpers
+            SplittedArc GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold);
+
+            SplittedArc GetSplittedClosestOldArcToPoint(Coordinate coord, int treshold,
+                                                        const pair<ExtFTNode,ArcData>& arcData, const Geometry& arc);
+
+            bool IsPointOnArc(Coordinate coords, const Geometry& arc);
+
+            //Helpers for looking up original data
+            void GetOriginalArcData(const list<ArcData>& origArcData,
+                                    const list<FTNode>& startEndNodes,
                                     bool isDirected);
-            void GetOriginalArcDataAndFlow(list<ArcDataAndFlow>& origArcDataAndFlow,
-                                            list<FTNode>& startEndNodes,
+            void GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow,
+                                            const list<FTNode>& startEndNodes,
                                             bool isDirected);
             string GetOriginalNodeID(unsigned int internalNodeID);
+            unsigned int GetInternalNodeID(string externalNodeID);
             string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
             void GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID);
-            NewSplittedArc GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold,
-                                                            bool isPointOnLine, NewArcs& nArcs);
+            double GetPositionOfPointAlongLine(Coordinate coord, const Geometry& arc);
+            StartOrEndLocationOfLine GetLocationOfPointOnLine(Coordinate coord, const Geometry& arc);
+
             virtual ~Network();
 
         private:
+            bool isEqual (string& a, string& b) { return a == b; }
+            vector<FTNode> insertNewStartNode(bool isDirected, SplittedArc& splittedLine, string extNodeID,
+                                            const Coordinate& startPoint);
+            vector<FTNode> insertNewEndNode(bool isDirected, SplittedArc& splittedLine, string extNodeID,
+                                            const Coordinate& endPoint);
             void renameNodes();
             void readNetworkFromTable(bool autoClean, bool oneWay);
             void processArc(InputArc arc, unsigned int internalStartNode,
                                     unsigned int internalEndNode);
             void processBarriers();
 
+            shared_ptr<MultiLineString> splitLine(Coordinate coord,
+                                        const Geometry& lineGeom);
+
             Config netXpertConfig;
             unsigned int currentNodeCount;
             unsigned int currentArcCount;
             unsigned int maxNodeCount;
             unsigned int maxArcCount;
+
 
             string arcIDColName;
             string fromColName;
@@ -68,7 +97,7 @@ namespace NetXpert
             InputNodes nodesTbl;
             NodeSupplies nodeSupplies;
 
-            Arcs internalArcData;
+            //TODO BiMap
             unordered_map<ExtNodeID,IntNodeID> internalDistinctNodeIDs;
             unordered_map<IntNodeID,ExtNodeID> swappedInternalDistinctNodeIDs;
             AddedPoints addedStartPoints;
@@ -77,7 +106,7 @@ namespace NetXpert
             list<ExtFTNode> arcLoops;
 
             //Network changes
-            Arcs oldArcs;
+            Arcs internalArcData;
             NewArcs newArcs;
     };
 }

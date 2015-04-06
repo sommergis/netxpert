@@ -39,8 +39,8 @@ namespace NetXpert
     struct InputArc
     {
         std::string extArcID;
-        unsigned int fromNode;
-        unsigned int toNode;
+        std::string extFromNode;
+        std::string extToNode;
         double cost;
         double capacity;
         std::string oneway;
@@ -197,8 +197,8 @@ namespace NetXpert
 %extend NetXpert::InputArc {
    char *__str__() {
        static char tmp [1024];
-       sprintf(tmp,"InputArc('%s',%u,%u,%g,%g,'%s')", $self->extArcID.c_str(), $self->fromNode,
-                                        $self->toNode, $self->cost, $self->capacity,
+       sprintf(tmp,"InputArc('%s',%s,%s,%g,%g,'%s')", $self->extArcID.c_str(), $self->extFromNode.c_str(),
+                                        $self->extToNode.c_str(), $self->cost, $self->capacity,
                                         $self->oneway.c_str());
        return tmp;
    }

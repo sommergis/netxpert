@@ -4105,11 +4105,11 @@
 	<fstream>
 	"config.h"
 
-1426839032 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
+1428156271 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
 	"dbhelper.h"
 	<exception>
 
-1426838153 /home/hahne/dev/netxpert/include/dbhelper.h
+1427919007 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"data.h"
 	"logger.h"
@@ -4118,8 +4118,9 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBReader.h>
 	<geos/geom/Point.h>
+	<geos/geom/PrecisionModel.h>
 
-1426886333 /home/hahne/dev/netxpert/include/data.h
+1428155704 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
 	<geos/geom/MultiLineString.h>
@@ -4128,15 +4129,16 @@
 	<unordered_set>
 	<list>
 	<vector>
+	<boost/bimap.hpp>
 
-1426540516 /home/hahne/dev/netxpert/include/logger.h
+1427572329 /home/hahne/dev/netxpert/include/logger.h
 	<string>
 	"config.h"
 
-1426579050 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
+1427572844 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
 	"fgdbwriter.h"
 
-1425572668 /home/hahne/dev/netxpert/include/fgdbwriter.h
+1427572917 /home/hahne/dev/netxpert/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -4191,7 +4193,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1426587325 source:/home/hahne/dev/netxpert/src/logger.cpp
+1427573237 source:/home/hahne/dev/netxpert/src/logger.cpp
 	"logger.h"
 	<iostream>
 	<fstream>
@@ -4199,10 +4201,10 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1426886661 source:/home/hahne/dev/netxpert/src/network.cpp
+1428156361 source:/home/hahne/dev/netxpert/src/network.cpp
 	"network.h"
 
-1426887662 /home/hahne/dev/netxpert/include/network.h
+1428155588 /home/hahne/dev/netxpert/include/network.h
 	"dbhelper.h"
 	<algorithm>
 	<geos/geom/CoordinateSequenceFactory.h>
@@ -4210,11 +4212,16 @@
 	<geos/opDistance.h>
 	<geos/index/strtree/STRtree.h>
 	<geos/linearref/LengthIndexedLine.h>
+	<geos/geom/LineString.h>
+	<geos/linearref/ExtractLineByLocation.h>
+	<geos/linearref/LengthIndexOfPoint.h>
+	<geos/linearref/LocationIndexOfLine.h>
+	<geos/io/WKTReader.h>
 
-1426540719 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
+1427572809 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
 	"slitewriter.h"
 
-1425572679 /home/hahne/dev/netxpert/include/slitewriter.h
+1427572820 /home/hahne/dev/netxpert/include/slitewriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -4223,7 +4230,7 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBWriter.h>
 
-1426887194 source:/home/hahne/dev/netxpert/src/test.cpp
+1427578966 source:/home/hahne/dev/netxpert/src/test.cpp
 	"test.h"
 
 1426681979 /home/hahne/dev/netxpert/include/test.h
@@ -4238,7 +4245,7 @@
 	"network.h"
 	"dbhelper.h"
 
-1426542346 source:/home/hahne/dev/netxpert/src/main.cpp
+1428156333 source:/home/hahne/dev/netxpert/src/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -4518,7 +4525,7 @@
 1426371266 source:/home/hahne/dev/netxpert/src/netxpert.i
 	"network.h"
 
-1426679031 source:/home/hahne/dev/netxpert/src/network.i
+1426887748 source:/home/hahne/dev/netxpert/src/network.i
 	"network.h"
 	"dbhelper.h"
 

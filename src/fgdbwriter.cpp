@@ -274,7 +274,7 @@ void FGDBWriter::dropTable (string _tableName)
 }
 
 void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::MultiLineString& route, string _tableName,
+                                    const geos::geom::MultiLineString& route, string _tableName,
                                     bool truncateBeforeInsert)
 {
     try
@@ -317,7 +317,7 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
             lineGeometry.Setup(ShapeType::shapePolyline, numParts, numPts);
 
             // Set the point array to the array from the read geometry.
-            Point* points;
+            FileGDBAPI::Point* points;
             lineGeometry.GetPoints(points);
             const geos::geom::CoordinateSequence* coordsPtr = route.getCoordinates();
             const auto& coords = *coordsPtr;
@@ -325,7 +325,7 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
             for (int i = 0; i < length; i++)
             {
                 const geos::geom::Coordinate c = coords.getAt(i);
-                Point p {c.x, c.y};
+                FileGDBAPI::Point p {c.x, c.y};
                 //Point p { x = coords->getAt(i).x, y = coords->getAt(i).y };
                 points[i] = p;
             }

@@ -17,7 +17,7 @@ namespace NetXpert {
             LOGGER() {}
         public:
             ~LOGGER() {}
-            static void Initialize(Config& cnfg);
+            static void Initialize(const Config& cnfg);
             static void LogDebug(string logMsg);
             static void LogInfo(string logMsg);
             static void LogWarning(string logMsg);
