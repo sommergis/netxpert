@@ -283,7 +283,7 @@ SQLite::Statement* SpatiaLiteWriter::PrepareSaveSolveQueryToDB(string _tableName
 }
 
 void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::Geometry& route, string _tableName,
+                                    const Geometry& route, string _tableName,
                                     bool truncateBeforeInsert, SQLite::Statement& query)
 {
     try

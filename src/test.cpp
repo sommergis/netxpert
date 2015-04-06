@@ -160,6 +160,10 @@ void NetXpert::Test::TestAddStartNode(Config& cnfg)
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
                         cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
 
+        bool withCapacity = false;
+        if (!cnfg.CapColumnName.empty())
+            withCapacity = true;
+
         //2. Load Network
         LOGGER::LogInfo("Loading Data from DB..!");
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
@@ -170,20 +174,41 @@ void NetXpert::Test::TestAddStartNode(Config& cnfg)
         net.ConvertInputNetwork(autoCleanNetwork);
         LOGGER::LogInfo("Done!");
 
-        auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, cnfg.ArcIDColumnName, cnfg.ArcsGeomColumnName,
-                                            ArcIDColumnDataType::Number);
+        auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, cnfg.ArcsGeomColumnName,
+                                            cmap, ArcIDColumnDataType::Number, withCapacity);
         geos::geom::Coordinate coord = {703444, 5364720};
         LOGGER::LogDebug(to_string(coord.x) + " " + to_string(coord.y) );
 
-        auto result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Treshold, *qry);
+        ExtClosestArcAndPoint result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Treshold, *qry, withCapacity);
 
         LOGGER::LogDebug("Closest Arc ID: " + result.extArcID);
         LOGGER::LogDebug("Closest Point X: " + to_string(result.closestPoint.x));
         LOGGER::LogDebug("Closest Point Y: " + to_string(result.closestPoint.y));
+        LOGGER::LogDebug("Closest Arc cost: " + to_string(result.cost));
+        LOGGER::LogDebug("Closest Arc cap: " + to_string(result.capacity));
+        LOGGER::LogDebug("Closest Arc geom: " + result.arcGeom->toString());
 
-        geos::io::WKTReader reader;
-        //string wkt1 = "LINESTRING(1 2, 3 4)";
-        string wkt1 = "LINESTRING(3 4, 1 2)";
+        ExtFTNode key = {result.extFromNode, result.extToNode};
+        ArcData arcData = {result.extArcID, result.cost, result.capacity};
+        //shared_ptr<LineString> line = dynamic_pointer_cast<LineString>(result.arcGeom);
+        auto p = make_pair(key, arcData);
+
+        const Geometry& arc = *result.arcGeom;
+        SplittedArc sArc = net.GetSplittedClosestOldArcToPoint(coord, cnfg.Treshold, p, arc);
+
+        stringstream ss;
+        ss << "Splitted Closest New Arc is: " << endl
+           << "     fromNode " << sArc.fromNode << endl
+           << "     toNode " << sArc.toNode << endl
+           << "     cost " << sArc.cost << endl
+           << "     capacity " << sArc.capacity << endl
+           << sArc.arcGeom->toString() << endl;
+
+        cout << ss.str() << endl;
+
+        /*geos::io::WKTReader reader;
+        string wkt1 = "LINESTRING(1 2, 3 4)";
+        //string wkt1 = "LINESTRING(3 4, 1 2)";
         string wkt2 = "LINESTRING(20 30, 30 40)";
         shared_ptr<Geometry> geomPtr1 (reader.read(wkt1));
         shared_ptr<Geometry> geomPtr2 (reader.read(wkt2));
@@ -199,7 +224,7 @@ void NetXpert::Test::TestAddStartNode(Config& cnfg)
 
         geos::geom::Coordinate c2 = {2.3, 1.2};
 
-        auto res = net.GetSplittedClosestNewArcToPoint(c2, 2, false, nArcs);
+        auto res = net.GetSplittedClosestNewArcToPoint(c2, 2);
         stringstream ss;
         ss << "Splitted Closest New Arc is: " << endl
            << "     fromNode " << res.fromNode << endl
@@ -210,6 +235,19 @@ void NetXpert::Test::TestAddStartNode(Config& cnfg)
 
         LOGGER::LogDebug(ss.str());
         //delete qry;
+
+        cout << "Position of point along line: " << net.GetPositionOfPointAlongLine(c2, *geomPtr1) << endl;
+
+        cout << "Location of Point on Line (0=Intermediate, 1=Start, 2=End ): "
+             << net.GetLocationOfPointOnLine(c2, *geomPtr1) << endl;
+
+        geos::geom::Coordinate c3 = {0, 1};
+
+        cout << "Position of point along line: " << net.GetPositionOfPointAlongLine(c3, *geomPtr1) << endl;
+
+        cout << "Location of Point on Line (0=Intermediate, 1=Start, 2=End ): "
+             << net.GetLocationOfPointOnLine(c3, *geomPtr1) << endl;*/
+
     }
     catch (exception& ex)
     {

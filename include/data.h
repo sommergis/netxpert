@@ -9,6 +9,7 @@
 #include <unordered_set>
 #include <list>
 #include <vector>
+#include <boost/bimap.hpp>
 //#include <pair>
 
 //Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
@@ -41,10 +42,22 @@ namespace NetXpert {
         EndEdge = 2
     };
 
-    struct ClosestArcAndPoint
+    struct ExtClosestArcAndPoint
     {
         string extArcID;
+        string extFromNode;
+        string extToNode;
+        double cost;
+        double capacity;
         Coordinate closestPoint;
+        shared_ptr<Geometry> arcGeom;
+    };
+
+    enum StartOrEndLocationOfLine
+    {
+        Intermediate = 0,
+        Start = 1,
+        End = 2
     };
 
     /**
@@ -52,8 +65,8 @@ namespace NetXpert {
     **/
     struct ExtFTNode
     {
-        string fromNode;
-        string toNode;
+        string extFromNode;
+        string extToNode;
     };
     /**
     * \Custom data type for storing nodes tuple <fromNode,toNode>
@@ -108,7 +121,7 @@ namespace NetXpert {
     };
 
     /**
-    * \Custom data type for storing nodes tuple <extNodeID,<coord, supply>
+    * \Custom data type for storing new nodes data <extNodeID,<coord, supply>
     **/
     struct NewNode
     {
@@ -122,7 +135,7 @@ namespace NetXpert {
     **/
     struct NewArc
     {
-        shared_ptr<Geometry> arcGeom;
+        Geometry& arcGeom;
         AddedNodeType nodeType;
         double cost;
         double capacity;
@@ -131,20 +144,20 @@ namespace NetXpert {
     /**
     * \Custom data type for storing tuple <fromNode,toNode,arcGeom,cost,capacity>
     **/
-    struct NewSplittedArc
+    struct SplittedArc
     {
         unsigned int fromNode;
         unsigned int toNode;
-        shared_ptr<MultiLineString> arcGeom;
         double cost;
         double capacity;
+        shared_ptr<MultiLineString> arcGeom;
     };
 
     struct InputArc
     {
         string extArcID;
-        unsigned int fromNode;
-        unsigned int toNode;
+        string extFromNode;
+        string extToNode;
         double cost;
         double capacity;
         string oneway;
@@ -173,6 +186,7 @@ namespace NetXpert {
     typedef string ExtArcID;
 
     typedef unordered_map<FTNode, ArcData> Arcs;
+    //typedef boost::bimap< FTNode, ArcData > Arcs;
     typedef unordered_map<IntNodeID, AddedPoint> AddedPoints;
     typedef unordered_map<IntNodeID, NodeSupply> NodeSupplies;
     typedef unordered_map<FTNode, NewArc> NewArcs;

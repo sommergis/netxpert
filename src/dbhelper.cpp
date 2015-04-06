@@ -3,6 +3,7 @@
 
 using namespace NetXpert;
 using namespace geos::io;
+using namespace geos::geom;
 
 //Init static member variables must be out of class scope!
 SQLite::Database* DBHELPER::connPtr = nullptr;
@@ -11,6 +12,7 @@ Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
 unordered_set<string> DBHELPER::EliminatedArcs;
+shared_ptr<GeometryFactory> DBHELPER::GEO_FACTORY;
 
 namespace NetXpert {
     class GeometryEmptyException: public std::exception
@@ -31,8 +33,17 @@ DBHELPER::~DBHELPER()
         delete currentTransactionPtr;
 }
 
-void DBHELPER::Initialize(Config& cnfg)
+void DBHELPER::Initialize(const Config& cnfg)
 {
+    //FIXED = 0 Kommastellen
+    //FLOATING_SINGLE = 6 Kommastellen
+    //FLOATING = 16 Kommastellen
+	shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING_SINGLE));
+
+	// Initialize global factory with defined PrecisionModel
+	// and a SRID of -1 (undefined).
+	DBHELPER::GEO_FACTORY = shared_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+
     DBHELPER::NETXPERT_CNFG = cnfg;
     IsInitialized = true;
 }
@@ -111,7 +122,7 @@ void DBHELPER::OpenNewTransaction()
         LOGGER::LogError( ex.what() );
     }
 }
-InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
+InputArcs DBHELPER::LoadNetworkFromDB(string _tableName,const ColumnMap& _map)
 {
     InputArcs arcTbl;
     string sqlStr = "";
@@ -175,12 +186,12 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
             while (query.executeStep())
             {
                 const string  id     = query.getColumn(0);
-                int fNode            = query.getColumn(1);
-                int tNode            = query.getColumn(2);
-                double cost          = query.getColumn(3);
-                double cap           = query.getColumn(4);
+                const string fNode   = query.getColumn(1);
+                const string tNode   = query.getColumn(2);
+                const double cost    = query.getColumn(3);
+                const double cap     = query.getColumn(4);
                 const string _oneway = query.getColumn(5);
-                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
+                arcTbl.push_back(InputArc {id,fNode,tNode,
                                             cost,cap,_oneway});
             }
         }
@@ -188,12 +199,12 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
         {
             while (query.executeStep())
             {
-                const string  id    = query.getColumn(0);
-                int fNode           = query.getColumn(1);
-                int tNode           = query.getColumn(2);
-                double cost         = query.getColumn(3);
-                double cap          = query.getColumn(4);
-                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
+                const string  id     = query.getColumn(0);
+                const string fNode   = query.getColumn(1);
+                const string tNode   = query.getColumn(2);
+                const double cost    = query.getColumn(3);
+                const double cap     = query.getColumn(4);
+                arcTbl.push_back(InputArc {id,fNode,tNode,
                                             cost,cap,""});
             }
         }
@@ -202,11 +213,11 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
             while (query.executeStep())
             {
                 const string  id     = query.getColumn(0);
-                int fNode            = query.getColumn(1);
-                int tNode            = query.getColumn(2);
-                double cost          = query.getColumn(3);
+                const string fNode   = query.getColumn(1);
+                const string tNode   = query.getColumn(2);
+                const double cost    = query.getColumn(3);
                 const string _oneway = query.getColumn(4);
-                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
+                arcTbl.push_back(InputArc {id,fNode,tNode,
                                             cost,DOUBLE_INFINITY,_oneway});
             }
         }
@@ -215,10 +226,10 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
             while (query.executeStep())
             {
                 const string  id     = query.getColumn(0);
-                int fNode            = query.getColumn(1);
-                int tNode            = query.getColumn(2);
-                double cost          = query.getColumn(3);
-                arcTbl.push_back(InputArc {id,static_cast<unsigned int>(fNode),static_cast<unsigned int>(tNode),
+                const string fNode   = query.getColumn(1);
+                const string tNode   = query.getColumn(2);
+                const double cost    = query.getColumn(3);
+                arcTbl.push_back(InputArc {id,fNode,tNode,
                                             cost, DOUBLE_INFINITY, ""});
             }
         }
@@ -233,7 +244,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName, ColumnMap _map)
         return arcTbl;
     }
 }
-InputNodes DBHELPER::LoadNodesFromDB(string _tableName, ColumnMap _map)
+InputNodes DBHELPER::LoadNodesFromDB(string _tableName, const ColumnMap& _map)
 {
     InputNodes nodesTbl;
     string sqlStr = "";
@@ -267,10 +278,13 @@ InputNodes DBHELPER::LoadNodesFromDB(string _tableName, ColumnMap _map)
     }
 }
 
-std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string arcIDColName,
-                            string geomColName, ArcIDColumnDataType arcIDColDataType)
+std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string geomColName,
+                                                        const ColumnMap& cmap, ArcIDColumnDataType arcIDColDataType,
+                                                        bool withCapacity)
 {
     string eliminatedArcIDs = "";
+    string sqlStr = "";
+
     try
     {
         switch (arcIDColDataType)
@@ -292,13 +306,32 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string ta
 
         LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
 
-        const string sqlStr = "SELECT "+ arcIDColName +", AsBinary(ST_ClosestPoint("+geomColName+", MakePoint(@XCoord, @YCoord))) as geometry"+
-                    " FROM "+tableName + " WHERE "+arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
+        if (withCapacity)
+        {
+            sqlStr = "SELECT "+ cmap.arcIDColName +", "+ cmap.fromColName+", "+ cmap.toColName+", "+cmap.costColName+
+                    ", "+ cmap.capColName +", AsBinary(" + geomColName +
+                    ") as a_geometry, AsBinary(ST_ClosestPoint("
+                    +geomColName+", MakePoint(@XCoord, @YCoord))) as p_geometry"+
+                    " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
                     " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
                     " AND ROWID IN"+
                     " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
                        " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
+        }
+        else
+        {
+            sqlStr = "SELECT "+ cmap.arcIDColName +", "+ cmap.fromColName+", "+ cmap.toColName+", "+cmap.costColName+
+                    ", AsBinary(" + geomColName +
+                    ") as a_geometry, AsBinary(ST_ClosestPoint("
+                    +geomColName+", MakePoint(@XCoord, @YCoord))) as p_geometry"+
+                    " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
+                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
+                    " AND ROWID IN"+
+                    " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
+                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
+                    " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
+        }
 
         LOGGER::LogDebug(sqlStr);
 
@@ -315,11 +348,21 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string ta
     }
 }
 
-ClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int treshold,
-                                                    SQLite::Statement& qry)
+ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int treshold,
+                                                    SQLite::Statement& qry, bool withCapacity)
 {
-    string closestArcID = "";
-    std::shared_ptr<Geometry> geomPtr = nullptr;
+    string closestArcID;
+    shared_ptr<Geometry> pGeomPtr = nullptr;
+    shared_ptr<Geometry> aGeomPtr = nullptr; //kein shared_ptr, weil es zur Reference als Member eines structs kopiert wird
+    // nach dem return geht das Ding out of scope und räumt sich selbst auf
+    string extFromNode;
+    string extToNode;
+    double cost;
+    double capacity;
+
+    /*cout << withCapacity << endl;
+    cout << coord.toString() << endl;
+    cout << treshold << endl;*/
 
     try
     {
@@ -331,7 +374,7 @@ ClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tresho
         qry.bind("@YCoord", y);
         qry.bind("@Treshold", treshold);
 
-        WKBReader wkbReader;
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
         while (qry.executeStep())
@@ -345,28 +388,69 @@ ClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tresho
                     closestArcID = to_string(arcIDcol.getDouble());
                 if (arcIDcol.isText())
                     closestArcID = arcIDcol.getText();
+                //cout << closestArcID << endl;
             }
-            SQLite::Column geoCol = qry.getColumn(1);
-            if (!geoCol.isNull())
+
+            if (!qry.getColumn(1).isNull())
+                extFromNode = static_cast<string>( qry.getColumn(1).getText() );
+
+            if (!qry.getColumn(2).isNull())
+                extToNode = static_cast<string>( qry.getColumn(2).getText() );
+
+            if (!qry.getColumn(3).isNull())
+                cost = qry.getColumn(3).getDouble();
+
+            /*cout << fromNode << endl
+                 << toNode << endl
+                 << cost << endl;*/
+
+            int indxCount = 4;
+            if (withCapacity)
             {
-                const void* pVoid = geoCol.getBlob();
-                const int sizeOfwkb = geoCol.getBytes();
+                if (!qry.getColumn(4).isNull())
+                    capacity =  qry.getColumn(4).getDouble();
+                indxCount += 1; //+1 if capacitry for getColumn()
+            }
+            //Arc geom
+            SQLite::Column aGeoCol = qry.getColumn(indxCount); //4 without cap, 5 with cap
+            if (!aGeoCol.isNull())
+            {
+                const void* pVoid = aGeoCol.getBlob();
+                const int sizeOfwkb = aGeoCol.getBytes();
 
                 const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
 
                 for (int i = 0; i < sizeOfwkb; i++)
                     is << bytes[i];
 
-                geomPtr = std::shared_ptr<Geometry>( wkbReader.read(is) );
+                 aGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
+            }
+
+            //Closest Point geom
+            SQLite::Column pGeoCol = qry.getColumn(indxCount+1);//5 without cap, 6 with cap
+            if (!pGeoCol.isNull())
+            {
+                const void* pVoid = pGeoCol.getBlob();
+                const int sizeOfwkb = pGeoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                pGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
             }
         }
-        if (geomPtr)
+        if (aGeomPtr && pGeomPtr)
         {
-            std::shared_ptr<geos::geom::Point> pPtr (dynamic_pointer_cast<geos::geom::Point>(geomPtr));
+            std::shared_ptr<Point> pPtr (dynamic_pointer_cast<Point>(pGeomPtr));
+            //std::shared_ptr<const LineString> aPtr (dynamic_pointer_cast<const LineString>(aGeomPtr));
             const Coordinate* cPtr = pPtr->getCoordinate();
             const Coordinate coord = *cPtr;
 
-            const ClosestArcAndPoint result = {closestArcID, coord};
+            //aGeomPtr darf nicht eine reference aus einem shared_ptr sein, weil das Ding sonst nach return gekillt wird!
+            const ExtClosestArcAndPoint result = {closestArcID, extFromNode, extToNode, cost, capacity, coord, aGeomPtr};
+            //cout << "DBHELPER: " <<aGeomPtr->toString() << endl;
 
             return result;
         }

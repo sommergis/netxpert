@@ -62,6 +62,7 @@
 		<Unit filename="include/fgdbwriter.h" />
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
+		<Unit filename="include/slitewriter.h" />
 		<Unit filename="libs/SQLiteCpp/Assertion.h" />
 		<Unit filename="libs/SQLiteCpp/Column.cpp" />
 		<Unit filename="libs/SQLiteCpp/Column.h" />
