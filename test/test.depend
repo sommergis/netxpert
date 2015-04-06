@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1426752370 source:/home/hahne/dev/netxpert/test/main.cpp
+1427578241 source:/home/hahne/dev/netxpert/test/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -10,7 +10,7 @@
 	"dbhelper.h"
 	"test.h"
 
-1426540516 /home/hahne/dev/netxpert/include/logger.h
+1427572329 /home/hahne/dev/netxpert/include/logger.h
 	<string>
 	"config.h"
 
@@ -145,7 +145,7 @@
 	<cereal/cereal.hpp>
 	<vector>
 
-1425572668 /home/hahne/dev/netxpert/include/fgdbwriter.h
+1427572917 /home/hahne/dev/netxpert/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -200,7 +200,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1425572679 /home/hahne/dev/netxpert/include/slitewriter.h
+1427572820 /home/hahne/dev/netxpert/include/slitewriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -235,7 +235,7 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1426847514 /home/hahne/dev/netxpert/include/data.h
+1428155704 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
 	<geos/geom/MultiLineString.h>
@@ -244,8 +244,9 @@
 	<unordered_set>
 	<list>
 	<vector>
+	<boost/bimap.hpp>
 
-1426844291 /home/hahne/dev/netxpert/include/network.h
+1428155588 /home/hahne/dev/netxpert/include/network.h
 	"dbhelper.h"
 	<algorithm>
 	<geos/geom/CoordinateSequenceFactory.h>
@@ -253,10 +254,15 @@
 	<geos/opDistance.h>
 	<geos/index/strtree/STRtree.h>
 	<geos/linearref/LengthIndexedLine.h>
+	<geos/geom/LineString.h>
+	<geos/linearref/ExtractLineByLocation.h>
+	<geos/linearref/LengthIndexOfPoint.h>
+	<geos/linearref/LocationIndexOfLine.h>
+	<geos/io/WKTReader.h>
 
 1423772165 /usr/local/include/boost/algorithm
 
-1426838153 /home/hahne/dev/netxpert/include/dbhelper.h
+1427919007 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"data.h"
 	"logger.h"
@@ -265,6 +271,7 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBReader.h>
 	<geos/geom/Point.h>
+	<geos/geom/PrecisionModel.h>
 
 1426681979 /home/hahne/dev/netxpert/include/test.h
 	<iostream>

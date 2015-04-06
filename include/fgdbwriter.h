@@ -26,10 +26,10 @@ namespace NetXpert {
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
             virtual void CreateSolverResultTable(const string _tableName);
-            virtual void CreateSolverResultTable(string _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const string _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
             void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::MultiLineString& route, string _tableName,
+                                    const geos::geom::MultiLineString& route, string _tableName,
                                     bool truncateBeforeInsert);
             virtual void CloseConnection();
         private:

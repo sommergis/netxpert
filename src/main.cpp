@@ -102,10 +102,10 @@ int main(int argc, char** argv)
         //delete mlPtr;
 
         //Network test
-        InputArc arc1 = {"1", 1, 2, 1.0, 99999.9, ""};
-        InputArc arc2 = {"2", 2, 3, 3.0, 99999.9, ""};
-        InputArc arc3 = {"3", 2, 3, 2.0, 99999.9, ""};
-        InputArc arc4 = {"4", 3, 3, 4.0, -1, ""};
+        InputArc arc1 = {"1", "1", "2", 1.0, 99999.9, ""};
+        InputArc arc2 = {"2", "2", "3", 3.0, 99999.9, ""};
+        InputArc arc3 = {"3", "2", "3", 2.0, 99999.9, ""};
+        InputArc arc4 = {"4", "3", "3", 4.0, -1, ""};
         InputNode node {"1", 2.0};
 
 

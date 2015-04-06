@@ -4936,43 +4936,10 @@ SWIG_FromCharPtr(const char *cptr)
   return SWIG_FromCharPtrAndSize(cptr, (cptr ? strlen(cptr) : 0));
 }
 
-
-#include <limits.h>
-#if !defined(SWIG_NO_LLONG_MAX)
-# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
-#   define LLONG_MAX __LONG_LONG_MAX__
-#   define LLONG_MIN (-LLONG_MAX - 1LL)
-#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
-# endif
-#endif
-
-
-SWIGINTERN int
-SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
-{
-  unsigned long v;
-  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v > UINT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< unsigned int >(v);
-    }
-  }  
-  return res;
-}
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_unsigned_SS_int  (unsigned int value)
-{
-  return PyInt_FromSize_t((size_t) value);
-}
-
 SWIGINTERN char *NetXpert_InputArc___str__(NetXpert::InputArc *self){
        static char tmp [1024];
-       sprintf(tmp,"InputArc('%s',%u,%u,%g,%g,'%s')", self->extArcID.c_str(), self->fromNode,
-                                        self->toNode, self->cost, self->capacity,
+       sprintf(tmp,"InputArc('%s',%s,%s,%g,%g,'%s')", self->extArcID.c_str(), self->extFromNode.c_str(),
+                                        self->extToNode.c_str(), self->cost, self->capacity,
                                         self->oneway.c_str());
        return tmp;
    }
@@ -4982,6 +4949,16 @@ SWIGINTERNINLINE PyObject*
 {
   return PyInt_FromLong((long) value);
 }
+
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
 
 
 SWIGINTERN int
@@ -5008,6 +4985,22 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
     return SWIG_ERROR;
   if (val) *val = r ? true : false;
   return SWIG_OK;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > UINT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned int >(v);
+    }
+  }  
+  return res;
 }
 
 #ifdef __cplusplus
@@ -10443,104 +10436,118 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_InputArc_fromNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_InputArc_extFromNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
-  unsigned int arg2 ;
+  std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_fromNode_set",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_extFromNode_set",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_fromNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_fromNode_set" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->fromNode = arg2;
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArc_extFromNode_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArc_extFromNode_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->extFromNode = *arg2;
   resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_InputArc_fromNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_InputArc_extFromNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  unsigned int result;
+  std::string *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:InputArc_fromNode_get",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:InputArc_extFromNode_get",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_fromNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
-  result = (unsigned int) ((arg1)->fromNode);
-  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  result = (std::string *) & ((arg1)->extFromNode);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_InputArc_toNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_InputArc_extToNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
-  unsigned int arg2 ;
+  std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  unsigned int val2 ;
-  int ecode2 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_toNode_set",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_extToNode_set",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_toNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
-  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_toNode_set" "', argument " "2"" of type '" "unsigned int""'");
-  } 
-  arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->toNode = arg2;
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArc_extToNode_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArc_extToNode_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->extToNode = *arg2;
   resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_InputArc_toNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_InputArc_extToNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  unsigned int result;
+  std::string *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:InputArc_toNode_get",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:InputArc_extToNode_get",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_toNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
-  result = (unsigned int) ((arg1)->toNode);
-  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  result = (std::string *) & ((arg1)->extToNode);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
   return NULL;
@@ -13715,10 +13722,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"InputNode_swigregister", InputNode_swigregister, METH_VARARGS, NULL},
 	 { (char *)"InputArc_extArcID_set", _wrap_InputArc_extArcID_set, METH_VARARGS, NULL},
 	 { (char *)"InputArc_extArcID_get", _wrap_InputArc_extArcID_get, METH_VARARGS, NULL},
-	 { (char *)"InputArc_fromNode_set", _wrap_InputArc_fromNode_set, METH_VARARGS, NULL},
-	 { (char *)"InputArc_fromNode_get", _wrap_InputArc_fromNode_get, METH_VARARGS, NULL},
-	 { (char *)"InputArc_toNode_set", _wrap_InputArc_toNode_set, METH_VARARGS, NULL},
-	 { (char *)"InputArc_toNode_get", _wrap_InputArc_toNode_get, METH_VARARGS, NULL},
+	 { (char *)"InputArc_extFromNode_set", _wrap_InputArc_extFromNode_set, METH_VARARGS, NULL},
+	 { (char *)"InputArc_extFromNode_get", _wrap_InputArc_extFromNode_get, METH_VARARGS, NULL},
+	 { (char *)"InputArc_extToNode_set", _wrap_InputArc_extToNode_set, METH_VARARGS, NULL},
+	 { (char *)"InputArc_extToNode_get", _wrap_InputArc_extToNode_get, METH_VARARGS, NULL},
 	 { (char *)"InputArc_cost_set", _wrap_InputArc_cost_set, METH_VARARGS, NULL},
 	 { (char *)"InputArc_cost_get", _wrap_InputArc_cost_get, METH_VARARGS, NULL},
 	 { (char *)"InputArc_capacity_set", _wrap_InputArc_capacity_set, METH_VARARGS, NULL},

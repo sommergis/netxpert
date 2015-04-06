@@ -19,7 +19,7 @@ string LOGGER::sTime = "";
 LOG_LEVEL LOGGER::applicationLogLevel = LOG_LEVEL::All;
 Config LOGGER::NETXPERT_CNFG;
 
-void LOGGER::Initialize(Config& cnfg)
+void LOGGER::Initialize(const Config& cnfg)
 {
     NETXPERT_CNFG = cnfg;
     string fileName = readConfig();
@@ -93,10 +93,10 @@ void LOGGER::writeLog(string _logMsg, LOG_LEVEL msgLogLevel)
 void LOGGER::LogDebug(string _logMsg)
 {
     //format with time
-    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S");
+    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S.%f");
     stringstream ss;
     ss.imbue(locale(ss.getloc(), facet));
-    ss << second_clock::local_time();
+    ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " DEBUG " + _logMsg;
     writeLog(totalMsg, Debug);
@@ -105,10 +105,10 @@ void LOGGER::LogDebug(string _logMsg)
 void LOGGER::LogInfo(string _logMsg)
 {
     //format with time
-    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S");
+    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S.%f");
     stringstream ss;
     ss.imbue(locale(ss.getloc(), facet));
-    ss << second_clock::local_time();
+    ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " INFO " + _logMsg;
     writeLog(totalMsg, Info);
@@ -117,10 +117,10 @@ void LOGGER::LogInfo(string _logMsg)
 void LOGGER::LogWarning(string _logMsg)
 {
     //format with time
-    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S");
+    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S.%f");
     stringstream ss;
     ss.imbue(locale(ss.getloc(), facet));
-    ss << second_clock::local_time();
+    ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " WARN " + _logMsg;
     writeLog(totalMsg, Warning);
@@ -129,10 +129,10 @@ void LOGGER::LogWarning(string _logMsg)
 void LOGGER::LogError(string _logMsg)
 {
     //format with time
-    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S");
+    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S.%f");
     stringstream ss;
     ss.imbue(locale(ss.getloc(), facet));
-    ss << second_clock::local_time();
+    ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " ERROR " + _logMsg;
     writeLog(totalMsg, Error);
@@ -141,10 +141,10 @@ void LOGGER::LogError(string _logMsg)
 void LOGGER::LogFatal(string _logMsg)
 {
     //format with time
-    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S");
+    time_facet *facet = new time_facet("%Y-%m-%d %H:%M:%S.%f");
     stringstream ss;
     ss.imbue(locale(ss.getloc(), facet));
-    ss << second_clock::local_time();
+    ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " FATAL " + _logMsg;
     writeLog(totalMsg, Fatal);

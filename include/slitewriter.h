@@ -26,11 +26,11 @@ namespace NetXpert {
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
             virtual void CreateSolverResultTable(const string _tableName);
-            virtual void CreateSolverResultTable(string _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const string _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
             SQLite::Statement* PrepareSaveSolveQueryToDB(string _tableName);
             void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    Geometry& route, string _tableName,
+                                    const Geometry& route, string _tableName,
                                     bool truncateBeforeInsert, SQLite::Statement& query);
             virtual void CloseConnection();
             //string ConnStr;
