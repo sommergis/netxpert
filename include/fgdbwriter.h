@@ -13,7 +13,7 @@ using namespace std;
 using namespace geos;
 using namespace FileGDBAPI;
 
-namespace NetXpert {
+namespace netxpert {
 
     /**
     * \Class that writes the result of NetXpert into a ESRI FileGeodatabase
@@ -33,12 +33,12 @@ namespace NetXpert {
                                     bool truncateBeforeInsert);
             virtual void CloseConnection();
         private:
-            Geodatabase* geodatabasePtr;
+            unique_ptr<Geodatabase> geodatabasePtr;
             void connect();
             void createTable( string _tableName);
             void openTable( string _tableName);
             void dropTable ( string _tableName);
-            Table* currentTblPtr;
+            unique_ptr<Table> currentTblPtr;
             const string resultTblDefPath = "FGDB_NETXPERT_RESULT_SCHEMA.XML";
             Config NETXPERT_CNFG;
     };

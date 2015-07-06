@@ -1,7 +1,7 @@
 #include "network.h"
 
 using namespace std;
-using namespace NetXpert;
+using namespace netxpert;
 
 // ColumnMap can override entries in Config
 Network::Network(const InputArcs& _arcsTbl, const InputNodes& _nodesTbl, const ColumnMap& _map, const Config& cnfg)
@@ -28,6 +28,7 @@ Network::Network(const InputArcs& _arcsTbl, const InputNodes& _nodesTbl, const C
         netXpertConfig = cnfg;
 
         internalArcData.reserve(_arcsTbl.size());
+        newArcs.reserve(2);
 
         this->arcsTbl = _arcsTbl;
         this->nodesTbl = _nodesTbl;
@@ -60,6 +61,7 @@ Network::Network(const InputArcs& _arcsTbl, const ColumnMap& _map, const Config&
         netXpertConfig = cnfg;
 
         internalArcData.reserve(_arcsTbl.size());
+        newArcs.reserve(2);
 
         this->arcsTbl = _arcsTbl;
     }
@@ -80,17 +82,75 @@ Network::~Network()
 
 //public
 
-//TODO:
+//TODO
+vector<pair<unsigned int, string>> Network::LoadStartNodes(const vector<NewNode>& newNodes, int treshold,
+                                                            string arcsTableName, string geomColumnName,
+                                                                ColumnMap& cmap, bool withCapacity)
+{
+    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                            cmap, ArcIDColumnDataType::Number, withCapacity);
+    vector<pair<unsigned int, string>> startNodes;
+
+    for (auto& startNode : newNodes)
+    {
+        if (startNode.supply > 0)
+        {
+            LOGGER::LogDebug("Loading Node "+ startNode.extNodeID + "..");
+            try
+            {
+                unsigned int newStartNodeID = AddStartNode(startNode, treshold, *qry, withCapacity);
+                startNodes.push_back( make_pair(newStartNodeID, startNode.extNodeID ) );
+                LOGGER::LogDebug("New Start Node ID " + to_string(newStartNodeID)  + " - " + startNode.extNodeID);
+            }
+            catch (exception& ex)
+            {
+                //pass
+                cout << "Exception!" << endl;
+            }
+        }
+    }
+    return startNodes;
+}
+//TODO
+vector<pair<unsigned int, string>> Network::LoadEndNodes(const vector<NewNode>& newNodes, int treshold,
+                                                            string arcsTableName, string geomColumnName,
+                                                                ColumnMap& cmap, bool withCapacity)
+{
+    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                            cmap, ArcIDColumnDataType::Number, withCapacity);
+    vector<pair<unsigned int, string>> endNodes;
+
+    for (auto endNode : newNodes)
+    {
+        if (endNode.supply < 0)
+        {
+            LOGGER::LogDebug("Loading Node "+ endNode.extNodeID + "..");
+            try
+            {
+                unsigned int newEndNodeID = AddEndNode(endNode, treshold, *qry, withCapacity);
+                endNodes.push_back( make_pair(newEndNodeID, endNode.extNodeID ) );
+                LOGGER::LogDebug("New End Node ID " + to_string(newEndNodeID) + " - " + endNode.extNodeID);
+            }
+            catch (exception& ex)
+            {
+                //pass
+                cout << "Exception!" << endl;
+            }
+        }
+    }
+    return endNodes;
+}
+
+//Vorgehen:
 //1. Hol die nächste Kante (per Spatialite) ArcID + Geometrie
 //2. Wurde die Kante schon aufgebrochen oder nicht?
 //3. Hole Geometrie neu wenn nötig (aus den newArcs)
 //4. isPointOnLine, position of closestPoint (Start / End ) alles in Memory (egal ob aufgebrochene Kante oder vorhandene Kante)
 //5. Splitte Kante
 // --> einmaliger DB-Zugriff, Rest in memory processing
-
 unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity)
 {
-    unordered_map<string, FTNode> newSegments;
+    unordered_map<string, InternalArc> newSegments;
     newSegments.reserve(2);
 
     const string extNodeID = newStartNode.extNodeID;
@@ -103,7 +163,8 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
     //1. Suche die nächste Line und den nächsten Punkt auf der Linie zum temporaeren Punkt
     ExtClosestArcAndPoint closestArcAndPoint = DBHELPER::GetClosestArcFromPoint(startPoint,
             treshold, closestArcQry, withCapacity);
-    const string extArcID = closestArcAndPoint.extArcID;
+
+    string extArcID = closestArcAndPoint.extArcID; // kann noch auf leeren string gesetzt werden, wenn Kante bereits aufgebrochen wurde
     const Coordinate closestPoint = closestArcAndPoint.closestPoint;
     Geometry& closestArc = *closestArcAndPoint.arcGeom;
     const string extFromNode = closestArcAndPoint.extFromNode;
@@ -113,16 +174,14 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
 
     //2. Wenn die Kante bereits aufgebrochen wurde (=Eintrag in oldArcs.ArcData.extArcID, hol
     // die nächste Linie aus NewArcs
-    // Lambda expression
-
-    /*auto it = std::count_if(oldArcs.begin(), oldArcs.end(),
-        [](const std::pair<FTNode, ArcData> & t) -> bool {
-        return t.second.x == extArcID; }
-    );*/
     bool arcHasBeenSplitAlready = false;
+    if (swappedOldArcs.count(extArcID) > 0) //found
+    {
+        arcHasBeenSplitAlready = true;
+    }
+
     if (!arcHasBeenSplitAlready)  //es wurde die Kante noch nicht aufgebrochen
     {
-
         // Prüfe, ob der nächste Punkt gleichzeitig der Start - oder der Endpunkt einer Linie ist
         auto locationOfPoint = GetLocationOfPointOnLine(startPoint, closestArc);
         switch ( locationOfPoint  )
@@ -148,11 +207,11 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
                 {
                     unsigned int newID = internalDistinctNodeIDs.at(extFromNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
-                    AddedPoint pVal = {extNodeID, startPoint};
+                    AddedPoint pVal  {extNodeID, startPoint};
                     addedStartPoints.insert(make_pair(newID, pVal));
 
                     //add nodeSupply
-                    NodeSupply supVal = {extNodeID, nodeSupply};
+                    NodeSupply supVal  {extNodeID, nodeSupply};
                     nodeSupplies.insert(make_pair(newID, supVal));
 
                     return newID;
@@ -164,11 +223,11 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
                 {
                     unsigned int newID = internalDistinctNodeIDs.at(extToNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
-                    AddedPoint val = {extNodeID, startPoint};
+                    AddedPoint val  {extNodeID, startPoint};
                     addedStartPoints.insert(make_pair(newID, val));
 
                     //add nodeSupply
-                    NodeSupply supVal = {extNodeID, nodeSupply};
+                    NodeSupply supVal  {extNodeID, nodeSupply};
                     nodeSupplies.insert(make_pair(newID, supVal));
 
                     return newID;
@@ -178,71 +237,25 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
         else //point lies somewhere between start and end coordinate of the line --> split!
         {
             //split line
-            ExtFTNode ftPair = {extFromNode, extToNode};
-            ArcData val = {extArcID, cost, capacity};
-            pair<ExtFTNode,ArcData> arcData = make_pair(ftPair, val);
-
-            cout << closestArc.toString() << endl;
+            ExternalArc ftPair  {extFromNode, extToNode};
+            ArcData val  {extArcID, cost, capacity};
+            pair<ExternalArc,ArcData> arcData = make_pair(ftPair, val);
 
             auto splittedLine = GetSplittedClosestOldArcToPoint(startPoint, treshold, arcData, closestArc);
 
             //TODO: Direction!
-            vector<FTNode> newSegmentIDs = insertNewStartNode(true, splittedLine, extNodeID, startPoint);
+            vector<InternalArc> newSegmentIDs = insertNewStartNode(true, splittedLine, extArcID, extNodeID, startPoint);
             newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
             newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
             unsigned int newID = newSegmentIDs[0].toNode;
 
             //add nodeSupply
-            NodeSupply supVal = {extNodeID, nodeSupply};
+            NodeSupply supVal  {extNodeID, nodeSupply};
             nodeSupplies.insert( make_pair(newID, supVal));
 
             return newID;
         }
-
-        // in den internen Datenstrukturen hinzufügen
-       /*
-        //Berechne die neuen Kosten pro Kante (relativ zur Länge)
-        //Hole die Infos der EdgeID aus der internen Repräsentation: Kosten und knoten-IDs
-
-
-        //TODO Directed!
-        //if arc's directed = false: should contain two!
-        //if arc's oneway = Y: and directed = true: should contain only one!
-        //if arc's oneway = N: and directed = true: should contain two!
-        //var internalNetKVPair = this.InternalArcData.Where(x => x.Value.Item1 == extEdgeID).First();
-
-        auto queryResult = internalArcData. Where(x => x.Value.Item1 == extEdgeID).ToList();
-
-        //Regardless of count (1 or 2) take always startEndPair and cost information from first occurence
-        var internalNetKVPair = queryResult[0];
-        Tuple<uint, uint> startEndPair = new Tuple<uint, uint>(internalNetKVPair.Key.Item1,
-                                                internalNetKVPair.Key.Item2);
-        double cost = internalNetKVPair.Value.Item2;
-
-        //Erzeuge eine neue Knoten-ID (maximale ID der Knoten +1)
-        //Erzeuge für die beiden Segmente der Kante die neue Knoten/Kanten Repräsentation
-        //Speichere die Knoten/Kanten Repräsentation der ursprünglichen Kante
-        //Lösche die Knoten/Kanten Repräsentation der ursprünglichen Kante aus dem Netzwerk
-        //Füge die neuen Segmente der Kante in Knoten/Kanten Repräsentation in das Netzwerk ein
-        //Speichere die beiden Segmente der Kante (inkl. Geometrie und Knoten/Kanten Repräsentation)
-        Tuple<Tuple<uint, uint>, Tuple<uint, uint>> newSegmentIDs = null;
-        switch (queryResult.Count)
-        {
-            case 1:
-                newSegmentIDs = this.insertNewStartNode(startEndPair,
-                                                    true,
-                                                    newSegmentsGeom, oldNodeID, startPoint);
-                break;
-            case 2:
-                newSegmentIDs = this.insertNewStartNode(startEndPair,
-                                                    false,
-                                                    newSegmentsGeom, oldNodeID, startPoint);
-                break;
-            default:
-                break;
-        }*/
-
     }
     else // Kante schon aufgebrochen
     {
@@ -250,41 +263,566 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
         auto splittedLine = GetSplittedClosestNewArcToPoint(startPoint, treshold);
 
         //TODO: Direction!
-        vector<FTNode> newSegmentIDs = insertNewStartNode(true, splittedLine, extNodeID, startPoint);
+        //TODO: extArcID bei schon aufgebrochenen Kanten
+        extArcID = "";
+        vector<InternalArc> newSegmentIDs = insertNewStartNode(true, splittedLine, extArcID, extNodeID, startPoint);
         newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
         newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
         unsigned int newID = newSegmentIDs[0].toNode;
 
         //add nodeSupply
-        NodeSupply supVal = {extNodeID, nodeSupply};
+        NodeSupply supVal  {extNodeID, nodeSupply};
         nodeSupplies.insert( make_pair(newID, supVal));
 
         return newID;
     }
 }
 
-vector<FTNode> Network::insertNewStartNode(bool isDirected, SplittedArc& splittedLine, string extNodeID,
-                                            const Coordinate& startPoint)
+
+vector<InternalArc> Network::insertNewStartNode(bool isDirected, SplittedArc& splittedLine, string extArcID,
+                                            string extNodeID, const Coordinate& startPoint)
 {
-    vector<FTNode> result;
+    vector<InternalArc> result;
     result.reserve(2);
+
+    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    //Insert of new node between old start node and old to node
+    InternalArc newArc1 { splittedLine.ftNode.fromNode, newNodeID };
+    InternalArc newArc2 { newNodeID, splittedLine.ftNode.toNode };
+
+    //ArcData geht aus der gesplitteten Linie hervor
+    // extArcID kann aber auch leer sein
+    ArcData arcData { extArcID, splittedLine.cost, splittedLine.capacity};
+    if (oldArcs.count(splittedLine.ftNode) == 0)
+    {
+        oldArcs.insert( make_pair(splittedLine.ftNode, arcData) );
+        //TODO - checkme
+        SwappedOldArc swappedOldArc  {splittedLine.ftNode, splittedLine.cost, splittedLine.capacity };
+        //check extArcID for empty string
+        swappedOldArcs.insert( make_pair(extArcID, swappedOldArc) );
+    }
+
+    //Add new Edges with new oldEdgeIDS and relative cost to geometry length
+    //Capacity is not relative!
+    const MultiLineString& completeLine = *splittedLine.arcGeom;
+
+    //TODO: shared ptr problem with getGeometryN()
+    //Workaround: raw pointers and references; not delete ptr necessary (TEST!)
+
+    // double free corruption!
+    /*auto ptr1 = unique_ptr<const Geometry>(completeLine.getGeometryN(0));
+    auto ptr2 = unique_ptr<const Geometry>(completeLine.getGeometryN(1));
+    const Geometry& g1 = *ptr1;
+    const Geometry& g2 = *ptr2;
+    const LineString& segment1 = dynamic_cast<const LineString&>(g1);
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);*/
+
+    auto ptr1 = completeLine.getGeometryN(0);
+    auto ptr2 = completeLine.getGeometryN(1);
+    const Geometry& g1 = *ptr1;
+    const Geometry& g2 = *ptr2;
+    const LineString& segment1 = dynamic_cast<const LineString&>(g1);
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);
+
+    //OLD with shared_ptrs
+    //shared_ptr<const Geometry> gPtr1 (completeLine.getGeometryN(0));
+    /*shared_ptr<const Geometry> gPtr2 (completeLine.getGeometryN(1));
+    */
+    /*shared_ptr<const LineString> sPtr1 ( dynamic_pointer_cast<const LineString>(gPtr1));
+    shared_ptr<const LineString> sPtr2 ( dynamic_pointer_cast<const LineString>(gPtr2));
+    const LineString& segment1 = *sPtr1;
+    const LineString& segment2 = *sPtr2;
+    */
+
+    double newArcCap = splittedLine.capacity;
+    double newArc1Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment1);
+    double newArc2Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment2);
+
+    ArcData newArc1data {"", newArc1Cost, splittedLine.capacity};
+    ArcData newArc2data {"", newArc2Cost, splittedLine.capacity};
+
+    if (isDirected)
+    {
+        internalArcData.insert( make_pair(newArc1, newArc1data) );
+        internalArcData.insert( make_pair(newArc2, newArc2data) );
+
+        //Save newEdges and set Geometry
+        LineString* ptr1 = dynamic_cast<LineString*>(segment1.clone());
+        LineString* ptr2 = dynamic_cast<LineString*>(segment2.clone());
+
+        NewArc n1 { shared_ptr<LineString>( ptr1) , AddedNodeType::StartArc, newArc1Cost, splittedLine.capacity};
+        NewArc n2 { shared_ptr<LineString>( ptr2) , AddedNodeType::StartArc, newArc2Cost, splittedLine.capacity};
+
+        newArcs.insert ( make_pair(newArc1, n1 ) );
+        newArcs.insert ( make_pair(newArc2, n2 ) );
+
+        //Remove oldEdge from internal mapping dict
+        internalArcData.erase(splittedLine.ftNode);
+
+    }
+    else {
+        //double everything
+        internalArcData.insert( make_pair(newArc1, newArc1data) );
+        internalArcData.insert( make_pair(newArc2, newArc2data) );
+
+        internalArcData.insert( make_pair(InternalArc { newArc1.toNode, newArc1.fromNode }, newArc1data) );
+        internalArcData.insert( make_pair(InternalArc { newArc2.toNode, newArc2.fromNode }, newArc2data) );
+
+        //Save newEdges and set Geometry
+        LineString* ptr1 = dynamic_cast<LineString*>(segment1.clone());
+        LineString* ptr2 = dynamic_cast<LineString*>(segment2.clone());
+
+        NewArc n1 { shared_ptr<LineString>( ptr1) , AddedNodeType::StartArc, newArc1Cost, splittedLine.capacity};
+        NewArc n2 { shared_ptr<LineString>( ptr2) , AddedNodeType::StartArc, newArc2Cost, splittedLine.capacity};
+
+        //regular direction
+        newArcs.insert ( make_pair(newArc1, n1 ) );
+        newArcs.insert ( make_pair(newArc2, n2 ) );
+
+        //reverse direction
+        newArcs.insert ( make_pair(InternalArc { newArc1.toNode, newArc1.fromNode }, n1 ) );
+        newArcs.insert ( make_pair(InternalArc { newArc2.toNode, newArc2.fromNode }, n2 ) );
+
+        //Remove oldEdge from internal mapping dict
+        internalArcData.erase(splittedLine.ftNode);
+        //reverse direction
+        internalArcData.erase(InternalArc { splittedLine.ftNode.toNode, splittedLine.ftNode.fromNode });
+    }
+
+    addedStartPoints.insert( make_pair(newNodeID, AddedPoint {extNodeID, startPoint}) );
+
+    const string newExtNodeID = extArcID + "_" + to_string(newNodeID);
+    internalDistinctNodeIDs.insert( make_pair(newExtNodeID, newNodeID  ) );
+    swappedInternalDistinctNodeIDs.insert( make_pair(newNodeID, newExtNodeID ) );
+
+    //swappedOldArcs.insert()
+    SwappedOldArc swappedOldArc  {splittedLine.ftNode, splittedLine.cost, splittedLine.capacity };
+    swappedOldArcs.insert( make_pair(extArcID, swappedOldArc) );
+
+    result.push_back(newArc1);
+    result.push_back(newArc2);
+
+    //delete ptr1;
+    //delete ptr2;
 
     return result;
 }
 
-void Network::AddEndNode(){}
+unsigned int Network::AddEndNode(const NewNode& newEndNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity)
+{
+    unordered_map<string, InternalArc> newSegments;
+    newSegments.reserve(2);
 
-vector<FTNode> Network::insertNewEndNode(bool isDirected, SplittedArc& splittedLine, string extNodeID,
+    const string extNodeID = newEndNode.extNodeID;
+    const Coordinate endPoint = newEndNode.coord;
+    const double nodeSupply = newEndNode.supply;
+
+    //if (!endPoint.x)
+    //    throw new InvalidValueException("End coordinate must not be null!");
+
+    //1. Suche die nächste Line und den nächsten Punkt auf der Linie zum temporaeren Punkt
+    ExtClosestArcAndPoint closestArcAndPoint = DBHELPER::GetClosestArcFromPoint(endPoint,
+            treshold, closestArcQry, withCapacity);
+
+    if (!closestArcAndPoint.arcGeom)
+        cout << "Geom really empty" << endl;
+
+    string extArcID = closestArcAndPoint.extArcID; //kann noch auf leeren String gesetzt werden bei bereits aufgebrochenen Kante
+    const Coordinate closestPoint = closestArcAndPoint.closestPoint;
+    Geometry& closestArc = *closestArcAndPoint.arcGeom;
+    const string extFromNode = closestArcAndPoint.extFromNode;
+    const string extToNode = closestArcAndPoint.extToNode;
+    const double cost = closestArcAndPoint.cost;
+    const double capacity = closestArcAndPoint.capacity;
+
+    //2. Wenn die Kante bereits aufgebrochen wurde (=Eintrag in oldArcs.ArcData.extArcID, hol
+    // die nächste Linie aus NewArcs
+    bool arcHasBeenSplitAlready = false;
+    if (swappedOldArcs.count(extArcID) > 0) //found
+    {
+        arcHasBeenSplitAlready = true;
+    }
+
+    if (!arcHasBeenSplitAlready)  //es wurde die Kante noch nicht aufgebrochen
+    {
+        // Prüfe, ob der nächste Punkt gleichzeitig der Start - oder der Endpunkt einer Linie ist
+        auto locationOfPoint = GetLocationOfPointOnLine(endPoint, closestArc);
+        switch ( locationOfPoint  )
+        {
+            case StartOrEndLocationOfLine::Start:
+                LOGGER::LogDebug("Closest Point for end node "+extNodeID
+                    +" is identical to a start node of the network!");
+                break;
+            case StartOrEndLocationOfLine::End:
+                LOGGER::LogDebug("Closest Point for end node "+extNodeID
+                    +" is identical to a end node of the network!");
+                break;
+            default:
+                break;
+        }
+
+        if (locationOfPoint != StartOrEndLocationOfLine::Intermediate)
+        {
+            //fromNode und toNode von oben nehmen und keinen Split durchführen
+            if (locationOfPoint == StartOrEndLocationOfLine::Start) //closestPoint == startPoint of line
+            {
+                if (internalDistinctNodeIDs.count(extFromNode) > 0)
+                {
+                    unsigned int newID = internalDistinctNodeIDs.at(extFromNode);
+                    //save closestPoint geom for lookup later on straight lines for ODMatrix
+                    AddedPoint pVal  {extNodeID, endPoint};
+                    addedEndPoints.insert(make_pair(newID, pVal));
+
+                    //add nodeSupply
+                    NodeSupply supVal  {extNodeID, nodeSupply};
+                    nodeSupplies.insert(make_pair(newID, supVal));
+
+                    return newID;
+                }
+            }
+            else //closestPoint == endPoint of line
+            {
+                if (internalDistinctNodeIDs.count(extToNode) > 0)
+                {
+                    unsigned int newID = internalDistinctNodeIDs.at(extToNode);
+                    //save closestPoint geom for lookup later on straight lines for ODMatrix
+                    AddedPoint val  {extNodeID, endPoint};
+                    addedEndPoints.insert(make_pair(newID, val));
+
+                    //add nodeSupply
+                    NodeSupply supVal  {extNodeID, nodeSupply};
+                    nodeSupplies.insert(make_pair(newID, supVal));
+
+                    return newID;
+                }
+            }
+        }
+        else //point lies somewhere between start and end coordinate of the line --> split!
+        {
+            //split line
+            ExternalArc ftPair  {extFromNode, extToNode};
+            ArcData val  {extArcID, cost, capacity};
+            pair<ExternalArc,ArcData> arcData = make_pair(ftPair, val);
+
+            auto splittedLine = GetSplittedClosestOldArcToPoint(endPoint, treshold, arcData, closestArc);
+
+            //TODO: Direction!
+            vector<InternalArc> newSegmentIDs = insertNewEndNode(true, splittedLine, extArcID, extNodeID, endPoint);
+            newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
+            newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
+
+            unsigned int newID = newSegmentIDs[0].toNode;
+
+            //add nodeSupply
+            NodeSupply supVal  {extNodeID, nodeSupply};
+            nodeSupplies.insert( make_pair(newID, supVal));
+
+            return newID;
+        }
+    }
+    else // Kante schon aufgebrochen
+    {
+        //split line
+        auto splittedLine = GetSplittedClosestNewArcToPoint(endPoint, treshold);
+
+        //TODO: Direction!
+        //TODO: extArcID leer, wenn Kante bereits aufgebrochen
+        extArcID = "";
+        vector<InternalArc> newSegmentIDs = insertNewEndNode(true, splittedLine, extArcID, extNodeID, endPoint);
+        newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
+        newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
+
+        unsigned int newID = newSegmentIDs[0].toNode;
+
+        //add nodeSupply
+        NodeSupply supVal  {extNodeID, nodeSupply};
+        nodeSupplies.insert( make_pair(newID, supVal));
+
+        return newID;
+    }
+}
+
+vector<InternalArc> Network::insertNewEndNode(bool isDirected, SplittedArc& splittedLine, string extArcID, string extNodeID,
                                             const Coordinate& endPoint)
 {
-    vector<FTNode> result;
+    vector<InternalArc> result;
     result.reserve(2);
+
+    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    //Insert of new node between old start node and old to node
+    InternalArc newArc1 { splittedLine.ftNode.fromNode, newNodeID };
+    InternalArc newArc2 { newNodeID, splittedLine.ftNode.toNode };
+
+    //ArcData geht aus der gesplitteten Linie hervor
+    // extArcID kann aber auch leer sein
+    ArcData arcData { extArcID, splittedLine.cost, splittedLine.capacity};
+    if (oldArcs.count(splittedLine.ftNode) == 0)
+    {
+        oldArcs.insert( make_pair(splittedLine.ftNode, arcData) );
+        //TODO - checkme
+        SwappedOldArc swappedOldArc  {splittedLine.ftNode, splittedLine.cost, splittedLine.capacity };
+        //check extArcID for empty string
+        swappedOldArcs.insert( make_pair(extArcID, swappedOldArc) );
+    }
+
+    //Add new Edges with new oldEdgeIDS and relative cost to geometry length
+    //Capacity is not relative!
+    //TODO: shared ptr problem with getGeometryN()
+    //Workaround: raw pointers and references; not delete ptr necessary (TEST!)
+    const MultiLineString& completeLine = *splittedLine.arcGeom;
+
+    /*auto ptr1 = completeLine.getGeometryN(0);
+    auto ptr2 = completeLine.getGeometryN(1);
+    const Geometry& g1 = *ptr1;
+    const Geometry& g2 = *ptr2;
+    const LineString& segment1 = dynamic_cast<const LineString&>(g1);
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);*/
+
+    auto ptr1 = unique_ptr<const Geometry>(completeLine.getGeometryN(0));
+    auto ptr2 = unique_ptr<const Geometry>(completeLine.getGeometryN(1));
+    const Geometry& g1 = *ptr1;
+    const Geometry& g2 = *ptr2;
+    const LineString& segment1 = dynamic_cast<const LineString&>(g1);
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);
+
+    //OLD with shared_ptrs
+    //shared_ptr<const Geometry> gPtr1 (completeLine.getGeometryN(0));
+    /*shared_ptr<const Geometry> gPtr2 (completeLine.getGeometryN(1));
+    shared_ptr<const LineString> sPtr1 ( dynamic_pointer_cast<const LineString>(gPtr1));
+      shared_ptr<const LineString> sPtr2 ( dynamic_pointer_cast<const LineString>(gPtr2));
+	  const LineString& segment1 = *sPtr1;
+	  const LineString& segment2 = *sPtr2;*/
+
+    double newArcCap = splittedLine.capacity;
+    double newArc1Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment1);
+    double newArc2Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment2);
+
+    ArcData newArc1data {"", newArc1Cost, splittedLine.capacity};
+    ArcData newArc2data {"", newArc2Cost, splittedLine.capacity};
+
+    if (isDirected)
+    {
+        internalArcData.insert( make_pair(newArc1, newArc1data) );
+        internalArcData.insert( make_pair(newArc2, newArc2data) );
+
+        //Save newEdges and set Geometry
+        LineString* ptr1 = dynamic_cast<LineString*>(segment1.clone());
+        LineString* ptr2 = dynamic_cast<LineString*>(segment2.clone());
+
+        NewArc n1 { shared_ptr<LineString>(ptr1) , AddedNodeType::EndArc, newArc1Cost, splittedLine.capacity};
+        NewArc n2 { shared_ptr<LineString>(ptr2) , AddedNodeType::EndArc, newArc2Cost, splittedLine.capacity};
+
+        newArcs.insert ( make_pair(newArc1, n1 ) );
+        newArcs.insert ( make_pair(newArc2, n2 ) );
+
+        //Remove oldEdge from internal mapping dict
+        internalArcData.erase(splittedLine.ftNode);
+
+    }
+    else {
+        //double everything
+        internalArcData.insert( make_pair(newArc1, newArc1data) );
+        internalArcData.insert( make_pair(newArc2, newArc2data) );
+
+        internalArcData.insert( make_pair(InternalArc { newArc1.toNode, newArc1.fromNode }, newArc1data) );
+        internalArcData.insert( make_pair(InternalArc { newArc2.toNode, newArc2.fromNode }, newArc2data) );
+
+        //Save newEdges and set Geometry
+        LineString* ptr1 = dynamic_cast<LineString*>(segment1.clone());
+        LineString* ptr2 = dynamic_cast<LineString*>(segment2.clone());
+
+        NewArc n1 { shared_ptr<LineString>(ptr1) , AddedNodeType::EndArc, newArc1Cost, splittedLine.capacity};
+        NewArc n2 { shared_ptr<LineString>(ptr2) , AddedNodeType::EndArc, newArc2Cost, splittedLine.capacity};
+
+        //regular direction
+        newArcs.insert ( make_pair(newArc1, n1 ) );
+        newArcs.insert ( make_pair(newArc2, n2 ) );
+
+        //reverse direction
+        newArcs.insert ( make_pair(InternalArc { newArc1.toNode, newArc1.fromNode }, n1 ) );
+        newArcs.insert ( make_pair(InternalArc { newArc2.toNode, newArc2.fromNode }, n2 ) );
+
+        //Remove oldEdge from internal mapping dict
+        internalArcData.erase(splittedLine.ftNode);
+        //reverse direction
+        internalArcData.erase(InternalArc { splittedLine.ftNode.toNode, splittedLine.ftNode.fromNode });
+    }
+
+    addedEndPoints.insert( make_pair(newNodeID, AddedPoint {extNodeID, endPoint}) );
+
+    const string newExtNodeID = extArcID + "_" + to_string(newNodeID);
+    internalDistinctNodeIDs.insert( make_pair(newExtNodeID, newNodeID  ) );
+    swappedInternalDistinctNodeIDs.insert( make_pair(newNodeID, newExtNodeID ) );
+
+    result.push_back(newArc1);
+    result.push_back(newArc2);
 
     return result;
 }
+// Only for unbroken, original network (e.g. MST)
+void Network::BuildTotalRouteGeometry(const string& arcIDs,
+                                      const string& resultTableName)
+{
+    buildTotalRouteGeometry(arcIDs, resultTableName);
+}
+//TODO: Derzeit wird nur die jeweilig relevante Start- oder End-Kante aus den aufgebrochenen Kanten
+// entnommen. Wenn sonstige Punkte das Netzwerk aufbrechen (z.B. entlang der Route und diese dann auch
+// aufgebrochen in der Route dargestellt werden sollen, muss die Methode überarbeitet werden
+//--> Hole die originalen ArcIDs von den aufgebrochenen Kanten, die Teil der Route sind
+void Network::BuildTotalRouteGeometry(string& arcIDs, vector<InternalArc>& routeNodeArcRep, unsigned int orig,
+                                       unsigned int dest, const string& resultTableName, DBWriter& writer)
+{
+    //order of start or end segments do not matter
+    vector<Geometry*> tmpRes;
 
-void Network::BuildTotalRouteGeometry(){}
+    if (addedStartPoints.size() > 0)
+    {
+        /*cout << "size of addedStartPoints(): " << addedStartPoints.size() << endl;
+        cout << "size of newArcs: " << newArcs.size() << endl;*/
+
+        // 1. Add relevant start edges, that are part of the route
+        for (auto& arc : newArcs)
+        {
+            auto key = arc.first;
+            auto val = arc.second;
+            //cout << arc.first.fromNode << "->" << arc.first.toNode << " " <<arc.second.arcGeom.isValid() << endl;
+            if (val.nodeType == AddedNodeType::StartArc)
+            {
+                if (netXpertConfig.IsDirected)
+                {
+                    if ( std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end() )
+                    {
+                        /*if (orig == key.fromNode) //touching arc
+                        {*/
+                        //auto clonedGeom = val.arcGeom.clone(); // clone - sonst verschwindet die Geometrie beim zweiten durchlauf
+                        auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+
+                        //shared_ptr<Geometry> geo (clonedGeom);
+                        /*auto it = tmpRes.begin();
+                        tmpRes.insert(it, geo);*/
+                        tmpRes.push_back(clonedGeom.get());
+                        //cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
+                        /*}
+                        else {
+                            cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
+                        }*/
+                    }
+                }
+                // Undirected case
+                else
+                {
+                    bool segmentFound = false;
+
+                    if (std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end())
+                    {
+                        /*if (orig == key.fromNode)
+                        {*/
+                            auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+                            //shared_ptr<Geometry> geo (clonedGeom);
+                            segmentFound = true;
+                            /*auto it = tmpRes.begin();
+                            tmpRes.insert(it, geo);*/
+                            tmpRes.push_back(clonedGeom.get());
+                            //cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
+                        /*}
+                         else {
+                            cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
+                        }*/
+                    }
+                    //Check also reverse if not found previously
+                    if (segmentFound == false)
+                    {
+                        if (std::find(routeNodeArcRep.begin(),
+                                    routeNodeArcRep.end(),
+                                    InternalArc {key.toNode, key.fromNode}) != routeNodeArcRep.end() )
+                        {
+                            /*if (orig == key.toNode)
+                            {*/
+                                auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+                                //shared_ptr<Geometry> geo (clonedGeom);
+                                /*auto it = tmpRes.begin();
+                                tmpRes.insert(it, geo);*/
+                                tmpRes.push_back(clonedGeom.get());
+                                //cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
+                            /*}
+                            else {
+                                cout << "Int extArcID: " << internalArcData.at(InternalArc {key.toNode, key.fromNode}).extArcID<< endl;
+                            }*/
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (addedEndPoints.size() > 0)
+    {
+        /*cout << "size of addedEndPoints(): " << addedEndPoints.size() << endl;
+        cout << "size of newArcs: " << newArcs.size() << endl;*/
+        // 1. Add relevant end edges, that are part of the route
+        for (auto& arc : newArcs)
+        {
+            //cout << arc.first.fromNode << "->" << arc.first.toNode << endl;
+            auto key = arc.first;
+            auto val = arc.second;
+
+            if (arc.second.nodeType == AddedNodeType::EndArc)
+            {
+                if (netXpertConfig.IsDirected)
+                {
+                    if (std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end())
+                    {
+                        /*if (dest == key.toNode)
+                        {*/
+                            auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+                            //shared_ptr<Geometry> geo (clonedGeom);
+                            /*auto it = tmpRes.begin();
+                            tmpRes.insert(it+1, geo); //end segment -> it+1*/
+                            tmpRes.push_back(clonedGeom.get());
+                        //}
+                    }
+                }
+                // Undirected case
+                else
+                {
+                    bool segmentFound = false;
+
+                    if (std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end())
+                    {
+                        /*if (dest == key.toNode)
+                        {*/
+                            auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+                            //shared_ptr<Geometry> geo (clonedGeom);
+                            segmentFound = true;
+                            /*auto it = tmpRes.begin();
+                            tmpRes.insert(it+1, geo); //end segment -> it+1*/
+                            tmpRes.push_back(clonedGeom.get());
+                        //}
+                    }
+                    //Check also reverse if not found previously
+                    if (segmentFound == false)
+                    {
+                        if (std::find(routeNodeArcRep.begin(),
+                                routeNodeArcRep.end(),
+                                InternalArc {key.toNode, key.fromNode}) != routeNodeArcRep.end() )
+                        {
+                            /*if (dest == key.fromNode)
+                            {*/
+                                auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
+                                //shared_ptr<Geometry> geo (clonedGeom);
+                                /*auto it = tmpRes.begin();
+                                tmpRes.insert(it+1, geo); //end segment -> it+1*/
+                                tmpRes.push_back(clonedGeom.get());
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    buildTotalRouteGeometry(arcIDs, tmpRes, resultTableName, writer);
+}
 
 void Network::ConvertInputNetwork(bool autoClean)
 {
@@ -309,13 +847,58 @@ void Network::ConvertInputNetwork(bool autoClean)
     LOGGER::LogDebug("Count of eliminatedArcs: " + to_string(eliminatedArcs.size()));
     //LOGGER::LogDebug("Size of eliminatedArcsCount: "+ to_string(eliminatedArcsCount) );
 }
+vector<string> Network::GetOriginalArcIDs(const vector<InternalArc>& ftNodes, bool isDirected) const
+{
+    vector<string> resultIDs;
 
-void Network::GetOriginalArcData(const list<ArcData>& origArcData, const list<FTNode>& startEndNodes, bool isDirected){}
-void Network::GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow, const list<FTNode>& startEndNodes, bool isDirected){}
+    if (isDirected)
+    {
+        for (const InternalArc& ftNode : ftNodes)
+        {
+            if (internalArcData.count(ftNode) > 0)
+            {
+                auto arcData = internalArcData.at(ftNode);
+                if (!arcData.extArcID.empty())
+                    resultIDs.push_back(arcData.extArcID);
+            }
+        }
+    }
+    else
+    {
+        for (const InternalArc& ftNode : ftNodes)
+        {
+            if (internalArcData.count(ftNode) > 0)
+            {
+                auto arcData = internalArcData.at(ftNode);
+                if (!arcData.extArcID.empty())
+                    resultIDs.push_back(arcData.extArcID);
+            }
+            else {
+                //reverse direction also
+                InternalArc flippedFTNode  {ftNode.toNode, ftNode.fromNode};
+                if (internalArcData.count(flippedFTNode) > 0)
+                {
+                    auto arcData = internalArcData.at(flippedFTNode);
+                    if (!arcData.extArcID.empty())
+                        resultIDs.push_back(arcData.extArcID);
+                }
+            }
+        }
+    }
+    return resultIDs;
+}
+void Network::GetOriginalArcData(const list<ArcData>& origArcData, const list<InternalArc>& startEndNodes, bool isDirected){}
+void Network::GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow, const list<InternalArc>& startEndNodes, bool isDirected){}
+
+double Network::getRelativeValueFromGeomLength(const double attrValue, const MultiLineString& completeLine,
+                                                    const LineString& segment)
+{
+    return ( segment.getLength() / completeLine.getLength() ) * attrValue;
+}
 
 unsigned int Network::GetInternalNodeID(string externalNodeID)
 {
-    unsigned int internalNodeID;
+    unsigned int internalNodeID {};
     try
     {
         internalNodeID = internalDistinctNodeIDs.at(externalNodeID);
@@ -330,7 +913,7 @@ unsigned int Network::GetInternalNodeID(string externalNodeID)
 
 string Network::GetOriginalNodeID(unsigned int internalNodeID)
 {
-    string externalNodeID = "";
+    string externalNodeID {};
     try
     {
         externalNodeID = swappedInternalDistinctNodeIDs.at(internalNodeID);
@@ -388,17 +971,21 @@ SplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int tresh
         //must not defined as smart_pointer!
         const Envelope* bufEnv = buf->getEnvelopeInternal();
 
-        map<double, pair<FTNode, NewArc> > distanceTbl;
+        map<double, pair<InternalArc, NewArc> > distanceTbl;
 
         /*// search in spatial index for relevant geometry
         // with buffer around point (treshold)*/
 
         //1. Generate Distance Table
-        for ( auto nArc : this->newArcs )
+        for ( auto nArc : newArcs )
         {
-            FTNode key = nArc.first;
+            InternalArc key = nArc.first;
             NewArc val = nArc.second;
-            Geometry* g2Ptr = &val.arcGeom;
+            auto lPtr = val.arcGeom.get();
+
+            //NewArc geometry as shared_ptr
+            //Geometry* g2Ptr = static_cast<Geometry*>( val.arcGeom.get() );
+            Geometry* g2Ptr = dynamic_cast<Geometry*>( val.arcGeom.get() );
 
             // "spatial index like":
             // calculate distance table only for those geometries
@@ -418,16 +1005,14 @@ SplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int tresh
 
         auto elem = *distanceTbl.begin();
         //double dist = elem.first;
-        FTNode nearestArcKey = elem.second.first;
+        InternalArc nearestArcKey = elem.second.first;
         NewArc nearestArc = elem.second.second;
-        //shared_ptr<const Geometry> nGeomPtr ( nearestArc.arcGeom );
 
-        shared_ptr<MultiLineString> mLine = splitLine(coord, nearestArc.arcGeom);
+        shared_ptr<MultiLineString> mLine = splitLine(coord, static_cast<Geometry&>( *nearestArc.arcGeom ));
 
-        SplittedArc result{ nearestArcKey.fromNode, nearestArcKey.toNode,
+        SplittedArc result{ nearestArcKey,
                             nearestArc.cost, nearestArc.capacity, mLine };
 
-        //cout << seg1->toString() << endl << seg2->toString() << endl;
         return result;
     }
     catch (std::exception& ex)
@@ -440,24 +1025,22 @@ SplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int tresh
 
 
 SplittedArc Network::GetSplittedClosestOldArcToPoint(Coordinate coord, int treshold,
-                                                    const pair<ExtFTNode,ArcData>& arcData,
+                                                    const pair<ExternalArc,ArcData>& arcData,
                                                     const Geometry& arc)
 {
   try
     {
-        ExtFTNode nearestArcKey = arcData.first;
+        ExternalArc nearestArcKey = arcData.first;
         ArcData nearestArc = arcData.second;
-        //shared_ptr<const Geometry> nGeomPtr ( &arc );
 
-        //cout << arc.toString() << endl;
         shared_ptr<MultiLineString> mLine = splitLine(coord, arc);
 
         //Lookup ext. from / toNodes
         unsigned int fromNode = GetInternalNodeID(nearestArcKey.extFromNode);
         unsigned int toNode = GetInternalNodeID(nearestArcKey.extToNode);
 
-        SplittedArc result{ fromNode, toNode,
-                            nearestArc.cost, nearestArc.capacity, mLine };
+        InternalArc ftNode {fromNode, toNode};
+        SplittedArc result{ ftNode, nearestArc.cost, nearestArc.capacity, mLine };
 
         return result;
     }
@@ -529,11 +1112,7 @@ double Network::GetPositionOfPointAlongLine(Coordinate coord, const Geometry& ar
         LengthIndexedLine idxLine ( &arc );
 
         double pointIdx = idxLine.indexOf(coord);
-        //double startIdx = idxLine.getStartIndex();
-        //double endIdx = idxLine.getEndIndex();
 
-        //cout << "Indexes: "<< endl;
-        //cout << pointIdx << endl << startIdx << endl << endIdx << endl;
         if (idxLine.isValidIndex( pointIdx) )
             return pointIdx;
         else
@@ -649,15 +1228,100 @@ void Network::renameNodes()
             }
         }
     }
-    maxNodeCount = static_cast<unsigned int>(internalDistinctNodeIDs.size());
-    maxArcCount = static_cast<unsigned int>(arcsTbl.size());
-    currentArcCount = maxArcCount;
-    currentNodeCount = maxNodeCount;
 }
+
+unsigned int Network::GetMaxNodeCount() {
+ return static_cast<unsigned int>(internalDistinctNodeIDs.size());
+}
+
+unsigned int Network::GetMaxArcCount() {
+ return static_cast<unsigned int>(internalArcData.size());
+}
+
+unsigned int Network::GetCurrentNodeCount() {
+ return static_cast<unsigned int>(internalDistinctNodeIDs.size());
+}
+
+unsigned int Network::GetCurrentArcCount() {
+ return static_cast<unsigned int>(internalArcData.size());
+}
+
+Arcs& Network::GetInternalArcData()
+{
+    return internalArcData;
+}
+NodeSupplies Network::GetNodeSupplies()
+{
+    return nodeSupplies;
+}
+Arcs& Network::GetOldArcs()
+{
+    return oldArcs;
+}
+NewArcs& Network::GetNewArcs()
+{
+    return newArcs;
+}
+
+//Unbroken Network e.g. MST
+void Network::buildTotalRouteGeometry(const string& arcIDs, const string& resultTableName)
+{
+    switch (netXpertConfig.ResultDBType)
+    {
+        case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                auto mLinePtr = unique_ptr<MultiLineString>( DBHELPER::GEO_FACTORY->createMultiLineString() );
+
+                SpatiaLiteWriter sldb (netXpertConfig);
+                sldb.OpenNewTransaction();
+                sldb.CreateSolverResultTable(resultTableName, true);
+                sldb.CreateRouteGeometries(netXpertConfig.ArcsGeomColumnName,
+                    netXpertConfig.ArcIDColumnName, netXpertConfig.ArcsTableName,
+                    arcIDs, *mLinePtr, resultTableName);
+                sldb.CommitCurrentTransaction();
+                sldb.CloseConnection();
+            }
+            break;
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+            //TODO
+            break;
+    }
+}
+void Network::buildTotalRouteGeometry(const string& arcIDs, vector<Geometry*> tmpRes,
+                                        const string& resultTableName, DBWriter& writer)
+{
+    switch (netXpertConfig.ResultDBType)
+    {
+        case RESULT_DB_TYPE::SpatiaLiteDB:
+        {
+            auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+            //merge all geometries in tmpRes to one Multilinestring
+            //MultilineString ist auch ok, wenn nur ein Linestring drin ist
+            /*vector<Geometry*> tmpResRaw;
+            for (auto& p : tmpRes)
+                tmpResRaw.push_back(p.get());*/
+
+            //vector<Geometry*> tmpResRaw = { (tmpRes.begin())->get(), (tmpRes.end())->get() };
+
+            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( tmpRes ));
+
+            //cout << mLine->toString() << endl;
+
+            sldb.CreateRouteGeometries(netXpertConfig.ArcsGeomColumnName,
+                netXpertConfig.ArcIDColumnName, netXpertConfig.ArcsTableName,
+                arcIDs, *mLine, resultTableName);
+        }
+            break;
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+            //TODO
+            break;
+    }
+}
+
 
 void Network::readNetworkFromTable(bool autoClean, bool oneWay)
 {
-    unordered_map<FTNode,DuplicateArcData> duplicates;
+    unordered_map<InternalArc,DuplicateArcData> duplicates;
 
     for (InputArcs::iterator it = arcsTbl.begin(); it != arcsTbl.end(); ++it)
     {
@@ -697,7 +1361,7 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
             {
                 LOGGER::LogInfo("Loop at "+externalStartNode+ " - " + externalEndNode+ " ignored.");
 
-                ExtFTNode ftNode {externalStartNode, externalEndNode};
+                ExternalArc ftNode {externalStartNode, externalEndNode};
                 arcLoops.push_back(ftNode);
                 eliminatedArcs.insert(externalArcID);
                 //eliminatedArcsCount = eliminatedArcsCount + 1;
@@ -762,7 +1426,7 @@ void Network::processArc(InputArc arc, unsigned int internalStartNode,
     bool isDirected = netXpertConfig.IsDirected;
     string externalArcID = arc.extArcID;
 
-    FTNode inFromToPair {internalStartNode, internalEndNode};
+    InternalArc inFromToPair {internalStartNode, internalEndNode};
 
     // Calculates the internal representation of the graph
     // [startNode,endNode],[oldArcID],[cost]
@@ -802,7 +1466,7 @@ void Network::processArc(InputArc arc, unsigned int internalStartNode,
     else //undirected
     {
         // Hier muss auch das vertauschte FromTo Paar geprüft werden;
-        FTNode inToFromPair {inFromToPair.toNode, inFromToPair.fromNode};
+        InternalArc inToFromPair {inFromToPair.toNode, inFromToPair.fromNode};
 
         // erst wenn auch bei der Vertauschung auch keine Kante vorhanden ist, füge sie hinzu
         if (internalArcData.count(inFromToPair) +
@@ -853,3 +1517,166 @@ void Network::processArc(InputArc arc, unsigned int internalStartNode,
     }
 }
 void Network::processBarriers(){}
+
+void Network::Reset()
+{
+    //1. Remove all new Segments
+    //2. Restore all oldEdges
+    const int totalAddedPoints = addedEndPoints.size() + addedStartPoints.size();
+    //Reset network only if there were changes
+    if (totalAddedPoints > 0)
+    {
+        //Remove all new Segments
+        for (auto& newArc : newArcs)
+        {
+            //.. in internal mapping Dict
+            internalArcData.erase(newArc.first);
+        }
+        //Add oldEdges to internal mapping dict
+        for (auto& oldArc : oldArcs)
+        {
+            //.. in internal mapping Dict
+            internalArcData.insert( make_pair( oldArc.first, oldArc.second) );
+
+            for (auto& point : addedStartPoints)
+            {
+                try
+                {
+                    //TODO: CHeck removal of node IDs
+
+                    internalDistinctNodeIDs.erase(
+                        oldArc.second.extArcID + "_" + to_string(point.first));
+                    swappedInternalDistinctNodeIDs.erase(point.first);
+                }
+                catch (exception& ex){ }
+            }
+            for (auto& point : addedEndPoints)
+            {
+                try
+                {
+                    //TODO: CHeck removal of node IDs
+                    internalDistinctNodeIDs.erase(
+                        oldArc.second.extArcID + "_" + to_string(point.first));
+                    swappedInternalDistinctNodeIDs.erase(point.first);
+                }
+                catch (exception& ex){ }
+            }
+        }
+        //Remove all added start and end nodes from nodeSupply
+        for (auto point : addedStartPoints)
+            nodeSupplies.erase(point.first);
+
+        for (auto point : addedEndPoints)
+            nodeSupplies.erase(point.first);
+
+        addedStartPoints.clear();
+        addedEndPoints.clear();
+        oldArcs.clear();
+        swappedOldArcs.clear();
+        newArcs.clear();
+        eliminatedArcs.clear();
+        arcLoops.clear();
+    }
+}
+
+// MCF
+double Network::calcTotalSupply ()
+{
+    double supplyValue = 0;
+    for (auto& supply : nodeSupplies)
+    {
+        if (supply.second.supply < 0)
+            supplyValue += abs( supply.second.supply );
+    }
+    return supplyValue;
+}
+double Network::calcTotalDemand ()
+{
+    double demandValue = 0;
+    for (auto& demand : nodeSupplies)
+    {
+        if (demand.second.supply > 0)
+            demandValue += demand.second.supply;
+    }
+    return demandValue;
+}
+MinCostFlowInstanceType Network::GetMinCostFlowInstanceType()
+{
+    double totalSupply = calcTotalSupply();
+    double totalDemand = calcTotalDemand();
+
+    LOGGER::LogDebug("Supply - Demand:" + to_string( totalSupply ) + " " + to_string(totalDemand));
+
+    if (totalSupply > totalDemand)
+        return MinCostFlowInstanceType::MCFExtrasupply;
+    if (totalSupply < totalDemand)
+        return MinCostFlowInstanceType::MCFExtrademand;
+    else
+        return MinCostFlowInstanceType::MCFBalanced;
+}
+
+// Arbeiten mit Dummy Nodes; Ziel ist die Ausgewogene Verteilung von Angebot und Nachfrage
+void Network::TransformUnbalancedMCF(MinCostFlowInstanceType mcfInstanceType)
+{
+    switch (mcfInstanceType)
+    {
+        case MinCostFlowInstanceType::MCFExtrasupply:
+            transformExtraSupply();
+            break;
+        case MinCostFlowInstanceType::MCFExtrademand:
+            transformExtraDemand();
+            break;
+        case MinCostFlowInstanceType::MCFBalanced: //Nothing to do
+            break;
+    }
+}
+void Network::transformExtraDemand()
+{
+    // Dummy Angebotsknoten mit überschüssiger Nachfrage hinzufügen
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
+    // --> In Networkx schon
+
+    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
+    // siehe getSupplyDemandDifference()
+    processSupplyOrDemand();
+}
+void Network::transformExtraSupply()
+{
+    // Dummy Nachfrageknoten mit überschüssigem Angebot hinzufügen
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
+
+    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
+    // siehe getSupplyDemandDifference()
+    processSupplyOrDemand();
+}
+void Network::processSupplyOrDemand()
+{
+    // Dummy Knoten
+    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    internalDistinctNodeIDs.insert(make_pair("dummy", newNodeID));
+    swappedInternalDistinctNodeIDs.insert( make_pair( newNodeID, "dummy" ));
+    NodeSupply sup {"dummy", getSupplyDemandDifference() }; //Differenz ist positiv oder negativ, je nach Überschuss
+    nodeSupplies.insert( make_pair( newNodeID, sup));
+
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    const double cost = 0;
+    const double capacity = netxpert::DOUBLE_INFINITY;
+    for (auto node : nodeSupplies) //Filter dummy und transshipment nodes (=0) raus
+    {
+        if (node.first == newNodeID) //Filter dummy
+            continue;
+        if (node.second.supply == 0) //Filter transshipment nodes (=0)
+            continue;
+
+        InternalArc key  {newNodeID,node.first};
+        ArcData value  {"dummy", cost, capacity };
+        internalArcData.insert( make_pair(key, value));
+    }
+}
+double Network::getSupplyDemandDifference()
+{
+    //can be negative or positive
+    return calcTotalSupply() - calcTotalDemand();
+}

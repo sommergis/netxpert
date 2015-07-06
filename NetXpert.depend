@@ -3923,7 +3923,7 @@
 	<unicode/ubrk.h>
 	<unicode/utf16.h>
 
-1426681903 /home/hahne/dev/netxpert/include/config.h
+1434728254 /home/hahne/dev/netxpert/include/config.h
 	<string>
 	<cereal/cereal.hpp>
 	<cereal/archives/json.hpp>
@@ -4070,7 +4070,7 @@
 	<stdexcept>
 	<string>
 
-1425417421 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Database.cpp
+1432192529 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Database.cpp
 	"Database.h"
 	"Statement.h"
 	"Assertion.h"
@@ -4101,15 +4101,15 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1425417426 source:/home/hahne/dev/netxpert/src/config.cpp
+1434728254 source:/home/hahne/dev/netxpert/src/config.cpp
 	<fstream>
 	"config.h"
 
-1428156271 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
+1435417065 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
 	"dbhelper.h"
 	<exception>
 
-1427919007 /home/hahne/dev/netxpert/include/dbhelper.h
+1435346752 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"data.h"
 	"logger.h"
@@ -4117,13 +4117,15 @@
 	<SQLiteCpp/Transaction.h>
 	<boost/filesystem.hpp>
 	<geos/io/WKBReader.h>
+	<geos/io/WKBWriter.h>
 	<geos/geom/Point.h>
 	<geos/geom/PrecisionModel.h>
 
-1428155704 /home/hahne/dev/netxpert/include/data.h
+1436207829 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
 	<geos/geom/MultiLineString.h>
+	<geos/geom/LineString.h>
 	<map>
 	<unordered_map>
 	<unordered_set>
@@ -4131,14 +4133,14 @@
 	<vector>
 	<boost/bimap.hpp>
 
-1427572329 /home/hahne/dev/netxpert/include/logger.h
+1434728254 /home/hahne/dev/netxpert/include/logger.h
 	<string>
 	"config.h"
 
-1427572844 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
+1435269897 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
 	"fgdbwriter.h"
 
-1427572917 /home/hahne/dev/netxpert/include/fgdbwriter.h
+1435268533 /home/hahne/dev/netxpert/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -4147,7 +4149,7 @@
 	<boost/filesystem.hpp>
 	<boost/algorithm/string.hpp>
 
-1425572623 /home/hahne/dev/netxpert/include/dbwriter.h
+1434728254 /home/hahne/dev/netxpert/include/dbwriter.h
 	<string>
 	<geos/geom/MultiLineString.h>
 	<geos/geom/Geometry.h>
@@ -4193,7 +4195,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1427573237 source:/home/hahne/dev/netxpert/src/logger.cpp
+1434728254 source:/home/hahne/dev/netxpert/src/logger.cpp
 	"logger.h"
 	<iostream>
 	<fstream>
@@ -4201,11 +4203,12 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1428156361 source:/home/hahne/dev/netxpert/src/network.cpp
+1436210523 source:/home/hahne/dev/netxpert/src/network.cpp
 	"network.h"
 
-1428155588 /home/hahne/dev/netxpert/include/network.h
+1435866203 /home/hahne/dev/netxpert/include/network.h
 	"dbhelper.h"
+	"slitewriter.h"
 	<algorithm>
 	<geos/geom/CoordinateSequenceFactory.h>
 	<geos/geom/GeometryFactory.h>
@@ -4217,11 +4220,12 @@
 	<geos/linearref/LengthIndexOfPoint.h>
 	<geos/linearref/LocationIndexOfLine.h>
 	<geos/io/WKTReader.h>
+	<cmath>
 
-1427572809 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
+1435780504 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
 	"slitewriter.h"
 
-1427572820 /home/hahne/dev/netxpert/include/slitewriter.h
+1435777143 /home/hahne/dev/netxpert/include/slitewriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -4230,10 +4234,10 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBWriter.h>
 
-1427578966 source:/home/hahne/dev/netxpert/src/test.cpp
+1435783626 source:/home/hahne/dev/netxpert/src/test.cpp
 	"test.h"
 
-1426681979 /home/hahne/dev/netxpert/include/test.h
+1434728254 /home/hahne/dev/netxpert/include/test.h
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -4244,8 +4248,11 @@
 	"data.h"
 	"network.h"
 	"dbhelper.h"
+	"mstree.h"
+	"sptree.h"
+	"odmatrix.h"
 
-1428156333 source:/home/hahne/dev/netxpert/src/main.cpp
+1434728254 source:/home/hahne/dev/netxpert/src/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -4525,9 +4532,181 @@
 1426371266 source:/home/hahne/dev/netxpert/src/netxpert.i
 	"network.h"
 
-1426887748 source:/home/hahne/dev/netxpert/src/network.i
+1435268185 source:/home/hahne/dev/netxpert/src/network.i
 	"network.h"
 	"dbhelper.h"
+	"isolver.h"
+	"mstree.h"
 
 1423772163 /usr/local/include/boost/exception
+
+1432302989 source:/home/hahne/dev/netxpert/src/networkbuilder.cpp
+	"networkbuilder.h"
+
+1432302989 /home/hahne/dev/netxpert/include/networkbuilder.h
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/mstlem.cpp
+	"mstlem.h"
+
+1434728254 /home/hahne/dev/netxpert/include/core/mstlem.h
+	<lemon/smart_graph.h>
+	<lemon/kruskal.h>
+	<lemon/maps.h>
+	<stdio.h>
+	<limits.h>
+	<string.h>
+	"imstree.h"
+
+1432411396 /home/hahne/dev/netxpert/include/solver/iminspantree.h
+
+1423765899 source:/home/hahne/dev/netxpert/src/core/MCFSimplex.cpp
+	"MCFSimplex.h"
+	<algorithm>
+	<iostream>
+	<cstdlib>
+	<ctime>
+
+1423765899 /home/hahne/dev/netxpert/include/core/MCFSimplex.h
+	"MCFClass.h"
+
+1432325148 /home/hahne/dev/netxpert/include/core/MCFClass.h
+	"OPTUtils.h"
+	<string.h>
+	<iomanip>
+	<sstream>
+	<limits>
+	<iostream>
+
+1423765899 /home/hahne/dev/netxpert/include/core/OPTUtils.h
+	<stdlib.h>
+	<sys/times.h>
+	<sys/timeb.h>
+	<limits.h>
+	<time.h>
+	<sys/time.h>
+	<iostream>
+	<sstream>
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/netsimplexlem.cpp
+	"netsimplexlem.h"
+
+1434728254 /home/hahne/dev/netxpert/include/core/netsimplexlem.h
+	<lemon/smart_graph.h>
+	<lemon/network_simplex.h>
+	<stdio.h>
+	<limits.h>
+	<string.h>
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/SPTree_Dijkstra.cpp
+	"assert.h"
+	"SPTree_Dijkstra.h"
+
+1436210881 /home/hahne/dev/netxpert/include/core/SPTree_Dijkstra.h
+	"MCFClass.h"
+	"isptree.h"
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/SPTree_Heap.cpp
+	"assert.h"
+	"SPTree_Heap.h"
+
+1436210858 /home/hahne/dev/netxpert/include/core/SPTree_Heap.h
+	"MCFClass.h"
+	"isptree.h"
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/SPTree_LDeque.cpp
+	"assert.h"
+	"SPTree_LDeque.h"
+
+1436210735 /home/hahne/dev/netxpert/include/core/SPTree_LDeque.h
+	"MCFClass.h"
+	"isptree.h"
+
+1434728254 source:/home/hahne/dev/netxpert/src/core/SPTree_LQueue.cpp
+	"assert.h"
+	"SPTree_LQueue.h"
+
+1436210880 /home/hahne/dev/netxpert/include/core/SPTree_LQueue.h
+	"MCFClass.h"
+	"isptree.h"
+
+1432324889 source:/home/hahne/dev/netxpert/src/core/sptreelem.cpp
+	"sptreelem.h"
+	<vector>
+
+1432325007 /home/hahne/dev/netxpert/include/core/sptreelem.h
+	<lemon/smart_graph.h>
+	<lemon/dijkstra.h>
+	<stdio.h>
+	<limits.h>
+	<string.h>
+	<lemon/quad_heap.h>
+	<lemon/fib_heap.h>
+
+1432409816 /home/hahne/dev/netxpert/include/solver/minspantree.h
+	"isolver.h"
+	"iminspantree.h"
+	"mstlem.h"
+
+1432331499 /home/hahne/dev/netxpert/include/solver.h
+	<string>
+	"network.h"
+
+1432492314 source:/home/hahne/dev/netxpert/src/solver/minspantree.cpp
+	"minspantree.h"
+
+1434728254 /home/hahne/dev/netxpert/include/isolver.h
+	<string>
+	"network.h"
+
+1435869546 source:/home/hahne/dev/netxpert/src/core/sptlem.cpp
+	"sptlem.h"
+	<vector>
+
+1434728254 /home/hahne/dev/netxpert/include/core/sptlem.h
+	<lemon/smart_graph.h>
+	<lemon/dijkstra.h>
+	<stdio.h>
+	<limits.h>
+	<string.h>
+	<lemon/quad_heap.h>
+	<lemon/fib_heap.h>
+	"isptree.h"
+
+1434728254 /home/hahne/dev/netxpert/include/solver/isptree.h
+
+1435350911 source:/home/hahne/dev/netxpert/src/solver/sptree.cpp
+	"sptree.h"
+
+1435350637 /home/hahne/dev/netxpert/include/solver/sptree.h
+	"isolver.h"
+	"isptree.h"
+	"SPTree_Dijkstra.h"
+	"SPTree_Heap.h"
+	"SPTree_LDeque.h"
+	"SPTree_LQueue.h"
+	"sptlem.h"
+	"data.h"
+
+1434728254 /home/hahne/dev/netxpert/include/solver/imstree.h
+
+1434728254 /home/hahne/dev/netxpert/include/solver/mstree.h
+	"isolver.h"
+	"imstree.h"
+	"mstlem.h"
+
+1434728254 source:/home/hahne/dev/netxpert/src/solver/mstree.cpp
+	"mstree.h"
+
+1435782036 /home/hahne/dev/netxpert/include/solver/odmatrix.h
+	"isolver.h"
+	"isptree.h"
+	"SPTree_Dijkstra.h"
+	"SPTree_Heap.h"
+	"SPTree_LDeque.h"
+	"SPTree_LQueue.h"
+	"sptlem.h"
+	"data.h"
+
+1435783370 source:/home/hahne/dev/netxpert/src/solver/odmatrix.cpp
+	"odmatrix.h"
 

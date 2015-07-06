@@ -1,7 +1,7 @@
 #include <fstream>
 #include "config.h"
 
-using namespace NetXpert;
+using namespace netxpert;
 using namespace cereal;
 using namespace std;
 
