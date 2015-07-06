@@ -26,7 +26,7 @@ void ShortestPathTree::Solve(string net){
 
 void ShortestPathTree::Solve(Network& net)
 {
-    this->net = &net;
+    this->net = shared_ptr<Network>( &net );
 
     unsigned int arcCount = net.GetCurrentArcCount();
     unsigned int nodeCount = net.GetCurrentNodeCount();

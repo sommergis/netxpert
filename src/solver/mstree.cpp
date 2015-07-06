@@ -57,7 +57,7 @@ vector<InternalArc> MinimumSpanningTree::solve (Network& net)
         switch (algorithm)
         {
             case MSTAlgorithm::Kruskal_LEMON:
-                mst = new MST_LEMON();
+                mst = shared_ptr<IMinSpanTree>(new MST_LEMON());
                 break;
         }
     }
@@ -201,6 +201,4 @@ bool MinimumSpanningTree::validateNetworkData(Network& net)
 MinimumSpanningTree::~MinimumSpanningTree()
 {
     //dtor
-    if (mst)
-        delete mst;
 }
