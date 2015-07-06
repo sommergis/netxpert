@@ -10,23 +10,32 @@
 #include "test.h"
 
 using namespace std;
-using namespace NetXpert;
+using namespace netxpert;
 using namespace cereal;
 
 int main(int argc, char** argv)
 {
     string inFile = "";
-    if( argc == 2 ) {
+    if( argc == 2 )
+    {
         inFile = argv[1];
     }
     else
     {
         //inFile = "./ODMatrixCnfg.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestCreateGeom.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
     }
 
     Config cnfg;
-    try {
+    try
+    {
         ConfigReader reader;
         reader.GetConfigFromJSONFile(inFile, cnfg);
     }
@@ -34,7 +43,8 @@ int main(int argc, char** argv)
     {
         cout << "Fehler beim Config init: " << e.what() << endl;
     }
-    try {
+    try
+    {
         LOGGER::Initialize(cnfg);
         LOGGER::LogInfo("Logging gestartet!");
     }
@@ -73,21 +83,46 @@ int main(int argc, char** argv)
         InputNode node {"1", 2.0};
 
         /* TEST CASES */
-        switch (cnfg.TestCase){
+        switch (cnfg.TestCase)
+        {
 
-            case TESTCASE::NetworkConvert:
-                NetXpert::Test::NetworkConvert(cnfg);
-                break;
-            case TESTCASE::TestFileGDBWriter:
-                NetXpert::Test::TestFileGDBWriter(cnfg);
-                break;
-            case TESTCASE::TestSpatiaLiteWriter:
-                NetXpert::Test::TestSpatiaLiteWriter(cnfg);
-                break;
-            case TESTCASE::TestAddStartNode:
-                NetXpert::Test::TestAddStartNode(cnfg);
-                break;
+        case TESTCASE::NetworkConvert:
+            netxpert::Test::NetworkConvert(cnfg);
+            break;
+        case TESTCASE::TestFileGDBWriter:
+            netxpert::Test::TestFileGDBWriter(cnfg);
+            break;
+        case TESTCASE::TestSpatiaLiteWriter:
+            netxpert::Test::TestSpatiaLiteWriter(cnfg);
+            break;
+        case TESTCASE::TestAddNodes:
+            netxpert::Test::TestAddNodes(cnfg);
+            break;
+        case TESTCASE::MSTCOM:
+            netxpert::Test::TestMST(cnfg);
+            break;
+        case TESTCASE::ShortestPathTreeCOM:
+            netxpert::Test::TestSPT(cnfg);
+            break;
+        case TESTCASE::ODMatrixCOM:
+            netxpert::Test::TestODMatrix(cnfg);
+            break;
+        case TESTCASE::TestCreateRouteGeometries:
+            netxpert::Test::TestCreateRouteGeometries(cnfg);
+            break;
         }
+
+        /*
+                //only test connection to sqlite
+                //still 120 Bytes Heap usage, 40 Bytes leak because of loading spatialite extension
+                if (!DBHELPER::IsInitialized)
+                {
+                    DBHELPER::Initialize(cnfg);
+                }
+                DBHELPER::OpenNewTransaction();
+                DBHELPER::CommitCurrentTransaction();
+                DBHELPER::CloseConnection();
+        */
 
     }
     catch (std::exception& ex)

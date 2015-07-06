@@ -12,19 +12,25 @@
 #include "data.h"
 #include "network.h"
 #include "dbhelper.h"
+#include "mstree.h"
+#include "sptree.h"
+#include "odmatrix.h"
 
-
-namespace NetXpert
+namespace netxpert
 {
     /**
     * \Static test functions for NetXpert
     **/
     namespace Test
     {
-        void NetworkConvert(NetXpert::Config& cnfg);
+        void NetworkConvert(netxpert::Config& cnfg);
         void TestFileGDBWriter(Config& cnfg);
         void TestSpatiaLiteWriter(Config& cnfg);
-        void TestAddStartNode(Config& cnfg);
+        void TestAddNodes(Config& cnfg);
+        void TestMST(Config& cnfg);
+        void TestSPT(Config& cnfg);
+        void TestODMatrix(Config& cnfg);
+        void TestCreateRouteGeometries(Config& cnfg);
     }
 }
 

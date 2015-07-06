@@ -8,6 +8,7 @@
 #include <SQLiteCpp/Transaction.h>
 #include <boost/filesystem.hpp>
 #include <geos/io/WKBReader.h>
+#include <geos/io/WKBWriter.h>
 #include <geos/geom/Point.h>
 #include <geos/geom/PrecisionModel.h>
 
@@ -16,7 +17,7 @@ using namespace geos::geom;
 using namespace SQLite;
 
 
-namespace NetXpert
+namespace netxpert
 {
     /**
     * \Static Class that controls the SpatiaLite DB processing access for NetXpert
@@ -29,18 +30,18 @@ namespace NetXpert
             static void Initialize(const Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
-            static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(string tableName,
+            static unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(string tableName,
                                         string geomColumnName, const ColumnMap& cmap, ArcIDColumnDataType arcIDColDataType,
                                         bool withCapacity);
             static ExtClosestArcAndPoint GetClosestArcFromPoint(Coordinate coord, int treshold,
                                             SQLite::Statement& qry, bool withCapacity);
             static InputArcs LoadNetworkFromDB(string _tableName, const ColumnMap& _map);
-            static InputNodes LoadNodesFromDB(string _tableName, const ColumnMap& _map);
+            static vector<NewNode> LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map);
 
             //UNUSED -->
-            static std::unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
+            static unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType );
-            static bool IsPointOnArc(Coordinate coords, string extArcID, SQLite::Statement& qry);
+            static bool IsPointOnArc(Coordinate coords, string extArcID, shared_ptr<SQLite::Statement> qry);
             static double GetPositionOfClosestPoint(string arcsGeomColumnName, string arcsTableName, Coordinate coord,
                                                     string extArcID, SQLite::Statement& posOfClosestPointQry);
             //-> //
@@ -51,11 +52,12 @@ namespace NetXpert
             ~DBHELPER();
         private:
             static Config NETXPERT_CNFG;
-            static SQLite::Database* connPtr;
-            static SQLite::Transaction* currentTransactionPtr;
-            static void connect( );
+            static unique_ptr<SQLite::Database> connPtr;
+            static unique_ptr<SQLite::Transaction> currentTransactionPtr;
+            static void connect();
             static bool isConnected;
-            static bool performInitialCommand(SQLite::Database& db);
+            static bool performInitialCommand();
+            //static void cleanupPtr();
     };
 }
 #endif // DBHELPER_H

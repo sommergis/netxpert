@@ -1,6 +1,6 @@
 #include "fgdbwriter.h"
 
-using namespace NetXpert;
+using namespace netxpert;
 using namespace std;
 using namespace boost::filesystem;
 using namespace FileGDBAPI;
@@ -8,7 +8,7 @@ using namespace FileGDBAPI;
 
 FGDBWriter::FGDBWriter(Config& netxpertConfig)
 {
-    //NETXPERT_CNFG = netxpertConfig;
+    NETXPERT_CNFG = netxpertConfig;
     if ( !LOGGER::IsInitialized )
     {
         LOGGER::Initialize(netxpertConfig);
@@ -21,10 +21,10 @@ FGDBWriter::FGDBWriter(Config& netxpertConfig)
 FGDBWriter::~FGDBWriter()
 {
     //dtor
-    if (currentTblPtr)
+    /*if (currentTblPtr)
         delete currentTblPtr;
     if (geodatabasePtr)
-        delete geodatabasePtr;
+        delete geodatabasePtr;*/
     //CloseConnection();
 }
 
@@ -70,10 +70,12 @@ void FGDBWriter::connect()
 {
     try
     {
-        geodatabasePtr = new Geodatabase();
+        geodatabasePtr = unique_ptr<Geodatabase>(new Geodatabase());
 
         wstring newPath;
         StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
+
+        cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
 
         fgdbError hr;
         wstring errorText;
@@ -119,8 +121,10 @@ void FGDBWriter::CreateNetXpertDB()
     try
     {
         wstring newPath;
+        cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
         //ASCII string to UTF16 String
         StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
+        cout << "FGDB Path: "<< newPath << endl;
         // TODO: muss nicht ueberschrieben werden, wenns existiert
         if ( exists(NETXPERT_CNFG.ResultDBPath) )
         {
@@ -159,7 +163,7 @@ void FGDBWriter::CreateSolverResultTable(string _tableName)
 {
     try {
         if (!geodatabasePtr)
-            connect( );
+            connect();
 
         createTable ( _tableName );
     }
@@ -174,7 +178,7 @@ void FGDBWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
     try
     {
         if (!geodatabasePtr)
-            connect( );
+            connect();
 
         if (dropFirst)
         {
@@ -191,7 +195,7 @@ void FGDBWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
 
 void FGDBWriter::createTable ( string _tableName )
 {
-    currentTblPtr = new Table();
+    currentTblPtr = unique_ptr<Table> (new Table());
 
     string resultTblDefStr;
     string defLine;

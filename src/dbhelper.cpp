@@ -1,20 +1,20 @@
 #include "dbhelper.h"
 #include <exception>
 
-using namespace NetXpert;
+using namespace netxpert;
 using namespace geos::io;
 using namespace geos::geom;
 
 //Init static member variables must be out of class scope!
-SQLite::Database* DBHELPER::connPtr = nullptr;
-SQLite::Transaction* DBHELPER::currentTransactionPtr = nullptr;
+unique_ptr<SQLite::Database> DBHELPER::connPtr = nullptr;
+unique_ptr<SQLite::Transaction> DBHELPER::currentTransactionPtr = nullptr;
 Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
 unordered_set<string> DBHELPER::EliminatedArcs;
 shared_ptr<GeometryFactory> DBHELPER::GEO_FACTORY;
 
-namespace NetXpert {
+namespace netxpert {
     class GeometryEmptyException: public std::exception
     {
       virtual const char* what() const throw()
@@ -24,13 +24,35 @@ namespace NetXpert {
     } GeometryEmptyException;
 }
 
+/*void DBHELPER::cleanupPtr()
+{
+    //dtor
+    //cout << "deconstructor" << endl;
+    if (currentTransactionPtr) {
+        //cout << "deleting currentTransactionPtr" << endl;
+        delete currentTransactionPtr;
+    }
+    if (connPtr)
+    {
+        //cout << "deleting connPtr" << endl;
+        delete connPtr;
+    }
+
+}*/
+//gets not called, because everything else is static
 DBHELPER::~DBHELPER()
 {
     //dtor
+    /*cout << "deconstructor" << endl;
     if (connPtr)
+    {
+        cout << "deleting connPtr" << endl;
         delete connPtr;
-    if (currentTransactionPtr)
+    }
+    if (currentTransactionPtr) {
+        cout << "deleting currentTransactionPtr" << endl;
         delete currentTransactionPtr;
+    }*/
 }
 
 void DBHELPER::Initialize(const Config& cnfg)
@@ -38,7 +60,14 @@ void DBHELPER::Initialize(const Config& cnfg)
     //FIXED = 0 Kommastellen
     //FLOATING_SINGLE = 6 Kommastellen
     //FLOATING = 16 Kommastellen
-	shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING_SINGLE));
+    // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
+    // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
+    // muss.
+    // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
+    // (nur die Kanten, die aufgebrochen werden)
+    // --> Zusammengefügt werden die Kanten (Route) ja in der DB bei Spatialite (FGDB?).
+
+	shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
@@ -52,7 +81,8 @@ void DBHELPER::connect( )
 {
     try
     {
-        connPtr = new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
+        // Pointer verursacht possible mem leaks ~70,000 bytes
+        connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
 
@@ -75,7 +105,7 @@ void DBHELPER::connect( )
         //connPtr = db;
 
         //Depointerize "on-the-fly" to SQLite::Database&
-        if ( performInitialCommand(*connPtr) )
+        if ( performInitialCommand() )
         {
             LOGGER::LogDebug("Successfully performed initial spatialite command.");
         }
@@ -113,7 +143,8 @@ void DBHELPER::OpenNewTransaction()
             connect();
 
         SQLite::Database& db = *connPtr;
-        currentTransactionPtr = new SQLite::Transaction (db);
+        currentTransactionPtr = unique_ptr<SQLite::Transaction>(new SQLite::Transaction (db));
+
         LOGGER::LogDebug("Successfully opened new transaction.");
     }
     catch (std::exception& ex)
@@ -244,9 +275,11 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName,const ColumnMap& _map)
         return arcTbl;
     }
 }
-InputNodes DBHELPER::LoadNodesFromDB(string _tableName, const ColumnMap& _map)
+vector<NewNode> DBHELPER::LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map)
 {
-    InputNodes nodesTbl;
+    vector<NewNode> nodesTbl;
+    shared_ptr<Geometry> pGeomPtr = nullptr;
+
     string sqlStr = "";
     try
     {
@@ -254,20 +287,47 @@ InputNodes DBHELPER::LoadNodesFromDB(string _tableName, const ColumnMap& _map)
             connect();
 
         SQLite::Database& db = *connPtr;
+
         sqlStr = "SELECT "+_map.nodeIDColName+","+
-                            _map.supplyColName+
+                            _map.supplyColName+ ","+
+                            "AsBinary(" + geomColName + ")"+
                             " FROM "+ _tableName + ";";
+
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
         //cout << sqlStr << endl;
         SQLite::Statement query(db, sqlStr);
         //fetch data
         while (query.executeStep())
         {
-            const string  id     = query.getColumn(0);
-            double supply        = query.getColumn(1);
-            nodesTbl.push_back(InputNode {id,supply});
+            const string  id      = query.getColumn(0);
+            double supply         = query.getColumn(1);
+            SQLite::Column geoCol = query.getColumn(2);
+            if (!geoCol.isNull())
+            {
+                const void* pVoid = geoCol.getBlob();
+                const int sizeOfwkb = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                pGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
+                shared_ptr<Point> pPtr (dynamic_pointer_cast<Point>(pGeomPtr));
+
+                const Coordinate* cPtr = pPtr->getCoordinate();
+                const Coordinate coord = *cPtr;
+
+                nodesTbl.push_back(NewNode {id, coord, supply});
+            }
+
         }
         LOGGER::LogDebug("Successfully fetched nodes table data.");
+
+        query.reset();
+
         return nodesTbl;
     }
     catch (std::exception& ex)
@@ -278,7 +338,7 @@ InputNodes DBHELPER::LoadNodesFromDB(string _tableName, const ColumnMap& _map)
     }
 }
 
-std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string geomColName,
+unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string geomColName,
                                                         const ColumnMap& cmap, ArcIDColumnDataType arcIDColDataType,
                                                         bool withCapacity)
 {
@@ -333,10 +393,11 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string ta
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
 
-        LOGGER::LogDebug(sqlStr);
+        //LOGGER::LogDebug(sqlStr);
 
         SQLite::Database& db = *connPtr;
-        std::unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+        unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+        //std::shared_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
         LOGGER::LogDebug("Successfully prepared query.");
         return qryPtr;
     }
@@ -348,8 +409,9 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string ta
     }
 }
 
+//TODO: eliminatedArcs implementieren!
 ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int treshold,
-                                                    SQLite::Statement& qry, bool withCapacity)
+                                                   SQLite::Statement& qry, bool withCapacity)
 {
     string closestArcID;
     shared_ptr<Geometry> pGeomPtr = nullptr;
@@ -359,6 +421,8 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
     string extToNode;
     double cost;
     double capacity;
+
+    //auto qry = *qry;
 
     /*cout << withCapacity << endl;
     cout << coord.toString() << endl;
@@ -452,20 +516,23 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
             const ExtClosestArcAndPoint result = {closestArcID, extFromNode, extToNode, cost, capacity, coord, aGeomPtr};
             //cout << "DBHELPER: " <<aGeomPtr->toString() << endl;
 
+            qry.reset();
+
             return result;
         }
-
-        throw GeometryEmptyException;
+        else
+            throw GeometryEmptyException;
     }
-    catch (std::exception& ex)
+    catch (exception& ex)
     {
+        qry.reset(); // sonst gibts errors "library out of sequence"
         LOGGER::LogError( "Error getting closest Arc!" );
         LOGGER::LogError( ex.what() );
         throw ex;
     }
 }
 
-std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
+unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType )
 {
     string eliminatedArcIDs = "";
@@ -515,7 +582,7 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tab
     }
 }
 
-bool DBHELPER::IsPointOnArc(Coordinate coords, string arcID, SQLite::Statement& qry)
+bool DBHELPER::IsPointOnArc(Coordinate coords, string arcID, shared_ptr<SQLite::Statement> qry)
 {
     bool isPointOnLine = false;
     const double tolerance = 0.0000001;
@@ -526,14 +593,14 @@ bool DBHELPER::IsPointOnArc(Coordinate coords, string arcID, SQLite::Statement& 
         const double y = coords.y;
 
         // Bind values to the parameters of the SQL query
-        qry.bind("@XCoord", x);
-        qry.bind("@YCoord", y);
-        qry.bind("@Tolerance", tolerance);
-        qry.bind("@ArcID", arcID);
+        qry->bind("@XCoord", x);
+        qry->bind("@YCoord", y);
+        qry->bind("@Tolerance", tolerance);
+        qry->bind("@ArcID", arcID);
 
-        while (qry.executeStep())
+        while (qry->executeStep())
         {
-            SQLite::Column col = qry.getColumn(0);
+            SQLite::Column col = qry->getColumn(0);
             isPointOnLine = static_cast<bool>(col.getInt());
         }
         return isPointOnLine;
@@ -549,22 +616,22 @@ bool DBHELPER::IsPointOnArc(Coordinate coords, string arcID, SQLite::Statement& 
 
 void DBHELPER::CloseConnection()
 {
-    try
+    /*try
     {
-
+        DBHELPER::cleanupPtr();
     }
     catch (std::exception& ex)
     {
         LOGGER::LogError( "Error closing connection to NetXpert SpatiaLite DB!" );
         LOGGER::LogError( ex.what() );
-    }
+    }*/
 }
 
-bool DBHELPER::performInitialCommand(SQLite::Database& db)
+bool DBHELPER::performInitialCommand()
 {
-    try {
-        //cout << NETXPERT_CNFG.SpatiaLiteHome << endl;
-        //cout << NETXPERT_CNFG.SpatiaLiteCoreName << endl;
+    try
+    {
+        SQLite::Database& db = *connPtr;
 
         const string spatiaLiteHome = NETXPERT_CNFG.SpatiaLiteHome;
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
@@ -581,7 +648,6 @@ bool DBHELPER::performInitialCommand(SQLite::Database& db)
         query.executeStep();
 
         db.disableExtensions();
-
         boost::filesystem::current_path(pathBefore);
         //cout <<  boost::filesystem::current_path() << endl;
         return true;

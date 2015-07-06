@@ -2937,28 +2937,36 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_NetXpert__ColumnMap swig_types[0]
-#define SWIGTYPE_p_NetXpert__Config swig_types[1]
-#define SWIGTYPE_p_NetXpert__DBHELPER swig_types[2]
-#define SWIGTYPE_p_NetXpert__InputArc swig_types[3]
-#define SWIGTYPE_p_NetXpert__InputNode swig_types[4]
-#define SWIGTYPE_p_NetXpert__LOGGER swig_types[5]
-#define SWIGTYPE_p_NetXpert__Network swig_types[6]
-#define SWIGTYPE_p_allocator_type swig_types[7]
-#define SWIGTYPE_p_char swig_types[8]
-#define SWIGTYPE_p_difference_type swig_types[9]
-#define SWIGTYPE_p_p_PyObject swig_types[10]
-#define SWIGTYPE_p_size_type swig_types[11]
-#define SWIGTYPE_p_std__allocatorT_NetXpert__InputArc_t swig_types[12]
-#define SWIGTYPE_p_std__allocatorT_NetXpert__InputNode_t swig_types[13]
-#define SWIGTYPE_p_std__invalid_argument swig_types[14]
-#define SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t swig_types[15]
-#define SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t swig_types[16]
-#define SWIGTYPE_p_std__listT__Tp__Alloc_t swig_types[17]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[18]
-#define SWIGTYPE_p_value_type swig_types[19]
-static swig_type_info *swig_types[21];
-static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
+#define SWIGTYPE_p_Coordinate swig_types[0]
+#define SWIGTYPE_p_allocator_type swig_types[1]
+#define SWIGTYPE_p_char swig_types[2]
+#define SWIGTYPE_p_difference_type swig_types[3]
+#define SWIGTYPE_p_netxpert__ColumnMap swig_types[4]
+#define SWIGTYPE_p_netxpert__Config swig_types[5]
+#define SWIGTYPE_p_netxpert__DBHELPER swig_types[6]
+#define SWIGTYPE_p_netxpert__ISolver swig_types[7]
+#define SWIGTYPE_p_netxpert__InputArc swig_types[8]
+#define SWIGTYPE_p_netxpert__InputNode swig_types[9]
+#define SWIGTYPE_p_netxpert__InternalArc swig_types[10]
+#define SWIGTYPE_p_netxpert__LOGGER swig_types[11]
+#define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[12]
+#define SWIGTYPE_p_netxpert__Network swig_types[13]
+#define SWIGTYPE_p_netxpert__NewNode swig_types[14]
+#define SWIGTYPE_p_p_PyObject swig_types[15]
+#define SWIGTYPE_p_size_type swig_types[16]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[17]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[18]
+#define SWIGTYPE_p_std__invalid_argument swig_types[19]
+#define SWIGTYPE_p_std__listT__Tp__Alloc_t swig_types[20]
+#define SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[21]
+#define SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[22]
+#define SWIGTYPE_p_string swig_types[23]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[24]
+#define SWIGTYPE_p_value_type swig_types[25]
+#define SWIGTYPE_p_vectorT_netxpert__InternalArc_t swig_types[26]
+#define SWIGTYPE_p_vectorT_netxpert__NewNode_t swig_types[27]
+static swig_type_info *swig_types[29];
+static swig_module_info swig_module = {swig_types, 28, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -2971,16 +2979,16 @@ static swig_module_info swig_module = {swig_types, 20, 0, 0, 0, 0};
 #endif
 
 /*-----------------------------------------------
-              @(target):= _pyNetXpert.so
+              @(target):= _pynetxpert.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__pyNetXpert
+#  define SWIG_init    PyInit__pynetxpert
 
 #else
-#  define SWIG_init    init_pyNetXpert
+#  define SWIG_init    init_pynetxpert
 
 #endif
-#define SWIG_name    "_pyNetXpert"
+#define SWIG_name    "_pynetxpert"
 
 #define SWIGVERSION 0x020011 
 #define SWIG_VERSION SWIGVERSION
@@ -3446,6 +3454,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 
 #include "network.h"
 #include "dbhelper.h"
+#include "isolver.h"
+#include "mstree.h"
 
 
 namespace swig {  
@@ -4458,9 +4468,9 @@ namespace swig
 
 
   namespace swig {
-    template <>  struct traits<NetXpert::InputArc > {
+    template <>  struct traits<netxpert::InputArc > {
       typedef pointer_category category;
-      static const char* type_name() { return"NetXpert::InputArc"; }
+      static const char* type_name() { return"netxpert::InputArc"; }
     };
   }
 
@@ -4564,24 +4574,24 @@ namespace swig {
 
 
       namespace swig {
-	template <>  struct traits<std::list<NetXpert::InputArc, std::allocator< NetXpert::InputArc > > > {
+	template <>  struct traits<std::list<netxpert::InputArc, std::allocator< netxpert::InputArc > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::list<" "NetXpert::InputArc" ", " "std::allocator< NetXpert::InputArc >" " >";
+	    return "std::list<" "netxpert::InputArc" ", " "std::allocator< netxpert::InputArc >" " >";
 	  }
 	};
       }
     
-SWIGINTERN swig::SwigPyIterator *std_list_Sl_NetXpert_InputArc_Sg__iterator(std::list< NetXpert::InputArc > *self,PyObject **PYTHON_SELF){
+SWIGINTERN swig::SwigPyIterator *std_list_Sl_netxpert_InputArc_Sg__iterator(std::list< netxpert::InputArc > *self,PyObject **PYTHON_SELF){
       return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
     }
-SWIGINTERN bool std_list_Sl_NetXpert_InputArc_Sg____nonzero__(std::list< NetXpert::InputArc > const *self){
+SWIGINTERN bool std_list_Sl_netxpert_InputArc_Sg____nonzero__(std::list< netxpert::InputArc > const *self){
       return !(self->empty());
     }
-SWIGINTERN bool std_list_Sl_NetXpert_InputArc_Sg____bool__(std::list< NetXpert::InputArc > const *self){
+SWIGINTERN bool std_list_Sl_netxpert_InputArc_Sg____bool__(std::list< netxpert::InputArc > const *self){
       return !(self->empty());
     }
-SWIGINTERN std::list< NetXpert::InputArc >::size_type std_list_Sl_NetXpert_InputArc_Sg____len__(std::list< NetXpert::InputArc > const *self){
+SWIGINTERN std::list< netxpert::InputArc >::size_type std_list_Sl_netxpert_InputArc_Sg____len__(std::list< netxpert::InputArc > const *self){
       return self->size();
     }
 
@@ -4599,178 +4609,178 @@ SWIG_From_size_t  (size_t value)
   return SWIG_From_unsigned_SS_long  (static_cast< unsigned long >(value));
 }
 
-SWIGINTERN std::list< NetXpert::InputArc >::value_type std_list_Sl_NetXpert_InputArc_Sg__pop(std::list< NetXpert::InputArc > *self){
+SWIGINTERN std::list< netxpert::InputArc >::value_type std_list_Sl_netxpert_InputArc_Sg__pop(std::list< netxpert::InputArc > *self){
       if (self->size() == 0)
 	throw std::out_of_range("pop from empty container");
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::value_type x = self->back();
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::value_type x = self->back();
       self->pop_back();
       return x;
     }
-SWIGINTERN std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *std_list_Sl_NetXpert_InputArc_Sg____getslice__(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::difference_type i,std::list< NetXpert::InputArc >::difference_type j){
+SWIGINTERN std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *std_list_Sl_netxpert_InputArc_Sg____getslice__(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::difference_type i,std::list< netxpert::InputArc >::difference_type j){
       return swig::getslice(self, i, j, 1);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____setslice____SWIG_0(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::difference_type i,std::list< NetXpert::InputArc >::difference_type j,std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &v=std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > >()){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::difference_type i,std::list< netxpert::InputArc >::difference_type j,std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &v=std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > >()){
       swig::setslice(self, i, j, 1, v);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____delslice__(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::difference_type i,std::list< NetXpert::InputArc >::difference_type j){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____delslice__(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::difference_type i,std::list< netxpert::InputArc >::difference_type j){
       swig::delslice(self, i, j, 1);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____delitem____SWIG_0(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::difference_type i){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____delitem____SWIG_0(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::difference_type i){
       self->erase(swig::getpos(self,i));
     }
-SWIGINTERN std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *std_list_Sl_NetXpert_InputArc_Sg____getitem____SWIG_0(std::list< NetXpert::InputArc > *self,PySliceObject *slice){
+SWIGINTERN std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *std_list_Sl_netxpert_InputArc_Sg____getitem____SWIG_0(std::list< netxpert::InputArc > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return NULL;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type id = i;
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type jd = j;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type id = i;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type jd = j;
       return swig::getslice(self, id, jd, step);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_0(std::list< NetXpert::InputArc > *self,PySliceObject *slice,std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &v){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_0(std::list< netxpert::InputArc > *self,PySliceObject *slice,std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &v){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type id = i;
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type jd = j;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type id = i;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type jd = j;
       swig::setslice(self, id, jd, step, v);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_1(std::list< NetXpert::InputArc > *self,PySliceObject *slice){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_1(std::list< netxpert::InputArc > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type id = i;
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type jd = j;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type id = i;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____delitem____SWIG_1(std::list< NetXpert::InputArc > *self,PySliceObject *slice){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____delitem____SWIG_1(std::list< netxpert::InputArc > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type id = i;
-      std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >::difference_type jd = j;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type id = i;
+      std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN std::list< NetXpert::InputArc >::value_type const &std_list_Sl_NetXpert_InputArc_Sg____getitem____SWIG_1(std::list< NetXpert::InputArc > const *self,std::list< NetXpert::InputArc >::difference_type i){
+SWIGINTERN std::list< netxpert::InputArc >::value_type const &std_list_Sl_netxpert_InputArc_Sg____getitem____SWIG_1(std::list< netxpert::InputArc > const *self,std::list< netxpert::InputArc >::difference_type i){
       return *(swig::cgetpos(self, i));
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_2(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::difference_type i,std::list< NetXpert::InputArc >::value_type const &x){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_2(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::difference_type i,std::list< netxpert::InputArc >::value_type const &x){
       *(swig::getpos(self,i)) = x;
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputArc_Sg__append(std::list< NetXpert::InputArc > *self,std::list< NetXpert::InputArc >::value_type const &x){
+SWIGINTERN void std_list_Sl_netxpert_InputArc_Sg__append(std::list< netxpert::InputArc > *self,std::list< netxpert::InputArc >::value_type const &x){
       self->push_back(x);
     }
 
   namespace swig {
-    template <>  struct traits<NetXpert::InputNode > {
+    template <>  struct traits<netxpert::InputNode > {
       typedef pointer_category category;
-      static const char* type_name() { return"NetXpert::InputNode"; }
+      static const char* type_name() { return"netxpert::InputNode"; }
     };
   }
 
 
       namespace swig {
-	template <>  struct traits<std::list<NetXpert::InputNode, std::allocator< NetXpert::InputNode > > > {
+	template <>  struct traits<std::list<netxpert::InputNode, std::allocator< netxpert::InputNode > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::list<" "NetXpert::InputNode" ", " "std::allocator< NetXpert::InputNode >" " >";
+	    return "std::list<" "netxpert::InputNode" ", " "std::allocator< netxpert::InputNode >" " >";
 	  }
 	};
       }
     
-SWIGINTERN swig::SwigPyIterator *std_list_Sl_NetXpert_InputNode_Sg__iterator(std::list< NetXpert::InputNode > *self,PyObject **PYTHON_SELF){
+SWIGINTERN swig::SwigPyIterator *std_list_Sl_netxpert_InputNode_Sg__iterator(std::list< netxpert::InputNode > *self,PyObject **PYTHON_SELF){
       return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
     }
-SWIGINTERN bool std_list_Sl_NetXpert_InputNode_Sg____nonzero__(std::list< NetXpert::InputNode > const *self){
+SWIGINTERN bool std_list_Sl_netxpert_InputNode_Sg____nonzero__(std::list< netxpert::InputNode > const *self){
       return !(self->empty());
     }
-SWIGINTERN bool std_list_Sl_NetXpert_InputNode_Sg____bool__(std::list< NetXpert::InputNode > const *self){
+SWIGINTERN bool std_list_Sl_netxpert_InputNode_Sg____bool__(std::list< netxpert::InputNode > const *self){
       return !(self->empty());
     }
-SWIGINTERN std::list< NetXpert::InputNode >::size_type std_list_Sl_NetXpert_InputNode_Sg____len__(std::list< NetXpert::InputNode > const *self){
+SWIGINTERN std::list< netxpert::InputNode >::size_type std_list_Sl_netxpert_InputNode_Sg____len__(std::list< netxpert::InputNode > const *self){
       return self->size();
     }
-SWIGINTERN std::list< NetXpert::InputNode >::value_type std_list_Sl_NetXpert_InputNode_Sg__pop(std::list< NetXpert::InputNode > *self){
+SWIGINTERN std::list< netxpert::InputNode >::value_type std_list_Sl_netxpert_InputNode_Sg__pop(std::list< netxpert::InputNode > *self){
       if (self->size() == 0)
 	throw std::out_of_range("pop from empty container");
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::value_type x = self->back();
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::value_type x = self->back();
       self->pop_back();
       return x;
     }
-SWIGINTERN std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *std_list_Sl_NetXpert_InputNode_Sg____getslice__(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::difference_type i,std::list< NetXpert::InputNode >::difference_type j){
+SWIGINTERN std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *std_list_Sl_netxpert_InputNode_Sg____getslice__(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::difference_type i,std::list< netxpert::InputNode >::difference_type j){
       return swig::getslice(self, i, j, 1);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____setslice____SWIG_0(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::difference_type i,std::list< NetXpert::InputNode >::difference_type j,std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &v=std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > >()){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::difference_type i,std::list< netxpert::InputNode >::difference_type j,std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &v=std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > >()){
       swig::setslice(self, i, j, 1, v);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____delslice__(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::difference_type i,std::list< NetXpert::InputNode >::difference_type j){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____delslice__(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::difference_type i,std::list< netxpert::InputNode >::difference_type j){
       swig::delslice(self, i, j, 1);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____delitem____SWIG_0(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::difference_type i){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____delitem____SWIG_0(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::difference_type i){
       self->erase(swig::getpos(self,i));
     }
-SWIGINTERN std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *std_list_Sl_NetXpert_InputNode_Sg____getitem____SWIG_0(std::list< NetXpert::InputNode > *self,PySliceObject *slice){
+SWIGINTERN std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *std_list_Sl_netxpert_InputNode_Sg____getitem____SWIG_0(std::list< netxpert::InputNode > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return NULL;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type id = i;
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type jd = j;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type id = i;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type jd = j;
       return swig::getslice(self, id, jd, step);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_0(std::list< NetXpert::InputNode > *self,PySliceObject *slice,std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &v){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_0(std::list< netxpert::InputNode > *self,PySliceObject *slice,std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &v){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type id = i;
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type jd = j;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type id = i;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type jd = j;
       swig::setslice(self, id, jd, step, v);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_1(std::list< NetXpert::InputNode > *self,PySliceObject *slice){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_1(std::list< netxpert::InputNode > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type id = i;
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type jd = j;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type id = i;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____delitem____SWIG_1(std::list< NetXpert::InputNode > *self,PySliceObject *slice){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____delitem____SWIG_1(std::list< netxpert::InputNode > *self,PySliceObject *slice){
       Py_ssize_t i, j, step;
       if( !PySlice_Check(slice) ) {
         SWIG_Error(SWIG_TypeError, "Slice object expected.");
         return;
       }
       PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type id = i;
-      std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >::difference_type jd = j;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type id = i;
+      std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >::difference_type jd = j;
       swig::delslice(self, id, jd, step);
     }
-SWIGINTERN std::list< NetXpert::InputNode >::value_type const &std_list_Sl_NetXpert_InputNode_Sg____getitem____SWIG_1(std::list< NetXpert::InputNode > const *self,std::list< NetXpert::InputNode >::difference_type i){
+SWIGINTERN std::list< netxpert::InputNode >::value_type const &std_list_Sl_netxpert_InputNode_Sg____getitem____SWIG_1(std::list< netxpert::InputNode > const *self,std::list< netxpert::InputNode >::difference_type i){
       return *(swig::cgetpos(self, i));
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_2(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::difference_type i,std::list< NetXpert::InputNode >::value_type const &x){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_2(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::difference_type i,std::list< netxpert::InputNode >::value_type const &x){
       *(swig::getpos(self,i)) = x;
     }
-SWIGINTERN void std_list_Sl_NetXpert_InputNode_Sg__append(std::list< NetXpert::InputNode > *self,std::list< NetXpert::InputNode >::value_type const &x){
+SWIGINTERN void std_list_Sl_netxpert_InputNode_Sg__append(std::list< netxpert::InputNode > *self,std::list< netxpert::InputNode >::value_type const &x){
       self->push_back(x);
     }
 
@@ -4924,7 +4934,7 @@ SWIG_From_std_string  (const std::string& s)
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
-SWIGINTERN char *NetXpert_InputNode___str__(NetXpert::InputNode *self){
+SWIGINTERN char *netxpert_InputNode___str__(netxpert::InputNode *self){
        static char tmp [1024];
        sprintf(tmp,"InputNode('%s',%g)", self->extNodeID.c_str(), self->nodeSupply);
        return tmp;
@@ -4936,7 +4946,7 @@ SWIG_FromCharPtr(const char *cptr)
   return SWIG_FromCharPtrAndSize(cptr, (cptr ? strlen(cptr) : 0));
 }
 
-SWIGINTERN char *NetXpert_InputArc___str__(NetXpert::InputArc *self){
+SWIGINTERN char *netxpert_InputArc___str__(netxpert::InputArc *self){
        static char tmp [1024];
        sprintf(tmp,"InputArc('%s',%s,%s,%g,%g,'%s')", self->extArcID.c_str(), self->extFromNode.c_str(),
                                         self->extToNode.c_str(), self->cost, self->capacity,
@@ -5001,6 +5011,13 @@ SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
     }
   }  
   return res;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_unsigned_SS_int  (unsigned int value)
+{
+  return PyInt_FromSize_t((size_t) value);
 }
 
 #ifdef __cplusplus
@@ -5852,7 +5869,7 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 
 SWIGINTERN PyObject *_wrap_InputArcs_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   PyObject **arg2 = (PyObject **) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -5861,12 +5878,12 @@ SWIGINTERN PyObject *_wrap_InputArcs_iterator(PyObject *SWIGUNUSEDPARM(self), Py
   
   arg2 = &obj0;
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_iterator",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_iterator" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_iterator" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (swig::SwigPyIterator *)std_list_Sl_NetXpert_InputArc_Sg__iterator(arg1,arg2);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (swig::SwigPyIterator *)std_list_Sl_netxpert_InputArc_Sg__iterator(arg1,arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -5876,19 +5893,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs___nonzero__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___nonzero__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___nonzero__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (bool)std_list_Sl_NetXpert_InputArc_Sg____nonzero__((std::list< NetXpert::InputArc > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (bool)std_list_Sl_netxpert_InputArc_Sg____nonzero__((std::list< netxpert::InputArc > const *)arg1);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -5898,19 +5915,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs___bool__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___bool__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___bool__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (bool)std_list_Sl_NetXpert_InputArc_Sg____bool__((std::list< NetXpert::InputArc > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (bool)std_list_Sl_netxpert_InputArc_Sg____bool__((std::list< netxpert::InputArc > const *)arg1);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -5920,19 +5937,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::size_type result;
+  std::list< netxpert::InputArc >::size_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs___len__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___len__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___len__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = std_list_Sl_NetXpert_InputArc_Sg____len__((std::list< NetXpert::InputArc > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = std_list_Sl_netxpert_InputArc_Sg____len__((std::list< netxpert::InputArc > const *)arg1);
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -5942,26 +5959,26 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::value_type result;
+  std::list< netxpert::InputArc >::value_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_pop",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   try {
-    result = std_list_Sl_NetXpert_InputArc_Sg__pop(arg1);
+    result = std_list_Sl_netxpert_InputArc_Sg__pop(arg1);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj((new std::list< NetXpert::InputArc >::value_type(static_cast< const std::list< NetXpert::InputArc >::value_type& >(result))), SWIGTYPE_p_NetXpert__InputArc, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new std::list< netxpert::InputArc >::value_type(static_cast< const std::list< netxpert::InputArc >::value_type& >(result))), SWIGTYPE_p_netxpert__InputArc, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5970,9 +5987,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
-  std::list< NetXpert::InputArc >::difference_type arg3 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -5982,26 +5999,26 @@ SWIGINTERN PyObject *_wrap_InputArcs___getslice__(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *result = 0 ;
+  std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs___getslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getslice__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___getslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___getslice__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___getslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___getslice__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputArc >::difference_type >(val3);
   try {
-    result = (std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)std_list_Sl_NetXpert_InputArc_Sg____getslice__(arg1,arg2,arg3);
+    result = (std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_list_Sl_netxpert_InputArc_Sg____getslice__(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6010,7 +6027,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___getslice__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6019,10 +6036,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
-  std::list< NetXpert::InputArc >::difference_type arg3 ;
-  std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *arg4 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc >::difference_type arg3 ;
+  std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6036,34 +6053,34 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_0(PyObject *SWIGUNUSEDPA
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:InputArcs___setslice__",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setslice__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setslice__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___setslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___setslice__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputArc >::difference_type >(val3);
   {
-    std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *ptr = (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)0;
+    std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
     res4 = swig::asptr(obj3, &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputArcs___setslice__" "', argument " "4"" of type '" "std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputArcs___setslice__" "', argument " "4"" of type '" "std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setslice__" "', argument " "4"" of type '" "std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setslice__" "', argument " "4"" of type '" "std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &""'"); 
     }
     arg4 = ptr;
   }
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &)*arg4);
+    std_list_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg4);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6083,9 +6100,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
-  std::list< NetXpert::InputArc >::difference_type arg3 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6097,23 +6114,23 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_1(PyObject *SWIGUNUSEDPA
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs___setslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setslice__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setslice__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___setslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___setslice__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputArc >::difference_type >(val3);
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    std_list_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6141,7 +6158,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice__(PyObject *self, PyObject *args
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6161,7 +6178,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice__(PyObject *self, PyObject *args
   }
   if (argc == 4) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6174,7 +6191,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice__(PyObject *self, PyObject *args
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = swig::asptr(argv[3], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+          int res = swig::asptr(argv[3], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_InputArcs___setslice____SWIG_0(self, args);
@@ -6187,17 +6204,17 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice__(PyObject *self, PyObject *args
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs___setslice__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::__setslice__(std::list< NetXpert::InputArc >::difference_type,std::list< NetXpert::InputArc >::difference_type,std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &)\n"
-    "    std::list< NetXpert::InputArc >::__setslice__(std::list< NetXpert::InputArc >::difference_type,std::list< NetXpert::InputArc >::difference_type)\n");
+    "    std::list< netxpert::InputArc >::__setslice__(std::list< netxpert::InputArc >::difference_type,std::list< netxpert::InputArc >::difference_type,std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)\n"
+    "    std::list< netxpert::InputArc >::__setslice__(std::list< netxpert::InputArc >::difference_type,std::list< netxpert::InputArc >::difference_type)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
-  std::list< NetXpert::InputArc >::difference_type arg3 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6209,23 +6226,23 @@ SWIGINTERN PyObject *_wrap_InputArcs___delslice__(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs___delslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delslice__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___delslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___delslice__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___delslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs___delslice__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputArc >::difference_type >(val3);
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____delslice__(arg1,arg2,arg3);
+    std_list_Sl_netxpert_InputArc_Sg____delslice__(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6243,8 +6260,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6253,18 +6270,18 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_0(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs___delitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___delitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___delitem__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____delitem____SWIG_0(arg1,arg2);
+    std_list_Sl_netxpert_InputArc_Sg____delitem____SWIG_0(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6279,20 +6296,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *result = 0 ;
+  std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs___getitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -6300,7 +6317,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)std_list_Sl_NetXpert_InputArc_Sg____getitem____SWIG_0(arg1,arg2);
+    result = (std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_list_Sl_netxpert_InputArc_Sg____getitem____SWIG_0(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6309,7 +6326,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6318,9 +6335,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
-  std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *arg3 = 0 ;
+  std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int res3 = SWIG_OLDOBJ ;
@@ -6329,11 +6346,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_0(PyObject *SWIGUNUSEDPAR
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -6341,18 +6358,18 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   {
-    std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *ptr = (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)0;
+    std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
     res3 = swig::asptr(obj2, &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &""'"); 
     }
     arg3 = ptr;
   }
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_0(arg1,arg2,(std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &)*arg3);
+    std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_0(arg1,arg2,(std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6372,7 +6389,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6380,11 +6397,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_1(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs___setitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -6392,7 +6409,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_1(arg1,arg2);
+    std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_1(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6410,7 +6427,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6418,11 +6435,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_1(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs___delitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___delitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -6430,7 +6447,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____delitem____SWIG_1(arg1,arg2);
+    std_list_Sl_netxpert_InputArc_Sg____delitem____SWIG_1(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6458,7 +6475,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem__(PyObject *self, PyObject *args)
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6471,7 +6488,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem__(PyObject *self, PyObject *args)
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6487,43 +6504,43 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem__(PyObject *self, PyObject *args)
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs___delitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::__delitem__(std::list< NetXpert::InputArc >::difference_type)\n"
-    "    std::list< NetXpert::InputArc >::__delitem__(PySliceObject *)\n");
+    "    std::list< netxpert::InputArc >::__delitem__(std::list< netxpert::InputArc >::difference_type)\n"
+    "    std::list< netxpert::InputArc >::__delitem__(PySliceObject *)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputArc >::value_type *result = 0 ;
+  std::list< netxpert::InputArc >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs___getitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___getitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___getitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___getitem__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
   try {
-    result = (std::list< NetXpert::InputArc >::value_type *) &std_list_Sl_NetXpert_InputArc_Sg____getitem____SWIG_1((std::list< NetXpert::InputArc > const *)arg1,arg2);
+    result = (std::list< netxpert::InputArc >::value_type *) &std_list_Sl_netxpert_InputArc_Sg____getitem____SWIG_1((std::list< netxpert::InputArc > const *)arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6542,7 +6559,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem__(PyObject *self, PyObject *args)
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6555,7 +6572,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem__(PyObject *self, PyObject *args)
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6571,17 +6588,17 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem__(PyObject *self, PyObject *args)
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs___getitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::__getitem__(PySliceObject *)\n"
-    "    std::list< NetXpert::InputArc >::__getitem__(std::list< NetXpert::InputArc >::difference_type) const\n");
+    "    std::list< netxpert::InputArc >::__getitem__(PySliceObject *)\n"
+    "    std::list< netxpert::InputArc >::__getitem__(std::list< netxpert::InputArc >::difference_type) const\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::difference_type arg2 ;
-  std::list< NetXpert::InputArc >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::difference_type arg2 ;
+  std::list< netxpert::InputArc >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -6593,26 +6610,26 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_2(PyObject *SWIGUNUSEDPAR
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs___setitem__" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::difference_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputArc >::difference_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp3);
   try {
-    std_list_Sl_NetXpert_InputArc_Sg____setitem____SWIG_2(arg1,arg2,(NetXpert::InputArc const &)*arg3);
+    std_list_Sl_netxpert_InputArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputArc const &)*arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6637,7 +6654,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem__(PyObject *self, PyObject *args)
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6650,14 +6667,14 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem__(PyObject *self, PyObject *args)
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
         _v = PySlice_Check(argv[1]);
       }
       if (_v) {
-        int res = swig::asptr(argv[2], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+        int res = swig::asptr(argv[2], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputArcs___setitem____SWIG_0(self, args);
@@ -6667,7 +6684,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem__(PyObject *self, PyObject *args)
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6675,7 +6692,7 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem__(PyObject *self, PyObject *args)
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputArc, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputArc, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputArcs___setitem____SWIG_2(self, args);
@@ -6687,17 +6704,17 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem__(PyObject *self, PyObject *args)
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs___setitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::__setitem__(PySliceObject *,std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > const &)\n"
-    "    std::list< NetXpert::InputArc >::__setitem__(PySliceObject *)\n"
-    "    std::list< NetXpert::InputArc >::__setitem__(std::list< NetXpert::InputArc >::difference_type,std::list< NetXpert::InputArc >::value_type const &)\n");
+    "    std::list< netxpert::InputArc >::__setitem__(PySliceObject *,std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)\n"
+    "    std::list< netxpert::InputArc >::__setitem__(PySliceObject *)\n"
+    "    std::list< netxpert::InputArc >::__setitem__(std::list< netxpert::InputArc >::difference_type,std::list< netxpert::InputArc >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -6706,20 +6723,20 @@ SWIGINTERN PyObject *_wrap_InputArcs_append(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_append",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_append" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_append" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_append" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_append" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_append" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_append" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp2);
-  std_list_Sl_NetXpert_InputArc_Sg__append(arg1,(NetXpert::InputArc const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp2);
+  std_list_Sl_netxpert_InputArc_Sg__append(arg1,(netxpert::InputArc const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6729,11 +6746,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *result = 0 ;
+  std::list< netxpert::InputArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputArcs")) SWIG_fail;
-  result = (std::list< NetXpert::InputArc > *)new std::list< NetXpert::InputArc >();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
+  result = (std::list< netxpert::InputArc > *)new std::list< netxpert::InputArc >();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6742,25 +6759,25 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc > *result = 0 ;
+  std::list< netxpert::InputArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_InputArcs",&obj0)) SWIG_fail;
   {
-    std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *ptr = (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)0;
+    std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
     res1 = swig::asptr(obj0, &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const &""'"); 
     }
     arg1 = ptr;
   }
-  result = (std::list< NetXpert::InputArc > *)new std::list< NetXpert::InputArc >((std::list< NetXpert::InputArc > const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
+  result = (std::list< netxpert::InputArc > *)new std::list< netxpert::InputArc >((std::list< netxpert::InputArc > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -6771,19 +6788,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_empty",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_empty" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_empty" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (bool)((std::list< NetXpert::InputArc > const *)arg1)->empty();
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (bool)((std::list< netxpert::InputArc > const *)arg1)->empty();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6793,19 +6810,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::size_type result;
+  std::list< netxpert::InputArc >::size_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_size",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_size" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_size" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = ((std::list< NetXpert::InputArc > const *)arg1)->size();
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = ((std::list< netxpert::InputArc > const *)arg1)->size();
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -6815,17 +6832,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_clear",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_clear" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_clear" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   (arg1)->clear();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6836,8 +6853,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc > *arg2 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -6846,19 +6863,19 @@ SWIGINTERN PyObject *_wrap_InputArcs_swap(PyObject *SWIGUNUSEDPARM(self), PyObje
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_swap",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_swap" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_swap" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t,  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_swap" "', argument " "2"" of type '" "std::list< NetXpert::InputArc > &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_swap" "', argument " "2"" of type '" "std::list< netxpert::InputArc > &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_swap" "', argument " "2"" of type '" "std::list< NetXpert::InputArc > &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_swap" "', argument " "2"" of type '" "std::list< netxpert::InputArc > &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp2);
   (arg1)->swap(*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -6869,20 +6886,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< std::allocator< NetXpert::InputArc > > result;
+  SwigValueWrapper< std::allocator< netxpert::InputArc > > result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_get_allocator",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_get_allocator" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_get_allocator" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = ((std::list< NetXpert::InputArc > const *)arg1)->get_allocator();
-  resultobj = SWIG_NewPointerObj((new std::list< NetXpert::InputArc >::allocator_type(static_cast< const std::list< NetXpert::InputArc >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_NetXpert__InputArc_t, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = ((std::list< netxpert::InputArc > const *)arg1)->get_allocator();
+  resultobj = SWIG_NewPointerObj((new std::list< netxpert::InputArc >::allocator_type(static_cast< const std::list< netxpert::InputArc >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6891,20 +6908,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::iterator result;
+  std::list< netxpert::InputArc >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_begin",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_begin" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_begin" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   result = (arg1)->begin();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -6914,20 +6931,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::iterator result;
+  std::list< netxpert::InputArc >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_end",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_end" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_end" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   result = (arg1)->end();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -6937,20 +6954,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::reverse_iterator result;
+  std::list< netxpert::InputArc >::reverse_iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_rbegin",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rbegin" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rbegin" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   result = (arg1)->rbegin();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -6960,20 +6977,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::reverse_iterator result;
+  std::list< netxpert::InputArc >::reverse_iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_rend",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rend" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rend" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   result = (arg1)->rend();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -6983,20 +7000,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc >::size_type arg1 ;
+  std::list< netxpert::InputArc >::size_type arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc > *result = 0 ;
+  std::list< netxpert::InputArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_InputArcs",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg1 = static_cast< std::list< NetXpert::InputArc >::size_type >(val1);
-  result = (std::list< NetXpert::InputArc > *)new std::list< NetXpert::InputArc >(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
+  arg1 = static_cast< std::list< netxpert::InputArc >::size_type >(val1);
+  result = (std::list< netxpert::InputArc > *)new std::list< netxpert::InputArc >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7005,17 +7022,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_pop_back",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop_back" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop_back" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   (arg1)->pop_back();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7026,8 +7043,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::size_type arg2 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::size_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -7036,16 +7053,16 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_resize",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_resize" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_resize" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_resize" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_resize" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::size_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputArc >::size_type >(val2);
   (arg1)->resize(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7056,35 +7073,35 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::iterator arg2 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::iterator arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
   int res2 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputArc >::iterator result;
+  std::list< netxpert::InputArc >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_erase",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_erase" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_erase" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
     }
   }
   result = (arg1)->erase(arg2);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7094,9 +7111,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::iterator arg2 ;
-  std::list< NetXpert::InputArc >::iterator arg3 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::iterator arg2 ;
+  std::list< netxpert::InputArc >::iterator arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -7106,38 +7123,38 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputArc >::iterator result;
+  std::list< netxpert::InputArc >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs_erase",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_erase" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_erase" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
     }
   }
   res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res3) || !iter3) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter3);
+    swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter3);
     if (iter_t) {
       arg3 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::iterator""'");
     }
   }
   result = (arg1)->erase(arg2,arg3);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7157,12 +7174,12 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase(PyObject *self, PyObject *args) {
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter) != 0));
       if (_v) {
         return _wrap_InputArcs_erase__SWIG_0(self, args);
       }
@@ -7170,16 +7187,16 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter) != 0));
       if (_v) {
         swig::SwigPyIterator *iter = 0;
         int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter) != 0));
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter) != 0));
         if (_v) {
           return _wrap_InputArcs_erase__SWIG_1(self, args);
         }
@@ -7190,40 +7207,40 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs_erase'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::erase(std::list< NetXpert::InputArc >::iterator)\n"
-    "    std::list< NetXpert::InputArc >::erase(std::list< NetXpert::InputArc >::iterator,std::list< NetXpert::InputArc >::iterator)\n");
+    "    std::list< netxpert::InputArc >::erase(std::list< netxpert::InputArc >::iterator)\n"
+    "    std::list< netxpert::InputArc >::erase(std::list< netxpert::InputArc >::iterator,std::list< netxpert::InputArc >::iterator)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc >::size_type arg1 ;
-  std::list< NetXpert::InputArc >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputArc >::size_type arg1 ;
+  std::list< netxpert::InputArc >::value_type *arg2 = 0 ;
   size_t val1 ;
   int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputArc > *result = 0 ;
+  std::list< netxpert::InputArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_InputArcs",&obj0,&obj1)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg1 = static_cast< std::list< NetXpert::InputArc >::size_type >(val1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg1 = static_cast< std::list< netxpert::InputArc >::size_type >(val1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_InputArcs" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_InputArcs" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputArcs" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputArcs" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp2);
-  result = (std::list< NetXpert::InputArc > *)new std::list< NetXpert::InputArc >(arg1,(std::list< NetXpert::InputArc >::value_type const &)*arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
+  arg2 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp2);
+  result = (std::list< netxpert::InputArc > *)new std::list< netxpert::InputArc >(arg1,(std::list< netxpert::InputArc >::value_type const &)*arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7255,7 +7272,7 @@ SWIGINTERN PyObject *_wrap_new_InputArcs(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_InputArcs__SWIG_1(self, args);
@@ -7268,7 +7285,7 @@ SWIGINTERN PyObject *_wrap_new_InputArcs(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_NetXpert__InputArc, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_netxpert__InputArc, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_new_InputArcs__SWIG_3(self, args);
@@ -7279,18 +7296,18 @@ SWIGINTERN PyObject *_wrap_new_InputArcs(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_InputArcs'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::list()\n"
-    "    std::list< NetXpert::InputArc >::list(std::list< NetXpert::InputArc > const &)\n"
-    "    std::list< NetXpert::InputArc >::list(std::list< NetXpert::InputArc >::size_type)\n"
-    "    std::list< NetXpert::InputArc >::list(std::list< NetXpert::InputArc >::size_type,std::list< NetXpert::InputArc >::value_type const &)\n");
+    "    std::list< netxpert::InputArc >::list()\n"
+    "    std::list< netxpert::InputArc >::list(std::list< netxpert::InputArc > const &)\n"
+    "    std::list< netxpert::InputArc >::list(std::list< netxpert::InputArc >::size_type)\n"
+    "    std::list< netxpert::InputArc >::list(std::list< netxpert::InputArc >::size_type,std::list< netxpert::InputArc >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -7299,20 +7316,20 @@ SWIGINTERN PyObject *_wrap_InputArcs_push_back(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_push_back",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_push_back" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_push_back" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_push_back" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_push_back" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_push_back" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_push_back" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp2);
-  (arg1)->push_back((std::list< NetXpert::InputArc >::value_type const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp2);
+  (arg1)->push_back((std::list< netxpert::InputArc >::value_type const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7322,20 +7339,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::value_type *result = 0 ;
+  std::list< netxpert::InputArc >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_front",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_front" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_front" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (std::list< NetXpert::InputArc >::value_type *) &((std::list< NetXpert::InputArc > const *)arg1)->front();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (std::list< netxpert::InputArc >::value_type *) &((std::list< netxpert::InputArc > const *)arg1)->front();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7344,20 +7361,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputArc >::value_type *result = 0 ;
+  std::list< netxpert::InputArc >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_back",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_back" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_back" "', argument " "1"" of type '" "std::list< netxpert::InputArc > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  result = (std::list< NetXpert::InputArc >::value_type *) &((std::list< NetXpert::InputArc > const *)arg1)->back();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  result = (std::list< netxpert::InputArc >::value_type *) &((std::list< netxpert::InputArc > const *)arg1)->back();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7366,9 +7383,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::size_type arg2 ;
-  std::list< NetXpert::InputArc >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::size_type arg2 ;
+  std::list< netxpert::InputArc >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -7380,25 +7397,25 @@ SWIGINTERN PyObject *_wrap_InputArcs_assign(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs_assign",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_assign" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_assign" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_assign" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_assign" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::size_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputArc >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_assign" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_assign" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_assign" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_assign" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::list< NetXpert::InputArc >::value_type const &)*arg3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp3);
+  (arg1)->assign(arg2,(std::list< netxpert::InputArc >::value_type const &)*arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7408,9 +7425,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::size_type arg2 ;
-  std::list< NetXpert::InputArc >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::size_type arg2 ;
+  std::list< netxpert::InputArc >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -7422,25 +7439,25 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs_resize",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_resize" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_resize" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_resize" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_resize" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputArc >::size_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputArc >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_resize" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_resize" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_resize" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_resize" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::list< NetXpert::InputArc >::value_type const &)*arg3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp3);
+  (arg1)->resize(arg2,(std::list< netxpert::InputArc >::value_type const &)*arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7460,7 +7477,7 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize(PyObject *self, PyObject *args) {
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7474,7 +7491,7 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7482,7 +7499,7 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize(PyObject *self, PyObject *args) {
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputArc, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputArc, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputArcs_resize__SWIG_1(self, args);
@@ -7494,17 +7511,17 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs_resize'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::resize(std::list< NetXpert::InputArc >::size_type)\n"
-    "    std::list< NetXpert::InputArc >::resize(std::list< NetXpert::InputArc >::size_type,std::list< NetXpert::InputArc >::value_type const &)\n");
+    "    std::list< netxpert::InputArc >::resize(std::list< netxpert::InputArc >::size_type)\n"
+    "    std::list< netxpert::InputArc >::resize(std::list< netxpert::InputArc >::size_type,std::list< netxpert::InputArc >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::iterator arg2 ;
-  std::list< NetXpert::InputArc >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::iterator arg2 ;
+  std::list< netxpert::InputArc >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -7514,35 +7531,35 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputArc >::iterator result;
+  std::list< netxpert::InputArc >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputArcs_insert",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_insert" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_insert" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
     }
   }
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::list< NetXpert::InputArc >::value_type const &)*arg3);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputArc >::iterator & >(result)),
+  arg3 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp3);
+  result = (arg1)->insert(arg2,(std::list< netxpert::InputArc >::value_type const &)*arg3);
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -7552,10 +7569,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::iterator arg2 ;
-  std::list< NetXpert::InputArc >::size_type arg3 ;
-  std::list< NetXpert::InputArc >::value_type *arg4 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::iterator arg2 ;
+  std::list< netxpert::InputArc >::size_type arg3 ;
+  std::list< netxpert::InputArc >::value_type *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -7570,36 +7587,36 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:InputArcs_insert",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_insert" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_insert" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_insert" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::iterator""'");
     }
   }
   ecode3 = SWIG_AsVal_size_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputArc >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::list< netxpert::InputArc >::size_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputArc >::size_type >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg3 = static_cast< std::list< netxpert::InputArc >::size_type >(val3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputArcs_insert" "', argument " "4"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputArcs_insert" "', argument " "4"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "4"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "4"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg4 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::list< NetXpert::InputArc >::value_type const &)*arg4);
+  arg4 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp4);
+  (arg1)->insert(arg2,arg3,(std::list< netxpert::InputArc >::value_type const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7619,14 +7636,14 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter) != 0));
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputArc, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputArc, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputArcs_insert__SWIG_0(self, args);
@@ -7636,19 +7653,19 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert(PyObject *self, PyObject *args) {
   }
   if (argc == 4) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputArc >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputArc >::iterator > *>(iter) != 0));
       if (_v) {
         {
           int res = SWIG_AsVal_size_t(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_NetXpert__InputArc, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_netxpert__InputArc, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_InputArcs_insert__SWIG_1(self, args);
@@ -7661,25 +7678,25 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputArcs_insert'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputArc >::insert(std::list< NetXpert::InputArc >::iterator,std::list< NetXpert::InputArc >::value_type const &)\n"
-    "    std::list< NetXpert::InputArc >::insert(std::list< NetXpert::InputArc >::iterator,std::list< NetXpert::InputArc >::size_type,std::list< NetXpert::InputArc >::value_type const &)\n");
+    "    std::list< netxpert::InputArc >::insert(std::list< netxpert::InputArc >::iterator,std::list< netxpert::InputArc >::value_type const &)\n"
+    "    std::list< netxpert::InputArc >::insert(std::list< netxpert::InputArc >::iterator,std::list< netxpert::InputArc >::size_type,std::list< netxpert::InputArc >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputArcs_pop_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_pop_front",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop_front" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop_front" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   (arg1)->pop_front();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7690,8 +7707,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_push_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
-  std::list< NetXpert::InputArc >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -7700,20 +7717,20 @@ SWIGINTERN PyObject *_wrap_InputArcs_push_front(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArcs_push_front",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_push_front" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_push_front" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputArc,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputArc,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_push_front" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputArcs_push_front" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_push_front" "', argument " "2"" of type '" "std::list< NetXpert::InputArc >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_push_front" "', argument " "2"" of type '" "std::list< netxpert::InputArc >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputArc >::value_type * >(argp2);
-  (arg1)->push_front((std::list< NetXpert::InputArc >::value_type const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputArc >::value_type * >(argp2);
+  (arg1)->push_front((std::list< netxpert::InputArc >::value_type const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7723,17 +7740,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArcs_reverse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArcs_reverse",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_reverse" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_reverse" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   (arg1)->reverse();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7744,17 +7761,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_InputArcs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputArc > *arg1 = (std::list< NetXpert::InputArc > *) 0 ;
+  std::list< netxpert::InputArc > *arg1 = (std::list< netxpert::InputArc > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_InputArcs",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArcs" "', argument " "1"" of type '" "std::list< NetXpert::InputArc > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArcs" "', argument " "1"" of type '" "std::list< netxpert::InputArc > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputArc > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputArc > * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7766,13 +7783,13 @@ fail:
 SWIGINTERN PyObject *InputArcs_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_InputNodes_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   PyObject **arg2 = (PyObject **) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -7781,12 +7798,12 @@ SWIGINTERN PyObject *_wrap_InputNodes_iterator(PyObject *SWIGUNUSEDPARM(self), P
   
   arg2 = &obj0;
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_iterator",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_iterator" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_iterator" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (swig::SwigPyIterator *)std_list_Sl_NetXpert_InputNode_Sg__iterator(arg1,arg2);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (swig::SwigPyIterator *)std_list_Sl_netxpert_InputNode_Sg__iterator(arg1,arg2);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -7796,19 +7813,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes___nonzero__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___nonzero__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___nonzero__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (bool)std_list_Sl_NetXpert_InputNode_Sg____nonzero__((std::list< NetXpert::InputNode > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (bool)std_list_Sl_netxpert_InputNode_Sg____nonzero__((std::list< netxpert::InputNode > const *)arg1);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7818,19 +7835,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes___bool__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___bool__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___bool__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (bool)std_list_Sl_NetXpert_InputNode_Sg____bool__((std::list< NetXpert::InputNode > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (bool)std_list_Sl_netxpert_InputNode_Sg____bool__((std::list< netxpert::InputNode > const *)arg1);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7840,19 +7857,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::size_type result;
+  std::list< netxpert::InputNode >::size_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes___len__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___len__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___len__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = std_list_Sl_NetXpert_InputNode_Sg____len__((std::list< NetXpert::InputNode > const *)arg1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = std_list_Sl_netxpert_InputNode_Sg____len__((std::list< netxpert::InputNode > const *)arg1);
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -7862,26 +7879,26 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::value_type result;
+  std::list< netxpert::InputNode >::value_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_pop",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   try {
-    result = std_list_Sl_NetXpert_InputNode_Sg__pop(arg1);
+    result = std_list_Sl_netxpert_InputNode_Sg__pop(arg1);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj((new std::list< NetXpert::InputNode >::value_type(static_cast< const std::list< NetXpert::InputNode >::value_type& >(result))), SWIGTYPE_p_NetXpert__InputNode, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new std::list< netxpert::InputNode >::value_type(static_cast< const std::list< netxpert::InputNode >::value_type& >(result))), SWIGTYPE_p_netxpert__InputNode, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7890,9 +7907,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
-  std::list< NetXpert::InputNode >::difference_type arg3 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -7902,26 +7919,26 @@ SWIGINTERN PyObject *_wrap_InputNodes___getslice__(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *result = 0 ;
+  std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes___getslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getslice__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___getslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___getslice__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___getslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___getslice__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputNode >::difference_type >(val3);
   try {
-    result = (std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)std_list_Sl_NetXpert_InputNode_Sg____getslice__(arg1,arg2,arg3);
+    result = (std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_list_Sl_netxpert_InputNode_Sg____getslice__(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7930,7 +7947,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___getslice__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7939,10 +7956,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
-  std::list< NetXpert::InputNode >::difference_type arg3 ;
-  std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *arg4 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode >::difference_type arg3 ;
+  std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -7956,34 +7973,34 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_0(PyObject *SWIGUNUSEDP
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:InputNodes___setslice__",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setslice__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setslice__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___setslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___setslice__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputNode >::difference_type >(val3);
   {
-    std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *ptr = (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)0;
+    std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *ptr = (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *)0;
     res4 = swig::asptr(obj3, &ptr);
     if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputNodes___setslice__" "', argument " "4"" of type '" "std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputNodes___setslice__" "', argument " "4"" of type '" "std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setslice__" "', argument " "4"" of type '" "std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setslice__" "', argument " "4"" of type '" "std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &""'"); 
     }
     arg4 = ptr;
   }
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &)*arg4);
+    std_list_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg4);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8003,9 +8020,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
-  std::list< NetXpert::InputNode >::difference_type arg3 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -8017,23 +8034,23 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_1(PyObject *SWIGUNUSEDP
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes___setslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setslice__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setslice__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___setslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___setslice__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputNode >::difference_type >(val3);
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    std_list_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8061,7 +8078,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice__(PyObject *self, PyObject *arg
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8081,7 +8098,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice__(PyObject *self, PyObject *arg
   }
   if (argc == 4) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8094,7 +8111,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice__(PyObject *self, PyObject *arg
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = swig::asptr(argv[3], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+          int res = swig::asptr(argv[3], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_InputNodes___setslice____SWIG_0(self, args);
@@ -8107,17 +8124,17 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice__(PyObject *self, PyObject *arg
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes___setslice__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::__setslice__(std::list< NetXpert::InputNode >::difference_type,std::list< NetXpert::InputNode >::difference_type,std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &)\n"
-    "    std::list< NetXpert::InputNode >::__setslice__(std::list< NetXpert::InputNode >::difference_type,std::list< NetXpert::InputNode >::difference_type)\n");
+    "    std::list< netxpert::InputNode >::__setslice__(std::list< netxpert::InputNode >::difference_type,std::list< netxpert::InputNode >::difference_type,std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)\n"
+    "    std::list< netxpert::InputNode >::__setslice__(std::list< netxpert::InputNode >::difference_type,std::list< netxpert::InputNode >::difference_type)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
-  std::list< NetXpert::InputNode >::difference_type arg3 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode >::difference_type arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -8129,23 +8146,23 @@ SWIGINTERN PyObject *_wrap_InputNodes___delslice__(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes___delslice__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delslice__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delslice__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___delslice__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___delslice__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___delslice__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes___delslice__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val3);
+  arg3 = static_cast< std::list< netxpert::InputNode >::difference_type >(val3);
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____delslice__(arg1,arg2,arg3);
+    std_list_Sl_netxpert_InputNode_Sg____delslice__(arg1,arg2,arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8163,8 +8180,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -8173,18 +8190,18 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_0(PyObject *SWIGUNUSEDPA
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes___delitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___delitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___delitem__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____delitem____SWIG_0(arg1,arg2);
+    std_list_Sl_netxpert_InputNode_Sg____delitem____SWIG_0(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8199,20 +8216,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *result = 0 ;
+  std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes___getitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -8220,7 +8237,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)std_list_Sl_NetXpert_InputNode_Sg____getitem____SWIG_0(arg1,arg2);
+    result = (std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_list_Sl_netxpert_InputNode_Sg____getitem____SWIG_0(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8229,7 +8246,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_0(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8238,9 +8255,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
-  std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *arg3 = 0 ;
+  std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int res3 = SWIG_OLDOBJ ;
@@ -8249,11 +8266,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_0(PyObject *SWIGUNUSEDPA
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -8261,18 +8278,18 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   {
-    std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *ptr = (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)0;
+    std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *ptr = (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *)0;
     res3 = swig::asptr(obj2, &ptr);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &""'"); 
     }
     arg3 = ptr;
   }
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_0(arg1,arg2,(std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &)*arg3);
+    std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_0(arg1,arg2,(std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8292,7 +8309,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -8300,11 +8317,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_1(PyObject *SWIGUNUSEDPA
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes___setitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -8312,7 +8329,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_1(arg1,arg2);
+    std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_1(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8330,7 +8347,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   PySliceObject *arg2 = (PySliceObject *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -8338,11 +8355,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_1(PyObject *SWIGUNUSEDPA
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes___delitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___delitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   {
     if (!PySlice_Check(obj1)) {
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
@@ -8350,7 +8367,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____delitem____SWIG_1(arg1,arg2);
+    std_list_Sl_netxpert_InputNode_Sg____delitem____SWIG_1(arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8378,7 +8395,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem__(PyObject *self, PyObject *args
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8391,7 +8408,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem__(PyObject *self, PyObject *args
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8407,43 +8424,43 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem__(PyObject *self, PyObject *args
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes___delitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::__delitem__(std::list< NetXpert::InputNode >::difference_type)\n"
-    "    std::list< NetXpert::InputNode >::__delitem__(PySliceObject *)\n");
+    "    std::list< netxpert::InputNode >::__delitem__(std::list< netxpert::InputNode >::difference_type)\n"
+    "    std::list< netxpert::InputNode >::__delitem__(PySliceObject *)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputNode >::value_type *result = 0 ;
+  std::list< netxpert::InputNode >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes___getitem__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___getitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___getitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___getitem__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
   try {
-    result = (std::list< NetXpert::InputNode >::value_type *) &std_list_Sl_NetXpert_InputNode_Sg____getitem____SWIG_1((std::list< NetXpert::InputNode > const *)arg1,arg2);
+    result = (std::list< netxpert::InputNode >::value_type *) &std_list_Sl_netxpert_InputNode_Sg____getitem____SWIG_1((std::list< netxpert::InputNode > const *)arg1,arg2);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
   }
   
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8462,7 +8479,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem__(PyObject *self, PyObject *args
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8475,7 +8492,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem__(PyObject *self, PyObject *args
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8491,17 +8508,17 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem__(PyObject *self, PyObject *args
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes___getitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::__getitem__(PySliceObject *)\n"
-    "    std::list< NetXpert::InputNode >::__getitem__(std::list< NetXpert::InputNode >::difference_type) const\n");
+    "    std::list< netxpert::InputNode >::__getitem__(PySliceObject *)\n"
+    "    std::list< netxpert::InputNode >::__getitem__(std::list< netxpert::InputNode >::difference_type) const\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::difference_type arg2 ;
-  std::list< NetXpert::InputNode >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::difference_type arg2 ;
+  std::list< netxpert::InputNode >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   ptrdiff_t val2 ;
@@ -8513,26 +8530,26 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_2(PyObject *SWIGUNUSEDPA
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___setitem__" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setitem__" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::difference_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes___setitem__" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::difference_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::difference_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputNode >::difference_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes___setitem__" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp3);
   try {
-    std_list_Sl_NetXpert_InputNode_Sg____setitem____SWIG_2(arg1,arg2,(NetXpert::InputNode const &)*arg3);
+    std_list_Sl_netxpert_InputNode_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputNode const &)*arg3);
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8557,7 +8574,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem__(PyObject *self, PyObject *args
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8570,14 +8587,14 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem__(PyObject *self, PyObject *args
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
         _v = PySlice_Check(argv[1]);
       }
       if (_v) {
-        int res = swig::asptr(argv[2], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+        int res = swig::asptr(argv[2], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputNodes___setitem____SWIG_0(self, args);
@@ -8587,7 +8604,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem__(PyObject *self, PyObject *args
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8595,7 +8612,7 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem__(PyObject *self, PyObject *args
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputNode, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputNode, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputNodes___setitem____SWIG_2(self, args);
@@ -8607,17 +8624,17 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem__(PyObject *self, PyObject *args
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes___setitem__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::__setitem__(PySliceObject *,std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > const &)\n"
-    "    std::list< NetXpert::InputNode >::__setitem__(PySliceObject *)\n"
-    "    std::list< NetXpert::InputNode >::__setitem__(std::list< NetXpert::InputNode >::difference_type,std::list< NetXpert::InputNode >::value_type const &)\n");
+    "    std::list< netxpert::InputNode >::__setitem__(PySliceObject *,std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)\n"
+    "    std::list< netxpert::InputNode >::__setitem__(PySliceObject *)\n"
+    "    std::list< netxpert::InputNode >::__setitem__(std::list< netxpert::InputNode >::difference_type,std::list< netxpert::InputNode >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -8626,20 +8643,20 @@ SWIGINTERN PyObject *_wrap_InputNodes_append(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_append",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_append" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_append" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_append" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_append" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_append" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_append" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp2);
-  std_list_Sl_NetXpert_InputNode_Sg__append(arg1,(NetXpert::InputNode const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp2);
+  std_list_Sl_netxpert_InputNode_Sg__append(arg1,(netxpert::InputNode const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8649,11 +8666,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *result = 0 ;
+  std::list< netxpert::InputNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputNodes")) SWIG_fail;
-  result = (std::list< NetXpert::InputNode > *)new std::list< NetXpert::InputNode >();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
+  result = (std::list< netxpert::InputNode > *)new std::list< netxpert::InputNode >();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8662,25 +8679,25 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode > *result = 0 ;
+  std::list< netxpert::InputNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_InputNodes",&obj0)) SWIG_fail;
   {
-    std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *ptr = (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)0;
+    std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *ptr = (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *)0;
     res1 = swig::asptr(obj0, &ptr);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const &""'"); 
     }
     arg1 = ptr;
   }
-  result = (std::list< NetXpert::InputNode > *)new std::list< NetXpert::InputNode >((std::list< NetXpert::InputNode > const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
+  result = (std::list< netxpert::InputNode > *)new std::list< netxpert::InputNode >((std::list< netxpert::InputNode > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -8691,19 +8708,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_empty",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_empty" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_empty" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (bool)((std::list< NetXpert::InputNode > const *)arg1)->empty();
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (bool)((std::list< netxpert::InputNode > const *)arg1)->empty();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8713,19 +8730,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::size_type result;
+  std::list< netxpert::InputNode >::size_type result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_size",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_size" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_size" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = ((std::list< NetXpert::InputNode > const *)arg1)->size();
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = ((std::list< netxpert::InputNode > const *)arg1)->size();
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -8735,17 +8752,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_clear",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_clear" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_clear" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   (arg1)->clear();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -8756,8 +8773,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode > *arg2 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -8766,19 +8783,19 @@ SWIGINTERN PyObject *_wrap_InputNodes_swap(PyObject *SWIGUNUSEDPARM(self), PyObj
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_swap",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_swap" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_swap" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t,  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_swap" "', argument " "2"" of type '" "std::list< NetXpert::InputNode > &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_swap" "', argument " "2"" of type '" "std::list< netxpert::InputNode > &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_swap" "', argument " "2"" of type '" "std::list< NetXpert::InputNode > &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_swap" "', argument " "2"" of type '" "std::list< netxpert::InputNode > &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp2);
   (arg1)->swap(*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -8789,20 +8806,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< std::allocator< NetXpert::InputNode > > result;
+  SwigValueWrapper< std::allocator< netxpert::InputNode > > result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_get_allocator",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_get_allocator" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_get_allocator" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = ((std::list< NetXpert::InputNode > const *)arg1)->get_allocator();
-  resultobj = SWIG_NewPointerObj((new std::list< NetXpert::InputNode >::allocator_type(static_cast< const std::list< NetXpert::InputNode >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_NetXpert__InputNode_t, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = ((std::list< netxpert::InputNode > const *)arg1)->get_allocator();
+  resultobj = SWIG_NewPointerObj((new std::list< netxpert::InputNode >::allocator_type(static_cast< const std::list< netxpert::InputNode >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8811,20 +8828,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::iterator result;
+  std::list< netxpert::InputNode >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_begin",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_begin" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_begin" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   result = (arg1)->begin();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8834,20 +8851,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::iterator result;
+  std::list< netxpert::InputNode >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_end",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_end" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_end" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   result = (arg1)->end();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8857,20 +8874,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::reverse_iterator result;
+  std::list< netxpert::InputNode >::reverse_iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_rbegin",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rbegin" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rbegin" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   result = (arg1)->rbegin();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8880,20 +8897,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::reverse_iterator result;
+  std::list< netxpert::InputNode >::reverse_iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_rend",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rend" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rend" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   result = (arg1)->rend();
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::reverse_iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -8903,20 +8920,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode >::size_type arg1 ;
+  std::list< netxpert::InputNode >::size_type arg1 ;
   size_t val1 ;
   int ecode1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode > *result = 0 ;
+  std::list< netxpert::InputNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_InputNodes",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg1 = static_cast< std::list< NetXpert::InputNode >::size_type >(val1);
-  result = (std::list< NetXpert::InputNode > *)new std::list< NetXpert::InputNode >(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
+  arg1 = static_cast< std::list< netxpert::InputNode >::size_type >(val1);
+  result = (std::list< netxpert::InputNode > *)new std::list< netxpert::InputNode >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8925,17 +8942,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_pop_back",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop_back" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop_back" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   (arg1)->pop_back();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -8946,8 +8963,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::size_type arg2 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::size_type arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -8956,16 +8973,16 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_resize",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_resize" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_resize" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_resize" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_resize" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::size_type >(val2);
+  arg2 = static_cast< std::list< netxpert::InputNode >::size_type >(val2);
   (arg1)->resize(arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -8976,35 +8993,35 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::iterator arg2 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::iterator arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
   int res2 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputNode >::iterator result;
+  std::list< netxpert::InputNode >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_erase",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_erase" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_erase" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
     }
   }
   result = (arg1)->erase(arg2);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -9014,9 +9031,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::iterator arg2 ;
-  std::list< NetXpert::InputNode >::iterator arg3 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::iterator arg2 ;
+  std::list< netxpert::InputNode >::iterator arg3 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -9026,38 +9043,38 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputNode >::iterator result;
+  std::list< netxpert::InputNode >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes_erase",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_erase" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_erase" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
     }
   }
   res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res3) || !iter3) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter3);
+    swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter3);
     if (iter_t) {
       arg3 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::iterator""'");
     }
   }
   result = (arg1)->erase(arg2,arg3);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::iterator & >(result)),
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -9077,12 +9094,12 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase(PyObject *self, PyObject *args) {
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter) != 0));
       if (_v) {
         return _wrap_InputNodes_erase__SWIG_0(self, args);
       }
@@ -9090,16 +9107,16 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter) != 0));
       if (_v) {
         swig::SwigPyIterator *iter = 0;
         int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter) != 0));
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter) != 0));
         if (_v) {
           return _wrap_InputNodes_erase__SWIG_1(self, args);
         }
@@ -9110,40 +9127,40 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes_erase'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::erase(std::list< NetXpert::InputNode >::iterator)\n"
-    "    std::list< NetXpert::InputNode >::erase(std::list< NetXpert::InputNode >::iterator,std::list< NetXpert::InputNode >::iterator)\n");
+    "    std::list< netxpert::InputNode >::erase(std::list< netxpert::InputNode >::iterator)\n"
+    "    std::list< netxpert::InputNode >::erase(std::list< netxpert::InputNode >::iterator,std::list< netxpert::InputNode >::iterator)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode >::size_type arg1 ;
-  std::list< NetXpert::InputNode >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputNode >::size_type arg1 ;
+  std::list< netxpert::InputNode >::value_type *arg2 = 0 ;
   size_t val1 ;
   int ecode1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  std::list< NetXpert::InputNode > *result = 0 ;
+  std::list< netxpert::InputNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_InputNodes",&obj0,&obj1)) SWIG_fail;
   ecode1 = SWIG_AsVal_size_t(obj0, &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg1 = static_cast< std::list< NetXpert::InputNode >::size_type >(val1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg1 = static_cast< std::list< netxpert::InputNode >::size_type >(val1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_InputNodes" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_InputNodes" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputNodes" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputNodes" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp2);
-  result = (std::list< NetXpert::InputNode > *)new std::list< NetXpert::InputNode >(arg1,(std::list< NetXpert::InputNode >::value_type const &)*arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
+  arg2 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp2);
+  result = (std::list< netxpert::InputNode > *)new std::list< netxpert::InputNode >(arg1,(std::list< netxpert::InputNode >::value_type const &)*arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -9175,7 +9192,7 @@ SWIGINTERN PyObject *_wrap_new_InputNodes(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_InputNodes__SWIG_1(self, args);
@@ -9188,7 +9205,7 @@ SWIGINTERN PyObject *_wrap_new_InputNodes(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
     }
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_NetXpert__InputNode, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_netxpert__InputNode, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_new_InputNodes__SWIG_3(self, args);
@@ -9199,18 +9216,18 @@ SWIGINTERN PyObject *_wrap_new_InputNodes(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_InputNodes'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::list()\n"
-    "    std::list< NetXpert::InputNode >::list(std::list< NetXpert::InputNode > const &)\n"
-    "    std::list< NetXpert::InputNode >::list(std::list< NetXpert::InputNode >::size_type)\n"
-    "    std::list< NetXpert::InputNode >::list(std::list< NetXpert::InputNode >::size_type,std::list< NetXpert::InputNode >::value_type const &)\n");
+    "    std::list< netxpert::InputNode >::list()\n"
+    "    std::list< netxpert::InputNode >::list(std::list< netxpert::InputNode > const &)\n"
+    "    std::list< netxpert::InputNode >::list(std::list< netxpert::InputNode >::size_type)\n"
+    "    std::list< netxpert::InputNode >::list(std::list< netxpert::InputNode >::size_type,std::list< netxpert::InputNode >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -9219,20 +9236,20 @@ SWIGINTERN PyObject *_wrap_InputNodes_push_back(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_push_back",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_push_back" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_push_back" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_push_back" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_push_back" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_push_back" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_push_back" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp2);
-  (arg1)->push_back((std::list< NetXpert::InputNode >::value_type const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp2);
+  (arg1)->push_back((std::list< netxpert::InputNode >::value_type const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9242,20 +9259,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::value_type *result = 0 ;
+  std::list< netxpert::InputNode >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_front",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_front" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_front" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (std::list< NetXpert::InputNode >::value_type *) &((std::list< NetXpert::InputNode > const *)arg1)->front();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (std::list< netxpert::InputNode >::value_type *) &((std::list< netxpert::InputNode > const *)arg1)->front();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -9264,20 +9281,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  std::list< NetXpert::InputNode >::value_type *result = 0 ;
+  std::list< netxpert::InputNode >::value_type *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_back",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_back" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_back" "', argument " "1"" of type '" "std::list< netxpert::InputNode > const *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  result = (std::list< NetXpert::InputNode >::value_type *) &((std::list< NetXpert::InputNode > const *)arg1)->back();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  result = (std::list< netxpert::InputNode >::value_type *) &((std::list< netxpert::InputNode > const *)arg1)->back();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -9286,9 +9303,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::size_type arg2 ;
-  std::list< NetXpert::InputNode >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::size_type arg2 ;
+  std::list< netxpert::InputNode >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -9300,25 +9317,25 @@ SWIGINTERN PyObject *_wrap_InputNodes_assign(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes_assign",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_assign" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_assign" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_assign" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_assign" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::size_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputNode >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_assign" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_assign" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_assign" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_assign" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::list< NetXpert::InputNode >::value_type const &)*arg3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp3);
+  (arg1)->assign(arg2,(std::list< netxpert::InputNode >::value_type const &)*arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9328,9 +9345,9 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::size_type arg2 ;
-  std::list< NetXpert::InputNode >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::size_type arg2 ;
+  std::list< netxpert::InputNode >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   size_t val2 ;
@@ -9342,25 +9359,25 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes_resize",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_resize" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_resize" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   ecode2 = SWIG_AsVal_size_t(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_resize" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_resize" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg2 = static_cast< std::list< NetXpert::InputNode >::size_type >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg2 = static_cast< std::list< netxpert::InputNode >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_resize" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_resize" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_resize" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_resize" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::list< NetXpert::InputNode >::value_type const &)*arg3);
+  arg3 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp3);
+  (arg1)->resize(arg2,(std::list< netxpert::InputNode >::value_type const &)*arg3);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9380,7 +9397,7 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize(PyObject *self, PyObject *args) {
   }
   if (argc == 2) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -9394,7 +9411,7 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -9402,7 +9419,7 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize(PyObject *self, PyObject *args) {
         _v = SWIG_CheckState(res);
       }
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputNode, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputNode, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputNodes_resize__SWIG_1(self, args);
@@ -9414,17 +9431,17 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes_resize'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::resize(std::list< NetXpert::InputNode >::size_type)\n"
-    "    std::list< NetXpert::InputNode >::resize(std::list< NetXpert::InputNode >::size_type,std::list< NetXpert::InputNode >::value_type const &)\n");
+    "    std::list< netxpert::InputNode >::resize(std::list< netxpert::InputNode >::size_type)\n"
+    "    std::list< netxpert::InputNode >::resize(std::list< netxpert::InputNode >::size_type,std::list< netxpert::InputNode >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::iterator arg2 ;
-  std::list< NetXpert::InputNode >::value_type *arg3 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::iterator arg2 ;
+  std::list< netxpert::InputNode >::value_type *arg3 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -9434,35 +9451,35 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  std::list< NetXpert::InputNode >::iterator result;
+  std::list< netxpert::InputNode >::iterator result;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:InputNodes_insert",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_insert" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_insert" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
     }
   }
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg3 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::list< NetXpert::InputNode >::value_type const &)*arg3);
-  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< NetXpert::InputNode >::iterator & >(result)),
+  arg3 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp3);
+  result = (arg1)->insert(arg2,(std::list< netxpert::InputNode >::value_type const &)*arg3);
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::list< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
 fail:
@@ -9472,10 +9489,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::iterator arg2 ;
-  std::list< NetXpert::InputNode >::size_type arg3 ;
-  std::list< NetXpert::InputNode >::value_type *arg4 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::iterator arg2 ;
+  std::list< netxpert::InputNode >::size_type arg3 ;
+  std::list< netxpert::InputNode >::value_type *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   swig::SwigPyIterator *iter2 = 0 ;
@@ -9490,36 +9507,36 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:InputNodes_insert",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_insert" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_insert" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
   if (!SWIG_IsOK(res2) || !iter2) {
-    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
   } else {
-    swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter2);
+    swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter2);
     if (iter_t) {
       arg2 = iter_t->get_current();
     } else {
-      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::iterator""'");
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_insert" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::iterator""'");
     }
   }
   ecode3 = SWIG_AsVal_size_t(obj2, &val3);
   if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< NetXpert::InputNode >::size_type""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::list< netxpert::InputNode >::size_type""'");
   } 
-  arg3 = static_cast< std::list< NetXpert::InputNode >::size_type >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg3 = static_cast< std::list< netxpert::InputNode >::size_type >(val3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputNodes_insert" "', argument " "4"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "InputNodes_insert" "', argument " "4"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "4"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "4"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg4 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::list< NetXpert::InputNode >::value_type const &)*arg4);
+  arg4 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp4);
+  (arg1)->insert(arg2,arg3,(std::list< netxpert::InputNode >::value_type const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9539,14 +9556,14 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter) != 0));
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__InputNode, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__InputNode, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_InputNodes_insert__SWIG_0(self, args);
@@ -9556,19 +9573,19 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert(PyObject *self, PyObject *args) {
   }
   if (argc == 4) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
       swig::SwigPyIterator *iter = 0;
       int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
-      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< NetXpert::InputNode >::iterator > *>(iter) != 0));
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::list< netxpert::InputNode >::iterator > *>(iter) != 0));
       if (_v) {
         {
           int res = SWIG_AsVal_size_t(argv[2], NULL);
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_NetXpert__InputNode, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_netxpert__InputNode, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_InputNodes_insert__SWIG_1(self, args);
@@ -9581,25 +9598,25 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'InputNodes_insert'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    std::list< NetXpert::InputNode >::insert(std::list< NetXpert::InputNode >::iterator,std::list< NetXpert::InputNode >::value_type const &)\n"
-    "    std::list< NetXpert::InputNode >::insert(std::list< NetXpert::InputNode >::iterator,std::list< NetXpert::InputNode >::size_type,std::list< NetXpert::InputNode >::value_type const &)\n");
+    "    std::list< netxpert::InputNode >::insert(std::list< netxpert::InputNode >::iterator,std::list< netxpert::InputNode >::value_type const &)\n"
+    "    std::list< netxpert::InputNode >::insert(std::list< netxpert::InputNode >::iterator,std::list< netxpert::InputNode >::size_type,std::list< netxpert::InputNode >::value_type const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_InputNodes_pop_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_pop_front",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop_front" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop_front" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   (arg1)->pop_front();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -9610,8 +9627,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_push_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
-  std::list< NetXpert::InputNode >::value_type *arg2 = 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode >::value_type *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -9620,20 +9637,20 @@ SWIGINTERN PyObject *_wrap_InputNodes_push_front(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNodes_push_front",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_push_front" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_push_front" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__InputNode,  0  | 0);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__InputNode,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_push_front" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "InputNodes_push_front" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_push_front" "', argument " "2"" of type '" "std::list< NetXpert::InputNode >::value_type const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_push_front" "', argument " "2"" of type '" "std::list< netxpert::InputNode >::value_type const &""'"); 
   }
-  arg2 = reinterpret_cast< std::list< NetXpert::InputNode >::value_type * >(argp2);
-  (arg1)->push_front((std::list< NetXpert::InputNode >::value_type const &)*arg2);
+  arg2 = reinterpret_cast< std::list< netxpert::InputNode >::value_type * >(argp2);
+  (arg1)->push_front((std::list< netxpert::InputNode >::value_type const &)*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9643,17 +9660,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNodes_reverse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNodes_reverse",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_reverse" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_reverse" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   (arg1)->reverse();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -9664,17 +9681,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_InputNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::list< NetXpert::InputNode > *arg1 = (std::list< NetXpert::InputNode > *) 0 ;
+  std::list< netxpert::InputNode > *arg1 = (std::list< netxpert::InputNode > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_InputNodes",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNodes" "', argument " "1"" of type '" "std::list< NetXpert::InputNode > *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNodes" "', argument " "1"" of type '" "std::list< netxpert::InputNode > *""'"); 
   }
-  arg1 = reinterpret_cast< std::list< NetXpert::InputNode > * >(argp1);
+  arg1 = reinterpret_cast< std::list< netxpert::InputNode > * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -9686,13 +9703,13 @@ fail:
 SWIGINTERN PyObject *InputNodes_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9701,11 +9718,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_set(PyObject *SWIGUNUSEDPARM(s
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_arcIDColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_arcIDColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_arcIDColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -9729,18 +9746,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_arcIDColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_arcIDColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_arcIDColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->arcIDColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -9751,7 +9768,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_fromColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9760,11 +9777,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_fromColName_set(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_fromColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_fromColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_fromColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -9788,18 +9805,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_fromColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_fromColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_fromColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_fromColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->fromColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -9810,7 +9827,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_toColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9819,11 +9836,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_toColName_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_toColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_toColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_toColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -9847,18 +9864,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_toColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_toColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_toColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_toColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->toColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -9869,7 +9886,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_costColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9878,11 +9895,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_costColName_set(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_costColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_costColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_costColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -9906,18 +9923,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_costColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_costColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_costColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_costColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->costColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -9928,7 +9945,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_capColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9937,11 +9954,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_capColName_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_capColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_capColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_capColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -9965,18 +9982,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_capColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_capColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_capColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_capColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->capColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -9987,7 +10004,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_onewayColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -9996,11 +10013,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_onewayColName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_onewayColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_onewayColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_onewayColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10024,18 +10041,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_onewayColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_onewayColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_onewayColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_onewayColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->onewayColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10046,7 +10063,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_nodeIDColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10055,11 +10072,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_nodeIDColName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_nodeIDColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_nodeIDColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_nodeIDColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10083,18 +10100,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_nodeIDColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_nodeIDColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_nodeIDColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_nodeIDColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->nodeIDColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10105,7 +10122,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_supplyColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10114,11 +10131,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_supplyColName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:ColumnMap_supplyColName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_supplyColName_set" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_supplyColName_set" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10142,18 +10159,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_ColumnMap_supplyColName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:ColumnMap_supplyColName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_supplyColName_get" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_supplyColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   result = (std::string *) & ((arg1)->supplyColName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10164,11 +10181,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_ColumnMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *result = 0 ;
+  netxpert::ColumnMap *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ColumnMap")) SWIG_fail;
-  result = (NetXpert::ColumnMap *)new NetXpert::ColumnMap();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__ColumnMap, SWIG_POINTER_NEW |  0 );
+  result = (netxpert::ColumnMap *)new netxpert::ColumnMap();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ColumnMap, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -10177,17 +10194,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_ColumnMap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::ColumnMap *arg1 = (NetXpert::ColumnMap *) 0 ;
+  netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_ColumnMap",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__ColumnMap, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ColumnMap, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ColumnMap" "', argument " "1"" of type '" "NetXpert::ColumnMap *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ColumnMap" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::ColumnMap * >(argp1);
+  arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -10199,13 +10216,13 @@ fail:
 SWIGINTERN PyObject *ColumnMap_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__ColumnMap, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__ColumnMap, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_InputNode_extNodeID_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10214,11 +10231,11 @@ SWIGINTERN PyObject *_wrap_InputNode_extNodeID_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNode_extNodeID_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_extNodeID_set" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_extNodeID_set" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10242,18 +10259,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNode_extNodeID_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNode_extNodeID_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_extNodeID_get" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_extNodeID_get" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
   result = (std::string *) & ((arg1)->extNodeID);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10264,7 +10281,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNode_nodeSupply_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10274,11 +10291,11 @@ SWIGINTERN PyObject *_wrap_InputNode_nodeSupply_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputNode_nodeSupply_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_nodeSupply_set" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_nodeSupply_set" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNode_nodeSupply_set" "', argument " "2"" of type '" "double""'");
@@ -10294,18 +10311,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNode_nodeSupply_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   double result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNode_nodeSupply_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_nodeSupply_get" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_nodeSupply_get" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
   result = (double) ((arg1)->nodeSupply);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
@@ -10316,19 +10333,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputNode___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   char *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputNode___str__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode___str__" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode___str__" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
-  result = (char *)NetXpert_InputNode___str__(arg1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
+  result = (char *)netxpert_InputNode___str__(arg1);
   resultobj = SWIG_FromCharPtr((const char *)result);
   return resultobj;
 fail:
@@ -10338,11 +10355,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputNode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *result = 0 ;
+  netxpert::InputNode *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputNode")) SWIG_fail;
-  result = (NetXpert::InputNode *)new NetXpert::InputNode();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputNode, SWIG_POINTER_NEW |  0 );
+  result = (netxpert::InputNode *)new netxpert::InputNode();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -10351,17 +10368,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_InputNode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputNode *arg1 = (NetXpert::InputNode *) 0 ;
+  netxpert::InputNode *arg1 = (netxpert::InputNode *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_InputNode",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputNode, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputNode, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNode" "', argument " "1"" of type '" "NetXpert::InputNode *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNode" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputNode * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -10373,13 +10390,13 @@ fail:
 SWIGINTERN PyObject *InputNode_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__InputNode, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__InputNode, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_InputArc_extArcID_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10388,11 +10405,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extArcID_set(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_extArcID_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extArcID_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extArcID_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10416,18 +10433,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_extArcID_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_extArcID_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extArcID_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extArcID_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (std::string *) & ((arg1)->extArcID);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10438,7 +10455,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_extFromNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10447,11 +10464,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extFromNode_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_extFromNode_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10475,18 +10492,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_extFromNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_extFromNode_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (std::string *) & ((arg1)->extFromNode);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10497,7 +10514,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_extToNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10506,11 +10523,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extToNode_set(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_extToNode_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10534,18 +10551,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_extToNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_extToNode_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (std::string *) & ((arg1)->extToNode);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10556,7 +10573,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_cost_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10566,11 +10583,11 @@ SWIGINTERN PyObject *_wrap_InputArc_cost_set(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_cost_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_cost_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_cost_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_cost_set" "', argument " "2"" of type '" "double""'");
@@ -10586,18 +10603,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_cost_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   double result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_cost_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_cost_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_cost_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (double) ((arg1)->cost);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
@@ -10608,7 +10625,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_capacity_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10618,11 +10635,11 @@ SWIGINTERN PyObject *_wrap_InputArc_capacity_set(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_capacity_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_capacity_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_capacity_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_capacity_set" "', argument " "2"" of type '" "double""'");
@@ -10638,18 +10655,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_capacity_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   double result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_capacity_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_capacity_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_capacity_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (double) ((arg1)->capacity);
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
@@ -10660,7 +10677,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_oneway_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10669,11 +10686,11 @@ SWIGINTERN PyObject *_wrap_InputArc_oneway_set(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:InputArc_oneway_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_oneway_set" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_oneway_set" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10697,18 +10714,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc_oneway_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc_oneway_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_oneway_get" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_oneway_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   result = (std::string *) & ((arg1)->oneway);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10719,19 +10736,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_InputArc___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   char *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:InputArc___str__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc___str__" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc___str__" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
-  result = (char *)NetXpert_InputArc___str__(arg1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
+  result = (char *)netxpert_InputArc___str__(arg1);
   resultobj = SWIG_FromCharPtr((const char *)result);
   return resultobj;
 fail:
@@ -10741,11 +10758,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_InputArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *result = 0 ;
+  netxpert::InputArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputArc")) SWIG_fail;
-  result = (NetXpert::InputArc *)new NetXpert::InputArc();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__InputArc, SWIG_POINTER_NEW |  0 );
+  result = (netxpert::InputArc *)new netxpert::InputArc();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -10754,17 +10771,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_InputArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArc *arg1 = (NetXpert::InputArc *) 0 ;
+  netxpert::InputArc *arg1 = (netxpert::InputArc *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_InputArc",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__InputArc, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InputArc, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArc" "', argument " "1"" of type '" "NetXpert::InputArc *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArc" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::InputArc * >(argp1);
+  arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -10776,13 +10793,225 @@ fail:
 SWIGINTERN PyObject *InputArc_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__InputArc, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__InputArc, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_NewNode_extNodeID_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NewNode_extNodeID_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_extNodeID_set" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NewNode_extNodeID_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNode_extNodeID_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->extNodeID = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NewNode_extNodeID_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NewNode_extNodeID_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_extNodeID_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  result = (std::string *) & ((arg1)->extNodeID);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NewNode_coord_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  Coordinate arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NewNode_coord_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_coord_set" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Coordinate,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NewNode_coord_set" "', argument " "2"" of type '" "Coordinate""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNode_coord_set" "', argument " "2"" of type '" "Coordinate""'");
+    } else {
+      Coordinate * temp = reinterpret_cast< Coordinate * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  if (arg1) (arg1)->coord = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NewNode_coord_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Coordinate result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NewNode_coord_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_coord_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  result =  ((arg1)->coord);
+  resultobj = SWIG_NewPointerObj((new Coordinate(static_cast< const Coordinate& >(result))), SWIGTYPE_p_Coordinate, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NewNode_supply_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NewNode_supply_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_supply_set" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NewNode_supply_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  if (arg1) (arg1)->supply = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NewNode_supply_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NewNode_supply_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_supply_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  result = (double) ((arg1)->supply);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_NewNode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_NewNode")) SWIG_fail;
+  result = (netxpert::NewNode *)new netxpert::NewNode();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NewNode, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_NewNode(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NewNode *arg1 = (netxpert::NewNode *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_NewNode",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NewNode, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NewNode" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *NewNode_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__NewNode, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10791,11 +11020,11 @@ SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SQLiteDBPath_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10819,18 +11048,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SQLiteDBPath_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->SQLiteDBPath);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10841,7 +11070,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SQLiteVersion_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10851,11 +11080,11 @@ SWIGINTERN PyObject *_wrap_Config_SQLiteVersion_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SQLiteVersion_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SQLiteVersion_set" "', argument " "2"" of type '" "int""'");
@@ -10871,18 +11100,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SQLiteVersion_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SQLiteVersion_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (int) ((arg1)->SQLiteVersion);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -10893,7 +11122,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ResultDBPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -10902,11 +11131,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBPath_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ResultDBPath_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBPath_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBPath_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -10930,18 +11159,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ResultDBPath_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ResultDBPath_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBPath_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->ResultDBPath);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -10952,8 +11181,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ResultDBType_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::RESULT_DB_TYPE arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::RESULT_DB_TYPE arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -10962,16 +11191,16 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBType_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ResultDBType_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBType_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBType_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_ResultDBType_set" "', argument " "2"" of type '" "NetXpert::RESULT_DB_TYPE""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_ResultDBType_set" "', argument " "2"" of type '" "netxpert::RESULT_DB_TYPE""'");
   } 
-  arg2 = static_cast< NetXpert::RESULT_DB_TYPE >(val2);
+  arg2 = static_cast< netxpert::RESULT_DB_TYPE >(val2);
   if (arg1) (arg1)->ResultDBType = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -10982,19 +11211,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ResultDBType_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::RESULT_DB_TYPE result;
+  netxpert::RESULT_DB_TYPE result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ResultDBType_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBType_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBType_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::RESULT_DB_TYPE) ((arg1)->ResultDBType);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::RESULT_DB_TYPE) ((arg1)->ResultDBType);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -11004,7 +11233,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SPTAllDests_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11014,11 +11243,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTAllDests_set(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SPTAllDests_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTAllDests_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTAllDests_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SPTAllDests_set" "', argument " "2"" of type '" "bool""'");
@@ -11034,18 +11263,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SPTAllDests_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SPTAllDests_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTAllDests_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTAllDests_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (bool) ((arg1)->SPTAllDests);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
@@ -11056,7 +11285,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SPTHeapCard_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11066,11 +11295,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTHeapCard_set(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SPTHeapCard_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTHeapCard_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTHeapCard_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SPTHeapCard_set" "', argument " "2"" of type '" "int""'");
@@ -11086,18 +11315,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SPTHeapCard_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SPTHeapCard_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTHeapCard_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTHeapCard_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (int) ((arg1)->SPTHeapCard);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -11108,8 +11337,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SptAlgorithm_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::SPTAlgorithm arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::SPTAlgorithm arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -11118,16 +11347,16 @@ SWIGINTERN PyObject *_wrap_Config_SptAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SptAlgorithm_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SptAlgorithm_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SptAlgorithm_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SptAlgorithm_set" "', argument " "2"" of type '" "NetXpert::SPTAlgorithm""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SptAlgorithm_set" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
   } 
-  arg2 = static_cast< NetXpert::SPTAlgorithm >(val2);
+  arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
   if (arg1) (arg1)->SptAlgorithm = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -11138,19 +11367,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SptAlgorithm_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::SPTAlgorithm result;
+  netxpert::SPTAlgorithm result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SptAlgorithm_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SptAlgorithm_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SptAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::SPTAlgorithm) ((arg1)->SptAlgorithm);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::SPTAlgorithm) ((arg1)->SptAlgorithm);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -11160,8 +11389,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_McfAlgorithm_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::MCFAlgorithm arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::MCFAlgorithm arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -11170,16 +11399,16 @@ SWIGINTERN PyObject *_wrap_Config_McfAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_McfAlgorithm_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_McfAlgorithm_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_McfAlgorithm_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_McfAlgorithm_set" "', argument " "2"" of type '" "NetXpert::MCFAlgorithm""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_McfAlgorithm_set" "', argument " "2"" of type '" "netxpert::MCFAlgorithm""'");
   } 
-  arg2 = static_cast< NetXpert::MCFAlgorithm >(val2);
+  arg2 = static_cast< netxpert::MCFAlgorithm >(val2);
   if (arg1) (arg1)->McfAlgorithm = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -11190,19 +11419,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_McfAlgorithm_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::MCFAlgorithm result;
+  netxpert::MCFAlgorithm result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_McfAlgorithm_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_McfAlgorithm_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_McfAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::MCFAlgorithm) ((arg1)->McfAlgorithm);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::MCFAlgorithm) ((arg1)->McfAlgorithm);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -11212,8 +11441,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_MstAlgorithm_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::MSTAlgorithm arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::MSTAlgorithm arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -11222,16 +11451,16 @@ SWIGINTERN PyObject *_wrap_Config_MstAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_MstAlgorithm_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_MstAlgorithm_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_MstAlgorithm_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_MstAlgorithm_set" "', argument " "2"" of type '" "NetXpert::MSTAlgorithm""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_MstAlgorithm_set" "', argument " "2"" of type '" "netxpert::MSTAlgorithm""'");
   } 
-  arg2 = static_cast< NetXpert::MSTAlgorithm >(val2);
+  arg2 = static_cast< netxpert::MSTAlgorithm >(val2);
   if (arg1) (arg1)->MstAlgorithm = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -11242,19 +11471,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_MstAlgorithm_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::MSTAlgorithm result;
+  netxpert::MSTAlgorithm result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_MstAlgorithm_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_MstAlgorithm_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_MstAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::MSTAlgorithm) ((arg1)->MstAlgorithm);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::MSTAlgorithm) ((arg1)->MstAlgorithm);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -11264,7 +11493,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_IsDirected_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11274,11 +11503,11 @@ SWIGINTERN PyObject *_wrap_Config_IsDirected_set(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_IsDirected_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_IsDirected_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_IsDirected_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_IsDirected_set" "', argument " "2"" of type '" "bool""'");
@@ -11294,18 +11523,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_IsDirected_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_IsDirected_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_IsDirected_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_IsDirected_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (bool) ((arg1)->IsDirected);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
@@ -11316,7 +11545,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcsTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11325,11 +11554,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsTableName_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ArcsTableName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsTableName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11353,18 +11582,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcsTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ArcsTableName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsTableName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->ArcsTableName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11375,7 +11604,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcsGeomColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11384,11 +11613,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsGeomColumnName_set(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ArcsGeomColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsGeomColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsGeomColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11412,18 +11641,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcsGeomColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ArcsGeomColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsGeomColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->ArcsGeomColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11434,7 +11663,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcIDColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11443,11 +11672,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcIDColumnName_set(PyObject *SWIGUNUSEDPARM(s
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ArcIDColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcIDColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcIDColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11471,18 +11700,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ArcIDColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ArcIDColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcIDColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcIDColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->ArcIDColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11493,7 +11722,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_FromNodeColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11502,11 +11731,11 @@ SWIGINTERN PyObject *_wrap_Config_FromNodeColumnName_set(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_FromNodeColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_FromNodeColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_FromNodeColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11530,18 +11759,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_FromNodeColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_FromNodeColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_FromNodeColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_FromNodeColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->FromNodeColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11552,7 +11781,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ToNodeColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11561,11 +11790,11 @@ SWIGINTERN PyObject *_wrap_Config_ToNodeColumnName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_ToNodeColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ToNodeColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ToNodeColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11589,18 +11818,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_ToNodeColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_ToNodeColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ToNodeColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ToNodeColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->ToNodeColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11611,7 +11840,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CostColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11620,11 +11849,11 @@ SWIGINTERN PyObject *_wrap_Config_CostColumnName_set(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_CostColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CostColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CostColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11648,18 +11877,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CostColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_CostColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CostColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CostColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->CostColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11670,7 +11899,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CapColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11679,11 +11908,11 @@ SWIGINTERN PyObject *_wrap_Config_CapColumnName_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_CapColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CapColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CapColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11707,18 +11936,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CapColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_CapColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CapColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CapColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->CapColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11729,7 +11958,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodesTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11738,11 +11967,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesTableName_set(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_NodesTableName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesTableName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11766,18 +11995,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodesTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_NodesTableName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesTableName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->NodesTableName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11788,7 +12017,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodesGeomColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11797,11 +12026,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesGeomColumnName_set(PyObject *SWIGUNUSEDPA
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_NodesGeomColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesGeomColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesGeomColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11825,18 +12054,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodesGeomColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_NodesGeomColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesGeomColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->NodesGeomColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11847,7 +12076,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodeIDColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11856,11 +12085,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeIDColumnName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_NodeIDColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeIDColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeIDColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11884,18 +12113,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodeIDColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_NodeIDColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeIDColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeIDColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->NodeIDColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11906,7 +12135,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodeSupplyColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11915,11 +12144,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeSupplyColumnName_set(PyObject *SWIGUNUSEDP
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_NodeSupplyColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeSupplyColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeSupplyColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -11943,18 +12172,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NodeSupplyColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_NodeSupplyColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeSupplyColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeSupplyColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->NodeSupplyColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -11965,7 +12194,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPolyTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -11974,11 +12203,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyTableName_set(PyObject *SWIGUNUSEDP
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierPolyTableName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyTableName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12002,18 +12231,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPolyTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierPolyTableName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyTableName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierPolyTableName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12024,7 +12253,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPolyGeomColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12033,11 +12262,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyGeomColumnName_set(PyObject *SWIGUN
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierPolyGeomColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyGeomColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyGeomColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12061,18 +12290,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPolyGeomColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierPolyGeomColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyGeomColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierPolyGeomColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12083,7 +12312,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierLineTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12092,11 +12321,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineTableName_set(PyObject *SWIGUNUSEDP
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierLineTableName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineTableName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12120,18 +12349,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierLineTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierLineTableName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineTableName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierLineTableName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12142,7 +12371,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierLineGeomColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12151,11 +12380,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineGeomColumnName_set(PyObject *SWIGUN
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierLineGeomColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineGeomColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineGeomColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12179,18 +12408,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierLineGeomColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierLineGeomColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineGeomColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierLineGeomColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12201,7 +12430,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPointTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12210,11 +12439,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointTableName_set(PyObject *SWIGUNUSED
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierPointTableName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointTableName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12238,18 +12467,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPointTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierPointTableName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointTableName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierPointTableName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12260,7 +12489,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPointGeomColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12269,11 +12498,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointGeomColumnName_set(PyObject *SWIGU
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_BarrierPointGeomColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointGeomColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointGeomColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12297,18 +12526,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_BarrierPointGeomColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_BarrierPointGeomColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointGeomColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->BarrierPointGeomColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12319,7 +12548,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_Treshold_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12329,11 +12558,11 @@ SWIGINTERN PyObject *_wrap_Config_Treshold_set(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_Treshold_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_Treshold_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_Treshold_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_Treshold_set" "', argument " "2"" of type '" "int""'");
@@ -12349,18 +12578,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_Treshold_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_Treshold_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_Treshold_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_Treshold_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (int) ((arg1)->Treshold);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -12371,7 +12600,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_UseSpatialIndex_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12381,11 +12610,11 @@ SWIGINTERN PyObject *_wrap_Config_UseSpatialIndex_set(PyObject *SWIGUNUSEDPARM(s
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_UseSpatialIndex_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_UseSpatialIndex_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_UseSpatialIndex_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_UseSpatialIndex_set" "', argument " "2"" of type '" "bool""'");
@@ -12401,18 +12630,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_UseSpatialIndex_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_UseSpatialIndex_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_UseSpatialIndex_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_UseSpatialIndex_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (bool) ((arg1)->UseSpatialIndex);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
@@ -12423,7 +12652,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LoadDBIntoMemory_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12433,11 +12662,11 @@ SWIGINTERN PyObject *_wrap_Config_LoadDBIntoMemory_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_LoadDBIntoMemory_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LoadDBIntoMemory_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LoadDBIntoMemory_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_LoadDBIntoMemory_set" "', argument " "2"" of type '" "bool""'");
@@ -12453,18 +12682,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LoadDBIntoMemory_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_LoadDBIntoMemory_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LoadDBIntoMemory_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LoadDBIntoMemory_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (bool) ((arg1)->LoadDBIntoMemory);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
@@ -12475,7 +12704,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NumberOfTests_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12485,11 +12714,11 @@ SWIGINTERN PyObject *_wrap_Config_NumberOfTests_set(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_NumberOfTests_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NumberOfTests_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NumberOfTests_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_NumberOfTests_set" "', argument " "2"" of type '" "int""'");
@@ -12505,18 +12734,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_NumberOfTests_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_NumberOfTests_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NumberOfTests_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NumberOfTests_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (int) ((arg1)->NumberOfTests);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
@@ -12527,7 +12756,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SpatiaLiteHome_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12536,11 +12765,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteHome_set(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SpatiaLiteHome_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteHome_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteHome_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12564,18 +12793,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SpatiaLiteHome_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SpatiaLiteHome_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteHome_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteHome_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->SpatiaLiteHome);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12586,7 +12815,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SpatiaLiteCoreName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12595,11 +12824,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteCoreName_set(PyObject *SWIGUNUSEDPAR
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_SpatiaLiteCoreName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteCoreName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteCoreName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12623,18 +12852,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_SpatiaLiteCoreName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_SpatiaLiteCoreName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteCoreName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteCoreName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->SpatiaLiteCoreName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12645,8 +12874,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_GeometryHandling_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::GEOMETRY_HANDLING arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::GEOMETRY_HANDLING arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -12655,16 +12884,16 @@ SWIGINTERN PyObject *_wrap_Config_GeometryHandling_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_GeometryHandling_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_GeometryHandling_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_GeometryHandling_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_GeometryHandling_set" "', argument " "2"" of type '" "NetXpert::GEOMETRY_HANDLING""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_GeometryHandling_set" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
   } 
-  arg2 = static_cast< NetXpert::GEOMETRY_HANDLING >(val2);
+  arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
   if (arg1) (arg1)->GeometryHandling = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -12675,19 +12904,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_GeometryHandling_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::GEOMETRY_HANDLING result;
+  netxpert::GEOMETRY_HANDLING result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_GeometryHandling_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_GeometryHandling_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_GeometryHandling_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::GEOMETRY_HANDLING) ((arg1)->GeometryHandling);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::GEOMETRY_HANDLING) ((arg1)->GeometryHandling);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -12697,7 +12926,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_OnewayColumnName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12706,11 +12935,11 @@ SWIGINTERN PyObject *_wrap_Config_OnewayColumnName_set(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_OnewayColumnName_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_OnewayColumnName_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_OnewayColumnName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12734,18 +12963,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_OnewayColumnName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_OnewayColumnName_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_OnewayColumnName_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_OnewayColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->OnewayColumnName);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12756,8 +12985,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_TestCase_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::TESTCASE arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::TESTCASE arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -12766,16 +12995,16 @@ SWIGINTERN PyObject *_wrap_Config_TestCase_set(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_TestCase_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_TestCase_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_TestCase_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_TestCase_set" "', argument " "2"" of type '" "NetXpert::TESTCASE""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_TestCase_set" "', argument " "2"" of type '" "netxpert::TESTCASE""'");
   } 
-  arg2 = static_cast< NetXpert::TESTCASE >(val2);
+  arg2 = static_cast< netxpert::TESTCASE >(val2);
   if (arg1) (arg1)->TestCase = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -12786,19 +13015,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_TestCase_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::TESTCASE result;
+  netxpert::TESTCASE result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_TestCase_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_TestCase_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_TestCase_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::TESTCASE) ((arg1)->TestCase);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::TESTCASE) ((arg1)->TestCase);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -12808,7 +13037,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CleanNetwork_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12818,11 +13047,11 @@ SWIGINTERN PyObject *_wrap_Config_CleanNetwork_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_CleanNetwork_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CleanNetwork_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CleanNetwork_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_CleanNetwork_set" "', argument " "2"" of type '" "bool""'");
@@ -12838,18 +13067,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_CleanNetwork_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_CleanNetwork_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CleanNetwork_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CleanNetwork_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (bool) ((arg1)->CleanNetwork);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
@@ -12860,8 +13089,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LogLevel_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
-  NetXpert::LOG_LEVEL arg2 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  netxpert::LOG_LEVEL arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -12870,16 +13099,16 @@ SWIGINTERN PyObject *_wrap_Config_LogLevel_set(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_LogLevel_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogLevel_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogLevel_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_LogLevel_set" "', argument " "2"" of type '" "NetXpert::LOG_LEVEL""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_LogLevel_set" "', argument " "2"" of type '" "netxpert::LOG_LEVEL""'");
   } 
-  arg2 = static_cast< NetXpert::LOG_LEVEL >(val2);
+  arg2 = static_cast< netxpert::LOG_LEVEL >(val2);
   if (arg1) (arg1)->LogLevel = arg2;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -12890,19 +13119,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LogLevel_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  NetXpert::LOG_LEVEL result;
+  netxpert::LOG_LEVEL result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_LogLevel_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogLevel_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogLevel_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  result = (NetXpert::LOG_LEVEL) ((arg1)->LogLevel);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::LOG_LEVEL) ((arg1)->LogLevel);
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -12912,7 +13141,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LogFileFullPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -12921,11 +13150,11 @@ SWIGINTERN PyObject *_wrap_Config_LogFileFullPath_set(PyObject *SWIGUNUSEDPARM(s
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Config_LogFileFullPath_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogFileFullPath_set" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogFileFullPath_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
@@ -12949,18 +13178,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Config_LogFileFullPath_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Config_LogFileFullPath_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogFileFullPath_get" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogFileFullPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   result = (std::string *) & ((arg1)->LogFileFullPath);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
@@ -12971,11 +13200,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Config(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *result = 0 ;
+  netxpert::Config *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_Config")) SWIG_fail;
-  result = (NetXpert::Config *)new NetXpert::Config();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__Config, SWIG_POINTER_NEW |  0 );
+  result = (netxpert::Config *)new netxpert::Config();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Config, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -12984,17 +13213,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_Config(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = (NetXpert::Config *) 0 ;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_Config",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Config, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Config" "', argument " "1"" of type '" "NetXpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Config" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -13006,15 +13235,15 @@ fail:
 SWIGINTERN PyObject *Config_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__Config, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__Config, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_new_Network__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArcs arg1 ;
-  NetXpert::ColumnMap arg2 ;
-  NetXpert::Config *arg3 = 0 ;
+  netxpert::InputArcs arg1 ;
+  netxpert::ColumnMap arg2 ;
+  netxpert::Config *arg3 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
   void *argp3 = 0 ;
@@ -13022,41 +13251,41 @@ SWIGINTERN PyObject *_wrap_new_Network__SWIG_0(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  NetXpert::Network *result = 0 ;
+  netxpert::Network *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:new_Network",&obj0,&obj1,&obj2)) SWIG_fail;
   {
-    std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *ptr = (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)0;
+    std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
     int res = swig::asptr(obj0, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "1"" of type '" "NetXpert::InputArcs""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "1"" of type '" "netxpert::InputArcs""'"); 
     }
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__ColumnMap,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Network" "', argument " "2"" of type '" "NetXpert::ColumnMap""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_Network" "', argument " "2"" of type '" "netxpert::ColumnMap""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "2"" of type '" "NetXpert::ColumnMap""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "2"" of type '" "netxpert::ColumnMap""'");
     } else {
-      NetXpert::ColumnMap * temp = reinterpret_cast< NetXpert::ColumnMap * >(argp2);
+      netxpert::ColumnMap * temp = reinterpret_cast< netxpert::ColumnMap * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__Config,  0 );
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__Config,  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Network" "', argument " "3"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::Config &""'"); 
   }
   if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::Config &""'"); 
   }
-  arg3 = reinterpret_cast< NetXpert::Config * >(argp3);
-  result = (NetXpert::Network *)new NetXpert::Network(arg1,arg2,*arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__Network, SWIG_POINTER_NEW |  0 );
+  arg3 = reinterpret_cast< netxpert::Config * >(argp3);
+  result = (netxpert::Network *)new netxpert::Network(arg1,arg2,*arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Network, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -13065,10 +13294,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Network__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::InputArcs arg1 ;
-  NetXpert::InputNodes arg2 ;
-  NetXpert::ColumnMap arg3 ;
-  NetXpert::Config *arg4 = 0 ;
+  netxpert::InputArcs arg1 ;
+  netxpert::InputNodes arg2 ;
+  netxpert::ColumnMap arg3 ;
+  netxpert::Config *arg4 = 0 ;
   void *argp3 ;
   int res3 = 0 ;
   void *argp4 = 0 ;
@@ -13077,50 +13306,50 @@ SWIGINTERN PyObject *_wrap_new_Network__SWIG_1(PyObject *SWIGUNUSEDPARM(self), P
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
-  NetXpert::Network *result = 0 ;
+  netxpert::Network *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:new_Network",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   {
-    std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *ptr = (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *)0;
+    std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
     int res = swig::asptr(obj0, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "1"" of type '" "NetXpert::InputArcs""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "1"" of type '" "netxpert::InputArcs""'"); 
     }
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
   {
-    std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *ptr = (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *)0;
+    std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *ptr = (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > > *)0;
     int res = swig::asptr(obj1, &ptr);
     if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "2"" of type '" "NetXpert::InputNodes""'"); 
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "2"" of type '" "netxpert::InputNodes""'"); 
     }
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
   {
-    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_NetXpert__ColumnMap,  0  | 0);
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
     if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Network" "', argument " "3"" of type '" "NetXpert::ColumnMap""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::ColumnMap""'"); 
     }  
     if (!argp3) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "NetXpert::ColumnMap""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::ColumnMap""'");
     } else {
-      NetXpert::ColumnMap * temp = reinterpret_cast< NetXpert::ColumnMap * >(argp3);
+      netxpert::ColumnMap * temp = reinterpret_cast< netxpert::ColumnMap * >(argp3);
       arg3 = *temp;
       if (SWIG_IsNewObj(res3)) delete temp;
     }
   }
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_NetXpert__Config,  0 );
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_netxpert__Config,  0 );
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Network" "', argument " "4"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Network" "', argument " "4"" of type '" "netxpert::Config &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "4"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "4"" of type '" "netxpert::Config &""'"); 
   }
-  arg4 = reinterpret_cast< NetXpert::Config * >(argp4);
-  result = (NetXpert::Network *)new NetXpert::Network(arg1,arg2,arg3,*arg4);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_NetXpert__Network, SWIG_POINTER_NEW |  0 );
+  arg4 = reinterpret_cast< netxpert::Config * >(argp4);
+  result = (netxpert::Network *)new netxpert::Network(arg1,arg2,arg3,*arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Network, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -13139,14 +13368,14 @@ SWIGINTERN PyObject *_wrap_new_Network(PyObject *self, PyObject *args) {
   }
   if (argc == 3) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_NetXpert__ColumnMap, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_netxpert__ColumnMap, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_NetXpert__Config, 0);
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_netxpert__Config, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_new_Network__SWIG_0(self, args);
@@ -13156,17 +13385,17 @@ SWIGINTERN PyObject *_wrap_new_Network(PyObject *self, PyObject *args) {
   }
   if (argc == 4) {
     int _v;
-    int res = swig::asptr(argv[0], (std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > >**)(0));
+    int res = swig::asptr(argv[0], (std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = swig::asptr(argv[1], (std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > >**)(0));
+      int res = swig::asptr(argv[1], (std::list<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
       _v = SWIG_CheckState(res);
       if (_v) {
-        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_NetXpert__ColumnMap, 0);
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__ColumnMap, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           void *vptr = 0;
-          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_NetXpert__Config, 0);
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_netxpert__Config, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_new_Network__SWIG_1(self, args);
@@ -13179,15 +13408,15 @@ SWIGINTERN PyObject *_wrap_new_Network(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Network'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    NetXpert::Network::Network(NetXpert::InputArcs,NetXpert::ColumnMap,NetXpert::Config &)\n"
-    "    NetXpert::Network::Network(NetXpert::InputArcs,NetXpert::InputNodes,NetXpert::ColumnMap,NetXpert::Config &)\n");
+    "    netxpert::Network::Network(netxpert::InputArcs,netxpert::ColumnMap,netxpert::Config &)\n"
+    "    netxpert::Network::Network(netxpert::InputArcs,netxpert::InputNodes,netxpert::ColumnMap,netxpert::Config &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Network_ConvertInputNetwork(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Network *arg1 = (NetXpert::Network *) 0 ;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
   bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -13197,11 +13426,11 @@ SWIGINTERN PyObject *_wrap_Network_ConvertInputNetwork(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Network_ConvertInputNetwork",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Network, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_ConvertInputNetwork" "', argument " "1"" of type '" "NetXpert::Network *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_ConvertInputNetwork" "', argument " "1"" of type '" "netxpert::Network *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Network * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
   ecode2 = SWIG_AsVal_bool(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_ConvertInputNetwork" "', argument " "2"" of type '" "bool""'");
@@ -13217,7 +13446,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Network_GetOriginalNodeID(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Network *arg1 = (NetXpert::Network *) 0 ;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
   unsigned int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -13228,11 +13457,11 @@ SWIGINTERN PyObject *_wrap_Network_GetOriginalNodeID(PyObject *SWIGUNUSEDPARM(se
   std::string result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Network_GetOriginalNodeID",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Network, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_GetOriginalNodeID" "', argument " "1"" of type '" "NetXpert::Network *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_GetOriginalNodeID" "', argument " "1"" of type '" "netxpert::Network *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Network * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_GetOriginalNodeID" "', argument " "2"" of type '" "unsigned int""'");
@@ -13248,7 +13477,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Network_GetOriginalStartOrEndNodeID(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Network *arg1 = (NetXpert::Network *) 0 ;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
   unsigned int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -13259,11 +13488,11 @@ SWIGINTERN PyObject *_wrap_Network_GetOriginalStartOrEndNodeID(PyObject *SWIGUNU
   std::string result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Network_GetOriginalStartOrEndNodeID",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Network, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_GetOriginalStartOrEndNodeID" "', argument " "1"" of type '" "NetXpert::Network *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_GetOriginalStartOrEndNodeID" "', argument " "1"" of type '" "netxpert::Network *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Network * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
   ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_GetOriginalStartOrEndNodeID" "', argument " "2"" of type '" "unsigned int""'");
@@ -13279,17 +13508,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_Network(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Network *arg1 = (NetXpert::Network *) 0 ;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_Network",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__Network, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Network" "', argument " "1"" of type '" "NetXpert::Network *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Network" "', argument " "1"" of type '" "netxpert::Network *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Network * >(argp1);
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -13301,23 +13530,23 @@ fail:
 SWIGINTERN PyObject *Network_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__Network, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__Network, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_delete_LOGGER(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::LOGGER *arg1 = (NetXpert::LOGGER *) 0 ;
+  netxpert::LOGGER *arg1 = (netxpert::LOGGER *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_LOGGER",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__LOGGER, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__LOGGER, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LOGGER" "', argument " "1"" of type '" "NetXpert::LOGGER *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LOGGER" "', argument " "1"" of type '" "netxpert::LOGGER *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::LOGGER * >(argp1);
+  arg1 = reinterpret_cast< netxpert::LOGGER * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -13328,21 +13557,21 @@ fail:
 
 SWIGINTERN PyObject *_wrap_LOGGER_Initialize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = 0 ;
+  netxpert::Config *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:LOGGER_Initialize",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_NetXpert__Config,  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LOGGER_Initialize" "', argument " "1"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LOGGER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LOGGER_Initialize" "', argument " "1"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LOGGER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  NetXpert::LOGGER::Initialize(*arg1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  netxpert::LOGGER::Initialize(*arg1);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13355,9 +13584,9 @@ SWIGINTERN int Swig_var_LOGGER_IsInitialized_set(PyObject *_val) {
     bool val;
     int res = SWIG_AsVal_bool(_val, &val);
     if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""NetXpert::LOGGER::IsInitialized""' of type '""bool""'");
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""netxpert::LOGGER::IsInitialized""' of type '""bool""'");
     }
-    NetXpert::LOGGER::IsInitialized = static_cast< bool >(val);
+    netxpert::LOGGER::IsInitialized = static_cast< bool >(val);
   }
   return 0;
 fail:
@@ -13368,7 +13597,7 @@ fail:
 SWIGINTERN PyObject *Swig_var_LOGGER_IsInitialized_get(void) {
   PyObject *pyobj = 0;
   
-  pyobj = SWIG_From_bool(static_cast< bool >(NetXpert::LOGGER::IsInitialized));
+  pyobj = SWIG_From_bool(static_cast< bool >(netxpert::LOGGER::IsInitialized));
   return pyobj;
 }
 
@@ -13391,27 +13620,27 @@ SWIGINTERN PyObject *_wrap_LOGGER_IsInitialized_set(PyObject *SWIGUNUSEDPARM(sel
 SWIGINTERN PyObject *LOGGER_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__LOGGER, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__LOGGER, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_DBHELPER_Initialize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::Config *arg1 = 0 ;
+  netxpert::Config *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:DBHELPER_Initialize",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_NetXpert__Config,  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DBHELPER_Initialize" "', argument " "1"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DBHELPER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_Initialize" "', argument " "1"" of type '" "NetXpert::Config &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::Config * >(argp1);
-  NetXpert::DBHELPER::Initialize(*arg1);
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  netxpert::DBHELPER::Initialize(*arg1);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13424,9 +13653,9 @@ SWIGINTERN int Swig_var_DBHELPER_IsInitialized_set(PyObject *_val) {
     bool val;
     int res = SWIG_AsVal_bool(_val, &val);
     if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""NetXpert::DBHELPER::IsInitialized""' of type '""bool""'");
+      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""netxpert::DBHELPER::IsInitialized""' of type '""bool""'");
     }
-    NetXpert::DBHELPER::IsInitialized = static_cast< bool >(val);
+    netxpert::DBHELPER::IsInitialized = static_cast< bool >(val);
   }
   return 0;
 fail:
@@ -13437,7 +13666,7 @@ fail:
 SWIGINTERN PyObject *Swig_var_DBHELPER_IsInitialized_get(void) {
   PyObject *pyobj = 0;
   
-  pyobj = SWIG_From_bool(static_cast< bool >(NetXpert::DBHELPER::IsInitialized));
+  pyobj = SWIG_From_bool(static_cast< bool >(netxpert::DBHELPER::IsInitialized));
   return pyobj;
 }
 
@@ -13461,7 +13690,7 @@ SWIGINTERN PyObject *_wrap_DBHELPER_CommitCurrentTransaction(PyObject *SWIGUNUSE
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_CommitCurrentTransaction")) SWIG_fail;
-  NetXpert::DBHELPER::CommitCurrentTransaction();
+  netxpert::DBHELPER::CommitCurrentTransaction();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13473,7 +13702,7 @@ SWIGINTERN PyObject *_wrap_DBHELPER_OpenNewTransaction(PyObject *SWIGUNUSEDPARM(
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_OpenNewTransaction")) SWIG_fail;
-  NetXpert::DBHELPER::OpenNewTransaction();
+  netxpert::DBHELPER::OpenNewTransaction();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13484,12 +13713,12 @@ fail:
 SWIGINTERN PyObject *_wrap_DBHELPER_LoadNetworkFromDB(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
-  NetXpert::ColumnMap arg2 ;
+  netxpert::ColumnMap arg2 ;
   void *argp2 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  NetXpert::InputArcs result;
+  netxpert::InputArcs result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:DBHELPER_LoadNetworkFromDB",&obj0,&obj1)) SWIG_fail;
   {
@@ -13502,20 +13731,20 @@ SWIGINTERN PyObject *_wrap_DBHELPER_LoadNetworkFromDB(PyObject *SWIGUNUSEDPARM(s
     if (SWIG_IsNewObj(res)) delete ptr;
   }
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__ColumnMap,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DBHELPER_LoadNetworkFromDB" "', argument " "2"" of type '" "NetXpert::ColumnMap""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DBHELPER_LoadNetworkFromDB" "', argument " "2"" of type '" "netxpert::ColumnMap""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNetworkFromDB" "', argument " "2"" of type '" "NetXpert::ColumnMap""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNetworkFromDB" "', argument " "2"" of type '" "netxpert::ColumnMap""'");
     } else {
-      NetXpert::ColumnMap * temp = reinterpret_cast< NetXpert::ColumnMap * >(argp2);
+      netxpert::ColumnMap * temp = reinterpret_cast< netxpert::ColumnMap * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  result = NetXpert::DBHELPER::LoadNetworkFromDB(arg1,arg2);
-  resultobj = swig::from(static_cast< std::list<NetXpert::InputArc,std::allocator< NetXpert::InputArc > > >(result));
+  result = netxpert::DBHELPER::LoadNetworkFromDB(arg1,arg2);
+  resultobj = swig::from(static_cast< std::list<netxpert::InputArc,std::allocator< netxpert::InputArc > > >(result));
   return resultobj;
 fail:
   return NULL;
@@ -13524,39 +13753,57 @@ fail:
 
 SWIGINTERN PyObject *_wrap_DBHELPER_LoadNodesFromDB(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string arg1 ;
-  NetXpert::ColumnMap arg2 ;
+  string arg1 ;
+  string arg2 ;
+  netxpert::ColumnMap *arg3 = 0 ;
+  void *argp1 ;
+  int res1 = 0 ;
   void *argp2 ;
   int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  NetXpert::InputNodes result;
+  PyObject * obj2 = 0 ;
+  SwigValueWrapper< vector< netxpert::NewNode > > result;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:DBHELPER_LoadNodesFromDB",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OOO:DBHELPER_LoadNodesFromDB",&obj0,&obj1,&obj2)) SWIG_fail;
   {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(obj0, &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "1"" of type '" "std::string""'"); 
+    res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_string,  0  | 0);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "1"" of type '" "string""'"); 
+    }  
+    if (!argp1) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "1"" of type '" "string""'");
+    } else {
+      string * temp = reinterpret_cast< string * >(argp1);
+      arg1 = *temp;
+      if (SWIG_IsNewObj(res1)) delete temp;
     }
-    arg1 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
   }
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_NetXpert__ColumnMap,  0  | 0);
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_string,  0  | 0);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "2"" of type '" "NetXpert::ColumnMap""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "2"" of type '" "string""'"); 
     }  
     if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "2"" of type '" "NetXpert::ColumnMap""'");
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "2"" of type '" "string""'");
     } else {
-      NetXpert::ColumnMap * temp = reinterpret_cast< NetXpert::ColumnMap * >(argp2);
+      string * temp = reinterpret_cast< string * >(argp2);
       arg2 = *temp;
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  result = NetXpert::DBHELPER::LoadNodesFromDB(arg1,arg2);
-  resultobj = swig::from(static_cast< std::list<NetXpert::InputNode,std::allocator< NetXpert::InputNode > > >(result));
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "3"" of type '" "netxpert::ColumnMap const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "3"" of type '" "netxpert::ColumnMap const &""'"); 
+  }
+  arg3 = reinterpret_cast< netxpert::ColumnMap * >(argp3);
+  result = netxpert::DBHELPER::LoadNodesFromDB(arg1,arg2,(netxpert::ColumnMap const &)*arg3);
+  resultobj = SWIG_NewPointerObj((new vector< netxpert::NewNode >(static_cast< const vector< netxpert::NewNode >& >(result))), SWIGTYPE_p_vectorT_netxpert__NewNode_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -13567,7 +13814,7 @@ SWIGINTERN PyObject *_wrap_DBHELPER_CloseConnection(PyObject *SWIGUNUSEDPARM(sel
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_CloseConnection")) SWIG_fail;
-  NetXpert::DBHELPER::CloseConnection();
+  netxpert::DBHELPER::CloseConnection();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13577,17 +13824,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_delete_DBHELPER(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  NetXpert::DBHELPER *arg1 = (NetXpert::DBHELPER *) 0 ;
+  netxpert::DBHELPER *arg1 = (netxpert::DBHELPER *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_DBHELPER",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_NetXpert__DBHELPER, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__DBHELPER, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DBHELPER" "', argument " "1"" of type '" "NetXpert::DBHELPER *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DBHELPER" "', argument " "1"" of type '" "netxpert::DBHELPER *""'"); 
   }
-  arg1 = reinterpret_cast< NetXpert::DBHELPER * >(argp1);
+  arg1 = reinterpret_cast< netxpert::DBHELPER * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -13599,7 +13846,565 @@ fail:
 SWIGINTERN PyObject *DBHELPER_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_NetXpert__DBHELPER, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__DBHELPER, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_InternalArc_fromNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *arg1 = (netxpert::InternalArc *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:InternalArc_fromNode_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InternalArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_fromNode_set" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InternalArc_fromNode_set" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  if (arg1) (arg1)->fromNode = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_InternalArc_fromNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *arg1 = (netxpert::InternalArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:InternalArc_fromNode_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InternalArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_fromNode_get" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
+  result = (unsigned int) ((arg1)->fromNode);
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_InternalArc_toNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *arg1 = (netxpert::InternalArc *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:InternalArc_toNode_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InternalArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_toNode_set" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InternalArc_toNode_set" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  if (arg1) (arg1)->toNode = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_InternalArc_toNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *arg1 = (netxpert::InternalArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:InternalArc_toNode_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InternalArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_toNode_get" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
+  result = (unsigned int) ((arg1)->toNode);
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_InternalArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_InternalArc")) SWIG_fail;
+  result = (netxpert::InternalArc *)new netxpert::InternalArc();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InternalArc, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_InternalArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InternalArc *arg1 = (netxpert::InternalArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_InternalArc",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__InternalArc, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InternalArc" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *InternalArc_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__InternalArc, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_delete_ISolver(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ISolver *arg1 = (netxpert::ISolver *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ISolver",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ISolver, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ISolver" "', argument " "1"" of type '" "netxpert::ISolver *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ISolver * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ISolver_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ISolver *arg1 = (netxpert::ISolver *) 0 ;
+  string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ISolver_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ISolver, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ISolver_Solve" "', argument " "1"" of type '" "netxpert::ISolver *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ISolver * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_string,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ISolver_Solve" "', argument " "2"" of type '" "string""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ISolver_Solve" "', argument " "2"" of type '" "string""'");
+    } else {
+      string * temp = reinterpret_cast< string * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->Solve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ISolver_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ISolver *arg1 = (netxpert::ISolver *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ISolver_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ISolver, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ISolver_Solve" "', argument " "1"" of type '" "netxpert::ISolver *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ISolver * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ISolver_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ISolver_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  (arg1)->Solve(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ISolver_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__ISolver, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_string, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ISolver_Solve__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__ISolver, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ISolver_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ISolver_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::ISolver::Solve(string)\n"
+    "    netxpert::ISolver::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *ISolver_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__ISolver, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Config *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::MinimumSpanningTree *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MinimumSpanningTree",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (netxpert::MinimumSpanningTree *)new netxpert::MinimumSpanningTree(*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MinimumSpanningTree",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MinimumSpanningTree_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_Solve" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_string,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "string""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "string""'");
+    } else {
+      string * temp = reinterpret_cast< string * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->Solve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MinimumSpanningTree_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_Solve" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  (arg1)->Solve(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__MinimumSpanningTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_string, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_MinimumSpanningTree_Solve__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__MinimumSpanningTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_MinimumSpanningTree_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MinimumSpanningTree_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::MinimumSpanningTree::Solve(string)\n"
+    "    netxpert::MinimumSpanningTree::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::MSTAlgorithm result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumSpanningTree_GetAlgorithm",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetAlgorithm" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  result = (netxpert::MSTAlgorithm)(arg1)->GetAlgorithm();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_SetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  netxpert::MSTAlgorithm arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:MinimumSpanningTree_SetAlgorithm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_SetAlgorithm" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MinimumSpanningTree_SetAlgorithm" "', argument " "2"" of type '" "netxpert::MSTAlgorithm""'");
+  } 
+  arg2 = static_cast< netxpert::MSTAlgorithm >(val2);
+  (arg1)->SetAlgorithm(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumSpanningTree_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetOptimum" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetMinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< vector< netxpert::InternalArc > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumSpanningTree_GetMinimumSpanningTree",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetMinimumSpanningTree" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
+  result = ((netxpert::MinimumSpanningTree const *)arg1)->GetMinimumSpanningTree();
+  resultobj = SWIG_NewPointerObj((new vector< netxpert::InternalArc >(static_cast< const vector< netxpert::InternalArc >& >(result))), SWIGTYPE_p_vectorT_netxpert__InternalArc_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MinimumSpanningTree_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -13736,6 +14541,15 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_InputArc", _wrap_new_InputArc, METH_VARARGS, NULL},
 	 { (char *)"delete_InputArc", _wrap_delete_InputArc, METH_VARARGS, NULL},
 	 { (char *)"InputArc_swigregister", InputArc_swigregister, METH_VARARGS, NULL},
+	 { (char *)"NewNode_extNodeID_set", _wrap_NewNode_extNodeID_set, METH_VARARGS, NULL},
+	 { (char *)"NewNode_extNodeID_get", _wrap_NewNode_extNodeID_get, METH_VARARGS, NULL},
+	 { (char *)"NewNode_coord_set", _wrap_NewNode_coord_set, METH_VARARGS, NULL},
+	 { (char *)"NewNode_coord_get", _wrap_NewNode_coord_get, METH_VARARGS, NULL},
+	 { (char *)"NewNode_supply_set", _wrap_NewNode_supply_set, METH_VARARGS, NULL},
+	 { (char *)"NewNode_supply_get", _wrap_NewNode_supply_get, METH_VARARGS, NULL},
+	 { (char *)"new_NewNode", _wrap_new_NewNode, METH_VARARGS, NULL},
+	 { (char *)"delete_NewNode", _wrap_delete_NewNode, METH_VARARGS, NULL},
+	 { (char *)"NewNode_swigregister", NewNode_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteDBPath_set", _wrap_Config_SQLiteDBPath_set, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteDBPath_get", _wrap_Config_SQLiteDBPath_get, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteVersion_set", _wrap_Config_SQLiteVersion_set, METH_VARARGS, NULL},
@@ -13838,98 +14652,151 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"DBHELPER_CloseConnection", _wrap_DBHELPER_CloseConnection, METH_VARARGS, NULL},
 	 { (char *)"delete_DBHELPER", _wrap_delete_DBHELPER, METH_VARARGS, NULL},
 	 { (char *)"DBHELPER_swigregister", DBHELPER_swigregister, METH_VARARGS, NULL},
+	 { (char *)"InternalArc_fromNode_set", _wrap_InternalArc_fromNode_set, METH_VARARGS, NULL},
+	 { (char *)"InternalArc_fromNode_get", _wrap_InternalArc_fromNode_get, METH_VARARGS, NULL},
+	 { (char *)"InternalArc_toNode_set", _wrap_InternalArc_toNode_set, METH_VARARGS, NULL},
+	 { (char *)"InternalArc_toNode_get", _wrap_InternalArc_toNode_get, METH_VARARGS, NULL},
+	 { (char *)"new_InternalArc", _wrap_new_InternalArc, METH_VARARGS, NULL},
+	 { (char *)"delete_InternalArc", _wrap_delete_InternalArc, METH_VARARGS, NULL},
+	 { (char *)"InternalArc_swigregister", InternalArc_swigregister, METH_VARARGS, NULL},
+	 { (char *)"delete_ISolver", _wrap_delete_ISolver, METH_VARARGS, NULL},
+	 { (char *)"ISolver_Solve", _wrap_ISolver_Solve, METH_VARARGS, NULL},
+	 { (char *)"ISolver_swigregister", ISolver_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_MinimumSpanningTree", _wrap_new_MinimumSpanningTree, METH_VARARGS, NULL},
+	 { (char *)"delete_MinimumSpanningTree", _wrap_delete_MinimumSpanningTree, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_Solve", _wrap_MinimumSpanningTree_Solve, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_GetAlgorithm", _wrap_MinimumSpanningTree_GetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_SetAlgorithm", _wrap_MinimumSpanningTree_SetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_GetOptimum", _wrap_MinimumSpanningTree_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_GetMinimumSpanningTree", _wrap_MinimumSpanningTree_GetMinimumSpanningTree, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTree_swigregister", MinimumSpanningTree_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_NetXpert__ColumnMap = {"_p_NetXpert__ColumnMap", "NetXpert::ColumnMap *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__Config = {"_p_NetXpert__Config", "NetXpert::Config *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__DBHELPER = {"_p_NetXpert__DBHELPER", "NetXpert::DBHELPER *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__InputArc = {"_p_NetXpert__InputArc", "std::list< NetXpert::InputArc >::value_type *|NetXpert::InputArc *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__InputNode = {"_p_NetXpert__InputNode", "std::list< NetXpert::InputNode >::value_type *|NetXpert::InputNode *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__LOGGER = {"_p_NetXpert__LOGGER", "NetXpert::LOGGER *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_NetXpert__Network = {"_p_NetXpert__Network", "NetXpert::Network *", 0, 0, (void*)0, 0};
+static void *_p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((netxpert::ISolver *)  ((netxpert::MinimumSpanningTree *) x));
+}
+static swig_type_info _swigt__p_Coordinate = {"_p_Coordinate", "Coordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__ColumnMap = {"_p_netxpert__ColumnMap", "netxpert::ColumnMap *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__Config = {"_p_netxpert__Config", "netxpert::Config *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__DBHELPER = {"_p_netxpert__DBHELPER", "netxpert::DBHELPER *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__ISolver = {"_p_netxpert__ISolver", "netxpert::ISolver *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__InputArc = {"_p_netxpert__InputArc", "std::list< netxpert::InputArc >::value_type *|netxpert::InputArc *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__InputNode = {"_p_netxpert__InputNode", "std::list< netxpert::InputNode >::value_type *|netxpert::InputNode *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__InternalArc = {"_p_netxpert__InternalArc", "netxpert::InternalArc *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__LOGGER = {"_p_netxpert__LOGGER", "netxpert::LOGGER *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__MinimumSpanningTree = {"_p_netxpert__MinimumSpanningTree", "netxpert::MinimumSpanningTree *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__Network = {"_p_netxpert__Network", "netxpert::Network *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__NewNode = {"_p_netxpert__NewNode", "netxpert::NewNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__allocatorT_NetXpert__InputArc_t = {"_p_std__allocatorT_NetXpert__InputArc_t", "std::list< NetXpert::InputArc >::allocator_type *|std::allocator< NetXpert::InputArc > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__allocatorT_NetXpert__InputNode_t = {"_p_std__allocatorT_NetXpert__InputNode_t", "std::list< NetXpert::InputNode >::allocator_type *|std::allocator< NetXpert::InputNode > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_netxpert__InputArc_t = {"_p_std__allocatorT_netxpert__InputArc_t", "std::list< netxpert::InputArc >::allocator_type *|std::allocator< netxpert::InputArc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_netxpert__InputNode_t = {"_p_std__allocatorT_netxpert__InputNode_t", "std::list< netxpert::InputNode >::allocator_type *|std::allocator< netxpert::InputNode > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t = {"_p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t", "std::list< NetXpert::InputArc,std::allocator< NetXpert::InputArc > > *|std::list< NetXpert::InputArc > *|NetXpert::InputArcs *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t = {"_p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t", "NetXpert::InputNodes *|std::list< NetXpert::InputNode > *|std::list< NetXpert::InputNode,std::allocator< NetXpert::InputNode > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__listT__Tp__Alloc_t = {"_p_std__listT__Tp__Alloc_t", "std::list< _Tp,_Alloc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t = {"_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t", "std::list< netxpert::InputArc > *|std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *|netxpert::InputArcs *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t = {"_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t", "netxpert::InputNodes *|std::list< netxpert::InputNode > *|std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_string = {"_p_string", "string *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_netxpert__InternalArc_t = {"_p_vectorT_netxpert__InternalArc_t", "vector< netxpert::InternalArc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_netxpert__NewNode_t = {"_p_vectorT_netxpert__NewNode_t", "vector< netxpert::NewNode > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_NetXpert__ColumnMap,
-  &_swigt__p_NetXpert__Config,
-  &_swigt__p_NetXpert__DBHELPER,
-  &_swigt__p_NetXpert__InputArc,
-  &_swigt__p_NetXpert__InputNode,
-  &_swigt__p_NetXpert__LOGGER,
-  &_swigt__p_NetXpert__Network,
+  &_swigt__p_Coordinate,
   &_swigt__p_allocator_type,
   &_swigt__p_char,
   &_swigt__p_difference_type,
+  &_swigt__p_netxpert__ColumnMap,
+  &_swigt__p_netxpert__Config,
+  &_swigt__p_netxpert__DBHELPER,
+  &_swigt__p_netxpert__ISolver,
+  &_swigt__p_netxpert__InputArc,
+  &_swigt__p_netxpert__InputNode,
+  &_swigt__p_netxpert__InternalArc,
+  &_swigt__p_netxpert__LOGGER,
+  &_swigt__p_netxpert__MinimumSpanningTree,
+  &_swigt__p_netxpert__Network,
+  &_swigt__p_netxpert__NewNode,
   &_swigt__p_p_PyObject,
   &_swigt__p_size_type,
-  &_swigt__p_std__allocatorT_NetXpert__InputArc_t,
-  &_swigt__p_std__allocatorT_NetXpert__InputNode_t,
+  &_swigt__p_std__allocatorT_netxpert__InputArc_t,
+  &_swigt__p_std__allocatorT_netxpert__InputNode_t,
   &_swigt__p_std__invalid_argument,
-  &_swigt__p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t,
-  &_swigt__p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t,
   &_swigt__p_std__listT__Tp__Alloc_t,
+  &_swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t,
+  &_swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t,
+  &_swigt__p_string,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_value_type,
+  &_swigt__p_vectorT_netxpert__InternalArc_t,
+  &_swigt__p_vectorT_netxpert__NewNode_t,
 };
 
-static swig_cast_info _swigc__p_NetXpert__ColumnMap[] = {  {&_swigt__p_NetXpert__ColumnMap, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__Config[] = {  {&_swigt__p_NetXpert__Config, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__DBHELPER[] = {  {&_swigt__p_NetXpert__DBHELPER, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__InputArc[] = {  {&_swigt__p_NetXpert__InputArc, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__InputNode[] = {  {&_swigt__p_NetXpert__InputNode, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__LOGGER[] = {  {&_swigt__p_NetXpert__LOGGER, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_NetXpert__Network[] = {  {&_swigt__p_NetXpert__Network, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Coordinate[] = {  {&_swigt__p_Coordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ColumnMap[] = {  {&_swigt__p_netxpert__ColumnMap, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__Config[] = {  {&_swigt__p_netxpert__Config, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__DBHELPER[] = {  {&_swigt__p_netxpert__DBHELPER, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__InputArc[] = {  {&_swigt__p_netxpert__InputArc, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__InputNode[] = {  {&_swigt__p_netxpert__InputNode, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__InternalArc[] = {  {&_swigt__p_netxpert__InternalArc, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__LOGGER[] = {  {&_swigt__p_netxpert__LOGGER, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__Network[] = {  {&_swigt__p_netxpert__Network, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__NewNode[] = {  {&_swigt__p_netxpert__NewNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__allocatorT_NetXpert__InputArc_t[] = {  {&_swigt__p_std__allocatorT_NetXpert__InputArc_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__allocatorT_NetXpert__InputNode_t[] = {  {&_swigt__p_std__allocatorT_NetXpert__InputNode_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputArc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t[] = {  {&_swigt__p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t[] = {  {&_swigt__p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listT__Tp__Alloc_t[] = {  {&_swigt__p_std__listT__Tp__Alloc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t[] = {  {&_swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t[] = {  {&_swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_string[] = {  {&_swigt__p_string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_netxpert__InternalArc_t[] = {  {&_swigt__p_vectorT_netxpert__InternalArc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_netxpert__NewNode_t[] = {  {&_swigt__p_vectorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_NetXpert__ColumnMap,
-  _swigc__p_NetXpert__Config,
-  _swigc__p_NetXpert__DBHELPER,
-  _swigc__p_NetXpert__InputArc,
-  _swigc__p_NetXpert__InputNode,
-  _swigc__p_NetXpert__LOGGER,
-  _swigc__p_NetXpert__Network,
+  _swigc__p_Coordinate,
   _swigc__p_allocator_type,
   _swigc__p_char,
   _swigc__p_difference_type,
+  _swigc__p_netxpert__ColumnMap,
+  _swigc__p_netxpert__Config,
+  _swigc__p_netxpert__DBHELPER,
+  _swigc__p_netxpert__ISolver,
+  _swigc__p_netxpert__InputArc,
+  _swigc__p_netxpert__InputNode,
+  _swigc__p_netxpert__InternalArc,
+  _swigc__p_netxpert__LOGGER,
+  _swigc__p_netxpert__MinimumSpanningTree,
+  _swigc__p_netxpert__Network,
+  _swigc__p_netxpert__NewNode,
   _swigc__p_p_PyObject,
   _swigc__p_size_type,
-  _swigc__p_std__allocatorT_NetXpert__InputArc_t,
-  _swigc__p_std__allocatorT_NetXpert__InputNode_t,
+  _swigc__p_std__allocatorT_netxpert__InputArc_t,
+  _swigc__p_std__allocatorT_netxpert__InputNode_t,
   _swigc__p_std__invalid_argument,
-  _swigc__p_std__listT_NetXpert__InputArc_std__allocatorT_NetXpert__InputArc_t_t,
-  _swigc__p_std__listT_NetXpert__InputNode_std__allocatorT_NetXpert__InputNode_t_t,
   _swigc__p_std__listT__Tp__Alloc_t,
+  _swigc__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t,
+  _swigc__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t,
+  _swigc__p_string,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_value_type,
+  _swigc__p_vectorT_netxpert__InternalArc_t,
+  _swigc__p_vectorT_netxpert__NewNode_t,
 };
 
 
@@ -14614,37 +15481,37 @@ SWIG_init(void) {
   
   SWIG_InstallConstants(d,swig_const_table);
   
-  SWIG_Python_SetConstant(d, "NoGeometry",SWIG_From_int(static_cast< int >(NetXpert::NoGeometry)));
-  SWIG_Python_SetConstant(d, "StraightLines",SWIG_From_int(static_cast< int >(NetXpert::StraightLines)));
-  SWIG_Python_SetConstant(d, "RealGeometry",SWIG_From_int(static_cast< int >(NetXpert::RealGeometry)));
-  SWIG_Python_SetConstant(d, "NetworkBuilder",SWIG_From_int(static_cast< int >(NetXpert::NetworkBuilder)));
-  SWIG_Python_SetConstant(d, "ShortestPathTreeCOM",SWIG_From_int(static_cast< int >(NetXpert::ShortestPathTreeCOM)));
-  SWIG_Python_SetConstant(d, "ODMatrixCOM",SWIG_From_int(static_cast< int >(NetXpert::ODMatrixCOM)));
-  SWIG_Python_SetConstant(d, "TransportationCOM",SWIG_From_int(static_cast< int >(NetXpert::TransportationCOM)));
-  SWIG_Python_SetConstant(d, "MSTCOM",SWIG_From_int(static_cast< int >(NetXpert::MSTCOM)));
-  SWIG_Python_SetConstant(d, "IsolinesCOM",SWIG_From_int(static_cast< int >(NetXpert::IsolinesCOM)));
-  SWIG_Python_SetConstant(d, "DumpInternalArcsToDB",SWIG_From_int(static_cast< int >(NetXpert::DumpInternalArcsToDB)));
-  SWIG_Python_SetConstant(d, "NetworkConvert",SWIG_From_int(static_cast< int >(NetXpert::NetworkConvert)));
-  SWIG_Python_SetConstant(d, "TestFileGDBWriter",SWIG_From_int(static_cast< int >(NetXpert::TestFileGDBWriter)));
-  SWIG_Python_SetConstant(d, "TestSpatiaLiteWriter",SWIG_From_int(static_cast< int >(NetXpert::TestSpatiaLiteWriter)));
-  SWIG_Python_SetConstant(d, "SpatiaLiteDB",SWIG_From_int(static_cast< int >(NetXpert::SpatiaLiteDB)));
-  SWIG_Python_SetConstant(d, "ESRI_FileGDB",SWIG_From_int(static_cast< int >(NetXpert::ESRI_FileGDB)));
-  SWIG_Python_SetConstant(d, "All",SWIG_From_int(static_cast< int >(NetXpert::All)));
-  SWIG_Python_SetConstant(d, "Debug",SWIG_From_int(static_cast< int >(NetXpert::Debug)));
-  SWIG_Python_SetConstant(d, "Info",SWIG_From_int(static_cast< int >(NetXpert::Info)));
-  SWIG_Python_SetConstant(d, "Warning",SWIG_From_int(static_cast< int >(NetXpert::Warning)));
-  SWIG_Python_SetConstant(d, "Error",SWIG_From_int(static_cast< int >(NetXpert::Error)));
-  SWIG_Python_SetConstant(d, "Fatal",SWIG_From_int(static_cast< int >(NetXpert::Fatal)));
-  SWIG_Python_SetConstant(d, "Dijkstra_MCFClass",SWIG_From_int(static_cast< int >(NetXpert::Dijkstra_MCFClass)));
-  SWIG_Python_SetConstant(d, "LQueue_MCFClass",SWIG_From_int(static_cast< int >(NetXpert::LQueue_MCFClass)));
-  SWIG_Python_SetConstant(d, "LDeque_MCFClass",SWIG_From_int(static_cast< int >(NetXpert::LDeque_MCFClass)));
-  SWIG_Python_SetConstant(d, "Dijkstra_Heap_MCFClass",SWIG_From_int(static_cast< int >(NetXpert::Dijkstra_Heap_MCFClass)));
-  SWIG_Python_SetConstant(d, "Dijkstra_2Heap_LEMON",SWIG_From_int(static_cast< int >(NetXpert::Dijkstra_2Heap_LEMON)));
-  SWIG_Python_SetConstant(d, "NetworkSimplex_MCF",SWIG_From_int(static_cast< int >(NetXpert::NetworkSimplex_MCF)));
-  SWIG_Python_SetConstant(d, "NetworkSimplex_LEMON",SWIG_From_int(static_cast< int >(NetXpert::NetworkSimplex_LEMON)));
-  SWIG_Python_SetConstant(d, "Kruskal_QuickGraph",SWIG_From_int(static_cast< int >(NetXpert::Kruskal_QuickGraph)));
-  SWIG_Python_SetConstant(d, "Prim_QuickGraph",SWIG_From_int(static_cast< int >(NetXpert::Prim_QuickGraph)));
-  SWIG_Python_SetConstant(d, "Kruskal_LEMON",SWIG_From_int(static_cast< int >(NetXpert::Kruskal_LEMON)));
+  SWIG_Python_SetConstant(d, "NoGeometry",SWIG_From_int(static_cast< int >(netxpert::NoGeometry)));
+  SWIG_Python_SetConstant(d, "StraightLines",SWIG_From_int(static_cast< int >(netxpert::StraightLines)));
+  SWIG_Python_SetConstant(d, "RealGeometry",SWIG_From_int(static_cast< int >(netxpert::RealGeometry)));
+  SWIG_Python_SetConstant(d, "NetworkBuilder",SWIG_From_int(static_cast< int >(netxpert::NetworkBuilder)));
+  SWIG_Python_SetConstant(d, "ShortestPathTreeCOM",SWIG_From_int(static_cast< int >(netxpert::ShortestPathTreeCOM)));
+  SWIG_Python_SetConstant(d, "ODMatrixCOM",SWIG_From_int(static_cast< int >(netxpert::ODMatrixCOM)));
+  SWIG_Python_SetConstant(d, "TransportationCOM",SWIG_From_int(static_cast< int >(netxpert::TransportationCOM)));
+  SWIG_Python_SetConstant(d, "MSTCOM",SWIG_From_int(static_cast< int >(netxpert::MSTCOM)));
+  SWIG_Python_SetConstant(d, "IsolinesCOM",SWIG_From_int(static_cast< int >(netxpert::IsolinesCOM)));
+  SWIG_Python_SetConstant(d, "DumpInternalArcsToDB",SWIG_From_int(static_cast< int >(netxpert::DumpInternalArcsToDB)));
+  SWIG_Python_SetConstant(d, "NetworkConvert",SWIG_From_int(static_cast< int >(netxpert::NetworkConvert)));
+  SWIG_Python_SetConstant(d, "TestFileGDBWriter",SWIG_From_int(static_cast< int >(netxpert::TestFileGDBWriter)));
+  SWIG_Python_SetConstant(d, "TestSpatiaLiteWriter",SWIG_From_int(static_cast< int >(netxpert::TestSpatiaLiteWriter)));
+  SWIG_Python_SetConstant(d, "SpatiaLiteDB",SWIG_From_int(static_cast< int >(netxpert::SpatiaLiteDB)));
+  SWIG_Python_SetConstant(d, "ESRI_FileGDB",SWIG_From_int(static_cast< int >(netxpert::ESRI_FileGDB)));
+  SWIG_Python_SetConstant(d, "All",SWIG_From_int(static_cast< int >(netxpert::All)));
+  SWIG_Python_SetConstant(d, "Debug",SWIG_From_int(static_cast< int >(netxpert::Debug)));
+  SWIG_Python_SetConstant(d, "Info",SWIG_From_int(static_cast< int >(netxpert::Info)));
+  SWIG_Python_SetConstant(d, "Warning",SWIG_From_int(static_cast< int >(netxpert::Warning)));
+  SWIG_Python_SetConstant(d, "Error",SWIG_From_int(static_cast< int >(netxpert::Error)));
+  SWIG_Python_SetConstant(d, "Fatal",SWIG_From_int(static_cast< int >(netxpert::Fatal)));
+  SWIG_Python_SetConstant(d, "Dijkstra_MCFClass",SWIG_From_int(static_cast< int >(netxpert::Dijkstra_MCFClass)));
+  SWIG_Python_SetConstant(d, "LQueue_MCFClass",SWIG_From_int(static_cast< int >(netxpert::LQueue_MCFClass)));
+  SWIG_Python_SetConstant(d, "LDeque_MCFClass",SWIG_From_int(static_cast< int >(netxpert::LDeque_MCFClass)));
+  SWIG_Python_SetConstant(d, "Dijkstra_Heap_MCFClass",SWIG_From_int(static_cast< int >(netxpert::Dijkstra_Heap_MCFClass)));
+  SWIG_Python_SetConstant(d, "Dijkstra_2Heap_LEMON",SWIG_From_int(static_cast< int >(netxpert::Dijkstra_2Heap_LEMON)));
+  SWIG_Python_SetConstant(d, "NetworkSimplex_MCF",SWIG_From_int(static_cast< int >(netxpert::NetworkSimplex_MCF)));
+  SWIG_Python_SetConstant(d, "NetworkSimplex_LEMON",SWIG_From_int(static_cast< int >(netxpert::NetworkSimplex_LEMON)));
+  SWIG_Python_SetConstant(d, "Kruskal_QuickGraph",SWIG_From_int(static_cast< int >(netxpert::Kruskal_QuickGraph)));
+  SWIG_Python_SetConstant(d, "Prim_QuickGraph",SWIG_From_int(static_cast< int >(netxpert::Prim_QuickGraph)));
+  SWIG_Python_SetConstant(d, "Kruskal_LEMON",SWIG_From_int(static_cast< int >(netxpert::Kruskal_LEMON)));
   PyDict_SetItemString(md,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"LOGGER_IsInitialized",Swig_var_LOGGER_IsInitialized_get, Swig_var_LOGGER_IsInitialized_set);
   SWIG_addvarlink(SWIG_globals(),(char*)"DBHELPER_IsInitialized",Swig_var_DBHELPER_IsInitialized_get, Swig_var_DBHELPER_IsInitialized_set);

@@ -8,7 +8,7 @@
 using namespace std;
 using namespace boost::filesystem;
 using namespace boost::posix_time;
-using namespace NetXpert;
+using namespace netxpert;
 
 //Init static member variables must be out of class scope!
 string LOGGER::FullLogFileName = "";
@@ -37,12 +37,11 @@ void LOGGER::Initialize(const Config& cnfg)
     ss.imbue(locale(ss.getloc(), facet));
     ss << second_clock::local_time();
 
-    sTime = ss.str();
-
-    //cout << "sPath: "<< sPath << endl;
-    //cout << "sFileName: "<< sFileName << endl;
-    //cout << "sTime: " << sTime << endl;
-
+	sTime = ss.str();
+#ifdef _WIN32
+	//trim of first two chars
+	sTime = sTime.substr(2, 16);
+#endif
     //Create File - do not append
     if (sPath.empty()) // no directory specified in config
     {

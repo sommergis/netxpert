@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace NetXpert {
+namespace netxpert {
 
     /**
     * \Static Class for logging

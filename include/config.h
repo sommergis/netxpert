@@ -9,7 +9,7 @@
 using namespace std;
 using namespace cereal;
 
-namespace NetXpert {
+namespace netxpert {
 
     enum GEOMETRY_HANDLING
     {
@@ -33,7 +33,8 @@ namespace NetXpert {
         NetworkConvert = 7,
         TestFileGDBWriter = 8,
         TestSpatiaLiteWriter = 9,
-        TestAddStartNode = 10
+        TestAddNodes = 10,
+        TestCreateRouteGeometries = 11
     };
     enum RESULT_DB_TYPE
     {

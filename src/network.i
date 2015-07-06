@@ -1,4 +1,4 @@
-%module pyNetXpert
+%module pynetxpert
 
 %include "typemaps.i"
 %include "std_string.i"
@@ -8,15 +8,17 @@
 %{
 #include "network.h"
 #include "dbhelper.h"
+#include "isolver.h"
+#include "mstree.h"
 %}
 
 namespace std
 {
-    %template(InputArcs) std::list<NetXpert::InputArc>;
-    %template(InputNodes) std::list<NetXpert::InputNode>;
+    %template(InputArcs) std::list<netxpert::InputArc>;
+    %template(InputNodes) std::list<netxpert::InputNode>;
 }
 
-namespace NetXpert
+namespace netxpert
 {
     struct ColumnMap
     {
@@ -46,8 +48,15 @@ namespace NetXpert
         std::string oneway;
     };
 
-    typedef std::list<NetXpert::InputNode> InputNodes;
-    typedef std::list<NetXpert::InputArc> InputArcs;
+    struct NewNode
+    {
+        std::string extNodeID;
+        Coordinate coord;
+        double supply;
+    };
+
+    typedef std::list<netxpert::InputNode> InputNodes;
+    typedef std::list<netxpert::InputArc> InputArcs;
 
     enum GEOMETRY_HANDLING
     {
@@ -105,7 +114,7 @@ namespace NetXpert
         Kruskal_LEMON = 2};
 
     /**
-    * \Storage for the configuration of NetXpert
+    * \Storage for the configuration of netxpert
     **/
     struct Config
     {
@@ -156,6 +165,11 @@ namespace NetXpert
             Network(InputArcs arcsTbl, ColumnMap _map, Config& cnfg);
             Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);
             void ConvertInputNetwork(bool autoClean);
+
+            /* TODO SWIG 3.0 kann keine unique_ptr */
+            //unsigned int AddStartNode(const NewNode& newNode, int treshold, std::unique_ptr<SQLite::Statement> closestArcQry, bool withCapacity);
+            //unsigned int AddEndNode(const NewNode& newNode, int treshold, std::unique_ptr<SQLite::Statement> closestArcQry, bool withCapacity);
+
             std::string GetOriginalNodeID(unsigned int internalNodeID);
             std::string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
     };
@@ -180,21 +194,53 @@ namespace NetXpert
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
             static InputArcs LoadNetworkFromDB(std::string _tableName, ColumnMap _map);
-            static InputNodes LoadNodesFromDB(std::string _tableName, ColumnMap _map);
+            static vector<NewNode> LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map);
+
             static void CloseConnection();
             ~DBHELPER();
     };
+
+    struct InternalArc
+    {
+        unsigned int fromNode;
+        unsigned int toNode;
+    };
+
+    class ISolver
+    {
+        public:
+            virtual ~ISolver() {}
+            virtual void Solve(string net) = 0;
+            virtual void Solve(Network& net) = 0;
+    };
+
+    class MinimumSpanningTree : public ISolver
+    {
+        public:
+            MinimumSpanningTree(Config& cnfg);
+            virtual ~MinimumSpanningTree();
+
+            void Solve(string net);
+            void Solve(Network& net);
+
+            MSTAlgorithm GetAlgorithm();
+            void SetAlgorithm(MSTAlgorithm mstAlgorithm);
+
+            double GetOptimum();
+            vector<InternalArc> GetMinimumSpanningTree() const;
+    };
+
 }
 
 /* Add nicer __str__() methods */
-%extend NetXpert::InputNode {
+%extend netxpert::InputNode {
    char *__str__() {
        static char tmp [1024];
        sprintf(tmp,"InputNode('%s',%g)", $self->extNodeID.c_str(), $self->nodeSupply);
        return tmp;
    }
 };
-%extend NetXpert::InputArc {
+%extend netxpert::InputArc {
    char *__str__() {
        static char tmp [1024];
        sprintf(tmp,"InputArc('%s',%s,%s,%g,%g,'%s')", $self->extArcID.c_str(), $self->extFromNode.c_str(),

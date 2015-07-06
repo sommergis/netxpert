@@ -4,6 +4,7 @@
 #include <geos/geom/Coordinate.h>
 #include <geos/geom/Geometry.h>
 #include <geos/geom/MultiLineString.h>
+#include <geos/geom/LineString.h>
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
@@ -17,7 +18,7 @@
 using namespace std;
 using namespace geos::geom;
 
-namespace NetXpert {
+namespace netxpert {
 
     /**
     * \Maximum Value that shall be used instead of Infinity for arc values (e.g. capacity).
@@ -38,8 +39,18 @@ namespace NetXpert {
     enum AddedNodeType
     {
         Undefined = 0,
-        StartEdge = 1,
-        EndEdge = 2
+        StartArc = 1,
+        EndArc = 2
+    };
+    /**
+    * \Enum that reflects the type of the Minimum Cost Flow instance.
+    **/
+    enum MinCostFlowInstanceType
+    {
+        MCFUndefined = 0,
+        MCFBalanced = 1,
+        MCFExtrasupply = 2,
+        MCFExtrademand = 3
     };
 
     struct ExtClosestArcAndPoint
@@ -63,7 +74,7 @@ namespace NetXpert {
     /**
     * \Custom data type for storing external nodes tuple <fromNode,toNode>
     **/
-    struct ExtFTNode
+    struct ExternalArc
     {
         string extFromNode;
         string extToNode;
@@ -71,10 +82,23 @@ namespace NetXpert {
     /**
     * \Custom data type for storing nodes tuple <fromNode,toNode>
     **/
-    struct FTNode
+    struct InternalArc
     {
         unsigned int fromNode;
         unsigned int toNode;
+
+      bool operator==(const InternalArc& p2) const {
+        const InternalArc& p1=(*this);
+        return p1.fromNode == p2.fromNode && p1.toNode == p2.toNode;
+      }
+    };
+    /**
+    * \Custom data type for storing ODPair tuple <origin,dest>
+    **/
+    struct ODPair
+    {
+        unsigned int origin;
+        unsigned int dest;
     };
     /**
     * \Custom data type for storing tuple <oldArcID,cost,capacity>
@@ -135,8 +159,17 @@ namespace NetXpert {
     **/
     struct NewArc
     {
-        Geometry& arcGeom;
+        shared_ptr<LineString> arcGeom;
+        //LineString& arcGeom;
+        //LineString* arcGeom;
         AddedNodeType nodeType;
+        double cost;
+        double capacity;
+    };
+
+    struct SwappedOldArc
+    {
+        InternalArc ftNode;
         double cost;
         double capacity;
     };
@@ -146,8 +179,7 @@ namespace NetXpert {
     **/
     struct SplittedArc
     {
-        unsigned int fromNode;
-        unsigned int toNode;
+        InternalArc ftNode;
         double cost;
         double capacity;
         shared_ptr<MultiLineString> arcGeom;
@@ -185,11 +217,19 @@ namespace NetXpert {
     typedef string ExtNodeID;
     typedef string ExtArcID;
 
-    typedef unordered_map<FTNode, ArcData> Arcs;
+    typedef unordered_map<InternalArc, ArcData> Arcs;
     //typedef boost::bimap< FTNode, ArcData > Arcs;
     typedef unordered_map<IntNodeID, AddedPoint> AddedPoints;
     typedef unordered_map<IntNodeID, NodeSupply> NodeSupplies;
-    typedef unordered_map<FTNode, NewArc> NewArcs;
+
+    //TODO find structure of NewArcs / OldArcs
+    //Dictionary<Tuple<uint, uint>, Tuple<IGeometry, AddedNodeType, double, double>> newEdges;
+    typedef unordered_map<InternalArc, NewArc> NewArcs; //container for the new parts of arcs that where splitted
+    //Dictionary<Tuple<uint, uint>, Tuple<string, double, double>> oldEdges;
+    //Query in both directions necessary --> bimap?
+
+    typedef unordered_map<string, SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
+
 
     //typedef map<string,string> ColumnMap;
     typedef list<InputArc> InputArcs;
@@ -198,15 +238,16 @@ namespace NetXpert {
 
 namespace std
 {
+
     /**
-    * \Extension for custom key type FTNode specifying how to hash; serves as key in
+    * \Extension for custom key type InternalArc specifying how to hash; serves as key in
     * \unordered map.
     **/
     template <>
-    class hash<NetXpert::FTNode>
+    class hash<netxpert::InternalArc>
     {
       public:
-        long operator()(const NetXpert::FTNode& x) const
+        long operator()(const netxpert::InternalArc& x) const
         {
             hash<string> z;
             return z(to_string(x.fromNode) + to_string(x.toNode));
@@ -214,15 +255,43 @@ namespace std
     };
 
     /**
-    * \Equal_to operator for custom key type FTNode in unordered map.
+    * \Equal_to operator for custom key type InternalArc in unordered map.
     **/
     template <>
-    class equal_to<NetXpert::FTNode>
+    class equal_to<netxpert::InternalArc>
     {
       public:
-         bool operator()(const NetXpert::FTNode& a, const NetXpert::FTNode& b) const
+         bool operator()(const netxpert::InternalArc& a, const netxpert::InternalArc& b) const
          {
             return a.fromNode == b.fromNode && a.toNode == b.toNode;
+         }
+    };
+
+    /**
+    * \Extension for custom key type ODPair specifying how to hash; serves as key in
+    * \unordered map.
+    **/
+    template <>
+    class hash<netxpert::ODPair>
+    {
+      public:
+        long operator()(const netxpert::ODPair& x) const
+        {
+            hash<string> z;
+            return z(to_string(x.origin) + to_string(x.dest));
+        }
+    };
+
+    /**
+    * \Equal_to operator for custom key type ODPair in unordered map.
+    **/
+    template <>
+    class equal_to<netxpert::ODPair>
+    {
+      public:
+         bool operator()(const netxpert::ODPair& a, const netxpert::ODPair& b) const
+         {
+            return a.origin == b.origin && a.dest == b.dest;
          }
     };
 }
