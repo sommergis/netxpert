@@ -30,7 +30,7 @@ namespace netxpert {
         private:
             vector<InternalArc> minimumSpanTree;
             MSTAlgorithm algorithm;
-            IMinSpanTree* mst;
+            shared_ptr<IMinSpanTree> mst;
             vector<InternalArc> solve (Network& net);
             bool validateNetworkData(Network& net);
             void convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,

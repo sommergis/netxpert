@@ -46,8 +46,6 @@ namespace netxpert {
             unordered_map<ODPair, double> GetODMatrix() const;
 
             double GetOptimum() const;
-
-            //void UncompressRoute(unsigned int orig, vector<unsigned int>& ends, vector<InternalArc>& startsNends);
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:

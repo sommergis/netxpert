@@ -49,7 +49,7 @@ namespace netxpert {
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:
-            Network* net;
+            shared_ptr<Network> net;
             bool isDirected;
             int sptHeapCard;
             double optimum;
