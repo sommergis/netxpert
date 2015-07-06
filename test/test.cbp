@@ -46,6 +46,8 @@
 			<Add directory="../libs" />
 			<Add directory="../include" />
 			<Add directory="/usr/include/python2.7" />
+			<Add directory="../include/core" />
+			<Add directory="../include/solver" />
 		</Compiler>
 		<Linker>
 			<Add option="-lboost_system" />

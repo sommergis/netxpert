@@ -13,13 +13,13 @@
  }
  #endif
 
-using namespace NetXpert;
+using namespace netxpert;
 using namespace geos::io;
 using namespace boost::filesystem;
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
-    //NETXPERT_CNFG = cnfg;
+    NETXPERT_CNFG = cnfg;
     if ( !LOGGER::IsInitialized )
     {
         LOGGER::Initialize(cnfg);
@@ -27,15 +27,16 @@ SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
     LOGGER::LogInfo("SpatiaLiteWriter initialized.");
     connPtr = nullptr;
     currentTransactionPtr = nullptr;
+    isConnected = false;
 }
 
 SpatiaLiteWriter::~SpatiaLiteWriter()
 {
     //dtor
-    if (connPtr)
+    /*if (connPtr)
         delete connPtr;
     if (currentTransactionPtr)
-        delete currentTransactionPtr;
+        delete currentTransactionPtr;*/
 }
 
 
@@ -43,23 +44,43 @@ void SpatiaLiteWriter::connect( )
 {
     try
     {
-       connPtr = new SQLite::Database (NETXPERT_CNFG.ResultDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
+        // Pointer verursacht possible mem leaks ~70,000 bytes
+        connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath,
+                                                                        SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
+        const int cache_size_kb = 512000;
+        SQLite::Database& db = *connPtr;
 
-       //Depointerize "on-the-fly" to SQLite::Database&
-       if ( performInitialCommand(*connPtr) )
-       {
+        string sqlStr = "PRAGMA cache_size=" + to_string(cache_size_kb); //DEFAULT: 2000
+        SQLite::Statement cmd1(db, sqlStr);
+        cmd1.executeStep();
+
+        sqlStr = "PRAGMA locking_mode=NORMAL"; //default NORMAL
+        SQLite::Statement cmd2(db, sqlStr);
+        cmd2.executeStep();
+
+        sqlStr = "PRAGMA journal_mode=OFF"; //default: DELETE
+        SQLite::Statement cmd3(db, sqlStr);
+        cmd3.executeStep();
+
+        sqlStr = "PRAGMA synchronous=NORMAL"; //default: DELETE
+        SQLite::Statement cmd4(db, sqlStr);
+        cmd4.executeStep();
+
+        if ( performInitialCommand() )
+        {
             LOGGER::LogDebug("Successfully performed initial spatialite command.");
-       }
-       else
-       {
+        }
+        else
+        {
             LOGGER::LogError("Error performing initial spatialite command!");
-       }
+        }
         isConnected = true;
     }
-    catch (std::exception& ex)
+    catch (SQLite::Exception& ex)
     {
-        LOGGER::LogError("Error connecting to SpatiaLiteDB!");
+        LOGGER::LogError("Error connecting to SpatiaLiteDB '" + NETXPERT_CNFG.ResultDBPath +"'");
         LOGGER::LogError( ex.what() );
+        throw ex;
     }
 }
 
@@ -71,7 +92,8 @@ void SpatiaLiteWriter::OpenNewTransaction()
             connect();
 
         SQLite::Database& db = *connPtr;
-        currentTransactionPtr = new SQLite::Transaction (db);
+        currentTransactionPtr = unique_ptr<SQLite::Transaction> (new SQLite::Transaction (db));
+
         LOGGER::LogDebug("Successfully opened new transaction.");
     }
     catch (std::exception& ex)
@@ -109,7 +131,7 @@ void SpatiaLiteWriter::CreateNetXpertDB()
             return;
         }
         SQLite::Database db(NETXPERT_CNFG.ResultDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
-        initSpatialMetaData(db);
+        initSpatialMetaData();
         LOGGER::LogInfo("NetXpert SpatiaLite DB " + db.getFilename() +" created successfully.");
     }
     catch (std::exception& ex)
@@ -156,16 +178,18 @@ void SpatiaLiteWriter::CreateSolverResultTable(string _tableName, bool dropFirst
     }
 }
 
-bool SpatiaLiteWriter::performInitialCommand(SQLite::Database& db)
+bool SpatiaLiteWriter::performInitialCommand()
 {
-    try {
+    try
+    {
+        SQLite::Database& db = *connPtr;
         const string spatiaLiteHome = NETXPERT_CNFG.SpatiaLiteHome;
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
 
         const string pathBefore = boost::filesystem::current_path().string();
         //chdir to spatiallitehome
+        //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
         boost::filesystem::current_path(spatiaLiteHome);
-        //cout << boost::filesystem::current_path() << endl;
         db.enableExtensions();
 
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName);";
@@ -186,9 +210,9 @@ bool SpatiaLiteWriter::performInitialCommand(SQLite::Database& db)
     }
 
 }
-void SpatiaLiteWriter::initSpatialMetaData(SQLite::Database& db)
+void SpatiaLiteWriter::initSpatialMetaData()
 {
-    if ( performInitialCommand(db) )
+    if ( performInitialCommand() )
     {
         LOGGER::LogDebug("Successfully performed initial spatialite command.");
     }
@@ -196,7 +220,7 @@ void SpatiaLiteWriter::initSpatialMetaData(SQLite::Database& db)
     {
         LOGGER::LogError("Error performing initial spatialite command!");
     }
-
+    SQLite::Database& db = *connPtr;
     SQLite::Statement query(db, "SELECT InitSpatialMetadata('1');");
 
     try {
@@ -225,6 +249,7 @@ void SpatiaLiteWriter::createTable ( string _tableName )
     SQLite::Statement query(db, strSQL);
 
     query.exec();
+    query.reset();
 }
 
 void SpatiaLiteWriter::dropTable (string _tableName)
@@ -233,6 +258,7 @@ void SpatiaLiteWriter::dropTable (string _tableName)
     SQLite::Database& db = *connPtr;
     SQLite::Statement query(db, strSQL);
     query.exec();
+    query.reset();
 }
 
 void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColName, string _geomType)
@@ -263,14 +289,14 @@ void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColN
     }
 }
 
-SQLite::Statement* SpatiaLiteWriter::PrepareSaveSolveQueryToDB(string _tableName)
+unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveSolveQueryToDB(string _tableName)
 {
     try
     {
         const string sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,capacity,flow,geometry) VALUES " +
                                            "(@orig,@dest,@cost,@cap,@flow,GeomFromWKB(@geom))";
         SQLite::Database& db = *connPtr;
-        SQLite::Statement* query = new SQLite::Statement(db, sqlStr);
+        auto query = unique_ptr<SQLite::Statement>(new SQLite::Statement(db, sqlStr));
         LOGGER::LogDebug("Successfully prepared query.");
         return query;
     }
@@ -317,6 +343,7 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
         query.bind("@geom", blob, static_cast<int>(offset));
 
         query.exec();
+        query.reset();
 
     }
     catch (std::exception& ex)
@@ -325,6 +352,429 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
         LOGGER::LogError( ex.what() );
     }
 
+}
+
+/*SQLite::Statement* SpatiaLiteWriter::PrepareCreateRouteGeometries(string arcTableName)
+{
+    try
+    {
+        string sqlStr = "";
+        //start und end segmente vorh.
+        sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                    "SELECT ST_Union (ST_Collect( ST_Collect ( " +
+                    " GeomFromWKB(@startSeg)," + //start segment
+                    " (SELECT ST_Collect(" + geomColumnName +") " +
+                    "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ), " + //middle part
+                    " GeomFromWKB(@endSeg) ) )"; //end segment
+        SQLite::Database& db = *connPtr;
+        SQLite::Statement* query = new SQLite::Statement(db, sqlStr);
+        LOGGER::LogDebug("Successfully prepared query.");
+        return query;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error preparing query!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
+    }
+}
+*/
+
+/*void SpatiaLiteWriter::CreateRouteGeometries(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, vector<shared_ptr<Geometry>> segments,
+                                     const string& resultTableName)
+{
+    try
+    {
+        if (!isConnected)
+            connect();
+
+        cout << "CreateRouteGeometries() - Size of geom vector: " << segments.size() << endl;
+
+        int counter = 0;
+        for (auto i : segments) {
+            counter += 1;
+            cout << counter << endl;
+            if (i)
+                cout << i->toString() << endl;
+        }
+
+        createRouteWithAllParts_2(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                            segments, resultTableName);
+        return;
+
+
+        if (segments.size() < 1 && arcIDs.size() > 0)//only arcids (MST!)
+            createRouteWithMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                        resultTableName);
+        else
+        {
+            if (segments.at(0) && !segments.at(1) &&arcIDs.size() > 0)
+            {
+                auto geomPtr = segments.at(0);
+                createRouteWithStartAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                                *geomPtr, resultTableName);
+            }
+            if (segments.at(0) && !segments.at(1) &&arcIDs.size() == 0)
+            {
+                auto geomPtr = segments.at(0);
+                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
+            }
+            if (!segments.at(0) && segments.at(1) &&arcIDs.size() == 0)
+            {
+                auto geomPtr = segments.at(1);
+                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
+            }
+            if (!segments.at(0) && segments.at(1) && arcIDs.size() > 0)
+            {
+                auto geomPtr = segments.at(1);
+                createRouteWithEndAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                                *geomPtr, resultTableName);
+            }
+            if (segments.at(0) && segments.at(1) && arcIDs.size() == 0)
+                createRouteWithStartAndEnd(arcTableName, segments, resultTableName);
+
+            if (segments.at(0) && segments.at(1) && arcIDs.size() > 0)
+                createRouteWithAllParts(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                            segments, resultTableName);
+        }
+
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Error creating route geometry in database!");
+        throw ex;
+    }
+}*/
+
+void SpatiaLiteWriter::CreateRouteGeometries(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, const MultiLineString& mLine,
+                                     const string& resultTableName)
+{
+    try
+    {
+        if (!isConnected)
+            connect();
+
+        createRouteWithAllParts_2(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                            mLine, resultTableName);
+        return;
+
+
+        /*if (segments.size() < 1 && arcIDs.size() > 0)//only arcids (MST!)
+            createRouteWithMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                        resultTableName);
+        else
+        {
+            if (segments.at(0) && !segments.at(1) &&arcIDs.size() > 0)
+            {
+                auto geomPtr = segments.at(0);
+                createRouteWithStartAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                                *geomPtr, resultTableName);
+            }
+            if (segments.at(0) && !segments.at(1) &&arcIDs.size() == 0)
+            {
+                auto geomPtr = segments.at(0);
+                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
+            }
+            if (!segments.at(0) && segments.at(1) &&arcIDs.size() == 0)
+            {
+                auto geomPtr = segments.at(1);
+                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
+            }
+            if (!segments.at(0) && segments.at(1) && arcIDs.size() > 0)
+            {
+                auto geomPtr = segments.at(1);
+                createRouteWithEndAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                                *geomPtr, resultTableName);
+            }
+            if (segments.at(0) && segments.at(1) && arcIDs.size() == 0)
+                createRouteWithStartAndEnd(arcTableName, segments, resultTableName);
+
+            if (segments.at(0) && segments.at(1) && arcIDs.size() > 0)
+                createRouteWithAllParts(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+                                            segments, resultTableName);
+        }*/
+
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Error creating route geometry in database!");
+        throw ex;
+    }
+}
+void SpatiaLiteWriter::createRouteWithAllParts_2(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, const MultiLineString& mLine, const string& resultTableName)
+{
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
+                " GeomFromWKB(@mLine)," + //splitted segments as multilinestring
+                " (SELECT ST_Collect(" + geomColumnName +") " +
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) " //middle part
+                "  ))";
+
+    //cout << sqlStr.replace("GeomFromWKB(","GeomFromText(").replace("@mLine", mLine.toString()) << endl;
+
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    oss.seekp(0, ios::beg); //reset stream position
+    wkbWriter.write(mLine, oss);
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+    qry.bind("@mLine", blob, static_cast<int>(offset));
+
+    qry.exec();
+}
+
+void SpatiaLiteWriter::createRouteWithAllParts(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, vector<shared_ptr<Geometry>>segments, const string& resultTableName)
+{
+    //start und end segmente vorh.
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT ST_LineMerge ( ST_Collect(ST_Collect ( " +
+                " GeomFromWKB(@startSeg)," + //start segment
+                " (SELECT ST_Collect(" + geomColumnName +") " +
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ), " + //middle part
+                " GeomFromWKB(@endSeg) ))"; //end segment
+    cout << sqlStr << endl;
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    auto startGeomPtr = segments.at(0);
+    auto endGeomPtr = segments.at(1);
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    wkbWriter.write(*startGeomPtr, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //oss.seekp(0, ios::beg); //set to the start of stream
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+
+    qry.bind("@startSeg", blob, static_cast<int>(offset));
+
+    oss.seekp(0, ios::beg); //reset stream position
+    wkbWriter.write(*endGeomPtr, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    offset = oss.tellp();
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    s = oss.str();
+    blob = s.c_str();
+
+    qry.bind("@endSeg", blob, static_cast<int>(offset));
+
+    qry.exec();
+
+}
+
+void SpatiaLiteWriter::createRouteWithStartAndMiddlePart(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, const Geometry& geom, const string& resultTableName)
+{
+    //start und mittlerer Teil vorh.
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT ST_LineMerge ( ST_Collect ( " +
+                " GeomFromWKB(@startSeg)," + //start segment
+                " (SELECT ST_Collect(" + geomColumnName +") " +
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) " //middle part
+                "  )";
+    cout << sqlStr << endl;
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    wkbWriter.write(geom, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //oss.seekp(0, ios::beg); //set to the start of stream
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+
+    qry.bind("@startSeg", blob, static_cast<int>(offset));
+
+    qry.exec();
+}
+void SpatiaLiteWriter::createRouteWithEndAndMiddlePart(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, const Geometry& geom, const string& resultTableName)
+{
+    //ende und mittlerer Teil vorh.
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT ST_LineMerge( ST_Collect ( " +
+                " (SELECT ST_Collect(" + geomColumnName +") " +
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ), "+ //middle part
+                " GeomFromWKB(@endSeg) ) )"; //end segment
+    cout << sqlStr << endl;
+    SQLite::Database& db = *connPtr;
+
+    SQLite::Statement qry(db, sqlStr);
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    wkbWriter.write(geom, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //oss.seekp(0, ios::beg); //set to the start of stream
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+
+    qry.bind("@endSeg", blob, static_cast<int>(offset));
+    qry.exec();
+}
+
+void SpatiaLiteWriter::createRouteWithStartAndEnd(const string& arcTableName, vector<shared_ptr<Geometry>>segments,
+                                                    const string& resultTableName)
+{
+    //start und end vorhanden - kein Mittelteil (arcIDs)
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT ST_LineMerge (ST_Collect( " +
+                " GeomFromWKB(@startSeg)," + //start segment
+                " GeomFromWKB(@endSeg) ))"; //end segment
+
+    cout << sqlStr << endl;
+
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    auto startGeomPtr = segments.at(0);
+    auto endGeomPtr = segments.at(1);
+
+    cout << startGeomPtr->toString() << endl;
+    cout << endGeomPtr->toString() << endl;
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    wkbWriter.write(*startGeomPtr, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //oss.seekp(0, ios::beg); //set to the start of stream
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+
+    qry.bind("@startSeg", blob, static_cast<int>(offset));
+
+    oss.seekp(0, ios::beg); //reset stream position
+    wkbWriter.write(*endGeomPtr, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    offset = oss.tellp();
+    //oss.seekp(0, ios::beg);
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    s = oss.str();
+    blob = s.c_str();
+
+    qry.bind("@endSeg", blob, static_cast<int>(offset));
+
+    qry.exec();
+}
+
+void SpatiaLiteWriter::createRouteWithOnePart(const string& arcTableName, const Geometry& geom,
+                                                    const string& resultTableName)
+{
+    //start vorhanden - kein Mittelteil (arcIDs)
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "GeomFromWKB(@seg); "; //segment
+
+    cout << sqlStr << endl;
+
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    WKBWriter wkbWriter;
+    std::stringstream oss(ios_base::binary|ios_base::out);
+
+    wkbWriter.write(geom, oss);
+
+    //Get length
+    oss.seekp(0, ios::end);
+    stringstream::pos_type offset = oss.tellp();
+    //oss.seekp(0, ios::beg); //set to the start of stream
+
+    //DON'T
+    //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+    //const char* blob = oss.str().c_str();
+
+    //CORRECT
+    string s = oss.str();
+    const char* blob = s.c_str();
+
+    qry.bind("@seg", blob, static_cast<int>(offset));
+
+    qry.exec();
+}
+
+void SpatiaLiteWriter::createRouteWithMiddlePart(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
+                                     const string& arcIDs, const string& resultTableName)
+{
+    //mittelteil vorh.
+    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
+                "SELECT setsrid("+ geomColumnName + ",0)" //SRID = 0
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +")";
+    cout << sqlStr << endl;
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement qry(db, sqlStr);
+
+    qry.exec();
 }
 
 void SpatiaLiteWriter::CloseConnection()

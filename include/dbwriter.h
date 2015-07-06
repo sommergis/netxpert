@@ -8,7 +8,7 @@
 
 using namespace std;
 
-namespace NetXpert {
+namespace netxpert {
     /**
     * \Abstract Class (Interface) for Result DB for NetXpert
     **/

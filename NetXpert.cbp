@@ -16,6 +16,9 @@
 					<Add option="-std=c++0x" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="include" />
+					<Add directory="include/core" />
+					<Add directory="include/solver" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -26,8 +29,12 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-march=corei7" />
-					<Add option="-O2" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
 					<Add option="-std=c++11" />
+					<Add directory="include" />
+					<Add directory="include/core" />
+					<Add directory="include/solver" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -56,13 +63,31 @@
 			<Add directory="libs/SQLiteCpp" />
 		</Linker>
 		<Unit filename="include/config.h" />
+		<Unit filename="include/core/MCFClass.h" />
+		<Unit filename="include/core/MCFSimplex.h" />
+		<Unit filename="include/core/OPTUtils.h" />
+		<Unit filename="include/core/SPTree_Dijkstra.h" />
+		<Unit filename="include/core/SPTree_Heap.h" />
+		<Unit filename="include/core/SPTree_LDeque.h" />
+		<Unit filename="include/core/SPTree_LQueue.h" />
+		<Unit filename="include/core/mstlem.h" />
+		<Unit filename="include/core/netsimplexlem.h" />
+		<Unit filename="include/core/sptlem.h" />
 		<Unit filename="include/data.h" />
 		<Unit filename="include/dbhelper.h" />
 		<Unit filename="include/dbwriter.h" />
 		<Unit filename="include/fgdbwriter.h" />
+		<Unit filename="include/isolver.h" />
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
+		<Unit filename="include/networkbuilder.h" />
 		<Unit filename="include/slitewriter.h" />
+		<Unit filename="include/solver/imstree.h" />
+		<Unit filename="include/solver/isptree.h" />
+		<Unit filename="include/solver/mstree.h" />
+		<Unit filename="include/solver/odmatrix.h" />
+		<Unit filename="include/solver/sptree.h" />
+		<Unit filename="include/test.h" />
 		<Unit filename="libs/SQLiteCpp/Assertion.h" />
 		<Unit filename="libs/SQLiteCpp/Column.cpp" />
 		<Unit filename="libs/SQLiteCpp/Column.h" />
@@ -78,6 +103,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/config.cpp" />
+		<Unit filename="src/core/MCFSimplex.cpp" />
+		<Unit filename="src/core/SPTree_Dijkstra.cpp" />
+		<Unit filename="src/core/SPTree_Heap.cpp" />
+		<Unit filename="src/core/SPTree_LDeque.cpp" />
+		<Unit filename="src/core/SPTree_LQueue.cpp" />
+		<Unit filename="src/core/mstlem.cpp" />
+		<Unit filename="src/core/netsimplexlem.cpp" />
+		<Unit filename="src/core/sptlem.cpp" />
 		<Unit filename="src/dbhelper.cpp" />
 		<Unit filename="src/fgdbwriter.cpp" />
 		<Unit filename="src/logger.cpp" />
@@ -86,7 +119,11 @@
 		<Unit filename="src/network.i">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="src/networkbuilder.cpp" />
 		<Unit filename="src/slitewriter.cpp" />
+		<Unit filename="src/solver/mstree.cpp" />
+		<Unit filename="src/solver/odmatrix.cpp" />
+		<Unit filename="src/solver/sptree.cpp" />
 		<Unit filename="src/test.cpp" />
 		<Extensions>
 			<code_completion />
