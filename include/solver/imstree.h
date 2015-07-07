@@ -1,15 +1,12 @@
 #ifndef IMINSPANTREE_H
 #define IMINSPANTREE_H
 
-
 namespace netxpert {
     /** Abstract (Interface) Class for all Minimum Spanning Tree Solvers
     */
     class IMinSpanTree
     {
         public:
-
-            /** Default destructor */
             virtual ~IMinSpanTree(){}
             virtual void GetMST(unsigned int* outStartNodes, unsigned int* outEndNodes)=0;
             virtual void LoadNet(unsigned int nmx, unsigned int mmx, unsigned int pn, unsigned int pm, double* pU,

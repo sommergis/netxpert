@@ -1,6 +1,7 @@
 #ifndef NETSIMPLEXLEM_H
 #define NETSIMPLEXLEM_H
 
+#include "imcflow.h"
 #include <lemon/smart_graph.h>
 #include <lemon/network_simplex.h>
 #include <stdio.h>
@@ -9,7 +10,7 @@
 
 namespace netxpert {
 
-    class NetworkSimplex
+    class NetworkSimplex : IMinCostFlow
     {
         public:
             NetworkSimplex(void);
