@@ -41,7 +41,7 @@ namespace netxpert {
             //Kruskal<SmartDigraph,SmartDigraph::ArcMap<double>>* mst;
             SmartDigraph::ArcMap<double>* costMapPtr;
             SmartDigraph::ArcMap<bool>* edgeBoolMapPtr;
-            std::vector<typename SmartDigraph::Node> nodes;
+            vector<typename SmartDigraph::Node> nodes;
     };
 }
 #endif // CORE_MSTLEM_H

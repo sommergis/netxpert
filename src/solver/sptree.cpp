@@ -16,8 +16,8 @@ ShortestPathTree::ShortestPathTree(Config& cnfg)
 ShortestPathTree::~ShortestPathTree()
 {
     //dtor
-    //if (net)
-        //delete net;
+    // no need for deleting Network pointer, because it's not a dynamically
+    // allocated (new()..)
 }
 
 void ShortestPathTree::Solve(string net){
@@ -26,7 +26,7 @@ void ShortestPathTree::Solve(string net){
 
 void ShortestPathTree::Solve(Network& net)
 {
-    this->net = shared_ptr<Network>( &net );
+    this->net = &net;
 
     unsigned int arcCount = net.GetCurrentArcCount();
     unsigned int nodeCount = net.GetCurrentNodeCount();

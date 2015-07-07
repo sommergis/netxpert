@@ -31,6 +31,7 @@
 /*------------------------------ INCLUDES ----------------------------------*/
 /*--------------------------------------------------------------------------*/
 
+#include "imcflow.h" //netxpert interface
 #include "MCFClass.h"
 
 /*@} -----------------------------------------------------------------------*/
@@ -51,7 +52,7 @@ namespace MCFClass_di_unipi_it
 
 #define QUADRATICCOST 0
 
-/**< Setting QUADRATICCOST == 1 the solver can solve problems with linear and 
+/**< Setting QUADRATICCOST == 1 the solver can solve problems with linear and
    quadratic costs too (but the latter only with the Primal Simplex).
    The reason for having a macro is that when quadratic costs are present the
    "arcType" struct has the additional field "quadraticCost" to hold it.
@@ -73,7 +74,7 @@ namespace MCFClass_di_unipi_it
    Thus, with QUADRATICCOST == 0 the solver cannot solve problems with
    quadratic costs, but it does solve problems with linear costs faster. */
 
-/*@}  end( group( MCFCLASS_MACROS ) ) */ 
+/*@}  end( group( MCFCLASS_MACROS ) ) */
 
 /*--------------------------------------------------------------------------*/
 /*---------------------------- CLASSES -------------------------------------*/
@@ -83,10 +84,10 @@ namespace MCFClass_di_unipi_it
 
 /** The MCFSimplex class derives from the abstract base class MCFClass, thus
     sharing its (standard) interface, and implements both the Primal and
-    Dual network simplex algorithms for solving (Linear and Quadratic) 
+    Dual network simplex algorithms for solving (Linear and Quadratic)
     Min Cost Flow problems */
 
-class NetworkSimplex: public MCFClass 
+class MCFSimplex: public MCFClass
 {
 
 /*--------------------------------------------------------------------------*/
@@ -106,8 +107,8 @@ class NetworkSimplex: public MCFClass
 
 /** Public enum describing the parameters of MCFSimplex. */
 
- enum SimplexParam 
- { 
+ enum SimplexParam
+ {
   kAlgPrimal = kLastParam , ///< parameter to set algorithm (Primal/Dual):
   kAlgPricing ,             ///< parameter to set algorithm of pricing
   kNumCandList ,            /**< parameter to set the number of candidate
@@ -115,18 +116,18 @@ class NetworkSimplex: public MCFClass
   kHotListSize ,            /**< parameter to set the size of Hot List
 			         for Candidate List Pivot method */
   kRecomputeFOLimits ,      /**< parameter to set the number of iterations
-                                 in which quadratic Primal Simplex computes 
+                                 in which quadratic Primal Simplex computes
                                  "manually" the f.o. value */
-  kEpsOpt                   /**< parameter to set the precision of the 
-                                 objective function value for the 
+  kEpsOpt                   /**< parameter to set the precision of the
+                                 objective function value for the
 				 quadratic Primal Simplex */
   };
 
-    
+
 /** Public enum describing the pricing rules in MCFSimplex::SetAlg(). */
 
- enum enumPrcngRl 
- { 
+ enum enumPrcngRl
+ {
   kDantzig = 0,        ///< Dantzig's rule (most violated constraint)
   kFirstEligibleArc ,  ///< First eligible arc in round-robin
   kCandidateListPivot  ///< Candidate List Pivot Rule
@@ -138,7 +139,7 @@ class NetworkSimplex: public MCFClass
 /*---------------------------- CONSTRUCTOR ---------------------------------*/
 /*--------------------------------------------------------------------------*/
 
- NetworkSimplex( cIndex nmx = 0 , cIndex mmx = 0 );
+ MCFSimplex( cIndex nmx = 0 , cIndex mmx = 0 );
 
 /**< Constructor of the class, as in MCFClass::MCFClass(). */
 
@@ -165,8 +166,8 @@ class NetworkSimplex: public MCFClass
 
    The allowed values for WhchPrc are:
 
-   - kDantzig            Dantzig's pricing rule, i.e., most violated dual 
-                         constraint; this can only be used with the Primal 
+   - kDantzig            Dantzig's pricing rule, i.e., most violated dual
+                         constraint; this can only be used with the Primal
                          Network Simplex
 
    - kFirstEligibleArcA  "dumb" rule, first eligible arc in round-robin;
@@ -245,7 +246,7 @@ class NetworkSimplex: public MCFClass
  inline Index MCFENde( cIndex i );
 
 /*--------------------------------------------------------------------------*/
-  
+
  void MCFCosts( CRow Costv , cIndex_Set nms = NULL ,
 		cIndex strt = 0 , Index stp = Inf<Index>() );
 
@@ -331,7 +332,7 @@ class NetworkSimplex: public MCFClass
 /*------------------------------ DESTRUCTOR --------------------------------*/
 /*--------------------------------------------------------------------------*/
 
- ~NetworkSimplex();
+ ~MCFSimplex();
 
 /*--------------------------------------------------------------------------*/
 /*--------------------- PRIVATE PART OF THE CLASS --------------------------*/
@@ -379,7 +380,7 @@ class NetworkSimplex: public MCFClass
 
   nodePType *nextInT;     // next node in the order of the Post-Visit on T
 
-  arcPType *enteringTArc; // entering basic arc of this node     
+  arcPType *enteringTArc; // entering basic arc of this node
 
   FNumber balance;        // supply/demand of this node; a node is called a
                           // supply node, a demand node, or a transshipment
@@ -405,7 +406,7 @@ class NetworkSimplex: public MCFClass
 
   nodeDType *nextInT;     // next node in the order of the Post-Visit on T
 
-  arcDType *enteringTArc; // entering basic arc of this node     
+  arcDType *enteringTArc; // entering basic arc of this node
 
   FNumber balance;        // supply/demand of this node; a node is called a
                           // supply node, a demand node, or a transshipment
@@ -415,7 +416,7 @@ class NetworkSimplex: public MCFClass
  #if( QUADRATICCOST )
   CNumber sumQuadratic;   // the sum of the quadratic coefficients of the tree's arcs
                           // from root of T to the node
-        
+
   FONumber potential;     // the node potential corresponding with the flow
                           // conservation constrait of this node
  #else
@@ -495,8 +496,8 @@ class NetworkSimplex: public MCFClass
 
  nodePType *dummyRootP;         // the dummy root node
 
- nodePType *stopNodesP;         // first infeasible node address = nodes + n 
-  
+ nodePType *stopNodesP;         // first infeasible node address = nodes + n
+
  arcPType *arcsP;               // vector of arcs; this variable points to
                                 // the m arc structs.
 
@@ -507,8 +508,8 @@ class NetworkSimplex: public MCFClass
                                 // starting bases. For each node i, there is
                                 // exactly one dummy arc defined to connect
                                 // the node i with the dummy root node.
-    
- arcPType *stopArcsP;           // first infeasible arc address = arcs + m 
+
+ arcPType *stopArcsP;           // first infeasible arc address = arcs + m
 
  arcPType *stopDummyP;          // first infeasible dummy arc address
                                 // = arcs + m + n
@@ -523,8 +524,8 @@ class NetworkSimplex: public MCFClass
 
  nodeDType *dummyRootD;         // the dummy root node
 
- nodeDType *stopNodesD;         // first infeasible node address = nodes + n 
-  
+ nodeDType *stopNodesD;         // first infeasible node address = nodes + n
+
  arcDType *arcsD;               // vector of arcs; this variable points to
                                 // the m arc structs.
 
@@ -536,7 +537,7 @@ class NetworkSimplex: public MCFClass
                                 // exactly one dummy arc defined to connect
                                 // the node i with the dummy root node.
 
- arcDType *stopArcsD;           // first infeasible arc address = arcs + m 
+ arcDType *stopArcsD;           // first infeasible arc address = arcs + m
 
  arcDType *stopDummyD;          // first infeasible dummy arc address
                                 // = arcs + m + n
@@ -545,32 +546,32 @@ class NetworkSimplex: public MCFClass
                                 // start their search from this arc
 
  iteratorType iterator;         // the current number of iterations
-    
+
  primalCandidType *candP;       // every element points to an element of the
-                                // arcs vector which contains an arc violating 
+                                // arcs vector which contains an arc violating
                                 // dual bound
 
  dualCandidType *candD;         // every element points to an element of the
-                                // arcs vector which contains an arc violating 
+                                // arcs vector which contains an arc violating
                                 // primal bond
 
  Index numGroup;                // number of the candidate lists
-    
+
  Index tempCandidateListSize;   // hot list dimension (it is variable)
-    
+
  Index groupPos;                // contains the actual candidate list
-    
+
  Index numCandidateList;        // number of candidate lists
-    
+
  Index hotListSize;             // number of candidate lists and hot list dimension
 
  Index forcedNumCandidateList;  // value used to force the number of candidate list
-    
+
  Index forcedHotListSize;       // value used to force the number of candidate list
                                 // and hot list dimension
 
  bool newSession;               // true if algorithm is just started
-  
+
  CNumber MAX_ART_COST;          // large cost for artificial arcs
 
  FNumber *modifiedBalance;      // vector of balance used by the PostVisit
@@ -674,7 +675,7 @@ class NetworkSimplex: public MCFClass
      (for example h2 is the deepest node of the outgoing arc). Removing the
      arc "h" splits T in two subtrees: T1 (which contains the root of T) and
      T2, which will be re-connected by the incoming arc "k".
-     T2 will be reordered; in fact, the node "k2" becomes the root of T2 
+     T2 will be reordered; in fact, the node "k2" becomes the root of T2
      instead of "h2" and the hierarchy of T2 will be overturned. Then T2 will
      be moved; the root of T2 is changed, therefore the predecessor of the
      root will become the node "k1".
@@ -685,7 +686,7 @@ class NetworkSimplex: public MCFClass
      updates the field "subTreeLevel" of every subtree's nodes, since k2's
      subtree will be moved from the bottom to the top of T2. Then the method
      pasteSubtree() puts this subtree in the bidirectional list after the node
-     "k1". The same operations will be applied to the old precedessor of "k2" 
+     "k1". The same operations will be applied to the old precedessor of "k2"
      (which will become one of the childs of "k2"). This second subtree will
      be cut, the subTreeLevel fields will be updated, and it will be inserted
      in the bidirectional list after the k2's subtree. This is iterated until
@@ -745,14 +746,14 @@ class NetworkSimplex: public MCFClass
    - in the first phase it analyzes the remaining arcs and delete the arcs which
      don't violate the dual condition any more;
 
-   - in the second phase it tries to fill the set, so it searchs other arcs 
+   - in the second phase it tries to fill the set, so it searchs other arcs
      which violate the dual condition: the set of arcs is divided into "buckets"
      which are searched sequentially until the candidate list is full; the
      last visited bucket is retained, and the search is restarted from that
      one at later iterations
 
    - in the third phase the small set of candidate arcs is ordered according
-     to the violation of dual condition by the method SortPrimalCandidateList() 
+     to the violation of dual condition by the method SortPrimalCandidateList()
      using an implementation of the algorithm "quicksort".
 
     At last the method returns the first arc in the ordered small set. If the
@@ -829,7 +830,7 @@ class NetworkSimplex: public MCFClass
    T in the Primal Simplex data structure. */
 
 /*--------------------------------------------------------------------------*/
-    
+
   void PostPVisit( nodePType *r );
 
 /**< Method to calculate the flow on the basic arcs with the Primal Simplex's
@@ -861,7 +862,7 @@ class NetworkSimplex: public MCFClass
    T in the Dual Simplex data structure. */
 
 /*--------------------------------------------------------------------------*/
-    
+
   void PostDVisit( nodeDType *r );
 
 /**< Method to calculate the flow on the basic arcs with the Dual Simplex's data
@@ -895,7 +896,7 @@ class NetworkSimplex: public MCFClass
    value. */
 
 /*--------------------------------------------------------------------------*/
-    
+
   void PrintPNode( nodePType *nodo );
 
 /**< Method to print the "name" of the node in the Primal Simplex. */
@@ -939,7 +940,7 @@ class NetworkSimplex: public MCFClass
 
 /*--------------------------------------------------------------------------*/
 
-  arcDType* RecoverDArc( nodeDType *tail , nodeDType *head ); 
+  arcDType* RecoverDArc( nodeDType *tail , nodeDType *head );
 
 /**< Method to find an arc (in the Dual Simplex) using 2 pointers to tail
    node and head node. */
@@ -952,7 +953,7 @@ class NetworkSimplex: public MCFClass
 
 /*--------------------------------------------------------------------------*/
 
-  void infoPArc( arcPType *arc , int ind , int tab ); 
+  void infoPArc( arcPType *arc , int ind , int tab );
 
 /**< Method to print some information of the arc (in the Primal Simplex). */
 
@@ -975,7 +976,7 @@ class NetworkSimplex: public MCFClass
 /**< Method to show the actual complete situation. */
 
 /*--------------------------------------------------------------------------*/
-    
+
   };  // end( class MCFSimplex )
 
 /* @} end( group( MCFSimplex_CLASSES ) ) */
@@ -986,7 +987,7 @@ class NetworkSimplex: public MCFClass
 /*-------------------inline methods implementation-------------------------*/
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::Index NetworkSimplex::MCFSNde( MCFClass::cIndex i )
+inline MCFClass::Index MCFSimplex::MCFSNde( MCFClass::cIndex i )
 {
  if( usePrimalSimplex )
   return( Index( ( (arcsP + i)->tail - nodesP + 1 ) - USENAME0 ) );
@@ -996,7 +997,7 @@ inline MCFClass::Index NetworkSimplex::MCFSNde( MCFClass::cIndex i )
 
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::Index NetworkSimplex::MCFENde( MCFClass::cIndex i )
+inline MCFClass::Index MCFSimplex::MCFENde( MCFClass::cIndex i )
 {
  if( usePrimalSimplex )
   return( Index( ( (arcsP + i)->head - nodesP + 1 ) - USENAME0 ) );
@@ -1006,7 +1007,7 @@ inline MCFClass::Index NetworkSimplex::MCFENde( MCFClass::cIndex i )
 
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::CNumber NetworkSimplex::MCFCost( MCFClass::cIndex i )
+inline MCFClass::CNumber MCFSimplex::MCFCost( MCFClass::cIndex i )
 {
  if( usePrimalSimplex )
   return( (arcsP + i)->cost );
@@ -1016,7 +1017,7 @@ inline MCFClass::CNumber NetworkSimplex::MCFCost( MCFClass::cIndex i )
 
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::CNumber NetworkSimplex::MCFQCoef( MCFClass::cIndex i )
+inline MCFClass::CNumber MCFSimplex::MCFQCoef( MCFClass::cIndex i )
 {
  #if( QUADRATICCOST )
   if( usePrimalSimplex )
@@ -1030,7 +1031,7 @@ inline MCFClass::CNumber NetworkSimplex::MCFQCoef( MCFClass::cIndex i )
 
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::FNumber NetworkSimplex::MCFUCap( MCFClass::cIndex i )
+inline MCFClass::FNumber MCFSimplex::MCFUCap( MCFClass::cIndex i )
 {
  if( usePrimalSimplex )
   return( (arcsP + i)->upper );
@@ -1040,7 +1041,7 @@ inline MCFClass::FNumber NetworkSimplex::MCFUCap( MCFClass::cIndex i )
 
 /*-------------------------------------------------------------------------*/
 
-inline MCFClass::FNumber NetworkSimplex::MCFDfct( MCFClass::cIndex i )
+inline MCFClass::FNumber MCFSimplex::MCFDfct( MCFClass::cIndex i )
 {
  if( usePrimalSimplex )
   return( (nodesP + i)->balance );
@@ -1053,7 +1054,7 @@ inline MCFClass::FNumber NetworkSimplex::MCFDfct( MCFClass::cIndex i )
 #if( QUADRATICCOST )
 
 template <class A>
-inline NetworkSimplex::FONumber NetworkSimplex::ReductCost( A *a )
+inline MCFSimplex::FONumber MCFSimplex::ReductCost( A *a )
 {
  FONumber redc = (a->tail)->potential - (a->head)->potential;
  redc = redc + a->cost;
@@ -1064,7 +1065,7 @@ inline NetworkSimplex::FONumber NetworkSimplex::ReductCost( A *a )
 #else
 
 template <class A>
-inline NetworkSimplex::CNumber NetworkSimplex::ReductCost( A *a )
+inline MCFSimplex::CNumber MCFSimplex::ReductCost( A *a )
 {
  CNumber redc = (a->tail)->potential - (a->head)->potential;
  redc = redc + a->cost;
@@ -1074,7 +1075,7 @@ inline NetworkSimplex::CNumber NetworkSimplex::ReductCost( A *a )
 #endif
 
 /*-------------------------------------------------------------------------*/
- 
+
 #if( OPT_USE_NAMESPACES )
 };  // end( namespace MCFClass_di_unipi_it )
 #endif

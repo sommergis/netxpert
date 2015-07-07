@@ -572,19 +572,21 @@ vector<InternalArc> Network::insertNewEndNode(bool isDirected, SplittedArc& spli
     //Workaround: raw pointers and references; not delete ptr necessary (TEST!)
     const MultiLineString& completeLine = *splittedLine.arcGeom;
 
-    /*auto ptr1 = completeLine.getGeometryN(0);
+    auto ptr1 = completeLine.getGeometryN(0);
     auto ptr2 = completeLine.getGeometryN(1);
     const Geometry& g1 = *ptr1;
     const Geometry& g2 = *ptr2;
     const LineString& segment1 = dynamic_cast<const LineString&>(g1);
-    const LineString& segment2 = dynamic_cast<const LineString&>(g2);*/
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);
 
+    /*
+    Causes double free corruption
     auto ptr1 = unique_ptr<const Geometry>(completeLine.getGeometryN(0));
     auto ptr2 = unique_ptr<const Geometry>(completeLine.getGeometryN(1));
     const Geometry& g1 = *ptr1;
     const Geometry& g2 = *ptr2;
     const LineString& segment1 = dynamic_cast<const LineString&>(g1);
-    const LineString& segment2 = dynamic_cast<const LineString&>(g2);
+    const LineString& segment2 = dynamic_cast<const LineString&>(g2);*/
 
     //OLD with shared_ptrs
     //shared_ptr<const Geometry> gPtr1 (completeLine.getGeometryN(0));
@@ -1270,14 +1272,15 @@ void Network::buildTotalRouteGeometry(const string& arcIDs, const string& result
     {
         case RESULT_DB_TYPE::SpatiaLiteDB:
             {
-                auto mLinePtr = unique_ptr<MultiLineString>( DBHELPER::GEO_FACTORY->createMultiLineString() );
+                //pass empty geometry
+                //auto mLinePtr = unique_ptr<MultiLineString>( DBHELPER::GEO_FACTORY->createMultiLineString() );
 
                 SpatiaLiteWriter sldb (netXpertConfig);
                 sldb.OpenNewTransaction();
                 sldb.CreateSolverResultTable(resultTableName, true);
                 sldb.CreateRouteGeometries(netXpertConfig.ArcsGeomColumnName,
                     netXpertConfig.ArcIDColumnName, netXpertConfig.ArcsTableName,
-                    arcIDs, *mLinePtr, resultTableName);
+                    arcIDs, resultTableName);
                 sldb.CommitCurrentTransaction();
                 sldb.CloseConnection();
             }
