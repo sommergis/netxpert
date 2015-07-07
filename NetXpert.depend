@@ -4203,7 +4203,7 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1436210523 source:/home/hahne/dev/netxpert/src/network.cpp
+1436267893 source:/home/hahne/dev/netxpert/src/network.cpp
 	"network.h"
 
 1435866203 /home/hahne/dev/netxpert/include/network.h
@@ -4222,10 +4222,10 @@
 	<geos/io/WKTReader.h>
 	<cmath>
 
-1435780504 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
+1436268730 source:/home/hahne/dev/netxpert/src/slitewriter.cpp
 	"slitewriter.h"
 
-1435777143 /home/hahne/dev/netxpert/include/slitewriter.h
+1436267415 /home/hahne/dev/netxpert/include/slitewriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -4548,7 +4548,7 @@
 1434728254 source:/home/hahne/dev/netxpert/src/core/mstlem.cpp
 	"mstlem.h"
 
-1434728254 /home/hahne/dev/netxpert/include/core/mstlem.h
+1436265695 /home/hahne/dev/netxpert/include/core/mstlem.h
 	<lemon/smart_graph.h>
 	<lemon/kruskal.h>
 	<lemon/maps.h>
@@ -4559,14 +4559,15 @@
 
 1432411396 /home/hahne/dev/netxpert/include/solver/iminspantree.h
 
-1423765899 source:/home/hahne/dev/netxpert/src/core/MCFSimplex.cpp
+1436265247 source:/home/hahne/dev/netxpert/src/core/MCFSimplex.cpp
 	"MCFSimplex.h"
 	<algorithm>
 	<iostream>
 	<cstdlib>
 	<ctime>
 
-1423765899 /home/hahne/dev/netxpert/include/core/MCFSimplex.h
+1436265277 /home/hahne/dev/netxpert/include/core/MCFSimplex.h
+	"imcflow.h"
 	"MCFClass.h"
 
 1432325148 /home/hahne/dev/netxpert/include/core/MCFClass.h
@@ -4590,7 +4591,8 @@
 1434728254 source:/home/hahne/dev/netxpert/src/core/netsimplexlem.cpp
 	"netsimplexlem.h"
 
-1434728254 /home/hahne/dev/netxpert/include/core/netsimplexlem.h
+1436265105 /home/hahne/dev/netxpert/include/core/netsimplexlem.h
+	"imcflow.h"
 	<lemon/smart_graph.h>
 	<lemon/network_simplex.h>
 	<stdio.h>
@@ -4674,10 +4676,10 @@
 
 1434728254 /home/hahne/dev/netxpert/include/solver/isptree.h
 
-1435350911 source:/home/hahne/dev/netxpert/src/solver/sptree.cpp
+1436269083 source:/home/hahne/dev/netxpert/src/solver/sptree.cpp
 	"sptree.h"
 
-1436214822 /home/hahne/dev/netxpert/include/solver/sptree.h
+1436268948 /home/hahne/dev/netxpert/include/solver/sptree.h
 	"isolver.h"
 	"isptree.h"
 	"SPTree_Dijkstra.h"
@@ -4687,14 +4689,14 @@
 	"sptlem.h"
 	"data.h"
 
-1434728254 /home/hahne/dev/netxpert/include/solver/imstree.h
+1436265446 /home/hahne/dev/netxpert/include/solver/imstree.h
 
-1436214413 /home/hahne/dev/netxpert/include/solver/mstree.h
+1436265833 /home/hahne/dev/netxpert/include/solver/mstree.h
 	"isolver.h"
 	"imstree.h"
 	"mstlem.h"
 
-1436214499 source:/home/hahne/dev/netxpert/src/solver/mstree.cpp
+1436265848 source:/home/hahne/dev/netxpert/src/solver/mstree.cpp
 	"mstree.h"
 
 1436214152 /home/hahne/dev/netxpert/include/solver/odmatrix.h
@@ -4709,4 +4711,13 @@
 
 1435783370 source:/home/hahne/dev/netxpert/src/solver/odmatrix.cpp
 	"odmatrix.h"
+
+1436265182 /home/hahne/dev/netxpert/include/solver/imcflow.h
+
+1436267061 source:/home/hahne/dev/netxpert/src/solver/mcflow.cpp
+	"mcflow.h"
+
+1436267075 /home/hahne/dev/netxpert/include/solver/mcflow.h
+	"isolver.h"
+	"imcflow.h"
 

@@ -82,8 +82,10 @@
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
 		<Unit filename="include/slitewriter.h" />
+		<Unit filename="include/solver/imcflow.h" />
 		<Unit filename="include/solver/imstree.h" />
 		<Unit filename="include/solver/isptree.h" />
+		<Unit filename="include/solver/mcflow.h" />
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />
 		<Unit filename="include/solver/sptree.h" />
@@ -113,6 +115,7 @@
 		<Unit filename="src/core/sptlem.cpp" />
 		<Unit filename="src/dbhelper.cpp" />
 		<Unit filename="src/fgdbwriter.cpp" />
+		<Unit filename="src/imcflow.cpp" />
 		<Unit filename="src/logger.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/network.cpp" />
@@ -121,6 +124,7 @@
 		</Unit>
 		<Unit filename="src/networkbuilder.cpp" />
 		<Unit filename="src/slitewriter.cpp" />
+		<Unit filename="src/solver/mcflow.cpp" />
 		<Unit filename="src/solver/mstree.cpp" />
 		<Unit filename="src/solver/odmatrix.cpp" />
 		<Unit filename="src/solver/sptree.cpp" />

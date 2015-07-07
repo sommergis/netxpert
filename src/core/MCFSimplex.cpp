@@ -52,10 +52,10 @@ using namespace MCFClass_di_unipi_it;
 #define LIMITATEPRECISION 1
 
 /* If LIMITATEPRECISION is 1, in the quadratic case the Primal Simplex accepts
-   entering arc in base only if the decrease of the o.f. value is bigger than 
+   entering arc in base only if the decrease of the o.f. value is bigger than
    a fixed thresold (EpsOpt * oldFOValue / n). Otherwise, any strict decrease
    in the o.f. value is accepted. */
-   
+
 #define UNIPI_PRIMAL_INITIAL_SHOW 0
 
 /* If UNIPI_PRIMAL_INITIAL_SHOW = 1, Primal Simplex shows the initial condition
@@ -98,7 +98,7 @@ using namespace MCFClass_di_unipi_it;
 #define UNIPI_VIS_ARC_STATE 1
 #define UNIPI_VIS_NODE_BASIC_ARC 1
 
-/* When Primal Simplex or Dual Simplex shows the conditions of the network, 
+/* When Primal Simplex or Dual Simplex shows the conditions of the network,
    for every arcs the algorithm shows the flow, for every nodes it shows
    balance and potential. These 6 flags decide if the algorithm shows a
    particular value of the arcs/nodes;  for example if
@@ -107,7 +107,7 @@ using namespace MCFClass_di_unipi_it;
 
 #define FOSHOW 0
 
-/* If FOSHOW is 1, the algorithm shows the f.o. value every x iterations 
+/* If FOSHOW is 1, the algorithm shows the f.o. value every x iterations
    (x = UNIPI_PRIMAL_ITER_SHOW or x = UNIPI_DUAL_ITER_SHOW). */
 
 #define OPTQUADRATIC 0
@@ -153,7 +153,7 @@ inline void Swap( T &v1 , T &v2 )
    according to:
 
    - the used Simplex
-   - the size of the network 
+   - the size of the network
    - (obviously) the different variables
 
    This set of values tries to improve the performance of the two algorithms
@@ -174,7 +174,7 @@ static const int DUAL_HIGH_HOT_LIST_SIZE =  2;
 /*--------------------------- COSTRUCTOR -----------------------------------*/
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::NetworkSimplex( cIndex nmx , cIndex mmx )
+MCFSimplex::MCFSimplex( cIndex nmx , cIndex mmx )
             :
             MCFClass( nmx , mmx )
 {
@@ -194,7 +194,7 @@ NetworkSimplex::NetworkSimplex( cIndex nmx , cIndex mmx )
 
  #if( QUADRATICCOST )
   recomputeFOLimits = 100;
-  // recomputeFOLimits represents the limit of the iteration in which 
+  // recomputeFOLimits represents the limit of the iteration in which
   // quadratic Primal Simplex computes "manually" the f.o. value
   EpsOpt = 1e-13;
   // EpsOpt is the fixed precision of the quadratic Primal Simplex
@@ -222,7 +222,7 @@ NetworkSimplex::NetworkSimplex( cIndex nmx , cIndex mmx )
 /*-------------------------- OTHER INITIALIZATIONS -------------------------*/
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
+void MCFSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
                           cFRow pU , cCRow pC , cFRow pDfct ,
                           cIndex_Set pSn , cIndex_Set pEn )
 {
@@ -232,7 +232,7 @@ void NetworkSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
   // if the size of the allocated memory changes
 
   if( nmax && mmax )  {  // if the memory was already allocated
-   MemDeAlloc(true);         // deallocate the Primal 
+   MemDeAlloc(true);         // deallocate the Primal
    MemDeAlloc(false);        // and the Dual data structures
    nmax = mmax = 0;
    }
@@ -265,7 +265,7 @@ void NetworkSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
     // initialize real arcs
     arc->cost = pC[ arc - arcsP ];
     #if( QUADRATICCOST )
-     arc->quadraticCost = 0; 
+     arc->quadraticCost = 0;
     #endif
     arc->upper = pU[ arc - arcsP ];
     arc->tail = nodesP + pSn[ arc - arcsP ] - 1;
@@ -285,7 +285,7 @@ void NetworkSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
     // initialize real arcs
     arc->cost = pC[ arc - arcsD ];
     #if( QUADRATICCOST )
-     arc->quadraticCost = 0; 
+     arc->quadraticCost = 0;
     #endif
     arc->upper = pU[ arc - arcsD ];
     arc->tail = nodesD + pSn[ arc - arcsD ] - 1;
@@ -300,11 +300,11 @@ void NetworkSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
 
   status = kUnSolved;
   }
- }  // end( NetworkSimplex::LoadNet )
-                
+ }  // end( MCFSimplex::LoadNet )
+
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::SetAlg( bool UsPrml , char WhchPrc )
+void MCFSimplex::SetAlg( bool UsPrml , char WhchPrc )
 {
  bool newUsePrimalSimplex = UsPrml;
  bool oldUsePrimalSimplex = usePrimalSimplex;
@@ -512,7 +512,7 @@ void NetworkSimplex::SetAlg( bool UsPrml , char WhchPrc )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::SetPar( int par, int val )
+void MCFSimplex::SetPar( int par, int val )
 {
  switch( par ) {
  case kAlgPrimal:
@@ -525,7 +525,7 @@ void NetworkSimplex::SetPar( int par, int val )
   break;
 
  case kAlgPricing:
- 
+
   if( ( val == kDantzig ) || ( val == kFirstEligibleArc ) ||
       ( val == kCandidateListPivot ) )
    SetAlg( usePrimalSimplex , val );
@@ -563,7 +563,7 @@ void NetworkSimplex::SetPar( int par, int val )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::SetPar( int par , double val )
+void MCFSimplex::SetPar( int par , double val )
 {
  switch( par ) {
  case kEpsOpt:
@@ -580,7 +580,7 @@ void NetworkSimplex::SetPar( int par , double val )
 /*--------------- METHODS FOR SOLVING THE PROBLEM -------------------------*/
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::SolveMCF( void )
+void MCFSimplex::SolveMCF( void )
 {
  if( MCFt )
   MCFt->Start();
@@ -600,13 +600,13 @@ void NetworkSimplex::SolveMCF( void )
  if( MCFt )
   MCFt->Stop();
 
- }  // end( NetworkSimplex::SolveMCF )
+ }  // end( MCFSimplex::SolveMCF )
 
 /*--------------------------------------------------------------------------*/
 /*---------------------- METHODS FOR READING RESULTS -----------------------*/
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFGetX( FRow F , Index_Set nms , cIndex strt , Index stp )
+void MCFSimplex::MCFGetX( FRow F , Index_Set nms , cIndex strt , Index stp )
 {
  if( stp > m )
   stp = m;
@@ -630,7 +630,7 @@ void NetworkSimplex::MCFGetX( FRow F , Index_Set nms , cIndex strt , Index stp )
     }
 
   *nms = Inf<Index>();
-  }        
+  }
  else
   if( usePrimalSimplex )
    for( Index i = strt; i < stp; i++ )
@@ -639,11 +639,11 @@ void NetworkSimplex::MCFGetX( FRow F , Index_Set nms , cIndex strt , Index stp )
    for( Index i = strt; i < stp; i++ )
     *(F++) = ( arcsD + i )->flow;
 
- }  // end( NetworkSimplex::MCFGetX( some ) )
+ }  // end( MCFSimplex::MCFGetX( some ) )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFGetRC( CRow CR , cIndex_Set nms , cIndex strt , Index stp )
+void MCFSimplex::MCFGetRC( CRow CR , cIndex_Set nms , cIndex strt , Index stp )
 {
  if( nms ) {
   while( *nms < strt )
@@ -667,22 +667,22 @@ void NetworkSimplex::MCFGetRC( CRow CR , cIndex_Set nms , cIndex strt , Index st
    for( arcDType* arc = arcsD + strt ; arc < arcsD + stp ; arc++ )
     *(CR++) = ReductCost( arc );
   }
- }  // end( NetworkSimplex::MCFGetRC( some ) )
+ }  // end( MCFSimplex::MCFGetRC( some ) )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::CNumber NetworkSimplex::MCFGetRC( cIndex i )
+MCFSimplex::CNumber MCFSimplex::MCFGetRC( cIndex i )
 {
  if( usePrimalSimplex )
   return CNumber( ReductCost( arcsP + i ) );
  else
   return( ReductCost( arcsD + i ) );
 
- }  // end( NetworkSimplex::MCFGetRC( i ) )
+ }  // end( MCFSimplex::MCFGetRC( i ) )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFGetPi( CRow P , cIndex_Set nms , cIndex strt , Index stp )
+void MCFSimplex::MCFGetPi( CRow P , cIndex_Set nms , cIndex strt , Index stp )
 {
  if( stp > n )
   stp = n;
@@ -706,27 +706,27 @@ void NetworkSimplex::MCFGetPi( CRow P , cIndex_Set nms , cIndex strt , Index stp
    for( nodeDType *node = nodesD + strt ; node++ < ( nodesD + stp ) ; node++ )
     *(P++) = node->potential;
 
- }  // end(  NetworkSimplex::MCFGetPi( some ) )
+ }  // end(  MCFSimplex::MCFGetPi( some ) )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::FONumber NetworkSimplex::MCFGetFO( void )
+MCFSimplex::FONumber MCFSimplex::MCFGetFO( void )
 {
  if( status == kOK )
   return( (FONumber) GetFO() );
  else
-  if( status == kUnbounded ) 
+  if( status == kUnbounded )
    return( - Inf<FONumber>() );
   else
    return( Inf<FONumber>() );
 
- }  // end( NetworkSimplex::MCFGetFO )
+ }  // end( MCFSimplex::MCFGetFO )
 
 /*-------------------------------------------------------------------------*/
 /*----------METHODS FOR READING THE DATA OF THE PROBLEM--------------------*/
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFArcs( Index_Set Startv , Index_Set Endv ,
+void MCFSimplex::MCFArcs( Index_Set Startv , Index_Set Endv ,
 			  cIndex_Set nms , cIndex strt , Index stp )
 {
  if( stp > m )
@@ -767,11 +767,11 @@ void NetworkSimplex::MCFArcs( Index_Set Startv , Index_Set Endv ,
      *(Endv++) = Index( arc->head - nodesD ) - USENAME0;
     }
 
- }  // end( NetworkSimplex::MCFArcs )
+ }  // end( MCFSimplex::MCFArcs )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFCosts( CRow Costv , cIndex_Set nms ,
+void MCFSimplex::MCFCosts( CRow Costv , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -791,16 +791,16 @@ void NetworkSimplex::MCFCosts( CRow Costv , cIndex_Set nms ,
  else
   if( usePrimalSimplex )
    for( arcPType* arc = arcsP + strt ; arc < (arcsP + stp) ; arc++ )
-    *(Costv++) = arc->cost;           
+    *(Costv++) = arc->cost;
   else
    for( arcDType* arc = arcsD + strt ; arc < (arcsD + stp) ; arc++ )
-    *(Costv++) = arc->cost;           
+    *(Costv++) = arc->cost;
 
- }  // end( NetworkSimplex::MCFCosts ( some ) )
+ }  // end( MCFSimplex::MCFCosts ( some ) )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFQCoef( CRow Qv , cIndex_Set nms  ,
+void MCFSimplex::MCFQCoef( CRow Qv , cIndex_Set nms  ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -832,15 +832,15 @@ void NetworkSimplex::MCFQCoef( CRow Qv , cIndex_Set nms  ,
      *(Qv++) = arc->quadraticCost;
   #else
    for( Index h = strt ; h++ < stp ; )
-    *(Qv++) = 0;           
+    *(Qv++) = 0;
   #endif
 
- }  // end( NetworkSimplex::MCFQCoef ( some ) )
+ }  // end( MCFSimplex::MCFQCoef ( some ) )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFUCaps( FRow UCapv , cIndex_Set nms ,
-			   cIndex strt , Index stp ) 
+void MCFSimplex::MCFUCaps( FRow UCapv , cIndex_Set nms ,
+			   cIndex strt , Index stp )
 {
  if( stp > m )
   stp = m;
@@ -864,11 +864,11 @@ void NetworkSimplex::MCFUCaps( FRow UCapv , cIndex_Set nms ,
    for( arcDType* arc = arcsD + strt ; arc < ( arcsD + stp ) ; arc++ )
     *(UCapv++) = arc->upper;
 
- }  // end( NetworkSimplex::MCFUCaps ( some ) )
- 
+ }  // end( MCFSimplex::MCFUCaps ( some ) )
+
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::MCFDfcts( FRow Dfctv , cIndex_Set nms ,
+void MCFSimplex::MCFDfcts( FRow Dfctv , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > n )
@@ -893,13 +893,13 @@ void NetworkSimplex::MCFDfcts( FRow Dfctv , cIndex_Set nms ,
    for( nodeDType* node = nodesD + strt ; node < ( nodesD + stp ) ; node++ )
     *(Dfctv++) = node->balance;
 
- }  // end( NetworkSimplex::MCFDfcts )
+ }  // end( MCFSimplex::MCFDfcts )
 
 /*-------------------------------------------------------------------------*/
 /*--------- METHODS FOR ADDING / REMOVING / CHANGING DATA -----------------*/
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgCosts( cCRow NCost , cIndex_Set nms ,
+void MCFSimplex::ChgCosts( cCRow NCost , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -922,10 +922,10 @@ void NetworkSimplex::ChgCosts( cCRow NCost , cIndex_Set nms ,
  else
   if( usePrimalSimplex )
    for( arcPType *arc = arcsP + strt ; arc < (arcsP + stp) ; arc++ )
-    arc->cost = *(NCost++); 
+    arc->cost = *(NCost++);
   else
    for( arcDType *arc = arcsD + strt ; arc < (arcsD + stp) ; arc++ )
-    arc->cost = *(NCost++); 
+    arc->cost = *(NCost++);
 
  if( Senstv && ( status != kUnSolved ) )
   if( usePrimalSimplex )
@@ -939,7 +939,7 @@ void NetworkSimplex::ChgCosts( cCRow NCost , cIndex_Set nms ,
        arc->ident = AT_LOWER;
        }
       else {
-       arc->flow = arc->upper; 
+       arc->flow = arc->upper;
        arc->ident = AT_UPPER;
        }
 
@@ -950,11 +950,11 @@ void NetworkSimplex::ChgCosts( cCRow NCost , cIndex_Set nms ,
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgCosts )
+ }  // end( MCFSimplex::ChgCosts )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgCost( Index arc , cCNumber NCost )
+void MCFSimplex::ChgCost( Index arc , cCNumber NCost )
 {
  if( arc >= m )
   return;
@@ -986,7 +986,7 @@ void NetworkSimplex::ChgCost( Index arc , cCNumber NCost )
        a->ident = AT_LOWER;
        }
       else {
-       a->flow = a->upper; 
+       a->flow = a->upper;
        a->ident = AT_UPPER;
        }
 
@@ -998,11 +998,11 @@ void NetworkSimplex::ChgCost( Index arc , cCNumber NCost )
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgCost )
+ }  // end( MCFSimplex::ChgCost )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgQCoef( cCRow NQCoef , cIndex_Set nms ,
+void MCFSimplex::ChgQCoef( cCRow NQCoef , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -1026,10 +1026,10 @@ void NetworkSimplex::ChgQCoef( cCRow NQCoef , cIndex_Set nms ,
   else
    if( usePrimalSimplex )
     for( arcPType *arc = arcsP + strt ; arc < ( arcsP + stp ) ; arc++ )
-     arc->quadraticCost = *(NQCoef++); 
+     arc->quadraticCost = *(NQCoef++);
    else
     for( arcDType *arc = arcsD + strt ; arc < ( arcsD + stp ) ; arc++ )
-     arc->quadraticCost = *(NQCoef++); 
+     arc->quadraticCost = *(NQCoef++);
 
   if( Senstv && (status != kUnSolved ) )
    ComputePotential( dummyRootP );
@@ -1039,11 +1039,11 @@ void NetworkSimplex::ChgQCoef( cCRow NQCoef , cIndex_Set nms ,
   if( NQCoef )
    throw( MCFException( "ChgQCoef: nonzero coefficients not allowed" ) );
  #endif
-}  // end( NetworkSimplex::ChgQCoef )
+}  // end( MCFSimplex::ChgQCoef )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgQCoef( Index arc , cCNumber NQCoef )
+void MCFSimplex::ChgQCoef( Index arc , cCNumber NQCoef )
 {
  #if( QUADRATICCOST )
   if( arc >= m )
@@ -1067,11 +1067,11 @@ void NetworkSimplex::ChgQCoef( Index arc , cCNumber NQCoef )
   if( NQCoef )
    throw( MCFException( "ChgQCoef: nonzero coefficients not allowed" ) );
  #endif
- }  // end( NetworkSimplex::ChgQCoef )
+ }  // end( MCFSimplex::ChgQCoef )
 
 /*-------------------------------------------------------------------------*/
-    
-void NetworkSimplex::ChgDfcts( cFRow NDfct , cIndex_Set nms ,
+
+void MCFSimplex::ChgDfcts( cFRow NDfct , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -1113,12 +1113,12 @@ void NetworkSimplex::ChgDfcts( cFRow NDfct , cIndex_Set nms ,
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgDfcts )
+ }  // end( MCFSimplex::ChgDfcts )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgDfct( Index nod , cFNumber NDfct )
-{ 
+void MCFSimplex::ChgDfct( Index nod , cFNumber NDfct )
+{
  if( nod > n )
   return;
 
@@ -1141,11 +1141,11 @@ void NetworkSimplex::ChgDfct( Index nod , cFNumber NDfct )
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgDfct )
+ }  // end( MCFSimplex::ChgDfct )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgUCaps( cFRow NCap , cIndex_Set nms ,
+void MCFSimplex::ChgUCaps( cFRow NCap , cIndex_Set nms ,
 			   cIndex strt , Index stp )
 {
  if( stp > m )
@@ -1171,16 +1171,16 @@ void NetworkSimplex::ChgUCaps( cFRow NCap , cIndex_Set nms ,
     arc->upper = *(NCap++);
   else
    for( arcDType *arc = arcsD + strt ; arc < ( arcsD + stp ) ; arc++ )
-    arc->upper = *(NCap++); 
+    arc->upper = *(NCap++);
 
  if( Senstv && (status != kUnSolved ) ) {
   if( usePrimalSimplex ) {
    for( arcPType *arc = arcsP ; arc != stopArcsP ; arc++)
     #if( QUADRATICCOST )
-     if( GT( arc->flow , arc->upper , EpsFlw ) ) 
+     if( GT( arc->flow , arc->upper , EpsFlw ) )
       arc->flow = arc->upper;
     #else
-     if( GT(arc->flow , arc->upper , EpsFlw ) || 
+     if( GT(arc->flow , arc->upper , EpsFlw ) ||
 	 ( ( arc->ident == AT_UPPER ) &&
 	   ( ! ETZ( arc->flow - arc->upper , EpsFlw ) ) ) )
       arc->flow = arc->upper;
@@ -1208,11 +1208,11 @@ void NetworkSimplex::ChgUCaps( cFRow NCap , cIndex_Set nms ,
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgUCaps )
+ }  // end( MCFSimplex::ChgUCaps )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChgUCap( Index arc , cFNumber NCap )
+void MCFSimplex::ChgUCap( Index arc , cFNumber NCap )
 {
  if( arc >= m )
   return;
@@ -1225,7 +1225,7 @@ void NetworkSimplex::ChgUCap( Index arc , cFNumber NCap )
  if( Senstv && (status != kUnSolved ) ) {
   if( usePrimalSimplex ) {
    #if( QUADRATICCOST )
-    if( GT( ( arcsP + arc )->flow , ( arcsP + arc )->upper , EpsFlw ) ) 
+    if( GT( ( arcsP + arc )->flow , ( arcsP + arc )->upper , EpsFlw ) )
      ( arcsP + arc )->flow = ( arcsP + arc )->upper;
    #else
     if( GT( ( arcsP + arc )->flow , ( arcsP + arc )->upper , EpsFlw ) ||
@@ -1242,7 +1242,7 @@ void NetworkSimplex::ChgUCap( Index arc , cFNumber NCap )
   else {
    #if( QUADRATICCOST == 0 )
     if( ( GT( ( arcsD + arc )->flow , ( arcsD + arc )->upper , EpsFlw ) &&
-	  ( ( ( arcsD + arc )->ident != BASIC ) ) ) || 
+	  ( ( ( arcsD + arc )->ident != BASIC ) ) ) ||
 	( ( ( arcsD + arc )->ident == AT_UPPER ) &&
 	  ( ! ETZ( ( arcsD + arc )->flow - ( arcsD + arc )->upper , EpsFlw ) ) ) ) {
      ( arcsD + arc )->flow = ( arcsD + arc )->upper;
@@ -1258,11 +1258,11 @@ void NetworkSimplex::ChgUCap( Index arc , cFNumber NCap )
  else
   status = kUnSolved;
 
- }  // end( NetworkSimplex::ChgUCap )
+ }  // end( MCFSimplex::ChgUCap )
 
 /*-------------------------------------------------------------------------*/
 
-bool NetworkSimplex::IsClosedArc( cIndex name )
+bool MCFSimplex::IsClosedArc( cIndex name )
 {
  if( name >= m )
   return( false );
@@ -1279,7 +1279,7 @@ bool NetworkSimplex::IsClosedArc( cIndex name )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::CloseArc( cIndex name )
+void MCFSimplex::CloseArc( cIndex name )
 {
  if( name >= m )
   return;
@@ -1317,7 +1317,7 @@ void NetworkSimplex::CloseArc( cIndex name )
 
    CreateInitialPModifiedBalanceVector();
    PostPVisit(dummyRootP);
-   BalanceFlow(dummyRootP);                
+   BalanceFlow(dummyRootP);
    ComputePotential(dummyRootP);
    }
   else
@@ -1354,7 +1354,7 @@ void NetworkSimplex::CloseArc( cIndex name )
 	a->ident = AT_LOWER;
         }
        else {
-	a->flow = a->upper; 
+	a->flow = a->upper;
 	a->ident = AT_UPPER;
         }
      }
@@ -1367,11 +1367,11 @@ void NetworkSimplex::CloseArc( cIndex name )
     status = kUnSolved;
   #endif
   }
- }  // end( NetworkSimplex::CloseArc )
+ }  // end( MCFSimplex::CloseArc )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::DelNode( cIndex name )
+void MCFSimplex::DelNode( cIndex name )
 {
  if( name >= n )
   return;
@@ -1381,7 +1381,7 @@ void NetworkSimplex::DelNode( cIndex name )
   nodePType *last = CutAndUpdateSubtree(node, -node->subTreeLevel);
   nodePType *n = node->nextInT;
   while( n ) {
-   if( n->subTreeLevel == 1 ) 
+   if( n->subTreeLevel == 1 )
     n->enteringTArc = dummyArcsP + ( n - nodesP );
 
    n = n->nextInT;
@@ -1391,7 +1391,7 @@ void NetworkSimplex::DelNode( cIndex name )
   n = node->nextInT;
   dummyRootP->nextInT = n;
   n->prevInT = dummyRootP;
-  
+
   for( arcPType *arc = arcsP ; arc != stopArcsP ; arc++ ) {
    if( ( ( arc->tail ) == node) || ( ( arc->head ) == node ) ) {
     arc->flow = 0;
@@ -1453,11 +1453,11 @@ void NetworkSimplex::DelNode( cIndex name )
    ComputePotential( dummyRootD );
   #endif
   }
- }  // end( NetworkSimplex::DelNode )
+ }  // end( MCFSimplex::DelNode )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::OpenArc( cIndex name )
+void MCFSimplex::OpenArc( cIndex name )
 {
  if( name >= m )
   return;
@@ -1471,7 +1471,7 @@ void NetworkSimplex::OpenArc( cIndex name )
    arcPType *arc = arcsP + name;
    if( arc->ident == CLOSED ) {
     arc->ident = AT_LOWER;
-    arc->flow = 0; 
+    arc->flow = 0;
     }
   #endif
   }
@@ -1498,10 +1498,10 @@ void NetworkSimplex::OpenArc( cIndex name )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::Index NetworkSimplex::AddNode( cFNumber aDfct )
+MCFSimplex::Index MCFSimplex::AddNode( cFNumber aDfct )
 {
  if( n >= nmax )
-  return( Inf<Index>() );        
+  return( Inf<Index>() );
 
  n++;
  if( usePrimalSimplex ) {
@@ -1555,11 +1555,11 @@ NetworkSimplex::Index NetworkSimplex::AddNode( cFNumber aDfct )
 
  return( n );
 
- }  // end( NetworkSimplex::AddNode )
+ }  // end( MCFSimplex::AddNode )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::ChangeArc( cIndex name , cIndex nSN , cIndex nEN )
+void MCFSimplex::ChangeArc( cIndex name , cIndex nSN , cIndex nEN )
 {
  if( name >= m )
   return;
@@ -1581,11 +1581,11 @@ void NetworkSimplex::ChangeArc( cIndex name , cIndex nSN , cIndex nEN )
 
  OpenArc( name );
 
- }  // end( NetworkSimplex::ChangeArc )
+ }  // end( MCFSimplex::ChangeArc )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::DelArc( cIndex name )
+void MCFSimplex::DelArc( cIndex name )
 {
  if( name >= m )
   return;
@@ -1623,12 +1623,12 @@ void NetworkSimplex::DelArc( cIndex name )
    arc->ident = DELETED;
   #endif
   }
- }  // end( NetworkSimplex::DelArc )
+ }  // end( MCFSimplex::DelArc )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::Index NetworkSimplex::AddArc( cIndex Start , cIndex End ,
-				      cFNumber aU , cCNumber aC ) 
+MCFSimplex::Index MCFSimplex::AddArc( cIndex Start , cIndex End ,
+				      cFNumber aU , cCNumber aC )
 {
  if( usePrimalSimplex ) {
   arcPType *arc = arcsP;
@@ -1707,11 +1707,11 @@ NetworkSimplex::Index NetworkSimplex::AddArc( cIndex Start , cIndex End ,
    return( pos );
   #endif
   }
- }  // end( NetworkSimplex::AddArc )
+ }  // end( MCFSimplex::AddArc )
 
 /*--------------------------------------------------------------------------*/
 
-bool NetworkSimplex::IsDeletedArc( cIndex name )
+bool MCFSimplex::IsDeletedArc( cIndex name )
 {
  if( name >= m )
   return( false );
@@ -1730,7 +1730,7 @@ bool NetworkSimplex::IsDeletedArc( cIndex name )
 /*------------------------------ DESTRUCTOR --------------------------------*/
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::~NetworkSimplex()
+MCFSimplex::~MCFSimplex()
 {
  MemDeAllocCandidateList();
  MemDeAlloc(true);
@@ -1741,7 +1741,7 @@ NetworkSimplex::~NetworkSimplex()
 /*---------------------------- PRIVATE METHODS -----------------------------*/
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MemAlloc( void )
+void MCFSimplex::MemAlloc( void )
 {
  if( usePrimalSimplex )        {
   nodesP = new nodePType[ nmax + 1 ];   // array of nodes
@@ -1759,7 +1759,7 @@ void NetworkSimplex::MemAlloc( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MemDeAlloc( bool whatDeAlloc )
+void MCFSimplex::MemDeAlloc( bool whatDeAlloc )
 {
  if( whatDeAlloc ) {
   delete[] nodesP;
@@ -1778,26 +1778,26 @@ void NetworkSimplex::MemDeAlloc( bool whatDeAlloc )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MemAllocCandidateList( void )
+void MCFSimplex::MemAllocCandidateList( void )
 {
  if( usePrimalSimplex ) {
   if( m < 10000 ) {
-   numCandidateList = PRIMAL_LOW_NUM_CANDIDATE_LIST; 
+   numCandidateList = PRIMAL_LOW_NUM_CANDIDATE_LIST;
    hotListSize = PRIMAL_LOW_HOT_LIST_SIZE;
    }
   else
    if( m > 100000 ) {
-    numCandidateList = PRIMAL_HIGH_NUM_CANDIDATE_LIST; 
+    numCandidateList = PRIMAL_HIGH_NUM_CANDIDATE_LIST;
     hotListSize = PRIMAL_HIGH_HOT_LIST_SIZE ;
     }
    else {
-    numCandidateList = PRIMAL_MEDIUM_NUM_CANDIDATE_LIST; 
+    numCandidateList = PRIMAL_MEDIUM_NUM_CANDIDATE_LIST;
     hotListSize = PRIMAL_MEDIUM_HOT_LIST_SIZE;
     }
 
   #if( QUADRATICCOST )
    int coef = 1;
-   // If the number of the arcs is more than 10000, numCandidateList and hotListSize 
+   // If the number of the arcs is more than 10000, numCandidateList and hotListSize
    // are increased to improve the performance of the Quadratic Primal Simplex
    if( m > 10000 )
     coef = 10;
@@ -1836,17 +1836,17 @@ void NetworkSimplex::MemAllocCandidateList( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::MemDeAllocCandidateList( void )
+void MCFSimplex::MemDeAllocCandidateList( void )
 {
  delete[] candP;
  candP = NULL;
- delete[] candD; 
+ delete[] candD;
  candD = NULL;
 }
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::CreateInitialPrimalBase( void )
+void MCFSimplex::CreateInitialPrimalBase( void )
 {
  arcPType *arc;
  nodePType *node;
@@ -1859,7 +1859,7 @@ void NetworkSimplex::CreateInitialPrimalBase( void )
 
  for( arc = dummyArcsP ; arc != stopDummyP ; arc++ ) {  // initialize dummy arcs
   node = nodesP + ( arc - dummyArcsP );
-  if( node->balance > 0 ) {  // sink nodes 
+  if( node->balance > 0 ) {  // sink nodes
    arc->tail = dummyRootP;
    arc->head = node;
    arc->flow = node->balance;
@@ -1872,7 +1872,7 @@ void NetworkSimplex::CreateInitialPrimalBase( void )
 
   arc->cost = MAX_ART_COST;
   #if( QUADRATICCOST )
-   arc->quadraticCost = 0; 
+   arc->quadraticCost = 0;
   #else
    arc->ident = BASIC;
   #endif
@@ -1909,7 +1909,7 @@ void NetworkSimplex::CreateInitialPrimalBase( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::CreateInitialDualBase( void )
+void MCFSimplex::CreateInitialDualBase( void )
 {
  arcDType *arc;
  nodeDType *node;
@@ -1974,7 +1974,7 @@ void NetworkSimplex::CreateInitialDualBase( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::CreateAdditionalDualStructures( void )
+void MCFSimplex::CreateAdditionalDualStructures( void )
 {
  // this method creates, in a Dual context, the Backward Star and the
  // Forward Star of every node
@@ -2004,11 +2004,11 @@ void NetworkSimplex::CreateAdditionalDualStructures( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PrimalSimplex( void )
+void MCFSimplex::PrimalSimplex( void )
 {
  #if( UNIPI_PRIMAL_INITIAL_SHOW == 0 )
   #if( UNIPI_PRIMAL_ITER_SHOW == 0 )
-   #if( UNIPI_PRIMAL_FINAL_SHOW == 0 ) 
+   #if( UNIPI_PRIMAL_FINAL_SHOW == 0 )
     cout << endl;
    #endif
   #endif
@@ -2089,7 +2089,7 @@ void NetworkSimplex::PrimalSimplex( void )
   nodePType *k1;
   nodePType *k2;
   /* If the reduced cost of the entering arc is > 0, the Primal Simplex
-     pushes flow in the cycle determinated by T and entering arc for decreases 
+     pushes flow in the cycle determinated by T and entering arc for decreases
      flow in the entering arc: in the linear case entering arc's flow goes to 0,
      in the quadratic case it decreases while it's possibile.
      If the reduced cost of the entering arc is < 0, the Primal Simplex pushes
@@ -2099,7 +2099,7 @@ void NetworkSimplex::PrimalSimplex( void )
 
   #if( QUADRATICCOST )
    FONumber t;
-   FONumber theta; 
+   FONumber theta;
    FONumber deltaFO;
    FNumber theta2;
    CNumber Q = ( enteringArc->tail )->sumQuadratic +
@@ -2108,10 +2108,10 @@ void NetworkSimplex::PrimalSimplex( void )
    // and entering arc.
    FONumber rc = ReductCost( enteringArc );
    if( ETZ( Q, EpsCst ) )
-    theta = Inf<FNumber>();  // This value will be certainly decreased 
+    theta = Inf<FNumber>();  // This value will be certainly decreased
    else
     theta = ABS( rc / Q );
-    // This is the best theta value (with best f.o. value decrease) 
+    // This is the best theta value (with best f.o. value decrease)
 
    leavingArc = enteringArc;
    nodePType *cycleRoot; // The radix of the cycle determinated by T and entering arc.
@@ -2140,7 +2140,7 @@ void NetworkSimplex::PrimalSimplex( void )
     }
    else {
     k1 = enteringArc->tail;
-    k2 = enteringArc->head;        
+    k2 = enteringArc->head;
     #if( QUADRATICCOST )
      theta = min( theta , enteringArc->upper - enteringArc->flow );
      // The best value for theta is compared with the entering arc's bound
@@ -2181,7 +2181,7 @@ void NetworkSimplex::PrimalSimplex( void )
       theta = t;
       leavingArc = arc;
       leavingReducesFlow = leave;
-      // If "leavingReducesFlow" == true, if this arc is selected to exit the base, 
+      // If "leavingReducesFlow" == true, if this arc is selected to exit the base,
       // it decreases its flow
       }
 
@@ -2203,7 +2203,7 @@ void NetworkSimplex::PrimalSimplex( void )
       theta = t;
       leavingArc = arc;
       leavingReducesFlow = leave;
-      // If "leavingReducesFlow" == true, if this arc is selected to exit the base, 
+      // If "leavingReducesFlow" == true, if this arc is selected to exit the base,
       // it decreases its flow
       }
 
@@ -2270,7 +2270,7 @@ void NetworkSimplex::PrimalSimplex( void )
       }
 
      if( enteringArc != leavingArc ) {
-      bool leavingBringFlowInT2 = ( leavingReducesFlow == 
+      bool leavingBringFlowInT2 = ( leavingReducesFlow ==
 	( ( leavingArc->tail )->subTreeLevel > ( leavingArc->head )->subTreeLevel ) );
       // "leavingBringFlowInT2" == true if leaving arc brings flow to the subtree T2
       if( leavingBringFlowInT2 == ( memK1 == enteringArc->tail ) ) {
@@ -2278,7 +2278,7 @@ void NetworkSimplex::PrimalSimplex( void )
        k1 = enteringArc->head;
        }
       else {
-       k2 = enteringArc->head; 
+       k2 = enteringArc->head;
        k1 = enteringArc->tail;
        }
       }
@@ -2293,7 +2293,7 @@ void NetworkSimplex::PrimalSimplex( void )
        enteringArc->ident = BASIC;
        nodePType *h1;
        nodePType *h2;
-       // "h1" is the node in the leaving arc with smaller tree's level 
+       // "h1" is the node in the leaving arc with smaller tree's level
        if( ( leavingArc->tail )->subTreeLevel < ( leavingArc->head )->subTreeLevel ) {
 	h1 = leavingArc->tail;
 	h2 = leavingArc->head;
@@ -2320,7 +2320,7 @@ void NetworkSimplex::PrimalSimplex( void )
       if( leavingArc != enteringArc ) {
        nodePType *h1;
        nodePType *h2;
-       // "h1" is the node in the leaving arc with smaller tree's level 
+       // "h1" is the node in the leaving arc with smaller tree's level
        if( ( leavingArc->tail )->subTreeLevel <
 	   ( leavingArc->head )->subTreeLevel ) {
 	h1 = leavingArc->tail;
@@ -2329,7 +2329,7 @@ void NetworkSimplex::PrimalSimplex( void )
        else {
 	h1 = leavingArc->head;
 	h2 = leavingArc->tail;
-        } 
+        }
 
        // Update the basic tree
        UpdateT( leavingArc , enteringArc , h1 , h2 , k1 , k2 );
@@ -2395,7 +2395,7 @@ void NetworkSimplex::PrimalSimplex( void )
     status = kOK;
     // If one of dummy arcs has flow bigger than 0, the solution is unfeasible.
     for( arcPType *arc = dummyArcsP ; arc != stopDummyP ; arc++ )
-     if( GTZ( arc->flow , EpsFlw ) ) 
+     if( GTZ( arc->flow , EpsFlw ) )
       status = kUnfeasible;
     }
 
@@ -2412,14 +2412,14 @@ void NetworkSimplex::PrimalSimplex( void )
 
    #if( UNIPI_PRIMAL_ITER_SHOW )
     int it = (int) iterator;
-    if( it % UNIPI_PRIMAL_ITER_SHOW == 0 ) {        
+    if( it % UNIPI_PRIMAL_ITER_SHOW == 0 ) {
      cout << endl;
      for( int t = 0; t < 3; t++ )
       cout << "\t";
      cout << "PRIMALE MCFSimplex: ARCHI E NODI ALLA " << it << " ITERAZIONE" << endl;
      ShowSituation( 3 );
      #if( FOSHOW )
-      if( (int) iterator % FOSHOW == 0 ) 
+      if( (int) iterator % FOSHOW == 0 )
        clog << "Iteration = " << iterator << " of = "
         #if( LIMITATEPRECISION && QUADRATICCOST )
 	    << foValue
@@ -2444,11 +2444,11 @@ void NetworkSimplex::PrimalSimplex( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::DualSimplex( void )
+void MCFSimplex::DualSimplex( void )
 {
  #if( UNIPI_PRIMAL_INITIAL_SHOW == 0 )
   #if( UNIPI_PRIMAL_ITER_SHOW == 0 )
-   #if( UNIPI_PRIMAL_FINAL_SHOW == 0 ) 
+   #if( UNIPI_PRIMAL_FINAL_SHOW == 0 )
     cout << endl;
    #endif
   #endif
@@ -2567,7 +2567,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
              search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst) ) {
 	   fine = true;
@@ -2583,7 +2583,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
              search is ended: this is the arc which enters in T */
 
 	  if( ETZ( rc , EpsCst ) ) {
@@ -2609,7 +2609,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst ) ) {
 	   fine = true;
@@ -2625,7 +2625,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst ) ) {
 	   fine = true;
@@ -2661,7 +2661,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst ) ) {
 	   fine = true;
@@ -2677,7 +2677,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst ) ) {
 	   fine = true;
@@ -2702,7 +2702,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst ) ) {
 	   fine = true;
@@ -2718,7 +2718,7 @@ void NetworkSimplex::DualSimplex( void )
 	 if( LT( rc , maxRc , EpsCst ) ) {
 	  enteringArc = arc;
 	  maxRc = rc;
-	  /* If arc is appropriate to enter in T and its reduct cost is 0, 
+	  /* If arc is appropriate to enter in T and its reduct cost is 0,
 	     search is ended: this is the arc which enters in T */
 	  if( ETZ( rc , EpsCst) ) {
 	   fine = true;
@@ -2749,9 +2749,9 @@ void NetworkSimplex::DualSimplex( void )
     FNumber t;
     nodeDType *k1;
     nodeDType *k2;
-    /* if entering arc is in U, Dual Simplex pushs flow in the cycle 
+    /* if entering arc is in U, Dual Simplex pushs flow in the cycle
        determinated by T and entering arc for decreases flow in the entering arc:
-       if entering arc is in L, Dual Simplex pushs flow in the cycle 
+       if entering arc is in L, Dual Simplex pushs flow in the cycle
        determinated by T and entering arc for increases flow in the entering arc:
        Dual Simplex increases or decreases entering arc's flow.
        theta is a positive value.
@@ -2770,7 +2770,7 @@ void NetworkSimplex::DualSimplex( void )
 
     nodeDType *memK1 = k1;
     nodeDType *memK2 = k2;
-    arcDType *arc;                                
+    arcDType *arc;
     k1 = memK1;
     k2 = memK2;
     // Update the flow
@@ -2800,7 +2800,7 @@ void NetworkSimplex::DualSimplex( void )
     else
      leavingArc->ident = AT_UPPER;
 
-    bool leavingBringFlowInT2 = ( leavingArcInL == 
+    bool leavingBringFlowInT2 = ( leavingArcInL ==
 	 ( ( leavingArc->tail )->subTreeLevel >
 	   ( leavingArc->head )->subTreeLevel ) );
     // leavingBringFlowInT2 == true if leaving arc brings flow to the subtree T2
@@ -2809,7 +2809,7 @@ void NetworkSimplex::DualSimplex( void )
      k1 = enteringArc->head;
      }
     else {
-     k2 = enteringArc->head; 
+     k2 = enteringArc->head;
      k1 = enteringArc->tail;
      }
 
@@ -2876,7 +2876,7 @@ void NetworkSimplex::DualSimplex( void )
 
  #if( UNIPI_DUAL_ITER_SHOW )
   int it = (int) iterator;
-  if( it % UNIPI_DUAL_ITER_SHOW == 0 ) {        
+  if( it % UNIPI_DUAL_ITER_SHOW == 0 ) {
    cout << endl;
    for( int t = 0; t < 3; t++ )
     cout << "\t";
@@ -2891,7 +2891,7 @@ void NetworkSimplex::DualSimplex( void )
 /*--------------------------------------------------------------------------*/
 
 template<class N, class A>
-void NetworkSimplex::UpdateT( A *h , A *k , N *h1 , N *h2 , N *k1 , N *k2 )
+void MCFSimplex::UpdateT( A *h , A *k , N *h1 , N *h2 , N *k1 , N *k2 )
 {
  /* In subtree T2 there is a path from node h2 (deepest node of the leaving
     arc h and root of T2) to node k2 (deepest node of the leaving arc h and
@@ -2905,7 +2905,7 @@ void NetworkSimplex::UpdateT( A *h , A *k , N *h1 , N *h2 , N *k1 , N *k2 )
  int delta = (k1->subTreeLevel) + 1 - (k2->subTreeLevel);
  N *root = k2;
  N *dad;
- 
+
  /*To reorder T2, the method analyses every nodes of the path h2->k2, starting
    from k2. For every node, it moves the node's subtree from its original
    position to a new appropriate position. In particular k2 and its subtree
@@ -2941,22 +2941,22 @@ void NetworkSimplex::UpdateT( A *h , A *k , N *h1 , N *h2 , N *k1 , N *k2 )
   // the actual analysed subtree.
   previousNode = lastNode;
   /* The increase of the subtree in the next iteration is different from
-     the actual increase: in particual the increase increases itself (+2 
+     the actual increase: in particual the increase increases itself (+2
      at every iteration). */
-  delta = delta + 2; 
+  delta = delta + 2;
   /* A this point "enteringTArc" of actual root is stored in "arc2" and
      changed; then "arc1" and "root" are changed. */
   arc2 = root->enteringTArc;
   root->enteringTArc = arc1;
   arc1 = arc2;
   root = dad;
-  } 
+  }
  }
 
 /*--------------------------------------------------------------------------*/
 
 template<class N>
-N* NetworkSimplex::CutAndUpdateSubtree( N *root , int delta )
+N* MCFSimplex::CutAndUpdateSubtree( N *root , int delta )
 {
  int level = root->subTreeLevel;
  N *node = root;
@@ -2982,7 +2982,7 @@ N* NetworkSimplex::CutAndUpdateSubtree( N *root , int delta )
 /*--------------------------------------------------------------------------*/
 
 template<class N>
-void NetworkSimplex::PasteSubtree( N *root , N *lastNode , N *previousNode )
+void MCFSimplex::PasteSubtree( N *root , N *lastNode , N *previousNode )
 {
  /* The method inserts subtree ("root" and "lastNode" are the extremity of the
     subtree) after "previousNode". The method starts to identify the next node
@@ -2999,7 +2999,7 @@ void NetworkSimplex::PasteSubtree( N *root , N *lastNode , N *previousNode )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
+MCFSimplex::arcPType* MCFSimplex::RuleDantzig( void )
 {
  arcPType *arc = arcToStartP;
  arcPType *enteringArc = NULL;
@@ -3015,7 +3015,7 @@ NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
  #endif
 
  do {
-  // The method analyses every arc 
+  // The method analyses every arc
   #if( QUADRATICCOST )
    RC = ReductCost( arc );
    FNumber theta;
@@ -3027,7 +3027,7 @@ NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
    if( LTZ( RC , EpsCst ) )
     theta = arc->upper - arc->flow;
 
-   if( GTZ( RC , EpsCst ) ) 
+   if( GTZ( RC , EpsCst ) )
     theta = -arc->flow;
 
    // If it's possible to increase (or decrease) the flow in this arc
@@ -3046,9 +3046,9 @@ NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
 
     if( GTZ( Q , EpsCst ) )
      if( GTZ( theta , EpsFlw ) )
-      theta = min( theta , - RC / Q );        
+      theta = min( theta , - RC / Q );
      else
-      theta = max( theta , - RC / Q );        
+      theta = max( theta , - RC / Q );
 
     /* Calculate the estimate decrease of the f.o. value if this arc is
        selected and flow is increased (decreased) by "theta" */
@@ -3066,7 +3066,7 @@ NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
    if( arc->ident > BASIC ) {
     RC = ReductCost( arc );
 
-    if( ( LTZ( RC , EpsCst ) && ( arc->ident == AT_LOWER ) ) || 
+    if( ( LTZ( RC , EpsCst ) && ( arc->ident == AT_LOWER ) ) ||
 	( GTZ( RC , EpsCst ) && ( arc->ident == AT_UPPER ) ) ) {
 
      if( RC < 0 )
@@ -3096,7 +3096,7 @@ NetworkSimplex::arcPType* NetworkSimplex::RuleDantzig( void )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcPType* NetworkSimplex::PRuleFirstEligibleArc( void )
+MCFSimplex::arcPType* MCFSimplex::PRuleFirstEligibleArc( void )
 {
  arcPType *arc = arcToStartP;
  arcPType *enteringArc = NULL;
@@ -3110,7 +3110,7 @@ NetworkSimplex::arcPType* NetworkSimplex::PRuleFirstEligibleArc( void )
   #if( QUADRATICCOST )
    // In this method the "decrease f.o. value" criterion is not used.
    RC = ReductCost( arc );
-   if( ( LTZ( RC , EpsCst ) && LT( arc->flow , arc->upper , EpsFlw ) ) || 
+   if( ( LTZ( RC , EpsCst ) && LT( arc->flow , arc->upper , EpsFlw ) ) ||
        ( GTZ( RC , EpsCst ) && GTZ( arc->flow , EpsFlw ) ) )
     enteringArc = arc;
   #else
@@ -3135,7 +3135,7 @@ NetworkSimplex::arcPType* NetworkSimplex::PRuleFirstEligibleArc( void )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcDType* NetworkSimplex::DRuleFirstEligibleArc( void )
+MCFSimplex::arcDType* MCFSimplex::DRuleFirstEligibleArc( void )
 {
  arcDType *arc = arcToStartD;
  arcDType *leavingArc = NULL;
@@ -3156,7 +3156,7 @@ NetworkSimplex::arcDType* NetworkSimplex::DRuleFirstEligibleArc( void )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcPType* NetworkSimplex::RulePrimalCandidateListPivot( void )
+MCFSimplex::arcPType* MCFSimplex::RulePrimalCandidateListPivot( void )
 {
  Index next = 0;
  Index i;
@@ -3234,10 +3234,10 @@ NetworkSimplex::arcPType* NetworkSimplex::RulePrimalCandidateListPivot( void )
 	"theta" is the difference between lower (upper) bound and the actual
 	flow. */
 
-     if( LTZ( red_cost , EpsCst ) ) 
+     if( LTZ( red_cost , EpsCst ) )
       theta = arc->upper - arc->flow;
      else
-      if( GTZ( red_cost , EpsCst ) ) 
+      if( GTZ( red_cost , EpsCst ) )
        theta = - arc->flow;
 
      // if it's possible to increase (or decrease) the flow in this arc
@@ -3255,9 +3255,9 @@ NetworkSimplex::arcPType* NetworkSimplex::RulePrimalCandidateListPivot( void )
 
       if( GTZ( Q , EpsCst  ) )
        if( GTZ( theta , EpsFlw ) )
-	theta = min( theta , - red_cost / Q );        
+	theta = min( theta , - red_cost / Q );
        else
-	theta = max( theta , - red_cost / Q );        
+	theta = max( theta , - red_cost / Q );
 
       /* Calculate the estimate decrease of the f.o. value if this arc is
 	 selected and flow is increased (decreased) by "theta" */
@@ -3339,7 +3339,7 @@ NetworkSimplex::arcPType* NetworkSimplex::RulePrimalCandidateListPivot( void )
 
 /*--------------------------------------------------------------------------*/
 
-inline void NetworkSimplex::InitializePrimalCandidateList( void )
+inline void MCFSimplex::InitializePrimalCandidateList( void )
 {
  numGroup = ( ( m - 1 ) / numCandidateList ) + 1;
  groupPos = 0;
@@ -3348,7 +3348,7 @@ inline void NetworkSimplex::InitializePrimalCandidateList( void )
 
 /*--------------------------------------------------------------------------*/
 
-inline void NetworkSimplex::SortPrimalCandidateList( Index min , Index max )
+inline void MCFSimplex::SortPrimalCandidateList( Index min , Index max )
 {
  Index left = min;
  Index right = max;
@@ -3358,9 +3358,9 @@ inline void NetworkSimplex::SortPrimalCandidateList( Index min , Index max )
   CNumber cut = candP[ ( left + right ) / 2 ].absRC;
  #endif
  do {
-  while( candP[ left ].absRC > cut) 
+  while( candP[ left ].absRC > cut)
    left++;
-  while( cut > candP[ right ].absRC) 
+  while( cut > candP[ right ].absRC)
    right--;
 
   if( left < right )
@@ -3372,15 +3372,15 @@ inline void NetworkSimplex::SortPrimalCandidateList( Index min , Index max )
    }
   } while( left <= right );
 
- if( min < right ) 
+ if( min < right )
   SortPrimalCandidateList( min , right );
- if( ( left < max ) && ( left <= hotListSize ) ) 
+ if( ( left < max ) && ( left <= hotListSize ) )
   SortPrimalCandidateList( left , max );
  }
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcDType* NetworkSimplex::RuleDualCandidateListPivot( void )
+MCFSimplex::arcDType* MCFSimplex::RuleDualCandidateListPivot( void )
 {
  Index next = 0;
  // Check if the left arcs in the list continue to violate the primal condition
@@ -3440,7 +3440,7 @@ NetworkSimplex::arcDType* NetworkSimplex::RuleDualCandidateListPivot( void )
 
 /*--------------------------------------------------------------------------*/
 
-inline void NetworkSimplex::InitializeDualCandidateList( void )
+inline void MCFSimplex::InitializeDualCandidateList( void )
 {
  numGroup = ( ( n - 1 ) / numCandidateList ) + 1;
  groupPos = 0;
@@ -3449,7 +3449,7 @@ inline void NetworkSimplex::InitializeDualCandidateList( void )
 
 /*--------------------------------------------------------------------------*/
 
-inline void NetworkSimplex::SortDualCandidateList(Index min, Index max)
+inline void MCFSimplex::SortDualCandidateList(Index min, Index max)
 {
  Index left = min;
  Index right = max;
@@ -3459,7 +3459,7 @@ inline void NetworkSimplex::SortDualCandidateList(Index min, Index max)
    left++;
   while( cut > candD[ right ].absInfeas )
    right--;
-  if( left < right ) 
+  if( left < right )
    Swap( candD[left ] , candD[ right ] );
   if( left <= right) {
    left++;
@@ -3469,18 +3469,18 @@ inline void NetworkSimplex::SortDualCandidateList(Index min, Index max)
 
  if( min < right )
   SortDualCandidateList( min , right );
- if( (left < max) && ( left <= hotListSize ) ) 
+ if( (left < max) && ( left <= hotListSize ) )
   SortDualCandidateList( left , max );
  }
 
 /*--------------------------------------------------------------------------*/
 
 template<class N, class RCT>
-inline void NetworkSimplex::AddPotential( N *r , RCT delta )
+inline void MCFSimplex::AddPotential( N *r , RCT delta )
 {
  int level = r->subTreeLevel;
  N *n = r;
- 
+
  do {
   n->potential = n->potential + delta;
   n = n->nextInT;
@@ -3490,14 +3490,14 @@ inline void NetworkSimplex::AddPotential( N *r , RCT delta )
 /*--------------------------------------------------------------------------*/
 
 template<class N>
-inline void NetworkSimplex::ComputePotential( N *r )
+inline void MCFSimplex::ComputePotential( N *r )
 {
  N *n = r;
  int level = r->subTreeLevel;
  FONumber cost;
  // If "n" is not the dummy root, the potential of "r" is computed.
  // If "n" is the dummy root, the potential of dummy root is a constant.
- 
+
  do {
   if( n->enteringTArc ) {
    cost = ( n->enteringTArc )->cost;
@@ -3510,7 +3510,7 @@ inline void NetworkSimplex::ComputePotential( N *r )
      cost = cost + ( ( n->enteringTArc )->quadraticCost * ( n->enteringTArc )->flow );
    #endif
 
-   if( n == ( n->enteringTArc )->head ) 
+   if( n == ( n->enteringTArc )->head )
     n->potential = ( Father( n , n->enteringTArc ) )->potential + cost;
    else
     n->potential = ( Father( n , n->enteringTArc ) )->potential - cost;
@@ -3521,7 +3521,7 @@ inline void NetworkSimplex::ComputePotential( N *r )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::CreateInitialPModifiedBalanceVector( void )
+void MCFSimplex::CreateInitialPModifiedBalanceVector( void )
 {
  int i = 0;
  delete[] modifiedBalance;
@@ -3538,7 +3538,7 @@ void NetworkSimplex::CreateInitialPModifiedBalanceVector( void )
  for( arcPType *arc = arcsP ; arc != stopArcsP ; arc++ ) {
   #if( QUADRATICCOST )
    if( ( ! ETZ( arc->flow , EpsFlw ) ) &&
-       ( ( arc->tail )->enteringTArc != arc ) && 
+       ( ( arc->tail )->enteringTArc != arc ) &&
        ( ( arc->head )->enteringTArc != arc ) ) {
     i = (arc->tail) - nodesP;
     modifiedBalance[ i ] += arc->flow;
@@ -3559,7 +3559,7 @@ void NetworkSimplex::CreateInitialPModifiedBalanceVector( void )
  for( arcPType *arc = dummyArcsP ; arc != stopDummyP ; arc++ ) {
   #if( QUADRATICCOST )
    if ( ( ! ETZ( arc->flow , EpsFlw ) ) &&
-	( ( arc->tail )->enteringTArc != arc ) && 
+	( ( arc->tail )->enteringTArc != arc ) &&
 	( ( arc->head )->enteringTArc != arc ) ) {
     i = (arc->tail) - nodesP;
     modifiedBalance[ i ] += arc->flow;
@@ -3579,12 +3579,12 @@ void NetworkSimplex::CreateInitialPModifiedBalanceVector( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PostPVisit( nodePType *r )
+void MCFSimplex::PostPVisit( nodePType *r )
 {
  // The method controls if "r" is a leaf in T
  bool rLeaf = false;
  int i = r - nodesP;
- if( r->nextInT ) 
+ if( r->nextInT )
   if( ( r->nextInT )->subTreeLevel <= r->subTreeLevel )
    rLeaf = true;
   else
@@ -3620,14 +3620,14 @@ void NetworkSimplex::PostPVisit( nodePType *r )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::BalanceFlow( nodePType *r )
+void MCFSimplex::BalanceFlow( nodePType *r )
 {
  // used only by Primal Simplex to restore a primal feasible solution.
  if( r == dummyRootP ) {
   nodePType *node = dummyRootP->nextInT;
   while( node ) {
    // call this function recursively for every son of dummy root
-   if( node->subTreeLevel == 1 ) 
+   if( node->subTreeLevel == 1 )
     BalanceFlow( node );
 
    node = node->nextInT;
@@ -3649,7 +3649,7 @@ void NetworkSimplex::BalanceFlow( nodePType *r )
    nodePType *node = r->nextInT;
    // Balance the flow of every child of "r"
    while ( ( node ) && ( node->subTreeLevel > r->subTreeLevel ) ) {
-    if( node->subTreeLevel == r->subTreeLevel + 1 ) 
+    if( node->subTreeLevel == r->subTreeLevel + 1 )
      BalanceFlow( node );
     node = node->nextInT;
     }
@@ -3663,7 +3663,7 @@ void NetworkSimplex::BalanceFlow( nodePType *r )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::AdjustFlow( nodePType *r )
+void MCFSimplex::AdjustFlow( nodePType *r )
 {
  arcPType *arc = r->enteringTArc;
  if( arc >= dummyArcsP ) // If entering arc of "r" is a dummy arc
@@ -3719,7 +3719,7 @@ void NetworkSimplex::AdjustFlow( nodePType *r )
       changed, subtree of "r"is moved next dummy root. */
    r->enteringTArc = dummy;
    int deltaLevel = 1 - r->subTreeLevel;
-   nodePType *lastNode = CutAndUpdateSubtree( r , deltaLevel ); 
+   nodePType *lastNode = CutAndUpdateSubtree( r , deltaLevel );
    PasteSubtree( r , lastNode , dummyRootP );
    if( ( dummy->head == r ) != orientationDown )
     dummy->flow += delta;
@@ -3738,7 +3738,7 @@ void NetworkSimplex::AdjustFlow( nodePType *r )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::CreateInitialDModifiedBalanceVector( void )
+void MCFSimplex::CreateInitialDModifiedBalanceVector( void )
 {
  #if( ! QUADRATICCOST )
   int i = 0;
@@ -3772,7 +3772,7 @@ void NetworkSimplex::CreateInitialDModifiedBalanceVector( void )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PostDVisit( nodeDType *r )
+void MCFSimplex::PostDVisit( nodeDType *r )
 {
  #if( ! QUADRATICCOST )
   // The method controls if "r" is a leaf in T
@@ -3816,7 +3816,7 @@ void NetworkSimplex::PostDVisit( nodeDType *r )
 
 /*--------------------------------------------------------------------------*/
 
-inline void NetworkSimplex::ResetWhenInT2( void )
+inline void MCFSimplex::ResetWhenInT2( void )
 {
  for( nodeDType *n = nodesD ; n != stopNodesD ; n++)
   n->whenInT2 = 0;
@@ -3825,7 +3825,7 @@ inline void NetworkSimplex::ResetWhenInT2( void )
 /*--------------------------------------------------------------------------*/
 
 template<class N, class A>
-inline N* NetworkSimplex::Father( N *n , A *a )
+inline N* MCFSimplex::Father( N *n , A *a )
 {
  if( a == NULL )
   return NULL;
@@ -3838,14 +3838,14 @@ inline N* NetworkSimplex::Father( N *n , A *a )
 
 /*-------------------------------------------------------------------------*/
 
-inline NetworkSimplex::FONumber NetworkSimplex::GetFO( void )
+inline MCFSimplex::FONumber MCFSimplex::GetFO( void )
 {
  FONumber fo = 0;
  if( usePrimalSimplex ) {
   arcPType *arco;
   for( arco = arcsP ; arco != stopArcsP ; arco++ ) {
-   #if( QUADRATICCOST ) 
-    if( ! ETZ( arco->flow , EpsFlw ) ) 
+   #if( QUADRATICCOST )
+    if( ! ETZ( arco->flow , EpsFlw ) )
      fo += arco->flow * ( arco->cost + arco->flow * arco->quadraticCost / 2 );
    #else
     if( ( arco->ident == BASIC ) || ( arco->ident == AT_UPPER ) )
@@ -3854,11 +3854,11 @@ inline NetworkSimplex::FONumber NetworkSimplex::GetFO( void )
    }
 
   for( arco = dummyArcsP ; arco != stopDummyP ; arco++ ) {
-   #if( QUADRATICCOST ) 
+   #if( QUADRATICCOST )
     if( ! ETZ( arco->flow , EpsFlw ) )
      fo += arco->flow * ( arco->cost + arco->flow * arco->quadraticCost / 2 );
    #else
-    if( ( arco->ident == BASIC ) || ( arco->ident == AT_UPPER ) ) 
+    if( ( arco->ident == BASIC ) || ( arco->ident == AT_UPPER ) )
      fo += arco->cost * arco->flow;
    #endif
    }
@@ -3866,19 +3866,19 @@ inline NetworkSimplex::FONumber NetworkSimplex::GetFO( void )
  else {
   arcDType *a;
   for( a = arcsD ; a != stopArcsD ; a++ ) {
-   #if (QUADRATICCOST) 
+   #if (QUADRATICCOST)
     fo += ( a->cost * a->flow ) + ( a->quadraticCost * a->flow * a->flow ) / 2;
    #else
-    if( ( a->ident == BASIC ) || (a->ident == AT_UPPER ) ) 
+    if( ( a->ident == BASIC ) || (a->ident == AT_UPPER ) )
      fo += a->cost * a->flow;
    #endif
    }
 
   for( a = dummyArcsD ; a != stopDummyD ; a++) {
-   #if (QUADRATICCOST) 
+   #if (QUADRATICCOST)
     fo += ( a->cost * a->flow ) + ( a->quadraticCost * a->flow * a->flow ) / 2;
    #else
-    if( ( a->ident == BASIC ) || ( a->ident == AT_UPPER ) ) 
+    if( ( a->ident == BASIC ) || ( a->ident == AT_UPPER ) )
      fo += a->cost * a->flow;
    #endif
    }
@@ -3889,7 +3889,7 @@ inline NetworkSimplex::FONumber NetworkSimplex::GetFO( void )
 
 /*-------------------------------------------------------------------------*/
 
-void NetworkSimplex::PrintPNode( nodePType *nodo )
+void MCFSimplex::PrintPNode( nodePType *nodo )
 {
  if( nodo )
   if( nodo != dummyRootP )
@@ -3902,7 +3902,7 @@ void NetworkSimplex::PrintPNode( nodePType *nodo )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PrintPArc( arcPType *arc )
+void MCFSimplex::PrintPArc( arcPType *arc )
 {
  if( arc ) {
   cout << "(";
@@ -3917,7 +3917,7 @@ void NetworkSimplex::PrintPArc( arcPType *arc )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PrintDNode( nodeDType *nodo )
+void MCFSimplex::PrintDNode( nodeDType *nodo )
 {
  if( nodo )
   if( nodo != dummyRootD )
@@ -3930,7 +3930,7 @@ void NetworkSimplex::PrintDNode( nodeDType *nodo )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::PrintDArc( arcDType *arc )
+void MCFSimplex::PrintDArc( arcDType *arc )
 {
  if( arc ) {
   cout << "(";
@@ -3945,7 +3945,7 @@ void NetworkSimplex::PrintDArc( arcDType *arc )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::nodePType* NetworkSimplex::RecoverPNode( Index ind ) 
+MCFSimplex::nodePType* MCFSimplex::RecoverPNode( Index ind )
 {
  if( ( ind < 0 ) || ( ind > n ) )
   return( NULL );
@@ -3957,7 +3957,7 @@ NetworkSimplex::nodePType* NetworkSimplex::RecoverPNode( Index ind )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcPType* NetworkSimplex::RecoverPArc( nodePType *tail ,
+MCFSimplex::arcPType* MCFSimplex::RecoverPArc( nodePType *tail ,
 					       nodePType *head )
 {
  if( ( tail == NULL ) || ( head == NULL ) )
@@ -3977,9 +3977,9 @@ NetworkSimplex::arcPType* NetworkSimplex::RecoverPArc( nodePType *tail ,
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::nodeDType* NetworkSimplex::RecoverDNode( Index ind )
+MCFSimplex::nodeDType* MCFSimplex::RecoverDNode( Index ind )
 {
- if( ( ind < 0 ) || ( ind > n ) ) 
+ if( ( ind < 0 ) || ( ind > n ) )
   return( NULL );
 
  if( ind )
@@ -3990,10 +3990,10 @@ NetworkSimplex::nodeDType* NetworkSimplex::RecoverDNode( Index ind )
 
 /*--------------------------------------------------------------------------*/
 
-NetworkSimplex::arcDType* NetworkSimplex::RecoverDArc( nodeDType *tail ,
+MCFSimplex::arcDType* MCFSimplex::RecoverDArc( nodeDType *tail ,
 					       nodeDType *head )
 {
- if( ( tail == NULL ) || ( head == NULL ) ) 
+ if( ( tail == NULL ) || ( head == NULL ) )
   return( NULL );
 
  arcDType *arc = arcsD;
@@ -4010,7 +4010,7 @@ NetworkSimplex::arcDType* NetworkSimplex::RecoverDArc( nodeDType *tail ,
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::infoPNode( nodePType *node , int tab )
+void MCFSimplex::infoPNode( nodePType *node , int tab )
 {
  for( int t = 0 ; t < tab ; t++ )
   cout << "\t";
@@ -4026,7 +4026,7 @@ void NetworkSimplex::infoPNode( nodePType *node , int tab )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::infoPArc( arcPType *arc , int ind , int tab )
+void MCFSimplex::infoPArc( arcPType *arc , int ind , int tab )
 {
  for( int t = 0 ; t < tab ; t++ )
   cout << "\t";
@@ -4071,14 +4071,14 @@ void NetworkSimplex::infoPArc( arcPType *arc , int ind , int tab )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::infoDNode( nodeDType *node , int tab )
+void MCFSimplex::infoDNode( nodeDType *node , int tab )
 {
  for( int t = 0 ; t < tab; t++ )
   cout << "\t";
  cout << "Nodo ";
  PrintDNode( node );
  cout << ": b = " << node->balance << " y = " << node->potential;
- #if( UNIPI_VIS_NODE_BASIC_ARC )    
+ #if( UNIPI_VIS_NODE_BASIC_ARC )
   cout << ": TArc=";
   PrintDArc( node->enteringTArc );
   cout << endl;
@@ -4087,7 +4087,7 @@ void NetworkSimplex::infoDNode( nodeDType *node , int tab )
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::infoDArc( arcDType *arc , int ind , int tab )
+void MCFSimplex::infoDArc( arcDType *arc , int ind , int tab )
 {
  for( int t = 0 ; t < tab ; t++ )
   cout << "\t";
@@ -4128,11 +4128,11 @@ void NetworkSimplex::infoDArc( arcDType *arc , int ind , int tab )
   #endif
  #endif
  cout << endl;
- } 
+ }
 
 /*--------------------------------------------------------------------------*/
 
-void NetworkSimplex::ShowSituation( int tab )
+void MCFSimplex::ShowSituation( int tab )
 {
  if( usePrimalSimplex ) {
   arcPType *arc;
@@ -4146,7 +4146,7 @@ void NetworkSimplex::ShowSituation( int tab )
   #if( UNIPI_VIS_DUMMY_ARCS )
    i = 0;
    for( arc = dummyArcsP ; arc != stopDummyP ; arc++ ) {
-    infoPArc( arc , i , tab );                
+    infoPArc( arc , i , tab );
     i++;
     }
    cout << endl;
