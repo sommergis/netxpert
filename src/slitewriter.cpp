@@ -140,12 +140,12 @@ void SpatiaLiteWriter::CreateNetXpertDB()
         LOGGER::LogError( ex.what() );
     }
 }
-void SpatiaLiteWriter::CreateSolverResultTable(string _tableName)
+void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName)
 {
     CreateSolverResultTable(_tableName, false);
 }
 
-void SpatiaLiteWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
+void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName, bool dropFirst)
 {
     try
     {
@@ -380,83 +380,16 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
 }
 */
 
-/*void SpatiaLiteWriter::CreateRouteGeometries(const string& geomColumnName, const string& arcIDColumnName, const string& arcTableName,
-                                     const string& arcIDs, vector<shared_ptr<Geometry>> segments,
-                                     const string& resultTableName)
+void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+                                        string geomColumnName, string arcIDColumnName, string arcTableName,
+                                        const string& arcIDs, const MultiLineString& mLine, string resultTableName)
 {
     try
     {
         if (!isConnected)
             connect();
 
-        cout << "CreateRouteGeometries() - Size of geom vector: " << segments.size() << endl;
-
-        int counter = 0;
-        for (auto i : segments) {
-            counter += 1;
-            cout << counter << endl;
-            if (i)
-                cout << i->toString() << endl;
-        }
-
-        createRouteWithAllParts_2(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
-                                            segments, resultTableName);
-        return;
-
-
-        if (segments.size() < 1 && arcIDs.size() > 0)//only arcids (MST!)
-            createRouteWithMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
-                                        resultTableName);
-        else
-        {
-            if (segments.at(0) && !segments.at(1) &&arcIDs.size() > 0)
-            {
-                auto geomPtr = segments.at(0);
-                createRouteWithStartAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
-                                                *geomPtr, resultTableName);
-            }
-            if (segments.at(0) && !segments.at(1) &&arcIDs.size() == 0)
-            {
-                auto geomPtr = segments.at(0);
-                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
-            }
-            if (!segments.at(0) && segments.at(1) &&arcIDs.size() == 0)
-            {
-                auto geomPtr = segments.at(1);
-                createRouteWithOnePart(arcTableName, *geomPtr, resultTableName);
-            }
-            if (!segments.at(0) && segments.at(1) && arcIDs.size() > 0)
-            {
-                auto geomPtr = segments.at(1);
-                createRouteWithEndAndMiddlePart(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
-                                                *geomPtr, resultTableName);
-            }
-            if (segments.at(0) && segments.at(1) && arcIDs.size() == 0)
-                createRouteWithStartAndEnd(arcTableName, segments, resultTableName);
-
-            if (segments.at(0) && segments.at(1) && arcIDs.size() > 0)
-                createRouteWithAllParts(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
-                                            segments, resultTableName);
-        }
-
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("Error creating route geometry in database!");
-        throw ex;
-    }
-}*/
-
-void SpatiaLiteWriter::CreateRouteGeometries(string geomColumnName, string arcIDColumnName, string arcTableName,
-                                     const string& arcIDs, const MultiLineString& mLine,
-                                     string resultTableName)
-{
-    try
-    {
-        if (!isConnected)
-            connect();
-
-        createRouteWithAllParts(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+        createRouteWithAllParts(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
                                             mLine, resultTableName);
     }
     catch (exception& ex)
@@ -466,22 +399,58 @@ void SpatiaLiteWriter::CreateRouteGeometries(string geomColumnName, string arcID
     }
 }
 
-void SpatiaLiteWriter::createRouteWithAllParts(string geomColumnName, string arcIDColumnName, string arcTableName,
+bool replace(std::string& str, const std::string& from, const std::string& to) {
+    size_t start_pos = str.find(from);
+    if(start_pos == std::string::npos)
+        return false;
+    str.replace(start_pos, from.length(), to);
+    return true;
+}
+
+void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+                                     string geomColumnName, string arcIDColumnName, string arcTableName,
                                      const string& arcIDs, const MultiLineString& mLine, string resultTableName)
 {
-    //Outputs SRID is always 0
-    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
-                "SELECT SetSRID(CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
+    string sqlStr;
+    if (arcIDs.size() > 0)
+    {
+        //Outputs SRID is always 0
+        sqlStr = "INSERT INTO "+ resultTableName+" (fromNode, toNode, cost, capacity, flow, geometry) " +
+                "SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
                 " GeomFromWKB(@mLine)," + //splitted segments as multilinestring
                 " (SELECT ST_Collect(" + geomColumnName +") " +
-                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) " //middle part
+                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) "+ //middle part
                 "  ) ),0)";
+    }
+    else
+    {
+        //Outputs SRID is always 0
+        sqlStr = "INSERT INTO "+ resultTableName+" (fromNode, toNode, cost, capacity, flow, geometry) " +
+                "SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
+                " GeomFromWKB(@mLine)" + //splitted segments as multilinestring
+                " ) ) ),0)";
+    }
+    /*string printSqlStr = sqlStr;
 
-    //cout << sqlStr.replace("GeomFromWKB(","GeomFromText(").replace("@mLine", mLine.toString()) << endl;
+    replace(printSqlStr, "GeomFromWKB(","GeomFromText(");
+    replace(printSqlStr, "@mLine", mLine.toString());
+    replace(printSqlStr, "@orig", orig);
+    replace(printSqlStr, "@dest", dest);
+    replace(printSqlStr, "@cost", to_string(cost));
+    replace(printSqlStr, "@capacity", to_string(capacity));
+    replace(printSqlStr, "@flow", to_string(flow));
+    cout << printSqlStr << endl;*/
 
     SQLite::Database& db = *connPtr;
     SQLite::Statement qry(db, sqlStr);
 
+    qry.bind("@orig", orig);
+    qry.bind("@dest", dest);
+    qry.bind("@cost", cost);
+    qry.bind("@capacity", capacity);
+    qry.bind("@flow", flow);
+
+    //geo binding
     WKBWriter wkbWriter;
     std::stringstream oss(ios_base::binary|ios_base::out);
 
@@ -501,15 +470,16 @@ void SpatiaLiteWriter::createRouteWithAllParts(string geomColumnName, string arc
     qry.exec();
 }
 
-void SpatiaLiteWriter::CreateRouteGeometries(string geomColumnName, string arcIDColumnName, string arcTableName,
-                                     const string& arcIDs, string resultTableName)
+void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+                                            string geomColumnName, string arcIDColumnName, string arcTableName,
+                                            const string& arcIDs, string resultTableName)
 {
     try
     {
         if (!isConnected)
             connect();
 
-        createRouteWithAllParts(geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+        createRouteWithAllParts(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
                                             resultTableName);
         return;
     }
@@ -519,12 +489,13 @@ void SpatiaLiteWriter::CreateRouteGeometries(string geomColumnName, string arcID
         throw ex;
     }
 }
-void SpatiaLiteWriter::createRouteWithAllParts(string geomColumnName, string arcIDColumnName, string arcTableName,
-                                     const string& arcIDs, string resultTableName)
+void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+                                                string geomColumnName, string arcIDColumnName, string arcTableName,
+                                                const string& arcIDs, string resultTableName)
 {
     //Outputs SRID is always 0
-    const string sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
-                " SELECT SetSRID(CastToMultiLineString(" + geomColumnName +"),0) " +
+    const string sqlStr = "INSERT INTO "+ resultTableName+"(fromNode, toNode, cost, capacity, flow, geometry) " +
+                " SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(" + geomColumnName +"),0) " +
                 "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ";
 
     //cout << sqlStr << endl;
@@ -532,6 +503,12 @@ void SpatiaLiteWriter::createRouteWithAllParts(string geomColumnName, string arc
 
     SQLite::Database& db = *connPtr;
     SQLite::Statement qry(db, sqlStr);
+
+    qry.bind("@orig", orig);
+    qry.bind("@dest", dest);
+    qry.bind("@cost", cost);
+    qry.bind("@capacity", capacity);
+    qry.bind("@flow", flow);
 
     qry.exec();
 }

@@ -2,7 +2,8 @@
 #define IMINSPANTREE_H
 
 namespace netxpert {
-    /** Abstract (Interface) Class for all Minimum Spanning Tree Solvers
+    /**
+    * \Class Abstract Class (Interface) for all Minimum Spanning Tree Solvers
     */
     class IMinSpanTree
     {

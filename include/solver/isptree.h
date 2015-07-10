@@ -2,7 +2,8 @@
 #define ISPTREE_H
 
 namespace netxpert {
-    /** Abstract (Interface) Class for all Shortest Path Tree Solvers
+    /**
+    * \Class Abstract Class (Interface) for all Shortest Path Tree Solvers
     */
     class ISPTree
     {

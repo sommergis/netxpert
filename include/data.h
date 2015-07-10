@@ -21,7 +21,7 @@ using namespace geos::geom;
 namespace netxpert {
 
     /**
-    * \Maximum Value that shall be used instead of Infinity for arc values (e.g. capacity).
+    * \const Value that shall be used instead of Infinity for arc values (e.g. capacity).
     **/
     const double DOUBLE_INFINITY = 999999;
     const double DOUBLE_NULL = -1;
@@ -229,7 +229,7 @@ namespace netxpert {
     //Query in both directions necessary --> bimap?
 
     typedef unordered_map<string, SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
-
+    typedef pair<vector<unsigned int>,double> CompressedPath;
 
     //typedef map<string,string> ColumnMap;
     typedef list<InputArc> InputArcs;

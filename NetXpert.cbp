@@ -115,7 +115,6 @@
 		<Unit filename="src/core/sptlem.cpp" />
 		<Unit filename="src/dbhelper.cpp" />
 		<Unit filename="src/fgdbwriter.cpp" />
-		<Unit filename="src/imcflow.cpp" />
 		<Unit filename="src/logger.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/network.cpp" />

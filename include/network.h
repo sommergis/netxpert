@@ -3,6 +3,7 @@
 
 #include "dbhelper.h"
 #include "slitewriter.h"
+#include "fgdbwriter.h"
 #include <algorithm>
 #include <geos/geom/CoordinateSequenceFactory.h>
 #include <geos/geom/GeometryFactory.h>
@@ -14,6 +15,7 @@
 #include <geos/linearref/LengthIndexOfPoint.h>
 #include <geos/linearref/LocationIndexOfLine.h>
 #include <geos/io/WKTReader.h>
+#include <geos/opLinemerge.h>
 #include <cmath>
 
 using namespace std;
@@ -21,9 +23,13 @@ using namespace geos::geom;
 using namespace geos::index::strtree;
 using namespace geos::operation::distance;
 using namespace geos::linearref;
+using namespace geos::operation::linemerge;
 
 namespace netxpert
 {
+    /**
+    * \Class Stores the representation of the network and provides methods for I/O of the nodes and arcs.
+    **/
     class Network
     {
         public:
@@ -44,12 +50,15 @@ namespace netxpert
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity);
 
-            //for subset of arcs
-            void BuildTotalRouteGeometry(const string& arcIDs,
+            //for subset of arcs (MST)
+            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+                                            const string& arcIDs,
                                             const string& resultTableName);
-            void BuildTotalRouteGeometry(string& arcIDs, vector<InternalArc>& routeNodeArcRep,
-                                         unsigned int orig, unsigned int dest, const string& resultTableName,
-                                          DBWriter& writer);
+            //for broken up arcs (SPT, ODM)
+            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+                                         const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
+                                         const string& resultTableName,
+                                         DBWriter& writer);
 
             void ConvertInputNetwork(bool autoClean);
 
@@ -114,14 +123,16 @@ namespace netxpert
             shared_ptr<MultiLineString> splitLine(Coordinate coord,
                                         const Geometry& lineGeom);
 
-            Config netXpertConfig;
+            Config NETXPERT_CNFG;
             //TODO
             unsigned int getCurrentNodeCount();
             //TODO
             unsigned int getCurrentArcCount();
 
-            void buildTotalRouteGeometry(const string& arcIDs, const string& resultTableName);
-            void buildTotalRouteGeometry(const string& arcIDs, vector<Geometry*> tmpRes,
+            void buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+                                            const string& arcIDs, const string& resultTableName);
+            void buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& arcIDs, vector<Geometry*> tmpRes,
                                         const string& resultTableName, DBWriter& writer);
 
             //MCF

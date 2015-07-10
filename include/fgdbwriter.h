@@ -11,12 +11,11 @@
 
 using namespace std;
 using namespace geos;
-using namespace FileGDBAPI;
 
 namespace netxpert {
 
     /**
-    * \Class that writes the result of NetXpert into a ESRI FileGeodatabase
+    * \Class Writes the result of NetXpert into a ESRI FileGeodatabase
     **/
     class FGDBWriter : public DBWriter
     {
@@ -25,20 +24,21 @@ namespace netxpert {
             virtual ~FGDBWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const string _tableName);
-            virtual void CreateSolverResultTable(const string _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const string& _tableName);
+            virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
             void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     const geos::geom::MultiLineString& route, string _tableName,
                                     bool truncateBeforeInsert);
             virtual void CloseConnection();
         private:
-            unique_ptr<Geodatabase> geodatabasePtr;
+            unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;
             void connect();
-            void createTable( string _tableName);
-            void openTable( string _tableName);
-            void dropTable ( string _tableName);
-            unique_ptr<Table> currentTblPtr;
+            bool isConnected = false;
+            void createTable( const string& _tableName);
+            void openTable( const string& _tableName);
+            void dropTable ( const string& _tableName);
+            unique_ptr<FileGDBAPI::Table> currentTblPtr;
             const string resultTblDefPath = "FGDB_NETXPERT_RESULT_SCHEMA.XML";
             Config NETXPERT_CNFG;
     };

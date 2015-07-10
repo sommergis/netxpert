@@ -1,4 +1,5 @@
 #include "networkbuilder.h"
+using namespace netxpert;
 
 NetworkBuilder::NetworkBuilder()
 {

@@ -12,8 +12,9 @@
 
 namespace netxpert {
 
-    typedef pair<vector<unsigned int>,double> CompressedPath;
-
+    /**
+    * \Class Solver for the Shortest Path Tree Problem
+    */
     class ShortestPathTree : public ISolver
     {
         public:
