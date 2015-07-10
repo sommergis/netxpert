@@ -161,7 +161,7 @@ void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
         //segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));
         //cout << "insert done "<< endl;
 
-        sldb.CreateRouteGeometries(cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
+        sldb.CreateRouteGeometries("orig", "dest", 0.0, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
                                     cnfg.ArcsTableName, "1,2", *mPtr, resultTblName);
 
         sldb.CommitCurrentTransaction();
@@ -368,11 +368,8 @@ void netxpert::Test::TestMST(Config& cnfg)
         LOGGER::LogInfo("Optimum: " + to_string(mst.GetOptimum()) );
         LOGGER::LogInfo("Count of MST: " + to_string(mst.GetMinimumSpanningTree().size()) );
 
-        LOGGER::LogDebug("Getting ArcIDs..#1");
         string arcIDs;
         vector<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
-        LOGGER::LogDebug("Done!");
-        LOGGER::LogDebug("Getting ArcIDs..#2");
         for (string& id : arcIDlist)
         {
             // 13-14 min on 840000 arcs
@@ -381,10 +378,8 @@ void netxpert::Test::TestMST(Config& cnfg)
         }
         arcIDs.pop_back(); //trim last comma
 
-        LOGGER::LogDebug("Done!");
-
         LOGGER::LogDebug("Writing Geometries..");
-        net.BuildTotalRouteGeometry(arcIDs, resultTableName);
+        net.BuildTotalRouteGeometry("", "", -1, -1, -1, arcIDs, resultTableName);
         LOGGER::LogDebug("Done!");
     }
     catch (exception& ex)
@@ -500,6 +495,7 @@ void netxpert::Test::TestSPT(Config& cnfg)
                 break;
         }
         writer->OpenNewTransaction();
+        writer->CreateNetXpertDB();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
         LOGGER::LogDebug("Writing Geometries..");
@@ -513,19 +509,10 @@ void netxpert::Test::TestSPT(Config& cnfg)
             CompressedPath value = kv.second;
             vector<unsigned int> ends = value.first;
             double costPerPath = value.second;
-            //cout << "Origin-Dest: " << key.origin << " - " <<key.dest << endl;
-            /*cout << "Ends: " << endl;
-            for (auto& e : ends)
-                cout << e << ",";
-            cout << endl;*/
+
             auto route = spt.UncompressRoute(key.origin, ends);
-            /*cout << "Route: " << endl;
-            for (auto& r : route)
-                cout <<r.fromNode << " " << r.toNode << ",";
-            cout << endl;*/
 
             vector<string> arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
-            //cout << "Size of arcIDList: " << arcIDlist.size() << endl;
 
             if (arcIDlist.size() > 0)
             {
@@ -533,11 +520,21 @@ void netxpert::Test::TestSPT(Config& cnfg)
                     arcIDs += id += ",";
                 arcIDs.pop_back(); //trim last comma
             }
-            //cout << arcIDs << endl;
-            //writer->OpenNewTransaction();
-            net.BuildTotalRouteGeometry(arcIDs, route, key.origin, key.dest, resultTableName, *writer);
-            //writer->CommitCurrentTransaction();
-            //cout << "written"<<endl;
+            string orig;
+            string dest;
+            try{
+                orig = net.GetOriginalStartOrEndNodeID(key.origin);
+            }
+            catch (exception& ex) {
+                orig = net.GetOriginalNodeID(key.origin);
+            }
+            try{
+                dest = net.GetOriginalStartOrEndNodeID(key.dest);
+            }
+            catch (exception& ex) {
+                dest = net.GetOriginalNodeID(key.dest);
+            }
+            net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
@@ -679,7 +676,21 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
                     arcIDs += id += ",";
                 arcIDs.pop_back(); //trim last comma
             }
-            net.BuildTotalRouteGeometry(arcIDs, route, key.origin, key.dest, resultTableName, *writer);
+            string orig;
+            string dest;
+            try{
+                orig = net.GetOriginalStartOrEndNodeID(key.origin);
+            }
+            catch (exception& ex) {
+                orig = net.GetOriginalNodeID(key.origin);
+            }
+            try{
+                dest = net.GetOriginalStartOrEndNodeID(key.dest);
+            }
+            catch (exception& ex) {
+                dest = net.GetOriginalNodeID(key.dest);
+            }
+            net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();

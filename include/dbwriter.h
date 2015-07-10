@@ -10,7 +10,7 @@ using namespace std;
 
 namespace netxpert {
     /**
-    * \Abstract Class (Interface) for Result DB for NetXpert
+    * \Abstract Abstract Class (Interface) for the output DB
     **/
     class DBWriter
     {
@@ -21,8 +21,8 @@ namespace netxpert {
             // Sonst gibt es Fehler beim Kompilieren...
             virtual void CommitCurrentTransaction() = 0;
             virtual void CreateNetXpertDB() = 0;
-            virtual void CreateSolverResultTable(string _tableName) = 0;
-            virtual void CreateSolverResultTable(string _tableName, bool dropFirst) = 0;
+            virtual void CreateSolverResultTable(const string& _tableName) = 0;
+            virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst) = 0;
             virtual void OpenNewTransaction() = 0;
             /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     geos::geom::MultiLineString& route, string _tableName,

@@ -75,7 +75,7 @@ void FGDBWriter::connect()
         wstring newPath;
         StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
 
-        cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
+        //cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
 
         fgdbError hr;
         wstring errorText;
@@ -83,6 +83,7 @@ void FGDBWriter::connect()
         if ((hr = OpenGeodatabase(newPath, *geodatabasePtr) ) == S_OK)
         {
             LOGGER::LogDebug("Connected to NetXpert FileGDB "+ NETXPERT_CNFG.ResultDBPath);
+            isConnected = true;
         }
         else {
             ErrorInfo::GetErrorDescription(hr, errorText);
@@ -121,10 +122,10 @@ void FGDBWriter::CreateNetXpertDB()
     try
     {
         wstring newPath;
-        cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
+        //cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
         //ASCII string to UTF16 String
         StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
-        cout << "FGDB Path: "<< newPath << endl;
+        //cout << "FGDB Path: "<< newPath << endl;
         // TODO: muss nicht ueberschrieben werden, wenns existiert
         if ( exists(NETXPERT_CNFG.ResultDBPath) )
         {
@@ -159,7 +160,7 @@ void FGDBWriter::CreateNetXpertDB()
         LOGGER::LogError( ex.what() );
     }
 }
-void FGDBWriter::CreateSolverResultTable(string _tableName)
+void FGDBWriter::CreateSolverResultTable(const string& _tableName)
 {
     try {
         if (!geodatabasePtr)
@@ -173,7 +174,7 @@ void FGDBWriter::CreateSolverResultTable(string _tableName)
         LOGGER::LogError( ex.what() );
     }
 }
-void FGDBWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
+void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirst)
 {
     try
     {
@@ -193,7 +194,7 @@ void FGDBWriter::CreateSolverResultTable(string _tableName, bool dropFirst)
     }
 }
 
-void FGDBWriter::createTable ( string _tableName )
+void FGDBWriter::createTable (const string& _tableName )
 {
     currentTblPtr = unique_ptr<Table> (new Table());
 
@@ -227,7 +228,7 @@ void FGDBWriter::createTable ( string _tableName )
 
 }
 
-void FGDBWriter::openTable ( string _tableName)
+void FGDBWriter::openTable ( const string& _tableName)
 {
     fgdbError hr;
     wstring errorText;
@@ -237,7 +238,7 @@ void FGDBWriter::openTable ( string _tableName)
 
     if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
     {
-        LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
+        //LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
     }
     else {
         ErrorInfo::GetErrorDescription(hr, errorText);
@@ -249,7 +250,7 @@ void FGDBWriter::openTable ( string _tableName)
     }
 }
 
-void FGDBWriter::dropTable (string _tableName)
+void FGDBWriter::dropTable (const string& _tableName)
 {
     try
     {
@@ -292,7 +293,7 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
         if (truncateBeforeInsert)
             return; //TODO throw exception?
 
-        if (!geodatabasePtr)
+        if (!isConnected)
             connect( );
 
         openTable ( _tableName );
@@ -366,7 +367,7 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
 
             if ((hr = currentTblPtr->Insert(row)) == S_OK)
             {
-                LOGGER::LogDebug("Inserted row successfully.");
+                //LOGGER::LogDebug("Inserted row successfully.");
             }
             else {
                 ErrorInfo::GetErrorDescription(hr, errorText);
@@ -386,9 +387,6 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
     }
 
 }
-/*virtual void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::MultiLineString route, string _tableName,
-                                    bool truncateBeforeInsert, SQLiteCommand cmd);*/
 void FGDBWriter::CloseConnection()
 {
     try

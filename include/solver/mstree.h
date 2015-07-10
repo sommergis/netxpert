@@ -8,7 +8,9 @@
 using namespace std;
 
 namespace netxpert {
-
+    /**
+    * \Class Solver for the Minimum Spanning Tree Problem
+    */
     class MinimumSpanningTree : public ISolver
     {
         public:

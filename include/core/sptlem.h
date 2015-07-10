@@ -3,8 +3,6 @@
 
 #include <lemon/smart_graph.h>
 #include <lemon/dijkstra.h>
-//#include "..\..\lemon-1.3\lemon\smart_graph.h"
-//#include "..\..\lemon-1.3\lemon\dijkstra.h"
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
@@ -29,6 +27,9 @@ namespace netxpert {
     //typedef FibHeap<SmartDigraph::ArcMap<double>, SmartDigraph::NodeMap<double>> FibonacciHeap;
     typedef Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>> DijkstraInternal;
 
+    /**
+    *  \Class Core Solver for the Shortest Path Tree Problem with binary Heap structure and Dijkstra's algorithm of LEMON.
+    */
     class SPT_LEM_2Heap : public ISPTree
     {
         public:

@@ -11,6 +11,9 @@ using namespace cereal;
 
 namespace netxpert {
 
+    /**
+    * \Enum for Geometry Handling.
+    **/
     enum GEOMETRY_HANDLING
     {
         NoGeometry = 0,
@@ -36,12 +39,18 @@ namespace netxpert {
         TestAddNodes = 10,
         TestCreateRouteGeometries = 11
     };
+
+    /**
+    * \Enum for the type of the output DB in which the solver result is been written.
+    **/
     enum RESULT_DB_TYPE
     {
         SpatiaLiteDB = 0,
         ESRI_FileGDB = 1
     };
-
+    /**
+    * \Enum for the Log Level.
+    **/
     enum LOG_LEVEL {
            All = -1,
            Debug = 0,
@@ -49,7 +58,9 @@ namespace netxpert {
            Warning = 2,
            Error = 3,
            Fatal = 4   };
-
+    /**
+    * \Enum for the type of the Shortest Path Tree algorithms.
+    **/
     enum SPTAlgorithm {
 
         Dijkstra_MCFClass = 0,
@@ -57,12 +68,16 @@ namespace netxpert {
         LDeque_MCFClass = 2,
         Dijkstra_Heap_MCFClass = 3,
         Dijkstra_2Heap_LEMON = 4} ;
-
+    /**
+    * \Enum for the type of the Minimum Cost Flow algorithms.
+    **/
     enum MCFAlgorithm {
         NetworkSimplex_MCF = 0,
         NetworkSimplex_LEMON = 1
         } ;
-
+    /**
+    * \Enum for the type of the Minimum Spanning Tree algorithms.
+    **/
     enum MSTAlgorithm {
         Kruskal_QuickGraph = 0, //.NET!
         Prim_QuickGraph = 1,    //.NET!

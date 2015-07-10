@@ -10,6 +10,8 @@
 #include "dbhelper.h"
 #include "isolver.h"
 #include "mstree.h"
+#include "sptree.h"
+#include "odmatrix.h"
 %}
 
 namespace std
@@ -54,9 +56,15 @@ namespace netxpert
         Coordinate coord;
         double supply;
     };
+    struct ODPair
+    {
+        unsigned int origin;
+        unsigned int dest;
+    };
 
     typedef std::list<netxpert::InputNode> InputNodes;
     typedef std::list<netxpert::InputArc> InputArcs;
+    typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
 
     enum GEOMETRY_HANDLING
     {
@@ -170,6 +178,13 @@ namespace netxpert
             //unsigned int AddStartNode(const NewNode& newNode, int treshold, std::unique_ptr<SQLite::Statement> closestArcQry, bool withCapacity);
             //unsigned int AddEndNode(const NewNode& newNode, int treshold, std::unique_ptr<SQLite::Statement> closestArcQry, bool withCapacity);
 
+            std::vector< std::pair<unsigned int, std::string> > LoadStartNodes(const std::vector<NewNode>& newNodes, int treshold,
+                                                            std::string arcsTableName, std::string geomColumnName,
+                                                                ColumnMap& cmap, bool withCapacity);
+            std::vector< std::pair<unsigned int, std::string> > LoadEndNodes(const std::vector<NewNode>& newNodes, int treshold,
+                                                            std::string arcsTableName, std::string geomColumnName,
+                                                                ColumnMap& cmap, bool withCapacity);
+
             std::string GetOriginalNodeID(unsigned int internalNodeID);
             std::string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
     };
@@ -220,7 +235,7 @@ namespace netxpert
             MinimumSpanningTree(Config& cnfg);
             virtual ~MinimumSpanningTree();
 
-            void Solve(string net);
+            void Solve(std::string net);
             void Solve(Network& net);
 
             MSTAlgorithm GetAlgorithm();
@@ -230,6 +245,68 @@ namespace netxpert
             vector<InternalArc> GetMinimumSpanningTree() const;
     };
 
+    class OriginDestinationMatrix : public ISolver
+    {
+        public:
+            OriginDestinationMatrix(Config& cnfg);
+            virtual ~OriginDestinationMatrix();
+
+            void Solve(std::string net);
+            void Solve(Network& net);
+
+            SPTAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(SPTAlgorithm mstAlgorithm);
+
+            int GetSPTHeapCard() const;
+            void SetSPTHeapCard(int heapCard);
+
+            GEOMETRY_HANDLING GetGeometryHandling() const;
+            void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
+
+            std::vector<unsigned int> GetOrigins() const;
+            void SetOrigins(vector<unsigned int>  origs);
+
+            std::vector<unsigned int> GetDestinations() const;
+            void SetDestinations(vector<unsigned int>& dests);
+
+            std::vector<unsigned int> GetReachedDests() const;
+            std::unordered_map<ODPair, CompressedPath> GetShortestPaths() const;
+            std::unordered_map<ODPair, double> GetODMatrix() const;
+
+            double GetOptimum() const;
+            std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
+    };
+    class ShortestPathTree : public ISolver
+    {
+        public:
+            ShortestPathTree(Config& cnfg);
+            virtual ~ShortestPathTree();
+
+            void Solve(std::string net);
+            void Solve(Network& net);
+
+            SPTAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(SPTAlgorithm mstAlgorithm);
+
+            int GetSPTHeapCard() const;
+            void SetSPTHeapCard(int heapCard);
+
+            GEOMETRY_HANDLING GetGeometryHandling() const;
+            void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
+
+            unsigned int GetOrigin() const;
+            void SetOrigin(unsigned int orig);
+
+            std::vector<unsigned int> GetDestinations() const;
+            void SetDestinations(std::vector<unsigned int>& dests);
+
+            std::vector<unsigned int> GetReachedDests() const;
+            std::unordered_map<ODPair, CompressedPath> GetShortestPaths() const;
+
+            double GetOptimum() const;
+
+            std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
+    };
 }
 
 /* Add nicer __str__() methods */

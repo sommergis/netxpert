@@ -10,7 +10,10 @@
 
 namespace netxpert {
 
-    class NetworkSimplex : IMinCostFlow
+    /**
+    *  \Class Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON.
+    */
+    class NetworkSimplex : public IMinCostFlow
     {
         public:
             NetworkSimplex(void);
