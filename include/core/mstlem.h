@@ -15,7 +15,7 @@ using namespace std;
 
 namespace netxpert {
     /**
-      Core Solver for the Minimum Spanning Tree Problem
+    *  \Class Core Solver for the Minimum Spanning Tree Problem
     */
     class MST_LEMON : public IMinSpanTree
     {

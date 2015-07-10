@@ -16,7 +16,7 @@ using namespace SQLite;
 namespace netxpert {
 
     /**
-    * \Class that writes the result of NetXpert into a SpatiaLite DB
+    * \Class Writes the result of NetXpert into a SpatiaLite DB
     **/
     class SpatiaLiteWriter : public DBWriter
     {
@@ -25,8 +25,8 @@ namespace netxpert {
             virtual ~SpatiaLiteWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const string _tableName);
-            virtual void CreateSolverResultTable(const string _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const string& _tableName);
+            virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
             unique_ptr<SQLite::Statement> PrepareSaveSolveQueryToDB(string _tableName);
             void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
@@ -34,11 +34,13 @@ namespace netxpert {
                                     bool truncateBeforeInsert, SQLite::Statement& query);
             //TODO: testme
             unique_ptr<SQLite::Statement> PrepareCreateRouteGeometries(string arcTableName);
-            void CreateRouteGeometries(const string geomColumnName, const string arcIDColumnName, const string arcTableName,
-                                     const string& arcIDs, const string resultTableName);
-            void CreateRouteGeometries(const string geomColumnName, const string arcIDColumnName, const string arcTableName,
-                                     const string& arcIDs, const MultiLineString& mLine,
-                                     const string resultTableName);
+            void CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+                                        const string geomColumnName, const string arcIDColumnName,
+                                        const string arcTableName, const string& arcIDs, const string resultTableName);
+            void CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+                                        const string geomColumnName, const string arcIDColumnName,
+                                        const string arcTableName, const string& arcIDs, const MultiLineString& mLine,
+                                        const string resultTableName);
 
             virtual void CloseConnection();
             //string ConnStr;
@@ -53,9 +55,11 @@ namespace netxpert {
             void dropTable ( string _tableName);
             void recoverGeometryColumn (string _tableName, string _geomColName, string _geomType);
             Config NETXPERT_CNFG;
-            void createRouteWithAllParts(string geomColumnName, string arcIDColumnName, string arcTableName,
-                                     const string& arcIDs, const MultiLineString& mLine, string resultTableName);
-            void createRouteWithAllParts(string geomColumnName, string arcIDColumnName, string arcTableName,
+            void createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+                                        string geomColumnName, string arcIDColumnName, string arcTableName,
+                                        const string& arcIDs, const MultiLineString& mLine, string resultTableName);
+            void createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+                                        string geomColumnName, string arcIDColumnName, string arcTableName,
                                      const string& arcIDs, string resultTableName);
     };
 }

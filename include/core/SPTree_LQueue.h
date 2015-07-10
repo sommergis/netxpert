@@ -181,7 +181,9 @@ namespace MCFClass_di_unipi_it
 	     about this in the code. */
 
 namespace netxpert {
-
+/**
+*  \Class Core Solver for the Shortest Path Tree Problem with queue structure and label correcting algorithm.
+*/
 class SPTree_LQueue : public MCFClass, public ISPTree
 {
 

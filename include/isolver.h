@@ -8,7 +8,7 @@ using namespace std;
 
 namespace netxpert {
     /**
-    * \Abstract Class (Interface) for all Solvers in NetXpert
+    * \Abstract Abstract Class (Interface) for all Solvers
     **/
     class ISolver
     {

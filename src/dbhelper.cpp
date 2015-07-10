@@ -24,35 +24,10 @@ namespace netxpert {
     } GeometryEmptyException;
 }
 
-/*void DBHELPER::cleanupPtr()
-{
-    //dtor
-    //cout << "deconstructor" << endl;
-    if (currentTransactionPtr) {
-        //cout << "deleting currentTransactionPtr" << endl;
-        delete currentTransactionPtr;
-    }
-    if (connPtr)
-    {
-        //cout << "deleting connPtr" << endl;
-        delete connPtr;
-    }
-
-}*/
 //gets not called, because everything else is static
 DBHELPER::~DBHELPER()
 {
-    //dtor
-    /*cout << "deconstructor" << endl;
-    if (connPtr)
-    {
-        cout << "deleting connPtr" << endl;
-        delete connPtr;
-    }
-    if (currentTransactionPtr) {
-        cout << "deleting currentTransactionPtr" << endl;
-        delete currentTransactionPtr;
-    }*/
+
 }
 
 void DBHELPER::Initialize(const Config& cnfg)
@@ -81,7 +56,6 @@ void DBHELPER::connect( )
 {
     try
     {
-        // Pointer verursacht possible mem leaks ~70,000 bytes
         connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
@@ -415,21 +389,18 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
 {
     string closestArcID;
     shared_ptr<Geometry> pGeomPtr = nullptr;
-    shared_ptr<Geometry> aGeomPtr = nullptr; //kein shared_ptr, weil es zur Reference als Member eines structs kopiert wird
-    // nach dem return geht das Ding out of scope und räumt sich selbst auf
+    shared_ptr<Geometry> aGeomPtr = nullptr;
+
     string extFromNode;
     string extToNode;
-    double cost;
-    double capacity;
-
-    //auto qry = *qry;
-
-    /*cout << withCapacity << endl;
-    cout << coord.toString() << endl;
-    cout << treshold << endl;*/
+    double cost = 0;
+    double capacity = DOUBLE_INFINITY;
 
     try
     {
+        if (!isConnected)
+            connect();
+
         const double x = coord.x;
         const double y = coord.y;
 
@@ -529,6 +500,77 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
         LOGGER::LogError( "Error getting closest Arc!" );
         LOGGER::LogError( ex.what() );
         throw ex;
+    }
+}
+
+unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, string arcIDColumnName,
+                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType, const string& arcIDs )
+{
+    string eliminatedArcIDs = "";
+    string sqlStr = "";
+
+    try
+    {
+        if (!isConnected)
+            connect();
+
+        switch (arcIDColDataType)
+        {
+            case ArcIDColumnDataType::Std_String:
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",'", elem, "'";
+                }
+                break;
+            default: //double or int
+                for (const string& elem: DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",", elem;
+                }
+                break;
+        }
+        //trim comma on first
+        if (eliminatedArcIDs.length() > 0)
+            eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
+
+        sqlStr = "SELECT AsBinary(CastToMultiLineString(ST_Union(" + geomColumnName + ")))"+
+                 " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+                        arcIDColumnName+ " IN("+ arcIDs +")";
+
+        //LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+
+        //cout << sqlStr << endl;
+
+        SQLite::Database& db = *connPtr;
+        SQLite::Statement qry (db, sqlStr);
+
+        unique_ptr<MultiLineString> aGeomPtr;
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        while (qry.executeStep())
+        {
+            SQLite::Column col = qry.getColumn(0);
+
+            if (!col.isNull())
+            {
+                const void* pVoid = col.getBlob();
+                const int sizeOfwkb = col.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                 aGeomPtr = unique_ptr<MultiLineString>( dynamic_cast<MultiLineString*>( wkbReader.read(is) ) );
+            }
+        }
+        return aGeomPtr;
+
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError( "Error getting arc geometries!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
     }
 }
 

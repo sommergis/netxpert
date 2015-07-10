@@ -154,8 +154,8 @@ void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vecto
 
     // Für Min Span Tree ist eine Richtung ausreichend, weil eh nur die Kante an sich betrachtet wird
     // --> kein doppelter Input der Kanten notwendig
-    sNds.reserve(keys.size());
-    eNds.reserve(keys.size());
+    sNds.resize(keys.size());
+    eNds.resize(keys.size());
     cout << "size of arcs: " << keys.size() << endl;
     for (int i = 0; i < keys.size(); i++)
     {
@@ -163,8 +163,8 @@ void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vecto
         eNds[i] = keys[i].toNode;
     }
 
-    costs.reserve(keys.size()); //Größe muss passen!
-    caps.reserve(keys.size());  //Größe muss passen!
+    costs.resize(keys.size()); //Größe muss passen!
+    caps.resize(keys.size());  //Größe muss passen!
     for (int i = 0; i < keys.size(); i++)
     {
         ArcData oldArcData;
@@ -177,7 +177,7 @@ void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vecto
 
     //Min span tree does not care about capacity
     /*
-    supply.reserve( net.GetMaxNodeCount() ); //Größe muss passen!
+    supply.resize( net.GetMaxNodeCount() ); //Größe muss passen!
     for (auto item : net.GetNodeSupplies() )
     {
         unsigned int key = item.first;

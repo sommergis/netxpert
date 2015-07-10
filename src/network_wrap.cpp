@@ -2952,21 +2952,32 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[12]
 #define SWIGTYPE_p_netxpert__Network swig_types[13]
 #define SWIGTYPE_p_netxpert__NewNode swig_types[14]
-#define SWIGTYPE_p_p_PyObject swig_types[15]
-#define SWIGTYPE_p_size_type swig_types[16]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[17]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[18]
-#define SWIGTYPE_p_std__invalid_argument swig_types[19]
-#define SWIGTYPE_p_std__listT__Tp__Alloc_t swig_types[20]
-#define SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[21]
-#define SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[22]
-#define SWIGTYPE_p_string swig_types[23]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[24]
-#define SWIGTYPE_p_value_type swig_types[25]
-#define SWIGTYPE_p_vectorT_netxpert__InternalArc_t swig_types[26]
-#define SWIGTYPE_p_vectorT_netxpert__NewNode_t swig_types[27]
-static swig_type_info *swig_types[29];
-static swig_module_info swig_module = {swig_types, 28, 0, 0, 0, 0};
+#define SWIGTYPE_p_netxpert__ODPair swig_types[15]
+#define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[16]
+#define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[17]
+#define SWIGTYPE_p_p_PyObject swig_types[18]
+#define SWIGTYPE_p_size_type swig_types[19]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[20]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[21]
+#define SWIGTYPE_p_std__invalid_argument swig_types[22]
+#define SWIGTYPE_p_std__listT__Tp__Alloc_t swig_types[23]
+#define SWIGTYPE_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[24]
+#define SWIGTYPE_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[25]
+#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_t_double_t swig_types[26]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[27]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t swig_types[28]
+#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_t swig_types[29]
+#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_t swig_types[30]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_t swig_types[31]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_t swig_types[32]
+#define SWIGTYPE_p_string swig_types[33]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[34]
+#define SWIGTYPE_p_value_type swig_types[35]
+#define SWIGTYPE_p_vectorT_netxpert__InternalArc_t swig_types[36]
+#define SWIGTYPE_p_vectorT_netxpert__NewNode_t swig_types[37]
+#define SWIGTYPE_p_vectorT_unsigned_int_t swig_types[38]
+static swig_type_info *swig_types[40];
+static swig_module_info swig_module = {swig_types, 39, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3456,6 +3467,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "dbhelper.h"
 #include "isolver.h"
 #include "mstree.h"
+#include "sptree.h"
+#include "odmatrix.h"
 
 
 namespace swig {  
@@ -4954,13 +4967,6 @@ SWIGINTERN char *netxpert_InputArc___str__(netxpert::InputArc *self){
        return tmp;
    }
 
-SWIGINTERNINLINE PyObject*
-  SWIG_From_int  (int value)
-{
-  return PyInt_FromLong((long) value);
-}
-
-
 #include <limits.h>
 #if !defined(SWIG_NO_LLONG_MAX)
 # if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
@@ -4969,6 +4975,36 @@ SWIGINTERNINLINE PyObject*
 #   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
 # endif
 #endif
+
+
+SWIGINTERN int
+SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
+{
+  unsigned long v;
+  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v > UINT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< unsigned int >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_unsigned_SS_int  (unsigned int value)
+{
+  return PyInt_FromSize_t((size_t) value);
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
 
 
 SWIGINTERN int
@@ -4995,29 +5031,6 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
     return SWIG_ERROR;
   if (val) *val = r ? true : false;
   return SWIG_OK;
-}
-
-
-SWIGINTERN int
-SWIG_AsVal_unsigned_SS_int (PyObject * obj, unsigned int *val)
-{
-  unsigned long v;
-  int res = SWIG_AsVal_unsigned_SS_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v > UINT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< unsigned int >(v);
-    }
-  }  
-  return res;
-}
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_unsigned_SS_int  (unsigned int value)
-{
-  return PyInt_FromSize_t((size_t) value);
 }
 
 #ifdef __cplusplus
@@ -11009,6 +11022,151 @@ SWIGINTERN PyObject *NewNode_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_ODPair_origin_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *arg1 = (netxpert::ODPair *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ODPair_origin_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ODPair, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_origin_set" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ODPair_origin_set" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  if (arg1) (arg1)->origin = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ODPair_origin_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *arg1 = (netxpert::ODPair *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ODPair_origin_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ODPair, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_origin_get" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
+  result = (unsigned int) ((arg1)->origin);
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ODPair_dest_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *arg1 = (netxpert::ODPair *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ODPair_dest_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ODPair, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_dest_set" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ODPair_dest_set" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  if (arg1) (arg1)->dest = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ODPair_dest_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *arg1 = (netxpert::ODPair *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ODPair_dest_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ODPair, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_dest_get" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
+  result = (unsigned int) ((arg1)->dest);
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_ODPair(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_ODPair")) SWIG_fail;
+  result = (netxpert::ODPair *)new netxpert::ODPair();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ODPair, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_ODPair(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ODPair *arg1 = (netxpert::ODPair *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ODPair",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ODPair, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ODPair" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ODPair_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__ODPair, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Config *arg1 = (netxpert::Config *) 0 ;
@@ -13444,6 +13602,178 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Network_LoadStartNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
+  std::vector< netxpert::NewNode > *arg2 = 0 ;
+  int arg3 ;
+  std::string arg4 ;
+  std::string arg5 ;
+  netxpert::ColumnMap *arg6 = 0 ;
+  bool arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  SwigValueWrapper< std::vector< std::pair< unsigned int,std::string > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:Network_LoadStartNodes",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_LoadStartNodes" "', argument " "1"" of type '" "netxpert::Network *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_netxpert__NewNode_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Network_LoadStartNodes" "', argument " "2"" of type '" "std::vector< netxpert::NewNode > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Network_LoadStartNodes" "', argument " "2"" of type '" "std::vector< netxpert::NewNode > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Network_LoadStartNodes" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj3, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Network_LoadStartNodes" "', argument " "4"" of type '" "std::string""'"); 
+    }
+    arg4 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj4, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Network_LoadStartNodes" "', argument " "5"" of type '" "std::string""'"); 
+    }
+    arg5 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_netxpert__ColumnMap,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Network_LoadStartNodes" "', argument " "6"" of type '" "netxpert::ColumnMap &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Network_LoadStartNodes" "', argument " "6"" of type '" "netxpert::ColumnMap &""'"); 
+  }
+  arg6 = reinterpret_cast< netxpert::ColumnMap * >(argp6);
+  ecode7 = SWIG_AsVal_bool(obj6, &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Network_LoadStartNodes" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  result = (arg1)->LoadStartNodes((std::vector< netxpert::NewNode > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+  resultobj = SWIG_NewPointerObj((new std::vector< std::pair< unsigned int,std::string > >(static_cast< const std::vector< std::pair< unsigned int,std::string > >& >(result))), SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Network_LoadEndNodes(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
+  std::vector< netxpert::NewNode > *arg2 = 0 ;
+  int arg3 ;
+  std::string arg4 ;
+  std::string arg5 ;
+  netxpert::ColumnMap *arg6 = 0 ;
+  bool arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp6 = 0 ;
+  int res6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  PyObject * obj4 = 0 ;
+  PyObject * obj5 = 0 ;
+  PyObject * obj6 = 0 ;
+  SwigValueWrapper< std::vector< std::pair< unsigned int,std::string > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:Network_LoadEndNodes",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_LoadEndNodes" "', argument " "1"" of type '" "netxpert::Network *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_netxpert__NewNode_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Network_LoadEndNodes" "', argument " "2"" of type '" "std::vector< netxpert::NewNode > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Network_LoadEndNodes" "', argument " "2"" of type '" "std::vector< netxpert::NewNode > const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp2);
+  ecode3 = SWIG_AsVal_int(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Network_LoadEndNodes" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj3, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Network_LoadEndNodes" "', argument " "4"" of type '" "std::string""'"); 
+    }
+    arg4 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj4, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Network_LoadEndNodes" "', argument " "5"" of type '" "std::string""'"); 
+    }
+    arg5 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_netxpert__ColumnMap,  0 );
+  if (!SWIG_IsOK(res6)) {
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Network_LoadEndNodes" "', argument " "6"" of type '" "netxpert::ColumnMap &""'"); 
+  }
+  if (!argp6) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Network_LoadEndNodes" "', argument " "6"" of type '" "netxpert::ColumnMap &""'"); 
+  }
+  arg6 = reinterpret_cast< netxpert::ColumnMap * >(argp6);
+  ecode7 = SWIG_AsVal_bool(obj6, &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Network_LoadEndNodes" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  result = (arg1)->LoadEndNodes((std::vector< netxpert::NewNode > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+  resultobj = SWIG_NewPointerObj((new std::vector< std::pair< unsigned int,std::string > >(static_cast< const std::vector< std::pair< unsigned int,std::string > >& >(result))), SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Network_GetOriginalNodeID(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Network *arg1 = (netxpert::Network *) 0 ;
@@ -14141,31 +14471,6 @@ SWIGINTERN PyObject *ISolver_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::Config *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  netxpert::MinimumSpanningTree *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:new_MinimumSpanningTree",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::MinimumSpanningTree *)new netxpert::MinimumSpanningTree(*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
@@ -14190,11 +14495,9 @@ fail:
 SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::MinimumSpanningTree *arg1 = (netxpert::MinimumSpanningTree *) 0 ;
-  string arg2 ;
+  std::string arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
-  int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
@@ -14205,17 +14508,13 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_0(PyObject *SWIGUNUSE
   }
   arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
   {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_string,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "string""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "string""'");
-    } else {
-      string * temp = reinterpret_cast< string * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "std::string""'"); 
     }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
   }
   (arg1)->Solve(arg2);
   resultobj = SWIG_Py_Void();
@@ -14274,10 +14573,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve(PyObject *self, PyObject *a
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__MinimumSpanningTree, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_string, 0);
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_MinimumSpanningTree_Solve__SWIG_0(self, args);
+        return _wrap_MinimumSpanningTree_Solve__SWIG_1(self, args);
       }
     }
   }
@@ -14287,11 +14587,10 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve(PyObject *self, PyObject *a
     int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__MinimumSpanningTree, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
       _v = SWIG_CheckState(res);
       if (_v) {
-        return _wrap_MinimumSpanningTree_Solve__SWIG_1(self, args);
+        return _wrap_MinimumSpanningTree_Solve__SWIG_0(self, args);
       }
     }
   }
@@ -14299,7 +14598,7 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve(PyObject *self, PyObject *a
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'MinimumSpanningTree_Solve'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    netxpert::MinimumSpanningTree::Solve(string)\n"
+    "    netxpert::MinimumSpanningTree::Solve(std::string)\n"
     "    netxpert::MinimumSpanningTree::Solve(netxpert::Network &)\n");
   return 0;
 }
@@ -14405,6 +14704,1060 @@ SWIGINTERN PyObject *MinimumSpanningTree_swigregister(PyObject *SWIGUNUSEDPARM(s
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
   SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_delete_OriginDestinationMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_OriginDestinationMatrix",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OriginDestinationMatrix" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_Solve" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "OriginDestinationMatrix_Solve" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  (arg1)->Solve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_Solve" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  (arg1)->Solve(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_OriginDestinationMatrix_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_OriginDestinationMatrix_Solve__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OriginDestinationMatrix_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::OriginDestinationMatrix::Solve(std::string)\n"
+    "    netxpert::OriginDestinationMatrix::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::SPTAlgorithm result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetAlgorithm",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetAlgorithm" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = (netxpert::SPTAlgorithm)((netxpert::OriginDestinationMatrix const *)arg1)->GetAlgorithm();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  netxpert::SPTAlgorithm arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_SetAlgorithm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetAlgorithm" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetAlgorithm" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
+  } 
+  arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
+  (arg1)->SetAlgorithm(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetSPTHeapCard",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetSPTHeapCard" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = (int)((netxpert::OriginDestinationMatrix const *)arg1)->GetSPTHeapCard();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_SetSPTHeapCard",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetSPTHeapCard" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetSPTHeapCard" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetSPTHeapCard(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::GEOMETRY_HANDLING result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetGeometryHandling",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetGeometryHandling" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = (netxpert::GEOMETRY_HANDLING)((netxpert::OriginDestinationMatrix const *)arg1)->GetGeometryHandling();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  netxpert::GEOMETRY_HANDLING arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_SetGeometryHandling",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetGeometryHandling" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetGeometryHandling" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
+  } 
+  arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
+  (arg1)->SetGeometryHandling(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< unsigned int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetOrigins",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetOrigins" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetOrigins();
+  resultobj = SWIG_NewPointerObj((new std::vector< unsigned int >(static_cast< const std::vector< unsigned int >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  vector< unsigned int > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_SetOrigins",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_unsigned_int_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "vector< unsigned int >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "vector< unsigned int >""'");
+    } else {
+      vector< unsigned int > * temp = reinterpret_cast< vector< unsigned int > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (arg1)->SetOrigins(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetDestinations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< unsigned int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetDestinations",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetDestinations" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetDestinations();
+  resultobj = SWIG_NewPointerObj((new std::vector< unsigned int >(static_cast< const std::vector< unsigned int >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetDestinations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  vector< unsigned int > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:OriginDestinationMatrix_SetDestinations",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_unsigned_int_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "vector< unsigned int > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "vector< unsigned int > &""'"); 
+  }
+  arg2 = reinterpret_cast< vector< unsigned int > * >(argp2);
+  (arg1)->SetDestinations(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetReachedDests(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< unsigned int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetReachedDests",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetReachedDests" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetReachedDests();
+  resultobj = SWIG_NewPointerObj((new std::vector< unsigned int >(static_cast< const std::vector< unsigned int >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetShortestPaths(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::unordered_map< netxpert::ODPair,netxpert::CompressedPath > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetShortestPaths",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetShortestPaths" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetShortestPaths();
+  resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >(static_cast< const std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetODMatrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::unordered_map< netxpert::ODPair,double > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetODMatrix",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetODMatrix" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetODMatrix();
+  resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,double >(static_cast< const std::unordered_map< netxpert::ODPair,double >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrix_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetOptimum" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  result = (double)((netxpert::OriginDestinationMatrix const *)arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_UncompressRoute(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
+  unsigned int arg2 ;
+  std::vector< unsigned int > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  SwigValueWrapper< std::vector< netxpert::InternalArc > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:OriginDestinationMatrix_UncompressRoute",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_UncompressRoute" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_UncompressRoute" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__vectorT_unsigned_int_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "OriginDestinationMatrix_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< unsigned int > * >(argp3);
+  result = ((netxpert::OriginDestinationMatrix const *)arg1)->UncompressRoute(arg2,*arg3);
+  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc >(static_cast< const std::vector< netxpert::InternalArc >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OriginDestinationMatrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__OriginDestinationMatrix, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_delete_ShortestPathTree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ShortestPathTree",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ShortestPathTree" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_Solve" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "ShortestPathTree_Solve" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  (arg1)->Solve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_Solve" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ShortestPathTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  (arg1)->Solve(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__ShortestPathTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ShortestPathTree_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__ShortestPathTree, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_ShortestPathTree_Solve__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'ShortestPathTree_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::ShortestPathTree::Solve(std::string)\n"
+    "    netxpert::ShortestPathTree::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::SPTAlgorithm result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetAlgorithm",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetAlgorithm" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = (netxpert::SPTAlgorithm)((netxpert::ShortestPathTree const *)arg1)->GetAlgorithm();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_SetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  netxpert::SPTAlgorithm arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_SetAlgorithm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_SetAlgorithm" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetAlgorithm" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
+  } 
+  arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
+  (arg1)->SetAlgorithm(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetSPTHeapCard",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetSPTHeapCard" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = (int)((netxpert::ShortestPathTree const *)arg1)->GetSPTHeapCard();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_SetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_SetSPTHeapCard",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_SetSPTHeapCard" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetSPTHeapCard" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->SetSPTHeapCard(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::GEOMETRY_HANDLING result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetGeometryHandling",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetGeometryHandling" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = (netxpert::GEOMETRY_HANDLING)((netxpert::ShortestPathTree const *)arg1)->GetGeometryHandling();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_SetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  netxpert::GEOMETRY_HANDLING arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_SetGeometryHandling",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_SetGeometryHandling" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetGeometryHandling" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
+  } 
+  arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
+  (arg1)->SetGeometryHandling(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetOrigin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  unsigned int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetOrigin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetOrigin" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = (unsigned int)((netxpert::ShortestPathTree const *)arg1)->GetOrigin();
+  resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_SetOrigin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  unsigned int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_SetOrigin",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_SetOrigin" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetOrigin" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  (arg1)->SetOrigin(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetDestinations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< unsigned int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetDestinations",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetDestinations" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = ((netxpert::ShortestPathTree const *)arg1)->GetDestinations();
+  resultobj = SWIG_NewPointerObj((new std::vector< unsigned int >(static_cast< const std::vector< unsigned int >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_SetDestinations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  std::vector< unsigned int > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:ShortestPathTree_SetDestinations",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_SetDestinations" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_unsigned_int_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ShortestPathTree_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< unsigned int > * >(argp2);
+  (arg1)->SetDestinations(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetReachedDests(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< unsigned int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetReachedDests",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetReachedDests" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = ((netxpert::ShortestPathTree const *)arg1)->GetReachedDests();
+  resultobj = SWIG_NewPointerObj((new std::vector< unsigned int >(static_cast< const std::vector< unsigned int >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetShortestPaths(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::unordered_map< netxpert::ODPair,netxpert::CompressedPath > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetShortestPaths",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetShortestPaths" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = ((netxpert::ShortestPathTree const *)arg1)->GetShortestPaths();
+  resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >(static_cast< const std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTree_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetOptimum" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  result = (double)((netxpert::ShortestPathTree const *)arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTree_UncompressRoute(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::ShortestPathTree *arg1 = (netxpert::ShortestPathTree *) 0 ;
+  unsigned int arg2 ;
+  std::vector< unsigned int > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  SwigValueWrapper< std::vector< netxpert::InternalArc > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:ShortestPathTree_UncompressRoute",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_UncompressRoute" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_UncompressRoute" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_std__vectorT_unsigned_int_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "ShortestPathTree_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int > &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< unsigned int > * >(argp3);
+  result = ((netxpert::ShortestPathTree const *)arg1)->UncompressRoute(arg2,*arg3);
+  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc >(static_cast< const std::vector< netxpert::InternalArc >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ShortestPathTree_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__ShortestPathTree, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -14550,6 +15903,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_NewNode", _wrap_new_NewNode, METH_VARARGS, NULL},
 	 { (char *)"delete_NewNode", _wrap_delete_NewNode, METH_VARARGS, NULL},
 	 { (char *)"NewNode_swigregister", NewNode_swigregister, METH_VARARGS, NULL},
+	 { (char *)"ODPair_origin_set", _wrap_ODPair_origin_set, METH_VARARGS, NULL},
+	 { (char *)"ODPair_origin_get", _wrap_ODPair_origin_get, METH_VARARGS, NULL},
+	 { (char *)"ODPair_dest_set", _wrap_ODPair_dest_set, METH_VARARGS, NULL},
+	 { (char *)"ODPair_dest_get", _wrap_ODPair_dest_get, METH_VARARGS, NULL},
+	 { (char *)"new_ODPair", _wrap_new_ODPair, METH_VARARGS, NULL},
+	 { (char *)"delete_ODPair", _wrap_delete_ODPair, METH_VARARGS, NULL},
+	 { (char *)"ODPair_swigregister", ODPair_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteDBPath_set", _wrap_Config_SQLiteDBPath_set, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteDBPath_get", _wrap_Config_SQLiteDBPath_get, METH_VARARGS, NULL},
 	 { (char *)"Config_SQLiteVersion_set", _wrap_Config_SQLiteVersion_set, METH_VARARGS, NULL},
@@ -14633,6 +15993,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Config_swigregister", Config_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Network", _wrap_new_Network, METH_VARARGS, NULL},
 	 { (char *)"Network_ConvertInputNetwork", _wrap_Network_ConvertInputNetwork, METH_VARARGS, NULL},
+	 { (char *)"Network_LoadStartNodes", _wrap_Network_LoadStartNodes, METH_VARARGS, NULL},
+	 { (char *)"Network_LoadEndNodes", _wrap_Network_LoadEndNodes, METH_VARARGS, NULL},
 	 { (char *)"Network_GetOriginalNodeID", _wrap_Network_GetOriginalNodeID, METH_VARARGS, NULL},
 	 { (char *)"Network_GetOriginalStartOrEndNodeID", _wrap_Network_GetOriginalStartOrEndNodeID, METH_VARARGS, NULL},
 	 { (char *)"delete_Network", _wrap_delete_Network, METH_VARARGS, NULL},
@@ -14662,7 +16024,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"delete_ISolver", _wrap_delete_ISolver, METH_VARARGS, NULL},
 	 { (char *)"ISolver_Solve", _wrap_ISolver_Solve, METH_VARARGS, NULL},
 	 { (char *)"ISolver_swigregister", ISolver_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_MinimumSpanningTree", _wrap_new_MinimumSpanningTree, METH_VARARGS, NULL},
 	 { (char *)"delete_MinimumSpanningTree", _wrap_delete_MinimumSpanningTree, METH_VARARGS, NULL},
 	 { (char *)"MinimumSpanningTree_Solve", _wrap_MinimumSpanningTree_Solve, METH_VARARGS, NULL},
 	 { (char *)"MinimumSpanningTree_GetAlgorithm", _wrap_MinimumSpanningTree_GetAlgorithm, METH_VARARGS, NULL},
@@ -14670,14 +16031,55 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MinimumSpanningTree_GetOptimum", _wrap_MinimumSpanningTree_GetOptimum, METH_VARARGS, NULL},
 	 { (char *)"MinimumSpanningTree_GetMinimumSpanningTree", _wrap_MinimumSpanningTree_GetMinimumSpanningTree, METH_VARARGS, NULL},
 	 { (char *)"MinimumSpanningTree_swigregister", MinimumSpanningTree_swigregister, METH_VARARGS, NULL},
+	 { (char *)"delete_OriginDestinationMatrix", _wrap_delete_OriginDestinationMatrix, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_Solve", _wrap_OriginDestinationMatrix_Solve, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetAlgorithm", _wrap_OriginDestinationMatrix_GetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_SetAlgorithm", _wrap_OriginDestinationMatrix_SetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetSPTHeapCard", _wrap_OriginDestinationMatrix_GetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_SetSPTHeapCard", _wrap_OriginDestinationMatrix_SetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetGeometryHandling", _wrap_OriginDestinationMatrix_GetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_SetGeometryHandling", _wrap_OriginDestinationMatrix_SetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetOrigins", _wrap_OriginDestinationMatrix_GetOrigins, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_SetOrigins", _wrap_OriginDestinationMatrix_SetOrigins, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetDestinations", _wrap_OriginDestinationMatrix_GetDestinations, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_SetDestinations", _wrap_OriginDestinationMatrix_SetDestinations, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetReachedDests", _wrap_OriginDestinationMatrix_GetReachedDests, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetShortestPaths", _wrap_OriginDestinationMatrix_GetShortestPaths, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetODMatrix", _wrap_OriginDestinationMatrix_GetODMatrix, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_GetOptimum", _wrap_OriginDestinationMatrix_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_UncompressRoute", _wrap_OriginDestinationMatrix_UncompressRoute, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrix_swigregister", OriginDestinationMatrix_swigregister, METH_VARARGS, NULL},
+	 { (char *)"delete_ShortestPathTree", _wrap_delete_ShortestPathTree, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_Solve", _wrap_ShortestPathTree_Solve, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetAlgorithm", _wrap_ShortestPathTree_GetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_SetAlgorithm", _wrap_ShortestPathTree_SetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetSPTHeapCard", _wrap_ShortestPathTree_GetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_SetSPTHeapCard", _wrap_ShortestPathTree_SetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetGeometryHandling", _wrap_ShortestPathTree_GetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_SetGeometryHandling", _wrap_ShortestPathTree_SetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetOrigin", _wrap_ShortestPathTree_GetOrigin, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_SetOrigin", _wrap_ShortestPathTree_SetOrigin, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetDestinations", _wrap_ShortestPathTree_GetDestinations, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_SetDestinations", _wrap_ShortestPathTree_SetDestinations, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetReachedDests", _wrap_ShortestPathTree_GetReachedDests, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetShortestPaths", _wrap_ShortestPathTree_GetShortestPaths, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_GetOptimum", _wrap_ShortestPathTree_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_UncompressRoute", _wrap_ShortestPathTree_UncompressRoute, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTree_swigregister", ShortestPathTree_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static void *_p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((netxpert::ISolver *)  ((netxpert::OriginDestinationMatrix *) x));
+}
 static void *_p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((netxpert::ISolver *)  ((netxpert::MinimumSpanningTree *) x));
+}
+static void *_p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((netxpert::ISolver *)  ((netxpert::ShortestPathTree *) x));
 }
 static swig_type_info _swigt__p_Coordinate = {"_p_Coordinate", "Coordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
@@ -14694,6 +16096,9 @@ static swig_type_info _swigt__p_netxpert__LOGGER = {"_p_netxpert__LOGGER", "netx
 static swig_type_info _swigt__p_netxpert__MinimumSpanningTree = {"_p_netxpert__MinimumSpanningTree", "netxpert::MinimumSpanningTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__Network = {"_p_netxpert__Network", "netxpert::Network *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__NewNode = {"_p_netxpert__NewNode", "netxpert::NewNode *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__ODPair = {"_p_netxpert__ODPair", "netxpert::ODPair *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__OriginDestinationMatrix = {"_p_netxpert__OriginDestinationMatrix", "netxpert::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__ShortestPathTree = {"_p_netxpert__ShortestPathTree", "netxpert::ShortestPathTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__InputArc_t = {"_p_std__allocatorT_netxpert__InputArc_t", "std::list< netxpert::InputArc >::allocator_type *|std::allocator< netxpert::InputArc > *", 0, 0, (void*)0, 0};
@@ -14702,11 +16107,19 @@ static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argume
 static swig_type_info _swigt__p_std__listT__Tp__Alloc_t = {"_p_std__listT__Tp__Alloc_t", "std::list< _Tp,_Alloc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t = {"_p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t", "std::list< netxpert::InputArc > *|std::list< netxpert::InputArc,std::allocator< netxpert::InputArc > > *|netxpert::InputArcs *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t = {"_p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t", "netxpert::InputNodes *|std::list< netxpert::InputNode > *|std::list< netxpert::InputNode,std::allocator< netxpert::InputNode > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__pairT_std__vectorT_unsigned_int_t_double_t = {"_p_std__pairT_std__vectorT_unsigned_int_t_double_t", "netxpert::CompressedPath *|std::pair< std::vector< unsigned int >,double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__unordered_mapT_netxpert__ODPair_double_t = {"_p_std__unordered_mapT_netxpert__ODPair_double_t", "std::unordered_map< netxpert::ODPair,double > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t = {"_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t", "std::unordered_map< netxpert::ODPair,netxpert::CompressedPath > *|std::unordered_map< netxpert::ODPair,std::pair< std::vector< unsigned int >,double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_netxpert__InternalArc_t = {"_p_std__vectorT_netxpert__InternalArc_t", "std::vector< netxpert::InternalArc > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_netxpert__NewNode_t = {"_p_std__vectorT_netxpert__NewNode_t", "std::vector< netxpert::NewNode > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_std__pairT_unsigned_int_std__string_t_t = {"_p_std__vectorT_std__pairT_unsigned_int_std__string_t_t", "std::vector< std::pair< unsigned int,std::string > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_unsigned_int_t = {"_p_std__vectorT_unsigned_int_t", "std::vector< unsigned int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_string = {"_p_string", "string *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_netxpert__InternalArc_t = {"_p_vectorT_netxpert__InternalArc_t", "vector< netxpert::InternalArc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_vectorT_netxpert__NewNode_t = {"_p_vectorT_netxpert__NewNode_t", "vector< netxpert::NewNode > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_unsigned_int_t = {"_p_vectorT_unsigned_int_t", "vector< unsigned int > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_Coordinate,
@@ -14724,6 +16137,9 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__MinimumSpanningTree,
   &_swigt__p_netxpert__Network,
   &_swigt__p_netxpert__NewNode,
+  &_swigt__p_netxpert__ODPair,
+  &_swigt__p_netxpert__OriginDestinationMatrix,
+  &_swigt__p_netxpert__ShortestPathTree,
   &_swigt__p_p_PyObject,
   &_swigt__p_size_type,
   &_swigt__p_std__allocatorT_netxpert__InputArc_t,
@@ -14732,11 +16148,19 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__listT__Tp__Alloc_t,
   &_swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t,
   &_swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t,
+  &_swigt__p_std__pairT_std__vectorT_unsigned_int_t_double_t,
+  &_swigt__p_std__unordered_mapT_netxpert__ODPair_double_t,
+  &_swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t,
+  &_swigt__p_std__vectorT_netxpert__InternalArc_t,
+  &_swigt__p_std__vectorT_netxpert__NewNode_t,
+  &_swigt__p_std__vectorT_std__pairT_unsigned_int_std__string_t_t,
+  &_swigt__p_std__vectorT_unsigned_int_t,
   &_swigt__p_string,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_value_type,
   &_swigt__p_vectorT_netxpert__InternalArc_t,
   &_swigt__p_vectorT_netxpert__NewNode_t,
+  &_swigt__p_vectorT_unsigned_int_t,
 };
 
 static swig_cast_info _swigc__p_Coordinate[] = {  {&_swigt__p_Coordinate, 0, 0, 0},{0, 0, 0, 0}};
@@ -14746,7 +16170,7 @@ static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_ty
 static swig_cast_info _swigc__p_netxpert__ColumnMap[] = {  {&_swigt__p_netxpert__ColumnMap, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Config[] = {  {&_swigt__p_netxpert__Config, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__DBHELPER[] = {  {&_swigt__p_netxpert__DBHELPER, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__OriginDestinationMatrix, _p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ShortestPathTree, _p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputArc[] = {  {&_swigt__p_netxpert__InputArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputNode[] = {  {&_swigt__p_netxpert__InputNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InternalArc[] = {  {&_swigt__p_netxpert__InternalArc, 0, 0, 0},{0, 0, 0, 0}};
@@ -14754,6 +16178,9 @@ static swig_cast_info _swigc__p_netxpert__LOGGER[] = {  {&_swigt__p_netxpert__LO
 static swig_cast_info _swigc__p_netxpert__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Network[] = {  {&_swigt__p_netxpert__Network, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__NewNode[] = {  {&_swigt__p_netxpert__NewNode, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ODPair[] = {  {&_swigt__p_netxpert__ODPair, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ShortestPathTree[] = {  {&_swigt__p_netxpert__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputArc_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -14762,11 +16189,19 @@ static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__in
 static swig_cast_info _swigc__p_std__listT__Tp__Alloc_t[] = {  {&_swigt__p_std__listT__Tp__Alloc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t[] = {  {&_swigt__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t[] = {  {&_swigt__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__pairT_std__vectorT_unsigned_int_t_double_t[] = {  {&_swigt__p_std__pairT_std__vectorT_unsigned_int_t_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__unordered_mapT_netxpert__ODPair_double_t[] = {  {&_swigt__p_std__unordered_mapT_netxpert__ODPair_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t[] = {  {&_swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_netxpert__InternalArc_t[] = {  {&_swigt__p_std__vectorT_netxpert__InternalArc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_netxpert__NewNode_t[] = {  {&_swigt__p_std__vectorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_std__pairT_unsigned_int_std__string_t_t[] = {  {&_swigt__p_std__vectorT_std__pairT_unsigned_int_std__string_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_unsigned_int_t[] = {  {&_swigt__p_std__vectorT_unsigned_int_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_string[] = {  {&_swigt__p_string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_netxpert__InternalArc_t[] = {  {&_swigt__p_vectorT_netxpert__InternalArc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_vectorT_netxpert__NewNode_t[] = {  {&_swigt__p_vectorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_unsigned_int_t[] = {  {&_swigt__p_vectorT_unsigned_int_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_Coordinate,
@@ -14784,6 +16219,9 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__MinimumSpanningTree,
   _swigc__p_netxpert__Network,
   _swigc__p_netxpert__NewNode,
+  _swigc__p_netxpert__ODPair,
+  _swigc__p_netxpert__OriginDestinationMatrix,
+  _swigc__p_netxpert__ShortestPathTree,
   _swigc__p_p_PyObject,
   _swigc__p_size_type,
   _swigc__p_std__allocatorT_netxpert__InputArc_t,
@@ -14792,11 +16230,19 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__listT__Tp__Alloc_t,
   _swigc__p_std__listT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t,
   _swigc__p_std__listT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t,
+  _swigc__p_std__pairT_std__vectorT_unsigned_int_t_double_t,
+  _swigc__p_std__unordered_mapT_netxpert__ODPair_double_t,
+  _swigc__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_t_double_t_t,
+  _swigc__p_std__vectorT_netxpert__InternalArc_t,
+  _swigc__p_std__vectorT_netxpert__NewNode_t,
+  _swigc__p_std__vectorT_std__pairT_unsigned_int_std__string_t_t,
+  _swigc__p_std__vectorT_unsigned_int_t,
   _swigc__p_string,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_value_type,
   _swigc__p_vectorT_netxpert__InternalArc_t,
   _swigc__p_vectorT_netxpert__NewNode_t,
+  _swigc__p_vectorT_unsigned_int_t,
 };
 
 

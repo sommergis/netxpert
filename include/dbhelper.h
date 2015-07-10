@@ -20,7 +20,7 @@ using namespace SQLite;
 namespace netxpert
 {
     /**
-    * \Static Class that controls the SpatiaLite DB processing access for NetXpert
+    * \Static Static Class that controls the SpatiaLite DB processing access
     **/
     class DBHELPER
     {
@@ -37,6 +37,9 @@ namespace netxpert
                                             SQLite::Statement& qry, bool withCapacity);
             static InputArcs LoadNetworkFromDB(string _tableName, const ColumnMap& _map);
             static vector<NewNode> LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map);
+
+            static unique_ptr<MultiLineString> GetArcGeometriesFromDB(string tableName, string arcIDColumnName,
+                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType, const string& arcIDs );
 
             //UNUSED -->
             static unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
@@ -57,7 +60,6 @@ namespace netxpert
             static void connect();
             static bool isConnected;
             static bool performInitialCommand();
-            //static void cleanupPtr();
     };
 }
 #endif // DBHELPER_H

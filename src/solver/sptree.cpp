@@ -176,9 +176,9 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
 
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
-    a_pre.reserve(anz + 1);
-    pre.reserve(anz + 1);
-    nodes.reserve(anz + 1);
+    a_pre.resize(anz + 1);
+    pre.resize(anz + 1);
+    nodes.resize(anz + 1);
     try
     {
         // vector::data() returns pointer
@@ -501,9 +501,9 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
-    a_pre.reserve(anz + 1);
-    pre.reserve(anz + 1);
-    nodes.reserve(anz + 1);
+    a_pre.resize(anz + 1);
+    pre.resize(anz + 1);
+    nodes.resize(anz + 1);
     try
     {
         // vector::data() returns pointer
@@ -643,9 +643,9 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
 
     // Für Shortest Path Tree Tree auf die Richtung achten
     // --> doppelter Input der Kanten notwendig bei undirected
-    sNds.reserve(keys.size());
-    eNds.reserve(keys.size());
-    cout << "size of arcs: " << keys.size() << endl;
+    sNds.resize(keys.size());
+    eNds.resize(keys.size());
+    //cout << "size of arcs: " << keys.size() << endl;
     for (int i = 0; i < keys.size(); i++)
     {
         sNds[i] = keys[i].fromNode;
@@ -665,7 +665,7 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
     }
 
     supply.resize( net.GetMaxNodeCount(), 0 ); //Größe muss passen!
-    cout << "supply vector size: "<< supply.size() << endl;
+    //cout << "supply vector size: "<< supply.size() << endl;
     /*cout << "net supply size: " << net.GetNodeSupplies().size() <<endl;
     for (auto item : net.GetNodeSupplies() )
     {
@@ -676,7 +676,7 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
         // transshipment nodes (=0) are already present in the array (because of new array)
         supply[key - 1] = value.supply;
     }*/
-    cout << "ready converting data" << endl;
+    //cout << "ready converting data" << endl;
 }
 
 bool ShortestPathTree::validateNetworkData(Network& net, unsigned int orig)

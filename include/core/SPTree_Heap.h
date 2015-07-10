@@ -184,6 +184,9 @@ namespace MCFClass_di_unipi_it
 
 namespace netxpert {
 
+/**
+*  \Class Core Solver for the Shortest Path Tree Problem with configurable Heap structure (n) and Dijkstra's algorithm.
+*/
 class SPTree_Heap : public MCFClass, public ISPTree
 {
 
