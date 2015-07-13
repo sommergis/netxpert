@@ -4,6 +4,7 @@
 %include "std_string.i"
 %include "std_list.i"
 %include "std_map.i"
+%include "std_vector.i"
 
 %{
 #include "network.h"
@@ -18,10 +19,12 @@ namespace std
 {
     %template(InputArcs) std::list<netxpert::InputArc>;
     %template(InputNodes) std::list<netxpert::InputNode>;
+    %template(NewNodes) std::vector<netxpert::NewNode>;
 }
 
 namespace netxpert
 {
+
     struct ColumnMap
     {
         std::string arcIDColName;
@@ -65,6 +68,7 @@ namespace netxpert
     typedef std::list<netxpert::InputNode> InputNodes;
     typedef std::list<netxpert::InputArc> InputArcs;
     typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
+    typedef std::vector<netxpert::NewNode> NewNodes;
 
     enum GEOMETRY_HANDLING
     {
@@ -171,7 +175,7 @@ namespace netxpert
     {
         public:
             Network(InputArcs arcsTbl, ColumnMap _map, Config& cnfg);
-            Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);
+            /*Network(InputArcs arcsTbl, InputNodes nodesTbl, ColumnMap _map, Config& cnfg);*/
             void ConvertInputNetwork(bool autoClean);
 
             /* TODO SWIG 3.0 kann keine unique_ptr */
@@ -209,7 +213,7 @@ namespace netxpert
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
             static InputArcs LoadNetworkFromDB(std::string _tableName, ColumnMap _map);
-            static vector<NewNode> LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map);
+            static NewNodes LoadNodesFromDB(std::string _tableName, std::string geomColName, const ColumnMap& _map);
 
             static void CloseConnection();
             ~DBHELPER();
@@ -225,7 +229,7 @@ namespace netxpert
     {
         public:
             virtual ~ISolver() {}
-            virtual void Solve(string net) = 0;
+            virtual void Solve(std::string net) = 0;
             virtual void Solve(Network& net) = 0;
     };
 

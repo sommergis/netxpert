@@ -2,7 +2,6 @@
 
 using namespace netxpert;
 using namespace std;
-using namespace boost::filesystem;
 using namespace FileGDBAPI;
 
 
@@ -127,7 +126,7 @@ void FGDBWriter::CreateNetXpertDB()
         StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
         //cout << "FGDB Path: "<< newPath << endl;
         // TODO: muss nicht ueberschrieben werden, wenns existiert
-        if ( exists(NETXPERT_CNFG.ResultDBPath) )
+        if ( UTILS::PathExists(NETXPERT_CNFG.ResultDBPath) )
         {
             //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
             LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists!");

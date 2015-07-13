@@ -20,6 +20,7 @@
 				</Compiler>
 				<Linker>
 					<Add library="/home/hahne/dev/netxpert/bin/Debug/libnetxpert.so" />
+					<Add directory="/home/hahne/dev/netxpert/bin/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -49,9 +50,6 @@
 			<Add directory="../include/core" />
 			<Add directory="../include/solver" />
 		</Compiler>
-		<Linker>
-			<Add option="-lboost_system" />
-		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

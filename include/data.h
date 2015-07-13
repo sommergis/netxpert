@@ -10,7 +10,7 @@
 #include <unordered_set>
 #include <list>
 #include <vector>
-#include <boost/bimap.hpp>
+//#include <boost/bimap.hpp>
 //#include <pair>
 
 //Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
@@ -227,6 +227,8 @@ namespace netxpert {
     typedef unordered_map<InternalArc, NewArc> NewArcs; //container for the new parts of arcs that where splitted
     //Dictionary<Tuple<uint, uint>, Tuple<string, double, double>> oldEdges;
     //Query in both directions necessary --> bimap?
+
+    typedef std::vector<NewNode> NewNodes;
 
     typedef unordered_map<string, SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
     typedef pair<vector<unsigned int>,double> CompressedPath;

@@ -2,11 +2,12 @@
 #define DBHELPER_H
 
 #include <string>
+#include "utils.h"
 #include "data.h"
 #include "logger.h"
 #include <SQLiteCpp/Database.h>
 #include <SQLiteCpp/Transaction.h>
-#include <boost/filesystem.hpp>
+//#include <boost/filesystem.hpp>
 #include <geos/io/WKBReader.h>
 #include <geos/io/WKBWriter.h>
 #include <geos/geom/Point.h>

@@ -13,7 +13,6 @@
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-std=c++0x" />
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add directory="include" />
@@ -54,13 +53,10 @@
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
-			<Add option="-lboost_system -lboost_filesystem" />
-			<Add option="-pthread -ldl -lgeos -lpython2.7" />
-			<Add library="FileGDBAPI" />
-			<Add library="fgdbunixrtl" />
-			<Add directory="$(#boost.lib)" />
+			<Add option="-pthread -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/home/maxval/libs" />
 			<Add directory="libs/FileGDB_API/lib" />
 			<Add directory="libs/SQLiteCpp" />
+			<Add directory="/usr/local/lib" />
 		</Linker>
 		<Unit filename="include/config.h" />
 		<Unit filename="include/core/MCFClass.h" />
@@ -90,6 +86,7 @@
 		<Unit filename="include/solver/odmatrix.h" />
 		<Unit filename="include/solver/sptree.h" />
 		<Unit filename="include/test.h" />
+		<Unit filename="include/utils.h" />
 		<Unit filename="libs/SQLiteCpp/Assertion.h" />
 		<Unit filename="libs/SQLiteCpp/Column.cpp" />
 		<Unit filename="libs/SQLiteCpp/Column.h" />
@@ -128,6 +125,7 @@
 		<Unit filename="src/solver/odmatrix.cpp" />
 		<Unit filename="src/solver/sptree.cpp" />
 		<Unit filename="src/test.cpp" />
+		<Unit filename="src/utils.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
