@@ -1,6 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include "utils.h"
 #include "dbhelper.h"
 #include "slitewriter.h"
 #include "fgdbwriter.h"
@@ -56,9 +57,9 @@ namespace netxpert
                                             const string& resultTableName);
             //for broken up arcs (SPT, ODM)
             void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
-                                         const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
-                                         const string& resultTableName,
-                                         DBWriter& writer);
+                                           const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
+                                           const string& resultTableName,
+                                           DBWriter& writer);
 
             void ConvertInputNetwork(bool autoClean);
 

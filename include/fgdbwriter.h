@@ -6,7 +6,7 @@
 #include "logger.h"
 #include <fstream>
 #include <FileGDB_API/include/FileGDBAPI.h>
-#include <boost/filesystem.hpp>
+#include "utils.h"
 #include <boost/algorithm/string.hpp>
 
 using namespace std;

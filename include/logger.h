@@ -3,6 +3,7 @@
 
 #include <string>
 #include "config.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -34,8 +35,6 @@ namespace netxpert {
             static string sFileName;
             static LOG_LEVEL applicationLogLevel;
             static string readConfig();
-            static string getDirectoryName(string fileName);
-            static string getFileNameWithoutExtension(string fileName);
     };
 }
 

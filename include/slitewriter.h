@@ -1,12 +1,12 @@
 #ifndef SPATIALITEWRITER_H
 #define SPATIALITEWRITER_H
 
+#include "utils.h"
 #include <string>
 #include "dbwriter.h"
 #include "logger.h"
 #include <SQLiteCpp/Database.h>
 #include <SQLiteCpp/Transaction.h>
-#include <boost/filesystem.hpp>
 #include <geos/io/WKBWriter.h>
 
 using namespace std;
