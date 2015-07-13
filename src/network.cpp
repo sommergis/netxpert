@@ -682,9 +682,6 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
 
     if (addedStartPoints.size() > 0)
     {
-        /*cout << "size of addedStartPoints(): " << addedStartPoints.size() << endl;
-        cout << "size of newArcs: " << newArcs.size() << endl;*/
-
         // 1. Add relevant start edges, that are part of the route
         for (auto& arc : newArcs)
         {
@@ -1267,21 +1264,6 @@ NewArcs& Network::GetNewArcs()
     return newArcs;
 }
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
-    std::stringstream ss(s);
-    std::string item;
-    while (std::getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
-}
-
-std::vector<std::string> split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    split(s, delim, elems);
-    return elems;
-}
-
 //Unbroken Network e.g. MST
 void Network::buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, const string& resultTableName)
@@ -1311,7 +1293,7 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
                 unique_ptr<MultiLineString> arc;
                 if (arcIDs.size() > 0)
                 {
-                    auto tokens = split(arcIDs, ',');
+                    auto tokens = UTILS::Split(arcIDs, ',');
                     for (string& s : tokens)
                     {
                         arc = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName,
@@ -1462,30 +1444,6 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
             processArc(arc, internalStartNode, internalEndNode);
         }
     }
-    /*
-    //TEST
-    cout << "Internal Arcs:" << endl;
-    for (Arcs::iterator it = internalArcData.begin(); it != internalArcData.end(); ++it)
-    {
-        auto itD = *it;
-        FTNode ft = itD.first;
-        ArcData arc = itD.second;
-        cout << arc.extArcID << " " << ft.fromNode << " " << ft.toNode << " " << arc.cost << " " << arc.capacity << endl;
-    }
-    cout << "Eliminated Arcs" << endl;
-    for (list<string>::iterator it = eliminatedArcs.begin(); it != eliminatedArcs.end(); ++it)
-    {
-        string extArcID = *it;
-        cout << extArcID << endl;
-    }
-    cout << "Internal distinct nodes" << endl;
-    for (unordered_map<ExtNodeID,NodeID>::iterator it = internalDistinctNodeIDs.begin(); it != internalDistinctNodeIDs.end(); ++it)
-    {
-        auto itD = *it;
-        ExtNodeID extNodeID = itD.first;
-        NodeID intNodeID = itD.second;
-        cout << extNodeID << " " << intNodeID << endl;
-    }*/
 
     //TODO
     //DBHELPER.EliminatedArcs = this.eliminatedArcs;

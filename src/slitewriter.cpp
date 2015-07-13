@@ -15,7 +15,6 @@
 
 using namespace netxpert;
 using namespace geos::io;
-using namespace boost::filesystem;
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
@@ -123,7 +122,7 @@ void SpatiaLiteWriter::CreateNetXpertDB()
     try
     {
         //check for existence
-        if ( exists(NETXPERT_CNFG.ResultDBPath) )
+        if ( UTILS::FileExists(NETXPERT_CNFG.ResultDBPath) )
         {
             //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
             LOGGER::LogWarning("SpatiaLite DB "+ NETXPERT_CNFG.ResultDBPath + " already exists!");
@@ -186,10 +185,10 @@ bool SpatiaLiteWriter::performInitialCommand()
         const string spatiaLiteHome = NETXPERT_CNFG.SpatiaLiteHome;
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
 
-        const string pathBefore = boost::filesystem::current_path().string();
-        //chdir to spatiallitehome
-        //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
-        boost::filesystem::current_path(spatiaLiteHome);
+        const string pathBefore = UTILS::GetCurrentDir();
+
+        UTILS::SetCurrentDir(spatiaLiteHome);
+
         db.enableExtensions();
 
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName);";
@@ -199,7 +198,8 @@ bool SpatiaLiteWriter::performInitialCommand()
 
         db.disableExtensions();
 
-        boost::filesystem::current_path(pathBefore);
+        //boost::filesystem::current_path(pathBefore);
+        UTILS::SetCurrentDir(pathBefore);
         //cout <<  boost::filesystem::current_path() << endl;
         return true;
     }

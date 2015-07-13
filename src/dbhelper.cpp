@@ -678,10 +678,10 @@ bool DBHELPER::performInitialCommand()
         const string spatiaLiteHome = NETXPERT_CNFG.SpatiaLiteHome;
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
 
-        const string pathBefore = boost::filesystem::current_path().string();
+        const string pathBefore = UTILS::GetCurrentDir();
         //chdir to spatiallitehome
         //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
-        boost::filesystem::current_path(spatiaLiteHome);
+        UTILS::SetCurrentDir(spatiaLiteHome);
         db.enableExtensions();
 
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName);";
@@ -690,7 +690,7 @@ bool DBHELPER::performInitialCommand()
         query.executeStep();
 
         db.disableExtensions();
-        boost::filesystem::current_path(pathBefore);
+        UTILS::SetCurrentDir(pathBefore);
         //cout <<  boost::filesystem::current_path() << endl;
         return true;
     }

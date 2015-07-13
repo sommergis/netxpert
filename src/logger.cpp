@@ -1,12 +1,10 @@
 #include "logger.h"
 #include <iostream>
 #include <fstream>
-#include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/posix_time/posix_time_io.hpp>
 
 using namespace std;
-using namespace boost::filesystem;
 using namespace boost::posix_time;
 using namespace netxpert;
 
@@ -24,10 +22,10 @@ void LOGGER::Initialize(const Config& cnfg)
     NETXPERT_CNFG = cnfg;
     string fileName = readConfig();
     //cout << "Log File Path: " << fileName << endl;
-    sPath = getDirectoryName(fileName);
+    sPath = UTILS::GetDirectoryName(fileName);
     //cout << sPath << endl;
 
-    sFileName = getFileNameWithoutExtension(fileName);
+    sFileName = UTILS::GetFileNameWithoutExtension(fileName);
     //cout << sFileName << endl;
 
     //this variable used to create log filename format "
@@ -49,7 +47,7 @@ void LOGGER::Initialize(const Config& cnfg)
     }
     else
     {
-        FullLogFileName = sPath + to_string(boost::filesystem::path::preferred_separator)
+        FullLogFileName = sPath + "/"
             + sTime + "_" + sFileName + ".log";
     }
 
@@ -57,18 +55,6 @@ void LOGGER::Initialize(const Config& cnfg)
 
     ofstream outfile(FullLogFileName.c_str());
     IsInitialized = true;
-}
-string LOGGER::getDirectoryName(string _filePath) {
-    path p(_filePath);
-    //cout << "path p: " << p.string() << endl;
-    path dir = p.parent_path();
-    //cout << "path dir: " << dir.string() << endl;
-    return dir.string();
-}
-string LOGGER::getFileNameWithoutExtension(string _filePath) {
-    path p(_filePath);
-    path fileNameWithoutExt = p.filename().stem();
-    return fileNameWithoutExt.string();
 }
 string LOGGER::readConfig()
 {
