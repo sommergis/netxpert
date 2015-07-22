@@ -17,6 +17,7 @@ namespace netxpert {
             virtual ~ISolver() {}
             virtual void Solve(string net) = 0;
             virtual void Solve(Network& net) = 0;
+            virtual double GetOptimum() const=0;
     };
 }
 #endif // ISOLVER_H

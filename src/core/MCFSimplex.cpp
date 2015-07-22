@@ -256,8 +256,9 @@ void MCFSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
   if( usePrimalSimplex ) {
    stopNodesP = nodesP + n;
    dummyRootP = nodesP + nmax;
+   //Johannes Sommer negative pDfct
    for( nodePType *node = nodesP ; node != stopNodesP ; node++ )
-    node->balance = pDfct[ node - nodesP ];  // initialize nodes
+    node->balance = -(pDfct[ node - nodesP ]);  // initialize nodes
 
    stopArcsP = arcsP + m;
    dummyArcsP = arcsP + mmax;
@@ -276,8 +277,9 @@ void MCFSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
   else {
    stopNodesD = nodesD + n;
    dummyRootD = nodesD + nmax;
+   //Johannes Sommer negative pDfct
    for( nodeDType *node = nodesD ; node != stopNodesD ; node++ )
-    node->balance = pDfct[ node - nodesD ];  // initialize nodes
+    node->balance = -(pDfct[ node - nodesD ]);  // initialize nodes
 
    stopArcsD = arcsD + m;
    dummyArcsD = arcsD + mmax;
@@ -303,6 +305,36 @@ void MCFSimplex::LoadNet( cIndex nmx , cIndex mmx , cIndex pn , cIndex pm ,
   }
  }  // end( MCFSimplex::LoadNet )
 
+ // Johannes Sommer
+ //-- Methods for ISPTree interface
+ void MCFSimplex::LoadNet(unsigned int nmx, unsigned int mmx, unsigned int pn, unsigned int pm, double* pU,
+                            double* pC, double* pDfct, unsigned int* pSn, unsigned int* pEn)
+ {
+
+    MCFSimplex::LoadNet( (cIndex)nmx,  (cIndex)mmx, (cIndex)pn,  (cIndex)pm, (cFRow) pU, (cCRow) pC,
+                                (cFRow) pDfct, (cIndex_Set) pSn, (cIndex_Set) pEn );
+ }
+ unsigned int MCFSimplex::MCFmmax()
+ {
+    return (unsigned int) MCFClass::MCFmmax();
+ }
+ unsigned int MCFSimplex::MCFnmax()
+ {
+    return (unsigned int) MCFClass::MCFnmax();
+ }
+ int MCFSimplex::MCFGetStatus()
+ {
+    return (unsigned int) MCFClass::MCFGetStatus();
+ }
+ void MCFSimplex::MCFCosts(double* outCosts)
+ {
+    MCFSimplex::MCFCosts((CRow)outCosts, NULL);
+ }
+ void MCFSimplex::MCFGetX(double* outFlow)
+ {
+    MCFSimplex::MCFGetX((FRow)outFlow, NULL, 0, Inf<Index>());
+ }
+ //--
 /*-------------------------------------------------------------------------*/
 
 void MCFSimplex::SetAlg( bool UsPrml , char WhchPrc )
@@ -711,7 +743,7 @@ void MCFSimplex::MCFGetPi( CRow P , cIndex_Set nms , cIndex strt , Index stp )
 
 /*--------------------------------------------------------------------------*/
 
-MCFSimplex::FONumber MCFSimplex::MCFGetFO( void )
+double MCFSimplex::MCFGetFO( void )
 {
  if( status == kOK )
   return( (FONumber) GetFO() );
@@ -726,6 +758,11 @@ MCFSimplex::FONumber MCFSimplex::MCFGetFO( void )
 /*-------------------------------------------------------------------------*/
 /*----------METHODS FOR READING THE DATA OF THE PROBLEM--------------------*/
 /*-------------------------------------------------------------------------*/
+
+void MCFSimplex::MCFArcs( unsigned int* Startv , unsigned int* Endv)
+{
+    MCFSimplex::MCFArcs(Startv, Endv, NULL, 0, Inf<Index>() );
+}
 
 void MCFSimplex::MCFArcs( Index_Set Startv , Index_Set Endv ,
 			  cIndex_Set nms , cIndex strt , Index stp )

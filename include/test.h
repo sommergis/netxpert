@@ -1,6 +1,7 @@
 #ifndef TEST_H
 #define TEST_H
 
+#include <omp.h>
 #include <iostream>
 #include "logger.h"
 #include "fgdbwriter.h"
@@ -15,6 +16,8 @@
 #include "mstree.h"
 #include "sptree.h"
 #include "odmatrix.h"
+#include "mcflow.h"
+#include "transportation.h"
 
 namespace netxpert
 {
@@ -31,6 +34,9 @@ namespace netxpert
         void TestSPT(Config& cnfg);
         void TestODMatrix(Config& cnfg);
         void TestCreateRouteGeometries(Config& cnfg);
+        void TestMCF(Config& cnfg);
+        void TestTransportation(Config& cnfg);
+        void TestTransportationExt(Config& cnfg);
     }
 }
 

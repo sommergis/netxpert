@@ -50,7 +50,7 @@ namespace netxpert {
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:
-            Network* net;
+            Network* net; //raw pointer ok, no dynamic allocation (new())
             bool isDirected;
             int sptHeapCard;
             double optimum;

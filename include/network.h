@@ -34,12 +34,22 @@ namespace netxpert
     class Network
     {
         public:
+            /**
+            * Default constructor
+            * Handles only arc input (which can be enough for some solvers - e.g. Minimum Spanning Tree).
+            * Changes to the network can be made afterwards calling LoadStartNodes() and LoadEndNodes().
+            **/
+            Network(const InputArcs& arcsTbl, const ColumnMap& _map, const Config& cnfg);
+            /**
+            * Handles both arcs and nodes from the constructor call which can carry positive supply or negative demand values.
+            **/
+            Network(const InputArcs& arcsTbl, const InputNodes& nodesTbl, const ColumnMap& _map, const Config& cnfg);
+            /**
+            * Minimal constructor for the network.
+            * TESTME
+            **/
             Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
                        NodeSupplies _nodeSupplies);
-
-            //Default constructor
-            Network(const InputArcs& arcsTbl, const ColumnMap& _map, const Config& cnfg);
-            Network(const InputArcs& arcsTbl, const InputNodes& nodesTbl, const ColumnMap& _map, const Config& cnfg);
 
             unsigned int AddStartNode(const NewNode& newNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity);
             unsigned int AddEndNode(const NewNode& newNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity);
@@ -73,11 +83,9 @@ namespace netxpert
 
             //Helpers for looking up original data
             vector<string> GetOriginalArcIDs(const vector<InternalArc>& ftNodes, bool isDirected) const;
+            vector<ArcData> GetOriginalArcData(const vector<InternalArc>& ftNodes, bool isDirected) const;
 
             //TODO
-            void GetOriginalArcData(const list<ArcData>& origArcData,
-                                    const list<InternalArc>& startEndNodes,
-                                    bool isDirected);
             void GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow,
                                             const list<InternalArc>& startEndNodes,
                                             bool isDirected);

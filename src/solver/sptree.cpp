@@ -539,7 +539,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
         {
             //route is reference
             const double costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
-            totalCost = totalCost + costPerRoute;
+            totalCost += costPerRoute;
 
             //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
             // bei sps auch die Vektoren geleert.
@@ -735,7 +735,6 @@ bool ShortestPathTree::validateNetworkData(Network& net, unsigned int orig, vect
         throw;
         //throw new InvalidValueException("Origin Node ID must be greater than zero!");
     }
-
     if (orig > net.GetMaxNodeCount() ) {
         //throw new InvalidValueException("Origin Node ID must not exceed net.MaxNodeCount!");
         LOGGER::LogFatal("Origin Node ID must not exceed maximum node count of network!");
@@ -766,7 +765,7 @@ double ShortestPathTree::buildCompressedRoute(vector<unsigned int>& route, unsig
     {
         route.push_back(curr);
         const InternalArc& ftNode { arcPredescessors.at(curr), curr };
-        totalCost = totalCost + getArcCost( ftNode );
+        totalCost += getArcCost( ftNode );
         curr = arcPredescessors.at(curr);
     }
     //arcPredescessors = null;

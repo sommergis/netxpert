@@ -1,6 +1,8 @@
 #ifndef ODMATRIX_H
 #define ODMATRIX_H
 
+#include <omp.h>
+
 #include "isolver.h"
 #include "isptree.h"
 #include "SPTree_Dijkstra.h"
@@ -11,7 +13,6 @@
 #include "data.h"
 
 namespace netxpert {
-
 
     /**
     * \Class Solver for computing an Origin Destination Matrix
@@ -51,7 +52,7 @@ namespace netxpert {
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:
-            Network* net;
+            Network* net;  //raw pointer ok, no dynamic allocation (new())
             bool isDirected;
             int sptHeapCard;
             double optimum;

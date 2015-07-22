@@ -53,6 +53,16 @@ namespace netxpert {
         MCFExtrademand = 3
     };
 
+    enum MCFSolverStatus
+    {
+       MCFUnSolved = -1 ,     ///< no solution available
+       MCFOK = 0 ,            ///< optimal solution found
+       MCFStopped = 1,        ///< optimization stopped
+       MCFUnfeasible = 2,     ///< problem is unfeasible
+       MCFUnbounded = 3,      ///< problem is unbounded
+       MCFError = 4           ///< error in the solver
+    };
+
     struct ExtClosestArcAndPoint
     {
         string extArcID;
@@ -99,6 +109,11 @@ namespace netxpert {
     {
         unsigned int origin;
         unsigned int dest;
+
+        bool operator==(const ODPair& p2) const {
+          const ODPair& p1=(*this);
+          return p1.origin == p2.origin && p1.dest == p2.dest;
+        }
     };
     /**
     * \Custom data type for storing tuple <oldArcID,cost,capacity>
@@ -128,6 +143,28 @@ namespace netxpert {
         double flow;
     };
     /**
+    * \Custom data type for storing tuple <fromNode,toNode,flow,cost>
+    **/
+    struct FlowCost
+    {
+        InternalArc intArc;
+        double flow;
+        double cost;
+    };
+
+    /**
+    * \Custom data type for storing tuple <CompressedPath,cost>
+    **/
+    typedef pair<vector<unsigned int>,double> CompressedPath;
+    /**
+    * \Custom data type for storing tuple <CompressedPath,flow>
+    **/
+    struct DistributionArc
+    {
+        CompressedPath path;
+        double flow;
+    };
+    /**
     * \Custom data type for storing tuple <extNodeID,coord>
     **/
     struct AddedPoint
@@ -143,7 +180,14 @@ namespace netxpert {
         string extNodeID;
         double supply;
     };
-
+    /**
+    * \Custom data type for storing external arc of ODMatrix <extFromNode,extToNode,cost>
+    **/
+    struct ExtODMatrixArc
+    {
+        ExternalArc extArc;
+        double cost;
+    };
     /**
     * \Custom data type for storing new nodes data <extNodeID,<coord, supply>
     **/
@@ -231,11 +275,10 @@ namespace netxpert {
     typedef std::vector<NewNode> NewNodes;
 
     typedef unordered_map<string, SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
-    typedef pair<vector<unsigned int>,double> CompressedPath;
 
     //typedef map<string,string> ColumnMap;
-    typedef list<InputArc> InputArcs;
-    typedef list<InputNode> InputNodes;
+    typedef vector<InputArc> InputArcs;
+    typedef vector<InputNode> InputNodes;
 }
 
 namespace std

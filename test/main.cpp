@@ -28,9 +28,11 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TranspCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_2.json";
     }
 
     Config cnfg;
@@ -110,11 +112,19 @@ int main(int argc, char** argv)
         case TESTCASE::TestCreateRouteGeometries:
             netxpert::Test::TestCreateRouteGeometries(cnfg);
             break;
+        case TESTCASE::MCFCOM:
+            netxpert::Test::TestMCF(cnfg);
+            break;
+        case TESTCASE::TransportationCOM:
+            netxpert::Test::TestTransportation(cnfg);
+            break;
+        case TESTCASE::TransportationCOMExt:
+            netxpert::Test::TestTransportationExt(cnfg);
+            break;
         }
 
-        /*
+/*
                 //only test connection to sqlite
-                //still 120 Bytes Heap usage, 40 Bytes leak because of loading spatialite extension
                 if (!DBHELPER::IsInitialized)
                 {
                     DBHELPER::Initialize(cnfg);
@@ -122,7 +132,7 @@ int main(int argc, char** argv)
                 DBHELPER::OpenNewTransaction();
                 DBHELPER::CommitCurrentTransaction();
                 DBHELPER::CloseConnection();
-        */
+*/
 
     }
     catch (std::exception& ex)
