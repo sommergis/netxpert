@@ -2,7 +2,6 @@
 
 %include "typemaps.i"
 %include "std_string.i"
-%include "std_list.i"
 %include "std_map.i"
 %include "std_vector.i"
 
@@ -17,8 +16,8 @@
 
 namespace std
 {
-    %template(InputArcs) std::list<netxpert::InputArc>;
-    %template(InputNodes) std::list<netxpert::InputNode>;
+    %template(InputArcs) std::vector<netxpert::InputArc>;
+    %template(InputNodes) std::vector<netxpert::InputNode>;
     %template(NewNodes) std::vector<netxpert::NewNode>;
 }
 
@@ -65,8 +64,8 @@ namespace netxpert
         unsigned int dest;
     };
 
-    typedef std::list<netxpert::InputNode> InputNodes;
-    typedef std::list<netxpert::InputArc> InputArcs;
+    typedef std::vector<netxpert::InputNode> InputNodes;
+    typedef std::vector<netxpert::InputArc> InputArcs;
     typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
     typedef std::vector<netxpert::NewNode> NewNodes;
 
@@ -77,9 +76,6 @@ namespace netxpert
         RealGeometry = 2
     };
 
-    /**
-    * \Enum for TestCases, that can be started per entry "TestCase" in Config file.
-    **/
     enum TESTCASE
     {
         NetworkBuilder = 0,
@@ -91,8 +87,13 @@ namespace netxpert
         DumpInternalArcsToDB = 6,
         NetworkConvert = 7,
         TestFileGDBWriter = 8,
-        TestSpatiaLiteWriter = 9
+        TestSpatiaLiteWriter = 9,
+        TestAddNodes = 10,
+        TestCreateRouteGeometries = 11,
+        MCFCOM = 12,
+        TransportationCOMExt = 13
     };
+
     enum RESULT_DB_TYPE
     {
         SpatiaLiteDB = 0,
@@ -100,12 +101,12 @@ namespace netxpert
     };
 
     enum LOG_LEVEL {
-           All = -1,
-           Debug = 0,
-           Info = 1,
-           Warning = 2,
-           Error = 3,
-           Fatal = 4   };
+           LogAll = -1,
+           LogDebug = 0,
+           LogInfo = 1,
+           LogWarning = 2,
+           LogError = 3,
+           LogFatal = 4   };
 
     enum SPTAlgorithm {
 
@@ -118,13 +119,23 @@ namespace netxpert
     enum MCFAlgorithm {
         NetworkSimplex_MCF = 0,
         NetworkSimplex_LEMON = 1
-        } ;
+    } ;
 
     enum MSTAlgorithm {
-        Kruskal_QuickGraph = 0, //.NET!
-        Prim_QuickGraph = 1,    //.NET!
-        Kruskal_LEMON = 2};
+        //Kruskal_QuickGraph = 0, //.NET!
+        //Prim_QuickGraph = 1,    //.NET!
+        Kruskal_LEMON = 2
+    };
 
+    enum MCFSolverStatus
+    {
+       MCFUnSolved = -1 ,     ///< no solution available
+       MCFOK = 0 ,            ///< optimal solution found
+       MCFStopped = 1,        ///< optimization stopped
+       MCFUnfeasible = 2,     ///< problem is unfeasible
+       MCFUnbounded = 3,      ///< problem is unbounded
+       MCFError = 4           ///< error in the solver
+    };
     /**
     * \Storage for the configuration of netxpert
     **/
@@ -246,7 +257,7 @@ namespace netxpert
             void SetAlgorithm(MSTAlgorithm mstAlgorithm);
 
             double GetOptimum();
-            vector<InternalArc> GetMinimumSpanningTree() const;
+            std::vector<InternalArc> GetMinimumSpanningTree() const;
     };
 
     class OriginDestinationMatrix : public ISolver
@@ -268,10 +279,10 @@ namespace netxpert
             void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
 
             std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(vector<unsigned int>  origs);
+            void SetOrigins(std::vector<unsigned int>  origs);
 
             std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(vector<unsigned int>& dests);
+            void SetDestinations(std::vector<unsigned int>& dests);
 
             std::vector<unsigned int> GetReachedDests() const;
             std::unordered_map<ODPair, CompressedPath> GetShortestPaths() const;

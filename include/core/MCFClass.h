@@ -960,7 +960,7 @@ class MCFClass {
 /** @name Reading the objective function value
    @{ */
 
-   virtual FONumber MCFGetFO( void ) = 0;
+   virtual double MCFGetFO( void ) = 0;
 
 /**< Return the objective function value of the primal solution currently
    returned by MCFGetX().

@@ -14,7 +14,7 @@ bool LOGGER::IsInitialized = false;
 string LOGGER::sPath = "";
 string LOGGER::sFileName = "";
 string LOGGER::sTime = "";
-LOG_LEVEL LOGGER::applicationLogLevel = LOG_LEVEL::All;
+LOG_LEVEL LOGGER::applicationLogLevel = LOG_LEVEL::LogAll;
 Config LOGGER::NETXPERT_CNFG;
 
 void LOGGER::Initialize(const Config& cnfg)
@@ -84,7 +84,7 @@ void LOGGER::LogDebug(string _logMsg)
     ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " DEBUG " + _logMsg;
-    writeLog(totalMsg, Debug);
+    writeLog(totalMsg, LOG_LEVEL::LogDebug);
 }
 
 void LOGGER::LogInfo(string _logMsg)
@@ -96,7 +96,7 @@ void LOGGER::LogInfo(string _logMsg)
     ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " INFO " + _logMsg;
-    writeLog(totalMsg, Info);
+    writeLog(totalMsg, LOG_LEVEL::LogInfo);
 
 }
 void LOGGER::LogWarning(string _logMsg)
@@ -108,7 +108,7 @@ void LOGGER::LogWarning(string _logMsg)
     ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " WARN " + _logMsg;
-    writeLog(totalMsg, Warning);
+    writeLog(totalMsg, LOG_LEVEL::LogWarning);
 }
 
 void LOGGER::LogError(string _logMsg)
@@ -120,7 +120,7 @@ void LOGGER::LogError(string _logMsg)
     ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " ERROR " + _logMsg;
-    writeLog(totalMsg, Error);
+    writeLog(totalMsg, LOG_LEVEL::LogError);
 }
 
 void LOGGER::LogFatal(string _logMsg)
@@ -132,5 +132,5 @@ void LOGGER::LogFatal(string _logMsg)
     ss << microsec_clock::local_time();
     string timeStr = ss.str();
     string totalMsg = timeStr + " FATAL " + _logMsg;
-    writeLog(totalMsg, Fatal);
+    writeLog(totalMsg, LOG_LEVEL::LogFatal);
 }

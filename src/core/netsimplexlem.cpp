@@ -43,7 +43,7 @@ void NetworkSimplex::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int
     nodes.resize(nmax);
     for (unsigned int i = 0; i < nmax; ++i) {
 		nodes[i] = g.addNode();
-		supplyMap.set(nodes[i], -pDfct[i]);
+		supplyMap.set(nodes[i], pDfct[i]);
     }
 
     // construct arcs
@@ -93,12 +93,13 @@ void NetworkSimplex::MCFGetX( double* flow )
 	for (int i = 0; i < MCFmmax(); i++)
 	{
 		flowX[i] = flowMap[g.arcFromId(i)];
-		cout << flowMap[g.arcFromId(i)] << endl;
+		//cout << flowMap[g.arcFromId(i)] << endl;
+
 		//cout << flowMap[i] << endl;
 		//flow[i] = nsimplexPtr->flow(g.arcFromId(i));
 	}
 	memcpy(flow, flowX, MCFmmax() * sizeof (double) );
-	delete flowX;
+	delete[] flowX;
 }
 
 void NetworkSimplex::MCFArcs( unsigned int* startNodes, unsigned int* endNodes)

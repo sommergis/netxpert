@@ -17,7 +17,7 @@ void MinimumSpanningTree::SetAlgorithm(MSTAlgorithm mstAlgorithm)
 {
     algorithm = mstAlgorithm;
 }
-double MinimumSpanningTree::GetOptimum()
+double MinimumSpanningTree::GetOptimum() const
 {
     return mst->MSTGetF0();
 }
@@ -29,7 +29,7 @@ void MinimumSpanningTree::Solve(string net)
 
 void MinimumSpanningTree::Solve(Network& net)
 {
-    minimumSpanTree = solve(net);
+    solve(net);
 }
 
 vector<InternalArc> MinimumSpanningTree::GetMinimumSpanningTree() const
@@ -37,14 +37,14 @@ vector<InternalArc> MinimumSpanningTree::GetMinimumSpanningTree() const
     return minimumSpanTree;
 }
 
-vector<InternalArc> MinimumSpanningTree::solve (Network& net)
+void MinimumSpanningTree::solve (Network& net)
 {
     //vector<long> ign = { 0, -1, (long)4294967295, (long)4261281277 };
     // 0 is a valid ignore value for linux!
     //TODO check in windows
     vector<long> ign = { -1, (long)4294967295, (long)4261281277 };
 
-    vector<InternalArc> retList;
+    vector<InternalArc> result;
 
     vector<unsigned int> sNds;
     vector<unsigned int> eNds;
@@ -98,8 +98,7 @@ vector<InternalArc> MinimumSpanningTree::solve (Network& net)
     catch (exception& ex)
     {
         LOGGER::LogFatal( ex.what() );
-        retList.clear();
-        return retList;
+        result.clear();
     }
 
     try
@@ -108,7 +107,6 @@ vector<InternalArc> MinimumSpanningTree::solve (Network& net)
     }
     catch (exception& ex)
     {
-        //mst.Dispose();
         //throw new ApplicationException(ex.Message, ex.InnerException);
     }
 
@@ -126,7 +124,7 @@ vector<InternalArc> MinimumSpanningTree::solve (Network& net)
             if (source != ign[0] && source != ign[1] && source != ign[2] &&
                 target != ign[0] && target != ign[1] && target != ign[2])
             {
-                retList.push_back( {source, target} );
+                result.push_back( {source, target} );
             }
         }
         catch (exception& ex)
@@ -137,7 +135,7 @@ vector<InternalArc> MinimumSpanningTree::solve (Network& net)
     delete[] mstSNds;
     delete[] mstENds;
 
-    return retList;
+    this->minimumSpanTree = result;
 
 }
 void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
