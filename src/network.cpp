@@ -72,17 +72,24 @@ Network::Network(const InputArcs& _arcsTbl, const ColumnMap& _map, const Config&
     }
 }
 
+//TODO TESTME
 Network::Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
-                        NodeSupplies _nodeSupplies){}
+                        NodeSupplies _nodeSupplies)
+{
+    internalArcData = arcData;
+    internalDistinctNodeIDs = distinctNodeIDs;
+    //swap
+    for (auto& n : internalDistinctNodeIDs)
+        swappedInternalDistinctNodeIDs.insert( make_pair(n.second, n.first ) );
+
+    nodeSupplies = _nodeSupplies;
+}
 
 Network::~Network()
 {
     //dtor
 }
 
-//public
-
-//TODO
 vector<pair<unsigned int, string>> Network::LoadStartNodes(const vector<NewNode>& newNodes, int treshold,
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity)
@@ -148,7 +155,8 @@ vector<pair<unsigned int, string>> Network::LoadEndNodes(const vector<NewNode>& 
 //4. isPointOnLine, position of closestPoint (Start / End ) alles in Memory (egal ob aufgebrochene Kante oder vorhandene Kante)
 //5. Splitte Kante
 // --> einmaliger DB-Zugriff, Rest in memory processing
-unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity)
+unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQLite::Statement& closestArcQry,
+                                    bool withCapacity)
 {
     unordered_map<string, InternalArc> newSegments;
     newSegments.reserve(2);
@@ -669,10 +677,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
 {
     buildTotalRouteGeometry(orig, dest, cost, capacity, flow, arcIDs, resultTableName);
 }
-//TODO: Derzeit wird nur die jeweilig relevante Start- oder End-Kante aus den aufgebrochenen Kanten
-// entnommen. Wenn sonstige Punkte das Netzwerk aufbrechen (z.B. entlang der Route und diese dann auch
-// aufgebrochen in der Route dargestellt werden sollen, muss die Methode überarbeitet werden
-//--> Hole die originalen ArcIDs von den aufgebrochenen Kanten, die Teil der Route sind
+
 void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                         const string& resultTableName, DBWriter& writer)
@@ -687,7 +692,9 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
         {
             auto key = arc.first;
             auto val = arc.second;
-            //cout << arc.first.fromNode << "->" << arc.first.toNode << " " <<arc.second.arcGeom.isValid() << endl;
+
+            //cout << arc.first.fromNode << "->" << arc.first.toNode << endl;
+
             if (val.nodeType == AddedNodeType::StartArc)
             {
                 if (NETXPERT_CNFG.IsDirected)
@@ -703,7 +710,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                         /*auto it = tmpRes.begin();
                         tmpRes.insert(it, geo);*/
                         tmpRes.push_back(clonedGeom.get());
-                        //cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
+                        cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                         else {
                             cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
@@ -725,7 +732,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                             /*auto it = tmpRes.begin();
                             tmpRes.insert(it, geo);*/
                             tmpRes.push_back(clonedGeom.get());
-                            //cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
+                            cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                          else {
                             cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
@@ -745,7 +752,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                                 /*auto it = tmpRes.begin();
                                 tmpRes.insert(it, geo);*/
                                 tmpRes.push_back(clonedGeom.get());
-                                //cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
+                                cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
                             /*}
                             else {
                                 cout << "Int extArcID: " << internalArcData.at(InternalArc {key.toNode, key.fromNode}).extArcID<< endl;
@@ -888,7 +895,48 @@ vector<string> Network::GetOriginalArcIDs(const vector<InternalArc>& ftNodes, bo
     }
     return resultIDs;
 }
-void Network::GetOriginalArcData(const list<ArcData>& origArcData, const list<InternalArc>& startEndNodes, bool isDirected){}
+
+vector<ArcData> Network::GetOriginalArcData(const vector<InternalArc>& ftNodes, bool isDirected) const
+{
+    vector<ArcData> result;
+
+    if (isDirected)
+    {
+        for (const InternalArc& ftNode : ftNodes)
+        {
+            if (internalArcData.count(ftNode) > 0)
+            {
+                auto arcData = internalArcData.at(ftNode);
+                if (!arcData.extArcID.empty())
+                    result.push_back(arcData);
+            }
+        }
+    }
+    else
+    {
+        for (const InternalArc& ftNode : ftNodes)
+        {
+            if (internalArcData.count(ftNode) > 0)
+            {
+                auto arcData = internalArcData.at(ftNode);
+                if (!arcData.extArcID.empty())
+                    result.push_back(arcData);
+            }
+            else {
+                //reverse direction also
+                InternalArc flippedFTNode  {ftNode.toNode, ftNode.fromNode};
+                if (internalArcData.count(flippedFTNode) > 0)
+                {
+                    auto arcData = internalArcData.at(flippedFTNode);
+                    if (!arcData.extArcID.empty())
+                        result.push_back(arcData);
+                }
+            }
+        }
+    }
+    return result;
+}
+
 void Network::GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow, const list<InternalArc>& startEndNodes, bool isDirected){}
 
 double Network::getRelativeValueFromGeomLength(const double attrValue, const MultiLineString& completeLine,
@@ -1216,11 +1264,11 @@ void Network::renameNodes()
             //They are generated when the Core Solver is called
             try
             {
-                if (nodeSupply != 0)
-                {
+                //if (nodeSupply != 0)
+                //{
                     NodeSupply sVal {extNodeID, nodeSupply};
                     nodeSupplies.insert( make_pair(internalNodeID, sVal) );
-                }
+                //}
             }
             catch (exception& ex)
             {
@@ -1385,7 +1433,8 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
         string externalEndNode = arc.extToNode;
         unsigned int internalStartNode;
         unsigned int internalEndNode;
-        try{
+        try
+        {
             internalStartNode = internalDistinctNodeIDs.at(externalStartNode);
             internalEndNode = internalDistinctNodeIDs.at(externalEndNode);
         }
@@ -1634,7 +1683,7 @@ MinCostFlowInstanceType Network::GetMinCostFlowInstanceType()
     double totalSupply = calcTotalSupply();
     double totalDemand = calcTotalDemand();
 
-    LOGGER::LogDebug("Supply - Demand:" + to_string( totalSupply ) + " " + to_string(totalDemand));
+    LOGGER::LogDebug("Supply - Demand: " + to_string( totalSupply ) + " - " + to_string(totalDemand));
 
     if (totalSupply > totalDemand)
         return MinCostFlowInstanceType::MCFExtrasupply;

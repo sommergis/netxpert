@@ -26,14 +26,14 @@ namespace netxpert {
             MSTAlgorithm GetAlgorithm();
             void SetAlgorithm(MSTAlgorithm mstAlgorithm);
 
-            double GetOptimum();
+            double GetOptimum() const;
             vector<InternalArc> GetMinimumSpanningTree() const;
 
         private:
             vector<InternalArc> minimumSpanTree;
             MSTAlgorithm algorithm;
             shared_ptr<IMinSpanTree> mst;
-            vector<InternalArc> solve (Network& net);
+            void solve (Network& net);
             bool validateNetworkData(Network& net);
             void convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
                                                     vector<unsigned int>& eNds, vector<double>& supply,

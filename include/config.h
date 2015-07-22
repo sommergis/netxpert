@@ -12,7 +12,7 @@ using namespace cereal;
 namespace netxpert {
 
     /**
-    * \Enum for Geometry Handling.
+    * \Enum Geometry Handling.
     **/
     enum GEOMETRY_HANDLING
     {
@@ -22,7 +22,7 @@ namespace netxpert {
     };
 
     /**
-    * \Enum for TestCases, that can be started per entry "TestCase" in Config file.
+    * \Enum TestCases, that can be started per entry "TestCase" in Config file.
     **/
     enum TESTCASE
     {
@@ -37,11 +37,13 @@ namespace netxpert {
         TestFileGDBWriter = 8,
         TestSpatiaLiteWriter = 9,
         TestAddNodes = 10,
-        TestCreateRouteGeometries = 11
+        TestCreateRouteGeometries = 11,
+        MCFCOM = 12,
+        TransportationCOMExt = 13
     };
 
     /**
-    * \Enum for the type of the output DB in which the solver result is been written.
+    * \Enum Type of the output DB in which the solver result is been written.
     **/
     enum RESULT_DB_TYPE
     {
@@ -49,17 +51,18 @@ namespace netxpert {
         ESRI_FileGDB = 1
     };
     /**
-    * \Enum for the Log Level.
+    * \Enum Type of the Log Level.
     **/
     enum LOG_LEVEL {
-           All = -1,
-           Debug = 0,
-           Info = 1,
-           Warning = 2,
-           Error = 3,
-           Fatal = 4   };
+       LogAll = -1,
+       LogDebug = 0,
+       LogInfo = 1,
+       LogWarning = 2,
+       LogError = 3,
+       LogFatal = 4
+    };
     /**
-    * \Enum for the type of the Shortest Path Tree algorithms.
+    * \Enum Type of the Shortest Path Tree algorithms.
     **/
     enum SPTAlgorithm {
 
@@ -69,22 +72,22 @@ namespace netxpert {
         Dijkstra_Heap_MCFClass = 3,
         Dijkstra_2Heap_LEMON = 4} ;
     /**
-    * \Enum for the type of the Minimum Cost Flow algorithms.
+    * \Enum Type of the Minimum Cost Flow algorithms.
     **/
     enum MCFAlgorithm {
         NetworkSimplex_MCF = 0,
         NetworkSimplex_LEMON = 1
         } ;
     /**
-    * \Enum for the type of the Minimum Spanning Tree algorithms.
+    * \Enum Type of the Minimum Spanning Tree algorithms.
     **/
     enum MSTAlgorithm {
-        Kruskal_QuickGraph = 0, //.NET!
-        Prim_QuickGraph = 1,    //.NET!
+        //Kruskal_QuickGraph = 0, //.NET!
+        //Prim_QuickGraph = 1,    //.NET!
         Kruskal_LEMON = 2};
 
     /**
-    * \Storage for the configuration of NetXpert
+    * \Class Storage for the configuration of NetXpert
     **/
     struct Config
     {
@@ -178,7 +181,7 @@ namespace netxpert {
 
 
     /**
-    * \Class that reads a configuration file for NetXpert
+    * \Class Class reads a configuration file for NetXpert
     **/
     class ConfigReader
     {

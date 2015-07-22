@@ -152,13 +152,26 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
     //Main loop for calculating the ODMatrix
     int counter = 0;
-    for (unsigned int orig : origs)
+    auto origsSize = origs.size();
+
+    //for (unsigned int orig : origs)
+    vector<unsigned int>::iterator it;
+    //vector<unsigned int>::iterator it2;
+
+    //#pragma omp parallel for
+    for (it = origs.begin(); it < origs.end(); it++)
     {
+        unsigned int orig = *it;
+    //int i;
+    //#pragma omp parallel for
+    //for (i=0;i<origs.size();i++)
+    //{
+        //auto orig = origs[i];
         spt->SetOrigin(orig);
         try
         {
             LOGGER::LogDebug("Calculating routes from " + net.GetOriginalStartOrEndNodeID(orig) + ", # "+
-                                to_string(origs.size() - counter) +" left..");
+                                to_string(origsSize - counter) +" left..");
             // Set dests to UNIT_MAX --> no dest setting at all!
             spt->SetDest( UINT_MAX );
             //LOGGER::LogDebug("Starting to solve SPT..");
@@ -189,8 +202,9 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         }
 
         unordered_map<unsigned int,unsigned int> arcs;
-
-        for (int i = nmax; i > 0; i--)
+        int i;
+        //#pragma omp parallel for private(i)
+        for (i = nmax; i > 0; i--)
         {
             if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
                 arcs.insert( make_pair(i,pre[i]) );
@@ -206,14 +220,19 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
         // Get all routes from orig to dest in nodes-List
         for (unsigned int dest : dests)
+        //{
+
+        //#pragma omp parallel for
+        //for (it2 = dests.begin(); it2 < dests.end(); it2++)
         {
+            //unsigned int dest = *it2;
             bool isDestReached = spt->Reached(dest);
 
             if (orig != dest && isDestReached)
             {
                 //route is reference
-                const double costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
-                totalCost = totalCost + costPerRoute;
+                double costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
+                totalCost += costPerRoute;
 
                 //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
                 // bei sps auch die Vektoren geleert.
@@ -230,8 +249,9 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
                 //LOGGER::LogError("Destination "+ net.GetOriginalStartOrEndNodeID(dest) +" unreachable!");
             }
         }
+
         optimum = totalCost; //totalCost wird immer weiter aufsummiert für jedes neues OD-Paar
-        counter = counter + 1;
+        counter += 1;
     }
     //spt.Dispose();
 }
@@ -398,6 +418,7 @@ double OriginDestinationMatrix::buildCompressedRoute(vector<unsigned int>& route
     double totalCost = 0;
     //Neu - nur die Enden hinzufuegen
     unsigned int curr = dest;
+
     while (curr != orig)
     {
         /*route.push_back(curr);
@@ -419,7 +440,8 @@ double OriginDestinationMatrix::buildCompressedRoute(vector<unsigned int>& route
 
         route.push_back(curr);
         const InternalArc& ftNode  { arcPredescessors.at(curr), curr };
-        totalCost = totalCost + getArcCost( ftNode );
+
+        totalCost += getArcCost( ftNode );
         curr = arcPredescessors.at(curr);
     }
     return totalCost;

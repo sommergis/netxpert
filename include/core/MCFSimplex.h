@@ -155,6 +155,18 @@ class MCFSimplex: public MCFClass, public IMinCostFlow
 	       cIndex pm = 0 , cFRow pU = NULL , cCRow pC = NULL ,
 	       cFRow pDfct = NULL , cIndex_Set pSn = NULL ,
 	       cIndex_Set pEn = NULL );
+ // Johannes Sommer
+ //-- Methods for IMinCostFlow interface
+ void LoadNet(unsigned int nmx, unsigned int mmx, unsigned int pn, unsigned int pm, double* pU,
+                            double* pC, double* pDfct, unsigned int* pSn, unsigned int* pEn);
+ unsigned int MCFmmax();
+ unsigned int MCFnmax();
+
+ int MCFGetStatus();
+ void MCFCosts(double* outCosts);
+ void MCFGetX(double* outFlow);
+ void CheckPSol( void ) {MCFClass::CheckPSol();}
+ void CheckDSol( void ) {MCFClass::CheckDSol();}
 
 /**< Inputs a new network, as in MCFClass::LoadNet(). */
 
@@ -235,11 +247,13 @@ class MCFSimplex: public MCFClass, public IMinCostFlow
 
 /*--------------------------------------------------------------------------*/
 
- FONumber MCFGetFO( void );
+double MCFGetFO( void );
 
 /*--------------------------------------------------------------------------*/
 /*-------------- METHODS FOR READING THE DATA OF THE PROBLEM ---------------*/
 /*--------------------------------------------------------------------------*/
+//Johannes Sommer
+ virtual void MCFArcs( Index_Set Startv , Index_Set Endv );
 
  virtual void MCFArcs( Index_Set Startv , Index_Set Endv ,
 		       cIndex_Set nms = NULL , cIndex strt = 0 ,
