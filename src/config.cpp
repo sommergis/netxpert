@@ -5,7 +5,6 @@ using namespace netxpert;
 using namespace cereal;
 using namespace std;
 
-//TODO!
  Config ConfigReader::GetConfigFromJSON(string jsonString)
 {
     stringstream ss (jsonString);

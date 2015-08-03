@@ -4,6 +4,7 @@
 #include "mcflow.h"
 
 namespace netxpert {
+
     //TODO: check for inheritance of ODMatrix Solver
     /**
     * \Class Solver for the Transportation Problem
@@ -20,13 +21,24 @@ namespace netxpert {
             std::vector<unsigned int> GetDestinations() const;
             void SetDestinations(std::vector<unsigned int>& dests);
 
-            std::unordered_map<ExtArcID, ExtODMatrixArc> GetExtODMatrix() const;
-            void SetExtODMatrix(std::unordered_map<ExtArcID, ExtODMatrixArc> _extODMatrix);
+            //std::unordered_map<ExtArcID, ExtODMatrixArc> GetExtODMatrix() const;
+            //std::vector<ExtODMatrixArc> GetExtODMatrix() const;
+            //void SetExtODMatrix(std::unordered_map<ExtArcID, ExtODMatrixArc> _extODMatrix);
+            void SetExtODMatrix(std::vector<ExtODMatrixArc> _extODMatrix);
+            //void SetExtODMatrix(string _extODMatrixJSON);
 
-            std::unordered_map<ExtNodeID, double> GetNodeSupply() const;
-            void SetNodeSupply(std::unordered_map<ExtNodeID, double> _nodeSupply);
+            //std::vector<ExtNodeSupply> GetNodeSupply() const;
+            void SetExtNodeSupply(std::vector<ExtNodeSupply> _nodeSupply);
+            //void SetNodeSupply(string _nodeSupplyJSON);
 
             std::unordered_map<ODPair, DistributionArc> GetDistribution() const;
+
+            //simplified json output
+            std::string GetSolverJSONResult() const;
+
+            std::vector<ExtDistributionArc> GetExtDistribution() const;
+            std::string GetJSONExtDistribution() const;
+
             std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
             std::unique_ptr<Network> network;
@@ -48,9 +60,11 @@ namespace netxpert {
             std::vector<unsigned int> originNodes;
 
             std::unordered_map<ODPair, double> odMatrix;
-            std::unordered_map<ExtArcID, ExtODMatrixArc> extODMatrix;
+            //std::unordered_map<ExtArcID, ExtODMatrixArc> extODMatrix;
+            std::vector<ExtODMatrixArc> extODMatrix;
             std::unordered_map<ODPair, DistributionArc> distribution;
             std::unordered_map<ExtNodeID, double> nodeSupply;
+            std::vector<ExtNodeSupply> extNodeSupply;
 
             std::pair<double,double> getFlowCostData(const std::vector<FlowCost>& fc, const ODPair& key) const;
     };
