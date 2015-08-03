@@ -17,10 +17,10 @@ namespace netxpert {
         public:
             MinCostFlow(Config& cnfg);
             virtual ~MinCostFlow();
-            void Solve(string net);
+            void Solve(std::string net);
             void Solve(Network& net);
             bool IsDirected;
-            vector<FlowCost> GetMinCostFlow() const;
+            std::vector<FlowCost> GetMinCostFlow() const;
             MCFAlgorithm GetAlgorithm() const;
             void SetAlgorithm(MCFAlgorithm mcfAlgorithm);
             MCFSolverStatus GetSolverStatus() const;
@@ -28,7 +28,7 @@ namespace netxpert {
 
         protected:
             Config NETXPERT_CNFG;
-            double optimum;
+            double optimum = 0;
             MCFSolverStatus solverStatus;
             MCFAlgorithm algorithm;
             vector<FlowCost> flowCost;

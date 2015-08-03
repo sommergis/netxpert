@@ -15,11 +15,12 @@
 	"config.h"
 	"utils.h"
 
-1436988796 /home/hahne/dev/netxpert/include/config.h
+1437771115 /home/hahne/dev/netxpert/include/config.h
 	<string>
 	<cereal/cereal.hpp>
 	<cereal/archives/json.hpp>
 	<cereal/types/vector.hpp>
+	<cereal/types/map.hpp>
 
 1425417421 /home/hahne/dev/netxpert/libs/cereal/cereal.hpp
 	<type_traits>
@@ -236,7 +237,7 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1437161320 /home/hahne/dev/netxpert/include/data.h
+1438113613 /home/hahne/dev/netxpert/include/data.h
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
 	<geos/geom/MultiLineString.h>
@@ -246,6 +247,10 @@
 	<unordered_set>
 	<list>
 	<vector>
+	<cereal/cereal.hpp>
+	<cereal/archives/json.hpp>
+	<cereal/types/unordered_map.hpp>
+	<cereal/types/vector.hpp>
 
 1436907197 /home/hahne/dev/netxpert/include/network.h
 	"utils.h"
@@ -396,19 +401,23 @@
 	"sptlem.h"
 	"data.h"
 
-1436799972 /home/hahne/dev/netxpert/include/utils.h
+1437940187 /home/hahne/dev/netxpert/include/utils.h
 	<string>
 	<stdio.h>
 	<iostream>
 	<vector>
 	<sstream>
+	<cereal/cereal.hpp>
+	<cereal/archives/json.hpp>
+	<cereal/types/unordered_map.hpp>
+	<cereal/types/vector.hpp>
 	<direct.h>
 	<windows.h>
 	"Shlwapi.h"
 	<unistd.h>
 	<sys/stat.h>
 
-1436893939 /home/hahne/dev/netxpert/include/solver/mcflow.h
+1438029232 /home/hahne/dev/netxpert/include/solver/mcflow.h
 	"isolver.h"
 	"imcflow.h"
 	"MCFSimplex.h"
@@ -428,6 +437,14 @@
 	<limits.h>
 	<string.h>
 
-1437512716 /home/hahne/dev/netxpert/include/solver/transportation.h
+1438112172 /home/hahne/dev/netxpert/include/solver/transportation.h
 	"mcflow.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/types/map.hpp
+	<cereal/cereal.hpp>
+	<map>
+
+1425417421 /home/hahne/dev/netxpert/libs/cereal/types/unordered_map.hpp
+	<cereal/cereal.hpp>
+	<unordered_map>
 
