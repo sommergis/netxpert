@@ -12,6 +12,8 @@
 #include "mstree.h"
 #include "sptree.h"
 #include "odmatrix.h"
+#include "mcflow.h"
+#include "transportation.h"
 %}
 
 namespace std
@@ -19,6 +21,9 @@ namespace std
     %template(InputArcs) std::vector<netxpert::InputArc>;
     %template(InputNodes) std::vector<netxpert::InputNode>;
     %template(NewNodes) std::vector<netxpert::NewNode>;
+    %template(ExtODMatrix) std::vector<netxpert::ExtODMatrixArc>;
+    %template(ExtNodeSupplies) std::vector<netxpert::ExtNodeSupply>;
+    %template(ExtDistribution) std::vector<netxpert::ExtDistributionArc>;
 }
 
 namespace netxpert
@@ -64,10 +69,60 @@ namespace netxpert
         unsigned int dest;
     };
 
+    struct InternalArc
+    {
+        unsigned int fromNode;
+        unsigned int toNode;
+    };
+
+    struct FlowCost
+    {
+        InternalArc intArc;
+        double flow;
+        double cost;
+    };
+
     typedef std::vector<netxpert::InputNode> InputNodes;
     typedef std::vector<netxpert::InputArc> InputArcs;
     typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
     typedef std::vector<netxpert::NewNode> NewNodes;
+    typedef std::string ExtArcID;
+    typedef std::string ExtNodeID;
+    typedef std::vector<netxpert::ExtODMatrixArc> ExtODMatrix;
+    typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
+    typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
+
+    struct ExtNodeSupply
+    {
+        ExtNodeID extNodeID;
+        double supply;
+    };
+
+    struct ExternalArc
+    {
+        std::string extFromNode;
+        std::string extToNode;
+    };
+    struct ExtODMatrixArc
+    {
+        ExtArcID extArcID;
+        ExternalArc extArc;
+        double cost;
+    };
+
+    struct ExtTransportationData
+    {
+        ExtODMatrix odm;
+        ExtNodeSupplies supply;
+    };
+
+    struct ExtDistributionArc
+    {
+        ExtArcID arcid;
+        ExternalArc extArc;
+        double cost;
+        double flow;
+    };
 
     enum GEOMETRY_HANDLING
     {
@@ -136,6 +191,14 @@ namespace netxpert
        MCFUnbounded = 3,      ///< problem is unbounded
        MCFError = 4           ///< error in the solver
     };
+    enum MinCostFlowInstanceType
+    {
+        MCFUndefined = 0,
+        MCFBalanced = 1,
+        MCFExtrasupply = 2,
+        MCFExtrademand = 3
+    };
+
     /**
     * \Storage for the configuration of netxpert
     **/
@@ -230,12 +293,6 @@ namespace netxpert
             ~DBHELPER();
     };
 
-    struct InternalArc
-    {
-        unsigned int fromNode;
-        unsigned int toNode;
-    };
-
     class ISolver
     {
         public:
@@ -291,6 +348,7 @@ namespace netxpert
             double GetOptimum() const;
             std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
     };
+
     class ShortestPathTree : public ISolver
     {
         public:
@@ -321,6 +379,53 @@ namespace netxpert
             double GetOptimum() const;
 
             std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
+    };
+
+    class MinCostFlow : public ISolver
+    {
+        public:
+            MinCostFlow(Config& cnfg);
+            virtual ~MinCostFlow();
+            void Solve(string net);
+            void Solve(Network& net);
+            bool IsDirected;
+            std::vector<FlowCost> GetMinCostFlow() const;
+            netxpert::MCFAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(MCFAlgorithm mcfAlgorithm);
+            /*netxpert::MCFSolverStatus GetSolverStatus() const;*/
+            double GetOptimum() const;
+    };
+
+    %feature("notabstract") Transportation;
+    class Transportation : public MinCostFlow
+    {
+        public:
+            Transportation(Config& cnfg);
+            virtual ~Transportation();
+
+            std::vector<unsigned int> GetOrigins() const;
+            void SetOrigins(std::vector<unsigned int>  origs);
+
+            std::vector<unsigned int> GetDestinations() const;
+            void SetDestinations(std::vector<unsigned int>& dests);
+
+            void SetExtODMatrix(std::vector<ExtODMatrixArc> _extODMatrix);
+            void SetExtNodeSupply(std::vector<ExtNodeSupply> _nodeSupply);
+
+            /*std::unordered_map<ODPair, DistributionArc> GetDistribution() const;*/
+
+            ExtDistribution GetExtDistribution() const;
+            std::string GetJSONExtDistribution() const;
+
+            std::string GetSolverJSONResult() const;
+
+            std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
+
+            /**
+            * Solves the Transportation Problem with the defined ODMatrix and NodeSupply property. Solves on pure
+            * attribute data only i.e. output is always without geometry. (GEOMETRY_HANDLING is always set to "NoGeometry")
+            */
+            void Solve();
     };
 }
 

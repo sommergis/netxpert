@@ -1057,23 +1057,25 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
         DBHELPER::CloseConnection();
 
         //input arcs to extODMatrix
-        unordered_map<ExtArcID, ExtODMatrixArc> extODMatrix;
+        std::vector<ExtODMatrixArc> extODMatrix;
         for (InputArc& arc : arcsTable)
         {
-            extODMatrix.insert( make_pair( arc.extArcID,
-                                        ExtODMatrixArc {arc.extFromNode, arc.extToNode, arc.cost} ) );
+            extODMatrix.push_back( ExtODMatrixArc {arc.extArcID, arc.extFromNode, arc.extToNode, arc.cost}  );
         }
         //input nodes to extNodeSupply - no coords!
-        unordered_map<ExtNodeID, double> extNodeSupply;
+        vector<ExtNodeSupply> extNodeSupply;
         for (NewNode& node : nodesTable)
         {
-            extNodeSupply.insert( make_pair( node.extNodeID, node.supply) );
+            extNodeSupply.push_back( ExtNodeSupply {node.extNodeID, node.supply} );
         }
         //Transportation Solver
         Transportation transp(cnfg);
         //TransportationExt -> external setting of ODMatrix and nodesupply
-        transp.SetExtODMatrix(extODMatrix);
-        transp.SetNodeSupply(extNodeSupply);
+
+        ExtTransportationData input {extODMatrix, extNodeSupply};
+
+        transp.SetExtODMatrix(input.odm);
+        transp.SetExtNodeSupply(input.supply);
 
         transp.Solve();
 
@@ -1104,7 +1106,10 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
         writer->CommitCurrentTransaction();
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
-        int counter = 0;
+
+        vector<ExtDistributionArc> distArcs;
+
+        unsigned int counter = 0;
         for (auto& dist : result)
         {
             counter += 1;
@@ -1120,8 +1125,14 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
             //TODO: get capacity per arc
             double cap = -1;
 
-            auto route = transp.UncompressRoute(key.origin, ends);
+            // only one arc
+            vector<string> arcIDs = net.GetOriginalArcIDs(vector<InternalArc>
+                                                                        { InternalArc  {key.origin, key.dest} },
+                                                                        transp.IsDirected);
+            ExtArcID arcID = arcIDs.at(0);
 
+            //auto route = transp.UncompressRoute(key.origin, ends);
+            //cout << route.size() << endl;
             //cout << "From: " << key.origin << " To: " << key.dest << " flows: " << flow << " ,cost: " << costPerPath << endl;
 
             string orig;
@@ -1139,42 +1150,18 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
                 LOGGER::LogError(ex.what());
             }
 
-            net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, flow, "", route,
-                                        resultTableName, *writer);
+            //JSON output!
+            distArcs.push_back( ExtDistributionArc {arcID, ExternalArc {orig, dest}, costPerPath, flow });
 
+            /*net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, flow, "", route,
+                                        resultTableName, *writer);*/
 
-
-
-
-
-
-            /*vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
-            // is only one arc
-            if (arcData.size() > 0)
-            {
-                ArcData arcD = *arcData.begin();
-                arcIDs = arcD.extArcID;
-                cap = arcD.capacity;
-            }
-
-            string orig;
-            string dest;
-            try{
-                orig = net.GetOriginalStartOrEndNodeID(key.fromNode);
-            }
-            catch (exception& ex) {
-                orig = net.GetOriginalNodeID(key.fromNode);
-            }
-            try{
-                dest = net.GetOriginalStartOrEndNodeID(key.toNode);
-            }
-            catch (exception& ex) {
-                dest = net.GetOriginalNodeID(key.fromNode);
-            }
-            net.BuildTotalRouteGeometry(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer);*/
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
+
+        TransportationResult transpRes {transp.GetOptimum(), distArcs};
+        cout << UTILS::SerializeObjectToJSON<TransportationResult>(transpRes, "result") + "\n }"<< endl;
         LOGGER::LogDebug("Done!");
 
     }

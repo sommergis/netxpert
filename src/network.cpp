@@ -1663,9 +1663,10 @@ double Network::calcTotalSupply ()
     double supplyValue = 0;
     for (auto& supply : nodeSupplies)
     {
-        if (supply.second.supply < 0)
-            supplyValue += abs( supply.second.supply );
+        if (supply.second.supply > 0)
+            supplyValue += supply.second.supply;
     }
+    //cout << supplyValue << endl;
     return supplyValue;
 }
 double Network::calcTotalDemand ()
@@ -1673,10 +1674,11 @@ double Network::calcTotalDemand ()
     double demandValue = 0;
     for (auto& demand : nodeSupplies)
     {
-        if (demand.second.supply > 0)
+        if (demand.second.supply < 0)
             demandValue += demand.second.supply;
     }
-    return demandValue;
+    //cout << demandValue << endl;
+    return abs(demandValue);
 }
 MinCostFlowInstanceType Network::GetMinCostFlowInstanceType()
 {
@@ -1735,7 +1737,9 @@ void Network::processSupplyOrDemand()
     unsigned int newNodeID = GetMaxNodeCount() + 1;
     internalDistinctNodeIDs.insert(make_pair("dummy", newNodeID));
     swappedInternalDistinctNodeIDs.insert( make_pair( newNodeID, "dummy" ));
-    NodeSupply sup {"dummy", getSupplyDemandDifference() }; //Differenz ist positiv oder negativ, je nach Überschuss
+    //cout << "Ausgleich: " << getSupplyDemandDifference() << endl;
+    auto diff = getSupplyDemandDifference();
+    NodeSupply sup {"dummy", diff }; //Differenz ist positiv oder negativ, je nach Überschuss
     nodeSupplies.insert( make_pair( newNodeID, sup));
 
     // Dummy-Kosten (0 km) in Netzwerk hinzufügen
@@ -1748,7 +1752,18 @@ void Network::processSupplyOrDemand()
         if (node.second.supply == 0) //Filter transshipment nodes (=0)
             continue;
 
-        InternalArc key  {newNodeID,node.first};
+        InternalArc key;
+        if (diff > 0)
+        {
+            key.fromNode = newNodeID;
+            key.toNode = node.first;
+        }
+        else
+        {
+            key.fromNode = node.first;
+            key.toNode = newNodeID;
+        }
+
         ArcData value  {"dummy", cost, capacity };
         internalArcData.insert( make_pair(key, value));
     }
@@ -1756,5 +1771,5 @@ void Network::processSupplyOrDemand()
 double Network::getSupplyDemandDifference()
 {
     //can be negative or positive
-    return calcTotalSupply() - calcTotalDemand();
+    return (calcTotalDemand() - calcTotalSupply());
 }

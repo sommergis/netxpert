@@ -36,27 +36,74 @@ void Transportation::SetDestinations(vector<unsigned int>& dests)
 {
     this->destinationNodes = dests;
 }
-void Transportation::SetExtODMatrix(unordered_map<string, ExtODMatrixArc> _extODMatrix)
+void Transportation::SetExtODMatrix(vector<ExtODMatrixArc> _extODMatrix)
 {
     extODMatrix = _extODMatrix;
 }
-unordered_map<string, ExtODMatrixArc> Transportation::GetExtODMatrix() const
-{
-    return extODMatrix;
-}
 
-unordered_map<ODPair, DistributionArc> Transportation::GetDistribution() const
+std::unordered_map<ODPair, DistributionArc> Transportation::GetDistribution() const
 {
     return distribution;
 }
-unordered_map<ExtNodeID, double> Transportation::GetNodeSupply() const
+std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
 {
-    return nodeSupply;
+    vector<ExtDistributionArc> distArcs;
+    unsigned int counter = 0;
+    for (auto& dist : distribution)
+    {
+        counter += 1;
+        if (counter % 2500 == 0)
+            LOGGER::LogInfo("Processed #" + to_string(counter) + " rows.");
+
+        ODPair key = dist.first;
+        DistributionArc val = dist.second;
+        CompressedPath path = val.path;
+        vector<unsigned int> ends = val.path.first;
+
+        // only one arc
+        vector<string> arcIDs = network->GetOriginalArcIDs(vector<InternalArc>
+                                                                    { InternalArc  {key.origin, key.dest} }, IsDirected);
+        ExtArcID arcID = arcIDs.at(0);
+
+        double costPerPath = path.second;
+        double flow = val.flow;
+        //TODO: get capacity per arc
+        double cap = -1;
+
+        string orig;
+        string dest;
+        try{
+            orig = network->GetOriginalNodeID(key.origin);
+        }
+        catch (exception& ex) {
+            LOGGER::LogError(ex.what());
+        }
+        try{
+            dest = network->GetOriginalNodeID(key.dest);
+        }
+        catch (exception& ex) {
+            LOGGER::LogError(ex.what());
+        }
+        //JSON output!
+        distArcs.push_back( ExtDistributionArc {arcID, ExternalArc {orig, dest}, costPerPath, flow });
+    }
+    return distArcs;
 }
 
-void Transportation::SetNodeSupply(unordered_map<ExtNodeID, double> _nodeSupply)
+std::string Transportation::GetJSONExtDistribution() const
 {
-    nodeSupply = _nodeSupply;
+    return UTILS::SerializeObjectToJSON<vector<ExtDistributionArc>>(GetExtDistribution(),"distribution")+ "\n }";
+}
+
+std::string Transportation::GetSolverJSONResult() const
+{
+    TransportationResult transpRes {this->optimum, GetExtDistribution() };
+    return UTILS::SerializeObjectToJSON<TransportationResult>(transpRes, "result") + "\n }";
+}
+
+void Transportation::SetExtNodeSupply(vector<ExtNodeSupply> _nodeSupply)
+{
+    extNodeSupply = _nodeSupply;
 }
 
 std::pair<double,double> Transportation::getFlowCostData(const vector<FlowCost>& fc, const ODPair& key) const
@@ -76,19 +123,19 @@ std::pair<double,double> Transportation::getFlowCostData(const vector<FlowCost>&
 
 void Transportation::Solve()
 {
-    if (extODMatrix.size() == 0 || nodeSupply.size() == 0)
+    if (extODMatrix.size() == 0 || extNodeSupply.size() == 0)
         throw std::runtime_error("OD-Matrix and node supply must be filled in Transportation Solver!");
 
     //arcData from ODMatrix
     InputArcs arcs;
-    for (auto& kv : extODMatrix)
+    for (ExtODMatrixArc& v : extODMatrix)
     {
-        ExtArcID key = kv.first;
-        ExtODMatrixArc val = kv.second;
-        double cost = val.cost;
+        ExtArcID key = v.extArcID;
+        ExternalArc arc = v.extArc;
+        double cost = v.cost;
         double cap = DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
-        string fromNode = val.extArc.extFromNode;
-        string toNode = val.extArc.extToNode;
+        string fromNode = arc.extFromNode;
+        string toNode = arc.extToNode;
         string oneway = "";
         arcs.push_back( InputArc {key, fromNode, toNode, cost, cap, oneway } );
     }
@@ -99,10 +146,10 @@ void Transportation::Solve()
 
     //construct nodeSupply from external nodeSupply
     InputNodes nodes;
-    for (auto& kv : nodeSupply)
+    for (ExtNodeSupply& v : extNodeSupply)
     {
-        ExtNodeID key = kv.first;
-        double supply = kv.second;
+        ExtNodeID key = v.extNodeID;
+        double supply = v.supply;
         nodes.push_back( InputNode {key, supply });
     }
 

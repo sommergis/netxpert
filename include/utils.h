@@ -7,6 +7,11 @@
 #include <vector>
 #include <sstream>
 
+#include <cereal/cereal.hpp>
+#include <cereal/archives/json.hpp>
+#include <cereal/types/unordered_map.hpp>
+#include <cereal/types/vector.hpp>
+
 #ifdef WINDOWS
     #include <direct.h>
     #include <windows.h>
@@ -36,6 +41,24 @@ namespace netxpert {
             static std::string GetFileNameWithoutExtension(std::string& _filePath);
             static std::vector<std::string>& Split(const std::string &s, char delim, std::vector<std::string> &elems);
             static std::vector<std::string> Split(const std::string &s, char delim);
+            template<typename T>
+            static T DeserializeJSONtoObject(std::string _jsonString)
+            {
+                std::stringstream ss (_jsonString);
+                cereal::JSONInputArchive archive ( ss );
+                T outData;
+                archive( outData );
+                return outData;
+            }
+            template<typename T>
+            static std::string SerializeObjectToJSON(T _inData, std::string _rootNodeName="input")
+            {
+                std::stringstream ss;
+                cereal::JSONOutputArchive archive ( ss );
+                archive( cereal::make_nvp(_rootNodeName,_inData) );
+                std::string ret = ss.str();
+                return ret;
+            }
     };
 }
 #endif // UTILS_H

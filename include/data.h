@@ -10,6 +10,10 @@
 #include <unordered_set>
 #include <list>
 #include <vector>
+#include <cereal/cereal.hpp>
+#include <cereal/archives/json.hpp>
+#include <cereal/types/unordered_map.hpp>
+#include <cereal/types/vector.hpp>
 //#include <boost/bimap.hpp>
 //#include <pair>
 
@@ -63,6 +67,16 @@ namespace netxpert {
        MCFError = 4           ///< error in the solver
     };
 
+    enum StartOrEndLocationOfLine
+    {
+        Intermediate = 0,
+        Start = 1,
+        End = 2
+    };
+
+    typedef string ExtArcID;
+    typedef string ExtNodeID;
+
     struct ExtClosestArcAndPoint
     {
         string extArcID;
@@ -74,21 +88,93 @@ namespace netxpert {
         shared_ptr<Geometry> arcGeom;
     };
 
-    enum StartOrEndLocationOfLine
-    {
-        Intermediate = 0,
-        Start = 1,
-        End = 2
-    };
-
     /**
     * \Custom data type for storing external nodes tuple <fromNode,toNode>
     **/
     struct ExternalArc
     {
-        string extFromNode;
-        string extToNode;
+        std::string extFromNode;
+        std::string extToNode;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( extFromNode, extToNode );
+        }
     };
+
+    /**
+    *\Custom data type for storing external node supply <extNodeID,supply>
+    **/
+    struct ExtNodeSupply
+    {
+        ExtNodeID extNodeID;
+        double supply;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("nodeid", extNodeID),
+                cereal::make_nvp("supply",supply) );
+        }
+    };
+
+    /**
+    * \Custom data type for storing external arc of ODMatrix <extFromNode,extToNode,cost>
+    **/
+    struct ExtODMatrixArc
+    {
+        ExtArcID extArcID;
+        ExternalArc extArc;
+        double cost;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("arcid", extArcID),
+                cereal::make_nvp("fromNode",extArc.extFromNode),
+                cereal::make_nvp("toNode",extArc.extToNode),
+                cereal::make_nvp("cost",cost) );
+        }
+    };
+
+    /*struct ExtODMatrix
+    {
+        std::vector<ExtODMatrixArc> data;
+        template<class Archive>
+        void serialize( Archive & ar)
+        {
+            ar( cereal::make_nvp("odmatrix",data) );
+        }
+    };
+
+    struct ExtNodeSupplies
+    {
+        std::vector<ExtNodeSupply> data;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("supply",data));
+        }
+    };*/
+
+    typedef std::vector<netxpert::ExtODMatrixArc> ExtODMatrix;
+    typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
+
+    struct ExtTransportationData
+    {
+        ExtODMatrix odm;
+        ExtNodeSupplies supply;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("odmatrix",odm),
+                cereal::make_nvp("supply",supply));
+        }
+    };
+
     /**
     * \Custom data type for storing nodes tuple <fromNode,toNode>
     **/
@@ -113,6 +199,12 @@ namespace netxpert {
         bool operator==(const ODPair& p2) const {
           const ODPair& p1=(*this);
           return p1.origin == p2.origin && p1.dest == p2.dest;
+        }
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("origin",origin),
+                cereal::make_nvp("destination",dest) );
         }
     };
     /**
@@ -164,6 +256,40 @@ namespace netxpert {
         CompressedPath path;
         double flow;
     };
+
+
+    struct ExtDistributionArc
+    {
+        ExtArcID arcid;
+        ExternalArc extArc;
+        double cost;
+        double flow;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("arcid", arcid),
+                cereal::make_nvp("fromNode",extArc.extFromNode),
+                cereal::make_nvp("toNode",extArc.extToNode),
+                cereal::make_nvp("cost",cost),
+                cereal::make_nvp("flow",flow)   );
+        }
+    };
+    typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
+
+    struct TransportationResult
+    {
+        double optimum;
+        std::vector<ExtDistributionArc> dist;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("optimum", optimum),
+                cereal::make_nvp("distribution", dist)   );
+        }
+    };
+
     /**
     * \Custom data type for storing tuple <extNodeID,coord>
     **/
@@ -180,14 +306,7 @@ namespace netxpert {
         string extNodeID;
         double supply;
     };
-    /**
-    * \Custom data type for storing external arc of ODMatrix <extFromNode,extToNode,cost>
-    **/
-    struct ExtODMatrixArc
-    {
-        ExternalArc extArc;
-        double cost;
-    };
+
     /**
     * \Custom data type for storing new nodes data <extNodeID,<coord, supply>
     **/
@@ -258,8 +377,6 @@ namespace netxpert {
     };
 
     typedef unsigned int IntNodeID;
-    typedef string ExtNodeID;
-    typedef string ExtArcID;
 
     typedef unordered_map<InternalArc, ArcData> Arcs;
     //typedef boost::bimap< FTNode, ArcData > Arcs;
@@ -340,5 +457,4 @@ namespace std
          }
     };
 }
-
 #endif // DATA_H
