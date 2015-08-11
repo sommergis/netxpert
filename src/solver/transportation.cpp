@@ -32,7 +32,7 @@ vector<unsigned int> Transportation::GetDestinations() const
 {
     return this->destinationNodes;
 }
-void Transportation::SetDestinations(vector<unsigned int>& dests)
+void Transportation::SetDestinations(vector<unsigned int> dests)
 {
     this->destinationNodes = dests;
 }
@@ -123,7 +123,7 @@ std::pair<double,double> Transportation::getFlowCostData(const vector<FlowCost>&
 
 void Transportation::Solve()
 {
-    if (extODMatrix.size() == 0 || extNodeSupply.size() == 0)
+    if (this->extODMatrix.size() == 0 || this->extNodeSupply.size() == 0)
         throw std::runtime_error("OD-Matrix and node supply must be filled in Transportation Solver!");
 
     //arcData from ODMatrix
@@ -155,9 +155,8 @@ void Transportation::Solve()
 
     bool autoCleanNetwork = cnfg.CleanNetwork;
 
-    // construct network from external ODMatrix
+    //construct network from external ODMatrix
     //Network net(arcs, nodes, cmap, cnfg);
-
     //net.ConvertInputNetwork(autoCleanNetwork);
 
     this->network = std::unique_ptr<Network>(new Network(arcs, nodes, cmap, cnfg));
@@ -254,7 +253,167 @@ void Transportation::Solve()
 
 void Transportation::Solve(Network& net)
 {
+    if (this->originNodes.size() == 0 || this->destinationNodes.size() == 0)
+        throw std::runtime_error("Origin nodes and destination nodes must be filled in Transportation Solver!");
 
+    //Call the ODMatrixSolver
+    OriginDestinationMatrix ODsolver(this->NETXPERT_CNFG);
+    //Precondition: Starts and Ends has been filled and thus
+    // they were already converted to ascending ints
+    ODsolver.SetOrigins(this->originNodes);
+    ODsolver.SetDestinations(this->destinationNodes);
+    ODsolver.Solve(net);
+    this->odMatrix = ODsolver.GetODMatrix();
+
+    std::unordered_set<IntNodeID> odKeys;
+    //arcData from ODMatrix
+    InputArcs arcs;
+    int counter = 0;
+    for (auto& kv : this->odMatrix)
+    {
+        counter += 1;
+        ODPair key = kv.first;
+        double cost = kv.second;
+        double cap = DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
+        string fromNode = to_string(key.origin);
+        string toNode = to_string(key.dest);
+        string oneway = "";
+        // We do not have a original ArcID - so we set counter as ArcID
+        arcs.push_back( InputArc {to_string(counter), fromNode, toNode,
+                                    cost, cap, oneway } );
+        // Populate a unique key set of OD-Nodes
+        if(odKeys.count(key.origin) == 0)
+            odKeys.insert(key.origin);
+        if(odKeys.count(key.dest) == 0)
+            odKeys.insert(key.dest);
+    }
+    Config cnfg = this->NETXPERT_CNFG;
+    ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+
+    // Node supply has been set already in the given Network (parameter for Solve())
+
+    // Add nodes data only, if reached through ODMatrix Solver
+    InputNodes nodes;
+    NodeSupplies supplies = net.GetNodeSupplies();
+    for (auto& v : supplies )
+    {
+        IntNodeID key = v.first;
+        double supply = v.second.supply;
+        // condition: only reached nodes from ODMatrix solver shall be
+        // processed
+        if (odKeys.count(key) > 0)
+            nodes.push_back( InputNode {to_string(key), supply });
+    }
+
+    bool autoCleanNetwork = cnfg.CleanNetwork;
+
+    //construct network from ODMatrix
+    Network newNet(arcs, nodes, cmap, cnfg);
+    newNet.ConvertInputNetwork(autoCleanNetwork);
+
+    //Check Balancing of Transportation Problem Instance and
+    //transform the instance if needed is already done in
+    //parent class method MinCostFlow::Solve()
+
+    //Call MCF Solver of parent class
+    MinCostFlow::Solve(newNet);
+
+    // BEWARE of KEY Errors in Dictionarys!
+
+    //Go back from Origin->Dest: flow,cost to real path with a list of start and end nodes of the ODMatrix
+    //1. Translate back to original node ids
+    unordered_map<IntNodeID, ExtNodeID> startNodeMap;
+    unordered_map<IntNodeID, ExtNodeID> endNodeMap;
+    NodeSupplies newSupplies = newNet.GetNodeSupplies();
+    for (auto& n : newSupplies)
+    {
+        IntNodeID key = n.first;
+        NodeSupply ns = n.second;
+        if (ns.supply > 0 || ns.supply == 0) //start node
+        {
+            //cout<< "sm: inserting " << key << ": "<< ns.supply << endl;
+            // We know that the original node id is actually an uint because it was transformed in the ODMatrix solver		            }
+            // but dummys are possible because of balancing of the TP
+            if (ns.extNodeID != "dummy")
+            {
+                IntNodeID oridNodeID = static_cast<IntNodeID>(std::stoul(ns.extNodeID, nullptr, 0));
+                startNodeMap.insert(make_pair(oridNodeID, ns.extNodeID));
+            }
+        }
+        if (ns.supply < 0 || ns.supply == 0) //end node
+        {
+            //cout<< "em: inserting " << key << ": "<< ns.supply << endl;
+            // We know that the original node id is actually an uint because it was transformed in the ODMatrix solver
+            // but dummys are possible because of balancing of the TP
+            if (ns.extNodeID != "dummy")
+            {
+                IntNodeID oridNodeID = static_cast<IntNodeID>(std::stoul(ns.extNodeID, nullptr, 0));
+                endNodeMap.insert(make_pair(oridNodeID, ns.extNodeID));
+            }
+        }
+    }
+
+    //result
+    unordered_map<ODPair, DistributionArc> result;
+
+    //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
+    // Min Cost Flow Solver result
+    vector<FlowCost> flowCost = MinCostFlow::GetMinCostFlow();
+    unordered_map<ODPair, CompressedPath> shortestPaths = ODsolver.GetShortestPaths();
+    for (auto& fc : flowCost)
+    {
+        // We know that the original node id is actually an IntNodeID because it was transformed
+        // in the ODMatrix solver
+        string oldStartNodeStr;
+        string oldEndNodeStr;
+        IntNodeID oldStartNode = 0;
+        IntNodeID oldEndNode = 0;
+        //cout << fc.intArc.fromNode << "->" <<fc.intArc.toNode << " f: "<< fc.flow << " c: "<<fc.cost <<endl;
+        try
+        {
+            //If there are no values for the keys: dummys!
+            if (startNodeMap.count(fc.intArc.fromNode) > 0 &&
+                 endNodeMap.count(fc.intArc.toNode) > 0)
+            {
+                oldStartNodeStr = startNodeMap.at(fc.intArc.fromNode);
+                oldEndNodeStr = endNodeMap.at(fc.intArc.toNode);
+                //cout << oldEndNodeStr << endl;
+                if (oldStartNodeStr.size()>0)
+                    oldStartNode = static_cast<IntNodeID>(std::stoul(oldStartNodeStr, nullptr, 0));
+                if (oldEndNodeStr.size()>0)
+                    oldEndNode = static_cast<IntNodeID>(std::stoul(oldEndNodeStr, nullptr, 0));
+
+                if (oldStartNode > 0 && oldEndNode > 0)
+                {
+                    //build key for result map
+                    ODPair resultKey {oldStartNode, oldEndNode};
+                    // flow and cost
+                    // search for a match of startNode -> endNode in FlowCost,
+                    // take the first occurence
+                    // as flow and cost
+                    auto data = getFlowCostData(flowCost, resultKey);
+                    auto path = shortestPaths.at( resultKey );
+
+                    DistributionArc resultVal { path, data.first };
+
+                    this->distribution.insert(make_pair(resultKey, resultVal));
+                }
+                else
+                {
+                    LOGGER::LogWarning("Should never reach here! FromTo "+
+                                        oldStartNodeStr + " - "+ oldEndNodeStr+
+                                        " could not be looked up!");
+                }
+            }// else: dummys
+        }
+        catch (exception& ex)
+        {
+            LOGGER::LogError("Something strange happened - maybe a key error. ");
+            LOGGER::LogError(ex.what());
+        }
+    }
 }
 
 vector<InternalArc> Transportation::UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const
