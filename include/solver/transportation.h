@@ -2,6 +2,7 @@
 #define TRANSPORTATION_H
 
 #include "mcflow.h"
+#include "odmatrix.h"
 
 namespace netxpert {
 
@@ -16,10 +17,10 @@ namespace netxpert {
             virtual ~Transportation();
 
             std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(std::vector<unsigned int>  origs);
+            void SetOrigins(std::vector<unsigned int> origs);
 
             std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int>& dests);
+            void SetDestinations(std::vector<unsigned int> dests);
 
             //std::unordered_map<ExtArcID, ExtODMatrixArc> GetExtODMatrix() const;
             //std::vector<ExtODMatrixArc> GetExtODMatrix() const;
