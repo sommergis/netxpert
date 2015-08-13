@@ -213,7 +213,9 @@ void Transportation::Solve()
         //cout << fc.intArc.fromNode << "->" <<fc.intArc.toNode << " f: "<< fc.flow << " c: "<<fc.cost <<endl;
         try
         {
-            oldStartNodeStr = startNodeMap.at(fc.intArc.fromNode);
+            //TESTME: don't resolve str to uint (could be a real str)
+            // just take the internal uints
+            /*oldStartNodeStr = startNodeMap.at(fc.intArc.fromNode);
             oldEndNodeStr = endNodeMap.at(fc.intArc.toNode);
             //cout << oldEndNodeStr << endl;
             if (oldStartNodeStr.size()>0)
@@ -224,7 +226,8 @@ void Transportation::Solve()
             if (oldStartNode > 0 && oldEndNode > 0)
             {
                 //build key for result map
-                ODPair resultKey {oldStartNode, oldEndNode};
+                //ODPair resultKey {oldStartNode, oldEndNode};*/
+                ODPair resultKey {fc.intArc.fromNode, fc.intArc.toNode};
                 // flow and cost
                 // search for a match of startNode -> endNode in FlowCost,
                 // take the first occurence
@@ -235,13 +238,13 @@ void Transportation::Solve()
                 DistributionArc resultVal { CompressedPath { make_pair(vector<unsigned int> {}, data.second) }, data.first };
 
                 this->distribution.insert(make_pair(resultKey, resultVal));
-            }
-            else
+            //}
+            /*else
             {
                 LOGGER::LogWarning("Should never reach here! FromTo "+
                                     oldStartNodeStr + " - "+ oldEndNodeStr+
                                     " could not be looked up!");
-            }
+            }*/
         }
         catch (exception& ex)
         {
