@@ -1125,10 +1125,12 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
             //TODO: get capacity per arc
             double cap = -1;
 
+            cout << key.origin << "_>" << key.dest << endl;
             // only one arc
             vector<string> arcIDs = net.GetOriginalArcIDs(vector<InternalArc>
                                                                         { InternalArc  {key.origin, key.dest} },
                                                                         transp.IsDirected);
+            cout << arcIDs.size() << endl;
             ExtArcID arcID = arcIDs.at(0);
 
             //auto route = transp.UncompressRoute(key.origin, ends);
