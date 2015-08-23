@@ -4108,7 +4108,11 @@
 	<fstream>
 	"config.h"
 
+<<<<<<< local
+1439661958 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
+=======
 1440101132 source:/home/hahne/dev/netxpert/src/dbhelper.cpp
+>>>>>>> other
 	"dbhelper.h"
 	<exception>
 
@@ -4208,7 +4212,11 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
+<<<<<<< local
+1439756622 source:/home/hahne/dev/netxpert/src/network.cpp
+=======
 1440333206 source:/home/hahne/dev/netxpert/src/network.cpp
+>>>>>>> other
 	"network.h"
 
 1440333169 /home/hahne/dev/netxpert/include/network.h
@@ -4238,11 +4246,21 @@
 	<string>
 	"dbwriter.h"
 	"logger.h"
+<<<<<<< local
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Transaction.h>
+	<geos/io/WKBWriter.h>
+=======
 	"SQLiteCpp/Database.h"
 	"SQLiteCpp/Transaction.h"
 	"geos/io/WKBWriter.h"
+>>>>>>> other
 
+<<<<<<< local
+1439758269 source:/home/hahne/dev/netxpert/src/test.cpp
+=======
 1440334726 source:/home/hahne/dev/netxpert/src/test.cpp
+>>>>>>> other
 	"test.h"
 
 1440100970 /home/hahne/dev/netxpert/include/test.h
@@ -4778,7 +4796,11 @@
 
 1423772164 /usr/local/include/boost/iterator
 
+<<<<<<< local
+1439580079 /home/hahne/dev/netxpert/include/utils.h
+=======
 1440100970 /home/hahne/dev/netxpert/include/utils.h
+>>>>>>> other
 	<string>
 	<stdio.h>
 	<iostream>
@@ -4794,10 +4816,18 @@
 	<unistd.h>
 	<sys/stat.h>
 
+<<<<<<< local
+1439580145 source:/home/hahne/dev/netxpert/src/utils.cpp
+=======
 1440101130 source:/home/hahne/dev/netxpert/src/utils.cpp
+>>>>>>> other
 	"utils.h"
 
+<<<<<<< local
+1439756568 source:/home/hahne/dev/netxpert/src/solver/transportation.cpp
+=======
 1440101130 source:/home/hahne/dev/netxpert/src/solver/transportation.cpp
+>>>>>>> other
 	"transportation.h"
 
 1440100970 /home/hahne/dev/netxpert/include/solver/transportation.h
