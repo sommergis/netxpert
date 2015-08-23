@@ -61,11 +61,22 @@ namespace netxpert
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity);
 
+<<<<<<< local
+            //for subset of arcs (MST)
+            // DB writer is instantiated in method buildTotalRouteGeometry()
+            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+=======
             void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
+>>>>>>> other
                                             const string& arcIDs,
                                             const string& resultTableName);
 
+<<<<<<< local
+            //for broken up arcs (SPT, ODM)
+            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+=======
             void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
+>>>>>>> other
                                            const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                            const string& resultTableName,
                                            DBWriter& writer);
