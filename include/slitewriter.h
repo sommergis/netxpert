@@ -30,8 +30,7 @@ namespace netxpert {
             virtual void OpenNewTransaction();
             unique_ptr<SQLite::Statement> PrepareSaveResultArc(string _tableName);
             void SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const Geometry& route, string _tableName,
-                                    bool truncateBeforeInsert, SQLite::Statement& query);
+                                    const Geometry& route, string _tableName, SQLite::Statement& query);
 
             unique_ptr<SQLite::Statement> PrepareMergeAndSaveResultArcs(string arcTableName);
             void MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,

@@ -278,8 +278,7 @@ void FGDBWriter::dropTable (const string& _tableName)
 }
 
 void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const geos::geom::MultiLineString& route, string _tableName,
-                                    bool truncateBeforeInsert)
+                                    const geos::geom::MultiLineString& route, string _tableName)
 {
     try
     {
@@ -288,9 +287,6 @@ void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double cap
         //auto* route = &_route;
 
         string resultTableName = _tableName;
-
-        if (truncateBeforeInsert)
-            throw std::runtime_error("FGDBWriter: SaveResultArc() - truncateBeforeInsert not implemented yet!");
 
         if (!isConnected)
             connect( );
