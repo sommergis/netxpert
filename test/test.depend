@@ -253,7 +253,7 @@
 	<cereal/types/unordered_map.hpp>
 	<cereal/types/vector.hpp>
 
-1440333169 /home/hahne/dev/netxpert/include/network.h
+1440340511 /home/hahne/dev/netxpert/include/network.h
 	"utils.h"
 	"dbhelper.h"
 	"slitewriter.h"
@@ -406,11 +406,11 @@
 	"sptlem.h"
 	"data.h"
 
-<<<<<<< local
-1439580079 /home/hahne/dev/netxpert/include/utils.h
-=======
+1440100970 al
+
 1440100970 /home/hahne/dev/netxpert/include/utils.h
->>>>>>> other
+
+1440100970 er
 	<string>
 	<stdio.h>
 	<iostream>

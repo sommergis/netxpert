@@ -14,11 +14,15 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-pg" />
 					<Add option="-g" />
 					<Add directory="include" />
 					<Add directory="include/core" />
 					<Add directory="include/solver" />
 				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/netxpert" prefix_auto="1" extension_auto="1" />
@@ -35,9 +39,6 @@
 					<Add directory="include/core" />
 					<Add directory="include/solver" />
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>

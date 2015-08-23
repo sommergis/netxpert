@@ -1420,8 +1420,6 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
                 FGDBWriter fgdb (NETXPERT_CNFG);
                 fgdb.OpenNewTransaction();
                 fgdb.CreateSolverResultTable(resultTableName, true);
-                //FGDBWriter cannot truncate yet
-                const bool truncateBeforeInsert = false;
 
                 unique_ptr<MultiLineString> arc;
                 if (arcIDs.size() > 0)
@@ -1433,8 +1431,7 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
                                                                     NETXPERT_CNFG.ArcIDColumnName,
                                                                     NETXPERT_CNFG.ArcsGeomColumnName,
                                                                 ArcIDColumnDataType::Number, s);
-                        fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName,
-                                                truncateBeforeInsert);
+                        fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName);
                     }
                 }
                 fgdb.CommitCurrentTransaction();
@@ -1487,24 +1484,20 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
         case RESULT_DB_TYPE::SpatiaLiteDB:
         {
             auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
-            //save
-            bool truncateBeforeInsert = true;
 
             auto qry = sldb.PrepareSaveResultArc(resultTableName);
             //cout << mline->toString() << endl;
-            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, truncateBeforeInsert, *qry);
+            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, *qry);
 
         }
         break;
 
         case RESULT_DB_TYPE::ESRI_FileGDB:
         {
-            //FGDBWriter cannot truncate yet
-            const bool truncateBeforeInsert = false;
 
             auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
             fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
-                                *mline, resultTableName, truncateBeforeInsert);
+                                *mline, resultTableName);
         }
         break;
     }
@@ -1560,12 +1553,9 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
 
             unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
 
-            //FGDBWriter cannot truncate yet
-            const bool truncateBeforeInsert = false;
-
             auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
             fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
-                                *route, resultTableName, truncateBeforeInsert);
+                                *route, resultTableName);
         }
         break;
     }
@@ -1615,24 +1605,18 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
         case RESULT_DB_TYPE::SpatiaLiteDB:
         {
             auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
-            //save
-            bool truncateBeforeInsert = true;
-
             //auto qry = sldb.PrepareSaveResultArc(resultTableName);
             //cout << mline->toString() << endl;
-            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, truncateBeforeInsert, qry);
+            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, qry);
 
         }
         break;
 
         case RESULT_DB_TYPE::ESRI_FileGDB:
         {
-            //FGDBWriter cannot truncate yet
-            const bool truncateBeforeInsert = false;
-
             auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
             fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
-                                *mline, resultTableName, truncateBeforeInsert);
+                                *mline, resultTableName);
         }
         break;
     }

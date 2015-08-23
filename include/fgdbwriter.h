@@ -28,8 +28,7 @@ namespace netxpert {
             virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
             void SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const geos::geom::MultiLineString& route, string _tableName,
-                                    bool truncateBeforeInsert);
+                                    const geos::geom::MultiLineString& route, string _tableName);
             virtual void CloseConnection();
         private:
             unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;

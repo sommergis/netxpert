@@ -15,10 +15,12 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-Wall" />
+					<Add option="-pg" />
 					<Add option="-g" />
 					<Add directory="../bin/Debug" />
 				</Compiler>
 				<Linker>
+					<Add option="-pg" />
 					<Add library="/home/hahne/dev/netxpert/bin/Debug/libnetxpert.so" />
 					<Add directory="../bin/Debug" />
 				</Linker>
@@ -34,8 +36,7 @@
 					<Add directory="../bin/Release" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
-					<Add library="/home/hahne/Backup/dev/netxpert/bin/Release/libnetxpert.so" />
+					<Add library="/home/hahne/dev/netxpert/bin/Release/libnetxpert.so" />
 					<Add directory="../bin/Release" />
 				</Linker>
 			</Target>
