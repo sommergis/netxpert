@@ -406,7 +406,11 @@
 	"sptlem.h"
 	"data.h"
 
+<<<<<<< local
+1439580079 /home/hahne/dev/netxpert/include/utils.h
+=======
 1440100970 /home/hahne/dev/netxpert/include/utils.h
+>>>>>>> other
 	<string>
 	<stdio.h>
 	<iostream>

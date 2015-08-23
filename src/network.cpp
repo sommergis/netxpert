@@ -756,7 +756,11 @@ vector<Geometry*> Network::processRouteParts(vector<InternalArc>& routeNodeArcRe
                         //shared_ptr<Geometry> geo (clonedGeom);
                         /*auto it = tmpRes.begin();
                         tmpRes.insert(it, geo);*/
+<<<<<<< local
+                        tmpRes.push_back(clonedGeom.get());
+=======
                         routeParts.push_back(clonedGeom.get());
+>>>>>>> other
                         //cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                         else {
@@ -778,7 +782,11 @@ vector<Geometry*> Network::processRouteParts(vector<InternalArc>& routeNodeArcRe
                             segmentFound = true;
                             /*auto it = tmpRes.begin();
                             tmpRes.insert(it, geo);*/
+<<<<<<< local
+                            tmpRes.push_back(clonedGeom.get());
+=======
                             routeParts.push_back(clonedGeom.get());
+>>>>>>> other
                             //cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                          else {
@@ -798,7 +806,11 @@ vector<Geometry*> Network::processRouteParts(vector<InternalArc>& routeNodeArcRe
                                 //shared_ptr<Geometry> geo (clonedGeom);
                                 /*auto it = tmpRes.begin();
                                 tmpRes.insert(it, geo);*/
+<<<<<<< local
+                                tmpRes.push_back(clonedGeom.get());
+=======
                                 routeParts.push_back(clonedGeom.get());
+>>>>>>> other
                                 //cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
                             /*}
                             else {
@@ -1395,10 +1407,15 @@ NewArcs& Network::GetNewArcs()
     return newArcs;
 }
 
+<<<<<<< local
+/** For unbroken Network e.g. MST **/
+void Network::buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+=======
 /**
 * For results of original arcs only
 */
 void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
+>>>>>>> other
                                         const string& arcIDs, const string& resultTableName)
 {
     switch (NETXPERT_CNFG.ResultDBType)
@@ -1444,6 +1461,11 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
     }
 }
 
+<<<<<<< local
+/** For splitted Network (through new nodes) **/
+void Network::buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& arcIDs, vector<Geometry*> tmpRes,
+=======
 /**
 * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
 */
@@ -1512,6 +1534,7 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
 
 void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<Geometry*> routeParts,
+>>>>>>> other
                                         const string& resultTableName, DBWriter& writer)
 {
     switch (NETXPERT_CNFG.ResultDBType)
