@@ -6,17 +6,17 @@
 #include "slitewriter.h"
 #include "fgdbwriter.h"
 #include <algorithm>
-#include <geos/geom/CoordinateSequenceFactory.h>
-#include <geos/geom/GeometryFactory.h>
-#include <geos/opDistance.h>
-#include <geos/index/strtree/STRtree.h>
-#include <geos/linearref/LengthIndexedLine.h>
-#include <geos/geom/LineString.h>
-#include <geos/linearref/ExtractLineByLocation.h>
-#include <geos/linearref/LengthIndexOfPoint.h>
-#include <geos/linearref/LocationIndexOfLine.h>
-#include <geos/io/WKTReader.h>
-#include <geos/opLinemerge.h>
+#include "geos/geom/CoordinateSequenceFactory.h"
+#include "geos/geom/GeometryFactory.h"
+#include "geos/opDistance.h"
+#include "geos/index/strtree/STRtree.h"
+#include "geos/linearref/LengthIndexedLine.h"
+#include "geos/geom/LineString.h"
+#include "geos/linearref/ExtractLineByLocation.h"
+#include "geos/linearref/LengthIndexOfPoint.h"
+#include "geos/linearref/LocationIndexOfLine.h"
+#include "geos/io/WKTReader.h"
+#include "geos/opLinemerge.h"
 #include <cmath>
 
 using namespace std;
@@ -61,15 +61,19 @@ namespace netxpert
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity);
 
-            //for subset of arcs (MST)
-            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                             const string& arcIDs,
                                             const string& resultTableName);
-            //for broken up arcs (SPT, ODM)
-            void BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+
+            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                            const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                            const string& resultTableName,
                                            DBWriter& writer);
+
+            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
+                                           const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
+                                           const string& resultTableName,
+                                           DBWriter& writer, SQLite::Statement& qry);
 
             void ConvertInputNetwork(bool autoClean);
 
@@ -93,7 +97,8 @@ namespace netxpert
             string GetOriginalNodeID(unsigned int internalNodeID);
             unsigned int GetInternalNodeID(string externalNodeID);
             string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
-            void GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID);
+            Coordinate GetStartOrEndNodeGeometry(unsigned int internalNodeID);
+            Coordinate GetStartOrEndNodeGeometry(std::string externalNodeID);
             double GetPositionOfPointAlongLine(Coordinate coord, const Geometry& arc);
             StartOrEndLocationOfLine GetLocationOfPointOnLine(Coordinate coord, const Geometry& arc);
 
@@ -132,17 +137,37 @@ namespace netxpert
             shared_ptr<MultiLineString> splitLine(Coordinate coord,
                                         const Geometry& lineGeom);
 
+            vector<Geometry*> processRouteParts(vector<InternalArc>& routeNodeArcRep);
+
             Config NETXPERT_CNFG;
             //TODO
             unsigned int getCurrentNodeCount();
             //TODO
             unsigned int getCurrentArcCount();
 
-            void buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+            /**
+            * For results of original arcs only
+            */
+            void saveResults(string orig, string dest, double cost, double capacity, double flow,
                                             const string& arcIDs, const string& resultTableName);
-            void buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& arcIDs, vector<Geometry*> tmpRes,
+            /**
+            * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
+            */
+            void saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& resultTableName, DBWriter& writer);
+            /**
+            * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
+            * and with once prepared statement
+            */
+            void saveResults(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& resultTableName, DBWriter& writer, SQLite::Statement& qry);
+            /**
+            * For results of original arcs and new route parts
+            */
+            void saveResults(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& arcIDs, vector<Geometry*> routeParts,
+                                        const string& resultTableName, DBWriter& writer);
+
 
             //MCF
             double calcTotalDemand ();

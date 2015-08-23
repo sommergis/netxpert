@@ -289,15 +289,19 @@ void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColN
     }
 }
 
-unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveSolveQueryToDB(string _tableName)
+unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(string _tableName)
 {
     try
     {
+        if (!isConnected)
+            connect();
+
         const string sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,capacity,flow,geometry) VALUES " +
                                            "(@orig,@dest,@cost,@cap,@flow,GeomFromWKB(@geom))";
         SQLite::Database& db = *connPtr;
         auto query = unique_ptr<SQLite::Statement>(new SQLite::Statement(db, sqlStr));
-        LOGGER::LogDebug("Successfully prepared query.");
+
+        //LOGGER::LogDebug("Successfully prepared query.");
         return query;
     }
     catch (std::exception& ex)
@@ -308,7 +312,7 @@ unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveSolveQueryToDB(string
     }
 }
 
-void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
+void SpatiaLiteWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
                                     const Geometry& route, string _tableName,
                                     bool truncateBeforeInsert, SQLite::Statement& query)
 {
@@ -353,34 +357,10 @@ void SpatiaLiteWriter::SaveSolveQueryToDB(string orig, string dest, double cost,
     }
 
 }
-
-/*SQLite::Statement* SpatiaLiteWriter::PrepareCreateRouteGeometries(string arcTableName)
-{
-    try
-    {
-        string sqlStr = "";
-        //start und end segmente vorh.
-        sqlStr = "INSERT INTO "+ resultTableName+" (geometry) " +
-                    "SELECT ST_Union (ST_Collect( ST_Collect ( " +
-                    " GeomFromWKB(@startSeg)," + //start segment
-                    " (SELECT ST_Collect(" + geomColumnName +") " +
-                    "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ), " + //middle part
-                    " GeomFromWKB(@endSeg) ) )"; //end segment
-        SQLite::Database& db = *connPtr;
-        SQLite::Statement* query = new SQLite::Statement(db, sqlStr);
-        LOGGER::LogDebug("Successfully prepared query.");
-        return query;
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error preparing query!" );
-        LOGGER::LogError( ex.what() );
-        return nullptr;
-    }
-}
+/**
+*   Case: Route parts and original arc ids make out a result arc.
 */
-
-void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         string geomColumnName, string arcIDColumnName, string arcTableName,
                                         const string& arcIDs, const MultiLineString& mLine, string resultTableName)
 {
@@ -389,7 +369,7 @@ void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double co
         if (!isConnected)
             connect();
 
-        createRouteWithAllParts(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+        mergeAndSaveResultArcs(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
                                             mLine, resultTableName);
     }
     catch (exception& ex)
@@ -399,15 +379,8 @@ void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double co
     }
 }
 
-bool replace(std::string& str, const std::string& from, const std::string& to) {
-    size_t start_pos = str.find(from);
-    if(start_pos == std::string::npos)
-        return false;
-    str.replace(start_pos, from.length(), to);
-    return true;
-}
 
-void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                      string geomColumnName, string arcIDColumnName, string arcTableName,
                                      const string& arcIDs, const MultiLineString& mLine, string resultTableName)
 {
@@ -470,7 +443,10 @@ void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double 
     qry.exec();
 }
 
-void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+/**
+*   Case: Original arc ids make out a result arc.
+*/
+void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                             string geomColumnName, string arcIDColumnName, string arcTableName,
                                             const string& arcIDs, string resultTableName)
 {
@@ -479,7 +455,7 @@ void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double co
         if (!isConnected)
             connect();
 
-        createRouteWithAllParts(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+        mergeAndSaveResultArcs(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
                                             resultTableName);
         return;
     }
@@ -489,7 +465,7 @@ void SpatiaLiteWriter::CreateRouteGeometries(string orig, string dest, double co
         throw ex;
     }
 }
-void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                                 string geomColumnName, string arcIDColumnName, string arcTableName,
                                                 const string& arcIDs, string resultTableName)
 {
@@ -512,7 +488,6 @@ void SpatiaLiteWriter::createRouteWithAllParts(string orig, string dest, double 
 
     qry.exec();
 }
-
 
 void SpatiaLiteWriter::CloseConnection()
 {

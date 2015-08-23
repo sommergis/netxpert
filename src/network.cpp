@@ -118,7 +118,7 @@ vector<pair<unsigned int, string>> Network::LoadStartNodes(const vector<NewNode>
     }
     return startNodes;
 }
-//TODO
+
 vector<pair<unsigned int, string>> Network::LoadEndNodes(const vector<NewNode>& newNodes, int treshold,
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity)
@@ -671,19 +671,66 @@ vector<InternalArc> Network::insertNewEndNode(bool isDirected, SplittedArc& spli
     return result;
 }
 // Only for unbroken, original network (e.g. MST)
-void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+// NO Geometry Handling
+void Network::ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs,
                                       const string& resultTableName)
 {
-    buildTotalRouteGeometry(orig, dest, cost, capacity, flow, arcIDs, resultTableName);
+    saveResults(orig, dest, cost, capacity, flow, arcIDs, resultTableName);
 }
 
-void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+//With Geometry Handling
+void Network::ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                         const string& resultTableName, DBWriter& writer)
 {
+    vector<Geometry*> routeParts;
+
+    switch (NETXPERT_CNFG.GeometryHandling)
+    {
+        case GEOMETRY_HANDLING::RealGeometry:
+            {
+                routeParts = processRouteParts(routeNodeArcRep);
+                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer);
+            }
+            break;
+        default:
+            //GEOMETRY_HANDLING::NoGeometry:
+            //GEOMETRY_HANDLING::StraightLines:
+            {
+                saveResults(orig, dest, cost, capacity, flow, resultTableName, writer);
+            }
+            break;
+    }
+}
+void Network::ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
+                                        const string& resultTableName, DBWriter& writer, SQLite::Statement& qry)
+{
+    vector<Geometry*> routeParts;
+
+    switch (NETXPERT_CNFG.GeometryHandling)
+    {
+        case GEOMETRY_HANDLING::RealGeometry:
+            {
+                routeParts = processRouteParts(routeNodeArcRep);
+                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer);
+            }
+            break;
+        default:
+            //GEOMETRY_HANDLING::NoGeometry:
+            //GEOMETRY_HANDLING::StraightLines:
+            {
+                saveResults(orig, dest, cost, capacity, flow, resultTableName, writer, qry);
+            }
+            break;
+    }
+}
+
+vector<Geometry*> Network::processRouteParts(vector<InternalArc>& routeNodeArcRep)
+{
     //order of start or end segments do not matter
-    vector<Geometry*> tmpRes;
+    vector<Geometry*> routeParts;
 
     if (addedStartPoints.size() > 0)
     {
@@ -709,8 +756,8 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                         //shared_ptr<Geometry> geo (clonedGeom);
                         /*auto it = tmpRes.begin();
                         tmpRes.insert(it, geo);*/
-                        tmpRes.push_back(clonedGeom.get());
-                        cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
+                        routeParts.push_back(clonedGeom.get());
+                        //cout << "found (dir): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                         else {
                             cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
@@ -731,8 +778,8 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                             segmentFound = true;
                             /*auto it = tmpRes.begin();
                             tmpRes.insert(it, geo);*/
-                            tmpRes.push_back(clonedGeom.get());
-                            cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
+                            routeParts.push_back(clonedGeom.get());
+                            //cout << "found (undir [normal]): " << key.fromNode << "->" << key.toNode << endl;
                         /*}
                          else {
                             cout << "Int extArcID: " << internalArcData.at(key).extArcID<< endl;
@@ -751,8 +798,8 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                                 //shared_ptr<Geometry> geo (clonedGeom);
                                 /*auto it = tmpRes.begin();
                                 tmpRes.insert(it, geo);*/
-                                tmpRes.push_back(clonedGeom.get());
-                                cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
+                                routeParts.push_back(clonedGeom.get());
+                                //cout << "found (undir [reverse]): " << key.toNode << "->" << key.fromNode << endl;
                             /*}
                             else {
                                 cout << "Int extArcID: " << internalArcData.at(InternalArc {key.toNode, key.fromNode}).extArcID<< endl;
@@ -786,7 +833,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                             //shared_ptr<Geometry> geo (clonedGeom);
                             /*auto it = tmpRes.begin();
                             tmpRes.insert(it+1, geo); //end segment -> it+1*/
-                            tmpRes.push_back(clonedGeom.get());
+                            routeParts.push_back(clonedGeom.get());
                         //}
                     }
                 }
@@ -804,7 +851,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                             segmentFound = true;
                             /*auto it = tmpRes.begin();
                             tmpRes.insert(it+1, geo); //end segment -> it+1*/
-                            tmpRes.push_back(clonedGeom.get());
+                            routeParts.push_back(clonedGeom.get());
                         //}
                     }
                     //Check also reverse if not found previously
@@ -820,7 +867,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
                                 //shared_ptr<Geometry> geo (clonedGeom);
                                 /*auto it = tmpRes.begin();
                                 tmpRes.insert(it+1, geo); //end segment -> it+1*/
-                                tmpRes.push_back(clonedGeom.get());
+                                routeParts.push_back(clonedGeom.get());
                             //}
                         }
                     }
@@ -828,8 +875,7 @@ void Network::BuildTotalRouteGeometry(string orig, string dest, double cost, dou
             }
         }
     }
-
-    buildTotalRouteGeometry(orig, dest, cost, capacity, flow, arcIDs, tmpRes, resultTableName, writer);
+    return routeParts;
 }
 
 void Network::ConvertInputNetwork(bool autoClean)
@@ -991,7 +1037,7 @@ string Network::GetOriginalStartOrEndNodeID(unsigned int internalNodeID)
     }
     return externalNode.extNodeID;
 }
-void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internalNodeID)
+Coordinate Network::GetStartOrEndNodeGeometry(unsigned int internalNodeID)
 {
     AddedPoint externalNode;
     try
@@ -1006,8 +1052,45 @@ void Network::GetStartOrEndNodeGeometry(Coordinate& coord, unsigned int internal
         LOGGER::LogError("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
         throw ex;
     }
-    coord = externalNode.coord;
+    return externalNode.coord;
 }
+Coordinate Network::GetStartOrEndNodeGeometry(std::string externalNodeID)
+{
+    AddedPoint externalNode;
+    bool nodeFound = false;
+    try
+    {
+        //search in values not in keys
+        for (auto& kv : addedStartPoints)
+        {
+            if (kv.second.extNodeID == externalNodeID)
+            {
+                externalNode = kv.second;
+                nodeFound = true;
+                break;
+            }
+        }
+        if (!nodeFound) //search in endPoints
+        {
+            for (auto& kv : addedEndPoints)
+            {
+                if (kv.second.extNodeID == externalNodeID)
+                {
+                    externalNode = kv.second;
+                    nodeFound = true;
+                    break;
+                }
+            }
+        }
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Original start/end node ID " +externalNodeID +" could not be looked up!");
+        throw ex;
+    }
+    return externalNode.coord;
+}
+
 
 SplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold)
 {
@@ -1312,8 +1395,10 @@ NewArcs& Network::GetNewArcs()
     return newArcs;
 }
 
-//Unbroken Network e.g. MST
-void Network::buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
+/**
+* For results of original arcs only
+*/
+void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, const string& resultTableName)
 {
     switch (NETXPERT_CNFG.ResultDBType)
@@ -1323,7 +1408,7 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
                 SpatiaLiteWriter sldb (NETXPERT_CNFG);
                 sldb.OpenNewTransaction();
                 sldb.CreateSolverResultTable(resultTableName, true);
-                sldb.CreateRouteGeometries(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
+                sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
                     NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.ArcsTableName,
                     arcIDs, resultTableName);
                 sldb.CommitCurrentTransaction();
@@ -1348,7 +1433,7 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
                                                                     NETXPERT_CNFG.ArcIDColumnName,
                                                                     NETXPERT_CNFG.ArcsGeomColumnName,
                                                                 ArcIDColumnDataType::Number, s);
-                        fgdb.SaveSolveQueryToDB(orig, dest, cost, capacity, flow, *arc, resultTableName,
+                        fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName,
                                                 truncateBeforeInsert);
                     }
                 }
@@ -1358,8 +1443,75 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
             break;
     }
 }
-void Network::buildTotalRouteGeometry(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& arcIDs, vector<Geometry*> tmpRes,
+
+/**
+* For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
+*/
+void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& resultTableName, DBWriter& writer)
+{
+    //create empty MultiLineString that is filled or not
+    unique_ptr<MultiLineString> mline (DBHELPER::GEO_FACTORY->createMultiLineString());
+
+    switch (NETXPERT_CNFG.GeometryHandling)
+    {
+        //TODO: Lookup for original geometries does not work with Transportation-Solver, because
+        // of the double encoding of the IDs (InputArcs -> ODMatrix-Network -> Transport-Network
+        case GEOMETRY_HANDLING::StraightLines:
+        {
+            //create straight line from orig to dest
+            //cout << "looking up "<<orig << endl;
+            Coordinate origGeom = GetStartOrEndNodeGeometry(orig);
+            //cout << "looking up "<<dest <<endl;
+            Coordinate destGeom = GetStartOrEndNodeGeometry(dest);
+
+            auto coordFactory = DBHELPER::GEO_FACTORY->getCoordinateSequenceFactory();
+            //cast to size_t with zero coordinates, otherwise there are 0.0 0.0 coords in sequence factory!
+            auto coordSeq = coordFactory->create(static_cast<size_t>(0), static_cast<size_t>(2)) ; //0 coordinates, 2 dimensions
+
+            coordSeq->add(origGeom);
+            coordSeq->add(destGeom);
+            unique_ptr<LineString> line ( DBHELPER::GEO_FACTORY->createLineString(coordSeq));
+            Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
+            mline = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+            //cout << mline->toString() << endl;
+        }
+        break;
+
+        default: //GEOMETRY_HANDLING::NoGeometry: do nothing regarding the geometry (take the empty geometry)
+            break;
+    }
+
+    switch (NETXPERT_CNFG.ResultDBType)
+    {
+        case RESULT_DB_TYPE::SpatiaLiteDB:
+        {
+            auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+            //save
+            bool truncateBeforeInsert = true;
+
+            auto qry = sldb.PrepareSaveResultArc(resultTableName);
+            //cout << mline->toString() << endl;
+            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, truncateBeforeInsert, *qry);
+
+        }
+        break;
+
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+        {
+            //FGDBWriter cannot truncate yet
+            const bool truncateBeforeInsert = false;
+
+            auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+            fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
+                                *mline, resultTableName, truncateBeforeInsert);
+        }
+        break;
+    }
+}
+
+void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& arcIDs, vector<Geometry*> routeParts,
                                         const string& resultTableName, DBWriter& writer)
 {
     switch (NETXPERT_CNFG.ResultDBType)
@@ -1367,13 +1519,13 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
         case RESULT_DB_TYPE::SpatiaLiteDB:
         {
             auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
-            //put all geometries in tmpRes into one (perhaps disconnected) Multilinestring
+            //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
             //MultilineString could also contain only one Linestring
-            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( tmpRes ));
+            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
 
             //cout << mLine->toString() << endl;
 
-            sldb.CreateRouteGeometries(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
+            sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
                 NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.ArcsTableName,
                 arcIDs, *mLine, resultTableName);
         }
@@ -1382,10 +1534,10 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
         {
             /*
                 Get all geometries from Spatialite DB (per arcIDs) of one route and merge them with
-                all the segments of tmpRes;
+                all the segments of routeParts;
                 Save the geometry with SaveSolveQueryToDB()
             */
-            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( tmpRes ));
+            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
 
             unique_ptr<MultiLineString> mLineDB;
             if (arcIDs.size() > 0)
@@ -1408,16 +1560,84 @@ void Network::buildTotalRouteGeometry(string orig, string dest, double cost, dou
 
             unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
 
-            //save
-            bool truncateBeforeInsert = true;
+            //FGDBWriter cannot truncate yet
+            const bool truncateBeforeInsert = false;
 
             auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
-            fgdb.SaveSolveQueryToDB(orig, dest, cost, capacity, flow,
+            fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
                                 *route, resultTableName, truncateBeforeInsert);
         }
         break;
     }
 }
+
+
+/**
+* For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry and once prepared statement
+*/
+void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
+                                        const string& resultTableName, DBWriter& writer, SQLite::Statement& qry)
+{
+    //create empty MultiLineString that is filled or not
+    unique_ptr<MultiLineString> mline (DBHELPER::GEO_FACTORY->createMultiLineString());
+
+    switch (NETXPERT_CNFG.GeometryHandling)
+    {
+        //TODO: Lookup for original geometries does not work with Transportation-Solver, because
+        // of the double encoding of the IDs (InputArcs -> ODMatrix-Network -> Transport-Network
+        case GEOMETRY_HANDLING::StraightLines:
+        {
+            //create straight line from orig to dest
+            //cout << "looking up "<<orig << endl;
+            Coordinate origGeom = GetStartOrEndNodeGeometry(orig);
+            //cout << "looking up "<<dest <<endl;
+            Coordinate destGeom = GetStartOrEndNodeGeometry(dest);
+
+            auto coordFactory = DBHELPER::GEO_FACTORY->getCoordinateSequenceFactory();
+            //cast to size_t with zero coordinates, otherwise there are 0.0 0.0 coords in sequence factory!
+            auto coordSeq = coordFactory->create(static_cast<size_t>(0), static_cast<size_t>(2)) ; //0 coordinates, 2 dimensions
+
+            coordSeq->add(origGeom);
+            coordSeq->add(destGeom);
+            unique_ptr<LineString> line ( DBHELPER::GEO_FACTORY->createLineString(coordSeq));
+            Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
+            mline = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+            //cout << mline->toString() << endl;
+        }
+        break;
+
+        default: //GEOMETRY_HANDLING::NoGeometry: do nothing regarding the geometry (take the empty geometry)
+            break;
+    }
+
+    switch (NETXPERT_CNFG.ResultDBType)
+    {
+        case RESULT_DB_TYPE::SpatiaLiteDB:
+        {
+            auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+            //save
+            bool truncateBeforeInsert = true;
+
+            //auto qry = sldb.PrepareSaveResultArc(resultTableName);
+            //cout << mline->toString() << endl;
+            sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mline, resultTableName, truncateBeforeInsert, qry);
+
+        }
+        break;
+
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+        {
+            //FGDBWriter cannot truncate yet
+            const bool truncateBeforeInsert = false;
+
+            auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+            fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
+                                *mline, resultTableName, truncateBeforeInsert);
+        }
+        break;
+    }
+}
+
 
 
 void Network::readNetworkFromTable(bool autoClean, bool oneWay)

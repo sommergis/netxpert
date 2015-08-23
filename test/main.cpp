@@ -123,16 +123,16 @@ int main(int argc, char** argv)
             break;
         }
 
-/*
-                //only test connection to sqlite
-                if (!DBHELPER::IsInitialized)
-                {
-                    DBHELPER::Initialize(cnfg);
-                }
-                DBHELPER::OpenNewTransaction();
-                DBHELPER::CommitCurrentTransaction();
-                DBHELPER::CloseConnection();
-*/
+        /*
+                        //only test connection to sqlite
+                        if (!DBHELPER::IsInitialized)
+                        {
+                            DBHELPER::Initialize(cnfg);
+                        }
+                        DBHELPER::OpenNewTransaction();
+                        DBHELPER::CommitCurrentTransaction();
+                        DBHELPER::CloseConnection();
+        */
 
     }
     catch (std::exception& ex)

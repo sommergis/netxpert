@@ -7,8 +7,8 @@
 #include "fgdbwriter.h"
 #include "slitewriter.h"
 #include <fstream>
-#include <geos/io/WKTReader.h>
-#include <geos/io/StringTokenizer.h>
+#include "geos/io/WKTReader.h"
+#include "geos/io/StringTokenizer.h"
 
 #include "data.h"
 #include "network.h"
