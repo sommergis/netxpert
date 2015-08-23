@@ -190,15 +190,6 @@ void Transportation::Solve()
             endNodeMap.insert(make_pair(key, net.GetOriginalNodeID(key)));
         }
     }
-    /*cout << "start node map" << endl;
-    for (auto& s : startNodeMap)
-        cout << s.first << " : " << s.second << endl;
-    cout << "end node map" << endl;
-    for (auto& e : endNodeMap)
-        cout << e.first << " : " << e.second << endl;*/
-    //result
-    unordered_map<ODPair, DistributionArc> result;
-
     //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
     // Min Cost Flow Solver result
     vector<FlowCost> flowCost = MinCostFlow::GetMinCostFlow();
@@ -298,7 +289,6 @@ void Transportation::Solve(Network& net)
         if (odKeys.count(key) > 0)
             nodes.push_back( InputNode {to_string(key), supply });
     }
-
     bool autoCleanNetwork = cnfg.CleanNetwork;
 
     //construct network from ODMatrix
@@ -347,8 +337,11 @@ void Transportation::Solve(Network& net)
         }
     }
 
-    //result
-    unordered_map<ODPair, DistributionArc> result;
+    //debug
+    /*for (auto& s : startNodeMap)
+        cout << s.first << "_>" << s.second << endl;
+    for (auto& e : endNodeMap)
+        cout << e.first << "_>" << e.second << endl;*/
 
     //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
     // Min Cost Flow Solver result
@@ -362,43 +355,41 @@ void Transportation::Solve(Network& net)
         string oldEndNodeStr;
         IntNodeID oldStartNode = 0;
         IntNodeID oldEndNode = 0;
+
+        //cout << newNet.GetOriginalNodeID(fc.intArc.fromNode) << "->" <<newNet.GetOriginalNodeID(fc.intArc.toNode) <<endl;
         //cout << fc.intArc.fromNode << "->" <<fc.intArc.toNode << " f: "<< fc.flow << " c: "<<fc.cost <<endl;
         try
         {
-            //If there are no values for the keys: dummys!
-            if (startNodeMap.count(fc.intArc.fromNode) > 0 &&
-                 endNodeMap.count(fc.intArc.toNode) > 0)
+            oldStartNodeStr = newNet.GetOriginalNodeID(fc.intArc.fromNode);
+            oldEndNodeStr = newNet.GetOriginalNodeID(fc.intArc.toNode);
+
+            if (oldStartNodeStr.size() > 0 && oldStartNodeStr != "dummy")
+                oldStartNode = static_cast<IntNodeID>(std::stoul(oldStartNodeStr, nullptr, 0));
+            if (oldEndNodeStr.size() > 0 && oldEndNodeStr != "dummy")
+                oldEndNode = static_cast<IntNodeID>(std::stoul(oldEndNodeStr, nullptr, 0));
+
+            if (oldStartNode > 0 && oldEndNode > 0)
             {
-                oldStartNodeStr = startNodeMap.at(fc.intArc.fromNode);
-                oldEndNodeStr = endNodeMap.at(fc.intArc.toNode);
-                //cout << oldEndNodeStr << endl;
-                if (oldStartNodeStr.size()>0)
-                    oldStartNode = static_cast<IntNodeID>(std::stoul(oldStartNodeStr, nullptr, 0));
-                if (oldEndNodeStr.size()>0)
-                    oldEndNode = static_cast<IntNodeID>(std::stoul(oldEndNodeStr, nullptr, 0));
+                //build key for result map
+                ODPair resultKey {oldStartNode, oldEndNode};
+                // flow and cost
+                // search for a match of startNode -> endNode in FlowCost,
+                // take the first occurence
+                // as flow and cost
+                auto data = getFlowCostData(flowCost, ODPair {fc.intArc.fromNode, fc.intArc.toNode});
+                //cout << "flow: " << data.first << " :" << data.second << endl;
+                auto path = shortestPaths.at( resultKey );
 
-                if (oldStartNode > 0 && oldEndNode > 0)
-                {
-                    //build key for result map
-                    ODPair resultKey {oldStartNode, oldEndNode};
-                    // flow and cost
-                    // search for a match of startNode -> endNode in FlowCost,
-                    // take the first occurence
-                    // as flow and cost
-                    auto data = getFlowCostData(flowCost, resultKey);
-                    auto path = shortestPaths.at( resultKey );
+                DistributionArc resultVal { path, data.first };
 
-                    DistributionArc resultVal { path, data.first };
-
-                    this->distribution.insert(make_pair(resultKey, resultVal));
-                }
-                else
-                {
-                    LOGGER::LogWarning("Should never reach here! FromTo "+
-                                        oldStartNodeStr + " - "+ oldEndNodeStr+
-                                        " could not be looked up!");
-                }
-            }// else: dummys
+                this->distribution.insert(make_pair(resultKey, resultVal));
+            }
+            /*else
+            {
+                LOGGER::LogWarning("Dummy: FromTo "+
+                                    oldStartNodeStr + " - "+ oldEndNodeStr+
+                                    " could not be looked up!");
+            }*/
         }
         catch (exception& ex)
         {

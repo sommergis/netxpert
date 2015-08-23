@@ -5,9 +5,9 @@
 #include "dbwriter.h"
 #include "logger.h"
 #include <fstream>
-#include <FileGDB_API/include/FileGDBAPI.h>
+#include "FileGDB_API/include/FileGDBAPI.h"
 #include "utils.h"
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
 
 using namespace std;
 using namespace geos;
@@ -27,7 +27,7 @@ namespace netxpert {
             virtual void CreateSolverResultTable(const string& _tableName);
             virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
-            void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
+            void SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
                                     const geos::geom::MultiLineString& route, string _tableName,
                                     bool truncateBeforeInsert);
             virtual void CloseConnection();

@@ -80,7 +80,7 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
 
         fgdb.CreateSolverResultTable(resultTblName, dropFirst);
         fgdb.OpenNewTransaction();
-        fgdb.SaveSolveQueryToDB(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, false);
+        fgdb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, false);
         fgdb.CommitCurrentTransaction();
         fgdb.CloseConnection();
 
@@ -111,9 +111,9 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         sldb.CreateNetXpertDB();
         sldb.OpenNewTransaction();
         sldb.CreateSolverResultTable(resultTblName, dropFirst);
-        auto queryPtr = sldb.PrepareSaveSolveQueryToDB(resultTblName);
+        auto queryPtr = sldb.PrepareSaveResultArc(resultTblName);
         //depointerization "on the fly"
-        sldb.SaveSolveQueryToDB(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, false, *queryPtr);
+        sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, false, *queryPtr);
         sldb.CommitCurrentTransaction();
         //delete queryPtr;
 
@@ -161,7 +161,7 @@ void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
         //segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));
         //cout << "insert done "<< endl;
 
-        sldb.CreateRouteGeometries("orig", "dest", 0.0, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
+        sldb.MergeAndSaveResultArcs("orig", "dest", 0.0, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
                                     cnfg.ArcsTableName, "1,2", *mPtr, resultTblName);
 
         sldb.CommitCurrentTransaction();
@@ -379,7 +379,7 @@ void netxpert::Test::TestMST(Config& cnfg)
         arcIDs.pop_back(); //trim last comma
 
         LOGGER::LogDebug("Writing Geometries..");
-        net.BuildTotalRouteGeometry("", "", -1, -1, -1, arcIDs, resultTableName);
+        net.ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
         LOGGER::LogDebug("Done!");
     }
     catch (exception& ex)
@@ -532,7 +532,7 @@ void netxpert::Test::TestSPT(Config& cnfg)
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.dest);
             }
-            net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
+            net.ProcessResultArcs(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
@@ -633,11 +633,17 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
 
         auto kvSPS = odm.GetShortestPaths();
         unique_ptr<DBWriter> writer;
+        unique_ptr<SQLite::Statement> qry;
         switch (cnfg.ResultDBType)
         {
             case RESULT_DB_TYPE::SpatiaLiteDB:
             {
                 writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+                 if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {
+                    auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                    qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                }
             }
                 break;
             case RESULT_DB_TYPE::ESRI_FileGDB:
@@ -688,7 +694,7 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.dest);
             }
-            net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
+            net.ProcessResultArcs(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
@@ -837,7 +843,7 @@ void netxpert::Test::TestMCF(Config& cnfg)
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.fromNode);
             }
-            net.BuildTotalRouteGeometry(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer);
+            net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
@@ -917,25 +923,41 @@ void netxpert::Test::TestTransportation(Config& cnfg)
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
-
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
         //Transportation Solver
         Transportation transp(cnfg);
+
+        vector<unsigned int> origs;
+        for (auto& p : startNodes)
+            origs.push_back(p.first);
+
+        vector<unsigned int> dests;
+        for (auto& p : endNodes)
+            dests.push_back(p.first);
+
+        transp.SetOrigins(origs);
+        transp.SetDestinations(dests);
+
         transp.Solve(net);
         LOGGER::LogInfo("Done!");
         LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );
-        LOGGER::LogInfo("Count of Distributions: " + to_string(transp.GetDistribution().size()) );
-
         unordered_map<ODPair, DistributionArc> result = transp.GetDistribution();
-/*
+        LOGGER::LogInfo("Count of Distributions: " + to_string(result.size()) );
+
         unique_ptr<DBWriter> writer;
+        unique_ptr<SQLite::Statement> qry;
         switch (cnfg.ResultDBType)
         {
             case RESULT_DB_TYPE::SpatiaLiteDB:
             {
                 writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+                if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {
+                    auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                    qry = sldbWriter.PrepareSaveResultArc(resultTableName);
+                }
             }
                 break;
             case RESULT_DB_TYPE::ESRI_FileGDB:
@@ -950,49 +972,55 @@ void netxpert::Test::TestTransportation(Config& cnfg)
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
         int counter = 0;
-        for (FlowCost& arcFlow : result)
+        for (auto& dist : result)
         {
             counter += 1;
             if (counter % 2500 == 0)
                 LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
+            ODPair key = dist.first;
+            DistributionArc val = dist.second;
+
             string arcIDs = "";
-            InternalArc key = arcFlow.intArc;
-            double cost = arcFlow.cost;
-            double flow = arcFlow.flow;
+            CompressedPath path = val.path;
+            double cost = path.second;
+            double flow = val.flow;
             //TODO: get capacity per arc
             double cap = -1;
-            vector<InternalArc> arc { key };
 
-            vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
-            // is only one arc
-            if (arcData.size() > 0)
+            vector<InternalArc> arcs = transp.UncompressRoute(key.origin, path.first);
+            vector<ArcData> arcData = net.GetOriginalArcData(arcs, cnfg.IsDirected);
+
+            for (ArcData& arcD : arcData)
             {
-                ArcData arcD = *arcData.begin();
-                arcIDs = arcD.extArcID;
-                cap = arcD.capacity;
+                //cout << arcD.extArcID << endl;
+                arcIDs += arcD.extArcID += ",";
+                //TODO: get capacity per arc
+                //cap = arcD.capacity;
             }
+            if (arcIDs.size() > 0)
+                arcIDs.pop_back(); //trim last comma
 
             string orig;
             string dest;
             try{
-                orig = net.GetOriginalStartOrEndNodeID(key.fromNode);
+                orig = net.GetOriginalStartOrEndNodeID(key.origin);
             }
             catch (exception& ex) {
-                orig = net.GetOriginalNodeID(key.fromNode);
+                orig = net.GetOriginalNodeID(key.origin);
             }
             try{
-                dest = net.GetOriginalStartOrEndNodeID(key.toNode);
+                dest = net.GetOriginalStartOrEndNodeID(key.dest);
             }
             catch (exception& ex) {
-                dest = net.GetOriginalNodeID(key.fromNode);
+                dest = net.GetOriginalNodeID(key.dest);
             }
-            net.BuildTotalRouteGeometry(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer);
+            net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
         LOGGER::LogDebug("Done!");
-*/
+
     }
     catch (exception& ex)
     {

@@ -1,16 +1,19 @@
+// *** ADDED BY HEADER FIXUP ***
+#include <string>
+// *** END ***
 #ifndef SPT_LEM_H
 #define SPT_LEM_H
 
-#include <lemon/smart_graph.h>
-#include <lemon/dijkstra.h>
+#include "lemon/smart_graph.h"
+#include "lemon/dijkstra.h"
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
 
 //Heap
-#include <lemon/quad_heap.h>
-//#include <lemon/dheap.h>
-#include <lemon/fib_heap.h>
+#include "lemon/quad_heap.h"
+//#include "lemon/dheap.h"
+#include "lemon/fib_heap.h"
 #include "isptree.h"
 
 using namespace lemon;

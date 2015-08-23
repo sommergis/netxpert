@@ -5,13 +5,13 @@
 #include "utils.h"
 #include "data.h"
 #include "logger.h"
-#include <SQLiteCpp/Database.h>
-#include <SQLiteCpp/Transaction.h>
+#include "SQLiteCpp/Database.h"
+#include "SQLiteCpp/Transaction.h"
 //#include <boost/filesystem.hpp>
-#include <geos/io/WKBReader.h>
-#include <geos/io/WKBWriter.h>
-#include <geos/geom/Point.h>
-#include <geos/geom/PrecisionModel.h>
+#include "geos/io/WKBReader.h"
+#include "geos/io/WKBWriter.h"
+#include "geos/geom/Point.h"
+#include "geos/geom/PrecisionModel.h"
 
 using namespace std;
 using namespace geos::geom;

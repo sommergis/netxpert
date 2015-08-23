@@ -2,9 +2,9 @@
 #define DBWRITER_H
 
 #include <string>
-#include <geos/geom/MultiLineString.h>
-#include <geos/geom/Geometry.h>
-#include <geos/geom/CoordinateSequence.h>
+#include "geos/geom/MultiLineString.h"
+#include "geos/geom/Geometry.h"
+#include "geos/geom/CoordinateSequence.h"
 
 using namespace std;
 
