@@ -1015,11 +1015,7 @@ void netxpert::Test::TestTransportation(Config& cnfg)
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.dest);
             }
-<<<<<<< local
-            net.BuildTotalRouteGeometry(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer);
-=======
             net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
->>>>>>> other
         }
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
