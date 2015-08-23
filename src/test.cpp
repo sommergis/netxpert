@@ -80,7 +80,7 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
 
         fgdb.CreateSolverResultTable(resultTblName, dropFirst);
         fgdb.OpenNewTransaction();
-        fgdb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, false);
+        fgdb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName);
         fgdb.CommitCurrentTransaction();
         fgdb.CloseConnection();
 
@@ -113,7 +113,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         sldb.CreateSolverResultTable(resultTblName, dropFirst);
         auto queryPtr = sldb.PrepareSaveResultArc(resultTblName);
         //depointerization "on the fly"
-        sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, false, *queryPtr);
+        sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, *queryPtr);
         sldb.CommitCurrentTransaction();
         //delete queryPtr;
 

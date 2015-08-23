@@ -313,8 +313,7 @@ unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(string _tab
 }
 
 void SpatiaLiteWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const Geometry& route, string _tableName,
-                                    bool truncateBeforeInsert, SQLite::Statement& query)
+                                    const Geometry& route, string _tableName, SQLite::Statement& query)
 {
     try
     {
