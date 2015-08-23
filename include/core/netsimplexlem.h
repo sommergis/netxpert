@@ -1,9 +1,12 @@
+// *** ADDED BY HEADER FIXUP ***
+#include <string>
+// *** END ***
 #ifndef NETSIMPLEXLEM_H
 #define NETSIMPLEXLEM_H
 
 #include "imcflow.h"
-#include <lemon/smart_graph.h>
-#include <lemon/network_simplex.h>
+#include "lemon/smart_graph.h"
+#include "lemon/network_simplex.h"
 #include <stdio.h>
 #include <limits.h>
 #include <string.h> //memcpy

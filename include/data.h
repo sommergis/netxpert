@@ -1,10 +1,10 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <geos/geom/Coordinate.h>
-#include <geos/geom/Geometry.h>
-#include <geos/geom/MultiLineString.h>
-#include <geos/geom/LineString.h>
+#include "geos/geom/Coordinate.h"
+#include "geos/geom/Geometry.h"
+#include "geos/geom/MultiLineString.h"
+#include "geos/geom/LineString.h"
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
@@ -396,6 +396,20 @@ namespace netxpert {
     //typedef map<string,string> ColumnMap;
     typedef vector<InputArc> InputArcs;
     typedef vector<InputNode> InputNodes;
+
+    struct NetworkBuilderArc
+    {
+        ExtArcID extArcID;
+        IntNodeID fromNode;
+        IntNodeID toNode;
+        double cost;
+        double capacity;
+        std::string oneway;
+        shared_ptr<geos::geom::LineString> geom;
+    };
+    typedef vector<NetworkBuilderArc> NetworkBuilderArcs;
+
+    typedef unordered_map< shared_ptr<geos::geom::Point>, IntNodeID> NetworkBuilderNodes;
 }
 
 namespace std

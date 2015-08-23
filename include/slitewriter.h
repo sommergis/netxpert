@@ -5,9 +5,9 @@
 #include <string>
 #include "dbwriter.h"
 #include "logger.h"
-#include <SQLiteCpp/Database.h>
-#include <SQLiteCpp/Transaction.h>
-#include <geos/io/WKBWriter.h>
+#include "SQLiteCpp/Database.h"
+#include "SQLiteCpp/Transaction.h"
+#include "geos/io/WKBWriter.h"
 
 using namespace std;
 using namespace geos::geom;
@@ -28,16 +28,16 @@ namespace netxpert {
             virtual void CreateSolverResultTable(const string& _tableName);
             virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
             virtual void OpenNewTransaction();
-            unique_ptr<SQLite::Statement> PrepareSaveSolveQueryToDB(string _tableName);
-            void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
+            unique_ptr<SQLite::Statement> PrepareSaveResultArc(string _tableName);
+            void SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
                                     const Geometry& route, string _tableName,
                                     bool truncateBeforeInsert, SQLite::Statement& query);
-            //TODO: testme
-            unique_ptr<SQLite::Statement> PrepareCreateRouteGeometries(string arcTableName);
-            void CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+
+            unique_ptr<SQLite::Statement> PrepareMergeAndSaveResultArcs(string arcTableName);
+            void MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string geomColumnName, const string arcIDColumnName,
                                         const string arcTableName, const string& arcIDs, const string resultTableName);
-            void CreateRouteGeometries(string orig, string dest, double cost, double capacity, double flow,
+            void MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string geomColumnName, const string arcIDColumnName,
                                         const string arcTableName, const string& arcIDs, const MultiLineString& mLine,
                                         const string resultTableName);
@@ -55,10 +55,10 @@ namespace netxpert {
             void dropTable ( string _tableName);
             void recoverGeometryColumn (string _tableName, string _geomColName, string _geomType);
             Config NETXPERT_CNFG;
-            void createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+            void mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         string geomColumnName, string arcIDColumnName, string arcTableName,
                                         const string& arcIDs, const MultiLineString& mLine, string resultTableName);
-            void createRouteWithAllParts(string orig, string dest, double cost, double capacity, double flow,
+            void mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         string geomColumnName, string arcIDColumnName, string arcTableName,
                                      const string& arcIDs, string resultTableName);
     };

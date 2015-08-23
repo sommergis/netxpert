@@ -367,8 +367,6 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
 
-        //LOGGER::LogDebug(sqlStr);
-
         SQLite::Database& db = *connPtr;
         unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
         //std::shared_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
@@ -412,6 +410,13 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
+        string qryStr = qry.getQuery();
+        string s1 = UTILS::ReplaceAll(qryStr, "@XCoord", to_string(x));
+        s1 = UTILS::ReplaceAll(s1,"@YCoord", to_string(y));
+        s1 = UTILS::ReplaceAll(s1,"@Treshold", to_string(treshold));
+
+        //LOGGER::LogDebug(s1);
+
         while (qry.executeStep())
         {
             SQLite::Column arcIDcol = qry.getColumn(0);
@@ -435,8 +440,8 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
             if (!qry.getColumn(3).isNull())
                 cost = qry.getColumn(3).getDouble();
 
-            /*cout << fromNode << endl
-                 << toNode << endl
+            /*cout << closestArcID << endl << extFromNode << endl
+                 << extToNode << endl
                  << cost << endl;*/
 
             int indxCount = 4;
@@ -446,9 +451,10 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
                     capacity =  qry.getColumn(4).getDouble();
                 indxCount += 1; //+1 if capacitry for getColumn()
             }
+
             //Arc geom
             SQLite::Column aGeoCol = qry.getColumn(indxCount); //4 without cap, 5 with cap
-            if (!aGeoCol.isNull())
+            if (!aGeoCol.isNull()) //check for not null
             {
                 const void* pVoid = aGeoCol.getBlob();
                 const int sizeOfwkb = aGeoCol.getBytes();
@@ -460,7 +466,6 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
 
                  aGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
             }
-
             //Closest Point geom
             SQLite::Column pGeoCol = qry.getColumn(indxCount+1);//5 without cap, 6 with cap
             if (!pGeoCol.isNull())
@@ -475,6 +480,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
 
                 pGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
             }
+
         }
         if (aGeomPtr && pGeomPtr)
         {

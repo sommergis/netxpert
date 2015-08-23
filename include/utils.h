@@ -7,10 +7,10 @@
 #include <vector>
 #include <sstream>
 
-#include <cereal/cereal.hpp>
-#include <cereal/archives/json.hpp>
-#include <cereal/types/unordered_map.hpp>
-#include <cereal/types/vector.hpp>
+#include "cereal/cereal.hpp"
+#include "cereal/archives/json.hpp"
+#include "cereal/types/unordered_map.hpp"
+#include "cereal/types/vector.hpp"
 
 #ifdef WINDOWS
     #include <direct.h>
@@ -59,6 +59,8 @@ namespace netxpert {
                 std::string ret = ss.str();
                 return ret;
             }
+            static std::string Replace(std::string& str, const std::string& from, const std::string& to);
+            static std::string ReplaceAll(std::string& str, const std::string& from, const std::string& to);
     };
 }
 #endif // UTILS_H

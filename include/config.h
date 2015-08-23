@@ -1,3 +1,7 @@
+// *** ADDED BY HEADER FIXUP ***
+#include <map>
+#include <vector>
+// *** END ***
 #ifndef CONFIG_H
 #define CONFIG_H
 

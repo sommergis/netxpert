@@ -1,13 +1,16 @@
+// *** ADDED BY HEADER FIXUP ***
+#include <string>
+// *** END ***
 #ifndef CORE_MSTLEM_H
 #define CORE_MSTLEM_H
 
-#include <lemon/smart_graph.h>
-#include <lemon/kruskal.h>
-#include <lemon/maps.h>
+#include "lemon/smart_graph.h"
+#include "lemon/kruskal.h"
+#include "lemon/maps.h"
 #include <stdio.h>
 #include <limits.h> //UNIT_MAX
 #include <string.h> //memcpy
-//#include <lemon\min_cost_arborescence.h>
+//#include "lemon/min_cost_arborescence.h"
 #include "imstree.h"
 
 using namespace lemon;

@@ -211,7 +211,7 @@ void FGDBWriter::createTable (const string& _tableName )
     fgdbError hr;
     wstring errorText;
     //Replace Template name "netxpert_result" with real tablename
-    boost::replace_all(resultTblDefStr, "netxpert_result", _tableName);
+    resultTblDefStr = UTILS::ReplaceAll(resultTblDefStr, "netxpert_result", _tableName);
     if ((hr = geodatabasePtr->CreateTable(resultTblDefStr,L"", *currentTblPtr) ) == S_OK)
     {
         LOGGER::LogInfo("NetXpert Result Table "+ _tableName + " created.");
@@ -277,7 +277,7 @@ void FGDBWriter::dropTable (const string& _tableName)
     }
 }
 
-void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
+void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
                                     const geos::geom::MultiLineString& route, string _tableName,
                                     bool truncateBeforeInsert)
 {
@@ -290,7 +290,7 @@ void FGDBWriter::SaveSolveQueryToDB(string orig, string dest, double cost, doubl
         string resultTableName = _tableName;
 
         if (truncateBeforeInsert)
-            return; //TODO throw exception?
+            throw std::runtime_error("FGDBWriter: SaveResultArc() - truncateBeforeInsert not implemented yet!");
 
         if (!isConnected)
             connect( );
