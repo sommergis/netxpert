@@ -27,26 +27,46 @@ bool UTILS::SetCurrentDir(const std::string& path)
 
 bool UTILS::FileExists(const std::string& path)
 {
-    #ifdef WINDOWS
-    return PathFileExists(path.c_str());
-    #else
+    #ifdef _WIN32
+    std::wstring path2;
+    StringToWString(path2, path);
+    LPCWSTR path3 = path2.c_str();
+    return PathFileExists(path3);
+    #endif // _WIN32
+    #ifdef _WIN64
+    std::wstring path2;
+    StringToWString(path2, path);
+    LPCWSTR path3 = path2.c_str();
+    return PathFileExists(path3);
+    #endif // _WIN64
+    #ifdef __linux__
     struct stat buf;
     return (stat(path.c_str(), &buf) == 0);
-    #endif
+    #endif //__linux__
 }
 
 bool UTILS::PathExists(const std::string& path)
 {
-    #ifdef WINDOWS
-    return PathFileExists(path.c_str());
-    #else
+    #ifdef _WIN32
+    std::wstring path2;
+    StringToWString(path2, path);
+    LPCWSTR path3 = path2.c_str();
+    return PathFileExists(path3);
+    #endif // _WIN32
+    #ifdef _WIN64
+    std::wstring path2;
+    StringToWString(path2, path);
+    LPCWSTR path3 = path2.c_str();
+    return PathFileExists(path3);
+    #endif // _WIN64
+    #ifdef __linux__
     struct stat st;
     bool exists = false;
     if(stat(path.c_str(),&st) == 0)
         if(st.st_mode & S_IFDIR != 0)
             exists = true;
     return exists;
-    #endif
+    #endif //__linux__
 }
 
 std::string UTILS::GetDirectoryName(std::string& _filePath) {
@@ -69,6 +89,30 @@ std::vector<std::string>& UTILS::Split(const std::string &s, char delim, std::ve
         elems.push_back(item);
     }
     return elems;
+}
+
+
+/**
+ *  Converts string to wstring
+ */
+int UTILS::StringToWString(std::wstring &ws, const std::string &s)
+{
+    std::wstring wsTmp(s.begin(), s.end());
+
+    ws = wsTmp;
+
+    return 0;
+}
+/**
+ *  Converts wstring to string
+ */
+int UTILS::WStringToString (std::string &s, const std::wstring &ws)
+{
+    std::string sTmp(ws.begin(), ws.end());
+
+    s = sTmp;
+
+    return 0;
 }
 
 std::vector<std::string> UTILS::Split(const std::string &s, char delim) {

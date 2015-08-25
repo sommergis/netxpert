@@ -12,16 +12,29 @@
 #include "cereal/types/unordered_map.hpp"
 #include "cereal/types/vector.hpp"
 
-#ifdef WINDOWS
+#ifdef _WIN32
     #include <direct.h>
+    //Fix error with min/max on windows
+    #define NOMINMAX
     #include <windows.h>
+    #undef NOMINMAX
     #include "Shlwapi.h"
     #define getCurrentDir _getcwd
-#else
+#endif // _WIN32
+#ifdef _WIN64
+    #include <direct.h>
+    //Fix error with min/max on windows
+    #define NOMINMAX
+    #include <windows.h>
+    #undef NOMINMAX
+    #include "Shlwapi.h"
+    #define getCurrentDir _getcwd
+#endif // _WIN64
+#ifdef __linux__
     #include <unistd.h>
     #include <sys/stat.h>
     #define getCurrentDir getcwd
- #endif
+#endif
 
 namespace netxpert {
 
@@ -59,6 +72,8 @@ namespace netxpert {
                 std::string ret = ss.str();
                 return ret;
             }
+            static int StringToWString(std::wstring &ws, const std::string &s);
+            static int WStringToString (std::string &s, const std::wstring &ws);
             static std::string Replace(std::string& str, const std::string& from, const std::string& to);
             static std::string ReplaceAll(std::string& str, const std::string& from, const std::string& to);
     };

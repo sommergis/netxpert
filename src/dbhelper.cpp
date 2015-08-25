@@ -340,12 +340,15 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
 
         LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
 
+        // If Point lies exactly on the line a minimal shift of the coordinates is necessary
+        // to yield the nearest arc
+        // tolerance x,y: 0.000000001;
         if (withCapacity)
         {
             sqlStr = "SELECT "+ cmap.arcIDColName +", "+ cmap.fromColName+", "+ cmap.toColName+", "+cmap.costColName+
                     ", "+ cmap.capColName +", AsBinary(" + geomColName +
                     ") as a_geometry, AsBinary(ST_ClosestPoint("
-                    +geomColName+", MakePoint(@XCoord, @YCoord))) as p_geometry"+
+                    +geomColName+", ST_Translate(MakePoint(@XCoord, @YCoord),@Tolerance,@Tolerance,0))) as p_geometry"+
                     " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
                     " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
                     " AND ROWID IN"+
@@ -358,7 +361,7 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
             sqlStr = "SELECT "+ cmap.arcIDColName +", "+ cmap.fromColName+", "+ cmap.toColName+", "+cmap.costColName+
                     ", AsBinary(" + geomColName +
                     ") as a_geometry, AsBinary(ST_ClosestPoint("
-                    +geomColName+", MakePoint(@XCoord, @YCoord))) as p_geometry"+
+                    +geomColName+", ST_Translate(MakePoint(@XCoord, @YCoord),@Tolerance,@Tolerance,0))) as p_geometry"+
                     " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
                     " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
                     " AND ROWID IN"+
@@ -393,6 +396,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
     string extToNode;
     double cost = 0;
     double capacity = DOUBLE_INFINITY;
+    double tolerance = 0.000000001;
 
     try
     {
@@ -406,6 +410,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
         qry.bind("@XCoord", x);
         qry.bind("@YCoord", y);
         qry.bind("@Treshold", treshold);
+        qry.bind("@Tolerance", tolerance);
 
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
