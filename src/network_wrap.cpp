@@ -2963,35 +2963,39 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[23]
 #define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[24]
 #define SWIGTYPE_p_netxpert__Transportation swig_types[25]
-#define SWIGTYPE_p_p_PyObject swig_types[26]
-#define SWIGTYPE_p_size_type swig_types[27]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[28]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[29]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtODMatrixArc_t swig_types[30]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[31]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[32]
-#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[33]
-#define SWIGTYPE_p_std__invalid_argument swig_types[34]
-#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[35]
-#define SWIGTYPE_p_std__string swig_types[36]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[37]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[38]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[39]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[40]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[41]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtODMatrixArc_std__allocatorT_netxpert__ExtODMatrixArc_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[44]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[45]
-#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[46]
-#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[47]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[48]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[49]
-#define SWIGTYPE_p_string swig_types[50]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[51]
-#define SWIGTYPE_p_value_type swig_types[52]
-static swig_type_info *swig_types[54];
-static swig_module_info swig_module = {swig_types, 53, 0, 0, 0, 0};
+#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[26]
+#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[27]
+#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[28]
+#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[29]
+#define SWIGTYPE_p_p_PyObject swig_types[30]
+#define SWIGTYPE_p_size_type swig_types[31]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[32]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[33]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtODMatrixArc_t swig_types[34]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[35]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[37]
+#define SWIGTYPE_p_std__invalid_argument swig_types[38]
+#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[39]
+#define SWIGTYPE_p_std__string swig_types[40]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[41]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[42]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[43]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[44]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[45]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtODMatrixArc_std__allocatorT_netxpert__ExtODMatrixArc_t_t swig_types[46]
+#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[47]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[48]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[49]
+#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[50]
+#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[51]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[52]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[53]
+#define SWIGTYPE_p_string swig_types[54]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[55]
+#define SWIGTYPE_p_value_type swig_types[56]
+static swig_type_info *swig_types[58];
+static swig_module_info swig_module = {swig_types, 57, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3485,6 +3489,13 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+
+/* Simple Solver Interface */
+
+#include "sptree_simple.h"
+#include "odmatrix_simple.h"
+#include "mstree_simple.h"
+#include "transp_simple.h"
 
 
 namespace swig {  
@@ -25434,6 +25445,390 @@ SWIGINTERN PyObject *Transportation_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_ShortestPathTreeSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::ShortestPathTree *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_ShortestPathTreeSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_ShortestPathTreeSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (netxpert::simple::ShortestPathTree *)new netxpert::simple::ShortestPathTree(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__ShortestPathTree, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTreeSimple_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::ShortestPathTree *arg1 = (netxpert::simple::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTreeSimple_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTreeSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
+  result = (int)(arg1)->Solve();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ShortestPathTreeSimple_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::ShortestPathTree *arg1 = (netxpert::simple::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:ShortestPathTreeSimple_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__ShortestPathTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTreeSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_ShortestPathTreeSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::ShortestPathTree *arg1 = (netxpert::simple::ShortestPathTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_ShortestPathTreeSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__ShortestPathTree, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ShortestPathTreeSimple" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *ShortestPathTreeSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__ShortestPathTree, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_OriginDestinationMatrixSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::OriginDestinationMatrix *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_OriginDestinationMatrixSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_OriginDestinationMatrixSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (netxpert::simple::OriginDestinationMatrix *)new netxpert::simple::OriginDestinationMatrix(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrixSimple_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::OriginDestinationMatrix *arg1 = (netxpert::simple::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrixSimple_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrixSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
+  result = (int)(arg1)->Solve();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OriginDestinationMatrixSimple_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::OriginDestinationMatrix *arg1 = (netxpert::simple::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:OriginDestinationMatrixSimple_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrixSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_OriginDestinationMatrixSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::OriginDestinationMatrix *arg1 = (netxpert::simple::OriginDestinationMatrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_OriginDestinationMatrixSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OriginDestinationMatrixSimple" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OriginDestinationMatrixSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_MinimumSpanningTreeSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::MinimumSpanningTree *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MinimumSpanningTreeSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_MinimumSpanningTreeSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (netxpert::simple::MinimumSpanningTree *)new netxpert::simple::MinimumSpanningTree(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTreeSimple_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinimumSpanningTree *arg1 = (netxpert::simple::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumSpanningTreeSimple_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTreeSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
+  result = (int)(arg1)->Solve();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumSpanningTreeSimple_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinimumSpanningTree *arg1 = (netxpert::simple::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumSpanningTreeSimple_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTreeSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MinimumSpanningTreeSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinimumSpanningTree *arg1 = (netxpert::simple::MinimumSpanningTree *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MinimumSpanningTreeSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumSpanningTreeSimple" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MinimumSpanningTreeSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *_wrap_new_TransportationSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::Transportation *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_TransportationSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_TransportationSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (netxpert::simple::Transportation *)new netxpert::simple::Transportation(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__Transportation, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TransportationSimple_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TransportationSimple_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
+  result = (int)(arg1)->Solve();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TransportationSimple_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TransportationSimple_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_TransportationSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_TransportationSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TransportationSimple" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *TransportationSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__Transportation, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_VARARGS, NULL},
@@ -25949,15 +26344,32 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Transportation_UncompressRoute", _wrap_Transportation_UncompressRoute, METH_VARARGS, NULL},
 	 { (char *)"Transportation_Solve", _wrap_Transportation_Solve, METH_VARARGS, NULL},
 	 { (char *)"Transportation_swigregister", Transportation_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_ShortestPathTreeSimple", _wrap_new_ShortestPathTreeSimple, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTreeSimple_Solve", _wrap_ShortestPathTreeSimple_Solve, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTreeSimple_GetOptimum", _wrap_ShortestPathTreeSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"delete_ShortestPathTreeSimple", _wrap_delete_ShortestPathTreeSimple, METH_VARARGS, NULL},
+	 { (char *)"ShortestPathTreeSimple_swigregister", ShortestPathTreeSimple_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_OriginDestinationMatrixSimple", _wrap_new_OriginDestinationMatrixSimple, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrixSimple_Solve", _wrap_OriginDestinationMatrixSimple_Solve, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrixSimple_GetOptimum", _wrap_OriginDestinationMatrixSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"delete_OriginDestinationMatrixSimple", _wrap_delete_OriginDestinationMatrixSimple, METH_VARARGS, NULL},
+	 { (char *)"OriginDestinationMatrixSimple_swigregister", OriginDestinationMatrixSimple_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_MinimumSpanningTreeSimple", _wrap_new_MinimumSpanningTreeSimple, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTreeSimple_Solve", _wrap_MinimumSpanningTreeSimple_Solve, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTreeSimple_GetOptimum", _wrap_MinimumSpanningTreeSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"delete_MinimumSpanningTreeSimple", _wrap_delete_MinimumSpanningTreeSimple, METH_VARARGS, NULL},
+	 { (char *)"MinimumSpanningTreeSimple_swigregister", MinimumSpanningTreeSimple_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_TransportationSimple", _wrap_new_TransportationSimple, METH_VARARGS, NULL},
+	 { (char *)"TransportationSimple_Solve", _wrap_TransportationSimple_Solve, METH_VARARGS, NULL},
+	 { (char *)"TransportationSimple_GetOptimum", _wrap_TransportationSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"delete_TransportationSimple", _wrap_delete_TransportationSimple, METH_VARARGS, NULL},
+	 { (char *)"TransportationSimple_swigregister", TransportationSimple_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_netxpert__TransportationTo_p_netxpert__MinCostFlow(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((netxpert::MinCostFlow *)  ((netxpert::Transportation *) x));
-}
 static void *_p_netxpert__MinCostFlowTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((netxpert::ISolver *)  ((netxpert::MinCostFlow *) x));
 }
@@ -25972,6 +26384,9 @@ static void *_p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver(void *x, int
 }
 static void *_p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((netxpert::ISolver *)  ((netxpert::ShortestPathTree *) x));
+}
+static void *_p_netxpert__TransportationTo_p_netxpert__MinCostFlow(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((netxpert::MinCostFlow *)  ((netxpert::Transportation *) x));
 }
 static swig_type_info _swigt__p_Coordinate = {"_p_Coordinate", "Coordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
@@ -25999,6 +26414,10 @@ static swig_type_info _swigt__p_netxpert__ODPair = {"_p_netxpert__ODPair", "netx
 static swig_type_info _swigt__p_netxpert__OriginDestinationMatrix = {"_p_netxpert__OriginDestinationMatrix", "netxpert::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ShortestPathTree = {"_p_netxpert__ShortestPathTree", "netxpert::ShortestPathTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__Transportation = {"_p_netxpert__Transportation", "netxpert::Transportation *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__MinimumSpanningTree = {"_p_netxpert__simple__MinimumSpanningTree", "netxpert::simple::MinimumSpanningTree *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__OriginDestinationMatrix = {"_p_netxpert__simple__OriginDestinationMatrix", "netxpert::simple::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__ShortestPathTree = {"_p_netxpert__simple__ShortestPathTree", "netxpert::simple::ShortestPathTree *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__Transportation = {"_p_netxpert__simple__Transportation", "netxpert::simple::Transportation *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_p_PyObject = {"_p_p_PyObject", "PyObject **", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t = {"_p_std__allocatorT_netxpert__ExtDistributionArc_t", "std::allocator< netxpert::ExtDistributionArc > *|std::vector< netxpert::ExtDistributionArc >::allocator_type *", 0, 0, (void*)0, 0};
@@ -26054,6 +26473,10 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__OriginDestinationMatrix,
   &_swigt__p_netxpert__ShortestPathTree,
   &_swigt__p_netxpert__Transportation,
+  &_swigt__p_netxpert__simple__MinimumSpanningTree,
+  &_swigt__p_netxpert__simple__OriginDestinationMatrix,
+  &_swigt__p_netxpert__simple__ShortestPathTree,
+  &_swigt__p_netxpert__simple__Transportation,
   &_swigt__p_p_PyObject,
   &_swigt__p_size_type,
   &_swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t,
@@ -26109,6 +26532,10 @@ static swig_cast_info _swigc__p_netxpert__ODPair[] = {  {&_swigt__p_netxpert__OD
 static swig_cast_info _swigc__p_netxpert__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__ShortestPathTree[] = {  {&_swigt__p_netxpert__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Transportation[] = {  {&_swigt__p_netxpert__Transportation, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__simple__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__simple__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__ShortestPathTree[] = {  {&_swigt__p_netxpert__simple__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__Transportation[] = {  {&_swigt__p_netxpert__simple__Transportation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_p_PyObject[] = {  {&_swigt__p_p_PyObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__ExtDistributionArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -26164,6 +26591,10 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__OriginDestinationMatrix,
   _swigc__p_netxpert__ShortestPathTree,
   _swigc__p_netxpert__Transportation,
+  _swigc__p_netxpert__simple__MinimumSpanningTree,
+  _swigc__p_netxpert__simple__OriginDestinationMatrix,
+  _swigc__p_netxpert__simple__ShortestPathTree,
+  _swigc__p_netxpert__simple__Transportation,
   _swigc__p_p_PyObject,
   _swigc__p_size_type,
   _swigc__p_std__allocatorT_netxpert__ExtDistributionArc_t,

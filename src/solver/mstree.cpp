@@ -154,7 +154,7 @@ void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vecto
     // --> kein doppelter Input der Kanten notwendig
     sNds.resize(keys.size());
     eNds.resize(keys.size());
-    cout << "size of arcs: " << keys.size() << endl;
+    //cout << "size of arcs: " << keys.size() << endl;
     for (int i = 0; i < keys.size(); i++)
     {
         sNds[i] = keys[i].fromNode;

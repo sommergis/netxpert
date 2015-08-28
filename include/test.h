@@ -11,6 +11,7 @@
 #include "geos/io/StringTokenizer.h"
 
 #include "data.h"
+#include "utils.h"
 #include "network.h"
 #include "dbhelper.h"
 #include "mstree.h"

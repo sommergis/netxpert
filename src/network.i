@@ -15,6 +15,13 @@
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+
+/* Simple Solver Interface */
+
+#include "sptree_simple.h"
+#include "odmatrix_simple.h"
+#include "mstree_simple.h"
+#include "transp_simple.h"
 %}
 
 namespace std
@@ -434,6 +441,52 @@ namespace netxpert
             void Solve();
     };
 }
+
+%rename(ShortestPathTreeSimple) netxpert::simple::ShortestPathTree;
+namespace netxpert::simple {
+ class ShortestPathTree
+ {
+    public:
+        ShortestPathTree(std::string jsonCnfg);
+        int Solve();
+        double GetOptimum();
+ };
+}
+
+%rename(OriginDestinationMatrixSimple) netxpert::simple::OriginDestinationMatrix;
+namespace netxpert::simple {
+ class OriginDestinationMatrix
+ {
+    public:
+        OriginDestinationMatrix(std::string jsonCnfg);
+        int Solve();
+        double GetOptimum();
+ };
+}
+
+%rename(MinimumSpanningTreeSimple) netxpert::simple::MinimumSpanningTree;
+namespace netxpert::simple {
+ class MinimumSpanningTree
+ {
+    public:
+        MinimumSpanningTree(std::string jsonCnfg);
+        int Solve();
+        double GetOptimum();
+ };
+}
+
+%rename(TransportationSimple) netxpert::simple::Transportation;
+namespace netxpert::simple {
+ class Transportation
+ {
+    public:
+        Transportation(std::string jsonCnfg);
+        int Solve();
+        double GetOptimum();
+ };
+}
+
+
 
 /* Add nicer __str__() methods */
 %extend netxpert::InputNode {
