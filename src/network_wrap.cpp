@@ -24018,10 +24018,10 @@ fail:
 SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
-  SwigValueWrapper< std::vector< unsigned int,std::allocator< unsigned int > > > arg2 ;
+  std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 ;
+  void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
@@ -24032,20 +24032,15 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetOrigins(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  {
-    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t,  0  | 0);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > >""'"); 
-    }  
-    if (!argp2) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > >""'");
-    } else {
-      std::vector< unsigned int,std::allocator< unsigned int > > * temp = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp2);
-      arg2 = *temp;
-      if (SWIG_IsNewObj(res2)) delete temp;
-    }
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
   }
-  (arg1)->SetOrigins(arg2);
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > * >(argp2);
+  (arg1)->SetOrigins(*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24078,7 +24073,7 @@ fail:
 SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetDestinations(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::OriginDestinationMatrix *arg1 = (netxpert::OriginDestinationMatrix *) 0 ;
-  std::vector< unsigned int,std::allocator< unsigned int > > *arg2 = 0 ;
+  std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -24092,14 +24087,14 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetDestinations(PyObject *SWI
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t,  0 );
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t,  0 );
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
   }
-  arg2 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp2);
+  arg2 = reinterpret_cast< std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > * >(argp2);
   (arg1)->SetDestinations(*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;

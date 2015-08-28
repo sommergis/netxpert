@@ -39,10 +39,12 @@ namespace netxpert {
             void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
 
             vector<unsigned int> GetOrigins() const;
-            void SetOrigins(vector<unsigned int>  origs);
+            void SetOrigins(vector<unsigned int>& origs);
+            void SetOrigins(vector<pair<unsigned int, string>>& origs);
 
             vector<unsigned int> GetDestinations() const;
             void SetDestinations(vector<unsigned int>& dests);
+            void SetDestinations(vector<pair<unsigned int, string>>& dests);
 
             vector<unsigned int> GetReachedDests() const;
             unordered_map<ODPair, CompressedPath> GetShortestPaths() const;
