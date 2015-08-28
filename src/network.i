@@ -4,6 +4,7 @@
 %include "std_string.i"
 %include "std_map.i"
 %include "std_vector.i"
+%include "std_pair.i"
 
 %{
 #include "network.h"
@@ -24,6 +25,7 @@ namespace std
     %template(ExtODMatrix) std::vector<netxpert::ExtODMatrixArc>;
     %template(ExtNodeSupplies) std::vector<netxpert::ExtNodeSupply>;
     %template(ExtDistribution) std::vector<netxpert::ExtDistributionArc>;
+    /*%template(ODNodes) std::vector< std::pair<unsigned int,std::string> >;*/
 }
 
 namespace netxpert
@@ -91,6 +93,8 @@ namespace netxpert
     typedef std::vector<netxpert::ExtODMatrixArc> ExtODMatrix;
     typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
     typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
+
+    typedef std::vector< std::pair<unsigned int,std::string> >& ODNodes;
 
     struct ExtNodeSupply
     {
@@ -336,10 +340,12 @@ namespace netxpert
             void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
 
             std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(std::vector<unsigned int>  origs);
+			/*SWIG will leerzeichen bei manchen spitzen Klammern */
+            void SetOrigins(std::vector< std::pair<unsigned int,std::string> >& origs);
 
             std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int>& dests);
+			/*SWIG will leerzeichen bei manchen spitzen Klammern */
+            void SetDestinations(std::vector< std::pair<unsigned int,std::string> >& dests);
 
             std::vector<unsigned int> GetReachedDests() const;
             std::unordered_map<ODPair, CompressedPath> GetShortestPaths() const;
