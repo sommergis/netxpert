@@ -78,7 +78,7 @@
 #include <limits>
 //Johannes Sommer
 #include <iostream>
-#include <algorithm> //sonst gibts in windows fehler bei min
+#include <algorithm> //sonst gibts in windows fehler bei min/max
 
 using std::string;
 

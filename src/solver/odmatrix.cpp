@@ -287,9 +287,16 @@ vector<unsigned int> OriginDestinationMatrix::GetOrigins() const
 {
     return this->originNodes;
 }
-void OriginDestinationMatrix::SetOrigins(vector<unsigned int> origs)
+void OriginDestinationMatrix::SetOrigins(vector<unsigned int>& origs)
 {
     this->originNodes = origs;
+}
+void OriginDestinationMatrix::SetOrigins(vector<pair<unsigned int, string>>& origs)
+{
+    vector<unsigned int> newOrigs;
+    for (auto s : origs)
+        newOrigs.push_back(s.first);
+    this->originNodes = newOrigs;
 }
 
 vector<unsigned int> OriginDestinationMatrix::GetDestinations() const
@@ -299,6 +306,14 @@ vector<unsigned int> OriginDestinationMatrix::GetDestinations() const
 void OriginDestinationMatrix::SetDestinations(vector<unsigned int>& dests)
 {
     this->destinationNodes = dests;
+}
+
+void OriginDestinationMatrix::SetDestinations(vector<pair<unsigned int, string>>& dests)
+{
+    vector<unsigned int> newDests;
+    for (auto e : dests)
+        newDests.push_back(e.first);
+    this->destinationNodes = newDests;
 }
 vector<unsigned int> OriginDestinationMatrix::GetReachedDests() const
 {
