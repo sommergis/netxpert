@@ -120,9 +120,9 @@ namespace netxpert {
     };
 
     /**
-    * \Custom data type for storing external arc of ODMatrix <extFromNode,extToNode,cost>
+    * \Custom data type for storing external arc of SPTree/ODMatrix <extFromNode,extToNode,cost>
     **/
-    struct ExtODMatrixArc
+    struct ExtSPTreeArc
     {
         ExtArcID extArcID;
         ExternalArc extArc;
@@ -159,12 +159,12 @@ namespace netxpert {
         }
     };*/
 
-    typedef std::vector<netxpert::ExtODMatrixArc> ExtODMatrix;
+    typedef std::vector<netxpert::ExtSPTreeArc> ExtSPTArcs;
     typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
 
     struct ExtTransportationData
     {
-        ExtODMatrix odm;
+        ExtSPTArcs odm;
         ExtNodeSupplies supply;
 
         template<class Archive>
@@ -275,8 +275,12 @@ namespace netxpert {
                 cereal::make_nvp("flow",flow)   );
         }
     };
+
     typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
 
+    /**
+    * \Custom data type for storing the result of the Transpotation Solver in JSON-Format.
+    **/
     struct TransportationResult
     {
         double optimum;
@@ -287,6 +291,38 @@ namespace netxpert {
         {
             ar( cereal::make_nvp("optimum", optimum),
                 cereal::make_nvp("distribution", dist)   );
+        }
+    };
+
+    /**
+    * \Custom data type for storing the result of the MST Solver in JSON-Format.
+    **/
+    struct MSTResult
+    {
+        double optimum;
+        std::vector<netxpert::ExternalArc> mst;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("optimum", optimum),
+                cereal::make_nvp("mst", mst)   );
+        }
+    };
+
+    /**
+    * \Custom data type for storing the result of the SPT Solver in JSON-Format.
+    **/
+    struct SPTResult
+    {
+        double optimum;
+        std::vector<netxpert::ExtSPTreeArc> spt;
+
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("optimum", optimum),
+                cereal::make_nvp("spt", spt)   );
         }
     };
 

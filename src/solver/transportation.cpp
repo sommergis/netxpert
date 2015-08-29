@@ -36,7 +36,7 @@ void Transportation::SetDestinations(vector<unsigned int> dests)
 {
     this->destinationNodes = dests;
 }
-void Transportation::SetExtODMatrix(vector<ExtODMatrixArc> _extODMatrix)
+void Transportation::SetExtODMatrix(vector<ExtSPTreeArc> _extODMatrix)
 {
     extODMatrix = _extODMatrix;
 }
@@ -128,7 +128,7 @@ void Transportation::Solve()
 
     //arcData from ODMatrix
     InputArcs arcs;
-    for (ExtODMatrixArc& v : extODMatrix)
+    for (ExtSPTreeArc& v : extODMatrix)
     {
         ExtArcID key = v.extArcID;
         ExternalArc arc = v.extArc;

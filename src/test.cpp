@@ -1085,10 +1085,10 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
         DBHELPER::CloseConnection();
 
         //input arcs to extODMatrix
-        std::vector<ExtODMatrixArc> extODMatrix;
+        std::vector<ExtSPTreeArc> extODMatrix;
         for (InputArc& arc : arcsTable)
         {
-            extODMatrix.push_back( ExtODMatrixArc {arc.extArcID, arc.extFromNode, arc.extToNode, arc.cost}  );
+            extODMatrix.push_back( ExtSPTreeArc {arc.extArcID, arc.extFromNode, arc.extToNode, arc.cost}  );
         }
         //input nodes to extNodeSupply - no coords!
         vector<ExtNodeSupply> extNodeSupply;
