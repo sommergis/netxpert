@@ -3,7 +3,7 @@
 
 namespace netxpert {
     /**
-    * \Class Abstract Class (Interface) for all Minimum Cost Flow Problem Solvers
+    * \Class Abstract Class (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.
     */
     class IMinCostFlow
     {
