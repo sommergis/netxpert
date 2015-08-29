@@ -25,7 +25,7 @@ namespace netxpert {
             //std::unordered_map<ExtArcID, ExtODMatrixArc> GetExtODMatrix() const;
             //std::vector<ExtODMatrixArc> GetExtODMatrix() const;
             //void SetExtODMatrix(std::unordered_map<ExtArcID, ExtODMatrixArc> _extODMatrix);
-            void SetExtODMatrix(std::vector<ExtODMatrixArc> _extODMatrix);
+            void SetExtODMatrix(std::vector<ExtSPTreeArc> _extODMatrix);
             //void SetExtODMatrix(string _extODMatrixJSON);
 
             //std::vector<ExtNodeSupply> GetNodeSupply() const;
@@ -62,7 +62,7 @@ namespace netxpert {
 
             std::unordered_map<ODPair, double> odMatrix;
             //std::unordered_map<ExtArcID, ExtODMatrixArc> extODMatrix;
-            std::vector<ExtODMatrixArc> extODMatrix;
+            std::vector<ExtSPTreeArc> extODMatrix;
             std::unordered_map<ODPair, DistributionArc> distribution;
             std::unordered_map<ExtNodeID, double> nodeSupply;
             std::vector<ExtNodeSupply> extNodeSupply;
