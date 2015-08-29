@@ -3,7 +3,7 @@
 
 namespace netxpert {
     /**
-    * \Class Abstract Class (Interface) for all Shortest Path Tree Solvers
+    * \Class Abstract Class (Interface) for all Shortest Path Tree Solvers in netxpert core.
     */
     class ISPTree
     {

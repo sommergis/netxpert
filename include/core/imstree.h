@@ -3,7 +3,7 @@
 
 namespace netxpert {
     /**
-    * \Class Abstract Class (Interface) for all Minimum Spanning Tree Solvers
+    * \Class Abstract Class (Interface) for all Minimum Spanning Tree Solvers in netxpert core.
     */
     class IMinSpanTree
     {
