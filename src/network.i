@@ -29,7 +29,7 @@ namespace std
     %template(InputArcs) std::vector<netxpert::InputArc>;
     %template(InputNodes) std::vector<netxpert::InputNode>;
     %template(NewNodes) std::vector<netxpert::NewNode>;
-    %template(ExtODMatrix) std::vector<netxpert::ExtODMatrixArc>;
+    %template(ExtSPTArcs) std::vector<netxpert::ExtSPTreeArc>;
     %template(ExtNodeSupplies) std::vector<netxpert::ExtNodeSupply>;
     %template(ExtDistribution) std::vector<netxpert::ExtDistributionArc>;
     /*%template(ODNodes) std::vector< std::pair<unsigned int,std::string> >;*/
@@ -97,7 +97,7 @@ namespace netxpert
     typedef std::vector<netxpert::NewNode> NewNodes;
     typedef std::string ExtArcID;
     typedef std::string ExtNodeID;
-    typedef std::vector<netxpert::ExtODMatrixArc> ExtODMatrix;
+    typedef std::vector<netxpert::ExtSPTreeArc> ExtSPTArcs;
     typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
     typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
 
@@ -114,7 +114,7 @@ namespace netxpert
         std::string extFromNode;
         std::string extToNode;
     };
-    struct ExtODMatrixArc
+    struct ExtSPTreeArc
     {
         ExtArcID extArcID;
         ExternalArc extArc;
@@ -123,7 +123,7 @@ namespace netxpert
 
     struct ExtTransportationData
     {
-        ExtODMatrix odm;
+        ExtSPTArcs odm;
         ExtNodeSupplies supply;
     };
 
@@ -422,7 +422,7 @@ namespace netxpert
             std::vector<unsigned int> GetDestinations() const;
             void SetDestinations(std::vector<unsigned int>& dests);
 
-            void SetExtODMatrix(std::vector<ExtODMatrixArc> _extODMatrix);
+            void SetExtODMatrix(std::vector<ExtSPTreeArc> _extODMatrix);
             void SetExtNodeSupply(std::vector<ExtNodeSupply> _nodeSupply);
 
             /*std::unordered_map<ODPair, DistributionArc> GetDistribution() const;*/
