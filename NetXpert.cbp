@@ -73,6 +73,9 @@
 		<Unit filename="include/core/SPTree_Heap.h" />
 		<Unit filename="include/core/SPTree_LDeque.h" />
 		<Unit filename="include/core/SPTree_LQueue.h" />
+		<Unit filename="include/core/imcflow.h" />
+		<Unit filename="include/core/imstree.h" />
+		<Unit filename="include/core/isptree.h" />
 		<Unit filename="include/core/mstlem.h" />
 		<Unit filename="include/core/netsimplexlem.h" />
 		<Unit filename="include/core/sptlem.h" />
@@ -80,7 +83,6 @@
 		<Unit filename="include/dbhelper.h" />
 		<Unit filename="include/dbwriter.h" />
 		<Unit filename="include/fgdbwriter.h" />
-		<Unit filename="include/isolver.h" />
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
@@ -89,9 +91,7 @@
 		<Unit filename="include/simple/sptree_simple.h" />
 		<Unit filename="include/simple/transp_simple.h" />
 		<Unit filename="include/slitewriter.h" />
-		<Unit filename="include/solver/imcflow.h" />
-		<Unit filename="include/solver/imstree.h" />
-		<Unit filename="include/solver/isptree.h" />
+		<Unit filename="include/solver/isolver.h" />
 		<Unit filename="include/solver/mcflow.h" />
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />

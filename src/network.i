@@ -37,6 +37,10 @@ namespace std
 
 namespace netxpert
 {
+    static const std::string Version()
+    {
+        return "0.8.9";
+    };
 
     struct ColumnMap
     {
@@ -483,6 +487,8 @@ namespace netxpert::simple {
         Transportation(std::string jsonCnfg);
         int Solve();
         double GetOptimum();
+        std::string GetDistributionAsJSON();
+        std::vector<netxpert::ExtDistributionArc> GetDistribution();
  };
 }
 
