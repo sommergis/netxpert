@@ -8,15 +8,31 @@ using namespace std;
  Config ConfigReader::GetConfigFromJSON(string jsonString)
 {
     stringstream ss (jsonString);
-    JSONInputArchive archive ( ss );
-    Config outCnfg;
-    archive( outCnfg );
-    return outCnfg;
+    try
+    {
+        JSONInputArchive archive ( ss );
+        Config outCnfg;
+        archive( outCnfg );
+        return outCnfg;
+    }
+    catch (cereal::RapidJSONException& ex)
+    {
+        cout <<"Error in Config String!"<<endl;
+        throw ex;
+    }
 }
 
 void ConfigReader::GetConfigFromJSONFile(string fileName, Config& cnfg)
 {
     ifstream is(fileName);
-    JSONInputArchive archive( is );
-    archive( cnfg );
+    try
+    {
+        JSONInputArchive archive( is );
+        archive( cnfg );
+    }
+    catch (cereal::RapidJSONException& ex)
+    {
+        cout <<"Error in Config File: "<<fileName <<"!"<<endl;
+        throw ex;
+    }
 }
