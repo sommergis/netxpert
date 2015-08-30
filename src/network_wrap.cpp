@@ -5245,6 +5245,34 @@ SWIG_pchar_descriptor(void)
 }
 
 
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
 SWIGINTERN int
 SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
 {
@@ -5349,34 +5377,6 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
     }
   }
   return SWIG_ERROR;
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
-#else
-      return PyString_FromStringAndSize(carray, static_cast< int >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
 
@@ -17697,6 +17697,19 @@ SWIGINTERN PyObject *ExtDistribution_swigregister(PyObject *SWIGUNUSEDPARM(self)
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_Version(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)":Version")) SWIG_fail;
+  result = netxpert::Version();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::ColumnMap *arg1 = (netxpert::ColumnMap *) 0 ;
@@ -25801,6 +25814,50 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TransportationSimple_GetDistributionAsJSON(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TransportationSimple_GetDistributionAsJSON",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetDistributionAsJSON" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
+  result = (arg1)->GetDistributionAsJSON();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_TransportationSimple_GetDistribution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:TransportationSimple_GetDistribution",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetDistribution" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
+  result = (arg1)->GetDistribution();
+  resultobj = swig::from(static_cast< std::vector<netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_TransportationSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
@@ -26053,6 +26110,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExtDistribution_capacity", _wrap_ExtDistribution_capacity, METH_VARARGS, NULL},
 	 { (char *)"delete_ExtDistribution", _wrap_delete_ExtDistribution, METH_VARARGS, NULL},
 	 { (char *)"ExtDistribution_swigregister", ExtDistribution_swigregister, METH_VARARGS, NULL},
+	 { (char *)"Version", _wrap_Version, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_set", _wrap_ColumnMap_arcIDColName_set, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_get", _wrap_ColumnMap_arcIDColName_get, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_fromColName_set", _wrap_ColumnMap_fromColName_set, METH_VARARGS, NULL},
@@ -26362,6 +26420,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_TransportationSimple", _wrap_new_TransportationSimple, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_Solve", _wrap_TransportationSimple_Solve, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_GetOptimum", _wrap_TransportationSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"TransportationSimple_GetDistributionAsJSON", _wrap_TransportationSimple_GetDistributionAsJSON, METH_VARARGS, NULL},
+	 { (char *)"TransportationSimple_GetDistribution", _wrap_TransportationSimple_GetDistribution, METH_VARARGS, NULL},
 	 { (char *)"delete_TransportationSimple", _wrap_delete_TransportationSimple, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_swigregister", TransportationSimple_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

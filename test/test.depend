@@ -238,7 +238,7 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1440339922 /home/hahne/dev/netxpert/include/data.h
+1440880464 /home/hahne/dev/netxpert/include/data.h
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
 	"geos/geom/MultiLineString.h"
@@ -335,7 +335,7 @@
 	"geos/geom/Point.h"
 	"geos/geom/PrecisionModel.h"
 
-1440339921 /home/hahne/dev/netxpert/include/test.h
+1440790862 /home/hahne/dev/netxpert/include/test.h
 	<omp.h>
 	<iostream>
 	"logger.h"
@@ -345,6 +345,7 @@
 	"geos/io/WKTReader.h"
 	"geos/io/StringTokenizer.h"
 	"data.h"
+	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"mstree.h"
@@ -496,7 +497,7 @@
 	<limits.h>
 	<string.h>
 
-1440339921 /home/hahne/dev/netxpert/include/solver/transportation.h
+1440847339 /home/hahne/dev/netxpert/include/solver/transportation.h
 	"mcflow.h"
 	"odmatrix.h"
 
@@ -2007,4 +2008,14 @@
 	<algorithm>
 	<lemon/core.h>
 	<lemon/math.h>
+
+1440845253 /home/hahne/dev/netxpert/include/solver/isolver.h
+	<string>
+	"network.h"
+
+1440845405 /home/hahne/dev/netxpert/include/core/imstree.h
+
+1440845408 /home/hahne/dev/netxpert/include/core/isptree.h
+
+1440845401 /home/hahne/dev/netxpert/include/core/imcflow.h
 
