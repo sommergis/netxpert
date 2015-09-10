@@ -25,8 +25,8 @@ int main(int argc, char** argv)
         //inFile = "./ODMatrixCnfg.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestCreateGeom.json";
-        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
