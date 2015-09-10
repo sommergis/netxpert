@@ -19,6 +19,7 @@
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+#include "odmatrix_simple.h"
 
 namespace netxpert
 {
