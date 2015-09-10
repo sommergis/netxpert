@@ -19,7 +19,12 @@ std::string UTILS::GetCurrentDir()
 bool UTILS::SetCurrentDir(const std::string& path)
 {
     const char* newPath = path.c_str();
+    #ifdef _WIN32, _WIN64
+    if (_chdir(newPath) == 0)
+    #endif // _WIN
+    #ifdef __linux__
     if (chdir(newPath) == 0)
+    #endif // __linux__
         return true;
     else
         return false;
@@ -27,18 +32,19 @@ bool UTILS::SetCurrentDir(const std::string& path)
 
 bool UTILS::FileExists(const std::string& path)
 {
-    #ifdef _WIN32
-    std::wstring path2;
-    StringToWString(path2, path);
-    LPCWSTR path3 = path2.c_str();
-    return PathFileExists(path3);
-    #endif // _WIN32
-    #ifdef _WIN64
-    std::wstring path2;
-    StringToWString(path2, path);
-    LPCWSTR path3 = path2.c_str();
-    return PathFileExists(path3);
-    #endif // _WIN64
+	#ifdef _WIN32, _WIN64
+		#ifndef _UNICODE
+			LPCSTR path3 = path.c_str();
+			return PathFileExists(path3);
+		#endif
+		#ifdef _UNICODE
+			std::wstring path2 = convertStringToWString(path);
+			//Funktioniert nur mit UNICODE direktive
+			LPCWSTR path3 = path2.c_str();
+			return PathFileExists(path3);
+		#endif
+	#endif
+
     #ifdef __linux__
     struct stat buf;
     return (stat(path.c_str(), &buf) == 0);
@@ -47,18 +53,9 @@ bool UTILS::FileExists(const std::string& path)
 
 bool UTILS::PathExists(const std::string& path)
 {
-    #ifdef _WIN32
-    std::wstring path2;
-    StringToWString(path2, path);
-    LPCWSTR path3 = path2.c_str();
-    return PathFileExists(path3);
-    #endif // _WIN32
-    #ifdef _WIN64
-    std::wstring path2;
-    StringToWString(path2, path);
-    LPCWSTR path3 = path2.c_str();
-    return PathFileExists(path3);
-    #endif // _WIN64
+	#ifdef _WIN32, _WIN64
+	return FileExists(path);
+	#endif
     #ifdef __linux__
     struct stat st;
     bool exists = false;
@@ -95,25 +92,73 @@ std::vector<std::string>& UTILS::Split(const std::string &s, char delim, std::ve
 /**
  *  Converts string to wstring
  */
-int UTILS::StringToWString(std::wstring &ws, const std::string &s)
+std::wstring UTILS::convertStringToWString(const std::string& str)
 {
+	const std::ctype<wchar_t>& CType = std::use_facet<std::ctype<wchar_t> >(std::locale());
+	std::vector<wchar_t> wideStringBuffer(str.length());
+	CType.widen(str.data(), str.data() + str.length(), &wideStringBuffer[0]);
+
+	return std::wstring(&wideStringBuffer[0], wideStringBuffer.size());
+}
+
+std::string UTILS::convertWStringToString(const std::wstring& str)
+{
+	const std::ctype<wchar_t>& CType = std::use_facet<std::ctype<wchar_t> >(std::locale());
+	std::vector<char> stringBuffer(str.length());
+	char * pc = new char[str.length() + 1];
+	//CType.narrow(str.begin(), str.end(),"?", pc);
+	CType.narrow(str.c_str(), str.c_str() + str.length() + 1, '?', pc);
+
+	//return std::string(&stringBuffer[0], stringBuffer.size());
+	return std::string(pc, str.length() + 1);
+}
+/*
+std::wstring UTILS::convertStringToWString(const std::string &s)
+{
+#ifdef _WIN32, _WIN64
+	#ifdef _UNICODE
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.from_bytes(s);
+	#else
+		std::wstring wsTmp(s.begin(), s.end());
+		return wsTmp;
+	#endif
+#else
     std::wstring wsTmp(s.begin(), s.end());
-
-    ws = wsTmp;
-
-    return 0;
+	return wsTmp;
+#endif
 }
-/**
- *  Converts wstring to string
- */
-int UTILS::WStringToString (std::string &s, const std::wstring &ws)
+
+std::string UTILS::convertWStringToString (const std::wstring &ws)
 {
-    std::string sTmp(ws.begin(), ws.end());
-
-    s = sTmp;
-
-    return 0;
+#ifdef _WIN32, _WIN64
+	#ifdef _UNICODE
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.to_bytes(ws);
+	#else
+		std::string sTmp(ws.begin(), ws.end());
+		return sTmp;
+	#endif
+#else
+	std::string sTmp(ws.begin(), ws.end());
+	return sTmp;
+#endif
 }
+
+std::wstring UTILS::convertStringToWString(const std::string& str)
+{
+    typedef std::codecvt_utf8_utf16<wchar_t> convert_typeX;
+    std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+    return converterX.from_bytes(str);
+}
+std::string UTILS::convertWStringToString(const std::wstring& wstr)
+{
+	typedef std::codecvt_utf16<wchar_t> convert_typeX;
+    std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+    return converterX.to_bytes(wstr);
+}*/
 
 std::vector<std::string> UTILS::Split(const std::string &s, char delim) {
     std::vector<std::string> elems;

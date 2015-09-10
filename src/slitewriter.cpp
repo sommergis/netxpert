@@ -212,6 +212,9 @@ bool SpatiaLiteWriter::performInitialCommand()
 }
 void SpatiaLiteWriter::initSpatialMetaData()
 {
+	if (!isConnected)
+		connect();
+
     if ( performInitialCommand() )
     {
         LOGGER::LogDebug("Successfully performed initial spatialite command.");

@@ -814,11 +814,18 @@ inline void SPTree_Heap::SetOrigin( cIndex NewOrg )
 inline void SPTree_Heap::SetDest( cIndex NewDst )
 {
   //Johannes Sommer
+  //UINT_MAX fails on linux - windows seems ok
+  //--> UINT_MAX + 1 is ok
+ Index localNewDst = NewDst;
  if (NewDst == Inf<unsigned int>())
-    return;
- if( Dest != NewDst + USENAME0 ) {
+ #ifdef __linux__
+    localNewDst = NewDst + 1;
+ #else
+    localNewDst = NewDst;
+ #endif // __linux__
+ if( Dest != localNewDst + USENAME0 ) {
   //#if( LABEL_SETTING )
-   Dest = NewDst + USENAME0;
+   Dest = localNewDst + USENAME0;
   //#endif
   status = MCFClass::kUnSolved;
   }

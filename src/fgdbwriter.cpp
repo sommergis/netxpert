@@ -19,50 +19,7 @@ FGDBWriter::FGDBWriter(Config& netxpertConfig)
 
 FGDBWriter::~FGDBWriter()
 {
-    //dtor
-    /*if (currentTblPtr)
-        delete currentTblPtr;
-    if (geodatabasePtr)
-        delete geodatabasePtr;*/
-    //CloseConnection();
-}
 
-/*// convert UTF-8 string to wstring
-std::wstring utf8_to_wstring (const std::string& str)
-{
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
-    return myconv.from_bytes(str);
-}
-
-// convert wstring to UTF-8 string
-std::string wstring_to_utf8 (const std::wstring& str)
-{
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
-    return myconv.to_bytes(str);
-}*/
-
-
-/**
- *  Converts string to wstring
- */
-int StringToWString(std::wstring &ws, const std::string &s)
-{
-    std::wstring wsTmp(s.begin(), s.end());
-
-    ws = wsTmp;
-
-    return 0;
-}
-/**
- *  Converts wstring to string
- */
-int WStringToString (std::string &s, const std::wstring &ws)
-{
-    string sTmp(ws.begin(), ws.end());
-
-    s = sTmp;
-
-    return 0;
 }
 
 void FGDBWriter::connect()
@@ -71,8 +28,7 @@ void FGDBWriter::connect()
     {
         geodatabasePtr = unique_ptr<Geodatabase>(new Geodatabase());
 
-        wstring newPath;
-        StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
+		wstring newPath = UTILS::convertStringToWString(NETXPERT_CNFG.ResultDBPath);
 
         //cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
 
@@ -86,8 +42,7 @@ void FGDBWriter::connect()
         }
         else {
             ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
+            string newErrorText =  UTILS::convertWStringToString(errorText);
             LOGGER::LogError("Error connecting to FileGDB "+ NETXPERT_CNFG.ResultDBPath + "!");
             LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
         }
@@ -120,11 +75,9 @@ void FGDBWriter::CreateNetXpertDB()
 {
     try
     {
-        wstring newPath;
-        //cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
-        //ASCII string to UTF16 String
-        StringToWString(newPath, NETXPERT_CNFG.ResultDBPath);
-        //cout << "FGDB Path: "<< newPath << endl;
+		//NETXPERT_CNFG.ResultDBPath = "test.gdb";
+		wstring newPath = UTILS::convertStringToWString(NETXPERT_CNFG.ResultDBPath);
+        //cout << "FGDB Path: "<< newPath.c_str() << endl;
         // TODO: muss nicht ueberschrieben werden, wenns existiert
         if ( UTILS::PathExists(NETXPERT_CNFG.ResultDBPath) )
         {
@@ -146,8 +99,7 @@ void FGDBWriter::CreateNetXpertDB()
         else {
 
             ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
+            string newErrorText = UTILS::convertWStringToString(errorText);
             LOGGER::LogError("Error creating FileGDB "+ NETXPERT_CNFG.ResultDBPath + "!");
             LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
         }
@@ -182,13 +134,17 @@ void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirs
 
         if (dropFirst)
         {
+            //cout << "Dropping table.."<<endl;
             dropTable( _tableName);
+            //cout << "Dropping table succeeded."<<endl;
         }
+        //cout << "Creating table.."<<endl;
         createTable( _tableName);
+        //cout << "Creating table succeeded."<<endl;
     }
     catch (std::exception& ex)
     {
-        LOGGER::LogError( "Error deleting NetXpert result table first!" );
+        LOGGER::LogError( "Error creating NetXpert Result Table"+ _tableName + "!" );
         LOGGER::LogError( ex.what() );
     }
 }
@@ -218,8 +174,7 @@ void FGDBWriter::createTable (const string& _tableName )
     }
     else {
         ErrorInfo::GetErrorDescription(hr, errorText);
-        string newErrorText;
-        WStringToString(newErrorText, errorText);
+        string newErrorText = UTILS::convertWStringToString(errorText);
         LOGGER::LogError("Error creating Result Table "+ _tableName + "!");
         LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
         throw std::runtime_error("Runtime error!");
@@ -232,8 +187,7 @@ void FGDBWriter::openTable ( const string& _tableName)
     fgdbError hr;
     wstring errorText;
 
-    wstring newStr;
-    StringToWString(newStr, _tableName);
+    wstring newStr = UTILS::convertStringToWString(_tableName);
 
     if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
     {
@@ -241,8 +195,7 @@ void FGDBWriter::openTable ( const string& _tableName)
     }
     else {
         ErrorInfo::GetErrorDescription(hr, errorText);
-        string newErrorText;
-        WStringToString(newErrorText, errorText);
+        string newErrorText = UTILS::convertWStringToString(errorText);
         LOGGER::LogError("Error opening Result Table "+ _tableName + "!");
         LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
         throw std::runtime_error("Runtime error!");
@@ -255,8 +208,7 @@ void FGDBWriter::dropTable (const string& _tableName)
     {
         fgdbError hr;
         wstring errorText;
-        wstring newTableName;
-        StringToWString(newTableName, _tableName);
+        wstring newTableName = UTILS::convertStringToWString(_tableName);
 
         if ((hr = geodatabasePtr->Delete(L"\\" + newTableName, L"Feature Class" ) ) == S_OK)
         {
@@ -264,8 +216,7 @@ void FGDBWriter::dropTable (const string& _tableName)
         }
         else {
             ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
+            string newErrorText = UTILS::convertWStringToString(errorText);
             LOGGER::LogWarning("Failed to delete NetXpert result table first - maybe Feature Class does not exist!");
             LOGGER::LogWarning(newErrorText + " - Code: " +to_string(hr));
         }
@@ -296,10 +247,8 @@ void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double cap
         Row row;
         currentTblPtr->CreateRowObject(row);
 
-        wstring origNew;
-        wstring destNew;
-        StringToWString(origNew, orig);
-        StringToWString(destNew, dest);
+        wstring origNew = UTILS::convertStringToWString(orig);
+        wstring destNew = UTILS::convertStringToWString(dest);
 
         row.SetString(L"fromNode", origNew);
         row.SetString(L"toNode", destNew);
@@ -366,8 +315,7 @@ void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double cap
             }
             else {
                 ErrorInfo::GetErrorDescription(hr, errorText);
-                string newErrorText;
-                WStringToString(newErrorText, errorText);
+                string newErrorText = UTILS::convertWStringToString(errorText);
                 LOGGER::LogError("Error inserting row into Result Table "+ _tableName + "!");
                 LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
             }
@@ -395,8 +343,7 @@ void FGDBWriter::CloseConnection()
         }
         else {
             ErrorInfo::GetErrorDescription(hr, errorText);
-            string newErrorText;
-            WStringToString(newErrorText, errorText);
+            string newErrorText = UTILS::convertWStringToString(errorText);
             LOGGER::LogError("Error closing connection to NetXpert FileGDB!");
             LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
         }

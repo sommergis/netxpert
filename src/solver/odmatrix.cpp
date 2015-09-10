@@ -172,8 +172,8 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         {
             LOGGER::LogDebug("Calculating routes from " + net.GetOriginalStartOrEndNodeID(orig) + ", # "+
                                 to_string(origsSize - counter) +" left..");
-            // Set dests to UNIT_MAX --> no dest setting at all!
-            spt->SetDest( UINT_MAX );
+            // Set dests to UINT_MAX --> no dest setting at all!
+            spt->SetDest(UINT_MAX);
             //LOGGER::LogDebug("Starting to solve SPT..");
             spt->ShortestPathTree();
             //LOGGER::LogDebug("SPT solved!");
