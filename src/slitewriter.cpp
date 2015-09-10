@@ -44,7 +44,7 @@ void SpatiaLiteWriter::connect( )
     try
     {
         // Pointer verursacht possible mem leaks ~70,000 bytes
-        connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath,
+        connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (NETXPERT_CNFG.ResultDBPath,
                                                                         SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
@@ -130,6 +130,7 @@ void SpatiaLiteWriter::CreateNetXpertDB()
             return;
         }
         SQLite::Database db(NETXPERT_CNFG.ResultDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
+
         initSpatialMetaData();
         LOGGER::LogInfo("NetXpert SpatiaLite DB " + db.getFilename() +" created successfully.");
     }
@@ -212,17 +213,9 @@ bool SpatiaLiteWriter::performInitialCommand()
 }
 void SpatiaLiteWriter::initSpatialMetaData()
 {
-	if (!isConnected)
-		connect();
+    if (!isConnected)
+        connect();
 
-    if ( performInitialCommand() )
-    {
-        LOGGER::LogDebug("Successfully performed initial spatialite command.");
-    }
-    else
-    {
-        LOGGER::LogError("Error performing initial spatialite command!");
-    }
     SQLite::Database& db = *connPtr;
     SQLite::Statement query(db, "SELECT InitSpatialMetadata('1');");
 
