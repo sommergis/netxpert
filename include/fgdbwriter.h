@@ -7,6 +7,7 @@
 #include <fstream>
 #include "FileGDB_API/include/FileGDBAPI.h"
 #include "utils.h"
+#include <algorithm>
 //#include <boost/algorithm/string.hpp>
 
 using namespace std;

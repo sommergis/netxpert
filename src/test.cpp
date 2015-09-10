@@ -368,6 +368,22 @@ void netxpert::Test::TestMST(Config& cnfg)
         LOGGER::LogInfo("Optimum: " + to_string(mst.GetOptimum()) );
         LOGGER::LogInfo("Count of MST: " + to_string(mst.GetMinimumSpanningTree().size()) );
 
+        unique_ptr<DBWriter> writer;
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+            }
+                break;
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+            }
+                break;
+        }
+        writer->CreateNetXpertDB();
+
         string arcIDs;
         vector<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
         for (string& id : arcIDlist)
@@ -546,6 +562,14 @@ void netxpert::Test::TestSPT(Config& cnfg)
 }
 void netxpert::Test::TestODMatrix(Config& cnfg)
 {
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::OriginDestinationMatrix simpleSolver(s);
+	simpleSolver.Solve();
+}
+/*
+void netxpert::Test::TestODMatrix(Config& cnfg)
+{
     try
     {
         //1. Config
@@ -652,6 +676,7 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
             }
                 break;
         }
+        writer->CreateNetXpertDB();
         writer->OpenNewTransaction();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
@@ -705,7 +730,7 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
         LOGGER::LogError("TestODMatrix: Unexpected Error!");
         LOGGER::LogError(ex.what());
     }
-}
+}*/
 void netxpert::Test::TestMCF(Config& cnfg)
 {
     try
@@ -800,6 +825,7 @@ void netxpert::Test::TestMCF(Config& cnfg)
             }
                 break;
         }
+        writer->CreateNetXpertDB();
         writer->OpenNewTransaction();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
@@ -966,6 +992,7 @@ void netxpert::Test::TestTransportation(Config& cnfg)
             }
                 break;
         }
+        writer->CreateNetXpertDB();
         writer->OpenNewTransaction();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
@@ -1129,6 +1156,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
             }
                 break;
         }
+        writer->CreateNetXpertDB();
         writer->OpenNewTransaction();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
