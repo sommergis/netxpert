@@ -61,19 +61,24 @@ namespace netxpert
                                                             string arcsTableName, string geomColumnName,
                                                                 ColumnMap& cmap, bool withCapacity);
 
+            /** Method for processing and saving a subset of original arcs as results (e.g. MST) */
             void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                             const string& arcIDs,
                                             const string& resultTableName);
-
+            /** For Testing purposes only */
             void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                            const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                            const string& resultTableName,
-                                           DBWriter& writer);
+                                           DBWriter& writer
+                                        );
 
+            /** Main method for processing and saving result arcs */
             void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                            const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                            const string& resultTableName,
-                                           DBWriter& writer, SQLite::Statement& qry);
+                                           DBWriter& writer,
+                                           SQLite::Statement& qry //can be null in case of ESRI FileGDB
+                                           );
 
             void ConvertInputNetwork(bool autoClean);
 
@@ -146,7 +151,7 @@ namespace netxpert
             unsigned int getCurrentArcCount();
 
             /**
-            * For results of original arcs only
+            * For results of a subset of original arcs only (NETXPERT_CNFG.ResultDB == NETXPERT_CNFG.SQLiteDBPath)
             */
             void saveResults(string orig, string dest, double cost, double capacity, double flow,
                                             const string& arcIDs, const string& resultTableName);
@@ -166,8 +171,9 @@ namespace netxpert
             */
             void saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<Geometry*> routeParts,
-                                        const string& resultTableName, DBWriter& writer);
-
+                                        const string& resultTableName, DBWriter& writer,
+                                        SQLite::Statement& qry //only used when saved not to the netxpert db
+                                        );
 
             //MCF
             double calcTotalDemand ();

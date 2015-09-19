@@ -670,8 +670,8 @@ vector<InternalArc> Network::insertNewEndNode(bool isDirected, SplittedArc& spli
 
     return result;
 }
-// Only for unbroken, original network (e.g. MST)
-// NO Geometry Handling
+// Only for unbroken, original network (e.g. MST), if result DB is equal to netXpert DB
+// NO Geometry Handling --> creates always a subset of the original geometries
 void Network::ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs,
                                       const string& resultTableName)
@@ -691,7 +691,10 @@ void Network::ProcessResultArcs(string orig, string dest, double cost, double ca
         case GEOMETRY_HANDLING::RealGeometry:
             {
                 routeParts = processRouteParts(routeNodeArcRep);
-                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer);
+                //nullptr for query
+                LOGGER::LogWarning("Depointerization of a nullptr..: std::unique_ptr<SQLite::Statement> qry");
+                std::unique_ptr<SQLite::Statement> qry;
+                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer, *qry);
             }
             break;
         default:
@@ -703,6 +706,7 @@ void Network::ProcessResultArcs(string orig, string dest, double cost, double ca
             break;
     }
 }
+//With Geometry Handling and prepared insert query
 void Network::ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
                                         const string& resultTableName, DBWriter& writer, SQLite::Statement& qry)
@@ -714,7 +718,7 @@ void Network::ProcessResultArcs(string orig, string dest, double cost, double ca
         case GEOMETRY_HANDLING::RealGeometry:
             {
                 routeParts = processRouteParts(routeNodeArcRep);
-                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer);
+                saveResults(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer, qry);
             }
             break;
         default:
@@ -1401,11 +1405,22 @@ NewArcs& Network::GetNewArcs()
 void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, const string& resultTableName)
 {
+    bool isResultDBequalNetXpertDB = false;
+    if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
+    {
+        isResultDBequalNetXpertDB = true;
+    }
+
     switch (NETXPERT_CNFG.ResultDBType)
     {
         case RESULT_DB_TYPE::SpatiaLiteDB:
+        {
+            //special case: we can write directly into netxpert db without creating a new db
+            if (isResultDBequalNetXpertDB)
             {
-                SpatiaLiteWriter sldb (NETXPERT_CNFG);
+                //Override result DB Path with original netXpert DB path
+                //for using MergeAndSaveResultArcs()
+                SpatiaLiteWriter sldb (NETXPERT_CNFG, NETXPERT_CNFG.NetXDBPath);
                 sldb.OpenNewTransaction();
                 sldb.CreateSolverResultTable(resultTableName, true);
                 sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
@@ -1414,29 +1429,50 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
                 sldb.CommitCurrentTransaction();
                 sldb.CloseConnection();
             }
-            break;
-        case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                FGDBWriter fgdb (NETXPERT_CNFG);
-                fgdb.OpenNewTransaction();
-                fgdb.CreateSolverResultTable(resultTableName, true);
-
-                unique_ptr<MultiLineString> arc;
-                if (arcIDs.size() > 0)
+            else{
+                //Load result arc from DB
+                SpatiaLiteWriter sldb (NETXPERT_CNFG);
+                sldb.OpenNewTransaction();
+                sldb.CreateSolverResultTable(resultTableName, true);
+                //Prepare query once!
+                auto qry = sldb.PrepareSaveResultArc(resultTableName);
+                //for arc in arcIDs: load geometry from db and save result to resultDB
+                auto arcIDsV = UTILS::Split(arcIDs, ',');
+                for (auto s : arcIDsV)
                 {
-                    auto tokens = UTILS::Split(arcIDs, ',');
-                    for (string& s : tokens)
-                    {
-                        arc = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName,
-                                                                    NETXPERT_CNFG.ArcIDColumnName,
-                                                                    NETXPERT_CNFG.ArcsGeomColumnName,
-                                                                ArcIDColumnDataType::Number, s);
-                        fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName);
-                    }
+                    auto arcGeom = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName, NETXPERT_CNFG.ArcIDColumnName,
+                                                 NETXPERT_CNFG.ArcsGeomColumnName, ArcIDColumnDataType::Number,
+                                                 arcIDs);
+                    sldb.SaveResultArc(orig, dest, cost, capacity, flow, *arcGeom, resultTableName, *qry);
                 }
-                fgdb.CommitCurrentTransaction();
-                fgdb.CloseConnection();
+                sldb.CommitCurrentTransaction();
+                sldb.CloseConnection();
             }
+        }
+            break;
+
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+        {
+            FGDBWriter fgdb (NETXPERT_CNFG);
+            fgdb.OpenNewTransaction();
+            fgdb.CreateSolverResultTable(resultTableName, true);
+
+            unique_ptr<MultiLineString> arc;
+            if (arcIDs.size() > 0)
+            {
+                auto tokens = UTILS::Split(arcIDs, ',');
+                for (string& s : tokens)
+                {
+                    arc = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName,
+                                                                NETXPERT_CNFG.ArcIDColumnName,
+                                                                NETXPERT_CNFG.ArcsGeomColumnName,
+                                                            ArcIDColumnDataType::Number, s);
+                    fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName);
+                }
+            }
+            fgdb.CommitCurrentTransaction();
+            fgdb.CloseConnection();
+        }
             break;
     }
 }
@@ -1445,7 +1481,9 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
 * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
 */
 void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& resultTableName, DBWriter& writer)
+                                        const string& resultTableName, DBWriter& writer //,
+                                        //SQLite::Statement& qry //can be null for ESRI FileGDB
+                                        )
 {
     //create empty MultiLineString that is filled or not
     unique_ptr<MultiLineString> mline (DBHELPER::GEO_FACTORY->createMultiLineString());
@@ -1505,24 +1543,69 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
 
 void Network::saveResults(string orig, string dest, double cost, double capacity, double flow,
                                         const string& arcIDs, vector<Geometry*> routeParts,
-                                        const string& resultTableName, DBWriter& writer)
+                                        const string& resultTableName, DBWriter& writer,
+                                        SQLite::Statement& qry //only used when saved not to the netxpert db
+                                        )
 {
+    bool isResultDBequalNetXpertDB = false;
+    if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
+    {
+        isResultDBequalNetXpertDB = true;
+    }
+
     switch (NETXPERT_CNFG.ResultDBType)
     {
         case RESULT_DB_TYPE::SpatiaLiteDB:
         {
-            auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
-            //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
-            //MultilineString could also contain only one Linestring
-            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+            //special case: we can write directly into netxpert db without creating a new db
+            if (isResultDBequalNetXpertDB)
+            {
+                auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+                //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
+                //MultilineString could also contain only one Linestring
+                unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
 
-            //cout << mLine->toString() << endl;
+                //cout << mLine->toString() << endl;
 
-            sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
-                NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.ArcsTableName,
-                arcIDs, *mLine, resultTableName);
+                sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
+                    NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.ArcsTableName,
+                    arcIDs, *mLine, resultTableName);
+            }
+            else
+            {
+                auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+                //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
+                //MultilineString could also contain only one Linestring
+                unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+
+                unique_ptr<MultiLineString> mLineDB;
+                //load geometry from db
+                if (arcIDs.size() > 0)
+                    mLineDB = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName,
+                                                                                NETXPERT_CNFG.ArcIDColumnName,
+                                                                                NETXPERT_CNFG.ArcsGeomColumnName,
+                                                                                ArcIDColumnDataType::Number, arcIDs);
+                //merge routeParts with original arcs
+                LineMerger lm;
+                lm.add(mLine.get());
+
+                if (mLineDB)
+                    lm.add(mLineDB.get());
+
+                vector<LineString *> *mls = lm.getMergedLineStrings();
+                auto& mlsRef = *mls;
+                vector<Geometry*> mls2;
+                for (auto l : mlsRef)
+                    mls2.push_back(dynamic_cast<Geometry*>(l));
+
+                unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
+
+                //save merged route geometry to db
+                sldb.SaveResultArc(orig, dest, cost, capacity, flow, *route, resultTableName, qry);
+            }
         }
             break;
+
         case RESULT_DB_TYPE::ESRI_FileGDB:
         {
             /*
@@ -1557,7 +1640,7 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
             fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
                                 *route, resultTableName);
         }
-        break;
+            break;
     }
 }
 
