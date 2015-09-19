@@ -1437,13 +1437,17 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
                 //Prepare query once!
                 auto qry = sldb.PrepareSaveResultArc(resultTableName);
                 //for arc in arcIDs: load geometry from db and save result to resultDB
-                auto arcIDsV = UTILS::Split(arcIDs, ',');
-                for (auto s : arcIDsV)
+                unique_ptr<MultiLineString> arc;
+                if (arcIDs.size() > 0)
                 {
-                    auto arcGeom = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName, NETXPERT_CNFG.ArcIDColumnName,
-                                                 NETXPERT_CNFG.ArcsGeomColumnName, ArcIDColumnDataType::Number,
-                                                 arcIDs);
-                    sldb.SaveResultArc(orig, dest, cost, capacity, flow, *arcGeom, resultTableName, *qry);
+                    auto tokens = UTILS::Split(arcIDs, ',');
+                    for (string& s : tokens)
+                    {
+                        arc = DBHELPER::GetArcGeometriesFromDB(NETXPERT_CNFG.ArcsTableName, NETXPERT_CNFG.ArcIDColumnName,
+                                                     NETXPERT_CNFG.ArcsGeomColumnName, ArcIDColumnDataType::Number,
+                                                     s);
+                        sldb.SaveResultArc(orig, dest, cost, capacity, flow, *arc, resultTableName, *qry);
+                    }
                 }
                 sldb.CommitCurrentTransaction();
                 sldb.CloseConnection();

@@ -79,6 +79,13 @@ std::string UTILS::GetFileNameWithoutExtension(std::string& _filePath) {
     found=filename.find_last_of(".");
     return filename.substr(0,found);
 }
+
+std::vector<std::string> UTILS::Split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    UTILS::Split(s, delim, elems);
+    return elems;
+}
+
 std::vector<std::string>& UTILS::Split(const std::string &s, char delim, std::vector<std::string> &elems) {
     std::stringstream ss(s);
     std::string item;
@@ -160,11 +167,7 @@ std::string UTILS::convertWStringToString(const std::wstring& wstr)
     return converterX.to_bytes(wstr);
 }*/
 
-std::vector<std::string> UTILS::Split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    UTILS::Split(s, delim, elems);
-    return elems;
-}
+
 std::string UTILS::Replace(std::string& str, const std::string& from, const std::string& to) {
     size_t start_pos = str.find(from);
     if(start_pos == std::string::npos)

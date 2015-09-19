@@ -32,7 +32,7 @@ void MST_LEMON::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn ,
 		      double *pU , double *pC , double *pDfct ,
 		      unsigned int *pSn , unsigned int *pEn )
 {
-    cout << "Entering LoadNet().." << endl;
+    //cout << "Entering LoadNet().." << endl;
 	nmax = nmx;
 	mmax = mmx;
 
@@ -50,8 +50,8 @@ void MST_LEMON::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn ,
 	unsigned int source;
 	unsigned int target;
 
-    cout << "nmx: " << nmx << endl;
-    cout << "mmx: " << mmx << endl;
+    /*cout << "nmx: " << nmx << endl;
+    cout << "mmx: " << mmx << endl;*/
 
 	for (unsigned int i = 0; i < mmx; ++i) {
 		source = pSn[i];
@@ -61,7 +61,7 @@ void MST_LEMON::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn ,
 		costMap[arc] = cost;
 		//cout << "Arc: #" << i << " " << source << " " << target << " " << cost <<  endl;
 	}
-	cout << "ready loading arcs" << endl;
+	//cout << "ready loading arcs" << endl;
 }
 
 
