@@ -103,10 +103,10 @@ int netxpert::simple::ShortestPathTree::Solve()
 
         unique_ptr<DBWriter> writer;
 		unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-		switch (cnfg.ResultDBType)
-		{
-			case RESULT_DB_TYPE::SpatiaLiteDB:
-			{
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
                 if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
                 {
                     //Override result DB Path with original netXpert DB path
@@ -116,24 +116,28 @@ int netxpert::simple::ShortestPathTree::Solve()
 				{
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
 				}
-				writer->CreateNetXpertDB(); //create before preparing query
-				if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-				{
-					auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-					qry = unique_ptr<SQLite::Statement>(sldbWriter.PrepareSaveResultArc(resultTableName));
-				}
-			}
-			break;
-			case RESULT_DB_TYPE::ESRI_FileGDB:
-			{
-				writer = unique_ptr<DBWriter>(new FGDBWriter(cnfg));
-				writer->CreateNetXpertDB();
-			}
-			break;
-		}
-        writer->OpenNewTransaction();
-        writer->CreateSolverResultTable(resultTableName, true);
-        writer->CommitCurrentTransaction();
+                writer->CreateNetXpertDB(); //create before preparing query
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                //}
+            }
+                break;
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+                writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CommitCurrentTransaction();
+            }
+                break;
+        }
+
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
         int counter = 0;

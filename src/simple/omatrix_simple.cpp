@@ -113,23 +113,27 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
 				}
                 writer->CreateNetXpertDB(); //create before preparing query
-                 if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {
-                    auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                    qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
-                }
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                //}
             }
                 break;
             case RESULT_DB_TYPE::ESRI_FileGDB:
             {
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
                 writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CommitCurrentTransaction();
             }
                 break;
         }
-		writer->OpenNewTransaction();
-        writer->CreateSolverResultTable(resultTableName, true);
-        writer->CommitCurrentTransaction();
+
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
         int counter = 0;
