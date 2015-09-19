@@ -20,7 +20,9 @@
 #include "mcflow.h"
 #include "transportation.h"
 #include "odmatrix_simple.h"
-
+#include "mstree_simple.h"
+#include "sptree_simple.h"
+#include "transp_simple.h"
 namespace netxpert
 {
     /**

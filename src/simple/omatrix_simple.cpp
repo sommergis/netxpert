@@ -35,14 +35,14 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
         InputArcs arcsTable;
         vector<NewNode> nodesTable;
 
-        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
+        string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
 
-        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
-        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"***REMOVED***_LINE_edges";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath;
+        string arcsTableName = cnfg.ArcsTableName;
 
         string nodesTableName = cnfg.NodesTableName;
         string nodesGeomColName = cnfg.NodesGeomColumnName;
-        string resultTableName = cnfg.ArcsTableName + "_odm";
+        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_odm" : cnfg.ResultTableName;
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,

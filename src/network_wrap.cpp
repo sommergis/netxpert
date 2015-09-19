@@ -20585,6 +20585,65 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Config_ResultTableName_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Config_ResultTableName_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultTableName_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Config_ResultTableName_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Config_ResultTableName_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->ResultTableName = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Config_ResultTableName_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Config_ResultTableName_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  result = (std::string *) & ((arg1)->ResultTableName);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Config_SPTAllDests_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Config *arg1 = (netxpert::Config *) 0 ;
@@ -26181,6 +26240,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Config_ResultDBPath_get", _wrap_Config_ResultDBPath_get, METH_VARARGS, NULL},
 	 { (char *)"Config_ResultDBType_set", _wrap_Config_ResultDBType_set, METH_VARARGS, NULL},
 	 { (char *)"Config_ResultDBType_get", _wrap_Config_ResultDBType_get, METH_VARARGS, NULL},
+	 { (char *)"Config_ResultTableName_set", _wrap_Config_ResultTableName_set, METH_VARARGS, NULL},
+	 { (char *)"Config_ResultTableName_get", _wrap_Config_ResultTableName_get, METH_VARARGS, NULL},
 	 { (char *)"Config_SPTAllDests_set", _wrap_Config_SPTAllDests_set, METH_VARARGS, NULL},
 	 { (char *)"Config_SPTAllDests_get", _wrap_Config_SPTAllDests_get, METH_VARARGS, NULL},
 	 { (char *)"Config_SPTHeapCard_set", _wrap_Config_SPTHeapCard_set, METH_VARARGS, NULL},
