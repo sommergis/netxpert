@@ -56,7 +56,7 @@ void DBHELPER::connect( )
 {
     try
     {
-        connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (NETXPERT_CNFG.SQLiteDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
+        connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (NETXPERT_CNFG.NetXDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
 

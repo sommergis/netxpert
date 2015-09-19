@@ -36,7 +36,7 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         InputArcs arcsTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -104,7 +104,8 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();
         LOGGER::LogDebug("Writing Geometries..");
-        writer->OpenNewTransaction();
+        //writer->OpenNewTransaction();
+        //Processing and Saving Results are handled within net.ProcessResultArcs()
 
         string arcIDs;
         vector<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
@@ -117,9 +118,8 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         arcIDs.pop_back(); //trim last comma
 
         //TODO: resolve InternalArcs to ExternalArcs for Simple Interface!
-
         net.ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
-        writer->CommitCurrentTransaction();
+        //writer->CommitCurrentTransaction();
         LOGGER::LogDebug("Done!");
         return 0; //OK
     }

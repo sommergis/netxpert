@@ -36,7 +36,7 @@ int netxpert::simple::Transportation::Solve()
 
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -101,12 +101,20 @@ int netxpert::simple::Transportation::Solve()
         LOGGER::LogInfo("Count of Distributions: " + to_string(result.size()) );
 
         unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry;
+        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
         switch (cnfg.ResultDBType)
         {
             case RESULT_DB_TYPE::SpatiaLiteDB:
             {
-                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+                if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
+                {
+                    //Override result DB Path with original netXpert DB path
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, NETXPERT_CNFG.NetXDBPath));
+                }
+                else
+				{
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
 				writer->CreateNetXpertDB(); //create before preparing query
                 if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {
@@ -122,7 +130,7 @@ int netxpert::simple::Transportation::Solve()
             }
                 break;
         }
-        
+
         writer->OpenNewTransaction();
         writer->CreateSolverResultTable(resultTableName, true);
         writer->CommitCurrentTransaction();

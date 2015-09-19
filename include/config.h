@@ -96,8 +96,7 @@ namespace netxpert {
     **/
     struct Config
     {
-        string SQLiteDBPath; //!< Member variable "sqliteDBPath"
-        int SQLiteVersion; //!< Member variable "sqliteVersion"
+        string NetXDBPath; //!< Member variable "netxDBPath"
         string ResultDBPath; //!< Member variable "resultDBPath"
         RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
         bool SPTAllDests;//!< Member variable "sptAllDests"
@@ -142,8 +141,7 @@ namespace netxpert {
         template <class Archive>
         void serialize( Archive & ar ){
             ar(
-                CEREAL_NVP(SQLiteDBPath),
-                CEREAL_NVP(SQLiteVersion),
+                CEREAL_NVP(NetXDBPath),
                 CEREAL_NVP(ResultDBPath),
                 CEREAL_NVP(ResultDBType),
                 CEREAL_NVP(SPTAllDests),

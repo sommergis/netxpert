@@ -30,7 +30,7 @@ void netxpert::Test::NetworkConvert(Config& cnfg)
         InputNodes nodesTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -201,7 +201,7 @@ void netxpert::Test::TestAddNodes(Config& cnfg)
         InputNodes nodesTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -329,7 +329,7 @@ void netxpert::Test::TestMST(Config& cnfg)
         InputArcs arcsTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -431,7 +431,7 @@ void netxpert::Test::TestSPT(Config& cnfg)
         vector<NewNode> nodesTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -759,7 +759,7 @@ void netxpert::Test::TestMCF(Config& cnfg)
 
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -910,7 +910,7 @@ void netxpert::Test::TestTransportation(Config& cnfg)
 
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
@@ -1083,7 +1083,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
 
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
-        string pathToSpatiaLiteDB = cnfg.SQLiteDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
         string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
 
         string nodesTableName = cnfg.NodesTableName;
