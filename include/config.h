@@ -99,6 +99,7 @@ namespace netxpert {
         string NetXDBPath; //!< Member variable "netxDBPath"
         string ResultDBPath; //!< Member variable "resultDBPath"
         RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
+        string ResultTableName; //!< Member variable "resultTableName"
         bool SPTAllDests;//!< Member variable "sptAllDests"
         int SPTHeapCard; //!< Member variable "sptHeapCard"
         SPTAlgorithm SptAlgorithm; //!< Member variable "sptAlgorithm"
@@ -144,6 +145,7 @@ namespace netxpert {
                 CEREAL_NVP(NetXDBPath),
                 CEREAL_NVP(ResultDBPath),
                 CEREAL_NVP(ResultDBType),
+                CEREAL_NVP(ResultTableName),
                 CEREAL_NVP(SPTAllDests),
                 CEREAL_NVP(SPTHeapCard),
                 CEREAL_NVP(SptAlgorithm),
