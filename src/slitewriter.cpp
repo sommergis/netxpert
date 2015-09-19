@@ -18,15 +18,30 @@ using namespace geos::io;
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
-    NETXPERT_CNFG = cnfg;
+    this->NETXPERT_CNFG = cnfg;
     if ( !LOGGER::IsInitialized )
     {
         LOGGER::Initialize(cnfg);
     }
     LOGGER::LogInfo("SpatiaLiteWriter initialized.");
-    connPtr = nullptr;
-    currentTransactionPtr = nullptr;
-    isConnected = false;
+    this->connPtr = nullptr;
+    this->currentTransactionPtr = nullptr;
+    this->isConnected = false;
+    this->dbPath = this->NETXPERT_CNFG.ResultDBPath;
+}
+
+SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg, std::string dbPath)
+{
+    this->NETXPERT_CNFG = cnfg;
+    if ( !LOGGER::IsInitialized )
+    {
+        LOGGER::Initialize(cnfg);
+    }
+    LOGGER::LogInfo("SpatiaLiteWriter initialized.");
+    this->connPtr = nullptr;
+    this->currentTransactionPtr = nullptr;
+    this->isConnected = false;
+    this->dbPath = dbPath;
 }
 
 SpatiaLiteWriter::~SpatiaLiteWriter()
@@ -43,8 +58,9 @@ void SpatiaLiteWriter::connect( )
 {
     try
     {
+
         // Pointer verursacht possible mem leaks ~70,000 bytes
-        connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (NETXPERT_CNFG.ResultDBPath,
+        connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (this->dbPath,
                                                                         SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
         SQLite::Database& db = *connPtr;
@@ -77,7 +93,7 @@ void SpatiaLiteWriter::connect( )
     }
     catch (SQLite::Exception& ex)
     {
-        LOGGER::LogError("Error connecting to SpatiaLiteDB '" + NETXPERT_CNFG.ResultDBPath +"'");
+        LOGGER::LogError("Error connecting to SpatiaLiteDB '" + this->dbPath +"'");
         LOGGER::LogError( ex.what() );
         throw ex;
     }
@@ -122,14 +138,14 @@ void SpatiaLiteWriter::CreateNetXpertDB()
     try
     {
         //check for existence
-        if ( UTILS::FileExists(NETXPERT_CNFG.ResultDBPath) )
+        if ( UTILS::FileExists(this->dbPath) )
         {
             //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
-            LOGGER::LogWarning("SpatiaLite DB "+ NETXPERT_CNFG.ResultDBPath + " already exists!");
+            LOGGER::LogWarning("SpatiaLite DB "+ this->dbPath + " already exists!");
             //DeleteGeodatabase( newPath );
             return;
         }
-        SQLite::Database db(NETXPERT_CNFG.ResultDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
+        SQLite::Database db(this->dbPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
 
         initSpatialMetaData();
         LOGGER::LogInfo("NetXpert SpatiaLite DB " + db.getFilename() +" created successfully.");
@@ -285,7 +301,7 @@ void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColN
     }
 }
 
-unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(string _tableName)
+std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const std::string& _tableName)
 {
     try
     {
@@ -343,17 +359,15 @@ void SpatiaLiteWriter::SaveResultArc(string orig, string dest, double cost, doub
 
         query.exec();
         query.reset();
-
     }
     catch (std::exception& ex)
     {
         LOGGER::LogError( "Error saving results to NetXpert SpatiaLite DB!" );
         LOGGER::LogError( ex.what() );
     }
-
 }
 /**
-*   Case: Route parts and original arc ids make out a result arc.
+*   Case: Route parts and original arc ids form a result arc.
 */
 void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                         string geomColumnName, string arcIDColumnName, string arcTableName,
@@ -439,7 +453,7 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
 }
 
 /**
-*   Case: Original arc ids make out a result arc.
+*   Case: Original arc ids form a result arc.
 */
 void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                             string geomColumnName, string arcIDColumnName, string arcTableName,

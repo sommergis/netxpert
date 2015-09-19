@@ -219,8 +219,7 @@ namespace netxpert
     **/
     struct Config
     {
-        std::string SQLiteDBPath; //!< Member variable "sqliteDBPath"
-        int SQLiteVersion; //!< Member variable "sqliteVersion"
+        std::string NetXDBPath; //!< Member variable "netxDBPath"
         std::string ResultDBPath; //!< Member variable "resultDBPath"
         RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
         bool SPTAllDests;//!< Member variable "sptAllDests"

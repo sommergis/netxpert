@@ -41,9 +41,10 @@ namespace netxpert {
         Std_String = 1
     };
     /**
-    * \Enum that reflects the type of the node that was added to break an edge of the network.
-    * \Needed for building the total geometry of the route, if the network has been broken up through
-    * \additional start or end nodes.
+    * \Enum
+    * Enum that reflects the type of the node that was added to break an edge of the network.
+    * Needed for building the total geometry of the route, if the network has been broken up through
+    * additional start or end nodes.
     **/
     enum AddedNodeType
     {
@@ -52,7 +53,8 @@ namespace netxpert {
         EndArc = 2
     };
     /**
-    * \Enum that reflects the type of the Minimum Cost Flow instance.
+    * \Enum
+    * Enum that reflects the type of the Minimum Cost Flow instance.
     **/
     enum MinCostFlowInstanceType
     {

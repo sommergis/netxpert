@@ -20415,7 +20415,7 @@ SWIGINTERN PyObject *ExtDistributionArc_swigregister(PyObject *SWIGUNUSEDPARM(se
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Config_NetXDBPath_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   std::string *arg2 = 0 ;
@@ -20425,24 +20425,24 @@ SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_set(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"OO:Config_SQLiteDBPath_set",&obj0,&obj1)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"OO:Config_NetXDBPath_set",&obj0,&obj1)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NetXDBPath_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(obj1, &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Config_SQLiteDBPath_set" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Config_NetXDBPath_set" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Config_SQLiteDBPath_set" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Config_NetXDBPath_set" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->SQLiteDBPath = *arg2;
+  if (arg1) (arg1)->NetXDBPath = *arg2;
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20452,7 +20452,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Config_NetXDBPath_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Config *arg1 = (netxpert::Config *) 0 ;
   void *argp1 = 0 ;
@@ -20460,66 +20460,14 @@ SWIGINTERN PyObject *_wrap_Config_SQLiteDBPath_get(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj0 = 0 ;
   std::string *result = 0 ;
   
-  if (!PyArg_ParseTuple(args,(char *)"O:Config_SQLiteDBPath_get",&obj0)) SWIG_fail;
+  if (!PyArg_ParseTuple(args,(char *)"O:Config_NetXDBPath_get",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NetXDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->SQLiteDBPath);
+  result = (std::string *) & ((arg1)->NetXDBPath);
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Config_SQLiteVersion_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Config_SQLiteVersion_set",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_set" "', argument " "1"" of type '" "netxpert::Config *""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SQLiteVersion_set" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->SQLiteVersion = arg2;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Config_SQLiteVersion_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::Config *arg1 = (netxpert::Config *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Config_SQLiteVersion_get",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Config, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SQLiteVersion_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (int) ((arg1)->SQLiteVersion);
-  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -26227,10 +26175,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_ExtDistributionArc", _wrap_new_ExtDistributionArc, METH_VARARGS, NULL},
 	 { (char *)"delete_ExtDistributionArc", _wrap_delete_ExtDistributionArc, METH_VARARGS, NULL},
 	 { (char *)"ExtDistributionArc_swigregister", ExtDistributionArc_swigregister, METH_VARARGS, NULL},
-	 { (char *)"Config_SQLiteDBPath_set", _wrap_Config_SQLiteDBPath_set, METH_VARARGS, NULL},
-	 { (char *)"Config_SQLiteDBPath_get", _wrap_Config_SQLiteDBPath_get, METH_VARARGS, NULL},
-	 { (char *)"Config_SQLiteVersion_set", _wrap_Config_SQLiteVersion_set, METH_VARARGS, NULL},
-	 { (char *)"Config_SQLiteVersion_get", _wrap_Config_SQLiteVersion_get, METH_VARARGS, NULL},
+	 { (char *)"Config_NetXDBPath_set", _wrap_Config_NetXDBPath_set, METH_VARARGS, NULL},
+	 { (char *)"Config_NetXDBPath_get", _wrap_Config_NetXDBPath_get, METH_VARARGS, NULL},
 	 { (char *)"Config_ResultDBPath_set", _wrap_Config_ResultDBPath_set, METH_VARARGS, NULL},
 	 { (char *)"Config_ResultDBPath_get", _wrap_Config_ResultDBPath_get, METH_VARARGS, NULL},
 	 { (char *)"Config_ResultDBType_set", _wrap_Config_ResultDBType_set, METH_VARARGS, NULL},
