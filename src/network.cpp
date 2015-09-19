@@ -1036,7 +1036,7 @@ string Network::GetOriginalStartOrEndNodeID(unsigned int internalNodeID)
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
+        LOGGER::LogWarning("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
         throw ex;
     }
     return externalNode.extNodeID;
@@ -1053,7 +1053,7 @@ Coordinate Network::GetStartOrEndNodeGeometry(unsigned int internalNodeID)
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
+        LOGGER::LogWarning("Original start/end node ID " +to_string(internalNodeID) +" could not be looked up!");
         throw ex;
     }
     return externalNode.coord;

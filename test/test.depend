@@ -15,7 +15,7 @@
 	"config.h"
 	"utils.h"
 
-1442660018 /home/hahne/dev/netxpert/include/config.h
+1442691293 /home/hahne/dev/netxpert/include/config.h
 	<map>
 	<vector>
 	<string>
@@ -239,7 +239,7 @@
 1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	"Exception.h"
 
-1442660476 /home/hahne/dev/netxpert/include/data.h
+1442691370 /home/hahne/dev/netxpert/include/data.h
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
 	"geos/geom/MultiLineString.h"
@@ -336,7 +336,7 @@
 	"geos/geom/Point.h"
 	"geos/geom/PrecisionModel.h"
 
-1441742018 /home/hahne/dev/netxpert/include/test.h
+1442690983 /home/hahne/dev/netxpert/include/test.h
 	<omp.h>
 	<iostream>
 	"logger.h"
@@ -355,6 +355,9 @@
 	"mcflow.h"
 	"transportation.h"
 	"odmatrix_simple.h"
+	"mstree_simple.h"
+	"sptree_simple.h"
+	"transp_simple.h"
 
 1432409816 /home/hahne/dev/netxpert/include/solver/minspantree.h
 	"isolver.h"
@@ -2026,4 +2029,25 @@
 	"network.h"
 	"dbhelper.h"
 	"odmatrix.h"
+
+1440878673 /home/hahne/dev/netxpert/include/simple/mstree_simple.h
+	"data.h"
+	"utils.h"
+	"network.h"
+	"dbhelper.h"
+	"mstree.h"
+
+1440878478 /home/hahne/dev/netxpert/include/simple/sptree_simple.h
+	"data.h"
+	"utils.h"
+	"network.h"
+	"dbhelper.h"
+	"sptree.h"
+
+1440878425 /home/hahne/dev/netxpert/include/simple/transp_simple.h
+	"data.h"
+	"utils.h"
+	"network.h"
+	"dbhelper.h"
+	"transportation.h"
 

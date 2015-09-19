@@ -222,6 +222,7 @@ namespace netxpert
         std::string NetXDBPath; //!< Member variable "netxDBPath"
         std::string ResultDBPath; //!< Member variable "resultDBPath"
         RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
+        std::string ResultTableName; //!< Member variable "resultTableName"
         bool SPTAllDests;//!< Member variable "sptAllDests"
         int SPTHeapCard; //!< Member variable "sptHeapCard"
         SPTAlgorithm SptAlgorithm; //!< Member variable "sptAlgorithm"
