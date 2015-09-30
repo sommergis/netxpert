@@ -324,21 +324,20 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
         switch (arcIDColDataType)
         {
             case ArcIDColumnDataType::Std_String:
-                for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'", elem, "'";
+                for (const string& elem : DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
             default: //double or int
-                for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",", elem;
+                for (const string& elem : DBHELPER::EliminatedArcs) {
+                    eliminatedArcIDs += "," + elem;
                 }
                 break;
         }
+
         //trim comma on first
         if (eliminatedArcIDs.length() > 0)
             eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
-
-        LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
 
         // If Point lies exactly on the line a minimal shift of the coordinates is necessary
         // to yield the nearest arc
@@ -529,12 +528,12 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
         {
             case ArcIDColumnDataType::Std_String:
                 for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'", elem, "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
             default: //double or int
                 for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",", elem;
+                    eliminatedArcIDs += ","+ elem;
                 }
                 break;
         }
@@ -585,6 +584,56 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
     }
 }
 
+unordered_set<std::string> DBHELPER::GetIntersectingArcs(string barrierTableName, string barrierGeomColName,
+                                        string arcsTableName, string arcIDColName, string arcGeomColName)
+{
+    string sqlStr = "";
+    unordered_set<string> arcIDs;
+
+    try
+    {
+        if (!isConnected)
+            connect();
+
+        sqlStr = "SELECT " +arcIDColName+
+                 " FROM "+arcsTableName+" a, "+barrierTableName + " b "+
+                 " WHERE ST_Intersects(a."+arcGeomColName+",b."+barrierGeomColName+") = 1"+
+                 " AND a.ROWID IN "+
+                 " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+arcsTableName +"' "+
+                 " AND search_frame = b."+barrierGeomColName+")";
+
+        SQLite::Database& db = *connPtr;
+        SQLite::Statement qry (db, sqlStr);
+
+        while (qry.executeStep())
+        {
+            SQLite::Column col = qry.getColumn(0);
+
+            if (!col.isNull())
+            {
+                //Int vs string
+                if (col.isText())
+                {
+                    auto value = col.getText();
+                    arcIDs.insert(value);
+                }
+                if (col.isInteger())
+                {
+                    auto value = col.getInt();
+                    arcIDs.insert(to_string(value));
+                }
+            }
+        }
+        return arcIDs;
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError( "Error getting intersecting arc geometries!" );
+        LOGGER::LogError( ex.what() );
+        return arcIDs;
+    }
+}
+
 unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType )
 {
@@ -595,12 +644,12 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableNam
         {
             case ArcIDColumnDataType::Std_String:
                 for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'", elem, "'";
+                    eliminatedArcIDs += ",'"+ elem+ "'";
                 }
                 break;
             default: //double or int
                 for (const string& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",", elem;
+                    eliminatedArcIDs += ","+ elem;
                 }
                 break;
         }
