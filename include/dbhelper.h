@@ -42,6 +42,9 @@ namespace netxpert
             static unique_ptr<MultiLineString> GetArcGeometriesFromDB(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType, const string& arcIDs );
 
+            static unordered_set<std::string> GetIntersectingArcs(string barrierTableName, string barrierGeomColName,
+                                        string arcsTableName, string arcIDColName, string arcGeomColName);
+
             //UNUSED -->
             static unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType );

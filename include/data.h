@@ -26,7 +26,7 @@ namespace netxpert {
 
     static const std::string Version()
     {
-        return "0.8.9";
+        return "0.9.0";
     };
 
     /**

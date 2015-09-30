@@ -42,17 +42,13 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         string nodesTableName = cnfg.NodesTableName;
         string nodesGeomColName = cnfg.NodesGeomColumnName;
         string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_mst" : cnfg.ResultTableName;
-        bool dropFirst = true;
+        //bool dropFirst = true;
 
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
                         cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
-
-        bool withCapacity = false;
-        if (!cnfg.CapColumnName.empty())
-            withCapacity = true;
 
         //2. Load Network
         DBHELPER::OpenNewTransaction();

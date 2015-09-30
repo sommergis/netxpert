@@ -19,7 +19,7 @@ std::string UTILS::GetCurrentDir()
 bool UTILS::SetCurrentDir(const std::string& path)
 {
     const char* newPath = path.c_str();
-    #ifdef _WIN32, _WIN64
+    #if (defined _WIN32 || _WIN64)
     if (_chdir(newPath) == 0)
     #endif // _WIN
     #ifdef __linux__
@@ -32,7 +32,7 @@ bool UTILS::SetCurrentDir(const std::string& path)
 
 bool UTILS::FileExists(const std::string& path)
 {
-	#ifdef _WIN32, _WIN64
+	#if (defined _WIN32 || _WIN64)
 		#ifndef _UNICODE
 			LPCSTR path3 = path.c_str();
 			return PathFileExists(path3);
@@ -53,7 +53,7 @@ bool UTILS::FileExists(const std::string& path)
 
 bool UTILS::PathExists(const std::string& path)
 {
-	#ifdef _WIN32, _WIN64
+	#if (defined _WIN32 || _WIN64)
 	return FileExists(path);
 	#endif
     #ifdef __linux__
@@ -122,7 +122,7 @@ std::string UTILS::convertWStringToString(const std::wstring& str)
 /*
 std::wstring UTILS::convertStringToWString(const std::string &s)
 {
-#ifdef _WIN32, _WIN64
+#if (defined _WIN32 || _WIN64)
 	#ifdef _UNICODE
 		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 		return converter.from_bytes(s);
@@ -138,7 +138,7 @@ std::wstring UTILS::convertStringToWString(const std::string &s)
 
 std::string UTILS::convertWStringToString (const std::wstring &ws)
 {
-#ifdef _WIN32, _WIN64
+#if (defined _WIN32 || _WIN64)
 	#ifdef _UNICODE
 		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 		return converter.to_bytes(ws);
