@@ -12,7 +12,7 @@
 #include "cereal/types/unordered_map.hpp"
 #include "cereal/types/vector.hpp"
 
-#ifdef _WIN32,_WIN64
+#if (defined _WIN32 || _WIN64)
 	#include <locale>
 	#include <codecvt>
     #include <direct.h>

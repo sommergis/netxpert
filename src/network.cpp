@@ -173,7 +173,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, int treshold, SQ
             treshold, closestArcQry, withCapacity);
 
     string extArcID = closestArcAndPoint.extArcID; // kann noch auf leeren string gesetzt werden, wenn Kante bereits aufgebrochen wurde
-    const Coordinate closestPoint = closestArcAndPoint.closestPoint;
+    //const Coordinate closestPoint = closestArcAndPoint.closestPoint;
     Geometry& closestArc = *closestArcAndPoint.arcGeom;
     const string extFromNode = closestArcAndPoint.extFromNode;
     const string extToNode = closestArcAndPoint.extToNode;
@@ -343,7 +343,7 @@ vector<InternalArc> Network::insertNewStartNode(bool isDirected, SplittedArc& sp
     const LineString& segment2 = *sPtr2;
     */
 
-    double newArcCap = splittedLine.capacity;
+    //double newArcCap = splittedLine.capacity;
     double newArc1Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment1);
     double newArc2Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment2);
 
@@ -604,7 +604,7 @@ vector<InternalArc> Network::insertNewEndNode(bool isDirected, SplittedArc& spli
 	  const LineString& segment1 = *sPtr1;
 	  const LineString& segment2 = *sPtr2;*/
 
-    double newArcCap = splittedLine.capacity;
+    //double newArcCap = splittedLine.capacity;
     double newArc1Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment1);
     double newArc2Cost = getRelativeValueFromGeomLength(splittedLine.cost, completeLine, segment2);
 
@@ -1117,7 +1117,7 @@ SplittedArc Network::GetSplittedClosestNewArcToPoint(Coordinate coord, int tresh
         {
             InternalArc key = nArc.first;
             NewArc val = nArc.second;
-            auto lPtr = val.arcGeom.get();
+            //auto lPtr = val.arcGeom.get();
 
             //NewArc geometry as shared_ptr
             //Geometry* g2Ptr = static_cast<Geometry*>( val.arcGeom.get() );
@@ -1785,8 +1785,9 @@ void Network::readNetworkFromTable(bool autoClean, bool oneWay)
         }
     }
 
-    //TODO
-    //DBHELPER.EliminatedArcs = this.eliminatedArcs;
+    DBHELPER::EliminatedArcs = this->eliminatedArcs;
+    /*for (auto& s : DBHELPER::EliminatedArcs)
+        cout << s << endl;*/
 }
 //TODO: isDirected evtl. von Klasse nehmen, nicht vom Config
 void Network::processArc(InputArc arc, unsigned int internalStartNode,
@@ -1885,7 +1886,55 @@ void Network::processArc(InputArc arc, unsigned int internalStartNode,
         }
     }
 }
-void Network::processBarriers(){}
+void Network::processBarriers()
+{
+    if (!this->NETXPERT_CNFG.BarrierPolyTableName.empty())
+    {
+        LOGGER::LogInfo("Processing barrier polygons from "+NETXPERT_CNFG.BarrierPolyTableName + "..");
+
+        std::unordered_set<string> arcIDs = DBHELPER::GetIntersectingArcs(NETXPERT_CNFG.BarrierPolyTableName,
+                                      NETXPERT_CNFG.BarrierPolyGeomColumnName,
+                                      NETXPERT_CNFG.ArcsTableName,
+                                      NETXPERT_CNFG.ArcIDColumnName,
+                                      NETXPERT_CNFG.ArcsGeomColumnName);
+        for (auto& id : arcIDs)
+        {
+            cout << "Elim arc " << id << endl;
+            this->eliminatedArcs.insert(id);
+        }
+        LOGGER::LogDebug("Got "+ to_string(arcIDs.size()) +" intersecting barrier polygons from " + NETXPERT_CNFG.BarrierPolyTableName +".");
+    }
+    if (!this->NETXPERT_CNFG.BarrierLineTableName.empty())
+    {
+        LOGGER::LogInfo("Processing barrier lines from "+NETXPERT_CNFG.BarrierLineTableName + "..");
+
+        std::unordered_set<string> arcIDs = DBHELPER::GetIntersectingArcs(NETXPERT_CNFG.BarrierLineTableName,
+                                      NETXPERT_CNFG.BarrierLineGeomColumnName,
+                                      NETXPERT_CNFG.ArcsTableName,
+                                      NETXPERT_CNFG.ArcIDColumnName,
+                                      NETXPERT_CNFG.ArcsGeomColumnName);
+        for (auto& id : arcIDs)
+        {
+            this->eliminatedArcs.insert(id);
+        }
+        LOGGER::LogDebug("Got "+ to_string(arcIDs.size()) +" intersecting barrier lines from " + NETXPERT_CNFG.BarrierLineTableName +".");
+    }
+    if (!this->NETXPERT_CNFG.BarrierPointTableName.empty())
+    {
+        LOGGER::LogInfo("Processing barrier points from "+NETXPERT_CNFG.BarrierPointTableName + "..");
+
+        std::unordered_set<string> arcIDs = DBHELPER::GetIntersectingArcs(NETXPERT_CNFG.BarrierPointTableName,
+                                      NETXPERT_CNFG.BarrierPointGeomColumnName,
+                                      NETXPERT_CNFG.ArcsTableName,
+                                      NETXPERT_CNFG.ArcIDColumnName,
+                                      NETXPERT_CNFG.ArcsGeomColumnName);
+        for (auto& id : arcIDs)
+        {
+            this->eliminatedArcs.insert(id);
+        }
+        LOGGER::LogDebug("Got "+ to_string(arcIDs.size()) +" intersecting barrier points from " + NETXPERT_CNFG.BarrierPointTableName +".");
+    }
+}
 
 void Network::Reset()
 {
@@ -1998,6 +2047,8 @@ void Network::TransformUnbalancedMCF(MinCostFlowInstanceType mcfInstanceType)
             transformExtraDemand();
             break;
         case MinCostFlowInstanceType::MCFBalanced: //Nothing to do
+            break;
+        default: //MCFUndefined
             break;
     }
 }
