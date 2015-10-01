@@ -127,10 +127,10 @@
 		<Unit filename="src/logger.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/network.cpp" />
-		<Unit filename="src/network.i">
+		<Unit filename="src/networkbuilder.cpp" />
+		<Unit filename="src/py/network.i">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="src/networkbuilder.cpp" />
 		<Unit filename="src/simple/mstree_simple.cpp" />
 		<Unit filename="src/simple/omatrix_simple.cpp" />
 		<Unit filename="src/simple/sptree_simple.cpp" />
