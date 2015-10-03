@@ -202,8 +202,13 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         }
 
         unordered_map<unsigned int,unsigned int> arcs;
+        //cout << "num of threads: "<< omp_get_num_threads()<<endl;
+        //omp_set_num_threads(8);
+        //cout << "num of threads: "<< omp_get_num_threads()<<endl;
         int i;
-        //#pragma omp parallel for private(i)
+        //#pragma parallel
+        //{
+        //#pragma omp parallel for shared (a_pre, pre, ign, arcs) private(i)
         for (i = nmax; i > 0; i--)
         {
             if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
@@ -219,20 +224,33 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         vector<unsigned int> route;
 
         // Get all routes from orig to dest in nodes-List
-        for (unsigned int dest : dests)
+        //for (unsigned int dest : dests)
         //{
-
-        //#pragma omp parallel for
-        //for (it2 = dests.begin(); it2 < dests.end(); it2++)
+        vector<unsigned int>::iterator it2;
+        unsigned int dest;
+        bool isDestReached;
+        //#define OMP_STACKSIZE=16M
+        //#pragma omp parallel for private (orig, dest, isDestReached)
+        for (it2 = dests.begin(); it2 < dests.end(); it2++)
         {
-            //unsigned int dest = *it2;
-            bool isDestReached = spt->Reached(dest);
+
+            dest = *it2;
+            isDestReached = spt->Reached(dest);
 
             if (orig != dest && isDestReached)
             {
+                double costPerRoute;
                 //route is reference
-                double costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
+                //omp_set_num_threads(8);
+
+                //#pragma omp parallel shared(route, arcs) private(orig, dest)
+                //{
+                //cout << "hello from thread # " <<omp_get_thread_num() << endl;
+                costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
+                //cout << costPerRoute << endl;
                 totalCost += costPerRoute;
+                //cout << totalCost << endl;
+                //}
 
                 //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
                 // bei sps auch die Vektoren geleert.
@@ -248,11 +266,13 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
             {
                 //LOGGER::LogError("Destination "+ net.GetOriginalStartOrEndNodeID(dest) +" unreachable!");
             }
+
         }
 
         optimum = totalCost; //totalCost wird immer weiter aufsummiert für jedes neues OD-Paar
         counter += 1;
     }
+
     //spt.Dispose();
 }
 
@@ -434,31 +454,21 @@ double OriginDestinationMatrix::buildCompressedRoute(vector<unsigned int>& route
     //Neu - nur die Enden hinzufuegen
     unsigned int curr = dest;
 
+
     while (curr != orig)
     {
-        /*route.push_back(curr);
-        FTNode ftNode;
-        unsigned int pred;
-        try {
-            pred = arcPredescessors.at(curr);
-        }
-        catch (exception& ex)
-        {
-            cout << "arcPred key error: " << curr << endl;
-            cout << "arcPred size: "<< arcPredescessors.size() << endl;
-        }
-        ftNode  {pred , curr };
-        FTNode& ftNodeRef = ftNode;
-        totalCost = totalCost + getArcCost( ftNodeRef );
-        curr = arcPredescessors.at(curr);
-        //cout<<curr<< endl;*/
-
         route.push_back(curr);
         const InternalArc& ftNode  { arcPredescessors.at(curr), curr };
 
+        //#pragma omp parallel shared(ftNode)
+        //{
+        //#pragma omp parallel reduction(+:totalCost)
+        //{
         totalCost += getArcCost( ftNode );
+        //}
         curr = arcPredescessors.at(curr);
     }
+
     return totalCost;
 }
 double OriginDestinationMatrix::getArcCost(const InternalArc& arc)
