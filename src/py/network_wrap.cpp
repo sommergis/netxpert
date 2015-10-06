@@ -27845,28 +27845,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_TransportationSimple_GetDistribution(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:TransportationSimple_GetDistribution",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__Transportation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetDistribution" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
-  result = (arg1)->GetDistribution();
-  resultobj = swig::from(static_cast< std::vector<netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_TransportationSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::simple::Transportation *arg1 = (netxpert::simple::Transportation *) 0 ;
@@ -27979,28 +27957,6 @@ SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON(PyObje
   arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
   result = (arg1)->GetMinimumCostFlowAsJSON();
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetMinimumCostFlow(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:MinimumCostFlowSimple_GetMinimumCostFlow",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetMinimumCostFlow" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
-  result = (arg1)->GetMinimumCostFlow();
-  resultobj = swig::from(static_cast< std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > >(result));
   return resultobj;
 fail:
   return NULL;
@@ -28604,14 +28560,12 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TransportationSimple_Solve", _wrap_TransportationSimple_Solve, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_GetOptimum", _wrap_TransportationSimple_GetOptimum, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_GetDistributionAsJSON", _wrap_TransportationSimple_GetDistributionAsJSON, METH_VARARGS, NULL},
-	 { (char *)"TransportationSimple_GetDistribution", _wrap_TransportationSimple_GetDistribution, METH_VARARGS, NULL},
 	 { (char *)"delete_TransportationSimple", _wrap_delete_TransportationSimple, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_swigregister", TransportationSimple_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MinimumCostFlowSimple", _wrap_new_MinimumCostFlowSimple, METH_VARARGS, NULL},
 	 { (char *)"MinimumCostFlowSimple_Solve", _wrap_MinimumCostFlowSimple_Solve, METH_VARARGS, NULL},
 	 { (char *)"MinimumCostFlowSimple_GetOptimum", _wrap_MinimumCostFlowSimple_GetOptimum, METH_VARARGS, NULL},
 	 { (char *)"MinimumCostFlowSimple_GetMinimumCostFlowAsJSON", _wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON, METH_VARARGS, NULL},
-	 { (char *)"MinimumCostFlowSimple_GetMinimumCostFlow", _wrap_MinimumCostFlowSimple_GetMinimumCostFlow, METH_VARARGS, NULL},
 	 { (char *)"delete_MinimumCostFlowSimple", _wrap_delete_MinimumCostFlowSimple, METH_VARARGS, NULL},
 	 { (char *)"MinimumCostFlowSimple_swigregister", MinimumCostFlowSimple_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
