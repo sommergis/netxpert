@@ -23,6 +23,8 @@
 #include "mstree_simple.h"
 #include "sptree_simple.h"
 #include "transp_simple.h"
+#include "mcfp_simple.h"
+
 namespace netxpert
 {
     /**

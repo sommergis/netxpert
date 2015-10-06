@@ -396,13 +396,25 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
     string sqlStr;
     if (arcIDs.size() > 0)
     {
-        //Outputs SRID is always 0
-        sqlStr = "INSERT INTO "+ resultTableName+" (fromNode, toNode, cost, capacity, flow, geometry) " +
-                "SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
-                " GeomFromWKB(@mLine)," + //splitted segments as multilinestring
-                " (SELECT ST_Collect(" + geomColumnName +") " +
-                "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) "+ //middle part
-                "  ) ),0)";
+        if (!mLine.isEmpty()) //because of Merging Empty Geom with Geom is a NULL geom
+        {
+            //Outputs SRID is always 0
+            sqlStr = "INSERT INTO "+ resultTableName+" (fromNode, toNode, cost, capacity, flow, geometry) " +
+                    "SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(ST_LineMerge ( ST_Union ( " +
+                    " GeomFromWKB(@mLine)," + //splitted segments as multilinestring
+                    " (SELECT ST_Collect(" + geomColumnName +") " +
+                    "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) "+ //middle part
+                    "  ) ),0)";
+        }
+        else
+        {
+            //Outputs SRID is always 0
+            sqlStr = "INSERT INTO "+ resultTableName+" (fromNode, toNode, cost, capacity, flow, geometry) " +
+                    "SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(ST_LineMerge ( "+
+                    " (SELECT ST_Collect(" + geomColumnName +") " +
+                    "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ) ) "+ //middle part
+                    "  ),0)";
+        }
     }
     else
     {
@@ -414,13 +426,13 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
     }
     /*string printSqlStr = sqlStr;
 
-    replace(printSqlStr, "GeomFromWKB(","GeomFromText(");
-    replace(printSqlStr, "@mLine", mLine.toString());
-    replace(printSqlStr, "@orig", orig);
-    replace(printSqlStr, "@dest", dest);
-    replace(printSqlStr, "@cost", to_string(cost));
-    replace(printSqlStr, "@capacity", to_string(capacity));
-    replace(printSqlStr, "@flow", to_string(flow));
+    UTILS::Replace(printSqlStr, "GeomFromWKB(","GeomFromText(");
+    UTILS::Replace(printSqlStr, "@mLine", mLine.toString());
+    UTILS::Replace(printSqlStr, "@orig", orig);
+    UTILS::Replace(printSqlStr, "@dest", dest);
+    UTILS::Replace(printSqlStr, "@cost", to_string(cost));
+    UTILS::Replace(printSqlStr, "@capacity", to_string(capacity));
+    UTILS::Replace(printSqlStr, "@flow", to_string(flow));
     cout << printSqlStr << endl;*/
 
     SQLite::Database& db = *connPtr;
@@ -447,7 +459,9 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
     //CORRECT
     string s = oss.str();
     const char* blob = s.c_str();
-    qry.bind("@mLine", blob, static_cast<int>(offset));
+
+    if (!mLine.isEmpty()) //bind only, if geom is not null
+        qry.bind("@mLine", blob, static_cast<int>(offset));
 
     qry.exec();
 }

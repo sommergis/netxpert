@@ -1640,6 +1640,8 @@ void Network::saveResults(string orig, string dest, double cost, double capacity
 
             unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
 
+            cout << route->toString()<< endl;
+
             auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
             fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
                                 *route, resultTableName);
