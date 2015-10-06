@@ -2963,39 +2963,41 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[23]
 #define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[24]
 #define SWIGTYPE_p_netxpert__Transportation swig_types[25]
-#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[26]
-#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[27]
-#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[28]
-#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[29]
-#define SWIGTYPE_p_p_PyObject swig_types[30]
-#define SWIGTYPE_p_size_type swig_types[31]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[32]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[33]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[34]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[36]
-#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[37]
-#define SWIGTYPE_p_std__invalid_argument swig_types[38]
-#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[39]
-#define SWIGTYPE_p_std__string swig_types[40]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[41]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[42]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[43]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[44]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[45]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[46]
-#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[47]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[48]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[49]
-#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[50]
-#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[51]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[52]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[53]
-#define SWIGTYPE_p_string swig_types[54]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[55]
-#define SWIGTYPE_p_value_type swig_types[56]
-static swig_type_info *swig_types[58];
-static swig_module_info swig_module = {swig_types, 57, 0, 0, 0, 0};
+#define SWIGTYPE_p_netxpert__simple__MinCostFlow swig_types[26]
+#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[27]
+#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[28]
+#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[29]
+#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[30]
+#define SWIGTYPE_p_p_PyObject swig_types[31]
+#define SWIGTYPE_p_size_type swig_types[32]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[33]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[34]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[35]
+#define SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[39]
+#define SWIGTYPE_p_std__invalid_argument swig_types[40]
+#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[41]
+#define SWIGTYPE_p_std__string swig_types[42]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[43]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[44]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[45]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[46]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[47]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[48]
+#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[49]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[50]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[51]
+#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[52]
+#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[53]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[54]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[55]
+#define SWIGTYPE_p_string swig_types[56]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[57]
+#define SWIGTYPE_p_value_type swig_types[58]
+static swig_type_info *swig_types[60];
+static swig_module_info swig_module = {swig_types, 59, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3496,6 +3498,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "odmatrix_simple.h"
 #include "mstree_simple.h"
 #include "transp_simple.h"
+#include "mcfp_simple.h"
 
 
 namespace swig {  
@@ -5229,6 +5232,108 @@ SWIGINTERN void std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_
       *(swig::getpos(self,i)) = x;
     }
 SWIGINTERN void std_vector_Sl_netxpert_ExtDistributionArc_Sg__append(std::vector< netxpert::ExtDistributionArc > *self,std::vector< netxpert::ExtDistributionArc >::value_type const &x){
+      self->push_back(x);
+    }
+
+  namespace swig {
+    template <>  struct traits<netxpert::FlowCost > {
+      typedef pointer_category category;
+      static const char* type_name() { return"netxpert::FlowCost"; }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<netxpert::FlowCost, std::allocator< netxpert::FlowCost > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "netxpert::FlowCost" "," "std::allocator< netxpert::FlowCost >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN swig::SwigPyIterator *std_vector_Sl_netxpert_FlowCost_Sg__iterator(std::vector< netxpert::FlowCost > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_vector_Sl_netxpert_FlowCost_Sg____nonzero__(std::vector< netxpert::FlowCost > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_vector_Sl_netxpert_FlowCost_Sg____bool__(std::vector< netxpert::FlowCost > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::vector< netxpert::FlowCost >::size_type std_vector_Sl_netxpert_FlowCost_Sg____len__(std::vector< netxpert::FlowCost > const *self){
+      return self->size();
+    }
+SWIGINTERN std::vector< netxpert::FlowCost >::value_type std_vector_Sl_netxpert_FlowCost_Sg__pop(std::vector< netxpert::FlowCost > *self){
+      if (self->size() == 0)
+	throw std::out_of_range("pop from empty container");
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::value_type x = self->back();
+      self->pop_back();
+      return x;
+    }
+SWIGINTERN std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *std_vector_Sl_netxpert_FlowCost_Sg____getslice__(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::difference_type i,std::vector< netxpert::FlowCost >::difference_type j){
+      return swig::getslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::difference_type i,std::vector< netxpert::FlowCost >::difference_type j,std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &v=std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > >()){
+      swig::setslice(self, i, j, 1, v);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____delslice__(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::difference_type i,std::vector< netxpert::FlowCost >::difference_type j){
+      swig::delslice(self, i, j, 1);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_0(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::difference_type i){
+      self->erase(swig::getpos(self,i));
+    }
+SWIGINTERN std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_0(std::vector< netxpert::FlowCost > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return NULL;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type id = i;
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type jd = j;
+      return swig::getslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_0(std::vector< netxpert::FlowCost > *self,PySliceObject *slice,std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &v){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type id = i;
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type jd = j;
+      swig::setslice(self, id, jd, step, v);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_1(std::vector< netxpert::FlowCost > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type id = i;
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_1(std::vector< netxpert::FlowCost > *self,PySliceObject *slice){
+      Py_ssize_t i, j, step;
+      if( !PySlice_Check(slice) ) {
+        SWIG_Error(SWIG_TypeError, "Slice object expected.");
+        return;
+      }
+      PySlice_GetIndices(SWIGPY_SLICE_ARG(slice), (Py_ssize_t)self->size(), &i, &j, &step);
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type id = i;
+      std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >::difference_type jd = j;
+      swig::delslice(self, id, jd, step);
+    }
+SWIGINTERN std::vector< netxpert::FlowCost >::value_type const &std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_1(std::vector< netxpert::FlowCost > const *self,std::vector< netxpert::FlowCost >::difference_type i){
+      return *(swig::cgetpos(self, i));
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_2(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::difference_type i,std::vector< netxpert::FlowCost >::value_type const &x){
+      *(swig::getpos(self,i)) = x;
+    }
+SWIGINTERN void std_vector_Sl_netxpert_FlowCost_Sg__append(std::vector< netxpert::FlowCost > *self,std::vector< netxpert::FlowCost >::value_type const &x){
       self->push_back(x);
     }
 
@@ -17697,6 +17802,1903 @@ SWIGINTERN PyObject *ExtDistribution_swigregister(PyObject *SWIGUNUSEDPARM(self)
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_FlowCosts_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_iterator" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_FlowCost_Sg__iterator(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____nonzero__((std::vector< netxpert::FlowCost > const *)arg1);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts___bool__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___bool__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____bool__((std::vector< netxpert::FlowCost > const *)arg1);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts___len__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___len__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = std_vector_Sl_netxpert_FlowCost_Sg____len__((std::vector< netxpert::FlowCost > const *)arg1);
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_pop(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::value_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_pop",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_pop" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  try {
+    result = std_vector_Sl_netxpert_FlowCost_Sg__pop(arg1);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::FlowCost >::value_type(static_cast< const std::vector< netxpert::FlowCost >::value_type& >(result))), SWIGTYPE_p_netxpert__FlowCost, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___getslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  std::vector< netxpert::FlowCost >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts___getslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___getslice__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___getslice__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "FlowCosts___getslice__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
+  try {
+    result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getslice__(arg1,arg2,arg3);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setslice____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  std::vector< netxpert::FlowCost >::difference_type arg3 ;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:FlowCosts___setslice__",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___setslice__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___setslice__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "FlowCosts___setslice__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
+  {
+    std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *ptr = (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)0;
+    res4 = swig::asptr(obj3, &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "FlowCosts___setslice__" "', argument " "4"" of type '" "std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts___setslice__" "', argument " "4"" of type '" "std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg4);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setslice____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  std::vector< netxpert::FlowCost >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts___setslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___setslice__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___setslice__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "FlowCosts___setslice__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setslice__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_ptrdiff_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          return _wrap_FlowCosts___setslice____SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        {
+          int res = SWIG_AsVal_ptrdiff_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          int res = swig::asptr(argv[3], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_FlowCosts___setslice____SWIG_0(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts___setslice__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::__setslice__(std::vector< netxpert::FlowCost >::difference_type,std::vector< netxpert::FlowCost >::difference_type,std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)\n"
+    "    std::vector< netxpert::FlowCost >::__setslice__(std::vector< netxpert::FlowCost >::difference_type,std::vector< netxpert::FlowCost >::difference_type)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___delslice__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  std::vector< netxpert::FlowCost >::difference_type arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  ptrdiff_t val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts___delslice__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___delslice__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___delslice__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  ecode3 = SWIG_AsVal_ptrdiff_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "FlowCosts___delslice__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____delslice__(arg1,arg2,arg3);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts___delitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___delitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___delitem__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_0(arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___getitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts___getitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  try {
+    result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_0(arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___setitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  {
+    std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *ptr = (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)0;
+    res3 = swig::asptr(obj2, &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "FlowCosts___setitem__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts___setitem__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg3);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts___setitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___setitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts___setitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_1(arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  PySliceObject *arg2 = (PySliceObject *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts___delitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___delitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  {
+    if (!PySlice_Check(obj1)) {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts___delitem__" "', argument " "2"" of type '" "PySliceObject *""'");
+    }
+    arg2 = (PySliceObject *) obj1;
+  }
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_1(arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  catch(std::invalid_argument &_e) {
+    SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___delitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_FlowCosts___delitem____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_FlowCosts___delitem____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts___delitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::__delitem__(std::vector< netxpert::FlowCost >::difference_type)\n"
+    "    std::vector< netxpert::FlowCost >::__delitem__(PySliceObject *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< netxpert::FlowCost >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___getitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___getitem__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  try {
+    result = (std::vector< netxpert::FlowCost >::value_type *) &std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_1((std::vector< netxpert::FlowCost > const *)arg1,arg2);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___getitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_FlowCosts___getitem____SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_FlowCosts___getitem____SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts___getitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::__getitem__(PySliceObject *)\n"
+    "    std::vector< netxpert::FlowCost >::__getitem__(std::vector< netxpert::FlowCost >::difference_type) const\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::difference_type arg2 ;
+  std::vector< netxpert::FlowCost >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  ptrdiff_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___setitem__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_ptrdiff_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts___setitem__" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::difference_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "FlowCosts___setitem__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts___setitem__" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
+  try {
+    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::FlowCost const &)*arg3);
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts___setitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        return _wrap_FlowCosts___setitem____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        _v = PySlice_Check(argv[1]);
+      }
+      if (_v) {
+        int res = swig::asptr(argv[2], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_FlowCosts___setitem____SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_ptrdiff_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__FlowCost, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_FlowCosts___setitem____SWIG_2(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts___setitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::__setitem__(PySliceObject *,std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)\n"
+    "    std::vector< netxpert::FlowCost >::__setitem__(PySliceObject *)\n"
+    "    std::vector< netxpert::FlowCost >::__setitem__(std::vector< netxpert::FlowCost >::difference_type,std::vector< netxpert::FlowCost >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_append(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_append",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_append" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FlowCosts_append" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_append" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
+  std_vector_Sl_netxpert_FlowCost_Sg__append(arg1,(netxpert::FlowCost const &)*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_FlowCosts")) SWIG_fail;
+  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_FlowCosts",&obj0)) SWIG_fail;
+  {
+    std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *ptr = (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >((std::vector< netxpert::FlowCost > const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_empty",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_empty" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (bool)((std::vector< netxpert::FlowCost > const *)arg1)->empty();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_size",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_size" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = ((std::vector< netxpert::FlowCost > const *)arg1)->size();
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_clear",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_clear" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  (arg1)->clear();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_swap",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_swap" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FlowCosts_swap" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_swap" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp2);
+  (arg1)->swap(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< std::allocator< netxpert::FlowCost > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_get_allocator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = ((std::vector< netxpert::FlowCost > const *)arg1)->get_allocator();
+  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::FlowCost >::allocator_type(static_cast< const std::vector< netxpert::FlowCost >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_begin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_begin" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (arg1)->begin();
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_end",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_end" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (arg1)->end();
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_rbegin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (arg1)->rbegin();
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_rend",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_rend" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (arg1)->rend();
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost >::size_type arg1 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_FlowCosts",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val1);
+  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_pop_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_pop_back",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  (arg1)->pop_back();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_resize",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_resize" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_resize" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
+  (arg1)->resize(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< netxpert::FlowCost >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_erase" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+    }
+  }
+  result = (arg1)->erase(arg2);
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::iterator arg2 ;
+  std::vector< netxpert::FlowCost >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< netxpert::FlowCost >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts_erase",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_erase" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+    }
+  }
+  result = (arg1)->erase(arg2,arg3);
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_erase(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter) != 0));
+      if (_v) {
+        return _wrap_FlowCosts_erase__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter) != 0));
+      if (_v) {
+        swig::SwigPyIterator *iter = 0;
+        int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter) != 0));
+        if (_v) {
+          return _wrap_FlowCosts_erase__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::erase(std::vector< netxpert::FlowCost >::iterator)\n"
+    "    std::vector< netxpert::FlowCost >::erase(std::vector< netxpert::FlowCost >::iterator,std::vector< netxpert::FlowCost >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost >::size_type arg1 ;
+  std::vector< netxpert::FlowCost >::value_type *arg2 = 0 ;
+  size_t val1 ;
+  int ecode1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::vector< netxpert::FlowCost > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_FlowCosts",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_size_t(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg1 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_FlowCosts" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FlowCosts" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
+  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1,(std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_FlowCosts(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_FlowCosts__SWIG_0(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      int res = SWIG_AsVal_size_t(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      return _wrap_new_FlowCosts__SWIG_2(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_FlowCosts__SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      int res = SWIG_AsVal_size_t(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_netxpert__FlowCost, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_new_FlowCosts__SWIG_3(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_FlowCosts'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::vector()\n"
+    "    std::vector< netxpert::FlowCost >::vector(std::vector< netxpert::FlowCost > const &)\n"
+    "    std::vector< netxpert::FlowCost >::vector(std::vector< netxpert::FlowCost >::size_type)\n"
+    "    std::vector< netxpert::FlowCost >::vector(std::vector< netxpert::FlowCost >::size_type,std::vector< netxpert::FlowCost >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_push_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::value_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_push_back",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_push_back" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FlowCosts_push_back" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_push_back" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
+  (arg1)->push_back((std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_front(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_front",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_front" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->front();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_back(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::value_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_back",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_back" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->back();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_assign(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::size_type arg2 ;
+  std::vector< netxpert::FlowCost >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts_assign",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_assign" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_assign" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "FlowCosts_assign" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_assign" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
+  (arg1)->assign(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::size_type arg2 ;
+  std::vector< netxpert::FlowCost >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts_resize",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_resize" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_resize" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "FlowCosts_resize" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_resize" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
+  (arg1)->resize(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_resize(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_size_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_FlowCosts_resize__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_size_t(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__FlowCost, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_FlowCosts_resize__SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts_resize'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::resize(std::vector< netxpert::FlowCost >::size_type)\n"
+    "    std::vector< netxpert::FlowCost >::resize(std::vector< netxpert::FlowCost >::size_type,std::vector< netxpert::FlowCost >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::iterator arg2 ;
+  std::vector< netxpert::FlowCost >::value_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  std::vector< netxpert::FlowCost >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:FlowCosts_insert",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_insert" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_insert" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_insert" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "FlowCosts_insert" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_insert" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
+  result = (arg1)->insert(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::iterator arg2 ;
+  std::vector< netxpert::FlowCost >::size_type arg3 ;
+  std::vector< netxpert::FlowCost >::value_type *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  size_t val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:FlowCosts_insert",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_insert" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_insert" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_insert" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
+    }
+  }
+  ecode3 = SWIG_AsVal_size_t(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "FlowCosts_insert" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg3 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_netxpert__FlowCost,  0  | 0);
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "FlowCosts_insert" "', argument " "4"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_insert" "', argument " "4"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
+  }
+  arg4 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp4);
+  (arg1)->insert(arg2,arg3,(std::vector< netxpert::FlowCost >::value_type const &)*arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_insert(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter) != 0));
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__FlowCost, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_FlowCosts_insert__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::vector< netxpert::FlowCost >::iterator > *>(iter) != 0));
+      if (_v) {
+        {
+          int res = SWIG_AsVal_size_t(argv[2], NULL);
+          _v = SWIG_CheckState(res);
+        }
+        if (_v) {
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_netxpert__FlowCost, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_FlowCosts_insert__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'FlowCosts_insert'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::vector< netxpert::FlowCost >::insert(std::vector< netxpert::FlowCost >::iterator,std::vector< netxpert::FlowCost >::value_type const &)\n"
+    "    std::vector< netxpert::FlowCost >::insert(std::vector< netxpert::FlowCost >::iterator,std::vector< netxpert::FlowCost >::size_type,std::vector< netxpert::FlowCost >::value_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_reserve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  std::vector< netxpert::FlowCost >::size_type arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  size_t val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FlowCosts_reserve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_reserve" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  ecode2 = SWIG_AsVal_size_t(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_reserve" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
+  } 
+  arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
+  (arg1)->reserve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_FlowCosts_capacity(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:FlowCosts_capacity",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_capacity" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  result = ((std::vector< netxpert::FlowCost > const *)arg1)->capacity();
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_FlowCosts(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::vector< netxpert::FlowCost > *arg1 = (std::vector< netxpert::FlowCost > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_FlowCosts",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *FlowCosts_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_Version(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string result;
@@ -25006,7 +27008,7 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_GetMinCostFlow(PyObject *SWIGUNUSEDPARM(s
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  SwigValueWrapper< std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > > result;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:MinCostFlow_GetMinCostFlow",&obj0)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__MinCostFlow, 0 |  0 );
@@ -25015,7 +27017,7 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_GetMinCostFlow(PyObject *SWIGUNUSEDPARM(s
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
   result = ((netxpert::MinCostFlow const *)arg1)->GetMinCostFlow();
-  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > >(static_cast< const std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_OWN |  0 );
+  resultobj = swig::from(static_cast< std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > >(result));
   return resultobj;
 fail:
   return NULL;
@@ -25893,6 +27895,146 @@ SWIGINTERN PyObject *TransportationSimple_swigregister(PyObject *SWIGUNUSEDPARM(
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_MinimumCostFlowSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::MinCostFlow *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_MinimumCostFlowSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_MinimumCostFlowSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (netxpert::simple::MinCostFlow *)new netxpert::simple::MinCostFlow(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__MinCostFlow, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumCostFlowSimple_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
+  result = (int)(arg1)->Solve();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumCostFlowSimple_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
+  result = (double)(arg1)->GetOptimum();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumCostFlowSimple_GetMinimumCostFlowAsJSON",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetMinimumCostFlowAsJSON" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
+  result = (arg1)->GetMinimumCostFlowAsJSON();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetMinimumCostFlow(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:MinimumCostFlowSimple_GetMinimumCostFlow",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetMinimumCostFlow" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
+  result = (arg1)->GetMinimumCostFlow();
+  resultobj = swig::from(static_cast< std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_MinimumCostFlowSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::MinCostFlow *arg1 = (netxpert::simple::MinCostFlow *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_MinimumCostFlowSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__MinCostFlow, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumCostFlowSimple" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *MinimumCostFlowSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__MinCostFlow, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_VARARGS, NULL},
@@ -26117,6 +28259,40 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ExtDistribution_capacity", _wrap_ExtDistribution_capacity, METH_VARARGS, NULL},
 	 { (char *)"delete_ExtDistribution", _wrap_delete_ExtDistribution, METH_VARARGS, NULL},
 	 { (char *)"ExtDistribution_swigregister", ExtDistribution_swigregister, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_iterator", _wrap_FlowCosts_iterator, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___nonzero__", _wrap_FlowCosts___nonzero__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___bool__", _wrap_FlowCosts___bool__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___len__", _wrap_FlowCosts___len__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_pop", _wrap_FlowCosts_pop, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___getslice__", _wrap_FlowCosts___getslice__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___setslice__", _wrap_FlowCosts___setslice__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___delslice__", _wrap_FlowCosts___delslice__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___delitem__", _wrap_FlowCosts___delitem__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___getitem__", _wrap_FlowCosts___getitem__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts___setitem__", _wrap_FlowCosts___setitem__, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_append", _wrap_FlowCosts_append, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_empty", _wrap_FlowCosts_empty, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_size", _wrap_FlowCosts_size, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_clear", _wrap_FlowCosts_clear, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_swap", _wrap_FlowCosts_swap, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_get_allocator", _wrap_FlowCosts_get_allocator, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_begin", _wrap_FlowCosts_begin, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_end", _wrap_FlowCosts_end, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_rbegin", _wrap_FlowCosts_rbegin, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_rend", _wrap_FlowCosts_rend, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_pop_back", _wrap_FlowCosts_pop_back, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_erase", _wrap_FlowCosts_erase, METH_VARARGS, NULL},
+	 { (char *)"new_FlowCosts", _wrap_new_FlowCosts, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_push_back", _wrap_FlowCosts_push_back, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_front", _wrap_FlowCosts_front, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_back", _wrap_FlowCosts_back, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_assign", _wrap_FlowCosts_assign, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_resize", _wrap_FlowCosts_resize, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_insert", _wrap_FlowCosts_insert, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_reserve", _wrap_FlowCosts_reserve, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_capacity", _wrap_FlowCosts_capacity, METH_VARARGS, NULL},
+	 { (char *)"delete_FlowCosts", _wrap_delete_FlowCosts, METH_VARARGS, NULL},
+	 { (char *)"FlowCosts_swigregister", FlowCosts_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Version", _wrap_Version, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_set", _wrap_ColumnMap_arcIDColName_set, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_get", _wrap_ColumnMap_arcIDColName_get, METH_VARARGS, NULL},
@@ -26431,6 +28607,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TransportationSimple_GetDistribution", _wrap_TransportationSimple_GetDistribution, METH_VARARGS, NULL},
 	 { (char *)"delete_TransportationSimple", _wrap_delete_TransportationSimple, METH_VARARGS, NULL},
 	 { (char *)"TransportationSimple_swigregister", TransportationSimple_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_MinimumCostFlowSimple", _wrap_new_MinimumCostFlowSimple, METH_VARARGS, NULL},
+	 { (char *)"MinimumCostFlowSimple_Solve", _wrap_MinimumCostFlowSimple_Solve, METH_VARARGS, NULL},
+	 { (char *)"MinimumCostFlowSimple_GetOptimum", _wrap_MinimumCostFlowSimple_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"MinimumCostFlowSimple_GetMinimumCostFlowAsJSON", _wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON, METH_VARARGS, NULL},
+	 { (char *)"MinimumCostFlowSimple_GetMinimumCostFlow", _wrap_MinimumCostFlowSimple_GetMinimumCostFlow, METH_VARARGS, NULL},
+	 { (char *)"delete_MinimumCostFlowSimple", _wrap_delete_MinimumCostFlowSimple, METH_VARARGS, NULL},
+	 { (char *)"MinimumCostFlowSimple_swigregister", MinimumCostFlowSimple_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -26467,7 +28650,7 @@ static swig_type_info _swigt__p_netxpert__ExtNodeSupply = {"_p_netxpert__ExtNode
 static swig_type_info _swigt__p_netxpert__ExtSPTreeArc = {"_p_netxpert__ExtSPTreeArc", "netxpert::ExtSPTreeArc *|std::vector< netxpert::ExtSPTreeArc >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ExtTransportationData = {"_p_netxpert__ExtTransportationData", "netxpert::ExtTransportationData *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ExternalArc = {"_p_netxpert__ExternalArc", "netxpert::ExternalArc *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_netxpert__FlowCost = {"_p_netxpert__FlowCost", "netxpert::FlowCost *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__FlowCost = {"_p_netxpert__FlowCost", "std::vector< netxpert::FlowCost >::value_type *|netxpert::FlowCost *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ISolver = {"_p_netxpert__ISolver", "netxpert::ISolver *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InputArc = {"_p_netxpert__InputArc", "std::vector< netxpert::InputArc >::value_type *|netxpert::InputArc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InputNode = {"_p_netxpert__InputNode", "std::vector< netxpert::InputNode >::value_type *|netxpert::InputNode *", 0, 0, (void*)0, 0};
@@ -26481,6 +28664,7 @@ static swig_type_info _swigt__p_netxpert__ODPair = {"_p_netxpert__ODPair", "netx
 static swig_type_info _swigt__p_netxpert__OriginDestinationMatrix = {"_p_netxpert__OriginDestinationMatrix", "netxpert::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ShortestPathTree = {"_p_netxpert__ShortestPathTree", "netxpert::ShortestPathTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__Transportation = {"_p_netxpert__Transportation", "netxpert::Transportation *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__MinCostFlow = {"_p_netxpert__simple__MinCostFlow", "netxpert::simple::MinCostFlow *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__MinimumSpanningTree = {"_p_netxpert__simple__MinimumSpanningTree", "netxpert::simple::MinimumSpanningTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__OriginDestinationMatrix = {"_p_netxpert__simple__OriginDestinationMatrix", "netxpert::simple::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__ShortestPathTree = {"_p_netxpert__simple__ShortestPathTree", "netxpert::simple::ShortestPathTree *", 0, 0, (void*)0, 0};
@@ -26490,6 +28674,7 @@ static swig_type_info _swigt__p_size_type = {"_p_size_type", "size_type *", 0, 0
 static swig_type_info _swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t = {"_p_std__allocatorT_netxpert__ExtDistributionArc_t", "std::allocator< netxpert::ExtDistributionArc > *|std::vector< netxpert::ExtDistributionArc >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__ExtNodeSupply_t = {"_p_std__allocatorT_netxpert__ExtNodeSupply_t", "std::allocator< netxpert::ExtNodeSupply > *|std::vector< netxpert::ExtNodeSupply >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__ExtSPTreeArc_t = {"_p_std__allocatorT_netxpert__ExtSPTreeArc_t", "std::allocator< netxpert::ExtSPTreeArc > *|std::vector< netxpert::ExtSPTreeArc >::allocator_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_netxpert__FlowCost_t = {"_p_std__allocatorT_netxpert__FlowCost_t", "std::allocator< netxpert::FlowCost > *|std::vector< netxpert::FlowCost >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__InputArc_t = {"_p_std__allocatorT_netxpert__InputArc_t", "std::allocator< netxpert::InputArc > *|std::vector< netxpert::InputArc >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__InputNode_t = {"_p_std__allocatorT_netxpert__InputNode_t", "std::vector< netxpert::InputNode >::allocator_type *|std::allocator< netxpert::InputNode > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__NewNode_t = {"_p_std__allocatorT_netxpert__NewNode_t", "std::vector< netxpert::NewNode >::allocator_type *|std::allocator< netxpert::NewNode > *", 0, 0, (void*)0, 0};
@@ -26502,7 +28687,7 @@ static swig_type_info _swigt__p_std__vectorT__Tp__Alloc_t = {"_p_std__vectorT__T
 static swig_type_info _swigt__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t = {"_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t", "std::vector< netxpert::ExtDistributionArc > *|netxpert::ExtDistribution *|std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t = {"_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t", "std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *|netxpert::ExtNodeSupplies *|std::vector< netxpert::ExtNodeSupply > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t = {"_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t", "std::vector< netxpert::ExtSPTreeArc > *|std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > *|netxpert::ExtSPTArcs *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t = {"_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t", "std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t = {"_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t", "std::vector< netxpert::FlowCost > *|std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t = {"_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t", "std::vector< netxpert::InputArc > *|std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > *|netxpert::InputArcs *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t = {"_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t", "netxpert::InputNodes *|std::vector< netxpert::InputNode > *|std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t = {"_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t", "std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > > *", 0, 0, (void*)0, 0};
@@ -26540,6 +28725,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__OriginDestinationMatrix,
   &_swigt__p_netxpert__ShortestPathTree,
   &_swigt__p_netxpert__Transportation,
+  &_swigt__p_netxpert__simple__MinCostFlow,
   &_swigt__p_netxpert__simple__MinimumSpanningTree,
   &_swigt__p_netxpert__simple__OriginDestinationMatrix,
   &_swigt__p_netxpert__simple__ShortestPathTree,
@@ -26549,6 +28735,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t,
   &_swigt__p_std__allocatorT_netxpert__ExtNodeSupply_t,
   &_swigt__p_std__allocatorT_netxpert__ExtSPTreeArc_t,
+  &_swigt__p_std__allocatorT_netxpert__FlowCost_t,
   &_swigt__p_std__allocatorT_netxpert__InputArc_t,
   &_swigt__p_std__allocatorT_netxpert__InputNode_t,
   &_swigt__p_std__allocatorT_netxpert__NewNode_t,
@@ -26599,6 +28786,7 @@ static swig_cast_info _swigc__p_netxpert__ODPair[] = {  {&_swigt__p_netxpert__OD
 static swig_cast_info _swigc__p_netxpert__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__ShortestPathTree[] = {  {&_swigt__p_netxpert__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Transportation[] = {  {&_swigt__p_netxpert__Transportation, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__MinCostFlow[] = {  {&_swigt__p_netxpert__simple__MinCostFlow, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__simple__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__simple__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__ShortestPathTree[] = {  {&_swigt__p_netxpert__simple__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
@@ -26608,6 +28796,7 @@ static swig_cast_info _swigc__p_size_type[] = {  {&_swigt__p_size_type, 0, 0, 0}
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__ExtDistributionArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__ExtDistributionArc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__ExtNodeSupply_t[] = {  {&_swigt__p_std__allocatorT_netxpert__ExtNodeSupply_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__ExtSPTreeArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__ExtSPTreeArc_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_netxpert__FlowCost_t[] = {  {&_swigt__p_std__allocatorT_netxpert__FlowCost_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputArc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__NewNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -26658,6 +28847,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__OriginDestinationMatrix,
   _swigc__p_netxpert__ShortestPathTree,
   _swigc__p_netxpert__Transportation,
+  _swigc__p_netxpert__simple__MinCostFlow,
   _swigc__p_netxpert__simple__MinimumSpanningTree,
   _swigc__p_netxpert__simple__OriginDestinationMatrix,
   _swigc__p_netxpert__simple__ShortestPathTree,
@@ -26667,6 +28857,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__allocatorT_netxpert__ExtDistributionArc_t,
   _swigc__p_std__allocatorT_netxpert__ExtNodeSupply_t,
   _swigc__p_std__allocatorT_netxpert__ExtSPTreeArc_t,
+  _swigc__p_std__allocatorT_netxpert__FlowCost_t,
   _swigc__p_std__allocatorT_netxpert__InputArc_t,
   _swigc__p_std__allocatorT_netxpert__InputNode_t,
   _swigc__p_std__allocatorT_netxpert__NewNode_t,

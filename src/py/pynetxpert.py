@@ -380,6 +380,53 @@ class ExtDistribution(_object):
 ExtDistribution_swigregister = _pynetxpert.ExtDistribution_swigregister
 ExtDistribution_swigregister(ExtDistribution)
 
+class FlowCosts(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FlowCosts, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, FlowCosts, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _pynetxpert.FlowCosts_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _pynetxpert.FlowCosts___nonzero__(self)
+    def __bool__(self): return _pynetxpert.FlowCosts___bool__(self)
+    def __len__(self): return _pynetxpert.FlowCosts___len__(self)
+    def pop(self): return _pynetxpert.FlowCosts_pop(self)
+    def __getslice__(self, *args): return _pynetxpert.FlowCosts___getslice__(self, *args)
+    def __setslice__(self, *args): return _pynetxpert.FlowCosts___setslice__(self, *args)
+    def __delslice__(self, *args): return _pynetxpert.FlowCosts___delslice__(self, *args)
+    def __delitem__(self, *args): return _pynetxpert.FlowCosts___delitem__(self, *args)
+    def __getitem__(self, *args): return _pynetxpert.FlowCosts___getitem__(self, *args)
+    def __setitem__(self, *args): return _pynetxpert.FlowCosts___setitem__(self, *args)
+    def append(self, *args): return _pynetxpert.FlowCosts_append(self, *args)
+    def empty(self): return _pynetxpert.FlowCosts_empty(self)
+    def size(self): return _pynetxpert.FlowCosts_size(self)
+    def clear(self): return _pynetxpert.FlowCosts_clear(self)
+    def swap(self, *args): return _pynetxpert.FlowCosts_swap(self, *args)
+    def get_allocator(self): return _pynetxpert.FlowCosts_get_allocator(self)
+    def begin(self): return _pynetxpert.FlowCosts_begin(self)
+    def end(self): return _pynetxpert.FlowCosts_end(self)
+    def rbegin(self): return _pynetxpert.FlowCosts_rbegin(self)
+    def rend(self): return _pynetxpert.FlowCosts_rend(self)
+    def pop_back(self): return _pynetxpert.FlowCosts_pop_back(self)
+    def erase(self, *args): return _pynetxpert.FlowCosts_erase(self, *args)
+    def __init__(self, *args): 
+        this = _pynetxpert.new_FlowCosts(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _pynetxpert.FlowCosts_push_back(self, *args)
+    def front(self): return _pynetxpert.FlowCosts_front(self)
+    def back(self): return _pynetxpert.FlowCosts_back(self)
+    def assign(self, *args): return _pynetxpert.FlowCosts_assign(self, *args)
+    def resize(self, *args): return _pynetxpert.FlowCosts_resize(self, *args)
+    def insert(self, *args): return _pynetxpert.FlowCosts_insert(self, *args)
+    def reserve(self, *args): return _pynetxpert.FlowCosts_reserve(self, *args)
+    def capacity(self): return _pynetxpert.FlowCosts_capacity(self)
+    __swig_destroy__ = _pynetxpert.delete_FlowCosts
+    __del__ = lambda self : None;
+FlowCosts_swigregister = _pynetxpert.FlowCosts_swigregister
+FlowCosts_swigregister(FlowCosts)
+
 
 def Version():
   return _pynetxpert.Version()
@@ -1170,6 +1217,25 @@ class TransportationSimple(_object):
     __del__ = lambda self : None;
 TransportationSimple_swigregister = _pynetxpert.TransportationSimple_swigregister
 TransportationSimple_swigregister(TransportationSimple)
+
+class MinimumCostFlowSimple(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, MinimumCostFlowSimple, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, MinimumCostFlowSimple, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _pynetxpert.new_MinimumCostFlowSimple(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def Solve(self): return _pynetxpert.MinimumCostFlowSimple_Solve(self)
+    def GetOptimum(self): return _pynetxpert.MinimumCostFlowSimple_GetOptimum(self)
+    def GetMinimumCostFlowAsJSON(self): return _pynetxpert.MinimumCostFlowSimple_GetMinimumCostFlowAsJSON(self)
+    def GetMinimumCostFlow(self): return _pynetxpert.MinimumCostFlowSimple_GetMinimumCostFlow(self)
+    __swig_destroy__ = _pynetxpert.delete_MinimumCostFlowSimple
+    __del__ = lambda self : None;
+MinimumCostFlowSimple_swigregister = _pynetxpert.MinimumCostFlowSimple_swigregister
+MinimumCostFlowSimple_swigregister(MinimumCostFlowSimple)
 
 # This file is compatible with both classic and new-style classes.
 

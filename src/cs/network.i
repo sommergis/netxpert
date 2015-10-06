@@ -22,6 +22,7 @@
 #include "odmatrix_simple.h"
 #include "mstree_simple.h"
 #include "transp_simple.h"
+#include "mcfp_simple.h"
 %}
 
 namespace std
@@ -32,6 +33,7 @@ namespace std
     %template(ExtSPTArcs) std::vector<netxpert::ExtSPTreeArc>;
     %template(ExtNodeSupplies) std::vector<netxpert::ExtNodeSupply>;
     %template(ExtDistribution) std::vector<netxpert::ExtDistributionArc>;
+    %template(FlowCosts) std::vector<netxpert::FlowCost>;
     /*%template(ODNodes) std::vector< std::pair<unsigned int,std::string> >;*/
 }
 
@@ -491,3 +493,17 @@ namespace netxpert::simple {
         std::vector<netxpert::ExtDistributionArc> GetDistribution();
  };
 }
+
+%rename(MinimumCostFlowSimple) netxpert::simple::MinCostFlow;
+namespace netxpert::simple {
+ class MinCostFlow
+ {
+    public:
+        MinCostFlow(std::string jsonCnfg);
+        int Solve();
+        double GetOptimum();
+        std::string GetMinimumCostFlowAsJSON();
+        std::vector<netxpert::FlowCost> GetMinimumCostFlow();
+ };
+}
+
