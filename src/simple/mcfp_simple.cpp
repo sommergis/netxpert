@@ -2,7 +2,8 @@
 
 netxpert::simple::MinCostFlow::MinCostFlow(std::string jsonCnfg)
 {
-
+    //Convert JSON Config to real Config Object
+    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
 }
 
 int netxpert::simple::MinCostFlow::Solve()
@@ -33,6 +34,7 @@ int netxpert::simple::MinCostFlow::Solve()
         }
 
         InputArcs arcsTable;
+        vector<NewNode> nodesTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
 
         string pathToSpatiaLiteDB = cnfg.NetXDBPath;
@@ -57,11 +59,24 @@ int netxpert::simple::MinCostFlow::Solve()
         DBHELPER::OpenNewTransaction();
         LOGGER::LogInfo("Loading Data from DB..!");
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
+        nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
         LOGGER::LogInfo("Done!");
+
         Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
         net.ConvertInputNetwork(autoCleanNetwork);
+        LOGGER::LogInfo("Done!");
+
+        LOGGER::LogInfo("Loading Start nodes..");
+        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+                                                                        cnfg.ArcsGeomColumnName, cmap, withCapacity);
+        LOGGER::LogInfo("Loading End nodes..");
+        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+                                                                        cnfg.ArcsGeomColumnName, cmap, withCapacity);
+
+        LOGGER::LogInfo("Done!");
+        LOGGER::LogInfo("Converting Data into internal network..");
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
@@ -134,6 +149,8 @@ int netxpert::simple::MinCostFlow::Solve()
             double cap = -1;
             vector<InternalArc> arc { key };
 
+            cout << key.fromNode << "->" << key.toNode << endl;
+
             vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
             // is only one arc
             if (arcData.size() > 0)
@@ -155,12 +172,16 @@ int netxpert::simple::MinCostFlow::Solve()
                 dest = net.GetOriginalStartOrEndNodeID(key.toNode);
             }
             catch (exception& ex) {
-                dest = net.GetOriginalNodeID(key.fromNode);
+                dest = net.GetOriginalNodeID(key.toNode);
             }
-            net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer);
+
+            if (orig != "dummy" && dest != "dummy")
+                net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer, *qry);
+            else
+                LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
+                                                to_string(cap) + ", flow: " +to_string(flow));
         }
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
+
         LOGGER::LogDebug("Done!");
 
         return 0; //OK

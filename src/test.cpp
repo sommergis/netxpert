@@ -336,6 +336,14 @@ void netxpert::Test::TestTransportation(Config& cnfg)
 	simpleSolver.Solve();
 }
 
+void netxpert::Test::TestMCF(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::MinCostFlow simpleSolver(s);
+	simpleSolver.Solve();
+}
+
 void netxpert::Test::TestTransportationExt(Config& cnfg)
 {
     try
@@ -510,7 +518,9 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }
-void netxpert::Test::TestMCF(Config& cnfg)
+
+
+/*void netxpert::Test::TestMCF(Config& cnfg)
 {
     try
     {
@@ -660,7 +670,7 @@ void netxpert::Test::TestMCF(Config& cnfg)
         LOGGER::LogError("TestMCF: Unexpected Error!");
         LOGGER::LogError(ex.what());
     }
-}
+}*/
 
 /*
 void netxpert::Test::TestMST(Config& cnfg)
