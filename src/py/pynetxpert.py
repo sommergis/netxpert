@@ -1212,7 +1212,6 @@ class TransportationSimple(_object):
     def Solve(self): return _pynetxpert.TransportationSimple_Solve(self)
     def GetOptimum(self): return _pynetxpert.TransportationSimple_GetOptimum(self)
     def GetDistributionAsJSON(self): return _pynetxpert.TransportationSimple_GetDistributionAsJSON(self)
-    def GetDistribution(self): return _pynetxpert.TransportationSimple_GetDistribution(self)
     __swig_destroy__ = _pynetxpert.delete_TransportationSimple
     __del__ = lambda self : None;
 TransportationSimple_swigregister = _pynetxpert.TransportationSimple_swigregister
@@ -1231,7 +1230,6 @@ class MinimumCostFlowSimple(_object):
     def Solve(self): return _pynetxpert.MinimumCostFlowSimple_Solve(self)
     def GetOptimum(self): return _pynetxpert.MinimumCostFlowSimple_GetOptimum(self)
     def GetMinimumCostFlowAsJSON(self): return _pynetxpert.MinimumCostFlowSimple_GetMinimumCostFlowAsJSON(self)
-    def GetMinimumCostFlow(self): return _pynetxpert.MinimumCostFlowSimple_GetMinimumCostFlow(self)
     __swig_destroy__ = _pynetxpert.delete_MinimumCostFlowSimple
     __del__ = lambda self : None;
 MinimumCostFlowSimple_swigregister = _pynetxpert.MinimumCostFlowSimple_swigregister

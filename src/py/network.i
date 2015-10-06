@@ -490,7 +490,7 @@ namespace netxpert::simple {
         int Solve();
         double GetOptimum();
         std::string GetDistributionAsJSON();
-        std::vector<netxpert::ExtDistributionArc> GetDistribution();
+        /* std::vector<netxpert::ExtDistributionArc> GetDistribution(); */
  };
 }
 
@@ -502,8 +502,9 @@ namespace netxpert::simple {
         MinCostFlow(std::string jsonCnfg);
         int Solve();
         double GetOptimum();
+        /* TODO */
         std::string GetMinimumCostFlowAsJSON();
-        std::vector<netxpert::FlowCost> GetMinimumCostFlow();
+        /* std::vector<netxpert::FlowCost> GetMinimumCostFlow(); */
  };
 }
 

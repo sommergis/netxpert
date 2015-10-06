@@ -211,7 +211,8 @@ std::string netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
 
 std::vector<netxpert::FlowCost> netxpert::simple::MinCostFlow::GetMinimumCostFlow()
 {
-    std::vector<netxpert::FlowCost>  result;
-
+    std::vector<netxpert::FlowCost> result;
+    if (this->solver)
+        result = this->solver->GetMinCostFlow();
     return result;
 }
