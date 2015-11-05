@@ -131,13 +131,63 @@ int netxpert::simple::MinCostFlow::Solve()
         }
 
         LOGGER::LogDebug("Writing Geometries..");
-        //writer->OpenNewTransaction();
-        //Processing and Saving Results are handled within net.ProcessResultArcs()
+        writer->OpenNewTransaction();
 
-        string arcIDs;
-        int counter = 0;
-        for (FlowCost& arcFlow : mcfResult)
+        LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+        std::string arcIDs = "";
+        std::unordered_set<string> totalArcIDs;
+        std::vector<FlowCost>::iterator it;
+
+        #pragma omp parallel default(shared) private(it)
         {
+        //populate arcIDs
+        for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto arcFlow = *it;
+            InternalArc key = arcFlow.intArc;
+            double cost = arcFlow.cost;
+            double flow = arcFlow.flow;
+            vector<InternalArc> arc { key };
+            string id = "";
+
+            vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
+            // is only one arc
+            if (arcData.size() > 0)
+            {
+                ArcData arcD = *arcData.begin();
+                id = arcD.extArcID;
+                #pragma omp critical
+                {
+                if (id != "dummy")
+                    totalArcIDs.insert(id);
+                }
+            }
+            }//omp single
+        }
+        }//omp parallel
+
+        for (string id : totalArcIDs)
+            arcIDs += id += ",";
+
+        if (arcIDs.size()>0)
+        {
+            arcIDs.pop_back(); //trim last comma
+            DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+        }
+        LOGGER::LogDebug("Done!");
+
+        int counter = 0;
+        #pragma omp parallel shared(counter) private(it)
+        {
+        for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto arcFlow = *it;
+
             counter += 1;
             if (counter % 2500 == 0)
                 LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
@@ -149,7 +199,7 @@ int netxpert::simple::MinCostFlow::Solve()
             double cap = -1;
             vector<InternalArc> arc { key };
 
-            cout << key.fromNode << "->" << key.toNode << endl;
+            // cout << key.fromNode << "->" << key.toNode << endl;
 
             vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
             // is only one arc
@@ -176,14 +226,17 @@ int netxpert::simple::MinCostFlow::Solve()
             }
 
             if (orig != "dummy" && dest != "dummy")
-                net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer, *qry);
+                net.ProcessResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer, *qry);
             else
                 LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
                                                 to_string(cap) + ", flow: " +to_string(flow));
+            }//omp single
         }
+        }//omp paralell
 
+        writer->CommitCurrentTransaction();
+        writer->CloseConnection();
         LOGGER::LogDebug("Done!");
-
         return 0; //OK
     }
     catch (exception& ex)

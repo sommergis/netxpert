@@ -9,6 +9,7 @@
  * ----------------------------------------------------------------------------- */
 
 #define SWIGPYTHON
+#define SWIG_PYTHON_THREADS
 #define SWIG_PYTHON_DIRECTOR_NO_VTABLE
 
 
@@ -5589,7 +5590,11 @@ SWIGINTERN PyObject *_wrap_delete_SwigPyIterator(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_SwigPyIterator" "', argument " "1"" of type '" "swig::SwigPyIterator *""'"); 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5612,7 +5617,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_value(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)((swig::SwigPyIterator const *)arg1)->value();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)((swig::SwigPyIterator const *)arg1)->value();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5653,7 +5662,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_incr__SWIG_0(PyObject *SWIGUNUSEDPARM(
   } 
   arg2 = static_cast< size_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->incr(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->incr(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5685,7 +5698,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_incr__SWIG_1(PyObject *SWIGUNUSEDPARM(
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->incr();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->incr();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5770,7 +5787,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_decr__SWIG_0(PyObject *SWIGUNUSEDPARM(
   } 
   arg2 = static_cast< size_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->decr(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->decr(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5802,7 +5823,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_decr__SWIG_1(PyObject *SWIGUNUSEDPARM(
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->decr();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->decr();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -5890,7 +5915,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_distance(PyObject *SWIGUNUSEDPARM(self
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
   try {
-    result = ((swig::SwigPyIterator const *)arg1)->distance((swig::SwigPyIterator const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = ((swig::SwigPyIterator const *)arg1)->distance((swig::SwigPyIterator const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::invalid_argument &_e) {
     SWIG_Python_Raise(SWIG_NewPointerObj((new std::invalid_argument(static_cast< const std::invalid_argument& >(_e))),SWIGTYPE_p_std__invalid_argument,SWIG_POINTER_OWN), "std::invalid_argument", SWIGTYPE_p_std__invalid_argument); SWIG_fail;
@@ -5930,7 +5959,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_equal(PyObject *SWIGUNUSEDPARM(self), 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
   try {
-    result = (bool)((swig::SwigPyIterator const *)arg1)->equal((swig::SwigPyIterator const &)*arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (bool)((swig::SwigPyIterator const *)arg1)->equal((swig::SwigPyIterator const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::invalid_argument &_e) {
     SWIG_Python_Raise(SWIG_NewPointerObj((new std::invalid_argument(static_cast< const std::invalid_argument& >(_e))),SWIGTYPE_p_std__invalid_argument,SWIG_POINTER_OWN), "std::invalid_argument", SWIGTYPE_p_std__invalid_argument); SWIG_fail;
@@ -5957,7 +5990,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_copy(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SwigPyIterator_copy" "', argument " "1"" of type '" "swig::SwigPyIterator const *""'"); 
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
-  result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->copy();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->copy();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -5980,7 +6017,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_next(PyObject *SWIGUNUSEDPARM(self), P
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->next();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->next();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6012,7 +6053,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___next__(PyObject *SWIGUNUSEDPARM(self
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->__next__();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->__next__();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6044,7 +6089,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_previous(PyObject *SWIGUNUSEDPARM(self
   }
   arg1 = reinterpret_cast< swig::SwigPyIterator * >(argp1);
   try {
-    result = (PyObject *)(arg1)->previous();
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (PyObject *)(arg1)->previous();
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6085,7 +6134,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator_advance(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)(arg1)->advance(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)(arg1)->advance(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6128,7 +6181,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___eq__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___eq__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = (bool)((swig::SwigPyIterator const *)arg1)->operator ==((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((swig::SwigPyIterator const *)arg1)->operator ==((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6162,7 +6219,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___ne__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___ne__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = (bool)((swig::SwigPyIterator const *)arg1)->operator !=((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((swig::SwigPyIterator const *)arg1)->operator !=((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6194,7 +6255,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___iadd__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *) &(arg1)->operator +=(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *) &(arg1)->operator +=(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6235,7 +6300,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___isub__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *) &(arg1)->operator -=(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *) &(arg1)->operator -=(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6276,7 +6345,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___add__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator +(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator +(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6317,7 +6390,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___sub____SWIG_0(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< ptrdiff_t >(val2);
   try {
-    result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator -(arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (swig::SwigPyIterator *)((swig::SwigPyIterator const *)arg1)->operator -(arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(swig::stop_iteration &_e) {
     {
@@ -6360,7 +6437,11 @@ SWIGINTERN PyObject *_wrap_SwigPyIterator___sub____SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SwigPyIterator___sub__" "', argument " "2"" of type '" "swig::SwigPyIterator const &""'"); 
   }
   arg2 = reinterpret_cast< swig::SwigPyIterator * >(argp2);
-  result = ((swig::SwigPyIterator const *)arg1)->operator -((swig::SwigPyIterator const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((swig::SwigPyIterator const *)arg1)->operator -((swig::SwigPyIterator const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_ptrdiff_t(static_cast< ptrdiff_t >(result));
   return resultobj;
 fail:
@@ -6436,7 +6517,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_iterator(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_iterator" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_InputArc_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_InputArc_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -6458,7 +6543,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___nonzero__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_InputArc_Sg____nonzero__((std::vector< netxpert::InputArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_InputArc_Sg____nonzero__((std::vector< netxpert::InputArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6480,7 +6569,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___bool__(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___bool__" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_InputArc_Sg____bool__((std::vector< netxpert::InputArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_InputArc_Sg____bool__((std::vector< netxpert::InputArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -6502,7 +6595,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___len__(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs___len__" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = std_vector_Sl_netxpert_InputArc_Sg____len__((std::vector< netxpert::InputArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_InputArc_Sg____len__((std::vector< netxpert::InputArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -6525,7 +6622,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_pop(PyObject *SWIGUNUSEDPARM(self), PyObjec
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_InputArc_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_InputArc_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6571,7 +6672,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___getslice__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg3 = static_cast< std::vector< netxpert::InputArc >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_vector_Sl_netxpert_InputArc_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_vector_Sl_netxpert_InputArc_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6633,7 +6738,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_0(PyObject *SWIGUNUSEDPA
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6683,7 +6792,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setslice____SWIG_1(PyObject *SWIGUNUSEDPA
   } 
   arg3 = static_cast< std::vector< netxpert::InputArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6795,7 +6908,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___delslice__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg3 = static_cast< std::vector< netxpert::InputArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6834,7 +6951,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_0(PyObject *SWIGUNUSEDPAR
   } 
   arg2 = static_cast< std::vector< netxpert::InputArc >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6870,7 +6991,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_vector_Sl_netxpert_InputArc_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > *)std_vector_Sl_netxpert_InputArc_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6922,7 +7047,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::InputArc,std::allocator< netxpert::InputArc > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -6962,7 +7091,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7000,7 +7133,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___delitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7087,7 +7224,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___getitem____SWIG_1(PyObject *SWIGUNUSEDPAR
   } 
   arg2 = static_cast< std::vector< netxpert::InputArc >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::InputArc >::value_type *) &std_vector_Sl_netxpert_InputArc_Sg____getitem____SWIG_1((std::vector< netxpert::InputArc > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputArc >::value_type *) &std_vector_Sl_netxpert_InputArc_Sg____getitem____SWIG_1((std::vector< netxpert::InputArc > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7182,7 +7323,11 @@ SWIGINTERN PyObject *_wrap_InputArcs___setitem____SWIG_2(PyObject *SWIGUNUSEDPAR
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputArc const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputArc const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -7289,7 +7434,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_append(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_append" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp2);
-  std_vector_Sl_netxpert_InputArc_Sg__append(arg1,(netxpert::InputArc const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_InputArc_Sg__append(arg1,(netxpert::InputArc const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7302,7 +7451,11 @@ SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
   std::vector< netxpert::InputArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputArcs")) SWIG_fail;
-  result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7329,7 +7482,11 @@ SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >((std::vector< netxpert::InputArc > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >((std::vector< netxpert::InputArc > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -7353,7 +7510,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_empty(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_empty" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (bool)((std::vector< netxpert::InputArc > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::InputArc > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7375,7 +7536,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_size(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_size" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = ((std::vector< netxpert::InputArc > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputArc > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -7396,7 +7561,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_clear(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_clear" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7429,7 +7598,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_swap(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_swap" "', argument " "2"" of type '" "std::vector< netxpert::InputArc > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7451,7 +7624,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_get_allocator(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = ((std::vector< netxpert::InputArc > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputArc > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InputArc >::allocator_type(static_cast< const std::vector< netxpert::InputArc >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -7473,7 +7650,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_begin(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_begin" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7496,7 +7677,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_end(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_end" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7519,7 +7704,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_rbegin(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7542,7 +7731,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_rend(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_rend" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7565,7 +7758,11 @@ SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputArcs" "', argument " "1"" of type '" "std::vector< netxpert::InputArc >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::InputArc >::size_type >(val1);
-  result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7586,7 +7783,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_pop_back(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7616,7 +7817,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_resize" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::InputArc >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7653,7 +7858,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7706,7 +7915,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputArcs_erase" "', argument " "3"" of type '" "std::vector< netxpert::InputArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -7792,7 +8005,11 @@ SWIGINTERN PyObject *_wrap_new_InputArcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputArcs" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp2);
-  result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >(arg1,(std::vector< netxpert::InputArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc > *)new std::vector< netxpert::InputArc >(arg1,(std::vector< netxpert::InputArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -7882,7 +8099,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_push_back(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_push_back" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::InputArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::InputArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7904,7 +8125,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_front(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_front" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (std::vector< netxpert::InputArc >::value_type *) &((std::vector< netxpert::InputArc > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc >::value_type *) &((std::vector< netxpert::InputArc > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   return resultobj;
 fail:
@@ -7926,7 +8151,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_back(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_back" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = (std::vector< netxpert::InputArc >::value_type *) &((std::vector< netxpert::InputArc > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputArc >::value_type *) &((std::vector< netxpert::InputArc > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, 0 |  0 );
   return resultobj;
 fail:
@@ -7968,7 +8197,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_assign(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_assign" "', argument " "3"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8010,7 +8243,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_resize" "', argument " "3"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8111,7 +8348,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "3"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::InputArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -8169,7 +8410,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputArcs_insert" "', argument " "4"" of type '" "std::vector< netxpert::InputArc >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::InputArc >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::InputArc >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::InputArc >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8259,7 +8504,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_reserve(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArcs_reserve" "', argument " "2"" of type '" "std::vector< netxpert::InputArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::InputArc >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8281,7 +8530,11 @@ SWIGINTERN PyObject *_wrap_InputArcs_capacity(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArcs_capacity" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  result = ((std::vector< netxpert::InputArc > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputArc > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -8302,7 +8555,11 @@ SWIGINTERN PyObject *_wrap_delete_InputArcs(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArcs" "', argument " "1"" of type '" "std::vector< netxpert::InputArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputArc > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -8333,7 +8590,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_iterator(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_iterator" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_InputNode_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_InputNode_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -8355,7 +8616,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___nonzero__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_InputNode_Sg____nonzero__((std::vector< netxpert::InputNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_InputNode_Sg____nonzero__((std::vector< netxpert::InputNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8377,7 +8642,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___bool__(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___bool__" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_InputNode_Sg____bool__((std::vector< netxpert::InputNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_InputNode_Sg____bool__((std::vector< netxpert::InputNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -8399,7 +8668,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___len__(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes___len__" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = std_vector_Sl_netxpert_InputNode_Sg____len__((std::vector< netxpert::InputNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_InputNode_Sg____len__((std::vector< netxpert::InputNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -8422,7 +8695,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_pop(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_InputNode_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_InputNode_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8468,7 +8745,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___getslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< netxpert::InputNode >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_vector_Sl_netxpert_InputNode_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_vector_Sl_netxpert_InputNode_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8530,7 +8811,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_0(PyObject *SWIGUNUSEDP
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8580,7 +8865,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setslice____SWIG_1(PyObject *SWIGUNUSEDP
   } 
   arg3 = static_cast< std::vector< netxpert::InputNode >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8692,7 +8981,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___delslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< netxpert::InputNode >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8731,7 +9024,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_0(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< netxpert::InputNode >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8767,7 +9064,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_vector_Sl_netxpert_InputNode_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > *)std_vector_Sl_netxpert_InputNode_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8819,7 +9120,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::InputNode,std::allocator< netxpert::InputNode > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8859,7 +9164,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8897,7 +9206,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___delitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -8984,7 +9297,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___getitem____SWIG_1(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< netxpert::InputNode >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::InputNode >::value_type *) &std_vector_Sl_netxpert_InputNode_Sg____getitem____SWIG_1((std::vector< netxpert::InputNode > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::InputNode >::value_type *) &std_vector_Sl_netxpert_InputNode_Sg____getitem____SWIG_1((std::vector< netxpert::InputNode > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -9079,7 +9396,11 @@ SWIGINTERN PyObject *_wrap_InputNodes___setitem____SWIG_2(PyObject *SWIGUNUSEDPA
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputNode const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_InputNode_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::InputNode const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -9186,7 +9507,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_append(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_append" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp2);
-  std_vector_Sl_netxpert_InputNode_Sg__append(arg1,(netxpert::InputNode const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_InputNode_Sg__append(arg1,(netxpert::InputNode const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9199,7 +9524,11 @@ SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   std::vector< netxpert::InputNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputNodes")) SWIG_fail;
-  result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9226,7 +9555,11 @@ SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >((std::vector< netxpert::InputNode > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >((std::vector< netxpert::InputNode > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -9250,7 +9583,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_empty(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_empty" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (bool)((std::vector< netxpert::InputNode > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::InputNode > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -9272,7 +9609,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_size(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_size" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = ((std::vector< netxpert::InputNode > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputNode > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -9293,7 +9634,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_clear(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_clear" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9326,7 +9671,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_swap(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_swap" "', argument " "2"" of type '" "std::vector< netxpert::InputNode > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9348,7 +9697,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_get_allocator(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = ((std::vector< netxpert::InputNode > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputNode > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InputNode >::allocator_type(static_cast< const std::vector< netxpert::InputNode >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -9370,7 +9723,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_begin(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_begin" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9393,7 +9750,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_end(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_end" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9416,7 +9777,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_rbegin(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9439,7 +9804,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_rend(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_rend" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9462,7 +9831,11 @@ SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_InputNodes" "', argument " "1"" of type '" "std::vector< netxpert::InputNode >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::InputNode >::size_type >(val1);
-  result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9483,7 +9856,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_pop_back(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9513,7 +9890,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_resize" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::InputNode >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9550,7 +9931,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9603,7 +9988,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "InputNodes_erase" "', argument " "3"" of type '" "std::vector< netxpert::InputNode >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -9689,7 +10078,11 @@ SWIGINTERN PyObject *_wrap_new_InputNodes__SWIG_3(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_InputNodes" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp2);
-  result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >(arg1,(std::vector< netxpert::InputNode >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode > *)new std::vector< netxpert::InputNode >(arg1,(std::vector< netxpert::InputNode >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -9779,7 +10172,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_push_back(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_push_back" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::InputNode >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::InputNode >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9801,7 +10198,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_front(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_front" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (std::vector< netxpert::InputNode >::value_type *) &((std::vector< netxpert::InputNode > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode >::value_type *) &((std::vector< netxpert::InputNode > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   return resultobj;
 fail:
@@ -9823,7 +10224,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_back(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_back" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = (std::vector< netxpert::InputNode >::value_type *) &((std::vector< netxpert::InputNode > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::InputNode >::value_type *) &((std::vector< netxpert::InputNode > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, 0 |  0 );
   return resultobj;
 fail:
@@ -9865,7 +10270,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_assign(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_assign" "', argument " "3"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9907,7 +10316,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_resize" "', argument " "3"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10008,7 +10421,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "3"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::InputNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::InputNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -10066,7 +10483,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "InputNodes_insert" "', argument " "4"" of type '" "std::vector< netxpert::InputNode >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::InputNode >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::InputNode >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::InputNode >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10156,7 +10577,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_reserve(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNodes_reserve" "', argument " "2"" of type '" "std::vector< netxpert::InputNode >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::InputNode >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10178,7 +10603,11 @@ SWIGINTERN PyObject *_wrap_InputNodes_capacity(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNodes_capacity" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  result = ((std::vector< netxpert::InputNode > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::InputNode > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -10199,7 +10628,11 @@ SWIGINTERN PyObject *_wrap_delete_InputNodes(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNodes" "', argument " "1"" of type '" "std::vector< netxpert::InputNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::InputNode > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -10230,7 +10663,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_iterator(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_iterator" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_NewNode_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_NewNode_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -10252,7 +10689,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___nonzero__(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_NewNode_Sg____nonzero__((std::vector< netxpert::NewNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_NewNode_Sg____nonzero__((std::vector< netxpert::NewNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -10274,7 +10715,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___bool__(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes___bool__" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_NewNode_Sg____bool__((std::vector< netxpert::NewNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_NewNode_Sg____bool__((std::vector< netxpert::NewNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -10296,7 +10741,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___len__(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes___len__" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = std_vector_Sl_netxpert_NewNode_Sg____len__((std::vector< netxpert::NewNode > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_NewNode_Sg____len__((std::vector< netxpert::NewNode > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -10319,7 +10768,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_pop(PyObject *SWIGUNUSEDPARM(self), PyObject
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_NewNode_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_NewNode_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10365,7 +10818,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___getslice__(PyObject *SWIGUNUSEDPARM(self),
   } 
   arg3 = static_cast< std::vector< netxpert::NewNode >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > *)std_vector_Sl_netxpert_NewNode_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > *)std_vector_Sl_netxpert_NewNode_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10427,7 +10884,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___setslice____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10477,7 +10938,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___setslice____SWIG_1(PyObject *SWIGUNUSEDPAR
   } 
   arg3 = static_cast< std::vector< netxpert::NewNode >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10589,7 +11054,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___delslice__(PyObject *SWIGUNUSEDPARM(self),
   } 
   arg3 = static_cast< std::vector< netxpert::NewNode >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10628,7 +11097,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___delitem____SWIG_0(PyObject *SWIGUNUSEDPARM
   } 
   arg2 = static_cast< std::vector< netxpert::NewNode >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10664,7 +11137,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___getitem____SWIG_0(PyObject *SWIGUNUSEDPARM
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > *)std_vector_Sl_netxpert_NewNode_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > *)std_vector_Sl_netxpert_NewNode_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10716,7 +11193,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10756,7 +11237,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10794,7 +11279,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___delitem____SWIG_1(PyObject *SWIGUNUSEDPARM
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10881,7 +11370,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___getitem____SWIG_1(PyObject *SWIGUNUSEDPARM
   } 
   arg2 = static_cast< std::vector< netxpert::NewNode >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::NewNode >::value_type *) &std_vector_Sl_netxpert_NewNode_Sg____getitem____SWIG_1((std::vector< netxpert::NewNode > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::NewNode >::value_type *) &std_vector_Sl_netxpert_NewNode_Sg____getitem____SWIG_1((std::vector< netxpert::NewNode > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -10976,7 +11469,11 @@ SWIGINTERN PyObject *_wrap_NewNodes___setitem____SWIG_2(PyObject *SWIGUNUSEDPARM
   }
   arg3 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::NewNode const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_NewNode_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::NewNode const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -11083,7 +11580,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_append(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_append" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp2);
-  std_vector_Sl_netxpert_NewNode_Sg__append(arg1,(netxpert::NewNode const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_NewNode_Sg__append(arg1,(netxpert::NewNode const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11096,7 +11597,11 @@ SWIGINTERN PyObject *_wrap_new_NewNodes__SWIG_0(PyObject *SWIGUNUSEDPARM(self), 
   std::vector< netxpert::NewNode > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_NewNodes")) SWIG_fail;
-  result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11123,7 +11628,11 @@ SWIGINTERN PyObject *_wrap_new_NewNodes__SWIG_1(PyObject *SWIGUNUSEDPARM(self), 
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >((std::vector< netxpert::NewNode > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >((std::vector< netxpert::NewNode > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -11147,7 +11656,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_empty(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_empty" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (bool)((std::vector< netxpert::NewNode > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::NewNode > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -11169,7 +11682,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_size(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_size" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = ((std::vector< netxpert::NewNode > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::NewNode > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -11190,7 +11707,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_clear(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_clear" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11223,7 +11744,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_swap(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_swap" "', argument " "2"" of type '" "std::vector< netxpert::NewNode > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11245,7 +11770,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_get_allocator(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = ((std::vector< netxpert::NewNode > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::NewNode > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::NewNode >::allocator_type(static_cast< const std::vector< netxpert::NewNode >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -11267,7 +11796,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_begin(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_begin" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11290,7 +11823,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_end(PyObject *SWIGUNUSEDPARM(self), PyObject
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_end" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11313,7 +11850,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11336,7 +11877,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_rend(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_rend" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11359,7 +11904,11 @@ SWIGINTERN PyObject *_wrap_new_NewNodes__SWIG_2(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_NewNodes" "', argument " "1"" of type '" "std::vector< netxpert::NewNode >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::NewNode >::size_type >(val1);
-  result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11380,7 +11929,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_pop_back(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11410,7 +11963,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NewNodes_resize" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::NewNode >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11447,7 +12004,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "NewNodes_erase" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11500,7 +12061,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "NewNodes_erase" "', argument " "3"" of type '" "std::vector< netxpert::NewNode >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11586,7 +12151,11 @@ SWIGINTERN PyObject *_wrap_new_NewNodes__SWIG_3(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_NewNodes" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp2);
-  result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >(arg1,(std::vector< netxpert::NewNode >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode > *)new std::vector< netxpert::NewNode >(arg1,(std::vector< netxpert::NewNode >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -11676,7 +12245,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_push_back(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_push_back" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::NewNode >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::NewNode >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11698,7 +12271,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_front(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_front" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (std::vector< netxpert::NewNode >::value_type *) &((std::vector< netxpert::NewNode > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode >::value_type *) &((std::vector< netxpert::NewNode > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
   return resultobj;
 fail:
@@ -11720,7 +12297,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_back(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_back" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = (std::vector< netxpert::NewNode >::value_type *) &((std::vector< netxpert::NewNode > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::NewNode >::value_type *) &((std::vector< netxpert::NewNode > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NewNode, 0 |  0 );
   return resultobj;
 fail:
@@ -11762,7 +12343,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_assign(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_assign" "', argument " "3"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11804,7 +12389,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_resize" "', argument " "3"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -11905,7 +12494,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_insert" "', argument " "3"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::NewNode >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::NewNode >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -11963,7 +12556,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NewNodes_insert" "', argument " "4"" of type '" "std::vector< netxpert::NewNode >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::NewNode >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::NewNode >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::NewNode >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12053,7 +12650,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_reserve(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NewNodes_reserve" "', argument " "2"" of type '" "std::vector< netxpert::NewNode >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::NewNode >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12075,7 +12676,11 @@ SWIGINTERN PyObject *_wrap_NewNodes_capacity(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNodes_capacity" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  result = ((std::vector< netxpert::NewNode > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::NewNode > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -12096,7 +12701,11 @@ SWIGINTERN PyObject *_wrap_delete_NewNodes(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NewNodes" "', argument " "1"" of type '" "std::vector< netxpert::NewNode > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::NewNode > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12127,7 +12736,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_iterator(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_iterator" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -12149,7 +12762,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___nonzero__(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____nonzero__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____nonzero__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -12171,7 +12788,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___bool__(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs___bool__" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____bool__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____bool__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -12193,7 +12814,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___len__(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs___len__" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = std_vector_Sl_netxpert_ExtSPTreeArc_Sg____len__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_ExtSPTreeArc_Sg____len__((std::vector< netxpert::ExtSPTreeArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -12216,7 +12841,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_pop(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_ExtSPTreeArc_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_ExtSPTreeArc_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12262,7 +12891,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___getslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< netxpert::ExtSPTreeArc >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12324,7 +12957,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___setslice____SWIG_0(PyObject *SWIGUNUSEDP
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12374,7 +13011,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___setslice____SWIG_1(PyObject *SWIGUNUSEDP
   } 
   arg3 = static_cast< std::vector< netxpert::ExtSPTreeArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12486,7 +13127,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___delslice__(PyObject *SWIGUNUSEDPARM(self
   } 
   arg3 = static_cast< std::vector< netxpert::ExtSPTreeArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12525,7 +13170,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___delitem____SWIG_0(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< netxpert::ExtSPTreeArc >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12561,7 +13210,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___getitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > *)std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12613,7 +13266,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___setitem____SWIG_0(PyObject *SWIGUNUSEDPA
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtSPTreeArc,std::allocator< netxpert::ExtSPTreeArc > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12653,7 +13310,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___setitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12691,7 +13352,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___delitem____SWIG_1(PyObject *SWIGUNUSEDPA
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12778,7 +13443,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___getitem____SWIG_1(PyObject *SWIGUNUSEDPA
   } 
   arg2 = static_cast< std::vector< netxpert::ExtSPTreeArc >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getitem____SWIG_1((std::vector< netxpert::ExtSPTreeArc > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &std_vector_Sl_netxpert_ExtSPTreeArc_Sg____getitem____SWIG_1((std::vector< netxpert::ExtSPTreeArc > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12873,7 +13542,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs___setitem____SWIG_2(PyObject *SWIGUNUSEDPA
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtSPTreeArc const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtSPTreeArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtSPTreeArc const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -12980,7 +13653,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_append(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_append" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp2);
-  std_vector_Sl_netxpert_ExtSPTreeArc_Sg__append(arg1,(netxpert::ExtSPTreeArc const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_ExtSPTreeArc_Sg__append(arg1,(netxpert::ExtSPTreeArc const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -12993,7 +13670,11 @@ SWIGINTERN PyObject *_wrap_new_ExtSPTArcs__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   std::vector< netxpert::ExtSPTreeArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtSPTArcs")) SWIG_fail;
-  result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -13020,7 +13701,11 @@ SWIGINTERN PyObject *_wrap_new_ExtSPTArcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >((std::vector< netxpert::ExtSPTreeArc > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >((std::vector< netxpert::ExtSPTreeArc > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -13044,7 +13729,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_empty(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_empty" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (bool)((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -13066,7 +13755,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_size(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_size" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -13087,7 +13780,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_clear(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_clear" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13120,7 +13817,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_swap(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_swap" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13142,7 +13843,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_get_allocator(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::ExtSPTreeArc >::allocator_type(static_cast< const std::vector< netxpert::ExtSPTreeArc >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -13164,7 +13869,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_begin(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_begin" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13187,7 +13896,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_end(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_end" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13210,7 +13923,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_rbegin(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13233,7 +13950,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_rend(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_rend" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13256,7 +13977,11 @@ SWIGINTERN PyObject *_wrap_new_ExtSPTArcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_ExtSPTArcs" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::ExtSPTreeArc >::size_type >(val1);
-  result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -13277,7 +14002,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_pop_back(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13307,7 +14036,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtSPTArcs_resize" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtSPTreeArc >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13344,7 +14077,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtSPTArcs_erase" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13397,7 +14134,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtSPTArcs_erase" "', argument " "3"" of type '" "std::vector< netxpert::ExtSPTreeArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13483,7 +14224,11 @@ SWIGINTERN PyObject *_wrap_new_ExtSPTArcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExtSPTArcs" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp2);
-  result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >(arg1,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc > *)new std::vector< netxpert::ExtSPTreeArc >(arg1,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -13573,7 +14318,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_push_back(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_push_back" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13595,7 +14344,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_front(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_front" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtSPTreeArc, 0 |  0 );
   return resultobj;
 fail:
@@ -13617,7 +14370,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_back(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtSPTreeArc >::value_type *) &((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtSPTreeArc, 0 |  0 );
   return resultobj;
 fail:
@@ -13659,7 +14416,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_assign(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_assign" "', argument " "3"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13701,7 +14462,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_resize" "', argument " "3"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13802,7 +14567,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_insert" "', argument " "3"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtSPTreeArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -13860,7 +14629,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtSPTArcs_insert" "', argument " "4"" of type '" "std::vector< netxpert::ExtSPTreeArc >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtSPTreeArc >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13950,7 +14723,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_reserve(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtSPTArcs_reserve" "', argument " "2"" of type '" "std::vector< netxpert::ExtSPTreeArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtSPTreeArc >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -13972,7 +14749,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTArcs_capacity(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTArcs_capacity" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtSPTreeArc > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -13993,7 +14774,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtSPTArcs(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtSPTArcs" "', argument " "1"" of type '" "std::vector< netxpert::ExtSPTreeArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtSPTreeArc > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -14024,7 +14809,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_iterator(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_iterator" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtNodeSupply_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtNodeSupply_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -14046,7 +14835,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___nonzero__(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtNodeSupply_Sg____nonzero__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtNodeSupply_Sg____nonzero__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -14068,7 +14861,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___bool__(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies___bool__" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtNodeSupply_Sg____bool__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtNodeSupply_Sg____bool__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -14090,7 +14887,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___len__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies___len__" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = std_vector_Sl_netxpert_ExtNodeSupply_Sg____len__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_ExtNodeSupply_Sg____len__((std::vector< netxpert::ExtNodeSupply > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -14113,7 +14914,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_pop(PyObject *SWIGUNUSEDPARM(self), P
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_ExtNodeSupply_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_ExtNodeSupply_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14159,7 +14964,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___getslice__(PyObject *SWIGUNUSEDPARM
   } 
   arg3 = static_cast< std::vector< netxpert::ExtNodeSupply >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *)std_vector_Sl_netxpert_ExtNodeSupply_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *)std_vector_Sl_netxpert_ExtNodeSupply_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14221,7 +15030,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___setslice____SWIG_0(PyObject *SWIGUN
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14271,7 +15084,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___setslice____SWIG_1(PyObject *SWIGUN
   } 
   arg3 = static_cast< std::vector< netxpert::ExtNodeSupply >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14383,7 +15200,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___delslice__(PyObject *SWIGUNUSEDPARM
   } 
   arg3 = static_cast< std::vector< netxpert::ExtNodeSupply >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14422,7 +15243,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___delitem____SWIG_0(PyObject *SWIGUNU
   } 
   arg2 = static_cast< std::vector< netxpert::ExtNodeSupply >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14458,7 +15283,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___getitem____SWIG_0(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *)std_vector_Sl_netxpert_ExtNodeSupply_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *)std_vector_Sl_netxpert_ExtNodeSupply_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14510,7 +15339,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___setitem____SWIG_0(PyObject *SWIGUNU
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14550,7 +15383,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___setitem____SWIG_1(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14588,7 +15425,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___delitem____SWIG_1(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14675,7 +15516,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___getitem____SWIG_1(PyObject *SWIGUNU
   } 
   arg2 = static_cast< std::vector< netxpert::ExtNodeSupply >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &std_vector_Sl_netxpert_ExtNodeSupply_Sg____getitem____SWIG_1((std::vector< netxpert::ExtNodeSupply > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &std_vector_Sl_netxpert_ExtNodeSupply_Sg____getitem____SWIG_1((std::vector< netxpert::ExtNodeSupply > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14770,7 +15615,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies___setitem____SWIG_2(PyObject *SWIGUNU
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtNodeSupply const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtNodeSupply_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtNodeSupply const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -14877,7 +15726,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_append(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_append" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp2);
-  std_vector_Sl_netxpert_ExtNodeSupply_Sg__append(arg1,(netxpert::ExtNodeSupply const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_ExtNodeSupply_Sg__append(arg1,(netxpert::ExtNodeSupply const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -14890,7 +15743,11 @@ SWIGINTERN PyObject *_wrap_new_ExtNodeSupplies__SWIG_0(PyObject *SWIGUNUSEDPARM(
   std::vector< netxpert::ExtNodeSupply > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtNodeSupplies")) SWIG_fail;
-  result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -14917,7 +15774,11 @@ SWIGINTERN PyObject *_wrap_new_ExtNodeSupplies__SWIG_1(PyObject *SWIGUNUSEDPARM(
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >((std::vector< netxpert::ExtNodeSupply > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >((std::vector< netxpert::ExtNodeSupply > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -14941,7 +15802,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_empty(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_empty" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (bool)((std::vector< netxpert::ExtNodeSupply > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::ExtNodeSupply > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -14963,7 +15828,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_size(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_size" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -14984,7 +15853,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_clear(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_clear" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15017,7 +15890,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_swap(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_swap" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15039,7 +15916,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_get_allocator(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::ExtNodeSupply >::allocator_type(static_cast< const std::vector< netxpert::ExtNodeSupply >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -15061,7 +15942,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_begin(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_begin" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15084,7 +15969,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_end(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_end" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15107,7 +15996,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_rbegin(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15130,7 +16023,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_rend(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_rend" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15153,7 +16050,11 @@ SWIGINTERN PyObject *_wrap_new_ExtNodeSupplies__SWIG_2(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_ExtNodeSupplies" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::ExtNodeSupply >::size_type >(val1);
-  result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -15174,7 +16075,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_pop_back(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15204,7 +16109,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_resize__SWIG_0(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtNodeSupplies_resize" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtNodeSupply >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15241,7 +16150,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_erase__SWIG_0(PyObject *SWIGUNUSEDPAR
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtNodeSupplies_erase" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15294,7 +16207,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_erase__SWIG_1(PyObject *SWIGUNUSEDPAR
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtNodeSupplies_erase" "', argument " "3"" of type '" "std::vector< netxpert::ExtNodeSupply >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15380,7 +16297,11 @@ SWIGINTERN PyObject *_wrap_new_ExtNodeSupplies__SWIG_3(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExtNodeSupplies" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp2);
-  result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >(arg1,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply > *)new std::vector< netxpert::ExtNodeSupply >(arg1,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -15470,7 +16391,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_push_back(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_push_back" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15492,7 +16417,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_front(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_front" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &((std::vector< netxpert::ExtNodeSupply > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &((std::vector< netxpert::ExtNodeSupply > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtNodeSupply, 0 |  0 );
   return resultobj;
 fail:
@@ -15514,7 +16443,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_back(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &((std::vector< netxpert::ExtNodeSupply > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtNodeSupply >::value_type *) &((std::vector< netxpert::ExtNodeSupply > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtNodeSupply, 0 |  0 );
   return resultobj;
 fail:
@@ -15556,7 +16489,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_assign(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_assign" "', argument " "3"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15598,7 +16535,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_resize__SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_resize" "', argument " "3"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15699,7 +16640,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_insert__SWIG_0(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_insert" "', argument " "3"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtNodeSupply >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -15757,7 +16702,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_insert__SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtNodeSupplies_insert" "', argument " "4"" of type '" "std::vector< netxpert::ExtNodeSupply >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtNodeSupply >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15847,7 +16796,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_reserve(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtNodeSupplies_reserve" "', argument " "2"" of type '" "std::vector< netxpert::ExtNodeSupply >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtNodeSupply >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15869,7 +16822,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupplies_capacity(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupplies_capacity" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtNodeSupply > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -15890,7 +16847,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtNodeSupplies(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtNodeSupplies" "', argument " "1"" of type '" "std::vector< netxpert::ExtNodeSupply > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtNodeSupply > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15921,7 +16882,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_iterator(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_iterator" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtDistributionArc_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_ExtDistributionArc_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -15943,7 +16908,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___nonzero__(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtDistributionArc_Sg____nonzero__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtDistributionArc_Sg____nonzero__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -15965,7 +16934,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___bool__(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution___bool__" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_ExtDistributionArc_Sg____bool__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_ExtDistributionArc_Sg____bool__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -15987,7 +16960,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___len__(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution___len__" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = std_vector_Sl_netxpert_ExtDistributionArc_Sg____len__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_ExtDistributionArc_Sg____len__((std::vector< netxpert::ExtDistributionArc > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -16010,7 +16987,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_pop(PyObject *SWIGUNUSEDPARM(self), P
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_ExtDistributionArc_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_ExtDistributionArc_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16056,7 +17037,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___getslice__(PyObject *SWIGUNUSEDPARM
   } 
   arg3 = static_cast< std::vector< netxpert::ExtDistributionArc >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *)std_vector_Sl_netxpert_ExtDistributionArc_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *)std_vector_Sl_netxpert_ExtDistributionArc_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16118,7 +17103,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___setslice____SWIG_0(PyObject *SWIGUN
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16168,7 +17157,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___setslice____SWIG_1(PyObject *SWIGUN
   } 
   arg3 = static_cast< std::vector< netxpert::ExtDistributionArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16280,7 +17273,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___delslice__(PyObject *SWIGUNUSEDPARM
   } 
   arg3 = static_cast< std::vector< netxpert::ExtDistributionArc >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16319,7 +17316,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___delitem____SWIG_0(PyObject *SWIGUNU
   } 
   arg2 = static_cast< std::vector< netxpert::ExtDistributionArc >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16355,7 +17356,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___getitem____SWIG_0(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *)std_vector_Sl_netxpert_ExtDistributionArc_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *)std_vector_Sl_netxpert_ExtDistributionArc_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16407,7 +17412,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___setitem____SWIG_0(PyObject *SWIGUNU
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16447,7 +17456,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___setitem____SWIG_1(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16485,7 +17498,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___delitem____SWIG_1(PyObject *SWIGUNU
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16572,7 +17589,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___getitem____SWIG_1(PyObject *SWIGUNU
   } 
   arg2 = static_cast< std::vector< netxpert::ExtDistributionArc >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &std_vector_Sl_netxpert_ExtDistributionArc_Sg____getitem____SWIG_1((std::vector< netxpert::ExtDistributionArc > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &std_vector_Sl_netxpert_ExtDistributionArc_Sg____getitem____SWIG_1((std::vector< netxpert::ExtDistributionArc > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16667,7 +17688,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution___setitem____SWIG_2(PyObject *SWIGUNU
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtDistributionArc const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_ExtDistributionArc_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::ExtDistributionArc const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -16774,7 +17799,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_append(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_append" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp2);
-  std_vector_Sl_netxpert_ExtDistributionArc_Sg__append(arg1,(netxpert::ExtDistributionArc const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_ExtDistributionArc_Sg__append(arg1,(netxpert::ExtDistributionArc const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -16787,7 +17816,11 @@ SWIGINTERN PyObject *_wrap_new_ExtDistribution__SWIG_0(PyObject *SWIGUNUSEDPARM(
   std::vector< netxpert::ExtDistributionArc > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtDistribution")) SWIG_fail;
-  result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -16814,7 +17847,11 @@ SWIGINTERN PyObject *_wrap_new_ExtDistribution__SWIG_1(PyObject *SWIGUNUSEDPARM(
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >((std::vector< netxpert::ExtDistributionArc > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >((std::vector< netxpert::ExtDistributionArc > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -16838,7 +17875,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_empty(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_empty" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (bool)((std::vector< netxpert::ExtDistributionArc > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::ExtDistributionArc > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -16860,7 +17901,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_size(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_size" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -16881,7 +17926,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_clear(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_clear" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -16914,7 +17963,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_swap(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_swap" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -16936,7 +17989,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_get_allocator(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::ExtDistributionArc >::allocator_type(static_cast< const std::vector< netxpert::ExtDistributionArc >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -16958,7 +18015,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_begin(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_begin" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -16981,7 +18042,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_end(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_end" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17004,7 +18069,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_rbegin(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17027,7 +18096,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_rend(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_rend" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17050,7 +18123,11 @@ SWIGINTERN PyObject *_wrap_new_ExtDistribution__SWIG_2(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_ExtDistribution" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::ExtDistributionArc >::size_type >(val1);
-  result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -17071,7 +18148,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_pop_back(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17101,7 +18182,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_resize__SWIG_0(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtDistribution_resize" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtDistributionArc >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17138,7 +18223,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_erase__SWIG_0(PyObject *SWIGUNUSEDPAR
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtDistribution_erase" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17191,7 +18280,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_erase__SWIG_1(PyObject *SWIGUNUSEDPAR
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "ExtDistribution_erase" "', argument " "3"" of type '" "std::vector< netxpert::ExtDistributionArc >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17277,7 +18370,11 @@ SWIGINTERN PyObject *_wrap_new_ExtDistribution__SWIG_3(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ExtDistribution" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp2);
-  result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >(arg1,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc > *)new std::vector< netxpert::ExtDistributionArc >(arg1,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -17367,7 +18464,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_push_back(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_push_back" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17389,7 +18490,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_front(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_front" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &((std::vector< netxpert::ExtDistributionArc > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &((std::vector< netxpert::ExtDistributionArc > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtDistributionArc, 0 |  0 );
   return resultobj;
 fail:
@@ -17411,7 +18516,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_back(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_back" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &((std::vector< netxpert::ExtDistributionArc > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::ExtDistributionArc >::value_type *) &((std::vector< netxpert::ExtDistributionArc > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtDistributionArc, 0 |  0 );
   return resultobj;
 fail:
@@ -17453,7 +18562,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_assign(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_assign" "', argument " "3"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17495,7 +18608,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_resize__SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_resize" "', argument " "3"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17596,7 +18713,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_insert__SWIG_0(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_insert" "', argument " "3"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::ExtDistributionArc >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -17654,7 +18775,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_insert__SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ExtDistribution_insert" "', argument " "4"" of type '" "std::vector< netxpert::ExtDistributionArc >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::ExtDistributionArc >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17744,7 +18869,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_reserve(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtDistribution_reserve" "', argument " "2"" of type '" "std::vector< netxpert::ExtDistributionArc >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::ExtDistributionArc >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17766,7 +18895,11 @@ SWIGINTERN PyObject *_wrap_ExtDistribution_capacity(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistribution_capacity" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::ExtDistributionArc > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -17787,7 +18920,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtDistribution(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtDistribution" "', argument " "1"" of type '" "std::vector< netxpert::ExtDistributionArc > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::ExtDistributionArc > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -17818,7 +18955,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_iterator(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_iterator" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_FlowCost_Sg__iterator(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_vector_Sl_netxpert_FlowCost_Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -17840,7 +18981,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___nonzero__(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___nonzero__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____nonzero__((std::vector< netxpert::FlowCost > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____nonzero__((std::vector< netxpert::FlowCost > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -17862,7 +19007,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___bool__(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___bool__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____bool__((std::vector< netxpert::FlowCost > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_vector_Sl_netxpert_FlowCost_Sg____bool__((std::vector< netxpert::FlowCost > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -17884,7 +19033,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___len__(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts___len__" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = std_vector_Sl_netxpert_FlowCost_Sg____len__((std::vector< netxpert::FlowCost > const *)arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_vector_Sl_netxpert_FlowCost_Sg____len__((std::vector< netxpert::FlowCost > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -17907,7 +19060,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_pop(PyObject *SWIGUNUSEDPARM(self), PyObjec
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
   try {
-    result = std_vector_Sl_netxpert_FlowCost_Sg__pop(arg1);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = std_vector_Sl_netxpert_FlowCost_Sg__pop(arg1);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -17953,7 +19110,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___getslice__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
   try {
-    result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18015,7 +19176,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___setslice____SWIG_0(PyObject *SWIGUNUSEDPA
     arg4 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg4);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg4);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18065,7 +19230,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___setslice____SWIG_1(PyObject *SWIGUNUSEDPA
   } 
   arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____setslice____SWIG_0(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18177,7 +19346,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___delslice__(PyObject *SWIGUNUSEDPARM(self)
   } 
   arg3 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val3);
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____delslice__(arg1,arg2,arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____delslice__(arg1,arg2,arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18216,7 +19389,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___delitem____SWIG_0(PyObject *SWIGUNUSEDPAR
   } 
   arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18252,7 +19429,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___getitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_0(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > *)std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_0(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18304,7 +19485,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_0(PyObject *SWIGUNUSEDPAR
     arg3 = ptr;
   }
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_0(arg1,arg2,(std::vector< netxpert::FlowCost,std::allocator< netxpert::FlowCost > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18344,7 +19529,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18382,7 +19571,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___delitem____SWIG_1(PyObject *SWIGUNUSEDPAR
     arg2 = (PySliceObject *) obj1;
   }
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_1(arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____delitem____SWIG_1(arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18469,7 +19662,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___getitem____SWIG_1(PyObject *SWIGUNUSEDPAR
   } 
   arg2 = static_cast< std::vector< netxpert::FlowCost >::difference_type >(val2);
   try {
-    result = (std::vector< netxpert::FlowCost >::value_type *) &std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_1((std::vector< netxpert::FlowCost > const *)arg1,arg2);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::vector< netxpert::FlowCost >::value_type *) &std_vector_Sl_netxpert_FlowCost_Sg____getitem____SWIG_1((std::vector< netxpert::FlowCost > const *)arg1,arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18564,7 +19761,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts___setitem____SWIG_2(PyObject *SWIGUNUSEDPAR
   }
   arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
   try {
-    std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::FlowCost const &)*arg3);
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_vector_Sl_netxpert_FlowCost_Sg____setitem____SWIG_2(arg1,arg2,(netxpert::FlowCost const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
   }
   catch(std::out_of_range &_e) {
     SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
@@ -18671,7 +19872,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_append(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_append" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
-  std_vector_Sl_netxpert_FlowCost_Sg__append(arg1,(netxpert::FlowCost const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_vector_Sl_netxpert_FlowCost_Sg__append(arg1,(netxpert::FlowCost const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -18684,7 +19889,11 @@ SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
   std::vector< netxpert::FlowCost > *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_FlowCosts")) SWIG_fail;
-  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -18711,7 +19920,11 @@ SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
     }
     arg1 = ptr;
   }
-  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >((std::vector< netxpert::FlowCost > const &)*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >((std::vector< netxpert::FlowCost > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
@@ -18735,7 +19948,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_empty(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_empty" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (bool)((std::vector< netxpert::FlowCost > const *)arg1)->empty();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::vector< netxpert::FlowCost > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -18757,7 +19974,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_size(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_size" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = ((std::vector< netxpert::FlowCost > const *)arg1)->size();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::FlowCost > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -18778,7 +19999,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_clear(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_clear" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  (arg1)->clear();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -18811,7 +20036,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_swap(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_swap" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp2);
-  (arg1)->swap(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -18833,7 +20062,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_get_allocator(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_get_allocator" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = ((std::vector< netxpert::FlowCost > const *)arg1)->get_allocator();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::FlowCost > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::FlowCost >::allocator_type(static_cast< const std::vector< netxpert::FlowCost >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -18855,7 +20088,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_begin(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_begin" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (arg1)->begin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -18878,7 +20115,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_end(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_end" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (arg1)->end();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -18901,7 +20142,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_rbegin(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_rbegin" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (arg1)->rbegin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -18924,7 +20169,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_rend(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_rend" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (arg1)->rend();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::reverse_iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -18947,7 +20196,11 @@ SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_2(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
   } 
   arg1 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val1);
-  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -18968,7 +20221,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_pop_back(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_pop_back" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  (arg1)->pop_back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->pop_back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -18998,7 +20255,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_resize__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_resize" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
-  (arg1)->resize(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19035,7 +20296,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -19088,7 +20353,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self
       SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "FlowCosts_erase" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::iterator""'");
     }
   }
-  result = (arg1)->erase(arg2,arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -19174,7 +20443,11 @@ SWIGINTERN PyObject *_wrap_new_FlowCosts__SWIG_3(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_FlowCosts" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
-  result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1,(std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost > *)new std::vector< netxpert::FlowCost >(arg1,(std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -19264,7 +20537,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_push_back(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_push_back" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp2);
-  (arg1)->push_back((std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->push_back((std::vector< netxpert::FlowCost >::value_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19286,7 +20563,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_front(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_front" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->front();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->front();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, 0 |  0 );
   return resultobj;
 fail:
@@ -19308,7 +20589,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_back(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_back" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->back();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::vector< netxpert::FlowCost >::value_type *) &((std::vector< netxpert::FlowCost > const *)arg1)->back();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, 0 |  0 );
   return resultobj;
 fail:
@@ -19350,7 +20635,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_assign(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_assign" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
-  (arg1)->assign(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->assign(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19392,7 +20681,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_resize__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_resize" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
-  (arg1)->resize(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->resize(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19493,7 +20786,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_insert__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_insert" "', argument " "3"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp3);
-  result = (arg1)->insert(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->insert(arg2,(std::vector< netxpert::FlowCost >::value_type const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::vector< netxpert::FlowCost >::iterator & >(result)),
     swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
   return resultobj;
@@ -19551,7 +20848,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_insert__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "FlowCosts_insert" "', argument " "4"" of type '" "std::vector< netxpert::FlowCost >::value_type const &""'"); 
   }
   arg4 = reinterpret_cast< std::vector< netxpert::FlowCost >::value_type * >(argp4);
-  (arg1)->insert(arg2,arg3,(std::vector< netxpert::FlowCost >::value_type const &)*arg4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->insert(arg2,arg3,(std::vector< netxpert::FlowCost >::value_type const &)*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19641,7 +20942,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_reserve(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCosts_reserve" "', argument " "2"" of type '" "std::vector< netxpert::FlowCost >::size_type""'");
   } 
   arg2 = static_cast< std::vector< netxpert::FlowCost >::size_type >(val2);
-  (arg1)->reserve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->reserve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19663,7 +20968,11 @@ SWIGINTERN PyObject *_wrap_FlowCosts_capacity(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCosts_capacity" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > const *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  result = ((std::vector< netxpert::FlowCost > const *)arg1)->capacity();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::vector< netxpert::FlowCost > const *)arg1)->capacity();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_size_t(static_cast< size_t >(result));
   return resultobj;
 fail:
@@ -19684,7 +20993,11 @@ SWIGINTERN PyObject *_wrap_delete_FlowCosts(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FlowCosts" "', argument " "1"" of type '" "std::vector< netxpert::FlowCost > *""'"); 
   }
   arg1 = reinterpret_cast< std::vector< netxpert::FlowCost > * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -19704,7 +21017,11 @@ SWIGINTERN PyObject *_wrap_Version(PyObject *SWIGUNUSEDPARM(self), PyObject *arg
   std::string result;
   
   if (!PyArg_ParseTuple(args,(char *)":Version")) SWIG_fail;
-  result = netxpert::Version();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = netxpert::Version();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -19739,7 +21056,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_set(PyObject *SWIGUNUSEDPARM(s
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->arcIDColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->arcIDColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -19763,7 +21084,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_arcIDColName_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_arcIDColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->arcIDColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->arcIDColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -19798,7 +21123,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_fromColName_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->fromColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->fromColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -19822,7 +21151,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_fromColName_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_fromColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->fromColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->fromColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -19857,7 +21190,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_toColName_set(PyObject *SWIGUNUSEDPARM(self
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->toColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->toColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -19881,7 +21218,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_toColName_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_toColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->toColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->toColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -19916,7 +21257,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_costColName_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->costColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->costColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -19940,7 +21285,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_costColName_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_costColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->costColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->costColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -19975,7 +21324,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_capColName_set(PyObject *SWIGUNUSEDPARM(sel
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->capColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->capColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -19999,7 +21352,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_capColName_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_capColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->capColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->capColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20034,7 +21391,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_onewayColName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->onewayColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->onewayColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20058,7 +21419,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_onewayColName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_onewayColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->onewayColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->onewayColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20093,7 +21458,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_nodeIDColName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->nodeIDColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->nodeIDColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20117,7 +21486,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_nodeIDColName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_nodeIDColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->nodeIDColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->nodeIDColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20152,7 +21525,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_supplyColName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->supplyColName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->supplyColName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20176,7 +21553,11 @@ SWIGINTERN PyObject *_wrap_ColumnMap_supplyColName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ColumnMap_supplyColName_get" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  result = (std::string *) & ((arg1)->supplyColName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->supplyColName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20189,7 +21570,11 @@ SWIGINTERN PyObject *_wrap_new_ColumnMap(PyObject *SWIGUNUSEDPARM(self), PyObjec
   netxpert::ColumnMap *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ColumnMap")) SWIG_fail;
-  result = (netxpert::ColumnMap *)new netxpert::ColumnMap();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ColumnMap *)new netxpert::ColumnMap();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ColumnMap, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -20210,7 +21595,11 @@ SWIGINTERN PyObject *_wrap_delete_ColumnMap(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ColumnMap" "', argument " "1"" of type '" "netxpert::ColumnMap *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ColumnMap * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20252,7 +21641,11 @@ SWIGINTERN PyObject *_wrap_InputNode_extNodeID_set(PyObject *SWIGUNUSEDPARM(self
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extNodeID = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extNodeID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20276,7 +21669,11 @@ SWIGINTERN PyObject *_wrap_InputNode_extNodeID_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_extNodeID_get" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
-  result = (std::string *) & ((arg1)->extNodeID);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extNodeID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20306,7 +21703,11 @@ SWIGINTERN PyObject *_wrap_InputNode_nodeSupply_set(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputNode_nodeSupply_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->nodeSupply = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->nodeSupply = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20328,7 +21729,11 @@ SWIGINTERN PyObject *_wrap_InputNode_nodeSupply_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode_nodeSupply_get" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
-  result = (double) ((arg1)->nodeSupply);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->nodeSupply);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -20350,7 +21755,11 @@ SWIGINTERN PyObject *_wrap_InputNode___str__(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputNode___str__" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
-  result = (char *)netxpert_InputNode___str__(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (char *)netxpert_InputNode___str__(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_FromCharPtr((const char *)result);
   return resultobj;
 fail:
@@ -20363,7 +21772,11 @@ SWIGINTERN PyObject *_wrap_new_InputNode(PyObject *SWIGUNUSEDPARM(self), PyObjec
   netxpert::InputNode *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputNode")) SWIG_fail;
-  result = (netxpert::InputNode *)new netxpert::InputNode();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::InputNode *)new netxpert::InputNode();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputNode, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -20384,7 +21797,11 @@ SWIGINTERN PyObject *_wrap_delete_InputNode(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputNode" "', argument " "1"" of type '" "netxpert::InputNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputNode * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20426,7 +21843,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extArcID_set(PyObject *SWIGUNUSEDPARM(self),
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extArcID = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extArcID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20450,7 +21871,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extArcID_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extArcID_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (std::string *) & ((arg1)->extArcID);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extArcID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20485,7 +21910,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extFromNode_set(PyObject *SWIGUNUSEDPARM(sel
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extFromNode = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extFromNode = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20509,7 +21938,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extFromNode_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extFromNode_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (std::string *) & ((arg1)->extFromNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extFromNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20544,7 +21977,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extToNode_set(PyObject *SWIGUNUSEDPARM(self)
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extToNode = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extToNode = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20568,7 +22005,11 @@ SWIGINTERN PyObject *_wrap_InputArc_extToNode_get(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_extToNode_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (std::string *) & ((arg1)->extToNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extToNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20598,7 +22039,11 @@ SWIGINTERN PyObject *_wrap_InputArc_cost_set(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_cost_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->cost = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->cost = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20620,7 +22065,11 @@ SWIGINTERN PyObject *_wrap_InputArc_cost_get(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_cost_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (double) ((arg1)->cost);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->cost);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -20650,7 +22099,11 @@ SWIGINTERN PyObject *_wrap_InputArc_capacity_set(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InputArc_capacity_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->capacity = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->capacity = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20672,7 +22125,11 @@ SWIGINTERN PyObject *_wrap_InputArc_capacity_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_capacity_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (double) ((arg1)->capacity);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->capacity);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -20707,7 +22164,11 @@ SWIGINTERN PyObject *_wrap_InputArc_oneway_set(PyObject *SWIGUNUSEDPARM(self), P
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->oneway = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->oneway = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20731,7 +22192,11 @@ SWIGINTERN PyObject *_wrap_InputArc_oneway_get(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc_oneway_get" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (std::string *) & ((arg1)->oneway);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->oneway);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20753,7 +22218,11 @@ SWIGINTERN PyObject *_wrap_InputArc___str__(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InputArc___str__" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  result = (char *)netxpert_InputArc___str__(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (char *)netxpert_InputArc___str__(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_FromCharPtr((const char *)result);
   return resultobj;
 fail:
@@ -20766,7 +22235,11 @@ SWIGINTERN PyObject *_wrap_new_InputArc(PyObject *SWIGUNUSEDPARM(self), PyObject
   netxpert::InputArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InputArc")) SWIG_fail;
-  result = (netxpert::InputArc *)new netxpert::InputArc();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::InputArc *)new netxpert::InputArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InputArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -20787,7 +22260,11 @@ SWIGINTERN PyObject *_wrap_delete_InputArc(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InputArc" "', argument " "1"" of type '" "netxpert::InputArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InputArc * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20829,7 +22306,11 @@ SWIGINTERN PyObject *_wrap_NewNode_extNodeID_set(PyObject *SWIGUNUSEDPARM(self),
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extNodeID = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extNodeID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -20853,7 +22334,11 @@ SWIGINTERN PyObject *_wrap_NewNode_extNodeID_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_extNodeID_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
-  result = (std::string *) & ((arg1)->extNodeID);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extNodeID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -20891,7 +22376,11 @@ SWIGINTERN PyObject *_wrap_NewNode_coord_set(PyObject *SWIGUNUSEDPARM(self), PyO
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  if (arg1) (arg1)->coord = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->coord = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20913,7 +22402,11 @@ SWIGINTERN PyObject *_wrap_NewNode_coord_get(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_coord_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
-  result =  ((arg1)->coord);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result =  ((arg1)->coord);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new Coordinate(static_cast< const Coordinate& >(result))), SWIGTYPE_p_Coordinate, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -20943,7 +22436,11 @@ SWIGINTERN PyObject *_wrap_NewNode_supply_set(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NewNode_supply_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->supply = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->supply = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -20965,7 +22462,11 @@ SWIGINTERN PyObject *_wrap_NewNode_supply_get(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NewNode_supply_get" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
-  result = (double) ((arg1)->supply);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->supply);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -20978,7 +22479,11 @@ SWIGINTERN PyObject *_wrap_new_NewNode(PyObject *SWIGUNUSEDPARM(self), PyObject 
   netxpert::NewNode *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_NewNode")) SWIG_fail;
-  result = (netxpert::NewNode *)new netxpert::NewNode();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::NewNode *)new netxpert::NewNode();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NewNode, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -20999,7 +22504,11 @@ SWIGINTERN PyObject *_wrap_delete_NewNode(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NewNode" "', argument " "1"" of type '" "netxpert::NewNode *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::NewNode * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21036,7 +22545,11 @@ SWIGINTERN PyObject *_wrap_ODPair_origin_set(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ODPair_origin_set" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->origin = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->origin = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21058,7 +22571,11 @@ SWIGINTERN PyObject *_wrap_ODPair_origin_get(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_origin_get" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
-  result = (unsigned int) ((arg1)->origin);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int) ((arg1)->origin);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
@@ -21088,7 +22605,11 @@ SWIGINTERN PyObject *_wrap_ODPair_dest_set(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ODPair_dest_set" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->dest = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->dest = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21110,7 +22631,11 @@ SWIGINTERN PyObject *_wrap_ODPair_dest_get(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ODPair_dest_get" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
-  result = (unsigned int) ((arg1)->dest);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int) ((arg1)->dest);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
@@ -21123,7 +22648,11 @@ SWIGINTERN PyObject *_wrap_new_ODPair(PyObject *SWIGUNUSEDPARM(self), PyObject *
   netxpert::ODPair *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ODPair")) SWIG_fail;
-  result = (netxpert::ODPair *)new netxpert::ODPair();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ODPair *)new netxpert::ODPair();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ODPair, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -21144,7 +22673,11 @@ SWIGINTERN PyObject *_wrap_delete_ODPair(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ODPair" "', argument " "1"" of type '" "netxpert::ODPair *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ODPair * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21181,7 +22714,11 @@ SWIGINTERN PyObject *_wrap_InternalArc_fromNode_set(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InternalArc_fromNode_set" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->fromNode = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->fromNode = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21203,7 +22740,11 @@ SWIGINTERN PyObject *_wrap_InternalArc_fromNode_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_fromNode_get" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
-  result = (unsigned int) ((arg1)->fromNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int) ((arg1)->fromNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
@@ -21233,7 +22774,11 @@ SWIGINTERN PyObject *_wrap_InternalArc_toNode_set(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "InternalArc_toNode_set" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  if (arg1) (arg1)->toNode = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->toNode = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21255,7 +22800,11 @@ SWIGINTERN PyObject *_wrap_InternalArc_toNode_get(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "InternalArc_toNode_get" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
-  result = (unsigned int) ((arg1)->toNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int) ((arg1)->toNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
@@ -21268,7 +22817,11 @@ SWIGINTERN PyObject *_wrap_new_InternalArc(PyObject *SWIGUNUSEDPARM(self), PyObj
   netxpert::InternalArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_InternalArc")) SWIG_fail;
-  result = (netxpert::InternalArc *)new netxpert::InternalArc();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::InternalArc *)new netxpert::InternalArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InternalArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -21289,7 +22842,11 @@ SWIGINTERN PyObject *_wrap_delete_InternalArc(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_InternalArc" "', argument " "1"" of type '" "netxpert::InternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::InternalArc * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21326,7 +22883,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_intArc_set(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "FlowCost_intArc_set" "', argument " "2"" of type '" "netxpert::InternalArc *""'"); 
   }
   arg2 = reinterpret_cast< netxpert::InternalArc * >(argp2);
-  if (arg1) (arg1)->intArc = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->intArc = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21348,7 +22909,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_intArc_get(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCost_intArc_get" "', argument " "1"" of type '" "netxpert::FlowCost *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::FlowCost * >(argp1);
-  result = (netxpert::InternalArc *)& ((arg1)->intArc);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::InternalArc *)& ((arg1)->intArc);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__InternalArc, 0 |  0 );
   return resultobj;
 fail:
@@ -21378,7 +22943,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_flow_set(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCost_flow_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->flow = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->flow = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21400,7 +22969,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_flow_get(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCost_flow_get" "', argument " "1"" of type '" "netxpert::FlowCost *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::FlowCost * >(argp1);
-  result = (double) ((arg1)->flow);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->flow);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -21430,7 +23003,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_cost_set(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FlowCost_cost_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->cost = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->cost = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21452,7 +23029,11 @@ SWIGINTERN PyObject *_wrap_FlowCost_cost_get(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FlowCost_cost_get" "', argument " "1"" of type '" "netxpert::FlowCost *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::FlowCost * >(argp1);
-  result = (double) ((arg1)->cost);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->cost);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -21465,7 +23046,11 @@ SWIGINTERN PyObject *_wrap_new_FlowCost(PyObject *SWIGUNUSEDPARM(self), PyObject
   netxpert::FlowCost *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_FlowCost")) SWIG_fail;
-  result = (netxpert::FlowCost *)new netxpert::FlowCost();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::FlowCost *)new netxpert::FlowCost();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__FlowCost, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -21486,7 +23071,11 @@ SWIGINTERN PyObject *_wrap_delete_FlowCost(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_FlowCost" "', argument " "1"" of type '" "netxpert::FlowCost *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::FlowCost * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21528,7 +23117,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupply_extNodeID_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extNodeID = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extNodeID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21552,7 +23145,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupply_extNodeID_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupply_extNodeID_get" "', argument " "1"" of type '" "netxpert::ExtNodeSupply *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtNodeSupply * >(argp1);
-  result = (netxpert::ExtNodeID *) & ((arg1)->extNodeID);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtNodeID *) & ((arg1)->extNodeID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -21582,7 +23179,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupply_supply_set(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtNodeSupply_supply_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->supply = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->supply = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21604,7 +23205,11 @@ SWIGINTERN PyObject *_wrap_ExtNodeSupply_supply_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtNodeSupply_supply_get" "', argument " "1"" of type '" "netxpert::ExtNodeSupply *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtNodeSupply * >(argp1);
-  result = (double) ((arg1)->supply);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->supply);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -21617,7 +23222,11 @@ SWIGINTERN PyObject *_wrap_new_ExtNodeSupply(PyObject *SWIGUNUSEDPARM(self), PyO
   netxpert::ExtNodeSupply *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtNodeSupply")) SWIG_fail;
-  result = (netxpert::ExtNodeSupply *)new netxpert::ExtNodeSupply();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtNodeSupply *)new netxpert::ExtNodeSupply();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtNodeSupply, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -21638,7 +23247,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtNodeSupply(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtNodeSupply" "', argument " "1"" of type '" "netxpert::ExtNodeSupply *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtNodeSupply * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21680,7 +23293,11 @@ SWIGINTERN PyObject *_wrap_ExternalArc_extFromNode_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extFromNode = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extFromNode = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21704,7 +23321,11 @@ SWIGINTERN PyObject *_wrap_ExternalArc_extFromNode_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExternalArc_extFromNode_get" "', argument " "1"" of type '" "netxpert::ExternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExternalArc * >(argp1);
-  result = (std::string *) & ((arg1)->extFromNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extFromNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -21739,7 +23360,11 @@ SWIGINTERN PyObject *_wrap_ExternalArc_extToNode_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extToNode = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extToNode = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21763,7 +23388,11 @@ SWIGINTERN PyObject *_wrap_ExternalArc_extToNode_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExternalArc_extToNode_get" "', argument " "1"" of type '" "netxpert::ExternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExternalArc * >(argp1);
-  result = (std::string *) & ((arg1)->extToNode);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->extToNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -21776,7 +23405,11 @@ SWIGINTERN PyObject *_wrap_new_ExternalArc(PyObject *SWIGUNUSEDPARM(self), PyObj
   netxpert::ExternalArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExternalArc")) SWIG_fail;
-  result = (netxpert::ExternalArc *)new netxpert::ExternalArc();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExternalArc *)new netxpert::ExternalArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExternalArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -21797,7 +23430,11 @@ SWIGINTERN PyObject *_wrap_delete_ExternalArc(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExternalArc" "', argument " "1"" of type '" "netxpert::ExternalArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExternalArc * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21839,7 +23476,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_extArcID_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->extArcID = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extArcID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -21863,7 +23504,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_extArcID_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTreeArc_extArcID_get" "', argument " "1"" of type '" "netxpert::ExtSPTreeArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtSPTreeArc * >(argp1);
-  result = (netxpert::ExtArcID *) & ((arg1)->extArcID);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtArcID *) & ((arg1)->extArcID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -21893,7 +23538,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_extArc_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExtSPTreeArc_extArc_set" "', argument " "2"" of type '" "netxpert::ExternalArc *""'"); 
   }
   arg2 = reinterpret_cast< netxpert::ExternalArc * >(argp2);
-  if (arg1) (arg1)->extArc = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extArc = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21915,7 +23564,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_extArc_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTreeArc_extArc_get" "', argument " "1"" of type '" "netxpert::ExtSPTreeArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtSPTreeArc * >(argp1);
-  result = (netxpert::ExternalArc *)& ((arg1)->extArc);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExternalArc *)& ((arg1)->extArc);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExternalArc, 0 |  0 );
   return resultobj;
 fail:
@@ -21945,7 +23598,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_cost_set(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtSPTreeArc_cost_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->cost = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->cost = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -21967,7 +23624,11 @@ SWIGINTERN PyObject *_wrap_ExtSPTreeArc_cost_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtSPTreeArc_cost_get" "', argument " "1"" of type '" "netxpert::ExtSPTreeArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtSPTreeArc * >(argp1);
-  result = (double) ((arg1)->cost);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->cost);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -21980,7 +23641,11 @@ SWIGINTERN PyObject *_wrap_new_ExtSPTreeArc(PyObject *SWIGUNUSEDPARM(self), PyOb
   netxpert::ExtSPTreeArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtSPTreeArc")) SWIG_fail;
-  result = (netxpert::ExtSPTreeArc *)new netxpert::ExtSPTreeArc();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtSPTreeArc *)new netxpert::ExtSPTreeArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtSPTreeArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -22001,7 +23666,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtSPTreeArc(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtSPTreeArc" "', argument " "1"" of type '" "netxpert::ExtSPTreeArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtSPTreeArc * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22038,7 +23707,11 @@ SWIGINTERN PyObject *_wrap_ExtTransportationData_odm_set(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExtTransportationData_odm_set" "', argument " "2"" of type '" "netxpert::ExtSPTArcs *""'"); 
   }
   arg2 = reinterpret_cast< netxpert::ExtSPTArcs * >(argp2);
-  if (arg1) (arg1)->odm = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->odm = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22060,7 +23733,11 @@ SWIGINTERN PyObject *_wrap_ExtTransportationData_odm_get(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtTransportationData_odm_get" "', argument " "1"" of type '" "netxpert::ExtTransportationData *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtTransportationData * >(argp1);
-  result = (netxpert::ExtSPTArcs *)& ((arg1)->odm);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtSPTArcs *)& ((arg1)->odm);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t, 0 |  0 );
   return resultobj;
 fail:
@@ -22090,7 +23767,11 @@ SWIGINTERN PyObject *_wrap_ExtTransportationData_supply_set(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExtTransportationData_supply_set" "', argument " "2"" of type '" "netxpert::ExtNodeSupplies *""'"); 
   }
   arg2 = reinterpret_cast< netxpert::ExtNodeSupplies * >(argp2);
-  if (arg1) (arg1)->supply = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->supply = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22112,7 +23793,11 @@ SWIGINTERN PyObject *_wrap_ExtTransportationData_supply_get(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtTransportationData_supply_get" "', argument " "1"" of type '" "netxpert::ExtTransportationData *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtTransportationData * >(argp1);
-  result = (netxpert::ExtNodeSupplies *)& ((arg1)->supply);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtNodeSupplies *)& ((arg1)->supply);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, 0 |  0 );
   return resultobj;
 fail:
@@ -22125,7 +23810,11 @@ SWIGINTERN PyObject *_wrap_new_ExtTransportationData(PyObject *SWIGUNUSEDPARM(se
   netxpert::ExtTransportationData *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtTransportationData")) SWIG_fail;
-  result = (netxpert::ExtTransportationData *)new netxpert::ExtTransportationData();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtTransportationData *)new netxpert::ExtTransportationData();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtTransportationData, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -22146,7 +23835,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtTransportationData(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtTransportationData" "', argument " "1"" of type '" "netxpert::ExtTransportationData *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtTransportationData * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22188,7 +23881,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_arcid_set(PyObject *SWIGUNUSEDPARM
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->arcid = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->arcid = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -22212,7 +23909,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_arcid_get(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistributionArc_arcid_get" "', argument " "1"" of type '" "netxpert::ExtDistributionArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtDistributionArc * >(argp1);
-  result = (netxpert::ExtArcID *) & ((arg1)->arcid);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtArcID *) & ((arg1)->arcid);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -22242,7 +23943,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_extArc_set(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "ExtDistributionArc_extArc_set" "', argument " "2"" of type '" "netxpert::ExternalArc *""'"); 
   }
   arg2 = reinterpret_cast< netxpert::ExternalArc * >(argp2);
-  if (arg1) (arg1)->extArc = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extArc = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22264,7 +23969,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_extArc_get(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistributionArc_extArc_get" "', argument " "1"" of type '" "netxpert::ExtDistributionArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtDistributionArc * >(argp1);
-  result = (netxpert::ExternalArc *)& ((arg1)->extArc);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExternalArc *)& ((arg1)->extArc);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExternalArc, 0 |  0 );
   return resultobj;
 fail:
@@ -22294,7 +24003,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_cost_set(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtDistributionArc_cost_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->cost = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->cost = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22316,7 +24029,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_cost_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistributionArc_cost_get" "', argument " "1"" of type '" "netxpert::ExtDistributionArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtDistributionArc * >(argp1);
-  result = (double) ((arg1)->cost);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->cost);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -22346,7 +24063,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_flow_set(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ExtDistributionArc_flow_set" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  if (arg1) (arg1)->flow = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->flow = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22368,7 +24089,11 @@ SWIGINTERN PyObject *_wrap_ExtDistributionArc_flow_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ExtDistributionArc_flow_get" "', argument " "1"" of type '" "netxpert::ExtDistributionArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtDistributionArc * >(argp1);
-  result = (double) ((arg1)->flow);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->flow);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -22381,7 +24106,11 @@ SWIGINTERN PyObject *_wrap_new_ExtDistributionArc(PyObject *SWIGUNUSEDPARM(self)
   netxpert::ExtDistributionArc *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_ExtDistributionArc")) SWIG_fail;
-  result = (netxpert::ExtDistributionArc *)new netxpert::ExtDistributionArc();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtDistributionArc *)new netxpert::ExtDistributionArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ExtDistributionArc, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -22402,7 +24131,11 @@ SWIGINTERN PyObject *_wrap_delete_ExtDistributionArc(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ExtDistributionArc" "', argument " "1"" of type '" "netxpert::ExtDistributionArc *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ExtDistributionArc * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22444,7 +24177,11 @@ SWIGINTERN PyObject *_wrap_Config_NetXDBPath_set(PyObject *SWIGUNUSEDPARM(self),
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->NetXDBPath = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NetXDBPath = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -22468,7 +24205,11 @@ SWIGINTERN PyObject *_wrap_Config_NetXDBPath_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NetXDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->NetXDBPath);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->NetXDBPath);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -22503,7 +24244,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBPath_set(PyObject *SWIGUNUSEDPARM(self
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ResultDBPath = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ResultDBPath = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -22527,7 +24272,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBPath_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ResultDBPath);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ResultDBPath);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -22557,7 +24306,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBType_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_ResultDBType_set" "', argument " "2"" of type '" "netxpert::RESULT_DB_TYPE""'");
   } 
   arg2 = static_cast< netxpert::RESULT_DB_TYPE >(val2);
-  if (arg1) (arg1)->ResultDBType = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ResultDBType = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22579,7 +24332,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultDBType_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultDBType_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::RESULT_DB_TYPE) ((arg1)->ResultDBType);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::RESULT_DB_TYPE) ((arg1)->ResultDBType);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -22614,7 +24371,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultTableName_set(PyObject *SWIGUNUSEDPARM(s
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ResultTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ResultTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -22638,7 +24399,11 @@ SWIGINTERN PyObject *_wrap_Config_ResultTableName_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ResultTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ResultTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ResultTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -22668,7 +24433,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTAllDests_set(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SPTAllDests_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->SPTAllDests = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->SPTAllDests = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22690,7 +24459,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTAllDests_get(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTAllDests_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (bool) ((arg1)->SPTAllDests);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->SPTAllDests);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -22720,7 +24493,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTHeapCard_set(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SPTHeapCard_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->SPTHeapCard = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->SPTHeapCard = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22742,7 +24519,11 @@ SWIGINTERN PyObject *_wrap_Config_SPTHeapCard_get(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SPTHeapCard_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (int) ((arg1)->SPTHeapCard);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int) ((arg1)->SPTHeapCard);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -22772,7 +24553,11 @@ SWIGINTERN PyObject *_wrap_Config_SptAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_SptAlgorithm_set" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
-  if (arg1) (arg1)->SptAlgorithm = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->SptAlgorithm = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22794,7 +24579,11 @@ SWIGINTERN PyObject *_wrap_Config_SptAlgorithm_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SptAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::SPTAlgorithm) ((arg1)->SptAlgorithm);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::SPTAlgorithm) ((arg1)->SptAlgorithm);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -22824,7 +24613,11 @@ SWIGINTERN PyObject *_wrap_Config_McfAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_McfAlgorithm_set" "', argument " "2"" of type '" "netxpert::MCFAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::MCFAlgorithm >(val2);
-  if (arg1) (arg1)->McfAlgorithm = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->McfAlgorithm = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22846,7 +24639,11 @@ SWIGINTERN PyObject *_wrap_Config_McfAlgorithm_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_McfAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::MCFAlgorithm) ((arg1)->McfAlgorithm);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::MCFAlgorithm) ((arg1)->McfAlgorithm);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -22876,7 +24673,11 @@ SWIGINTERN PyObject *_wrap_Config_MstAlgorithm_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_MstAlgorithm_set" "', argument " "2"" of type '" "netxpert::MSTAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::MSTAlgorithm >(val2);
-  if (arg1) (arg1)->MstAlgorithm = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->MstAlgorithm = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22898,7 +24699,11 @@ SWIGINTERN PyObject *_wrap_Config_MstAlgorithm_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_MstAlgorithm_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::MSTAlgorithm) ((arg1)->MstAlgorithm);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::MSTAlgorithm) ((arg1)->MstAlgorithm);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -22928,7 +24733,11 @@ SWIGINTERN PyObject *_wrap_Config_IsDirected_set(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_IsDirected_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->IsDirected = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->IsDirected = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -22950,7 +24759,11 @@ SWIGINTERN PyObject *_wrap_Config_IsDirected_get(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_IsDirected_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (bool) ((arg1)->IsDirected);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->IsDirected);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -22985,7 +24798,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsTableName_set(PyObject *SWIGUNUSEDPARM(sel
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ArcsTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ArcsTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23009,7 +24826,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsTableName_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ArcsTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ArcsTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23044,7 +24865,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsGeomColumnName_set(PyObject *SWIGUNUSEDPAR
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ArcsGeomColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ArcsGeomColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23068,7 +24893,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcsGeomColumnName_get(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcsGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ArcsGeomColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ArcsGeomColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23103,7 +24932,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcIDColumnName_set(PyObject *SWIGUNUSEDPARM(s
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ArcIDColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ArcIDColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23127,7 +24960,11 @@ SWIGINTERN PyObject *_wrap_Config_ArcIDColumnName_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ArcIDColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ArcIDColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ArcIDColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23162,7 +24999,11 @@ SWIGINTERN PyObject *_wrap_Config_FromNodeColumnName_set(PyObject *SWIGUNUSEDPAR
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->FromNodeColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->FromNodeColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23186,7 +25027,11 @@ SWIGINTERN PyObject *_wrap_Config_FromNodeColumnName_get(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_FromNodeColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->FromNodeColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->FromNodeColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23221,7 +25066,11 @@ SWIGINTERN PyObject *_wrap_Config_ToNodeColumnName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->ToNodeColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->ToNodeColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23245,7 +25094,11 @@ SWIGINTERN PyObject *_wrap_Config_ToNodeColumnName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_ToNodeColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->ToNodeColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->ToNodeColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23280,7 +25133,11 @@ SWIGINTERN PyObject *_wrap_Config_CostColumnName_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->CostColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->CostColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23304,7 +25161,11 @@ SWIGINTERN PyObject *_wrap_Config_CostColumnName_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CostColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->CostColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->CostColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23339,7 +25200,11 @@ SWIGINTERN PyObject *_wrap_Config_CapColumnName_set(PyObject *SWIGUNUSEDPARM(sel
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->CapColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->CapColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23363,7 +25228,11 @@ SWIGINTERN PyObject *_wrap_Config_CapColumnName_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CapColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->CapColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->CapColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23398,7 +25267,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesTableName_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->NodesTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NodesTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23422,7 +25295,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesTableName_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->NodesTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->NodesTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23457,7 +25334,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesGeomColumnName_set(PyObject *SWIGUNUSEDPA
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->NodesGeomColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NodesGeomColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23481,7 +25362,11 @@ SWIGINTERN PyObject *_wrap_Config_NodesGeomColumnName_get(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodesGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->NodesGeomColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->NodesGeomColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23516,7 +25401,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeIDColumnName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->NodeIDColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NodeIDColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23540,7 +25429,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeIDColumnName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeIDColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->NodeIDColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->NodeIDColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23575,7 +25468,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeSupplyColumnName_set(PyObject *SWIGUNUSEDP
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->NodeSupplyColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NodeSupplyColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23599,7 +25496,11 @@ SWIGINTERN PyObject *_wrap_Config_NodeSupplyColumnName_get(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NodeSupplyColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->NodeSupplyColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->NodeSupplyColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23634,7 +25535,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyTableName_set(PyObject *SWIGUNUSEDP
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierPolyTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierPolyTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23658,7 +25563,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyTableName_get(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierPolyTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierPolyTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23693,7 +25602,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyGeomColumnName_set(PyObject *SWIGUN
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierPolyGeomColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierPolyGeomColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23717,7 +25630,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPolyGeomColumnName_get(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPolyGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierPolyGeomColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierPolyGeomColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23752,7 +25669,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineTableName_set(PyObject *SWIGUNUSEDP
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierLineTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierLineTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23776,7 +25697,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineTableName_get(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierLineTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierLineTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23811,7 +25736,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineGeomColumnName_set(PyObject *SWIGUN
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierLineGeomColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierLineGeomColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23835,7 +25764,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierLineGeomColumnName_get(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierLineGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierLineGeomColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierLineGeomColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23870,7 +25803,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointTableName_set(PyObject *SWIGUNUSED
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierPointTableName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierPointTableName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23894,7 +25831,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointTableName_get(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointTableName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierPointTableName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierPointTableName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23929,7 +25870,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointGeomColumnName_set(PyObject *SWIGU
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->BarrierPointGeomColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->BarrierPointGeomColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -23953,7 +25898,11 @@ SWIGINTERN PyObject *_wrap_Config_BarrierPointGeomColumnName_get(PyObject *SWIGU
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_BarrierPointGeomColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->BarrierPointGeomColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->BarrierPointGeomColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -23983,7 +25932,11 @@ SWIGINTERN PyObject *_wrap_Config_Treshold_set(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_Treshold_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->Treshold = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->Treshold = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24005,7 +25958,11 @@ SWIGINTERN PyObject *_wrap_Config_Treshold_get(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_Treshold_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (int) ((arg1)->Treshold);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int) ((arg1)->Treshold);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -24035,7 +25992,11 @@ SWIGINTERN PyObject *_wrap_Config_UseSpatialIndex_set(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_UseSpatialIndex_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->UseSpatialIndex = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->UseSpatialIndex = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24057,7 +26018,11 @@ SWIGINTERN PyObject *_wrap_Config_UseSpatialIndex_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_UseSpatialIndex_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (bool) ((arg1)->UseSpatialIndex);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->UseSpatialIndex);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -24087,7 +26052,11 @@ SWIGINTERN PyObject *_wrap_Config_LoadDBIntoMemory_set(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_LoadDBIntoMemory_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->LoadDBIntoMemory = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->LoadDBIntoMemory = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24109,7 +26078,11 @@ SWIGINTERN PyObject *_wrap_Config_LoadDBIntoMemory_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LoadDBIntoMemory_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (bool) ((arg1)->LoadDBIntoMemory);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->LoadDBIntoMemory);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -24139,7 +26112,11 @@ SWIGINTERN PyObject *_wrap_Config_NumberOfTests_set(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_NumberOfTests_set" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  if (arg1) (arg1)->NumberOfTests = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->NumberOfTests = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24161,7 +26138,11 @@ SWIGINTERN PyObject *_wrap_Config_NumberOfTests_get(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_NumberOfTests_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (int) ((arg1)->NumberOfTests);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int) ((arg1)->NumberOfTests);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -24196,7 +26177,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteHome_set(PyObject *SWIGUNUSEDPARM(se
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->SpatiaLiteHome = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->SpatiaLiteHome = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24220,7 +26205,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteHome_get(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteHome_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->SpatiaLiteHome);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->SpatiaLiteHome);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -24255,7 +26244,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteCoreName_set(PyObject *SWIGUNUSEDPAR
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->SpatiaLiteCoreName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->SpatiaLiteCoreName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24279,7 +26272,11 @@ SWIGINTERN PyObject *_wrap_Config_SpatiaLiteCoreName_get(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_SpatiaLiteCoreName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->SpatiaLiteCoreName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->SpatiaLiteCoreName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -24309,7 +26306,11 @@ SWIGINTERN PyObject *_wrap_Config_GeometryHandling_set(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_GeometryHandling_set" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
   } 
   arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
-  if (arg1) (arg1)->GeometryHandling = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->GeometryHandling = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24331,7 +26332,11 @@ SWIGINTERN PyObject *_wrap_Config_GeometryHandling_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_GeometryHandling_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::GEOMETRY_HANDLING) ((arg1)->GeometryHandling);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::GEOMETRY_HANDLING) ((arg1)->GeometryHandling);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -24366,7 +26371,11 @@ SWIGINTERN PyObject *_wrap_Config_OnewayColumnName_set(PyObject *SWIGUNUSEDPARM(
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->OnewayColumnName = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->OnewayColumnName = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24390,7 +26399,11 @@ SWIGINTERN PyObject *_wrap_Config_OnewayColumnName_get(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_OnewayColumnName_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->OnewayColumnName);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->OnewayColumnName);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -24420,7 +26433,11 @@ SWIGINTERN PyObject *_wrap_Config_TestCase_set(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_TestCase_set" "', argument " "2"" of type '" "netxpert::TESTCASE""'");
   } 
   arg2 = static_cast< netxpert::TESTCASE >(val2);
-  if (arg1) (arg1)->TestCase = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->TestCase = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24442,7 +26459,11 @@ SWIGINTERN PyObject *_wrap_Config_TestCase_get(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_TestCase_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::TESTCASE) ((arg1)->TestCase);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::TESTCASE) ((arg1)->TestCase);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -24472,7 +26493,11 @@ SWIGINTERN PyObject *_wrap_Config_CleanNetwork_set(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_CleanNetwork_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->CleanNetwork = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->CleanNetwork = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24494,7 +26519,11 @@ SWIGINTERN PyObject *_wrap_Config_CleanNetwork_get(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_CleanNetwork_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (bool) ((arg1)->CleanNetwork);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->CleanNetwork);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -24524,7 +26553,11 @@ SWIGINTERN PyObject *_wrap_Config_LogLevel_set(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_LogLevel_set" "', argument " "2"" of type '" "netxpert::LOG_LEVEL""'");
   } 
   arg2 = static_cast< netxpert::LOG_LEVEL >(val2);
-  if (arg1) (arg1)->LogLevel = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->LogLevel = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24546,7 +26579,11 @@ SWIGINTERN PyObject *_wrap_Config_LogLevel_get(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogLevel_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::LOG_LEVEL) ((arg1)->LogLevel);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::LOG_LEVEL) ((arg1)->LogLevel);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -24581,7 +26618,11 @@ SWIGINTERN PyObject *_wrap_Config_LogFileFullPath_set(PyObject *SWIGUNUSEDPARM(s
     }
     arg2 = ptr;
   }
-  if (arg1) (arg1)->LogFileFullPath = *arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->LogFileFullPath = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24605,7 +26646,11 @@ SWIGINTERN PyObject *_wrap_Config_LogFileFullPath_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_LogFileFullPath_get" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (std::string *) & ((arg1)->LogFileFullPath);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->LogFileFullPath);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
   return resultobj;
 fail:
@@ -24618,7 +26663,11 @@ SWIGINTERN PyObject *_wrap_new_Config(PyObject *SWIGUNUSEDPARM(self), PyObject *
   netxpert::Config *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_Config")) SWIG_fail;
-  result = (netxpert::Config *)new netxpert::Config();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::Config *)new netxpert::Config();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Config, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -24639,7 +26688,11 @@ SWIGINTERN PyObject *_wrap_delete_Config(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Config" "', argument " "1"" of type '" "netxpert::Config *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24699,7 +26752,11 @@ SWIGINTERN PyObject *_wrap_new_Network(PyObject *SWIGUNUSEDPARM(self), PyObject 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::Config &""'"); 
   }
   arg3 = reinterpret_cast< netxpert::Config * >(argp3);
-  result = (netxpert::Network *)new netxpert::Network(arg1,arg2,*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::Network *)new netxpert::Network(arg1,arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Network, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -24729,7 +26786,11 @@ SWIGINTERN PyObject *_wrap_Network_ConvertInputNetwork(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_ConvertInputNetwork" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  (arg1)->ConvertInputNetwork(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->ConvertInputNetwork(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -24817,7 +26878,11 @@ SWIGINTERN PyObject *_wrap_Network_LoadStartNodes(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Network_LoadStartNodes" "', argument " "7"" of type '" "bool""'");
   } 
   arg7 = static_cast< bool >(val7);
-  result = (arg1)->LoadStartNodes((std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->LoadStartNodes((std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > >(static_cast< const std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > >& >(result))), SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24907,7 +26972,11 @@ SWIGINTERN PyObject *_wrap_Network_LoadEndNodes(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Network_LoadEndNodes" "', argument " "7"" of type '" "bool""'");
   } 
   arg7 = static_cast< bool >(val7);
-  result = (arg1)->LoadEndNodes((std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->LoadEndNodes((std::vector< netxpert::NewNode,std::allocator< netxpert::NewNode > > const &)*arg2,arg3,arg4,arg5,*arg6,arg7);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > >(static_cast< const std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > >& >(result))), SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t, SWIG_POINTER_OWN |  0 );
   if (SWIG_IsNewObj(res2)) delete arg2;
   return resultobj;
@@ -24940,7 +27009,11 @@ SWIGINTERN PyObject *_wrap_Network_GetOriginalNodeID(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_GetOriginalNodeID" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  result = (arg1)->GetOriginalNodeID(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetOriginalNodeID(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -24971,7 +27044,11 @@ SWIGINTERN PyObject *_wrap_Network_GetOriginalStartOrEndNodeID(PyObject *SWIGUNU
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Network_GetOriginalStartOrEndNodeID" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  result = (arg1)->GetOriginalStartOrEndNodeID(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetOriginalStartOrEndNodeID(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -24992,7 +27069,11 @@ SWIGINTERN PyObject *_wrap_delete_Network(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Network" "', argument " "1"" of type '" "netxpert::Network *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Network * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25020,7 +27101,11 @@ SWIGINTERN PyObject *_wrap_delete_LOGGER(PyObject *SWIGUNUSEDPARM(self), PyObjec
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_LOGGER" "', argument " "1"" of type '" "netxpert::LOGGER *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::LOGGER * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25044,7 +27129,11 @@ SWIGINTERN PyObject *_wrap_LOGGER_Initialize(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LOGGER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  netxpert::LOGGER::Initialize(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    netxpert::LOGGER::Initialize(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25113,7 +27202,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_Initialize(PyObject *SWIGUNUSEDPARM(self), P
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_Initialize" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  netxpert::DBHELPER::Initialize(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    netxpert::DBHELPER::Initialize(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25163,7 +27256,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_CommitCurrentTransaction(PyObject *SWIGUNUSE
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_CommitCurrentTransaction")) SWIG_fail;
-  netxpert::DBHELPER::CommitCurrentTransaction();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    netxpert::DBHELPER::CommitCurrentTransaction();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25175,7 +27272,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_OpenNewTransaction(PyObject *SWIGUNUSEDPARM(
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_OpenNewTransaction")) SWIG_fail;
-  netxpert::DBHELPER::OpenNewTransaction();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    netxpert::DBHELPER::OpenNewTransaction();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25216,7 +27317,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_LoadNetworkFromDB(PyObject *SWIGUNUSEDPARM(s
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  result = netxpert::DBHELPER::LoadNetworkFromDB(arg1,arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = netxpert::DBHELPER::LoadNetworkFromDB(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<netxpert::InputArc,std::allocator< netxpert::InputArc > > >(result));
   return resultobj;
 fail:
@@ -25263,7 +27368,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_LoadNodesFromDB(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DBHELPER_LoadNodesFromDB" "', argument " "3"" of type '" "netxpert::ColumnMap const &""'"); 
   }
   arg3 = reinterpret_cast< netxpert::ColumnMap * >(argp3);
-  result = netxpert::DBHELPER::LoadNodesFromDB(arg1,arg2,(netxpert::ColumnMap const &)*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = netxpert::DBHELPER::LoadNodesFromDB(arg1,arg2,(netxpert::ColumnMap const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<netxpert::NewNode,std::allocator< netxpert::NewNode > > >(result));
   return resultobj;
 fail:
@@ -25275,7 +27384,11 @@ SWIGINTERN PyObject *_wrap_DBHELPER_CloseConnection(PyObject *SWIGUNUSEDPARM(sel
   PyObject *resultobj = 0;
   
   if (!PyArg_ParseTuple(args,(char *)":DBHELPER_CloseConnection")) SWIG_fail;
-  netxpert::DBHELPER::CloseConnection();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    netxpert::DBHELPER::CloseConnection();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25296,7 +27409,11 @@ SWIGINTERN PyObject *_wrap_delete_DBHELPER(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_DBHELPER" "', argument " "1"" of type '" "netxpert::DBHELPER *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::DBHELPER * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25324,7 +27441,11 @@ SWIGINTERN PyObject *_wrap_delete_ISolver(PyObject *SWIGUNUSEDPARM(self), PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ISolver" "', argument " "1"" of type '" "netxpert::ISolver *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ISolver * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25356,7 +27477,11 @@ SWIGINTERN PyObject *_wrap_ISolver_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self),
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->Solve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25389,7 +27514,11 @@ SWIGINTERN PyObject *_wrap_ISolver_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ISolver_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
   }
   arg2 = reinterpret_cast< netxpert::Network * >(argp2);
-  (arg1)->Solve(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25468,7 +27597,11 @@ SWIGINTERN PyObject *_wrap_new_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::MinimumSpanningTree *)new netxpert::MinimumSpanningTree(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::MinimumSpanningTree *)new netxpert::MinimumSpanningTree(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__MinimumSpanningTree, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -25489,7 +27622,11 @@ SWIGINTERN PyObject *_wrap_delete_MinimumSpanningTree(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumSpanningTree" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25521,7 +27658,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_0(PyObject *SWIGUNUSE
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->Solve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25554,7 +27695,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_Solve__SWIG_1(PyObject *SWIGUNUSE
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MinimumSpanningTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
   }
   arg2 = reinterpret_cast< netxpert::Network * >(argp2);
-  (arg1)->Solve(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25623,7 +27768,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetAlgorithm(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetAlgorithm" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
-  result = (netxpert::MSTAlgorithm)(arg1)->GetAlgorithm();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::MSTAlgorithm)(arg1)->GetAlgorithm();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -25653,7 +27802,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_SetAlgorithm(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MinimumSpanningTree_SetAlgorithm" "', argument " "2"" of type '" "netxpert::MSTAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::MSTAlgorithm >(val2);
-  (arg1)->SetAlgorithm(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetAlgorithm(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25675,7 +27828,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetOptimum(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetOptimum" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -25697,7 +27854,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTree_GetMinimumSpanningTree(PyObject *
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTree_GetMinimumSpanningTree" "', argument " "1"" of type '" "netxpert::MinimumSpanningTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinimumSpanningTree * >(argp1);
-  result = ((netxpert::MinimumSpanningTree const *)arg1)->GetMinimumSpanningTree();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::MinimumSpanningTree const *)arg1)->GetMinimumSpanningTree();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >(static_cast< const std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -25729,7 +27890,11 @@ SWIGINTERN PyObject *_wrap_new_OriginDestinationMatrix(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OriginDestinationMatrix" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::OriginDestinationMatrix *)new netxpert::OriginDestinationMatrix(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::OriginDestinationMatrix *)new netxpert::OriginDestinationMatrix(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__OriginDestinationMatrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -25750,7 +27915,11 @@ SWIGINTERN PyObject *_wrap_delete_OriginDestinationMatrix(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OriginDestinationMatrix" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25782,7 +27951,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_Solve__SWIG_0(PyObject *SWIGU
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->Solve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25815,7 +27988,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_Solve__SWIG_1(PyObject *SWIGU
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
   }
   arg2 = reinterpret_cast< netxpert::Network * >(argp2);
-  (arg1)->Solve(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25884,7 +28061,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetAlgorithm(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetAlgorithm" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = (netxpert::SPTAlgorithm)((netxpert::OriginDestinationMatrix const *)arg1)->GetAlgorithm();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::SPTAlgorithm)((netxpert::OriginDestinationMatrix const *)arg1)->GetAlgorithm();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -25914,7 +28095,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetAlgorithm(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetAlgorithm" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
-  (arg1)->SetAlgorithm(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetAlgorithm(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25936,7 +28121,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetSPTHeapCard(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetSPTHeapCard" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = (int)((netxpert::OriginDestinationMatrix const *)arg1)->GetSPTHeapCard();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)((netxpert::OriginDestinationMatrix const *)arg1)->GetSPTHeapCard();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -25966,7 +28155,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetSPTHeapCard(PyObject *SWIG
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetSPTHeapCard" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  (arg1)->SetSPTHeapCard(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetSPTHeapCard(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -25988,7 +28181,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetGeometryHandling(PyObject 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetGeometryHandling" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = (netxpert::GEOMETRY_HANDLING)((netxpert::OriginDestinationMatrix const *)arg1)->GetGeometryHandling();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::GEOMETRY_HANDLING)((netxpert::OriginDestinationMatrix const *)arg1)->GetGeometryHandling();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -26018,7 +28215,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetGeometryHandling(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OriginDestinationMatrix_SetGeometryHandling" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
   } 
   arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
-  (arg1)->SetGeometryHandling(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetGeometryHandling(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26040,7 +28241,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetOrigins(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetOrigins" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetOrigins();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetOrigins();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26073,7 +28278,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetOrigins(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetOrigins" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > * >(argp2);
-  (arg1)->SetOrigins(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetOrigins(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26095,7 +28304,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetDestinations(PyObject *SWI
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetDestinations" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetDestinations();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetDestinations();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26128,7 +28341,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_SetDestinations(PyObject *SWI
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_SetDestinations" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > * >(argp2);
-  (arg1)->SetDestinations(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetDestinations(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26150,7 +28367,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetReachedDests(PyObject *SWI
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetReachedDests" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetReachedDests();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetReachedDests();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26172,7 +28393,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetShortestPaths(PyObject *SW
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetShortestPaths" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetShortestPaths();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetShortestPaths();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >(static_cast< const std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26194,7 +28419,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetODMatrix(PyObject *SWIGUNU
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetODMatrix" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetODMatrix();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->GetODMatrix();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,double >(static_cast< const std::unordered_map< netxpert::ODPair,double >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26216,7 +28445,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_GetOptimum(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrix_GetOptimum" "', argument " "1"" of type '" "netxpert::OriginDestinationMatrix const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::OriginDestinationMatrix * >(argp1);
-  result = (double)((netxpert::OriginDestinationMatrix const *)arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)((netxpert::OriginDestinationMatrix const *)arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -26259,7 +28492,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrix_UncompressRoute(PyObject *SWI
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OriginDestinationMatrix_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp3);
-  result = ((netxpert::OriginDestinationMatrix const *)arg1)->UncompressRoute(arg2,*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::OriginDestinationMatrix const *)arg1)->UncompressRoute(arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >(static_cast< const std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26291,7 +28528,11 @@ SWIGINTERN PyObject *_wrap_new_ShortestPathTree(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_ShortestPathTree" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::ShortestPathTree *)new netxpert::ShortestPathTree(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ShortestPathTree *)new netxpert::ShortestPathTree(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__ShortestPathTree, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -26312,7 +28553,11 @@ SWIGINTERN PyObject *_wrap_delete_ShortestPathTree(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ShortestPathTree" "', argument " "1"" of type '" "netxpert::ShortestPathTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26344,7 +28589,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_Solve__SWIG_0(PyObject *SWIGUNUSEDPA
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->Solve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26377,7 +28626,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_Solve__SWIG_1(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
   }
   arg2 = reinterpret_cast< netxpert::Network * >(argp2);
-  (arg1)->Solve(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26446,7 +28699,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetAlgorithm(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetAlgorithm" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = (netxpert::SPTAlgorithm)((netxpert::ShortestPathTree const *)arg1)->GetAlgorithm();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::SPTAlgorithm)((netxpert::ShortestPathTree const *)arg1)->GetAlgorithm();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -26476,7 +28733,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_SetAlgorithm(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetAlgorithm" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
-  (arg1)->SetAlgorithm(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetAlgorithm(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26498,7 +28759,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetSPTHeapCard(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetSPTHeapCard" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = (int)((netxpert::ShortestPathTree const *)arg1)->GetSPTHeapCard();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)((netxpert::ShortestPathTree const *)arg1)->GetSPTHeapCard();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -26528,7 +28793,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_SetSPTHeapCard(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetSPTHeapCard" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  (arg1)->SetSPTHeapCard(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetSPTHeapCard(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26550,7 +28819,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetGeometryHandling(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetGeometryHandling" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = (netxpert::GEOMETRY_HANDLING)((netxpert::ShortestPathTree const *)arg1)->GetGeometryHandling();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::GEOMETRY_HANDLING)((netxpert::ShortestPathTree const *)arg1)->GetGeometryHandling();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -26580,7 +28853,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_SetGeometryHandling(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetGeometryHandling" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
   } 
   arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
-  (arg1)->SetGeometryHandling(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetGeometryHandling(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26602,7 +28879,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetOrigin(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetOrigin" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = (unsigned int)((netxpert::ShortestPathTree const *)arg1)->GetOrigin();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (unsigned int)((netxpert::ShortestPathTree const *)arg1)->GetOrigin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_unsigned_SS_int(static_cast< unsigned int >(result));
   return resultobj;
 fail:
@@ -26632,7 +28913,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_SetOrigin(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ShortestPathTree_SetOrigin" "', argument " "2"" of type '" "unsigned int""'");
   } 
   arg2 = static_cast< unsigned int >(val2);
-  (arg1)->SetOrigin(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetOrigin(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26654,7 +28939,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetDestinations(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetDestinations" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = ((netxpert::ShortestPathTree const *)arg1)->GetDestinations();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::ShortestPathTree const *)arg1)->GetDestinations();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26687,7 +28976,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_SetDestinations(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp2);
-  (arg1)->SetDestinations(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetDestinations(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26709,7 +29002,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetReachedDests(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetReachedDests" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = ((netxpert::ShortestPathTree const *)arg1)->GetReachedDests();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::ShortestPathTree const *)arg1)->GetReachedDests();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26731,7 +29028,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetShortestPaths(PyObject *SWIGUNUSE
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetShortestPaths" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = ((netxpert::ShortestPathTree const *)arg1)->GetShortestPaths();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::ShortestPathTree const *)arg1)->GetShortestPaths();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >(static_cast< const std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26753,7 +29054,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_GetOptimum(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTree_GetOptimum" "', argument " "1"" of type '" "netxpert::ShortestPathTree const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::ShortestPathTree * >(argp1);
-  result = (double)((netxpert::ShortestPathTree const *)arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)((netxpert::ShortestPathTree const *)arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -26796,7 +29101,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTree_UncompressRoute(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "ShortestPathTree_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp3);
-  result = ((netxpert::ShortestPathTree const *)arg1)->UncompressRoute(arg2,*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::ShortestPathTree const *)arg1)->UncompressRoute(arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >(static_cast< const std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -26824,7 +29133,11 @@ SWIGINTERN PyObject *_wrap_delete_MinCostFlow(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinCostFlow" "', argument " "1"" of type '" "netxpert::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26862,7 +29175,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(se
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  (arg1)->Solve(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26895,7 +29212,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "MinCostFlow_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
   }
   arg2 = reinterpret_cast< netxpert::Network * >(argp2);
-  (arg1)->Solve(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26972,7 +29293,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_IsDirected_set(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MinCostFlow_IsDirected_set" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  if (arg1) (arg1)->IsDirected = arg2;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->IsDirected = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -26994,7 +29319,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_IsDirected_get(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinCostFlow_IsDirected_get" "', argument " "1"" of type '" "netxpert::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
-  result = (bool) ((arg1)->IsDirected);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool) ((arg1)->IsDirected);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -27016,7 +29345,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_GetMinCostFlow(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinCostFlow_GetMinCostFlow" "', argument " "1"" of type '" "netxpert::MinCostFlow const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
-  result = ((netxpert::MinCostFlow const *)arg1)->GetMinCostFlow();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::MinCostFlow const *)arg1)->GetMinCostFlow();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<netxpert::FlowCost,std::allocator< netxpert::FlowCost > > >(result));
   return resultobj;
 fail:
@@ -27038,7 +29371,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_GetAlgorithm(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinCostFlow_GetAlgorithm" "', argument " "1"" of type '" "netxpert::MinCostFlow const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
-  result = (netxpert::MCFAlgorithm)((netxpert::MinCostFlow const *)arg1)->GetAlgorithm();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::MCFAlgorithm)((netxpert::MinCostFlow const *)arg1)->GetAlgorithm();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27068,7 +29405,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_SetAlgorithm(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "MinCostFlow_SetAlgorithm" "', argument " "2"" of type '" "netxpert::MCFAlgorithm""'");
   } 
   arg2 = static_cast< netxpert::MCFAlgorithm >(val2);
-  (arg1)->SetAlgorithm(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetAlgorithm(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27090,7 +29431,11 @@ SWIGINTERN PyObject *_wrap_MinCostFlow_GetOptimum(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinCostFlow_GetOptimum" "', argument " "1"" of type '" "netxpert::MinCostFlow const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::MinCostFlow * >(argp1);
-  result = (double)((netxpert::MinCostFlow const *)arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)((netxpert::MinCostFlow const *)arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27122,7 +29467,11 @@ SWIGINTERN PyObject *_wrap_new_Transportation(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Transportation" "', argument " "1"" of type '" "netxpert::Config &""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Config * >(argp1);
-  result = (netxpert::Transportation *)new netxpert::Transportation(*arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::Transportation *)new netxpert::Transportation(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Transportation, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27143,7 +29492,11 @@ SWIGINTERN PyObject *_wrap_delete_Transportation(PyObject *SWIGUNUSEDPARM(self),
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Transportation" "', argument " "1"" of type '" "netxpert::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27165,7 +29518,11 @@ SWIGINTERN PyObject *_wrap_Transportation_GetOrigins(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_GetOrigins" "', argument " "1"" of type '" "netxpert::Transportation const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  result = ((netxpert::Transportation const *)arg1)->GetOrigins();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->GetOrigins();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -27203,7 +29560,11 @@ SWIGINTERN PyObject *_wrap_Transportation_SetOrigins(PyObject *SWIGUNUSEDPARM(se
       if (SWIG_IsNewObj(res2)) delete temp;
     }
   }
-  (arg1)->SetOrigins(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetOrigins(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27225,7 +29586,11 @@ SWIGINTERN PyObject *_wrap_Transportation_GetDestinations(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_GetDestinations" "', argument " "1"" of type '" "netxpert::Transportation const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  result = ((netxpert::Transportation const *)arg1)->GetDestinations();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->GetDestinations();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< unsigned int,std::allocator< unsigned int > >(static_cast< const std::vector< unsigned int,std::allocator< unsigned int > >& >(result))), SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -27258,7 +29623,11 @@ SWIGINTERN PyObject *_wrap_Transportation_SetDestinations(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transportation_SetDestinations" "', argument " "2"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
   }
   arg2 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp2);
-  (arg1)->SetDestinations(*arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetDestinations(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27290,7 +29659,11 @@ SWIGINTERN PyObject *_wrap_Transportation_SetExtODMatrix(PyObject *SWIGUNUSEDPAR
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->SetExtODMatrix(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetExtODMatrix(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27322,7 +29695,11 @@ SWIGINTERN PyObject *_wrap_Transportation_SetExtNodeSupply(PyObject *SWIGUNUSEDP
     arg2 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  (arg1)->SetExtNodeSupply(arg2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetExtNodeSupply(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27344,7 +29721,11 @@ SWIGINTERN PyObject *_wrap_Transportation_GetExtDistribution(PyObject *SWIGUNUSE
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_GetExtDistribution" "', argument " "1"" of type '" "netxpert::Transportation const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  result = ((netxpert::Transportation const *)arg1)->GetExtDistribution();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->GetExtDistribution();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = swig::from(static_cast< std::vector<netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > >(result));
   return resultobj;
 fail:
@@ -27366,7 +29747,11 @@ SWIGINTERN PyObject *_wrap_Transportation_GetJSONExtDistribution(PyObject *SWIGU
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_GetJSONExtDistribution" "', argument " "1"" of type '" "netxpert::Transportation const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  result = ((netxpert::Transportation const *)arg1)->GetJSONExtDistribution();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->GetJSONExtDistribution();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -27388,7 +29773,11 @@ SWIGINTERN PyObject *_wrap_Transportation_GetSolverJSONResult(PyObject *SWIGUNUS
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_GetSolverJSONResult" "', argument " "1"" of type '" "netxpert::Transportation const *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  result = ((netxpert::Transportation const *)arg1)->GetSolverJSONResult();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->GetSolverJSONResult();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -27431,7 +29820,11 @@ SWIGINTERN PyObject *_wrap_Transportation_UncompressRoute(PyObject *SWIGUNUSEDPA
     SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transportation_UncompressRoute" "', argument " "3"" of type '" "std::vector< unsigned int,std::allocator< unsigned int > > &""'"); 
   }
   arg3 = reinterpret_cast< std::vector< unsigned int,std::allocator< unsigned int > > * >(argp3);
-  result = ((netxpert::Transportation const *)arg1)->UncompressRoute(arg2,*arg3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Transportation const *)arg1)->UncompressRoute(arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >(static_cast< const std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
@@ -27452,7 +29845,11 @@ SWIGINTERN PyObject *_wrap_Transportation_Solve(PyObject *SWIGUNUSEDPARM(self), 
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_Solve" "', argument " "1"" of type '" "netxpert::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  (arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27483,7 +29880,11 @@ SWIGINTERN PyObject *_wrap_new_ShortestPathTreeSimple(PyObject *SWIGUNUSEDPARM(s
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (netxpert::simple::ShortestPathTree *)new netxpert::simple::ShortestPathTree(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::ShortestPathTree *)new netxpert::simple::ShortestPathTree(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__ShortestPathTree, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27505,7 +29906,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTreeSimple_Solve(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTreeSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
-  result = (int)(arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27527,7 +29932,11 @@ SWIGINTERN PyObject *_wrap_ShortestPathTreeSimple_GetOptimum(PyObject *SWIGUNUSE
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ShortestPathTreeSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27548,7 +29957,11 @@ SWIGINTERN PyObject *_wrap_delete_ShortestPathTreeSimple(PyObject *SWIGUNUSEDPAR
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_ShortestPathTreeSimple" "', argument " "1"" of type '" "netxpert::simple::ShortestPathTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::ShortestPathTree * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27579,7 +29992,11 @@ SWIGINTERN PyObject *_wrap_new_OriginDestinationMatrixSimple(PyObject *SWIGUNUSE
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (netxpert::simple::OriginDestinationMatrix *)new netxpert::simple::OriginDestinationMatrix(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::OriginDestinationMatrix *)new netxpert::simple::OriginDestinationMatrix(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27601,7 +30018,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrixSimple_Solve(PyObject *SWIGUNU
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrixSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
-  result = (int)(arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27623,7 +30044,11 @@ SWIGINTERN PyObject *_wrap_OriginDestinationMatrixSimple_GetOptimum(PyObject *SW
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OriginDestinationMatrixSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27644,7 +30069,11 @@ SWIGINTERN PyObject *_wrap_delete_OriginDestinationMatrixSimple(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OriginDestinationMatrixSimple" "', argument " "1"" of type '" "netxpert::simple::OriginDestinationMatrix *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::OriginDestinationMatrix * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27675,7 +30104,11 @@ SWIGINTERN PyObject *_wrap_new_MinimumSpanningTreeSimple(PyObject *SWIGUNUSEDPAR
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (netxpert::simple::MinimumSpanningTree *)new netxpert::simple::MinimumSpanningTree(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::MinimumSpanningTree *)new netxpert::simple::MinimumSpanningTree(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__MinimumSpanningTree, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27697,7 +30130,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTreeSimple_Solve(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTreeSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
-  result = (int)(arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27719,7 +30156,11 @@ SWIGINTERN PyObject *_wrap_MinimumSpanningTreeSimple_GetOptimum(PyObject *SWIGUN
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumSpanningTreeSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27740,7 +30181,11 @@ SWIGINTERN PyObject *_wrap_delete_MinimumSpanningTreeSimple(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumSpanningTreeSimple" "', argument " "1"" of type '" "netxpert::simple::MinimumSpanningTree *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinimumSpanningTree * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27771,7 +30216,11 @@ SWIGINTERN PyObject *_wrap_new_TransportationSimple(PyObject *SWIGUNUSEDPARM(sel
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (netxpert::simple::Transportation *)new netxpert::simple::Transportation(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::Transportation *)new netxpert::simple::Transportation(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__Transportation, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27793,7 +30242,11 @@ SWIGINTERN PyObject *_wrap_TransportationSimple_Solve(PyObject *SWIGUNUSEDPARM(s
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
-  result = (int)(arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27815,7 +30268,11 @@ SWIGINTERN PyObject *_wrap_TransportationSimple_GetOptimum(PyObject *SWIGUNUSEDP
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27837,7 +30294,11 @@ SWIGINTERN PyObject *_wrap_TransportationSimple_GetDistributionAsJSON(PyObject *
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TransportationSimple_GetDistributionAsJSON" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
-  result = (arg1)->GetDistributionAsJSON();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetDistributionAsJSON();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -27858,7 +30319,11 @@ SWIGINTERN PyObject *_wrap_delete_TransportationSimple(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_TransportationSimple" "', argument " "1"" of type '" "netxpert::simple::Transportation *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::Transportation * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -27889,7 +30354,11 @@ SWIGINTERN PyObject *_wrap_new_MinimumCostFlowSimple(PyObject *SWIGUNUSEDPARM(se
     arg1 = *ptr;
     if (SWIG_IsNewObj(res)) delete ptr;
   }
-  result = (netxpert::simple::MinCostFlow *)new netxpert::simple::MinCostFlow(arg1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::MinCostFlow *)new netxpert::simple::MinCostFlow(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__MinCostFlow, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
@@ -27911,7 +30380,11 @@ SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_Solve(PyObject *SWIGUNUSEDPARM(
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_Solve" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
-  result = (int)(arg1)->Solve();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -27933,7 +30406,11 @@ SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetOptimum(PyObject *SWIGUNUSED
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetOptimum" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
-  result = (double)(arg1)->GetOptimum();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)(arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
 fail:
@@ -27955,7 +30432,11 @@ SWIGINTERN PyObject *_wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON(PyObje
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MinimumCostFlowSimple_GetMinimumCostFlowAsJSON" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
-  result = (arg1)->GetMinimumCostFlowAsJSON();
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetMinimumCostFlowAsJSON();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
@@ -27976,7 +30457,11 @@ SWIGINTERN PyObject *_wrap_delete_MinimumCostFlowSimple(PyObject *SWIGUNUSEDPARM
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_MinimumCostFlowSimple" "', argument " "1"" of type '" "netxpert::simple::MinCostFlow *""'"); 
   }
   arg1 = reinterpret_cast< netxpert::simple::MinCostFlow * >(argp1);
-  delete arg1;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -29564,6 +32049,9 @@ SWIG_init(void) {
   PyDict_SetItemString(md,(char*)"cvar", SWIG_globals());
   SWIG_addvarlink(SWIG_globals(),(char*)"LOGGER_IsInitialized",Swig_var_LOGGER_IsInitialized_get, Swig_var_LOGGER_IsInitialized_set);
   SWIG_addvarlink(SWIG_globals(),(char*)"DBHELPER_IsInitialized",Swig_var_DBHELPER_IsInitialized_get, Swig_var_DBHELPER_IsInitialized_set);
+  
+  /* Initialize threading */
+  SWIG_PYTHON_INITIALIZE_THREADS;
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

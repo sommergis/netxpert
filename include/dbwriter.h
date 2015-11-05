@@ -22,7 +22,7 @@ namespace netxpert {
             virtual void CommitCurrentTransaction() = 0;
             virtual void CreateNetXpertDB() = 0;
             virtual void CreateSolverResultTable(const string& _tableName) = 0;
-            virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst) = 0;
+            virtual void CreateSolverResultTable(const string& _tableName, const bool dropFirst) = 0;
             virtual void OpenNewTransaction() = 0;
             /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     geos::geom::MultiLineString& route, string _tableName,

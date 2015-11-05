@@ -106,17 +106,18 @@ int netxpert::simple::MinimumSpanningTree::Solve()
                 writer->OpenNewTransaction();
                 writer->CreateSolverResultTable(resultTableName, true);
                 writer->CommitCurrentTransaction();
+                writer->CloseConnection();
             }
                 break;
         }
 
         LOGGER::LogDebug("Writing Geometries..");
-        //writer->OpenNewTransaction();
+
         //Processing and Saving Results are handled within net.ProcessResultArcs()
 
         string arcIDs;
-        vector<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
-        for (string& id : arcIDlist)
+        unordered_set<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
+        for (string id : arcIDlist)
         {
             // 13-14 min on 840000 arcs
             //arcIDs = arcIDs + id + ","; //+= is c++ concat operator!
@@ -125,7 +126,7 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         arcIDs.pop_back(); //trim last comma
 
         net.ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
-        //writer->CommitCurrentTransaction();
+
         LOGGER::LogDebug("Done!");
         return 0; //OK
     }
