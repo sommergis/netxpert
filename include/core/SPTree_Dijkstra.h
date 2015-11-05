@@ -233,6 +233,15 @@ class SPTree_Dijkstra : public MCFClass, public ISPTree
                             double* pC, double* pDfct, unsigned int* pSn, unsigned int* pEn);
    unsigned int MCFmmax();
    unsigned int MCFnmax();
+   ISPTreePtr create () const        // Virtual constructor (creation)
+   {
+      return ISPTreePtr(new SPTree_Dijkstra ());
+   }
+   ISPTreePtr clone () const        // Virtual constructor (copying)
+   {
+      return ISPTreePtr(new SPTree_Dijkstra (*this));
+   }
+
    //void GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn );
    //--
 

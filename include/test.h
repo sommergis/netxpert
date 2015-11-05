@@ -1,7 +1,6 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include <omp.h>
 #include <iostream>
 #include "logger.h"
 #include "fgdbwriter.h"

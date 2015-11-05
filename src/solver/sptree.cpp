@@ -221,7 +221,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
             //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
             // bei sps auch die Vektoren geleert.
             shortestPaths.insert( make_pair( ODPair {orig, dest},
-                                  make_pair( vector<unsigned int> (route), //route
+                                  make_pair( route, //vector<unsigned int> (route),
                                                 costPerRoute)) );
             route.clear();
             reachedDests.push_back(dest);
@@ -381,7 +381,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
     // bei sps auch die Vektoren geleert.
     shortestPaths.insert( make_pair( ODPair {orig, dest},
-                          make_pair( vector<unsigned int> (route),
+                          make_pair( route, //vector<unsigned int> (route),
                                         totalCost)) );
 
     route.clear();

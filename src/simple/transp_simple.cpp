@@ -102,7 +102,8 @@ int netxpert::simple::Transportation::Solve()
 
         unique_ptr<DBWriter> writer;
         unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-                switch (cnfg.ResultDBType)
+
+        switch (cnfg.ResultDBType)
         {
             case RESULT_DB_TYPE::SpatiaLiteDB:
             {
@@ -139,9 +140,66 @@ int netxpert::simple::Transportation::Solve()
 
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
-        int counter = 0;
-        for (auto& dist : result)
+
+                LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+        std::string arcIDs = "";
+        std::unordered_set<string> totalArcIDs;
+        std::unordered_map<ODPair, DistributionArc>::iterator it;
+
+        #pragma omp parallel default(shared) private(it)
         {
+        //populate arcIDs
+        for (it = result.begin(); it != result.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto kv = *it;
+            ODPair key = kv.first;
+            DistributionArc value = kv.second;
+            CompressedPath path = value.path;
+            std::vector<unsigned int> ends = path.first;
+            std::vector<InternalArc> route;
+            std::unordered_set<std::string> arcIDlist;
+
+            route = transp.UncompressRoute(key.origin, ends);
+            arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
+
+            if (arcIDlist.size() > 0)
+            {
+                #pragma omp critical
+                {
+                for (std::string id : arcIDlist)
+                {
+                    if (id != "dummy")
+                        totalArcIDs.insert(id);
+                }
+                }
+            }
+            }//omp single
+        }
+        }//omp parallel
+
+        for (string id : totalArcIDs)
+            arcIDs += id += ",";
+
+        if (arcIDs.size()>0)
+        {
+            arcIDs.pop_back(); //trim last comma
+            DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+        }
+        LOGGER::LogDebug("Done!");
+
+        int counter = 0;
+        #pragma omp parallel shared(counter) private(it)
+        {
+
+        for (it = result.begin(); it != result.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto dist = *it;
+
             counter += 1;
             if (counter % 2500 == 0)
                 LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
@@ -183,8 +241,11 @@ int netxpert::simple::Transportation::Solve()
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.dest);
             }
-            net.ProcessResultArcs(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
+            net.ProcessResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
+            }//omp single
         }
+        }//omp paralell
+
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
         LOGGER::LogDebug("Done!");

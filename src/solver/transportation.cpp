@@ -61,9 +61,9 @@ std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
         vector<unsigned int> ends = val.path.first;
 
         // only one arc
-        vector<string> arcIDs = network->GetOriginalArcIDs(vector<InternalArc>
+        unordered_set<string> arcIDs = network->GetOriginalArcIDs(vector<InternalArc>
                                                                     { InternalArc  {key.origin, key.dest} }, IsDirected);
-        ExtArcID arcID = arcIDs.at(0);
+        ExtArcID arcID = *arcIDs.begin();
 
         double costPerPath = path.second;
         double flow = val.flow;

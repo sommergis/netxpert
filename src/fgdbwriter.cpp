@@ -55,12 +55,17 @@ void FGDBWriter::connect()
 }
 void FGDBWriter::OpenNewTransaction()
 {
+    if (!isConnected)
+        connect();
+
     // Begin load only mode. This shuts off the update of all indexes.
     if (currentTblPtr)
     {
         currentTblPtr->LoadOnlyMode(true);
         currentTblPtr->SetWriteLock();
     }
+    else //if no pointer is initialized, there is a error in openTable (happens when creating table in another session)
+        currentTblPtr = unique_ptr<Table> (new Table());
 }
 void FGDBWriter::CommitCurrentTransaction()
 {
@@ -134,13 +139,9 @@ void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirs
 
         if (dropFirst)
         {
-            //cout << "Dropping table.."<<endl;
             dropTable( _tableName);
-            //cout << "Dropping table succeeded."<<endl;
         }
-        //cout << "Creating table.."<<endl;
         createTable( _tableName);
-        //cout << "Creating table succeeded."<<endl;
     }
     catch (std::exception& ex)
     {
@@ -189,6 +190,9 @@ void FGDBWriter::openTable ( const string& _tableName)
 
     wstring newStr = UTILS::convertStringToWString(_tableName);
 
+    if (!currentTblPtr)
+        LOGGER::LogError("No Transaction open; result table "+ _tableName );
+
     if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
     {
         //LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
@@ -228,8 +232,9 @@ void FGDBWriter::dropTable (const string& _tableName)
     }
 }
 
-void FGDBWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const geos::geom::MultiLineString& route, string _tableName)
+void FGDBWriter::SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                               const double capacity, const double flow, const geos::geom::MultiLineString& route,
+                               const std::string& _tableName)
 {
     try
     {

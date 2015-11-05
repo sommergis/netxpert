@@ -71,59 +71,15 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
     unsigned int nmax;
     unsigned int anz;
-    vector<unsigned int> a_pre;
+    /*vector<unsigned int> a_pre;
     vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    vector<unsigned int> nodes;*/
 
     vector<unsigned int> sNds;
     vector<unsigned int> eNds;
     vector<double> supply;
     vector<double> costs;
     vector<double> caps;
-
-    try
-    {
-        switch (algorithm)
-        {
-            case SPTAlgorithm::Dijkstra_MCFClass:
-                spt = shared_ptr<ISPTree>(new SPTree_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                            isDirected));
-                break;
-            case SPTAlgorithm::LQueue_MCFClass:
-                spt = shared_ptr<ISPTree>(new SPTree_LQueue(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                            isDirected));
-                break;
-            case SPTAlgorithm::LDeque_MCFClass:
-                spt = shared_ptr<ISPTree>(new SPTree_LDeque(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                            isDirected));
-                break;
-            case SPTAlgorithm::Dijkstra_Heap_MCFClass:
-                spt = shared_ptr<ISPTree>(new SPTree_Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                            isDirected, sptHeapCard));
-                break;
-            case SPTAlgorithm::Dijkstra_2Heap_LEMON:
-                spt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                            isDirected));
-                break;
-            default:
-                break;
-        }
-    }
-    catch (exception& ex)
-    {
-        /*if (ex.GetInnermostException() is DllNotFoundException)
-        {
-            DllNotFoundException dllEx = (DllNotFoundException)ex.GetInnermostException();
-            Logger.WriteLog(string.Format("Fehler beim Instanziieren des MST-Solvers (Kern): {0}", dllEx.Message), LogLevel.Fatal);
-            throw dllEx;
-        }
-        else
-        {
-            Logger.WriteLog(string.Format("Fehler beim Instanziieren des MST-Solvers (Kern): {0}", ex.InnerException), LogLevel.Fatal);
-            Logger.WriteLog(string.Format("StackTrace: {0}", ex.StackTrace), LogLevel.Fatal);
-            throw ex;
-        }*/
-    }
 
     if (!validateNetworkData( net, origs, dests ))
         //throw new InvalidValueException(string.Format("Problem data does not fit the {0} Solver!", this.ToString()));
@@ -134,19 +90,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     LOGGER::LogDebug("Solving..");
 
     //Read the network
-    try
-    {
-        convertInternalNetworkToSolverData(net, sNds, eNds, supply, caps, costs);
-
-        //vector::data() returns direct pointer to data
-        spt->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
-                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
-                        caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogFatal( ex.what() );
-    }
+    convertInternalNetworkToSolverData(net, sNds, eNds, supply, caps, costs);
 
     double totalCost = 0;
 
@@ -155,60 +99,91 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     auto origsSize = origs.size();
 
     //for (unsigned int orig : origs)
-    vector<unsigned int>::iterator it;
-    //vector<unsigned int>::iterator it2;
+    /* OpenMP only wants iterator style in for-loops - no auto for loops
+       The loop for the ODMatrix Calculation is being computed paralell with the critical keyword.
+    */
 
-    //#pragma omp parallel for
-    for (it = origs.begin(); it < origs.end(); it++)
+    //#pragma omp parallel for shared(origs)
+    //make spt local to be copied for parallel proc
+    //no class member variables can be parallized
+    #pragma omp parallel default(shared)
     {
-        unsigned int orig = *it;
-    //int i;
-    //#pragma omp parallel for
-    //for (i=0;i<origs.size();i++)
-    //{
-        //auto orig = origs[i];
-        spt->SetOrigin(orig);
-        try
-        {
-            LOGGER::LogDebug("Calculating routes from " + net.GetOriginalStartOrEndNodeID(orig) + ", # "+
-                                to_string(origsSize - counter) +" left..");
-            // Set dests to UINT_MAX --> no dest setting at all!
-            spt->SetDest(UINT_MAX);
-            //LOGGER::LogDebug("Starting to solve SPT..");
-            spt->ShortestPathTree();
-            //LOGGER::LogDebug("SPT solved!");
-        }
-        catch (exception& ex)
-        {
-            //spt.Dispose();
-            //throw new ApplicationException(ex.Message, ex.InnerException);
-        }
+    shared_ptr<ISPTree> lspt;
+    switch (algorithm)
+    {
+        case SPTAlgorithm::Dijkstra_MCFClass:
+            lspt = shared_ptr<ISPTree>(new SPTree_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+            break;
+        case SPTAlgorithm::LQueue_MCFClass:
+            lspt = shared_ptr<ISPTree>(new SPTree_LQueue(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+            break;
+        case SPTAlgorithm::LDeque_MCFClass:
+            lspt = shared_ptr<ISPTree>(new SPTree_LDeque(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+            break;
+        case SPTAlgorithm::Dijkstra_Heap_MCFClass:
+            lspt = shared_ptr<ISPTree>(new SPTree_Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected, sptHeapCard));
+            break;
+        case SPTAlgorithm::Dijkstra_2Heap_LEMON:
+            lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+            break;
+        default:
+            lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+            break;
+    }
 
-        nmax = spt->MCFnmax();
-        anz = spt->MCFnmax();
-        a_pre.resize(anz + 1);
-        pre.resize(anz + 1);
-        nodes.resize(anz + 1);
-        try
+    lspt->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
+                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
+                        caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
+    nmax = lspt->MCFnmax();
+    anz = lspt->MCFnmax();
+
+    vector<unsigned int> a_pre;
+    vector<unsigned int> pre;
+    vector<unsigned int> nodes;
+
+    a_pre.resize(anz + 1);
+    pre.resize(anz + 1);
+    nodes.resize(anz + 1);
+
+    vector<unsigned int>::iterator origIt;
+
+    for (origIt = origs.begin(); origIt!=origs.end(); origIt++)
+    {
+        #pragma omp single nowait
         {
-            // vector::data() returns pointer
-            spt->GetArcPredecessors(a_pre.data());
-            spt->GetPredecessors(pre.data());
-        }
-        catch (exception& ex)
+        unsigned int orig = *origIt;
+        unordered_set< unsigned int > intReachedDests;
+
+        lspt->SetOrigin(orig);
+
+        int routesLeft = origsSize - counter;
+        LOGGER::LogDebug("# "+ to_string(omp_get_thread_num())  +": Calculating routes from " + net.GetOriginalStartOrEndNodeID(orig) + ", # "+
+                            to_string(routesLeft) +" left..");
+        // Set dests to UINT_MAX --> no dest setting at all!
+        lspt->SetDest(UINT_MAX);
+        //LOGGER::LogDebug("Starting to solve SPT..");
+        lspt->ShortestPathTree();
+        //LOGGER::LogDebug("SPT solved! ");
+
+        lspt->GetArcPredecessors(a_pre.data());
+        lspt->GetPredecessors(pre.data());
+
+        //omp: local intReachedDests --> no concurrent writes per thread
+        for (auto dest : dests)
         {
-            //spt.Dispose();
-            //throw new ApplicationException(ex.Message, ex.InnerException);
+            if (lspt->Reached(dest))
+                intReachedDests.insert(dest);
         }
 
         unordered_map<unsigned int,unsigned int> arcs;
-        //cout << "num of threads: "<< omp_get_num_threads()<<endl;
-        //omp_set_num_threads(8);
-        //cout << "num of threads: "<< omp_get_num_threads()<<endl;
         int i;
-        //#pragma parallel
-        //{
-        //#pragma omp parallel for shared (a_pre, pre, ign, arcs) private(i)
+        //omp: local arcs --> no concurrent writes per thread
         for (i = nmax; i > 0; i--)
         {
             if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
@@ -219,41 +194,32 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         // Thus it's not necessary to pay attention at this when building the route
         // out of the predecessors.
 
-        //reachedDests.clear();
-        //shortestPaths.clear();
-        vector<unsigned int> route;
-
         // Get all routes from orig to dest in nodes-List
+
         //for (unsigned int dest : dests)
         //{
-        vector<unsigned int>::iterator it2;
-        unsigned int dest;
-        bool isDestReached;
-        //#define OMP_STACKSIZE=16M
-        //#pragma omp parallel for private (orig, dest, isDestReached)
-        for (it2 = dests.begin(); it2 < dests.end(); it2++)
-        {
 
-            dest = *it2;
-            isDestReached = spt->Reached(dest);
+        vector<unsigned int> route;
+        vector<unsigned int>::iterator destIt;
+        for (destIt=dests.begin(); destIt!=dests.end(); destIt++)
+        {
+            auto dest = *destIt;
+            bool isDestReached;
+            if ( intReachedDests.count(dest) > 0 )
+                isDestReached = true;
+            else
+                isDestReached = false;
 
             if (orig != dest && isDestReached)
             {
-                double costPerRoute;
                 //route is reference
-                //omp_set_num_threads(8);
-
-                //#pragma omp parallel shared(route, arcs) private(orig, dest)
-                //{
-                //cout << "hello from thread # " <<omp_get_thread_num() << endl;
-                costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
-                //cout << costPerRoute << endl;
+                const double costPerRoute = buildCompressedRoute(route, orig, dest, arcs);
                 totalCost += costPerRoute;
-                //cout << totalCost << endl;
-                //}
 
                 //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
                 // bei sps auch die Vektoren geleert.
+                #pragma omp critical
+                {
                 shortestPaths.insert( make_pair( ODPair {orig, dest},
                                       make_pair( route, costPerRoute ) ));//vector<unsigned int> (route),
                                                  //   costPerRoute)) );
@@ -261,19 +227,20 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
                                     costPerRoute));
                 route.clear();
                 reachedDests.push_back(dest);
+                }
+
             }
             if (!isDestReached)
             {
                 //LOGGER::LogError("Destination "+ net.GetOriginalStartOrEndNodeID(dest) +" unreachable!");
             }
-
         }
-
         optimum = totalCost; //totalCost wird immer weiter aufsummiert für jedes neues OD-Paar
         counter += 1;
-    }
 
-    //spt.Dispose();
+    }//omp single
+    }
+    }//omp parallel
 }
 
 SPTAlgorithm OriginDestinationMatrix::GetAlgorithm() const
@@ -453,7 +420,6 @@ double OriginDestinationMatrix::buildCompressedRoute(vector<unsigned int>& route
     double totalCost = 0;
     //Neu - nur die Enden hinzufuegen
     unsigned int curr = dest;
-
 
     while (curr != orig)
     {

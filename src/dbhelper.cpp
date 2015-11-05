@@ -6,13 +6,14 @@ using namespace geos::io;
 using namespace geos::geom;
 
 //Init static member variables must be out of class scope!
-unique_ptr<SQLite::Database> DBHELPER::connPtr = nullptr;
-unique_ptr<SQLite::Transaction> DBHELPER::currentTransactionPtr = nullptr;
-Config DBHELPER::NETXPERT_CNFG;
+std::unique_ptr<SQLite::Database> DBHELPER::connPtr = nullptr;
+std::unique_ptr<SQLite::Transaction> DBHELPER::currentTransactionPtr = nullptr;
+netxpert::Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
-unordered_set<string> DBHELPER::EliminatedArcs;
-shared_ptr<GeometryFactory> DBHELPER::GEO_FACTORY;
+std::unordered_set<std::string> DBHELPER::EliminatedArcs;
+std::shared_ptr<geos::geom::GeometryFactory> DBHELPER::GEO_FACTORY;
+std::unordered_map<std::string, std::shared_ptr<geos::geom::LineString>> DBHELPER::KV_Network;
 
 namespace netxpert {
     class GeometryEmptyException: public std::exception
@@ -42,17 +43,17 @@ void DBHELPER::Initialize(const Config& cnfg)
     // (nur die Kanten, die aufgebrochen werden)
     // --> Zusammengefügt werden die Kanten (Route) ja in der DB bei Spatialite (FGDB?).
 
-	shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
+	std::shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
-	DBHELPER::GEO_FACTORY = shared_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+	DBHELPER::GEO_FACTORY = std::shared_ptr<geos::geom::GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
 
     DBHELPER::NETXPERT_CNFG = cnfg;
     IsInitialized = true;
 }
 
-void DBHELPER::connect( )
+/*void DBHELPER::connect( )
 {
     try
     {
@@ -94,6 +95,145 @@ void DBHELPER::connect( )
         LOGGER::LogError("Error connecting to SpatiaLiteDB!");
         LOGGER::LogError( ex.what() );
     }
+}*/
+
+void DBHELPER::initSpatialMetaData()
+{
+
+    SQLite::Database& db = *connPtr;
+    SQLite::Statement query(db, "SELECT InitSpatialMetadata('1');");
+
+    try {
+        query.executeStep();
+    }
+    catch (std::exception& e) {
+        LOGGER::LogError("Error loading initial SpatiaLite metadata!");
+        LOGGER::LogError( e.what() );
+    }
+}
+
+void DBHELPER::optimizeSQLiteCon()
+{
+    //optimizations for sqlite
+    string sqlStr = "";
+    const int cache_size_kb = 512000;
+    SQLite::Database& db = *connPtr;
+
+    sqlStr = "PRAGMA cache_size=" + to_string(cache_size_kb); //DEFAULT: 2000
+    SQLite::Statement cmd1(db, sqlStr);
+    cmd1.executeStep();
+
+    sqlStr = "PRAGMA locking_mode=NORMAL"; //default NORMAL
+    SQLite::Statement cmd2(db, sqlStr);
+    cmd2.executeStep();
+
+    sqlStr = "PRAGMA journal_mode=OFF"; //default: DELETE
+    SQLite::Statement cmd3(db, sqlStr);
+    cmd3.executeStep();
+
+    sqlStr = "PRAGMA synchronous=NORMAL"; //default: DELETE
+    SQLite::Statement cmd4(db, sqlStr);
+    cmd4.executeStep();
+}
+void DBHELPER::connect(bool inMemory )
+{
+    try
+    {
+        string sqlStr = "";
+        if (NETXPERT_CNFG.LoadDBIntoMemory)
+        {
+            LOGGER::LogInfo("Loading database into memory..");
+            // Create empty memory db
+            DBHELPER::connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (":memory:",
+                                        SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
+
+            SQLite::Database& db = *connPtr;
+
+            //optimizeSQLiteCon();
+
+            if ( performInitialCommand() )
+                LOGGER::LogDebug("Successfully performed initial spatialite command.");
+            else
+                LOGGER::LogError("Error performing initial spatialite command!");
+
+            initSpatialMetaData();
+
+            // Attach all from disk db and copy nodes and arcs into memory db
+            sqlStr = "ATTACH DATABASE '" + NETXPERT_CNFG.NetXDBPath +"' AS netx; ";
+            SQLite::Statement cmd(db, sqlStr);
+            cmd.executeStep();
+
+            sqlStr = "CREATE TABLE "+NETXPERT_CNFG.ArcsTableName +" AS "+
+                    "SELECT * FROM netx."+ NETXPERT_CNFG.ArcsTableName;
+            SQLite::Statement cmd2(db, sqlStr);
+            cmd2.executeStep();
+
+            sqlStr = "CREATE TABLE "+NETXPERT_CNFG.NodesTableName +" AS "+
+                    "SELECT * FROM netx."+ NETXPERT_CNFG.NodesTableName +"; ";
+            SQLite::Statement cmd3(db, sqlStr);
+            cmd3.executeStep();
+
+            sqlStr = "DETACH DATABASE netx;";
+            SQLite::Statement cmd4(db, sqlStr);
+            cmd4.executeStep();
+
+            sqlStr = "BEGIN;";
+            SQLite::Statement cmd5(db, sqlStr);
+            cmd5.executeStep();
+
+            sqlStr = "SELECT RecoverGeometryColumn('"+ NETXPERT_CNFG.NodesTableName +"','"
+                        +NETXPERT_CNFG.NodesGeomColumnName +"',25832,'POINT',2);";
+            SQLite::Statement cmd6(db, sqlStr);
+            cmd6.executeStep();
+
+            //LOGGER::LogInfo("RecoverGeometryColumn 1");
+
+            sqlStr = "SELECT CreateSpatialIndex('"+ NETXPERT_CNFG.NodesTableName +"','"
+                    +NETXPERT_CNFG.NodesGeomColumnName +"'); ";
+            SQLite::Statement cmd7(db, sqlStr);
+            cmd7.executeStep();
+
+            //LOGGER::LogInfo("CreateSpatialIndex 1");
+
+            sqlStr = "SELECT RecoverGeometryColumn('"+ NETXPERT_CNFG.ArcsTableName +"','"
+                    +NETXPERT_CNFG.ArcsGeomColumnName +"',0,'LINESTRING',2); ";
+            SQLite::Statement cmd8(db, sqlStr);
+            cmd8.executeStep();
+
+            //LOGGER::LogInfo("RecoverGeometryColumn 2");
+
+            sqlStr = "SELECT CreateSpatialIndex('"+ NETXPERT_CNFG.ArcsTableName +"','"
+                            +NETXPERT_CNFG.ArcsGeomColumnName +"'); ";
+            SQLite::Statement cmd9(db, sqlStr);
+            cmd9.executeStep();
+
+            sqlStr = "COMMIT;";
+            SQLite::Statement cmd10(db, sqlStr);
+            cmd10.executeStep();
+
+            //LOGGER::LogInfo("CreateSpatialIndex 2");
+            isConnected = true;
+            LOGGER::LogInfo("Done!");
+        }
+        else
+        {
+            LOGGER::LogInfo("No memory database..");
+            DBHELPER::connPtr = unique_ptr<SQLite::Database>(new SQLite::Database (NETXPERT_CNFG.NetXDBPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
+            optimizeSQLiteCon();
+
+            if ( performInitialCommand() )
+                LOGGER::LogDebug("Successfully performed initial spatialite command.");
+            else
+                LOGGER::LogError("Error performing initial spatialite command!");
+
+            isConnected = true;
+        }
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError("Error connecting to SpatiaLiteDB!");
+        LOGGER::LogError( ex.what() );
+    }
 }
 void DBHELPER::CommitCurrentTransaction()
 {
@@ -114,11 +254,11 @@ void DBHELPER::OpenNewTransaction()
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         SQLite::Database& db = *connPtr;
         currentTransactionPtr = unique_ptr<SQLite::Transaction>(new SQLite::Transaction (db));
-
+        cout << db.getFilename() << endl;
         LOGGER::LogDebug("Successfully opened new transaction.");
     }
     catch (std::exception& ex)
@@ -127,7 +267,132 @@ void DBHELPER::OpenNewTransaction()
         LOGGER::LogError( ex.what() );
     }
 }
-InputArcs DBHELPER::LoadNetworkFromDB(string _tableName,const ColumnMap& _map)
+
+void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+                                 const std::string& geomColumnName, const std::string& arcIDs)
+{
+    string eliminatedArcIDs = "";
+    string sqlStr = "";
+
+    try
+    {
+        if (!isConnected)
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
+
+        for (const string& elem: DBHELPER::EliminatedArcs) {
+            eliminatedArcIDs += ","+ elem;
+        }
+
+        //trim comma on first
+        if (eliminatedArcIDs.length() > 0)
+        {
+            eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
+            sqlStr = "SELECT "+_map.arcIDColName +", AsBinary(CastToLineString(" + geomColumnName + "))"+
+                 " FROM "+_tableName+" WHERE "+_map.arcIDColName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+                        _map.arcIDColName+ " IN("+ arcIDs +")";
+        }
+        else
+        {
+            sqlStr = "SELECT "+_map.arcIDColName +", AsBinary(CastToLineString(" + geomColumnName + "))"+
+                 " FROM "+_tableName+" WHERE "+_map.arcIDColName+" IN("+ arcIDs +")";
+        }
+        //cout << sqlStr << endl;
+
+        SQLite::Database& db = *connPtr;
+        SQLite::Statement qry (db, sqlStr);
+
+        shared_ptr<MultiLineString> aGeomPtr;
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        while(qry.executeStep())
+        {
+            SQLite::Column idCol = qry.getColumn(0);
+            SQLite::Column geoCol = qry.getColumn(1);
+            string id;
+            shared_ptr<LineString> aGeomPtr;
+
+            if (!idCol.isNull())
+            {
+                id  = idCol.getText();
+            }
+            if (!geoCol.isNull())
+            {
+                const void* pVoid = geoCol.getBlob();
+                const int sizeOfwkb = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                aGeomPtr = shared_ptr<LineString>( dynamic_cast<LineString*>( wkbReader.read(is) ) );
+            }
+            DBHELPER::KV_Network.insert( make_pair(id, move(aGeomPtr)) );
+        }
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error retrieving geometries!" );
+        LOGGER::LogError( ex.what() );
+    }
+}
+
+void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+                                 const std::string& geomColumnName)
+{
+    string sqlStr = "";
+    try
+    {
+        if (!isConnected)
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
+
+        sqlStr = "SELECT "+ _map.arcIDColName+", AsBinary(" + geomColumnName + ")"+
+                 " FROM "+_tableName;
+
+        //cout << sqlStr << endl;
+
+        SQLite::Database& db = *connPtr;
+        SQLite::Statement qry (db, sqlStr);
+
+        shared_ptr<MultiLineString> aGeomPtr;
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        while(qry.executeStep())
+        {
+            SQLite::Column idCol = qry.getColumn(0);
+            SQLite::Column geoCol = qry.getColumn(1);
+            string id;
+            shared_ptr<LineString> aGeomPtr;
+
+            if (!idCol.isNull())
+            {
+                id  = idCol.getText();
+            }
+            if (!geoCol.isNull())
+            {
+                const void* pVoid = geoCol.getBlob();
+                const int sizeOfwkb = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                aGeomPtr = shared_ptr<LineString>( dynamic_cast<LineString*>( wkbReader.read(is) ) );
+            }
+            DBHELPER::KV_Network.insert( make_pair(id, move(aGeomPtr)) );
+        }
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error retrieving geometries!" );
+        LOGGER::LogError( ex.what() );
+    }
+}
+
+netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map)
 {
     InputArcs arcTbl;
     string sqlStr = "";
@@ -136,7 +401,7 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName,const ColumnMap& _map)
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         SQLite::Database& db = *connPtr;
 
@@ -249,7 +514,8 @@ InputArcs DBHELPER::LoadNetworkFromDB(string _tableName,const ColumnMap& _map)
         return arcTbl;
     }
 }
-vector<NewNode> DBHELPER::LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map)
+std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
+                                               const ColumnMap& _map)
 {
     vector<NewNode> nodesTbl;
     shared_ptr<Geometry> pGeomPtr = nullptr;
@@ -258,7 +524,7 @@ vector<NewNode> DBHELPER::LoadNodesFromDB(string _tableName, string geomColName,
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         SQLite::Database& db = *connPtr;
 
@@ -312,9 +578,11 @@ vector<NewNode> DBHELPER::LoadNodesFromDB(string _tableName, string geomColName,
     }
 }
 
-unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableName, string geomColName,
-                                                        const ColumnMap& cmap, ArcIDColumnDataType arcIDColDataType,
-                                                        bool withCapacity)
+std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std::string& tableName,
+                                                        const std::string& geomColName,
+                                                        const ColumnMap& cmap,
+                                                        const netxpert::ArcIDColumnDataType arcIDColDataType,
+                                                        const bool withCapacity)
 {
     string eliminatedArcIDs = "";
     string sqlStr = "";
@@ -371,6 +639,8 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
 
         SQLite::Database& db = *connPtr;
         unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+        cout << db.getFilename() << endl;
+        cout << db.tableExists(NETXPERT_CNFG.ArcsTableName) << endl;
         //std::shared_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
         LOGGER::LogDebug("Successfully prepared query.");
         return qryPtr;
@@ -383,9 +653,9 @@ unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(string tableNa
     }
 }
 
-//TODO: eliminatedArcs implementieren!
-ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int treshold,
-                                                   SQLite::Statement& qry, bool withCapacity)
+netxpert::ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
+                                                       const int treshold, SQLite::Statement& qry,
+                                                       const bool withCapacity)
 {
     string closestArcID;
     shared_ptr<Geometry> pGeomPtr = nullptr;
@@ -400,7 +670,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         const double x = coord.x;
         const double y = coord.y;
@@ -513,8 +783,41 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(Coordinate coord, int tre
     }
 }
 
-unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, string arcIDColumnName,
-                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType, const string& arcIDs )
+std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(const std::string& arcIDs)
+{
+    try
+    {
+        vector<Geometry*> geoms;
+        vector<string> arcIDList = UTILS::Split(arcIDs, ',');
+        for (auto s : arcIDList)
+        {
+            if (DBHELPER::EliminatedArcs.count(s) == 0 ) //filter out eliminated arcs
+            {
+                shared_ptr<LineString> g = DBHELPER::KV_Network.at(s);
+                /*Geometry* gPtr = g.get();
+                LineString* lPtr = dynamic_cast<LineString*>(gPtr);
+                cout << lPtr->toString() << endl;
+                cout << gPtr->toString() << endl;*/
+                geoms.push_back( g.get() );
+            }
+        }
+        unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString(geoms));
+
+        return route;
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError( "Error getting arc geometries!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
+    }
+}
+
+std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromDB(const std::string& tableName,
+                                                             const std::string& arcIDColumnName,
+                                                             const std::string& geomColumnName,
+                                                             const ArcIDColumnDataType arcIDColDataType,
+                                                             const std::string& arcIDs)
 {
     string eliminatedArcIDs = "";
     string sqlStr = "";
@@ -522,7 +825,7 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         switch (arcIDColDataType)
         {
@@ -541,7 +844,10 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
         if (eliminatedArcIDs.length() > 0)
             eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
 
-        sqlStr = "SELECT AsBinary(CastToMultiLineString(ST_Union(" + geomColumnName + ")))"+
+        //ST_COLLECT müsste ok sein, weil der Multilinestring ja später sowieso per LineMerger mit den
+        // anderen Teilen zusammengeführt wird. Schneller ist ST_Collect ggü. ST_union.
+        //ODM_Big: 7:30 zu 8:30 min
+        sqlStr = "SELECT AsBinary(CastToMultiLineString(ST_COLLECT(" + geomColumnName + ")))"+
                  " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
                         arcIDColumnName+ " IN("+ arcIDs +")";
 
@@ -556,23 +862,23 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
-        while (qry.executeStep())
+        qry.executeStep(); //one row query -> no while necessary
+
+        SQLite::Column col = qry.getColumn(0);
+
+        if (!col.isNull())
         {
-            SQLite::Column col = qry.getColumn(0);
+            const void* pVoid = col.getBlob();
+            const int sizeOfwkb = col.getBytes();
 
-            if (!col.isNull())
-            {
-                const void* pVoid = col.getBlob();
-                const int sizeOfwkb = col.getBytes();
+            const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
 
-                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+            for (int i = 0; i < sizeOfwkb; i++)
+                is << bytes[i];
 
-                for (int i = 0; i < sizeOfwkb; i++)
-                    is << bytes[i];
-
-                 aGeomPtr = unique_ptr<MultiLineString>( dynamic_cast<MultiLineString*>( wkbReader.read(is) ) );
-            }
+            aGeomPtr = unique_ptr<MultiLineString>( dynamic_cast<MultiLineString*>( wkbReader.read(is) ) );
         }
+
         return aGeomPtr;
 
     }
@@ -584,8 +890,11 @@ unique_ptr<MultiLineString> DBHELPER::GetArcGeometriesFromDB(string tableName, s
     }
 }
 
-unordered_set<std::string> DBHELPER::GetIntersectingArcs(string barrierTableName, string barrierGeomColName,
-                                        string arcsTableName, string arcIDColName, string arcGeomColName)
+std::unordered_set<std::string> DBHELPER::GetIntersectingArcs(const std::string& barrierTableName,
+                                                              const std::string& barrierGeomColName,
+                                                              const std::string& arcsTableName,
+                                                              const std::string& arcIDColName,
+                                                              const std::string& arcGeomColName)
 {
     string sqlStr = "";
     unordered_set<string> arcIDs;
@@ -593,7 +902,7 @@ unordered_set<std::string> DBHELPER::GetIntersectingArcs(string barrierTableName
     try
     {
         if (!isConnected)
-            connect();
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         sqlStr = "SELECT " +arcIDColName+
                  " FROM "+arcsTableName+" a, "+barrierTableName + " b "+
@@ -634,7 +943,7 @@ unordered_set<std::string> DBHELPER::GetIntersectingArcs(string barrierTableName
     }
 }
 
-unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
+std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType )
 {
     string eliminatedArcIDs = "";

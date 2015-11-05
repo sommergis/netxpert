@@ -1,11 +1,13 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <omp.h>
 #include <string>
 #include <stdio.h> /* defines FILENAME_MAX */
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <chrono>
 
 #include "cereal/cereal.hpp"
 #include "cereal/archives/json.hpp"
@@ -31,6 +33,23 @@
 #endif
 
 namespace netxpert {
+
+    template<typename TimeT = std::chrono::microseconds,
+        typename ClockT=std::chrono::high_resolution_clock,
+        typename DurationT=double>
+    class Stopwatch
+    {
+    private:
+        std::chrono::time_point<ClockT> _start, _end;
+    public:
+        Stopwatch() { start(); }
+        void start() { _start = _end = ClockT::now(); }
+        DurationT stop() { _end = ClockT::now(); return elapsed();}
+        DurationT elapsed() {
+            auto delta = std::chrono::duration_cast<TimeT>(_end-_start);
+            return delta.count();
+        }
+    };
 
     /**
     * \Static Static Class that provides utility functions
@@ -70,6 +89,7 @@ namespace netxpert {
             static std::string convertWStringToString (const std::wstring &ws);
             static std::string Replace(std::string& str, const std::string& from, const std::string& to);
             static std::string ReplaceAll(std::string& str, const std::string& from, const std::string& to);
+            static bool IsEqual (const std::string& a, const std::string& b) { return a == b; }
     };
 }
 #endif // UTILS_H

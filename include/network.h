@@ -48,103 +48,113 @@ namespace netxpert
             * Minimal constructor for the network.
             * TESTME
             **/
-            Network(Arcs arcData, unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
+            Network(Arcs arcData, std::unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
                        NodeSupplies _nodeSupplies);
 
-            unsigned int AddStartNode(const NewNode& newNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity);
-            unsigned int AddEndNode(const NewNode& newNode, int treshold, SQLite::Statement& closestArcQry, bool withCapacity);
+            unsigned int AddStartNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
+            unsigned int AddEndNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
 
-            vector< pair<unsigned int, string> > LoadStartNodes(const vector<NewNode>& newNodes, int treshold,
-                                                            string arcsTableName, string geomColumnName,
-                                                                ColumnMap& cmap, bool withCapacity);
-            vector< pair<unsigned int, string> > LoadEndNodes(const vector<NewNode>& newNodes, int treshold,
-                                                            string arcsTableName, string geomColumnName,
-                                                                ColumnMap& cmap, bool withCapacity);
+            std::vector< std::pair<unsigned int, std::string> > LoadStartNodes(const std::vector<NewNode>& newNodes, const int treshold,
+                                                                const std::string arcsTableName, const std::string geomColumnName,
+                                                                const ColumnMap& cmap, const bool withCapacity);
+            std::vector< std::pair<unsigned int, std::string> > LoadEndNodes(const std::vector<NewNode>& newNodes, const int treshold,
+                                                                const std::string arcsTableName, const std::string geomColumnName,
+                                                                const ColumnMap& cmap, const bool withCapacity);
 
             /** Method for processing and saving a subset of original arcs as results (e.g. MST) */
-            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                            const string& arcIDs,
-                                            const string& resultTableName);
+            void ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                   const double capacity, const double flow, const std::string& arcIDs,
+                                   const std::string& resultTableName);
             /** For Testing purposes only */
-            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                           const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
-                                           const string& resultTableName,
-                                           DBWriter& writer
-                                        );
+            void ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                   const double capacity, const double flow,
+                                   const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
+                                   const std::string& resultTableName, netxpert::DBWriter& writer );
 
             /** Main method for processing and saving result arcs */
-            void ProcessResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                           const string& arcIDs, vector<InternalArc>& routeNodeArcRep,
-                                           const string& resultTableName,
-                                           DBWriter& writer,
-                                           SQLite::Statement& qry //can be null in case of ESRI FileGDB
-                                           );
-
+            void ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                   const double capacity, const double flow,
+                                   const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
+                                   const std::string& resultTableName, netxpert::DBWriter& writer,
+                                   SQLite::Statement& qry //can be null in case of ESRI FileGDB
+                                   );
+            /** Main method for processing and saving result arcs (preloading geometry into memory) */
+            void ProcessResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
+                                        const double capacity, const double flow,
+                                        const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
+                                        const std::string& resultTableName, netxpert::DBWriter& writer,
+                                        SQLite::Statement& qry //can be null in case of ESRI FileGDB
+                                        );
             void ConvertInputNetwork(bool autoClean);
 
             //Network Helpers
-            SplittedArc GetSplittedClosestNewArcToPoint(Coordinate coord, int treshold);
+            netxpert::SplittedArc GetSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
+                                                                  const int treshold);
 
-            SplittedArc GetSplittedClosestOldArcToPoint(Coordinate coord, int treshold,
-                                                        const pair<ExternalArc,ArcData>& arcData, const Geometry& arc);
+            netxpert::SplittedArc GetSplittedClosestOldArcToPoint(const geos::geom::Coordinate coord, const int treshold,
+                                                        const std::pair<ExternalArc,ArcData>& arcData,
+                                                        const geos::geom::Geometry& arc);
 
-            bool IsPointOnArc(Coordinate coords, const Geometry& arc);
+            bool IsPointOnArc(const geos::geom::Coordinate& coords, const geos::geom::Geometry& arc);
 
             //Helpers for looking up original data
-            vector<string> GetOriginalArcIDs(const vector<InternalArc>& ftNodes, bool isDirected) const;
-            vector<ArcData> GetOriginalArcData(const vector<InternalArc>& ftNodes, bool isDirected) const;
-
+            std::unordered_set<string> GetOriginalArcIDs(const std::vector<InternalArc>& ftNodes,
+                                                            const bool isDirected) const;
+            std::vector<ArcData> GetOriginalArcData(const std::vector<InternalArc>& ftNodes,
+                                                    const bool isDirected) const;
             //TODO
             void GetOriginalArcDataAndFlow(const list<ArcDataAndFlow>& origArcDataAndFlow,
                                             const list<InternalArc>& startEndNodes,
-                                            bool isDirected);
+                                            const bool isDirected);
 
-            string GetOriginalNodeID(unsigned int internalNodeID);
-            unsigned int GetInternalNodeID(string externalNodeID);
-            string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
-            Coordinate GetStartOrEndNodeGeometry(unsigned int internalNodeID);
-            Coordinate GetStartOrEndNodeGeometry(std::string externalNodeID);
-            double GetPositionOfPointAlongLine(Coordinate coord, const Geometry& arc);
-            StartOrEndLocationOfLine GetLocationOfPointOnLine(Coordinate coord, const Geometry& arc);
+            std::string GetOriginalNodeID(const unsigned int internalNodeID);
+            unsigned int GetInternalNodeID(const std::string& externalNodeID);
+            std::string GetOriginalStartOrEndNodeID(const unsigned int internalNodeID);
+            geos::geom::Coordinate GetStartOrEndNodeGeometry(const unsigned int internalNodeID);
+            geos::geom::Coordinate GetStartOrEndNodeGeometry(const std::string& externalNodeID);
+            double GetPositionOfPointAlongLine(const geos::geom::Coordinate& coord,
+                                                const geos::geom::Geometry& arc);
+            netxpert::StartOrEndLocationOfLine GetLocationOfPointOnLine(const geos::geom::Coordinate& coord,
+                                                                const geos::geom::Geometry& arc);
 
             unsigned int GetMaxNodeCount();
             unsigned int GetMaxArcCount();
             unsigned int GetCurrentNodeCount();
             unsigned int GetCurrentArcCount();
-            Arcs& GetInternalArcData();
-            NodeSupplies GetNodeSupplies();
-            Arcs& GetOldArcs();
-            NewArcs& GetNewArcs();
+            netxpert::Arcs& GetInternalArcData();
+            netxpert::NodeSupplies GetNodeSupplies();
+            netxpert::Arcs& GetOldArcs();
+            netxpert::NewArcs& GetNewArcs();
 
             void Reset();
 
             //MCF
-            MinCostFlowInstanceType GetMinCostFlowInstanceType();
-            void TransformUnbalancedMCF(MinCostFlowInstanceType mcfInstanceType);
+            netxpert::MinCostFlowInstanceType GetMinCostFlowInstanceType();
+            void TransformUnbalancedMCF(netxpert::MinCostFlowInstanceType mcfInstanceType);
 
             virtual ~Network();
 
         private:
-            bool isEqual (string& a, string& b) { return a == b; }
-            vector<InternalArc> insertNewStartNode(bool isDirected, SplittedArc& splittedLine, string extArcID, string extNodeID,
-                                            const Coordinate& startPoint);
-            vector<InternalArc> insertNewEndNode(bool isDirected, SplittedArc& splittedLine, string extArcID, string extNodeID,
-                                            const Coordinate& endPoint);
-            double getRelativeValueFromGeomLength(const double attrValue, const MultiLineString& totalGeom,
-                                                    const LineString& segmentGeom);
+            std::vector<InternalArc> insertNewStartNode(const bool isDirected, netxpert::SplittedArc& splittedLine,
+                                                        const std::string& extArcID, const std::string& extNodeID,
+                                                        const geos::geom::Coordinate& startPoint);
+            vector<InternalArc> insertNewEndNode(const bool isDirected, netxpert::SplittedArc& splittedLine,
+                                                 const std::string& extArcID, const std::string& extNodeID,
+                                                 const geos::geom::Coordinate& endPoint);
+            double getRelativeValueFromGeomLength(const double attrValue, const geos::geom::MultiLineString& totalGeom,
+                                                    const geos::geom::LineString& segmentGeom);
             void renameNodes();
-            void readNetworkFromTable(bool autoClean, bool oneWay);
-            void processArc(InputArc arc, unsigned int internalStartNode,
-                                    unsigned int internalEndNode);
-            //TODO
+            void readNetworkFromTable(const bool autoClean, const bool oneWay);
+            void processArc(const netxpert::InputArc& arc, const unsigned int internalStartNode,
+                            const unsigned int internalEndNode);
             void processBarriers();
 
-            shared_ptr<MultiLineString> splitLine(Coordinate coord,
-                                        const Geometry& lineGeom);
+            std::shared_ptr<geos::geom::MultiLineString> splitLine(const geos::geom::Coordinate& coord,
+                                        const geos::geom::Geometry& lineGeom);
 
-            vector<Geometry*> processRouteParts(vector<InternalArc>& routeNodeArcRep);
+            std::vector<geos::geom::Geometry*> processRouteParts(std::vector<netxpert::InternalArc>& routeNodeArcRep);
 
-            Config NETXPERT_CNFG;
+            netxpert::Config NETXPERT_CNFG;
             //TODO
             unsigned int getCurrentNodeCount();
             //TODO
@@ -153,28 +163,32 @@ namespace netxpert
             /**
             * For results of a subset of original arcs only (NETXPERT_CNFG.ResultDB == NETXPERT_CNFG.SQLiteDBPath)
             */
-            void saveResults(string orig, string dest, double cost, double capacity, double flow,
-                                            const string& arcIDs, const string& resultTableName);
+            void saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
+                                const double flow, const std::string& arcIDs, const std::string& resultTableName);
             /**
             * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
             */
-            void saveResults(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& resultTableName, DBWriter& writer);
+            void saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
+                             const double flow, const string& resultTableName, netxpert::DBWriter& writer);
             /**
             * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
             * and with once prepared statement
             */
-            void saveResults(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& resultTableName, DBWriter& writer, SQLite::Statement& qry);
+            void saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
+                             const double flow, const string& resultTableName, netxpert::DBWriter& writer,
+                             SQLite::Statement& qry);
             /**
             * For results of original arcs and new route parts
             */
-            void saveResults(string orig, string dest, double cost, double capacity, double flow,
-                                        const string& arcIDs, vector<Geometry*> routeParts,
-                                        const string& resultTableName, DBWriter& writer,
-                                        SQLite::Statement& qry //only used when saved not to the netxpert db
+            void saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
+                             const double flow, const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                             const std::string& resultTableName, netxpert::DBWriter& writer,
+                             SQLite::Statement& qry //only used when saved not to the netxpert db
                                         );
-
+            void saveResultsMem(const std::string orig, const std::string dest, const double cost, const double capacity,
+                                const double flow, const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                const std::string& resultTableName, netxpert::DBWriter& writer,
+                                SQLite::Statement& qry  );
             //MCF
             double calcTotalDemand ();
             double calcTotalSupply ();
@@ -183,34 +197,35 @@ namespace netxpert
             double getSupplyDemandDifference();
             void processSupplyOrDemand();
 
-            string arcIDColName;
-            string fromColName;
-            string toColName;
-            string costColName;
-            string capColName;
-            string nodeIDColName;
-            string supplyColName;
-            string newSegmentsTempTblName;
-            string onewayColName;
+            std::string arcIDColName;
+            std::string fromColName;
+            std::string toColName;
+            std::string costColName;
+            std::string capColName;
+            std::string nodeIDColName;
+            std::string supplyColName;
+            std::string newSegmentsTempTblName;
+            std::string onewayColName;
 
-            InputArcs arcsTbl;
-            InputNodes nodesTbl;
-            NodeSupplies nodeSupplies;
+            netxpert::InputArcs arcsTbl;
+            netxpert::InputNodes nodesTbl;
+            netxpert::NodeSupplies nodeSupplies;
 
             //internal network data
             //TODO BiMap
-            unordered_map<ExtNodeID,IntNodeID> internalDistinctNodeIDs;
-            unordered_map<IntNodeID,ExtNodeID> swappedInternalDistinctNodeIDs;
-            AddedPoints addedStartPoints;
-            AddedPoints addedEndPoints;
-            unordered_set<string> eliminatedArcs;
-            list<ExternalArc> arcLoops;
-            Arcs internalArcData;
+            std::unordered_map<ExtNodeID,IntNodeID> internalDistinctNodeIDs;
+            std::unordered_map<IntNodeID,ExtNodeID> swappedInternalDistinctNodeIDs;
+            netxpert::AddedPoints addedStartPoints;
+            netxpert::AddedPoints addedEndPoints;
+            std::unordered_set<string> eliminatedArcs;
+            //TODO: vector?
+            std::list<ExternalArc> arcLoops;
+            netxpert::Arcs internalArcData;
 
             //Network changes
-            Arcs oldArcs;
-            SwappedOldArcs swappedOldArcs;
-            NewArcs newArcs;
+            netxpert::Arcs oldArcs;
+            netxpert::SwappedOldArcs swappedOldArcs;
+            netxpert::NewArcs newArcs;
     };
 }
 #endif // NETWORK_H

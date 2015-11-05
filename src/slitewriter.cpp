@@ -58,8 +58,6 @@ void SpatiaLiteWriter::connect( )
 {
     try
     {
-
-        // Pointer verursacht possible mem leaks ~70,000 bytes
         connPtr = unique_ptr<SQLite::Database > (new SQLite::Database (this->dbPath,
                                                                         SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE));
         const int cache_size_kb = 512000;
@@ -324,8 +322,9 @@ std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const 
     }
 }
 
-void SpatiaLiteWriter::SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const Geometry& route, string _tableName, SQLite::Statement& query)
+void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                                     const double capacity, const double flow, const geos::geom::MultiLineString& route,
+                                     const std::string& _tableName, SQLite::Statement& query)
 {
     try
     {
@@ -369,9 +368,12 @@ void SpatiaLiteWriter::SaveResultArc(string orig, string dest, double cost, doub
 /**
 *   Case: Route parts and original arc ids form a result arc.
 */
-void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                        string geomColumnName, string arcIDColumnName, string arcTableName,
-                                        const string& arcIDs, const MultiLineString& mLine, string resultTableName)
+void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                        const double capacity, const double flow,
+                                        const std::string& geomColumnName, const std::string& arcIDColumnName,
+                                        const std::string& arcTableName, const std::string& arcIDs,
+                                        const geos::geom::MultiLineString& mLine,
+                                        const std::string& resultTableName)
 {
     try
     {
@@ -469,9 +471,11 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
 /**
 *   Case: Original arc ids form a result arc.
 */
-void SpatiaLiteWriter::MergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                            string geomColumnName, string arcIDColumnName, string arcTableName,
-                                            const string& arcIDs, string resultTableName)
+void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                        const double capacity, const double flow,
+                                        const std::string& geomColumnName, const std::string arcIDColumnName,
+                                        const std::string& arcTableName, const std::string& arcIDs,
+                                        const std::string& resultTableName)
 {
     try
     {

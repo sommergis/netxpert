@@ -25,11 +25,12 @@ namespace netxpert {
             virtual ~FGDBWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const string& _tableName);
-            virtual void CreateSolverResultTable(const string& _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const std::string&_tableName);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const bool dropFirst);
             virtual void OpenNewTransaction();
-            void SaveResultArc(string orig, string dest, double cost, double capacity, double flow,
-                                    const geos::geom::MultiLineString& route, string _tableName);
+            void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                               const double capacity, const double flow, const geos::geom::MultiLineString& route,
+                               const std::string& _tableName);
             virtual void CloseConnection();
         private:
             unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;
