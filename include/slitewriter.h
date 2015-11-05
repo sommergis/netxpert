@@ -27,7 +27,7 @@ namespace netxpert {
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
             virtual void CreateSolverResultTable(const std::string& _tableName);
-            virtual void CreateSolverResultTable(const std::string& _tableName, bool dropFirst);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const bool dropFirst);
             virtual void OpenNewTransaction();
             std::unique_ptr<SQLite::Statement> PrepareSaveResultArc(const std::string& _tableName);
             /**
@@ -35,8 +35,9 @@ namespace netxpert {
             * This method simply saves the data of a result arc into the netXpert result DB.
             * All result arc data is processed before calling this method.
             */
-            void SaveResultArc(std::string orig, std::string dest, double cost, double capacity, double flow,
-                                    const Geometry& route, std::string _tableName, SQLite::Statement& query);
+            void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                               const double capacity, const double flow, const geos::geom::MultiLineString& route,
+                               const std::string& _tableName, SQLite::Statement& query);
 
             std::unique_ptr<SQLite::Statement> PrepareMergeAndSaveResultArcs(std::string arcTableName);
 
@@ -47,9 +48,11 @@ namespace netxpert {
             * Obviously this is faster and memory friendlier than reading the arcs into memory first and
             * push them into a database afterwards (geometry parsing etc.).
             */
-            void MergeAndSaveResultArcs(std::string orig, std::string dest, double cost, double capacity, double flow,
-                                        const string geomColumnName, const string arcIDColumnName,
-                                        const string arcTableName, const string& arcIDs, const string resultTableName);
+            void MergeAndSaveResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                        const double capacity, const double flow,
+                                        const std::string& geomColumnName, const std::string arcIDColumnName,
+                                        const std::string& arcTableName, const std::string& arcIDs,
+                                        const std::string& resultTableName);
 
             /**
             * \Brief For saving a subset of original arcs and addintional route parts in the original netXpert DB.
@@ -58,10 +61,12 @@ namespace netxpert {
             * Obviously this is faster and memory friendlier than reading the arcs into memory first and
             * push them into a database afterwards (geometry parsing etc.).
             */
-            void MergeAndSaveResultArcs(std::string orig, std::string dest, double cost, double capacity, double flow,
-                                        const std::string geomColumnName, const std::string arcIDColumnName,
-                                        const std::string arcTableName, const std::string& arcIDs, const MultiLineString& mLine,
-                                        const std::string resultTableName);
+            void MergeAndSaveResultArcs(const std::string& orig, const std::string& dest, const double cost,
+                                        const double capacity, const double flow,
+                                        const std::string& geomColumnName, const std::string& arcIDColumnName,
+                                        const std::string& arcTableName, const std::string& arcIDs,
+                                        const geos::geom::MultiLineString& mLine,
+                                        const std::string& resultTableName);
 
             virtual void CloseConnection();
             //string ConnStr;

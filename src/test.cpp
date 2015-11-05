@@ -105,7 +105,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
 
         geos::io::WKTReader reader;
         auto geomPtr = reader.read(wkt);
-        //geos::geom::MultiLineString* mlPtr = dynamic_cast<geos::geom::MultiLineString*>(geomPtr);
+        geos::geom::MultiLineString* mlPtr = dynamic_cast<geos::geom::MultiLineString*>(geomPtr);
 
         SpatiaLiteWriter sldb( cnfg );
         sldb.CreateNetXpertDB();
@@ -113,7 +113,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         sldb.CreateSolverResultTable(resultTblName, dropFirst);
         auto queryPtr = sldb.PrepareSaveResultArc(resultTblName);
         //depointerization "on the fly"
-        sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *geomPtr, resultTblName, *queryPtr);
+        sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, *queryPtr);
         sldb.CommitCurrentTransaction();
         //delete queryPtr;
 
@@ -325,7 +325,7 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
 	netxpert::simple::OriginDestinationMatrix simpleSolver(s);
-	simpleSolver.Solve();
+	simpleSolver.Solve(true);
 }
 
 void netxpert::Test::TestTransportation(Config& cnfg)
@@ -472,11 +472,10 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
 
             cout << key.origin << "_>" << key.dest << endl;
             // only one arc
-            vector<string> arcIDs = net.GetOriginalArcIDs(vector<InternalArc>
+            unordered_set<string> arcIDs = net.GetOriginalArcIDs(vector<InternalArc>
                                                                         { InternalArc  {key.origin, key.dest} },
                                                                         transp.IsDirected);
-            cout << arcIDs.size() << endl;
-            ExtArcID arcID = arcIDs.at(0);
+            ExtArcID arcID = *arcIDs.begin();
 
             //auto route = transp.UncompressRoute(key.origin, ends);
             //cout << route.size() << endl;

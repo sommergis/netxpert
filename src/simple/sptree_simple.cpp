@@ -96,10 +96,10 @@ int netxpert::simple::ShortestPathTree::Solve()
 
         spt.Solve(net);
 
-        LOGGER::LogInfo("Optimum: " + to_string(spt.GetOptimum()) );
-        LOGGER::LogInfo("Count of SPT: " +to_string( spt.GetShortestPaths().size() ) );
-
         auto kvSPS = spt.GetShortestPaths();
+
+        LOGGER::LogInfo("Optimum: " + to_string(spt.GetOptimum()) );
+        LOGGER::LogInfo("Count of SPT: " +to_string( kvSPS.size() ) );
 
         unique_ptr<DBWriter> writer;
 		unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
@@ -140,26 +140,85 @@ int netxpert::simple::ShortestPathTree::Solve()
 
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
-        int counter = 0;
-        for (auto kv : kvSPS)
+
+        LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+        std::string arcIDs = "";
+        std::unordered_set<string> totalArcIDs;
+        std::unordered_map<ODPair, CompressedPath>::iterator it;
+
+        #pragma omp parallel default(shared) private(it)
         {
+        //populate arcIDs
+        for (it = kvSPS.begin(); it != kvSPS.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto kv = *it;
+            ODPair key = kv.first;
+            CompressedPath value = kv.second;
+            std::vector<unsigned int> ends = value.first;
+            std::vector<InternalArc> route;
+            std::unordered_set<std::string> arcIDlist;
+
+            route = spt.UncompressRoute(key.origin, ends);
+            arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
+
+            if (arcIDlist.size() > 0)
+            {
+                #pragma omp critical
+                {
+                for (std::string id : arcIDlist)
+                    totalArcIDs.insert(id);
+                }
+            }
+            }//omp single
+        }
+        }//omp parallel
+
+        for (string id : totalArcIDs)
+            arcIDs += id += ",";
+
+        if (arcIDs.size()>0)
+        {
+            arcIDs.pop_back(); //trim last comma
+            DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+        }
+        LOGGER::LogDebug("Done!");
+
+        int counter = 0;
+
+        #pragma omp parallel shared(counter) private(it)
+        {
+
+        for (it = kvSPS.begin(); it != kvSPS.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto kv = *it;
+
             counter += 1;
+            if (counter % 2500 == 0)
+                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
             string arcIDs = "";
             ODPair key = kv.first;
             CompressedPath value = kv.second;
             vector<unsigned int> ends = value.first;
             double costPerPath = value.second;
+            vector<InternalArc> route;
+            unordered_set<string> arcIDlist;
 
-            auto route = spt.UncompressRoute(key.origin, ends);
-
-            vector<string> arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
+            route = spt.UncompressRoute(key.origin, ends);
+            arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
 
             if (arcIDlist.size() > 0)
             {
-                for (string& id : arcIDlist)
+                for (string id : arcIDlist)
                     arcIDs += id += ",";
                 arcIDs.pop_back(); //trim last comma
             }
+
             string orig;
             string dest;
             try{
@@ -174,8 +233,11 @@ int netxpert::simple::ShortestPathTree::Solve()
             catch (exception& ex) {
                 dest = net.GetOriginalNodeID(key.dest);
             }
-            net.ProcessResultArcs(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
+            net.ProcessResultArcsMem(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
+            }//omp single
         }
+        }//omp paralell
+
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
         LOGGER::LogDebug("Done!");

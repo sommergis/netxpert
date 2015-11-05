@@ -71,7 +71,7 @@ namespace netxpert {
     **/
     enum SPTAlgorithm {
 
-        Dijkstra_MCFClass = 0,
+        Dijkstra_MCFClass = 0, //Buggy
         LQueue_MCFClass = 1,
         LDeque_MCFClass = 2,
         Dijkstra_Heap_MCFClass = 3,

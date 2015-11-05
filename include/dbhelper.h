@@ -28,42 +28,68 @@ namespace netxpert
         protected:
              DBHELPER(){}
         public:
-            static void Initialize(const Config& cnfg);
+            static void Initialize(const netxpert::Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
-            static unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(string tableName,
-                                        string geomColumnName, const ColumnMap& cmap, ArcIDColumnDataType arcIDColDataType,
-                                        bool withCapacity);
-            static ExtClosestArcAndPoint GetClosestArcFromPoint(Coordinate coord, int treshold,
-                                            SQLite::Statement& qry, bool withCapacity);
-            static InputArcs LoadNetworkFromDB(string _tableName, const ColumnMap& _map);
-            static vector<NewNode> LoadNodesFromDB(string _tableName, string geomColName, const ColumnMap& _map);
+            static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(const std::string& tableName,
+                                        const std::string& geomColumnName, const ColumnMap& cmap,
+                                        const netxpert::ArcIDColumnDataType arcIDColDataType,
+                                        const bool withCapacity);
+            static netxpert::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
+                                                                          const int treshold, SQLite::Statement& qry,
+                                                                          const bool withCapacity);
+            static netxpert::InputArcs LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map);
+            static std::vector<netxpert::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
+                                                                  const ColumnMap& _map);
 
-            static unique_ptr<MultiLineString> GetArcGeometriesFromDB(string tableName, string arcIDColumnName,
-                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType, const string& arcIDs );
+            static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromDB(const std::string& tableName,
+                                                                           const std::string& arcIDColumnName,
+                                                                           const std::string& geomColumnName,
+                                                                           const ArcIDColumnDataType arcIDColDataType,
+                                                                           const std::string& arcIDs );
 
-            static unordered_set<std::string> GetIntersectingArcs(string barrierTableName, string barrierGeomColName,
-                                        string arcsTableName, string arcIDColName, string arcGeomColName);
+            static std::unordered_set<std::string> GetIntersectingArcs(const std::string& barrierTableName,
+                                                                       const std::string& barrierGeomColName,
+                                                                       const std::string& arcsTableName,
+                                                                       const std::string& arcIDColName,
+                                                                       const std::string& arcGeomColName);
 
             //UNUSED -->
-            static unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
-                                        string geomColumnName, ArcIDColumnDataType arcIDColDataType );
-            static bool IsPointOnArc(Coordinate coords, string extArcID, shared_ptr<SQLite::Statement> qry);
-            static double GetPositionOfClosestPoint(string arcsGeomColumnName, string arcsTableName, Coordinate coord,
-                                                    string extArcID, SQLite::Statement& posOfClosestPointQry);
+            static std::unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(std::string tableName, std::string arcIDColumnName,
+                                        std::string geomColumnName, ArcIDColumnDataType arcIDColDataType );
+            static bool IsPointOnArc(Coordinate coords, std::string extArcID, std::shared_ptr<SQLite::Statement> qry);
+            static double GetPositionOfClosestPoint(std::string arcsGeomColumnName, std::string arcsTableName, Coordinate coord,
+                                                    std::string extArcID, SQLite::Statement& posOfClosestPointQry);
             //-> //
+
             static void CloseConnection();
             static bool IsInitialized;
-            static unordered_set<string> EliminatedArcs;
-            static shared_ptr<GeometryFactory> GEO_FACTORY;
+            static std::unordered_set<std::string> EliminatedArcs;
+            static std::shared_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
+
+            /* Methods for loading IDs and geometry into a map in memory for fast access to geometries.
+               Much faster (factor x10) than spatialite lookup per primary key lookup of IDs
+            */
+            /* Fills KV_Network */
+            static void LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+                                          const std::string& geomColumnName);
+            /* Fills KV_Network */
+            static void LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+                                          const std::string& geomColumnName, const std::string& arcIDs);
+            static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromMem(const std::string& arcIDs);
+
             ~DBHELPER();
         private:
-            static Config NETXPERT_CNFG;
-            static unique_ptr<SQLite::Database> connPtr;
-            static unique_ptr<SQLite::Transaction> currentTransactionPtr;
-            static void connect();
+            static std::unordered_map<std::string, std::shared_ptr<geos::geom::LineString>> KV_Network;
+            static netxpert::Config NETXPERT_CNFG;
+            static std::unique_ptr<SQLite::Database> connPtr;
+            static std::unique_ptr<SQLite::Transaction> currentTransactionPtr;
+            //static void connect();
+            static void connect(bool inMemory);
             static bool isConnected;
             static bool performInitialCommand();
+            static void initSpatialMetaData();
+            static void optimizeSQLiteCon();
     };
 }
 #endif // DBHELPER_H
