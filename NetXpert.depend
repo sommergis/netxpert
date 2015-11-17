@@ -3872,13 +3872,17 @@
 	<boost/filesystem.hpp>
 	<geos/io/WKBWriter.h>
 
-1440339232 source:/home/hahne/dev/netxpert/libs/sqlite3.c
+1447589732 source:/home/hahne/dev/netxpert/libs/sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
 	"mingw.h"
 	"_mingw.h"
 	<stdarg.h>
 	"config.h"
 	<stdint.h>
 	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3905,10 +3909,10 @@
 	<errno.h>
 	<sys/mman.h>
 	<sys/ioctl.h>
-	<semaphore.h>
-	<limits.h>
 	<sys/file.h>
 	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
 	<sys/mount.h>
 	<utime.h>
 	<sys/dcmd_blk.h>
@@ -3922,6 +3926,8 @@
 	<unicode/ucol.h>
 	<unicode/ubrk.h>
 	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
 
 1445715471 /home/hahne/dev/netxpert/include/config.h
 	<map>
@@ -4051,58 +4057,59 @@
 	<cereal/cereal.hpp>
 	<vector>
 
-1425417421 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Column.cpp
-	"Column.h"
+1447145112 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Column.cpp
+	<SQLiteCpp/Column.h>
 	<iostream>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Column.h
-	"sqlite3.h"
-	"Statement.h"
-	"Exception.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Column.h
+	<sqlite3.h>
+	<SQLiteCpp/Statement.h>
+	<SQLiteCpp/Exception.h>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/sqlite3.h
+1447589732 /home/hahne/dev/netxpert/libs/sqlite3.h
 	<stdarg.h>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.h
-	"sqlite3.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.h
+	<sqlite3.h>
 	<string>
-	"Exception.h"
+	<map>
+	<SQLiteCpp/Exception.h>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Exception.h
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Exception.h
 	<stdexcept>
 	<string>
 
-1432192529 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Database.cpp
-	"Database.h"
-	"Statement.h"
-	"Assertion.h"
-	"Exception.h"
+1447798147 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Database.cpp
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Statement.h>
+	<SQLiteCpp/Assertion.h>
+	<SQLiteCpp/Exception.h>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Database.h
-	"sqlite3.h"
-	"Column.h"
+1447436322 /home/hahne/dev/netxpert/libs/SQLiteCpp/Database.h
+	<sqlite3.h>
+	<SQLiteCpp/Column.h>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Assertion.h
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Assertion.h
 	<cassert>
 
-1425417421 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.cpp
-	"Statement.h"
-	"Database.h"
-	"Column.h"
-	"Assertion.h"
-	"Exception.h"
+1447145112 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.cpp
+	<SQLiteCpp/Statement.h>
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Column.h>
+	<SQLiteCpp/Assertion.h>
+	<SQLiteCpp/Exception.h>
 	<string>
 
-1425417421 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.cpp
-	"Transaction.h"
-	"Database.h"
-	"Assertion.h"
+1447145112 source:/home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.cpp
+	<SQLiteCpp/Transaction.h>
+	<SQLiteCpp/Database.h>
+	<SQLiteCpp/Assertion.h>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
-	"Exception.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
+	<SQLiteCpp/Exception.h>
 
 1440880046 source:/home/hahne/dev/netxpert/src/config.cpp
 	<fstream>
@@ -4166,7 +4173,7 @@
 	"geos/geom/Point.h"
 	"geos/geom/PrecisionModel.h"
 
-1443597917 /home/hahne/dev/netxpert/include/data.h
+1446995217 /home/hahne/dev/netxpert/include/data.h
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
 	"geos/geom/MultiLineString.h"
@@ -4186,7 +4193,7 @@
 	"config.h"
 	"utils.h"
 
-1446753325 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
+1446757973 source:/home/hahne/dev/netxpert/src/fgdbwriter.cpp
 	"fgdbwriter.h"
 
 1446757283 /home/hahne/dev/netxpert/include/fgdbwriter.h
@@ -6714,7 +6721,7 @@
 	<string>
 	"network.h"
 
-1444144848 source:/home/hahne/dev/netxpert/src/py/network.i
+1446931625 source:/home/hahne/dev/netxpert/src/py/network.i
 	"network.h"
 	"dbhelper.h"
 	"isolver.h"

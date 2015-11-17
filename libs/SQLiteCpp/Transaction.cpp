@@ -8,10 +8,10 @@
  * Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
  * or copy at http://opensource.org/licenses/MIT)
  */
-#include "Transaction.h"
+#include <SQLiteCpp/Transaction.h>
 
-#include "Database.h"
-#include "Assertion.h"
+#include <SQLiteCpp/Database.h>
+#include <SQLiteCpp/Assertion.h>
 
 
 namespace SQLite
@@ -38,6 +38,7 @@ Transaction::~Transaction() noexcept // nothrow
         catch (SQLite::Exception& e)
         {
             // Never throw an exception in a destructor
+            (void)e; // warning proof
             SQLITECPP_ASSERT(false, e.what());  // See SQLITECPP_ENABLE_ASSERT_HANDLER
         }
     }
@@ -53,7 +54,7 @@ void Transaction::commit()
     }
     else
     {
-        throw SQLite::Exception("Transaction already commited");
+        throw SQLite::Exception("Transaction already commited.");
     }
 }
 

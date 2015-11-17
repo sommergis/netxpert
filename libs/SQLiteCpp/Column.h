@@ -3,17 +3,17 @@
  * @ingroup SQLiteCpp
  * @brief   Encapsulation of a Column in a row of the result pointed by the prepared SQLite::Statement.
  *
- * Copyright (c) 2012-2014 Sebastien Rombauts (sebastien.rombauts@gmail.com)
+ * Copyright (c) 2012-2015 Sebastien Rombauts (sebastien.rombauts@gmail.com)
  *
  * Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
  * or copy at http://opensource.org/licenses/MIT)
  */
 #pragma once
 
-#include "sqlite3.h"
+#include <sqlite3.h>
 
-#include "Statement.h"
-#include "Exception.h"
+#include <SQLiteCpp/Statement.h>
+#include <SQLiteCpp/Exception.h>
 
 #include <string>
 
@@ -37,8 +37,6 @@ namespace SQLite
  * 2) the SQLite "Serialized" mode is not supported by SQLiteC++,
  *    because of the way it shares the underling SQLite precompiled statement
  *    in a custom shared pointer (See the inner class "Statement::Ptr").
- *
- * @todo inline all simple getters
  */
 class Column
 {
@@ -64,14 +62,16 @@ public:
     // they copy the Statement::Ptr which in turn increments the reference counter.
 
     /**
-     * @brief Return a pointer to the named assigned to a result column (potentially aliased)
+     * @brief Return a pointer to the named assigned to this result column (potentially aliased)
+     *
+     * @see getOriginName() to get original column name (not aliased)
      */
     const char*     getName() const noexcept; // nothrow
 
-    #ifdef SQLITE_ENABLE_COLUMN_METADATA
+#ifdef SQLITE_ENABLE_COLUMN_METADATA
     /**
      * @brief Return a pointer to the table column name that is the origin of this result column
-     *
+     * 
      *  Require definition of the SQLITE_ENABLE_COLUMN_METADATA preprocessor macro :
      * - when building the SQLite library itself (which is the case for the Debian libsqlite3 binary for instance),
      * - and also when compiling this wrapper.
@@ -171,7 +171,7 @@ public:
     /**
      * @brief Inline cast operator to char*
      *
-     * @see getText
+     * @see getText 
      */
     inline operator const char*() const
     {
@@ -186,10 +186,11 @@ public:
     {
         return getBlob();
     }
-#ifdef __GNUC__
-    // NOTE : the following is required by GCC to cast a Column result in a std::string
+
+#if !(defined(_MSC_VER) && _MSC_VER < 1900)
+    // NOTE : the following is required by GCC and Clang to cast a Column result in a std::string
     // (error: conversion from ‘SQLite::Column’ to non-scalar type ‘std::string {aka std::basic_string<char>}’)
-    // but is not working under Microsoft Visual Studio 2010 and 2012
+    // but is not working under Microsoft Visual Studio 2010, 2012 and 2013
     // (error C2440: 'initializing' : cannot convert from 'SQLite::Column' to 'std::basic_string<_Elem,_Traits,_Ax>'
     //  [...] constructor overload resolution was ambiguous)
     /// Inline cast operator to std::string
@@ -198,6 +199,16 @@ public:
         return getText();
     }
 #endif
+    // NOTE : the following is required by GCC and Clang to cast a Column result in a long/int64_t
+    /// @brief Inline cast operator to long as 64bits integer
+    inline operator long() const
+    {
+#ifdef __x86_64__
+        return getInt64();
+#else
+        return getInt();
+#endif
+    }
 
     /// @brief Return UTF-8 encoded English language explanation of the most recent error.
     inline const char* errmsg() const
