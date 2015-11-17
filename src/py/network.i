@@ -408,7 +408,7 @@ namespace netxpert
             void Solve(string net);
             void Solve(Network& net);
             bool IsDirected;
-            std::vector<FlowCost> GetMinCostFlow() const;
+            std::vector<netxpert::FlowCost> GetMinCostFlow() const;
             netxpert::MCFAlgorithm GetAlgorithm() const;
             void SetAlgorithm(MCFAlgorithm mcfAlgorithm);
             /*netxpert::MCFSolverStatus GetSolverStatus() const;*/

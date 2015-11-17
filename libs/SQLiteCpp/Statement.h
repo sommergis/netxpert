@@ -3,17 +3,18 @@
  * @ingroup SQLiteCpp
  * @brief   A prepared SQLite Statement is a compiled SQL query ready to be executed, pointing to a row of result.
  *
- * Copyright (c) 2012-2014 Sebastien Rombauts (sebastien.rombauts@gmail.com)
+ * Copyright (c) 2012-2015 Sebastien Rombauts (sebastien.rombauts@gmail.com)
  *
  * Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
  * or copy at http://opensource.org/licenses/MIT)
  */
 #pragma once
 
-#include "sqlite3.h"
+#include <sqlite3.h>
 #include <string>
+#include <map>
 
-#include "Exception.h"
+#include <SQLiteCpp/Exception.h>
 
 
 namespace SQLite
@@ -43,9 +44,9 @@ class Column;
  */
 class Statement
 {
-public:
-    class Ptr;
+    friend class Column; // For access to Statement::Ptr inner class
 
+public:
     /**
      * @brief Compile and register the SQL query for the provided SQLite Database Connection
      *
@@ -78,8 +79,12 @@ public:
 
     /**
      * @brief Clears away all the bindings of a prepared statement.
+     *
+     *  Contrary to the intuition of many, reset() does not reset
+     * the bindings on a prepared statement.
+     *  Use this routine to reset all parameters to NULL.
      */
-    void clearBindings(void); // throw(SQLite::Exception)
+    void clearBindings(); // throw(SQLite::Exception)
 
     ////////////////////////////////////////////////////////////////////////////
     // Bind a value to a parameter of the SQL statement,
@@ -274,7 +279,8 @@ public:
      *  Can be used to access the data of the current row of result when applicable,
      * while the executeStep() method returns true.
      *
-     *  Throw an exception if there is no row to return a Column from :
+     *  Throw an exception if there is no row to return a Column from:
+     * - if provided index is out of bound
      * - before any executeStep() call
      * - after the last executeStep() returned false
      * - after a reset() call
@@ -283,8 +289,7 @@ public:
      *
      * @param[in] aIndex    Index of the column, starting at 0
      *
-     * @note    This method is no more const, starting in v0.5,
-     *          which reflects the fact that the returned Column object will
+     * @note    This method is not const, reflecting the fact that the returned Column object will
      *          share the ownership of the underlying sqlite3_stmt.
      *
      * @warning The resulting Column object must not be memorized "as-is".
@@ -296,13 +301,66 @@ public:
     Column  getColumn(const int aIndex);
 
     /**
+     * @brief Return a copy of the column data specified by its column name (less efficient than using an index)
+     *
+     *  Can be used to access the data of the current row of result when applicable,
+     * while the executeStep() method returns true.
+     *
+     *  Throw an exception if there is no row to return a Column from :
+     * - if provided name is not one of the aliased column names
+     * - before any executeStep() call
+     * - after the last executeStep() returned false
+     * - after a reset() call
+     *
+     *  Throw an exception if the specified name is not an on of the aliased name of the columns in the result.
+     *
+     * @param[in] apName   Aliased name of the column, that is, the named specified in the query (not the original name)
+     *
+     * @note    Uses a map of column names to indexes, build on first call.
+     *
+     * @note    This method is not const, reflecting the fact that the returned Column object will
+     *          share the ownership of the underlying sqlite3_stmt.
+     *
+     * @warning The resulting Column object must not be memorized "as-is".
+     *          Is is only a wrapper around the current result row, so it is only valid
+     *          while the row from the Statement remains valid, that is only until next executeStep() call.
+     *          Thus, you should instead extract immediately its data (getInt(), getText()...)
+     *          and use or copy this data for any later usage.
+     */
+    Column  getColumn(const char* apName);
+
+    /**
      * @brief Test if the column value is NULL
      *
      * @param[in] aIndex    Index of the column, starting at 0
      *
      * @return true if the column value is NULL
+     *
+     *  Throw an exception if the specified index is out of the [0, getColumnCount()) range.
      */
     bool    isColumnNull(const int aIndex) const;
+
+    /**
+     * @brief Return a pointer to the named assigned to the specified result column (potentially aliased)
+     *
+     * @see getColumnOriginName() to get original column name (not aliased)
+     *
+     *  Throw an exception if the specified index is out of the [0, getColumnCount()) range.
+     */
+    const char* getColumnName(const int aIndex) const;
+
+#ifdef SQLITE_ENABLE_COLUMN_METADATA
+    /**
+    * @brief Return a pointer to the table column name that is the origin of the specified result column
+    *
+    *  Require definition of the SQLITE_ENABLE_COLUMN_METADATA preprocessor macro :
+    * - when building the SQLite library itself (which is the case for the Debian libsqlite3 binary for instance),
+    * - and also when compiling this wrapper.
+    *
+    *  Throw an exception if the specified index is out of the [0, getColumnCount()) range.
+    */
+    const char* getColumnOriginName(const int aIndex) const;
+#endif
 
     ////////////////////////////////////////////////////////////////////////////
 
@@ -326,13 +384,23 @@ public:
     {
         return mbDone;
     }
-    /// @brief Return UTF-8 encoded English language explanation of the most recent error.
-    inline const char* errmsg() const
+    /// @brief Return the numeric result code for the most recent failed API call (if any).
+    inline int getErrorCode() const noexcept // nothrow
+    {
+        return sqlite3_errcode(mStmtPtr);
+    }
+    /// @brief Return the extended numeric result code for the most recent failed API call (if any).
+    inline int getExtendedErrorCode() const noexcept // nothrow
+    {
+        return sqlite3_extended_errcode(mStmtPtr);
+    }
+    /// Return UTF-8 encoded English language explanation of the most recent failed API call (if any).
+    inline const char* errmsg() const noexcept // nothrow
     {
         return sqlite3_errmsg(mStmtPtr);
     }
 
-public:
+private:
     /**
      * @brief Shared pointer to the sqlite3_stmt SQLite Statement Object.
      *
@@ -362,16 +430,6 @@ public:
             return mpStmt;
         }
 
-        int getLastStatus() const
-        {
-          return mLastStatus;
-        }
-
-        void setLastStatus(int status)
-        {
-          mLastStatus = status;
-        }
-
     private:
         /// @{ Unused/forbidden copy operator
         Ptr& operator=(const Ptr& aPtr);
@@ -382,7 +440,6 @@ public:
         sqlite3_stmt*   mpStmt;      //!< Pointer to SQLite Statement Object
         unsigned int*   mpRefCount;  //!< Pointer to the heap allocated reference counter of the sqlite3_stmt
                                      //!< (to share it with Column objects)
-        int             mLastStatus; //!< The return status of the last statement evaluation
     };
 
 private:
@@ -396,12 +453,44 @@ private:
      *
      * @param[in] SQLite return code to test against the SQLITE_OK expected value
      */
-    void check(const int aRet);
+    inline void check(const int aRet) const
+    {
+        if (SQLITE_OK != aRet)
+        {
+            throw SQLite::Exception(sqlite3_errstr(aRet));
+        }
+    }
+
+    /**
+     * @brief Check if there is a row of result returnes by executeStep(), else throw a SQLite::Exception.
+     */
+    inline void checkRow() const
+    {
+        if (false == mbOk)
+        {
+            throw SQLite::Exception("No row to get a column from. executeStep() was not called, or returned false.");
+        }
+    }
+
+    /**
+    * @brief Check if there is a Column index is in the range of columns in the result.
+    */
+    inline void checkIndex(const int aIndex) const
+    {
+        if ((aIndex < 0) || (aIndex >= mColumnCount))
+        {
+            throw SQLite::Exception("Column index out of range.");
+        }
+    }
+
+private:
+    typedef std::map<std::string, int> TColumnNames;
 
 private:
     std::string     mQuery;         //!< UTF-8 SQL Query
     Ptr             mStmtPtr;       //!< Shared Pointer to the prepared SQLite Statement Object
     int             mColumnCount;   //!< Number of columns in the result of the prepared statement
+    TColumnNames    mColumnNames;   //!< Map of columns index by name
     bool            mbOk;           //!< true when a row has been fetched with executeStep()
     bool            mbDone;         //!< true when the last executeStep() had no more row to fetch
 };

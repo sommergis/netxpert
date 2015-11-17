@@ -35,6 +35,11 @@ namespace netxpert {
     const double DOUBLE_INFINITY = 999999;
     const double DOUBLE_NULL = -1;
 
+    /**
+    * \Enum
+    * Enum that reflects the type of the ArcID Column in the netxpert database. Used for building
+    * the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).
+    **/
     enum ArcIDColumnDataType
     {
         Number = 0, //double or int
@@ -58,12 +63,16 @@ namespace netxpert {
     **/
     enum MinCostFlowInstanceType
     {
-        MCFUndefined = 0,
-        MCFBalanced = 1,
-        MCFExtrasupply = 2,
-        MCFExtrademand = 3
+        MCFUndefined = 0,     ///< undefined MCF problem type
+        MCFBalanced = 1,      ///< balanced MCF problem
+        MCFExtrasupply = 2,   ///< MCF problem with more supply than demand
+        MCFExtrademand = 3    ///< MCF problem with more demand than supply
     };
 
+    /**
+    * \Enum
+    * Enum that reflects the status of the Minimum Cost Flow solver.
+    **/
     enum MCFSolverStatus
     {
        MCFUnSolved = -1 ,     ///< no solution available
@@ -74,11 +83,15 @@ namespace netxpert {
        MCFError = 4           ///< error in the solver
     };
 
+    /**
+    * \Enum
+    * Enum that reflects the location of a given point on a line.
+    **/
     enum StartOrEndLocationOfLine
     {
-        Intermediate = 0,
-        Start = 1,
-        End = 2
+        Intermediate = 0,     ///< points location is somewhere between the start and end point of the line
+        Start = 1,            ///< point is identical to the start point of the line
+        End = 2               ///< point is identical to the end point of the line
     };
 
     typedef string ExtArcID;

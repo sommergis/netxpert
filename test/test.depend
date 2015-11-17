@@ -149,7 +149,7 @@
 	<cereal/cereal.hpp>
 	<vector>
 
-1441742010 /home/hahne/dev/netxpert/include/fgdbwriter.h
+1446757283 /home/hahne/dev/netxpert/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -158,7 +158,7 @@
 	"utils.h"
 	<algorithm>
 
-1440339921 /home/hahne/dev/netxpert/include/dbwriter.h
+1446753314 /home/hahne/dev/netxpert/include/dbwriter.h
 	<string>
 	"geos/geom/MultiLineString.h"
 	"geos/geom/Geometry.h"
@@ -204,7 +204,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1442659406 /home/hahne/dev/netxpert/include/slitewriter.h
+1446753470 /home/hahne/dev/netxpert/include/slitewriter.h
 	"utils.h"
 	<string>
 	"dbwriter.h"
@@ -213,33 +213,34 @@
 	"SQLiteCpp/Transaction.h"
 	"geos/io/WKBWriter.h"
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Database.h
-	"sqlite3.h"
-	"Column.h"
+1447436322 /home/hahne/dev/netxpert/libs/SQLiteCpp/Database.h
+	<sqlite3.h>
+	<SQLiteCpp/Column.h>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/sqlite3.h
+1447589732 /home/hahne/dev/netxpert/libs/sqlite3.h
 	<stdarg.h>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Column.h
-	"sqlite3.h"
-	"Statement.h"
-	"Exception.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Column.h
+	<sqlite3.h>
+	<SQLiteCpp/Statement.h>
+	<SQLiteCpp/Exception.h>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.h
-	"sqlite3.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Statement.h
+	<sqlite3.h>
 	<string>
-	"Exception.h"
+	<map>
+	<SQLiteCpp/Exception.h>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Exception.h
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Exception.h
 	<stdexcept>
 	<string>
 
-1425417421 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
-	"Exception.h"
+1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
+	<SQLiteCpp/Exception.h>
 
-1443597917 /home/hahne/dev/netxpert/include/data.h
+1446995217 /home/hahne/dev/netxpert/include/data.h
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
 	"geos/geom/MultiLineString.h"
@@ -256,7 +257,7 @@
 
 1440100970 al
 
-1446640900 /home/hahne/dev/netxpert/include/network.h
+1446668386 /home/hahne/dev/netxpert/include/network.h
 	"utils.h"
 	"dbhelper.h"
 	"slitewriter.h"
@@ -324,7 +325,7 @@
 
 1423772165 /usr/local/include/boost/algorithm
 
-1446285614 /home/hahne/dev/netxpert/include/dbhelper.h
+1446668043 /home/hahne/dev/netxpert/include/dbhelper.h
 	<string>
 	"utils.h"
 	"data.h"
@@ -336,8 +337,7 @@
 	"geos/geom/Point.h"
 	"geos/geom/PrecisionModel.h"
 
-1443882345 /home/hahne/dev/netxpert/include/test.h
-	<omp.h>
+1446752759 /home/hahne/dev/netxpert/include/test.h
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -463,7 +463,7 @@
 	"sptlem.h"
 	"data.h"
 
-1446146015 /home/hahne/dev/netxpert/include/utils.h
+1446668438 /home/hahne/dev/netxpert/include/utils.h
 	<omp.h>
 	<string>
 	<stdio.h>
@@ -2022,7 +2022,7 @@
 
 1440845405 /home/hahne/dev/netxpert/include/core/imstree.h
 
-1445630063 /home/hahne/dev/netxpert/include/core/isptree.h
+1446676005 /home/hahne/dev/netxpert/include/core/isptree.h
 	<memory>
 
 1440845401 /home/hahne/dev/netxpert/include/core/imcflow.h

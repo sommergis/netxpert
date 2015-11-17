@@ -203,17 +203,20 @@ bool SpatiaLiteWriter::performInitialCommand()
         const string pathBefore = UTILS::GetCurrentDir();
 
         UTILS::SetCurrentDir(spatiaLiteHome);
-
+        /* Old way:
         db.enableExtensions();
-
-        const string strSQL = "SELECT load_extension(@spatiaLiteCoreName);";
+        const string strSQL = "SELECT load_extension(@spatiaLiteCoreName,@spatiaLiteEntryPoint);";
         SQLite::Statement query(db, strSQL);
         query.bind("@spatiaLiteCoreName", spatiaLiteCoreName);
+		query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
         query.executeStep();
-
-        db.disableExtensions();
-
-        //boost::filesystem::current_path(pathBefore);
+        db.disableExtensions(); */
+        //new way
+		#ifdef _WIN32
+		db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
+		#else
+        db.loadExtension(spatiaLiteCoreName.c_str(), NULL);
+        #endif
         UTILS::SetCurrentDir(pathBefore);
         //cout <<  boost::filesystem::current_path() << endl;
         return true;

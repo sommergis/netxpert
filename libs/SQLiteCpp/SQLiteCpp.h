@@ -5,7 +5,7 @@
  *
  * Include this main header file in your project to gain access to all functionality provided by the wrapper.
  *
- * Copyright (c) 2012-2014 Sebastien Rombauts (sebastien.rombauts@gmail.com)
+ * Copyright (c) 2012-2015 Sebastien Rombauts (sebastien.rombauts@gmail.com)
  *
  * Distributed under the MIT License (MIT) (See accompanying file LICENSE.txt
  * or copy at http://opensource.org/licenses/MIT)
@@ -18,12 +18,12 @@
 
 
 // Include useful headers of SQLiteC++
-#include "Assertion.h"
-#include "Exception.h"
-#include "Database.h"
-#include "Statement.h"
-#include "Column.h"
-#include "Transaction.h"
+#include <SQLiteCpp/Assertion.h>
+#include <SQLiteCpp/Exception.h>
+#include <SQLiteCpp/Database.h>
+#include <SQLiteCpp/Statement.h>
+#include <SQLiteCpp/Column.h>
+#include <SQLiteCpp/Transaction.h>
 
 
 /**
@@ -38,5 +38,5 @@
  * with the value (X*1000000 + Y*1000 + Z) where X, Y, and Z are the same
  * numbers used in [SQLITECPP_VERSION].
  */
-#define SQLITECPP_VERSION           "0.9.9"
-#define SQLITECPP_VERSION_NUMBER    0009009
+#define SQLITECPP_VERSION           "1.3.0"
+#define SQLITECPP_VERSION_NUMBER    1003000
