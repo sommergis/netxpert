@@ -116,21 +116,12 @@ void FGDBWriter::CreateNetXpertDB()
         LOGGER::LogError( ex.what() );
     }
 }
-void FGDBWriter::CreateSolverResultTable(const string& _tableName)
+void FGDBWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType)
 {
-    try {
-        if (!geodatabasePtr)
-            connect();
-
-        createTable ( _tableName );
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error creating NetXpert Result Table"+ _tableName + "!" );
-        LOGGER::LogError( ex.what() );
-    }
+    CreateSolverResultTable(_tableName, solverType, false);
 }
-void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirst)
+
+void FGDBWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType, bool dropFirst)
 {
     try
     {
@@ -141,7 +132,7 @@ void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirs
         {
             dropTable( _tableName);
         }
-        createTable( _tableName);
+        createTable( _tableName, solverType);
     }
     catch (std::exception& ex)
     {
@@ -150,15 +141,29 @@ void FGDBWriter::CreateSolverResultTable(const string& _tableName, bool dropFirs
     }
 }
 
-void FGDBWriter::createTable (const string& _tableName )
+void FGDBWriter::createTable (const string& _tableName, const NetXpertSolver solverType)
 {
     currentTblPtr = unique_ptr<Table> (new Table());
 
     string resultTblDefStr;
     string defLine;
+    string xml_path;
 
+    switch (solverType)
+    {
+        case NetXpertSolver::NetworkBuilderResult:
+        {
+            xml_path = resultNetBuilderDefPath;
+            break;
+        }
+        default:
+        {
+            xml_path = resultTblDefPath;
+            break;
+        }
+    }
     //XML loading for Table Definition
-    ifstream defFile(resultTblDefPath);
+    ifstream defFile(xml_path);
     while ( getline(defFile, defLine) )
     {
        resultTblDefStr.append(defLine + "\n");
@@ -331,6 +336,112 @@ void FGDBWriter::SaveResultArc(const std::string& orig, const std::string& dest,
     catch (std::exception& ex)
     {
         LOGGER::LogError( "Error saving results to NetXpert FileGDB!" );
+        LOGGER::LogError( ex.what() );
+    }
+
+}
+void FGDBWriter::SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
+                                       const unsigned int toNode, const double cost,
+                                       const double capacity, const std::string& oneway,
+                                       const geos::geom::Geometry& arc,
+                                       const std::string& _tableName)
+{
+    try
+    {
+        // Memory leaks:
+        // Make a "local" pointer from referenced route
+        //auto* route = &_route;
+
+        string resultTableName = _tableName;
+
+        if (!isConnected)
+            connect( );
+
+        openTable ( _tableName );
+
+        Row row;
+        currentTblPtr->CreateRowObject(row);
+
+        wstring extArcIDNew = UTILS::convertStringToWString(extArcID);
+        wstring onewayNew = UTILS::convertStringToWString(oneway);
+
+        row.SetString(L"originalArcID", extArcIDNew);
+        row.SetInteger(L"fromNode", fromNode);
+        row.SetInteger(L"toNode", toNode);
+        row.SetDouble(L"cost", cost);
+        row.SetDouble(L"capacity", capacity);
+        row.SetString(L"oneway", onewayNew);
+
+        if ( !arc.isEmpty() )
+        {
+            // Geometry
+            int numPts = static_cast<int>(arc.getNumPoints()); //TODO
+            int numParts = static_cast<int>(arc.getNumGeometries()); //TODO
+            MultiPartShapeBuffer lineGeometry;
+
+            lineGeometry.Setup(ShapeType::shapePolyline, numParts, numPts);
+
+            // Set the point array to the array from the read geometry.
+            FileGDBAPI::Point* points;
+            lineGeometry.GetPoints(points);
+            const geos::geom::CoordinateSequence* coordsPtr = arc.getCoordinates();
+            const auto& coords = *coordsPtr;
+            int length = static_cast<int>(coords.getSize());
+            for (int i = 0; i < length; i++)
+            {
+                const geos::geom::Coordinate c = coords.getAt(i);
+                FileGDBAPI::Point p {c.x, c.y};
+                //Point p { x = coords->getAt(i).x, y = coords->getAt(i).y };
+                points[i] = p;
+            }
+            delete coordsPtr; //else there are memory leaks!
+
+            // Set the parts array to the array from the read geometry.
+            int* parts;
+            lineGeometry.GetParts(parts);
+            parts[0] = 0;
+            int partNumber = 0;
+            //Valgrind: memory leaks:
+            // geos::geom::CoordinateArraySequenceFactory::create(std::vector<geos::geom::Coordinate,
+            // std::allocator<geos::geom::Coordinate> >*, unsigned long) const (CoordinateArraySequenceFactory.inl:35
+            //
+            // geos::geom::CoordinateArraySequence::clone() const (CoordinateArraySequence.cpp:77
+            for (int i = 1; i < numParts; i++)
+            {
+                const geos::geom::Geometry* geoPartPtr = arc.getGeometryN(static_cast<size_t>(i - 1));
+                //get position of last coordinate in part
+                const auto coordsPtr = geoPartPtr->getCoordinates();
+                //delete geoPart;
+                partNumber = static_cast<int>(coordsPtr->getSize());
+                //add number to last position
+                parts[i] = partNumber + parts[i - 1];
+                delete coordsPtr; //delete only this pointer! not geoPart!
+            }
+
+            lineGeometry.CalculateExtent();
+
+            fgdbError hr;
+            wstring errorText;
+
+            hr = row.SetGeometry( lineGeometry );
+
+            if ((hr = currentTblPtr->Insert(row)) == S_OK)
+            {
+                //LOGGER::LogDebug("Inserted row successfully.");
+            }
+            else {
+                ErrorInfo::GetErrorDescription(hr, errorText);
+                string newErrorText = UTILS::convertWStringToString(errorText);
+                LOGGER::LogError("Error inserting row into Result Table "+ _tableName + "!");
+                LOGGER::LogError(newErrorText + " - Code: " +to_string(hr));
+            }
+            //delete route;
+        }
+
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error saving network builder arcs to NetXpert FileGDB!" );
         LOGGER::LogError( ex.what() );
     }
 

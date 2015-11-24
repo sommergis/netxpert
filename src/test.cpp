@@ -61,6 +61,170 @@ void netxpert::Test::NetworkConvert(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }
+
+void netxpert::Test::TestNetworkBuilder(Config& cnfg)
+{
+    try
+    {
+        //1. Config
+        if (!DBHELPER::IsInitialized)
+        {
+            DBHELPER::Initialize(cnfg);
+        }
+
+        try
+        {
+            if (!LOGGER::IsInitialized)
+            {
+                LOGGER::Initialize(cnfg);
+            }
+        }
+        catch (exception& ex)
+        {
+            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
+            cout << ex.what() << endl;
+        }
+
+        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
+
+        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
+
+        string nodesTableName = cnfg.NodesTableName;
+        string nodesGeomColName = cnfg.NodesGeomColumnName;
+        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_net" : cnfg.ResultTableName;
+
+        bool autoCleanNetwork = cnfg.CleanNetwork;
+
+        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+
+        //2. Load Network
+        NetworkBuilder builder(cnfg);
+        builder.LoadData();
+
+        LOGGER::LogInfo("Calculating Network..");
+
+        unordered_map< unsigned int, NetworkBuilderResultArc> kvArcs = builder.GetBuiltNetwork();
+        LOGGER::LogDebug("Size of built network: "+ to_string(kvArcs.size()));
+
+        /*
+        auto it1 = kvArcs.begin();
+        auto n = &(it1->second);
+        cout << n->extArcID <<","
+             <<n->fromNode<<","
+             <<n->toNode<<","
+             <<n->cost<<","
+             <<n->capacity<<","
+             <<n->oneway<<","
+             <<n->geom->toString()
+        <<endl; */
+
+
+        //TODO: save!
+        unique_ptr<DBWriter> writer;
+		unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
+                {
+                    //Override result DB Path with original netXpert DB path
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+                }
+                else
+				{
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
+                writer->CreateNetXpertDB(); //create before preparing query
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveNetworkBuilderArc(resultTableName));
+                //}
+                break;
+            }
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+                writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
+                writer->CommitCurrentTransaction();
+
+                break;
+            }
+        }
+
+        LOGGER::LogDebug("Writing Geometries..");
+        writer->OpenNewTransaction();
+
+        unordered_map< unsigned int, NetworkBuilderResultArc>::iterator it;
+        int counter = 0;
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+        {
+
+        for (it = kvArcs.begin(); it != kvArcs.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            //auto kv = it;
+
+            counter += 1;
+            if (counter % 2500 == 0)
+                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+            unsigned int key = it->first;
+            NetworkBuilderResultArc* value = &(it->second);
+
+            //cout << value->geom->toString()<<endl;
+
+            /*auto mLine = unique_ptr<MultiLineString>( dynamic_cast<MultiLineString*>( value->geom.get()));
+            cout << mLine->toString() << endl;*/
+            switch (cnfg.ResultDBType)
+            {
+                case RESULT_DB_TYPE::SpatiaLiteDB:
+                {
+                    auto& sldb = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                    #pragma omp critical
+                    {
+                    sldb.SaveNetworkBuilderArc(value->extArcID, value->fromNode, value->toNode, value->cost,
+                                       value->capacity, value->oneway, *(value->geom), resultTableName, *qry);
+                    }
+                    break;
+                }
+                case RESULT_DB_TYPE::ESRI_FileGDB:
+                {
+                    auto& fgdb = dynamic_cast<FGDBWriter&>(*writer);
+                    #pragma omp critical
+                    {
+                    fgdb.SaveNetworkBuilderArc(value->extArcID, value->fromNode, value->toNode, value->cost,
+                                       value->capacity, value->oneway, *(value->geom),  resultTableName);
+                    }
+                    break;
+                }
+            }
+            //net.ProcessResultArcsMem(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
+            }//omp single
+        }
+        }//omp paralell
+
+        writer->CommitCurrentTransaction();
+        writer->CloseConnection();
+        LOGGER::LogDebug("Done!");
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("NetworkBuilder: Unerwarteter Fehler!");
+        LOGGER::LogError(ex.what());
+    }
+}
+
 void netxpert::Test::TestFileGDBWriter(Config& cnfg)
 {
     try
@@ -78,7 +242,7 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
         FGDBWriter fgdb(cnfg);
         fgdb.CreateNetXpertDB();
 
-        fgdb.CreateSolverResultTable(resultTblName, dropFirst);
+        fgdb.CreateSolverResultTable(resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
         fgdb.OpenNewTransaction();
         fgdb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName);
         fgdb.CommitCurrentTransaction();
@@ -110,7 +274,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         SpatiaLiteWriter sldb( cnfg );
         sldb.CreateNetXpertDB();
         sldb.OpenNewTransaction();
-        sldb.CreateSolverResultTable(resultTblName, dropFirst);
+        sldb.CreateSolverResultTable(resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
         auto queryPtr = sldb.PrepareSaveResultArc(resultTblName);
         //depointerization "on the fly"
         sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, *queryPtr);
@@ -142,7 +306,7 @@ void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
 
         SpatiaLiteWriter sldb( cnfg );
         sldb.OpenNewTransaction();
-        sldb.CreateSolverResultTable (resultTblName, dropFirst);
+        sldb.CreateSolverResultTable (resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
 
         vector<shared_ptr<Geometry>> segs;
         // {shared_ptr<Geometry>(geomPtr1), shared_ptr<Geometry>(geomPtr2) };
@@ -447,7 +611,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
         }
         writer->CreateNetXpertDB();
         writer->OpenNewTransaction();
-        writer->CreateSolverResultTable(resultTableName, true);
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
         writer->CommitCurrentTransaction();
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();

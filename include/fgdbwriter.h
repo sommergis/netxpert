@@ -25,22 +25,35 @@ namespace netxpert {
             virtual ~FGDBWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const std::string&_tableName);
-            virtual void CreateSolverResultTable(const std::string& _tableName, const bool dropFirst);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType,
+                                                 const bool dropFirst);
             virtual void OpenNewTransaction();
+            /**
+            * \Brief For saving the result arc of a built network into the netXpert result DB
+            */
+            void SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
+                                       const unsigned int toNode, const double cost,
+                                       const double capacity, const std::string& oneway,
+                                       const geos::geom::Geometry& arc,
+                                       const std::string& _tableName);
+
+
             void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
                                const double capacity, const double flow, const geos::geom::MultiLineString& route,
                                const std::string& _tableName);
+
             virtual void CloseConnection();
         private:
             unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;
             void connect();
             bool isConnected = false;
-            void createTable( const string& _tableName);
-            void openTable( const string& _tableName);
-            void dropTable ( const string& _tableName);
+            void createTable (const std::string& _tableName, const NetXpertSolver solverType);
+            void openTable(const string& _tableName);
+            void dropTable (const string& _tableName);
             unique_ptr<FileGDBAPI::Table> currentTblPtr;
             const string resultTblDefPath = "FGDB_NETXPERT_RESULT_SCHEMA.XML";
+            const string resultNetBuilderDefPath = "FGDB_NETXPERT_NETBUILD_SCHEMA.XML";
             Config NETXPERT_CNFG;
     };
 }

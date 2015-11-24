@@ -106,7 +106,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     //#pragma omp parallel for shared(origs)
     //make spt local to be copied for parallel proc
     //no class member variables can be parallized
-    #pragma omp parallel default(shared)
+	#pragma omp parallel default(shared) num_threads(LOCAL_NUM_THREADS)
     {
     shared_ptr<ISPTree> lspt;
     switch (algorithm)
