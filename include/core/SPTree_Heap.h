@@ -822,15 +822,26 @@ inline void SPTree_Heap::SetOrigin( cIndex NewOrg )
 inline void SPTree_Heap::SetDest( cIndex NewDst )
 {
   //Johannes Sommer
-  //UINT_MAX fails on linux - windows seems ok
-  //--> UINT_MAX + 1 is ok
+  //UINT_MAX fails on 64Bit machines - for 32Bit ok
+  //--> UINT_MAX + 1 is ok for 64Bit machines
  Index localNewDst = NewDst;
  if (NewDst == Inf<unsigned int>())
- #ifdef __linux__
+
+#if defined(__linux__) && defined(__LP64__)
     localNewDst = NewDst + 1;
- #else
+#endif
+#if defined(__linux__) && !defined(__LP64__)
     localNewDst = NewDst;
- #endif // __linux__
+#endif // __linux__
+
+#if defined(_WIN32) && !defined(_M_AMD64)
+ localNewDst = NewDst;
+#endif
+#if defined(_WIN64) || defined(_M_AMD64)
+ localNewDst = NewDst + 1;
+ std::cout << "adding +1 to UINT_MAX" << std::endl;
+#endif
+ 
  if( Dest != localNewDst + USENAME0 ) {
   //#if( LABEL_SETTING )
    Dest = localNewDst + USENAME0;

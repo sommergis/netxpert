@@ -514,6 +514,171 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
         return arcTbl;
     }
 }
+
+std::vector<NetworkBuilderInputArc>
+DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMap& _map)
+{
+    std::vector<NetworkBuilderInputArc> arcTbl;
+    string sqlStr = "";
+    bool oneway = false;
+    bool hasCapacity = false;
+    string geomColName = NETXPERT_CNFG.ArcsGeomColumnName;
+
+    try
+    {
+        if (!isConnected)
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
+
+        SQLite::Database& db = *connPtr;
+
+        if (!_map.onewayColName.empty())
+            oneway = true;
+        if (!_map.capColName.empty())
+            hasCapacity = true;
+
+        if (oneway && hasCapacity)
+        {
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.costColName+","+
+                               _map.capColName +","+
+                               _map.onewayColName +","+
+                               "AsBinary(" + geomColName + ")"+
+                                   " FROM "+ _tableName + ";";
+        }
+        if (!oneway && hasCapacity)
+        {
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.costColName+","+
+                               _map.capColName +","+
+                               "AsBinary(" + geomColName + ")"+
+                                   " FROM "+ _tableName + ";";
+        }
+        if (oneway && !hasCapacity)
+        {
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.costColName+","+
+                               _map.onewayColName + ","+
+                               "AsBinary(" + geomColName + ")"+
+                                   " FROM "+ _tableName + ";";
+        }
+        if (!oneway && !hasCapacity)
+        {
+            sqlStr = "SELECT "+_map.arcIDColName+","+
+                               _map.costColName+ "," +
+                               "AsBinary(" + geomColName + ")"+
+                                   " FROM "+ _tableName + ";";
+        }
+
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        //cout << sqlStr << endl;
+        SQLite::Statement query(db, sqlStr);
+
+        if (oneway && hasCapacity)
+        {
+            while (query.executeStep())
+            {
+                const string  id            = query.getColumn(0);
+                const double cost           = query.getColumn(1);
+                const double cap            = query.getColumn(2);
+                const string _oneway        = query.getColumn(3);
+                SQLite::Column geoCol       = query.getColumn(4);
+
+                const void* pVoid     = geoCol.getBlob();
+                const int sizeOfwkb   = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
+
+                arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
+            }
+        }
+        if (!oneway && hasCapacity)
+        {
+            while (query.executeStep())
+            {
+                const string  id             = query.getColumn(0);
+                const double cost            = query.getColumn(1);
+                const double cap             = query.getColumn(2);
+                const string _oneway         = "";
+                SQLite::Column geoCol        = query.getColumn(3);
+
+                const void* pVoid     = geoCol.getBlob();
+                const int sizeOfwkb   = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
+
+                arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
+            }
+        }
+        if (oneway && !hasCapacity)
+        {
+            while (query.executeStep())
+            {
+                const string  id            = query.getColumn(0);
+                const double cost           = query.getColumn(1);
+                const string _oneway        = query.getColumn(2);
+                const double cap            = DOUBLE_INFINITY;
+                SQLite::Column geoCol       = query.getColumn(3);
+
+                const void* pVoid     = geoCol.getBlob();
+                const int sizeOfwkb   = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
+
+                arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
+            }
+        }
+        if (!oneway && !hasCapacity)
+        {
+            while (query.executeStep())
+            {
+                const string  id            = query.getColumn(0);
+                const double cost           = query.getColumn(1);
+                const string _oneway        = "";
+                const double cap            = DOUBLE_INFINITY;
+                SQLite::Column geoCol       = query.getColumn(2);
+
+                const void* pVoid     = geoCol.getBlob();
+                const int sizeOfwkb   = geoCol.getBytes();
+
+                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+                for (int i = 0; i < sizeOfwkb; i++)
+                    is << bytes[i];
+
+                auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
+
+                arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
+            }
+        }
+
+        LOGGER::LogDebug("Successfully fetched network table data.");
+        return arcTbl;
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error preparing query!" );
+        LOGGER::LogError( ex.what() );
+        return arcTbl;
+    }
+}
+
 std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
                                                const ColumnMap& _map)
 {

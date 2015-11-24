@@ -32006,7 +32006,7 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "NoGeometry",SWIG_From_int(static_cast< int >(netxpert::NoGeometry)));
   SWIG_Python_SetConstant(d, "StraightLines",SWIG_From_int(static_cast< int >(netxpert::StraightLines)));
   SWIG_Python_SetConstant(d, "RealGeometry",SWIG_From_int(static_cast< int >(netxpert::RealGeometry)));
-  SWIG_Python_SetConstant(d, "NetworkBuilder",SWIG_From_int(static_cast< int >(netxpert::NetworkBuilder)));
+  SWIG_Python_SetConstant(d, "TestNetworkBuilder",SWIG_From_int(static_cast< int >(netxpert::TestNetworkBuilder)));
   SWIG_Python_SetConstant(d, "ShortestPathTreeCOM",SWIG_From_int(static_cast< int >(netxpert::ShortestPathTreeCOM)));
   SWIG_Python_SetConstant(d, "ODMatrixCOM",SWIG_From_int(static_cast< int >(netxpert::ODMatrixCOM)));
   SWIG_Python_SetConstant(d, "TransportationCOM",SWIG_From_int(static_cast< int >(netxpert::TransportationCOM)));

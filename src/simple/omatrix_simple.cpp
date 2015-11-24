@@ -114,7 +114,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
 				}
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ODMatrixSolver, true);
                 writer->CommitCurrentTransaction();
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
@@ -128,7 +128,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
                 writer->CreateNetXpertDB();
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ODMatrixSolver, true);
                 writer->CommitCurrentTransaction();
             }
                 break;
@@ -239,6 +239,8 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
+		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+
         //2. Load Network
         DBHELPER::OpenNewTransaction();
         LOGGER::LogInfo("Loading Data from DB..!");
@@ -300,7 +302,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
 				}
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ODMatrixSolver, true);
                 writer->CommitCurrentTransaction();
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
@@ -314,7 +316,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
                 writer->CreateNetXpertDB();
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ODMatrixSolver, true);
                 writer->CommitCurrentTransaction();
             }
                 break;
@@ -323,54 +325,56 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
 
-        LOGGER::LogDebug("Preloading relevant geometries into Memory..");
-
         std::string arcIDs = "";
         std::unordered_set<string> totalArcIDs;
         std::unordered_map<ODPair, CompressedPath>::iterator it;
 
-        #pragma omp parallel default(shared) private(it)
-        {
-        //populate arcIDs
-        for (it = kvSPS.begin(); it != kvSPS.end(); ++it)
-        {
-            #pragma omp single nowait
-            {
-            auto kv = *it;
-            ODPair key = kv.first;
-            CompressedPath value = kv.second;
-            std::vector<unsigned int> ends = value.first;
-            std::vector<InternalArc> route;
-            std::unordered_set<std::string> arcIDlist;
+		if (NETXPERT_CNFG.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+		{
+			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
 
-            route = odm.UncompressRoute(key.origin, ends);
-            arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
+			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
+			{
+				//populate arcIDs
+				for (it = kvSPS.begin(); it != kvSPS.end(); ++it)
+				{
+					#pragma omp single nowait
+					{
+						auto kv = *it;
+						ODPair key = kv.first;
+						CompressedPath value = kv.second;
+						std::vector<unsigned int> ends = value.first;
+						std::vector<InternalArc> route;
+						std::unordered_set<std::string> arcIDlist;
 
-            if (arcIDlist.size() > 0)
-            {
-                #pragma omp critical
-                {
-                for (std::string id : arcIDlist)
-                    totalArcIDs.insert(id);
-                }
-            }
-            }//omp single
-        }
-        }//omp parallel
+						route = odm.UncompressRoute(key.origin, ends);
+						arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
 
-        for (string id : totalArcIDs)
-            arcIDs += id += ",";
+						if (arcIDlist.size() > 0)
+						{
+							#pragma omp critical
+							{
+								for (std::string id : arcIDlist)
+								totalArcIDs.insert(id);
+							}
+						}
+					}//omp single
+				}
+			}//omp parallel
 
-        if (arcIDs.size()>0)
-        {
-            arcIDs.pop_back(); //trim last comma
-            DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
-        }
-        LOGGER::LogDebug("Done!");
+			for (string id : totalArcIDs)
+				arcIDs += id += ",";
 
+			if (arcIDs.size() > 0)
+			{
+				arcIDs.pop_back(); //trim last comma
+				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+			}
+			LOGGER::LogDebug("Done!");
+		}
         int counter = 0;
 
-        #pragma omp parallel shared(counter) private(it)
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
         {
 
         Stopwatch<> sw;

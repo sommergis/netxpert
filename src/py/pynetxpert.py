@@ -733,7 +733,7 @@ ExtDistributionArc_swigregister(ExtDistributionArc)
 NoGeometry = _pynetxpert.NoGeometry
 StraightLines = _pynetxpert.StraightLines
 RealGeometry = _pynetxpert.RealGeometry
-NetworkBuilder = _pynetxpert.NetworkBuilder
+TestNetworkBuilder = _pynetxpert.TestNetworkBuilder
 ShortestPathTreeCOM = _pynetxpert.ShortestPathTreeCOM
 ODMatrixCOM = _pynetxpert.ODMatrixCOM
 TransportationCOM = _pynetxpert.TransportationCOM

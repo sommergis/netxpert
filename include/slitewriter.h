@@ -26,9 +26,23 @@ namespace netxpert {
             virtual ~SpatiaLiteWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const std::string& _tableName);
-            virtual void CreateSolverResultTable(const std::string& _tableName, const bool dropFirst);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType);
+            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType,
+                                                 const bool dropFirst);
             virtual void OpenNewTransaction();
+
+            std::unique_ptr<SQLite::Statement> PrepareSaveNetworkBuilderArc(const std::string& _tableName);
+            /**
+            * \Brief For saving the result arc of a built network into the netXpert result DB
+            */
+            void SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
+                                       const unsigned int toNode, const double cost,
+                                       const double capacity, const std::string& oneway,
+                                       const geos::geom::Geometry& arc,
+                                       const std::string& _tableName,
+                                       SQLite::Statement& query);
+
+
             std::unique_ptr<SQLite::Statement> PrepareSaveResultArc(const std::string& _tableName);
             /**
             * \Brief For saving the result arc in the netXpert result DB
@@ -78,8 +92,8 @@ namespace netxpert {
             bool isConnected = false;
             void initSpatialMetaData();
             bool performInitialCommand();
-            void createTable( std::string _tableName);
-            void dropTable ( std::string _tableName);
+            void createTable (const std::string& _tableName, const NetXpertSolver solverType);
+            void dropTable (const std::string& _tableName);
             void recoverGeometryColumn (std::string _tableName, std::string _geomColName, std::string _geomType);
             Config NETXPERT_CNFG;
             void mergeAndSaveResultArcs(std::string orig, std::string dest, double cost, double capacity, double flow,

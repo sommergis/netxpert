@@ -10,10 +10,6 @@
 #include "geos/operation/linemerge/LineMerger.h"
 #include "geos/geomgraph/GeometryGraph.h"
 
-using namespace geos::geom;
-using namespace geos::geomgraph;
-using namespace geos::operation::linemerge;
-
 namespace netxpert {
     /**
     * \Class Builds a network of the given linestrings.
@@ -41,13 +37,17 @@ namespace netxpert {
             **/
             void LoadData();
 
-            shared_ptr<GeometryFactory> GEO_FACTORY;
+            std::unordered_map<unsigned int, NetworkBuilderResultArc> GetBuiltNetwork();
 
         private:
-            Config NETXPERT_CNFG;
-            InputArcs arcsTbl;
-            NetworkBuilderArcs builtArcs;
-            NetworkBuilderNodes builtNodes;
+            netxpert::Config NETXPERT_CNFG;
+            std::vector<NetworkBuilderInputArc> inputArcs;
+            std::unordered_map<unsigned int, NetworkBuilderResultArc> builtNetwork;
+            std::unordered_map< std::string, IntNodeID> builtNodes;
+            std::unique_ptr<geos::geomgraph::GeometryGraph> geoGraph;
+            void calcNodes();
+            std::unique_ptr<geos::geom::LineString> mergeMultiLineString(geos::geom::Geometry& geom);
+            std::unique_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
 
     };
 }

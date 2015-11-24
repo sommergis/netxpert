@@ -2,6 +2,7 @@
 #define DBWRITER_H
 
 #include <string>
+#include "data.h"
 #include "geos/geom/MultiLineString.h"
 #include "geos/geom/Geometry.h"
 #include "geos/geom/CoordinateSequence.h"
@@ -21,8 +22,9 @@ namespace netxpert {
             // Sonst gibt es Fehler beim Kompilieren...
             virtual void CommitCurrentTransaction() = 0;
             virtual void CreateNetXpertDB() = 0;
-            virtual void CreateSolverResultTable(const string& _tableName) = 0;
-            virtual void CreateSolverResultTable(const string& _tableName, const bool dropFirst) = 0;
+            virtual void CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType) = 0;
+            virtual void CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType,
+                                                 const bool dropFirst) = 0;
             virtual void OpenNewTransaction() = 0;
             /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
                                     geos::geom::MultiLineString& route, string _tableName,
