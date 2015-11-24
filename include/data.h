@@ -37,6 +37,22 @@ namespace netxpert {
 
     /**
     * \Enum
+    * Enum that reflects the type of the netXpert Solver
+    **/
+    enum NetXpertSolver
+    {
+        UndefinedNetXpertSolver = -1,
+        ShortestPathTreeSolver = 0, //double or int
+        ODMatrixSolver = 1,
+        TransportationSolver = 2,
+        MinCostFlowSolver = 3,
+        MinSpanningTreeSolver = 4,
+        TransshipmentSolver = 5,
+        NetworkBuilderResult = 6
+    };
+
+    /**
+    * \Enum
     * Enum that reflects the type of the ArcID Column in the netxpert database. Used for building
     * the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).
     **/
@@ -53,7 +69,7 @@ namespace netxpert {
     **/
     enum AddedNodeType
     {
-        Undefined = 0,
+        UndefinedAddedNodeType = 0,
         StartArc = 1,
         EndArc = 2
     };
@@ -453,7 +469,17 @@ namespace netxpert {
     typedef vector<InputArc> InputArcs;
     typedef vector<InputNode> InputNodes;
 
-    struct NetworkBuilderArc
+    struct NetworkBuilderInputArc
+    {
+        ExtArcID extArcID;
+        double cost;
+        double capacity;
+        std::string oneway;
+        std::unique_ptr<geos::geom::Geometry> geom;
+    };
+    typedef vector<NetworkBuilderInputArc> NetworkBuilderInputArcs;
+
+    struct NetworkBuilderResultArc
     {
         ExtArcID extArcID;
         IntNodeID fromNode;
@@ -461,11 +487,11 @@ namespace netxpert {
         double cost;
         double capacity;
         std::string oneway;
-        shared_ptr<geos::geom::LineString> geom;
+        std::unique_ptr<geos::geom::Geometry> geom;
     };
-    typedef vector<NetworkBuilderArc> NetworkBuilderArcs;
+    typedef unordered_map< unsigned int, NetworkBuilderResultArc> NetworkBuilderResultArcs;
 
-    typedef unordered_map< shared_ptr<geos::geom::Point>, IntNodeID> NetworkBuilderNodes;
+    typedef unordered_map< unique_ptr<geos::geom::Point>, IntNodeID> NetworkBuilderResultNodes;
 }
 
 namespace std

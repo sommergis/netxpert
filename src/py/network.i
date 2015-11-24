@@ -150,7 +150,7 @@ namespace netxpert
 
     enum TESTCASE
     {
-        NetworkBuilder = 0,
+        TestNetworkBuilder = 0,
         ShortestPathTreeCOM = 1,
         ODMatrixCOM = 2,
         TransportationCOM = 3,

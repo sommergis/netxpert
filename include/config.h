@@ -10,11 +10,14 @@
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
+#include <omp.h>
 
 using namespace std;
 using namespace cereal;
 
 namespace netxpert {
+
+	static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
 
     /**
     * \Enum Geometry Handling.
@@ -31,7 +34,7 @@ namespace netxpert {
     **/
     enum TESTCASE
     {
-        NetworkBuilder = 0,
+        TestNetworkBuilder = 0,
         ShortestPathTreeCOM = 1,
         ODMatrixCOM = 2,
         TransportationCOM = 3,

@@ -90,7 +90,7 @@ int netxpert::simple::MinimumSpanningTree::Solve()
 				}
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
                 writer->CommitCurrentTransaction();
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
@@ -104,7 +104,7 @@ int netxpert::simple::MinimumSpanningTree::Solve()
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
                 writer->CreateNetXpertDB();
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
                 writer->CommitCurrentTransaction();
                 writer->CloseConnection();
             }

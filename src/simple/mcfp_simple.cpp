@@ -47,6 +47,8 @@ int netxpert::simple::MinCostFlow::Solve()
 
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
+		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
                         cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
@@ -110,7 +112,7 @@ int netxpert::simple::MinCostFlow::Solve()
 				}
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
                 writer->CommitCurrentTransaction();
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
@@ -124,7 +126,7 @@ int netxpert::simple::MinCostFlow::Solve()
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
                 writer->CreateNetXpertDB();
                 writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, true);
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
                 writer->CommitCurrentTransaction();
             }
                 break;
@@ -133,54 +135,57 @@ int netxpert::simple::MinCostFlow::Solve()
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
 
-        LOGGER::LogDebug("Preloading relevant geometries into Memory..");
-
         std::string arcIDs = "";
         std::unordered_set<string> totalArcIDs;
         std::vector<FlowCost>::iterator it;
 
-        #pragma omp parallel default(shared) private(it)
-        {
-        //populate arcIDs
-        for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
-        {
-            #pragma omp single nowait
-            {
-            auto arcFlow = *it;
-            InternalArc key = arcFlow.intArc;
-            double cost = arcFlow.cost;
-            double flow = arcFlow.flow;
-            vector<InternalArc> arc { key };
-            string id = "";
+		if (NETXPERT_CNFG.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+		{
+			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
 
-            vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
-            // is only one arc
-            if (arcData.size() > 0)
-            {
-                ArcData arcD = *arcData.begin();
-                id = arcD.extArcID;
-                #pragma omp critical
-                {
-                if (id != "dummy")
-                    totalArcIDs.insert(id);
-                }
-            }
-            }//omp single
-        }
-        }//omp parallel
+			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
+			{
+				//populate arcIDs
+				for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+				{
+					#pragma omp single nowait
+					{
+						auto arcFlow = *it;
+						InternalArc key = arcFlow.intArc;
+						double cost = arcFlow.cost;
+						double flow = arcFlow.flow;
+						vector<InternalArc> arc{ key };
+						string id = "";
 
-        for (string id : totalArcIDs)
-            arcIDs += id += ",";
+						vector<ArcData> arcData = net.GetOriginalArcData(arc, cnfg.IsDirected);
+						// is only one arc
+						if (arcData.size() > 0)
+						{
+							ArcData arcD = *arcData.begin();
+							id = arcD.extArcID;
+							#pragma omp critical
+							{
+								if (id != "dummy")
+									totalArcIDs.insert(id);
+							}
+						}
+					}//omp single
+				}
+			}//omp parallel
 
-        if (arcIDs.size()>0)
-        {
-            arcIDs.pop_back(); //trim last comma
-            DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
-        }
-        LOGGER::LogDebug("Done!");
+			for (string id : totalArcIDs)
+				arcIDs += id += ",";
+
+			if (arcIDs.size() > 0)
+			{
+				arcIDs.pop_back(); //trim last comma
+				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+			}
+			LOGGER::LogDebug("Done!");
+		}
 
         int counter = 0;
-        #pragma omp parallel shared(counter) private(it)
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
         {
         for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
         {

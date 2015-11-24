@@ -39,6 +39,7 @@ namespace netxpert
                                                                           const int treshold, SQLite::Statement& qry,
                                                                           const bool withCapacity);
             static netxpert::InputArcs LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map);
+            static netxpert::NetworkBuilderInputArcs LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMap& _map);
             static std::vector<netxpert::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
                                                                   const ColumnMap& _map);
 

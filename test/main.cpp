@@ -26,13 +26,14 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestCreateGeom.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/ODMatrixCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TranspCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_2.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/NetworkBuilder_small.json";
     }
 
     Config cnfg;
@@ -87,7 +88,9 @@ int main(int argc, char** argv)
         /* TEST CASES */
         switch (cnfg.TestCase)
         {
-
+        case TESTCASE::TestNetworkBuilder:
+            netxpert::Test::TestNetworkBuilder(cnfg);
+            break;
         case TESTCASE::NetworkConvert:
             netxpert::Test::NetworkConvert(cnfg);
             break;
