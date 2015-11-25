@@ -18,12 +18,14 @@
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+#include "networkbuilder.h"
+
 #include "odmatrix_simple.h"
 #include "mstree_simple.h"
 #include "sptree_simple.h"
 #include "transp_simple.h"
 #include "mcfp_simple.h"
-#include "networkbuilder.h"
+#include "netbuilder_simple.h"
 
 namespace netxpert
 {

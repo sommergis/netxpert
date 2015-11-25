@@ -594,7 +594,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-
+				//move to shared_ptr ist anscheinend ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -617,7 +617,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-
+				//move to shared_ptr ist anscheinend ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -640,7 +640,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-
+				//move to shared_ptr ist anscheinend ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -663,7 +663,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-
+				//move to shared_ptr ist anscheinend ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
