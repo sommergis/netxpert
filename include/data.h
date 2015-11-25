@@ -475,7 +475,10 @@ namespace netxpert {
         double cost;
         double capacity;
         std::string oneway;
-        std::unique_ptr<geos::geom::Geometry> geom;
+		//Bug in VS2013: can't move for default copy
+		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
+		//--> std::unique_ptr funktioniert nicht als data member
+		std::shared_ptr<geos::geom::Geometry> geom;
     };
     typedef vector<NetworkBuilderInputArc> NetworkBuilderInputArcs;
 
@@ -487,7 +490,18 @@ namespace netxpert {
         double cost;
         double capacity;
         std::string oneway;
-        std::unique_ptr<geos::geom::Geometry> geom;
+		//Bug in VS2013: can't move for default copy
+		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
+		//--> std::unique_ptr funktioniert nicht als data member
+        std::shared_ptr<geos::geom::Geometry> geom;
+
+		//explicit assignment operator due to MSVC bug in VS2013
+		/*
+		NetworkBuilderResultArc& operator=(NetworkBuilderResultArc &&data)
+		{
+			geom = std::move(data.geom);
+			return *this;
+		}*/
     };
     typedef unordered_map< unsigned int, NetworkBuilderResultArc> NetworkBuilderResultArcs;
 
