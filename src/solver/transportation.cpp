@@ -302,8 +302,6 @@ void Transportation::Solve(Network& net)
     //Call MCF Solver of parent class
     MinCostFlow::Solve(newNet);
 
-    // BEWARE of KEY Errors in Dictionarys!
-
     //Go back from Origin->Dest: flow,cost to real path with a list of start and end nodes of the ODMatrix
     //1. Translate back to original node ids
     unordered_map<IntNodeID, ExtNodeID> startNodeMap;
