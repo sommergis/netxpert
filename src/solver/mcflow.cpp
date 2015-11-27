@@ -109,8 +109,24 @@ void MinCostFlow::solve (Network& net)
         //throw new InvalidValueException(string.Format("Problem data does not fit the {0} Solver!", this.ToString()));
         throw;
 
+    int srcCount = 0;
+    int transshipCount = 0;
+    int sinkCount = 0;
+    for (auto& s : supply)
+    {
+        if (s > 0)
+            srcCount += 1;
+        if (s == 0)
+            transshipCount += 1;
+        if (s < 0)
+            sinkCount += 1;
+    }
+
     LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Sources: "+ to_string(srcCount));
+    LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
+    LOGGER::LogDebug("Sinks: "+ to_string(sinkCount));
     LOGGER::LogDebug("Solving..");
 
     //Read the network

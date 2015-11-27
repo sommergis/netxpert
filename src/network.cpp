@@ -1369,6 +1369,7 @@ void Network::renameNodes()
     }
     //copy set to vector for index access
     vector<string> sortedDistinctNodes(sortedDistinctNodesSet.begin(), sortedDistinctNodesSet.end());
+
     // Count from 0 to sortedDistinctNodes.Count:
     // --> internal NodeIDs start from 1 to n.
     for (unsigned int i = 0; i < sortedDistinctNodes.size(); i++)
