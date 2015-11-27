@@ -87,6 +87,8 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
     LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Origs: "+ to_string(origs.size()));
+    LOGGER::LogDebug("Dests: "+ to_string(dests.size()));
     LOGGER::LogDebug("Solving..");
 
     //Read the network
@@ -140,6 +142,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     lspt->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
                         static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
                         caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
+
     nmax = lspt->MCFnmax();
     anz = lspt->MCFnmax();
 

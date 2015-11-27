@@ -139,6 +139,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
 
     LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Dests: "+ to_string(net.GetMaxNodeCount() ));
     LOGGER::LogDebug("Solving..");
 
     //Read the network
@@ -463,6 +464,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Dests: "+ to_string(dests.size()));
     LOGGER::LogDebug("Solving..");
 
     //Read the network
