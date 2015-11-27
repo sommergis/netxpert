@@ -2954,51 +2954,57 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_netxpert__ISolver swig_types[13]
 #define SWIGTYPE_p_netxpert__InputArc swig_types[14]
 #define SWIGTYPE_p_netxpert__InputNode swig_types[15]
-#define SWIGTYPE_p_netxpert__InternalArc swig_types[16]
-#define SWIGTYPE_p_netxpert__LOGGER swig_types[17]
-#define SWIGTYPE_p_netxpert__MinCostFlow swig_types[18]
-#define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[19]
-#define SWIGTYPE_p_netxpert__Network swig_types[20]
-#define SWIGTYPE_p_netxpert__NewNode swig_types[21]
-#define SWIGTYPE_p_netxpert__ODPair swig_types[22]
-#define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[23]
-#define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[24]
-#define SWIGTYPE_p_netxpert__Transportation swig_types[25]
-#define SWIGTYPE_p_netxpert__simple__MinCostFlow swig_types[26]
-#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[27]
-#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[28]
-#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[29]
-#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[30]
-#define SWIGTYPE_p_p_PyObject swig_types[31]
-#define SWIGTYPE_p_size_type swig_types[32]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[33]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[34]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[35]
-#define SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t swig_types[36]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[37]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[39]
-#define SWIGTYPE_p_std__invalid_argument swig_types[40]
-#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[41]
-#define SWIGTYPE_p_std__string swig_types[42]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[43]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[44]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[45]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[46]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[47]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[48]
-#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[49]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[50]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[51]
-#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[52]
-#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[53]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[54]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[55]
-#define SWIGTYPE_p_string swig_types[56]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[57]
-#define SWIGTYPE_p_value_type swig_types[58]
-static swig_type_info *swig_types[60];
-static swig_module_info swig_module = {swig_types, 59, 0, 0, 0, 0};
+#define SWIGTYPE_p_netxpert__IntNodeID swig_types[16]
+#define SWIGTYPE_p_netxpert__InternalArc swig_types[17]
+#define SWIGTYPE_p_netxpert__LOGGER swig_types[18]
+#define SWIGTYPE_p_netxpert__MinCostFlow swig_types[19]
+#define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[20]
+#define SWIGTYPE_p_netxpert__Network swig_types[21]
+#define SWIGTYPE_p_netxpert__NetworkBuilder swig_types[22]
+#define SWIGTYPE_p_netxpert__NetworkBuilderResultArc swig_types[23]
+#define SWIGTYPE_p_netxpert__NewNode swig_types[24]
+#define SWIGTYPE_p_netxpert__ODPair swig_types[25]
+#define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[26]
+#define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[27]
+#define SWIGTYPE_p_netxpert__Transportation swig_types[28]
+#define SWIGTYPE_p_netxpert__simple__MinCostFlow swig_types[29]
+#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[30]
+#define SWIGTYPE_p_netxpert__simple__NetworkBuilder swig_types[31]
+#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[32]
+#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[33]
+#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[34]
+#define SWIGTYPE_p_p_PyObject swig_types[35]
+#define SWIGTYPE_p_size_type swig_types[36]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[37]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[38]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[39]
+#define SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t swig_types[40]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[41]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[42]
+#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[43]
+#define SWIGTYPE_p_std__invalid_argument swig_types[44]
+#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[45]
+#define SWIGTYPE_p_std__shared_ptrT_geos__geom__Geometry_t swig_types[46]
+#define SWIGTYPE_p_std__string swig_types[47]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[48]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[49]
+#define SWIGTYPE_p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t swig_types[50]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[51]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[52]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[53]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[54]
+#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[55]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[56]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[57]
+#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[58]
+#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[59]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[60]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[61]
+#define SWIGTYPE_p_string swig_types[62]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[63]
+#define SWIGTYPE_p_value_type swig_types[64]
+static swig_type_info *swig_types[66];
+static swig_module_info swig_module = {swig_types, 65, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3492,6 +3498,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+#include "networkbuilder.h"
 
 /* Simple Solver Interface */
 
@@ -3500,6 +3507,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "mstree_simple.h"
 #include "transp_simple.h"
 #include "mcfp_simple.h"
+#include "netbuilder_simple.h"
 
 
 namespace swig {  
@@ -23090,6 +23098,513 @@ SWIGINTERN PyObject *FlowCost_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_extArcID_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  netxpert::ExtArcID *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_extArcID_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_extArcID_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NetworkBuilderResultArc_extArcID_set" "', argument " "2"" of type '" "netxpert::ExtArcID const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NetworkBuilderResultArc_extArcID_set" "', argument " "2"" of type '" "netxpert::ExtArcID const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->extArcID = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_extArcID_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::ExtArcID *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_extArcID_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_extArcID_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::ExtArcID *) & ((arg1)->extArcID);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_fromNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  netxpert::IntNodeID arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_fromNode_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_fromNode_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__IntNodeID,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NetworkBuilderResultArc_fromNode_set" "', argument " "2"" of type '" "netxpert::IntNodeID""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NetworkBuilderResultArc_fromNode_set" "', argument " "2"" of type '" "netxpert::IntNodeID""'");
+    } else {
+      netxpert::IntNodeID * temp = reinterpret_cast< netxpert::IntNodeID * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->fromNode = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_fromNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::IntNodeID result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_fromNode_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_fromNode_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result =  ((arg1)->fromNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new netxpert::IntNodeID(static_cast< const netxpert::IntNodeID& >(result))), SWIGTYPE_p_netxpert__IntNodeID, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_toNode_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  netxpert::IntNodeID arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_toNode_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_toNode_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__IntNodeID,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NetworkBuilderResultArc_toNode_set" "', argument " "2"" of type '" "netxpert::IntNodeID""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NetworkBuilderResultArc_toNode_set" "', argument " "2"" of type '" "netxpert::IntNodeID""'");
+    } else {
+      netxpert::IntNodeID * temp = reinterpret_cast< netxpert::IntNodeID * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->toNode = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_toNode_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::IntNodeID result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_toNode_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_toNode_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result =  ((arg1)->toNode);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new netxpert::IntNodeID(static_cast< const netxpert::IntNodeID& >(result))), SWIGTYPE_p_netxpert__IntNodeID, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_cost_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_cost_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_cost_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NetworkBuilderResultArc_cost_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->cost = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_cost_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_cost_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_cost_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->cost);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_capacity_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_capacity_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_capacity_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "NetworkBuilderResultArc_capacity_set" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->capacity = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_capacity_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_capacity_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_capacity_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double) ((arg1)->capacity);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_oneway_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_oneway_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_oneway_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NetworkBuilderResultArc_oneway_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NetworkBuilderResultArc_oneway_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->oneway = *arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_oneway_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_oneway_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_oneway_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::string *) & ((arg1)->oneway);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_geom_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  std::shared_ptr< geos::geom::Geometry > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:NetworkBuilderResultArc_geom_set",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_geom_set" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__shared_ptrT_geos__geom__Geometry_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "NetworkBuilderResultArc_geom_set" "', argument " "2"" of type '" "std::shared_ptr< geos::geom::Geometry >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "NetworkBuilderResultArc_geom_set" "', argument " "2"" of type '" "std::shared_ptr< geos::geom::Geometry >""'");
+    } else {
+      std::shared_ptr< geos::geom::Geometry > * temp = reinterpret_cast< std::shared_ptr< geos::geom::Geometry > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    if (arg1) (arg1)->geom = arg2;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderResultArc_geom_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::shared_ptr< geos::geom::Geometry > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderResultArc_geom_get",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderResultArc_geom_get" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result =  ((arg1)->geom);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new std::shared_ptr< geos::geom::Geometry >(static_cast< const std::shared_ptr< geos::geom::Geometry >& >(result))), SWIGTYPE_p_std__shared_ptrT_geos__geom__Geometry_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_NetworkBuilderResultArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_NetworkBuilderResultArc")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::NetworkBuilderResultArc *)new netxpert::NetworkBuilderResultArc();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NetworkBuilderResultArc, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_NetworkBuilderResultArc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilderResultArc *arg1 = (netxpert::NetworkBuilderResultArc *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_NetworkBuilderResultArc",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilderResultArc, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NetworkBuilderResultArc" "', argument " "1"" of type '" "netxpert::NetworkBuilderResultArc *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilderResultArc * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *NetworkBuilderResultArc_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__NetworkBuilderResultArc, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_ExtNodeSupply_extNodeID_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::ExtNodeSupply *arg1 = (netxpert::ExtNodeSupply *) 0 ;
@@ -29864,6 +30379,118 @@ SWIGINTERN PyObject *Transportation_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_NetworkBuilder(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Config *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::NetworkBuilder *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_NetworkBuilder",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_NetworkBuilder" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_NetworkBuilder" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::NetworkBuilder *)new netxpert::NetworkBuilder(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__NetworkBuilder, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_NetworkBuilder(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilder *arg1 = (netxpert::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_NetworkBuilder",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilder, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NetworkBuilder" "', argument " "1"" of type '" "netxpert::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilder_LoadData(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilder *arg1 = (netxpert::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilder_LoadData",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilder, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilder_LoadData" "', argument " "1"" of type '" "netxpert::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->LoadData();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilder_GetBuiltNetwork(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::NetworkBuilder *arg1 = (netxpert::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< std::unordered_map< unsigned int,netxpert::NetworkBuilderResultArc > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilder_GetBuiltNetwork",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__NetworkBuilder, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilder_GetBuiltNetwork" "', argument " "1"" of type '" "netxpert::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetBuiltNetwork();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new std::unordered_map< unsigned int,netxpert::NetworkBuilderResultArc >(static_cast< const std::unordered_map< unsigned int,netxpert::NetworkBuilderResultArc >& >(result))), SWIGTYPE_p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *NetworkBuilder_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__NetworkBuilder, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_new_ShortestPathTreeSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string arg1 ;
@@ -30476,6 +31103,118 @@ SWIGINTERN PyObject *MinimumCostFlowSimple_swigregister(PyObject *SWIGUNUSEDPARM
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_NetworkBuilderSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string arg1 ;
+  PyObject * obj0 = 0 ;
+  netxpert::simple::NetworkBuilder *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_NetworkBuilderSimple",&obj0)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_NetworkBuilderSimple" "', argument " "1"" of type '" "std::string""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::simple::NetworkBuilder *)new netxpert::simple::NetworkBuilder(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__simple__NetworkBuilder, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_NetworkBuilderSimple(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::NetworkBuilder *arg1 = (netxpert::simple::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_NetworkBuilderSimple",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__NetworkBuilder, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_NetworkBuilderSimple" "', argument " "1"" of type '" "netxpert::simple::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderSimple_Build(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::NetworkBuilder *arg1 = (netxpert::simple::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderSimple_Build",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__NetworkBuilder, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderSimple_Build" "', argument " "1"" of type '" "netxpert::simple::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)(arg1)->Build();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_NetworkBuilderSimple_GetBuiltNetworkAsJSON(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::simple::NetworkBuilder *arg1 = (netxpert::simple::NetworkBuilder *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:NetworkBuilderSimple_GetBuiltNetworkAsJSON",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__simple__NetworkBuilder, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "NetworkBuilderSimple_GetBuiltNetworkAsJSON" "', argument " "1"" of type '" "netxpert::simple::NetworkBuilder *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::simple::NetworkBuilder * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetBuiltNetworkAsJSON();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *NetworkBuilderSimple_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__simple__NetworkBuilder, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_VARARGS, NULL},
@@ -30810,6 +31549,23 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_FlowCost", _wrap_new_FlowCost, METH_VARARGS, NULL},
 	 { (char *)"delete_FlowCost", _wrap_delete_FlowCost, METH_VARARGS, NULL},
 	 { (char *)"FlowCost_swigregister", FlowCost_swigregister, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_extArcID_set", _wrap_NetworkBuilderResultArc_extArcID_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_extArcID_get", _wrap_NetworkBuilderResultArc_extArcID_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_fromNode_set", _wrap_NetworkBuilderResultArc_fromNode_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_fromNode_get", _wrap_NetworkBuilderResultArc_fromNode_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_toNode_set", _wrap_NetworkBuilderResultArc_toNode_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_toNode_get", _wrap_NetworkBuilderResultArc_toNode_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_cost_set", _wrap_NetworkBuilderResultArc_cost_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_cost_get", _wrap_NetworkBuilderResultArc_cost_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_capacity_set", _wrap_NetworkBuilderResultArc_capacity_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_capacity_get", _wrap_NetworkBuilderResultArc_capacity_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_oneway_set", _wrap_NetworkBuilderResultArc_oneway_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_oneway_get", _wrap_NetworkBuilderResultArc_oneway_get, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_geom_set", _wrap_NetworkBuilderResultArc_geom_set, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_geom_get", _wrap_NetworkBuilderResultArc_geom_get, METH_VARARGS, NULL},
+	 { (char *)"new_NetworkBuilderResultArc", _wrap_new_NetworkBuilderResultArc, METH_VARARGS, NULL},
+	 { (char *)"delete_NetworkBuilderResultArc", _wrap_delete_NetworkBuilderResultArc, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderResultArc_swigregister", NetworkBuilderResultArc_swigregister, METH_VARARGS, NULL},
 	 { (char *)"ExtNodeSupply_extNodeID_set", _wrap_ExtNodeSupply_extNodeID_set, METH_VARARGS, NULL},
 	 { (char *)"ExtNodeSupply_extNodeID_get", _wrap_ExtNodeSupply_extNodeID_get, METH_VARARGS, NULL},
 	 { (char *)"ExtNodeSupply_supply_set", _wrap_ExtNodeSupply_supply_set, METH_VARARGS, NULL},
@@ -31026,6 +31782,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Transportation_UncompressRoute", _wrap_Transportation_UncompressRoute, METH_VARARGS, NULL},
 	 { (char *)"Transportation_Solve", _wrap_Transportation_Solve, METH_VARARGS, NULL},
 	 { (char *)"Transportation_swigregister", Transportation_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_NetworkBuilder", _wrap_new_NetworkBuilder, METH_VARARGS, NULL},
+	 { (char *)"delete_NetworkBuilder", _wrap_delete_NetworkBuilder, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilder_LoadData", _wrap_NetworkBuilder_LoadData, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilder_GetBuiltNetwork", _wrap_NetworkBuilder_GetBuiltNetwork, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilder_swigregister", NetworkBuilder_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ShortestPathTreeSimple", _wrap_new_ShortestPathTreeSimple, METH_VARARGS, NULL},
 	 { (char *)"ShortestPathTreeSimple_Solve", _wrap_ShortestPathTreeSimple_Solve, METH_VARARGS, NULL},
 	 { (char *)"ShortestPathTreeSimple_GetOptimum", _wrap_ShortestPathTreeSimple_GetOptimum, METH_VARARGS, NULL},
@@ -31053,6 +31814,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MinimumCostFlowSimple_GetMinimumCostFlowAsJSON", _wrap_MinimumCostFlowSimple_GetMinimumCostFlowAsJSON, METH_VARARGS, NULL},
 	 { (char *)"delete_MinimumCostFlowSimple", _wrap_delete_MinimumCostFlowSimple, METH_VARARGS, NULL},
 	 { (char *)"MinimumCostFlowSimple_swigregister", MinimumCostFlowSimple_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_NetworkBuilderSimple", _wrap_new_NetworkBuilderSimple, METH_VARARGS, NULL},
+	 { (char *)"delete_NetworkBuilderSimple", _wrap_delete_NetworkBuilderSimple, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderSimple_Build", _wrap_NetworkBuilderSimple_Build, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderSimple_GetBuiltNetworkAsJSON", _wrap_NetworkBuilderSimple_GetBuiltNetworkAsJSON, METH_VARARGS, NULL},
+	 { (char *)"NetworkBuilderSimple_swigregister", NetworkBuilderSimple_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -31093,11 +31859,14 @@ static swig_type_info _swigt__p_netxpert__FlowCost = {"_p_netxpert__FlowCost", "
 static swig_type_info _swigt__p_netxpert__ISolver = {"_p_netxpert__ISolver", "netxpert::ISolver *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InputArc = {"_p_netxpert__InputArc", "std::vector< netxpert::InputArc >::value_type *|netxpert::InputArc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InputNode = {"_p_netxpert__InputNode", "std::vector< netxpert::InputNode >::value_type *|netxpert::InputNode *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__IntNodeID = {"_p_netxpert__IntNodeID", "netxpert::IntNodeID *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InternalArc = {"_p_netxpert__InternalArc", "netxpert::InternalArc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__LOGGER = {"_p_netxpert__LOGGER", "netxpert::LOGGER *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__MinCostFlow = {"_p_netxpert__MinCostFlow", "netxpert::MinCostFlow *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__MinimumSpanningTree = {"_p_netxpert__MinimumSpanningTree", "netxpert::MinimumSpanningTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__Network = {"_p_netxpert__Network", "netxpert::Network *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__NetworkBuilder = {"_p_netxpert__NetworkBuilder", "netxpert::NetworkBuilder *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__NetworkBuilderResultArc = {"_p_netxpert__NetworkBuilderResultArc", "netxpert::NetworkBuilderResultArc *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__NewNode = {"_p_netxpert__NewNode", "netxpert::NewNode *|std::vector< netxpert::NewNode >::value_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ODPair = {"_p_netxpert__ODPair", "netxpert::ODPair *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__OriginDestinationMatrix = {"_p_netxpert__OriginDestinationMatrix", "netxpert::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
@@ -31105,6 +31874,7 @@ static swig_type_info _swigt__p_netxpert__ShortestPathTree = {"_p_netxpert__Shor
 static swig_type_info _swigt__p_netxpert__Transportation = {"_p_netxpert__Transportation", "netxpert::Transportation *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__MinCostFlow = {"_p_netxpert__simple__MinCostFlow", "netxpert::simple::MinCostFlow *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__MinimumSpanningTree = {"_p_netxpert__simple__MinimumSpanningTree", "netxpert::simple::MinimumSpanningTree *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__simple__NetworkBuilder = {"_p_netxpert__simple__NetworkBuilder", "netxpert::simple::NetworkBuilder *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__OriginDestinationMatrix = {"_p_netxpert__simple__OriginDestinationMatrix", "netxpert::simple::OriginDestinationMatrix *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__ShortestPathTree = {"_p_netxpert__simple__ShortestPathTree", "netxpert::simple::ShortestPathTree *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__simple__Transportation = {"_p_netxpert__simple__Transportation", "netxpert::simple::Transportation *", 0, 0, (void*)0, 0};
@@ -31119,9 +31889,11 @@ static swig_type_info _swigt__p_std__allocatorT_netxpert__InputNode_t = {"_p_std
 static swig_type_info _swigt__p_std__allocatorT_netxpert__NewNode_t = {"_p_std__allocatorT_netxpert__NewNode_t", "std::vector< netxpert::NewNode >::allocator_type *|std::allocator< netxpert::NewNode > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t = {"_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t", "std::pair< std::vector< unsigned int,std::allocator< unsigned int > >,double > *|netxpert::CompressedPath *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__shared_ptrT_geos__geom__Geometry_t = {"_p_std__shared_ptrT_geos__geom__Geometry_t", "std::shared_ptr< geos::geom::Geometry > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "netxpert::ExtNodeID *|std::string *|netxpert::ExtArcID *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__unordered_mapT_netxpert__ODPair_double_t = {"_p_std__unordered_mapT_netxpert__ODPair_double_t", "std::unordered_map< netxpert::ODPair,double > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t = {"_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t", "std::unordered_map< netxpert::ODPair,netxpert::CompressedPath > *|std::unordered_map< netxpert::ODPair,std::pair< std::vector< unsigned int,std::allocator< unsigned int > >,double > > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t = {"_p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t", "std::unordered_map< unsigned int,netxpert::NetworkBuilderResultArc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT__Tp__Alloc_t = {"_p_std__vectorT__Tp__Alloc_t", "std::vector< _Tp,_Alloc > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t = {"_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t", "std::vector< netxpert::ExtDistributionArc > *|netxpert::ExtDistribution *|std::vector< netxpert::ExtDistributionArc,std::allocator< netxpert::ExtDistributionArc > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t = {"_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t", "std::vector< netxpert::ExtNodeSupply,std::allocator< netxpert::ExtNodeSupply > > *|netxpert::ExtNodeSupplies *|std::vector< netxpert::ExtNodeSupply > *", 0, 0, (void*)0, 0};
@@ -31154,11 +31926,14 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__ISolver,
   &_swigt__p_netxpert__InputArc,
   &_swigt__p_netxpert__InputNode,
+  &_swigt__p_netxpert__IntNodeID,
   &_swigt__p_netxpert__InternalArc,
   &_swigt__p_netxpert__LOGGER,
   &_swigt__p_netxpert__MinCostFlow,
   &_swigt__p_netxpert__MinimumSpanningTree,
   &_swigt__p_netxpert__Network,
+  &_swigt__p_netxpert__NetworkBuilder,
+  &_swigt__p_netxpert__NetworkBuilderResultArc,
   &_swigt__p_netxpert__NewNode,
   &_swigt__p_netxpert__ODPair,
   &_swigt__p_netxpert__OriginDestinationMatrix,
@@ -31166,6 +31941,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__Transportation,
   &_swigt__p_netxpert__simple__MinCostFlow,
   &_swigt__p_netxpert__simple__MinimumSpanningTree,
+  &_swigt__p_netxpert__simple__NetworkBuilder,
   &_swigt__p_netxpert__simple__OriginDestinationMatrix,
   &_swigt__p_netxpert__simple__ShortestPathTree,
   &_swigt__p_netxpert__simple__Transportation,
@@ -31180,9 +31956,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__allocatorT_netxpert__NewNode_t,
   &_swigt__p_std__invalid_argument,
   &_swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t,
+  &_swigt__p_std__shared_ptrT_geos__geom__Geometry_t,
   &_swigt__p_std__string,
   &_swigt__p_std__unordered_mapT_netxpert__ODPair_double_t,
   &_swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t,
+  &_swigt__p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t,
   &_swigt__p_std__vectorT__Tp__Alloc_t,
   &_swigt__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t,
   &_swigt__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t,
@@ -31215,11 +31993,14 @@ static swig_cast_info _swigc__p_netxpert__FlowCost[] = {  {&_swigt__p_netxpert__
 static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__MinCostFlow, _p_netxpert__MinCostFlowTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__Transportation, _p_netxpert__TransportationTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__OriginDestinationMatrix, _p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ShortestPathTree, _p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputArc[] = {  {&_swigt__p_netxpert__InputArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputNode[] = {  {&_swigt__p_netxpert__InputNode, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__IntNodeID[] = {  {&_swigt__p_netxpert__IntNodeID, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InternalArc[] = {  {&_swigt__p_netxpert__InternalArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__LOGGER[] = {  {&_swigt__p_netxpert__LOGGER, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__MinCostFlow[] = {  {&_swigt__p_netxpert__MinCostFlow, 0, 0, 0},  {&_swigt__p_netxpert__Transportation, _p_netxpert__TransportationTo_p_netxpert__MinCostFlow, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Network[] = {  {&_swigt__p_netxpert__Network, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__NetworkBuilder[] = {  {&_swigt__p_netxpert__NetworkBuilder, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__NetworkBuilderResultArc[] = {  {&_swigt__p_netxpert__NetworkBuilderResultArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__NewNode[] = {  {&_swigt__p_netxpert__NewNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__ODPair[] = {  {&_swigt__p_netxpert__ODPair, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
@@ -31227,6 +32008,7 @@ static swig_cast_info _swigc__p_netxpert__ShortestPathTree[] = {  {&_swigt__p_ne
 static swig_cast_info _swigc__p_netxpert__Transportation[] = {  {&_swigt__p_netxpert__Transportation, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__MinCostFlow[] = {  {&_swigt__p_netxpert__simple__MinCostFlow, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__simple__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__simple__NetworkBuilder[] = {  {&_swigt__p_netxpert__simple__NetworkBuilder, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__OriginDestinationMatrix[] = {  {&_swigt__p_netxpert__simple__OriginDestinationMatrix, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__ShortestPathTree[] = {  {&_swigt__p_netxpert__simple__ShortestPathTree, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__simple__Transportation[] = {  {&_swigt__p_netxpert__simple__Transportation, 0, 0, 0},{0, 0, 0, 0}};
@@ -31241,9 +32023,11 @@ static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputNode_t[] = {  {&_
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__NewNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t[] = {  {&_swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__shared_ptrT_geos__geom__Geometry_t[] = {  {&_swigt__p_std__shared_ptrT_geos__geom__Geometry_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__unordered_mapT_netxpert__ODPair_double_t[] = {  {&_swigt__p_std__unordered_mapT_netxpert__ODPair_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t[] = {  {&_swigt__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t[] = {  {&_swigt__p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT__Tp__Alloc_t[] = {  {&_swigt__p_std__vectorT__Tp__Alloc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t[] = {  {&_swigt__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t[] = {  {&_swigt__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -31276,11 +32060,14 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__ISolver,
   _swigc__p_netxpert__InputArc,
   _swigc__p_netxpert__InputNode,
+  _swigc__p_netxpert__IntNodeID,
   _swigc__p_netxpert__InternalArc,
   _swigc__p_netxpert__LOGGER,
   _swigc__p_netxpert__MinCostFlow,
   _swigc__p_netxpert__MinimumSpanningTree,
   _swigc__p_netxpert__Network,
+  _swigc__p_netxpert__NetworkBuilder,
+  _swigc__p_netxpert__NetworkBuilderResultArc,
   _swigc__p_netxpert__NewNode,
   _swigc__p_netxpert__ODPair,
   _swigc__p_netxpert__OriginDestinationMatrix,
@@ -31288,6 +32075,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__Transportation,
   _swigc__p_netxpert__simple__MinCostFlow,
   _swigc__p_netxpert__simple__MinimumSpanningTree,
+  _swigc__p_netxpert__simple__NetworkBuilder,
   _swigc__p_netxpert__simple__OriginDestinationMatrix,
   _swigc__p_netxpert__simple__ShortestPathTree,
   _swigc__p_netxpert__simple__Transportation,
@@ -31302,9 +32090,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__allocatorT_netxpert__NewNode_t,
   _swigc__p_std__invalid_argument,
   _swigc__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t,
+  _swigc__p_std__shared_ptrT_geos__geom__Geometry_t,
   _swigc__p_std__string,
   _swigc__p_std__unordered_mapT_netxpert__ODPair_double_t,
   _swigc__p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t,
+  _swigc__p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t,
   _swigc__p_std__vectorT__Tp__Alloc_t,
   _swigc__p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t,
   _swigc__p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t,
