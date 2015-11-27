@@ -24,11 +24,6 @@ using namespace geos::geom;
 
 namespace netxpert {
 
-    static const std::string Version()
-    {
-        return "0.9.0";
-    };
-
     /**
     * \const Value that shall be used instead of Infinity for arc values (e.g. capacity).
     **/
