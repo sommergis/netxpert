@@ -15,6 +15,7 @@
 #include "odmatrix.h"
 #include "mcflow.h"
 #include "transportation.h"
+#include "networkbuilder.h"
 
 /* Simple Solver Interface */
 
@@ -23,6 +24,7 @@
 #include "mstree_simple.h"
 #include "transp_simple.h"
 #include "mcfp_simple.h"
+#include "netbuilder_simple.h"
 %}
 
 namespace std
@@ -41,7 +43,7 @@ namespace netxpert
 {
     static const std::string Version()
     {
-        return "0.9.0";
+        return "0.9.1";
     };
 
     struct ColumnMap
@@ -95,6 +97,17 @@ namespace netxpert
         InternalArc intArc;
         double flow;
         double cost;
+    };
+
+    struct NetworkBuilderResultArc
+    {
+        netxpert::ExtArcID extArcID;
+        netxpert::IntNodeID fromNode;
+        netxpert::IntNodeID toNode;
+        double cost;
+        double capacity;
+        std::string oneway;
+        std::shared_ptr<geos::geom::Geometry> geom;
     };
 
     typedef std::vector<netxpert::InputNode> InputNodes;
@@ -440,11 +453,16 @@ namespace netxpert
 
             std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
-            /**
-            * Solves the Transportation Problem with the defined ODMatrix and NodeSupply property. Solves on pure
-            * attribute data only i.e. output is always without geometry. (GEOMETRY_HANDLING is always set to "NoGeometry")
-            */
             void Solve();
+    };
+
+    class NetworkBuilder
+    {
+        public:
+            NetworkBuilder(Config& cnfg);
+            virtual ~NetworkBuilder()  {};
+            void LoadData();
+            std::unordered_map<unsigned int, NetworkBuilderResultArc> GetBuiltNetwork();
     };
 }
 
@@ -502,11 +520,22 @@ namespace netxpert::simple {
         MinCostFlow(std::string jsonCnfg);
         int Solve();
         double GetOptimum();
-        /* TODO */
         std::string GetMinimumCostFlowAsJSON();
-        /* std::vector<netxpert::FlowCost> GetMinimumCostFlow(); */
  };
 }
+
+%rename(NetworkBuilderSimple) netxpert::simple::NetworkBuilder;
+namespace netxpert::simple {
+ class NetworkBuilder
+ {
+    public:
+        NetworkBuilder(std::string jsonCnfg);
+        virtual ~NetworkBuilder();
+        int Build();
+        std::string GetBuiltNetworkAsJSON();
+ };
+}
+
 
 
 

@@ -17,7 +17,15 @@ using namespace cereal;
 
 namespace netxpert {
 
+    /**
+    * 80% of available CPU Power (=number of threads) is used
+    */
 	static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
+
+    static const std::string Version()
+    {
+        return "0.9.1";
+    };
 
     /**
     * \Enum Geometry Handling.

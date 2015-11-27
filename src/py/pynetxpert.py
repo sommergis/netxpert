@@ -616,6 +616,42 @@ class FlowCost(_object):
 FlowCost_swigregister = _pynetxpert.FlowCost_swigregister
 FlowCost_swigregister(FlowCost)
 
+class NetworkBuilderResultArc(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NetworkBuilderResultArc, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, NetworkBuilderResultArc, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["extArcID"] = _pynetxpert.NetworkBuilderResultArc_extArcID_set
+    __swig_getmethods__["extArcID"] = _pynetxpert.NetworkBuilderResultArc_extArcID_get
+    if _newclass:extArcID = _swig_property(_pynetxpert.NetworkBuilderResultArc_extArcID_get, _pynetxpert.NetworkBuilderResultArc_extArcID_set)
+    __swig_setmethods__["fromNode"] = _pynetxpert.NetworkBuilderResultArc_fromNode_set
+    __swig_getmethods__["fromNode"] = _pynetxpert.NetworkBuilderResultArc_fromNode_get
+    if _newclass:fromNode = _swig_property(_pynetxpert.NetworkBuilderResultArc_fromNode_get, _pynetxpert.NetworkBuilderResultArc_fromNode_set)
+    __swig_setmethods__["toNode"] = _pynetxpert.NetworkBuilderResultArc_toNode_set
+    __swig_getmethods__["toNode"] = _pynetxpert.NetworkBuilderResultArc_toNode_get
+    if _newclass:toNode = _swig_property(_pynetxpert.NetworkBuilderResultArc_toNode_get, _pynetxpert.NetworkBuilderResultArc_toNode_set)
+    __swig_setmethods__["cost"] = _pynetxpert.NetworkBuilderResultArc_cost_set
+    __swig_getmethods__["cost"] = _pynetxpert.NetworkBuilderResultArc_cost_get
+    if _newclass:cost = _swig_property(_pynetxpert.NetworkBuilderResultArc_cost_get, _pynetxpert.NetworkBuilderResultArc_cost_set)
+    __swig_setmethods__["capacity"] = _pynetxpert.NetworkBuilderResultArc_capacity_set
+    __swig_getmethods__["capacity"] = _pynetxpert.NetworkBuilderResultArc_capacity_get
+    if _newclass:capacity = _swig_property(_pynetxpert.NetworkBuilderResultArc_capacity_get, _pynetxpert.NetworkBuilderResultArc_capacity_set)
+    __swig_setmethods__["oneway"] = _pynetxpert.NetworkBuilderResultArc_oneway_set
+    __swig_getmethods__["oneway"] = _pynetxpert.NetworkBuilderResultArc_oneway_get
+    if _newclass:oneway = _swig_property(_pynetxpert.NetworkBuilderResultArc_oneway_get, _pynetxpert.NetworkBuilderResultArc_oneway_set)
+    __swig_setmethods__["geom"] = _pynetxpert.NetworkBuilderResultArc_geom_set
+    __swig_getmethods__["geom"] = _pynetxpert.NetworkBuilderResultArc_geom_get
+    if _newclass:geom = _swig_property(_pynetxpert.NetworkBuilderResultArc_geom_get, _pynetxpert.NetworkBuilderResultArc_geom_set)
+    def __init__(self): 
+        this = _pynetxpert.new_NetworkBuilderResultArc()
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _pynetxpert.delete_NetworkBuilderResultArc
+    __del__ = lambda self : None;
+NetworkBuilderResultArc_swigregister = _pynetxpert.NetworkBuilderResultArc_swigregister
+NetworkBuilderResultArc_swigregister(NetworkBuilderResultArc)
+
 class ExtNodeSupply(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, ExtNodeSupply, name, value)
@@ -1148,6 +1184,23 @@ class Transportation(MinCostFlow):
 Transportation_swigregister = _pynetxpert.Transportation_swigregister
 Transportation_swigregister(Transportation)
 
+class NetworkBuilder(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NetworkBuilder, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, NetworkBuilder, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _pynetxpert.new_NetworkBuilder(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _pynetxpert.delete_NetworkBuilder
+    __del__ = lambda self : None;
+    def LoadData(self): return _pynetxpert.NetworkBuilder_LoadData(self)
+    def GetBuiltNetwork(self): return _pynetxpert.NetworkBuilder_GetBuiltNetwork(self)
+NetworkBuilder_swigregister = _pynetxpert.NetworkBuilder_swigregister
+NetworkBuilder_swigregister(NetworkBuilder)
+
 class ShortestPathTreeSimple(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, ShortestPathTreeSimple, name, value)
@@ -1234,6 +1287,23 @@ class MinimumCostFlowSimple(_object):
     __del__ = lambda self : None;
 MinimumCostFlowSimple_swigregister = _pynetxpert.MinimumCostFlowSimple_swigregister
 MinimumCostFlowSimple_swigregister(MinimumCostFlowSimple)
+
+class NetworkBuilderSimple(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, NetworkBuilderSimple, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, NetworkBuilderSimple, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _pynetxpert.new_NetworkBuilderSimple(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _pynetxpert.delete_NetworkBuilderSimple
+    __del__ = lambda self : None;
+    def Build(self): return _pynetxpert.NetworkBuilderSimple_Build(self)
+    def GetBuiltNetworkAsJSON(self): return _pynetxpert.NetworkBuilderSimple_GetBuiltNetworkAsJSON(self)
+NetworkBuilderSimple_swigregister = _pynetxpert.NetworkBuilderSimple_swigregister
+NetworkBuilderSimple_swigregister(NetworkBuilderSimple)
 
 # This file is compatible with both classic and new-style classes.
 
