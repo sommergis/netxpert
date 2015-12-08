@@ -62,110 +62,23 @@ int netxpert::simple::NetworkBuilder::Build()
 		unordered_map< unsigned int, NetworkBuilderResultArc> kvArcs = builder->GetBuiltNetwork();
 		LOGGER::LogDebug("Size of built network: " + to_string(kvArcs.size()));
 
-		unique_ptr<DBWriter> writer;
-		unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-		switch (cnfg.ResultDBType)
-		{
-			case RESULT_DB_TYPE::SpatiaLiteDB:
-			{
-				if (cnfg.ResultDBPath == cnfg.NetXDBPath)
-				{
-					//Override result DB Path with original netXpert DB path
-					writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
-				}
-				else
-				{
-					writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
-				writer->CreateNetXpertDB(); //create before preparing query
-				writer->OpenNewTransaction();
-				writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
-				writer->CommitCurrentTransaction();
-				/*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-				{*/
-				auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-				qry = unique_ptr<SQLite::Statement>(sldbWriter.PrepareSaveNetworkBuilderArc(resultTableName));
-				//}
-				break;
-			}
-			case RESULT_DB_TYPE::ESRI_FileGDB:
-			{
-				writer = unique_ptr<DBWriter>(new FGDBWriter(cnfg));
-				writer->CreateNetXpertDB();
-				writer->OpenNewTransaction();
-				writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
-				writer->CommitCurrentTransaction();
+		this->builder->SaveResults(cnfg.ResultTableName, cmap);
 
-				break;
-			}
-		}
-
-		LOGGER::LogDebug("Writing Geometries..");
-		writer->OpenNewTransaction();
-
-		unordered_map< unsigned int, NetworkBuilderResultArc>::iterator it;
-		int counter = 0;
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
-		{
-			for (it = kvArcs.begin(); it != kvArcs.end(); ++it)
-			{
-			#pragma omp single nowait
-				{
-					//auto kv = it;
-
-					counter += 1;
-					if (counter % 2500 == 0)
-						LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
-
-					unsigned int key = it->first;
-
-					NetworkBuilderResultArc value = it->second;
-
-					switch (cnfg.ResultDBType)
-					{
-						case RESULT_DB_TYPE::SpatiaLiteDB:
-						{
-							auto& sldb = dynamic_cast<SpatiaLiteWriter&>(*writer);
-							#pragma omp critical
-							{
-								sldb.SaveNetworkBuilderArc(value.extArcID, value.fromNode, value.toNode, value.cost,
-									value.capacity, value.oneway, *(value.geom), resultTableName, *qry);
-							}
-							break;
-						}
-						case RESULT_DB_TYPE::ESRI_FileGDB:
-						{
-							auto& fgdb = dynamic_cast<FGDBWriter&>(*writer);
-							#pragma omp critical
-							{
-								fgdb.SaveNetworkBuilderArc(value.extArcID, value.fromNode, value.toNode, value.cost,
-									value.capacity, value.oneway, *(value.geom), resultTableName);
-							}
-							break;
-						}
-					}
-				}//omp single
-			}
-		}//omp paralell
-
-		writer->CommitCurrentTransaction();
-		writer->CloseConnection();
-		LOGGER::LogDebug("Done!");
 		return 0; //OK
 	}
 	catch (exception& ex)
 	{
-		LOGGER::LogError("NetworkBuilderSimple: Unerwarteter Fehler!");
+		LOGGER::LogError("NetworkBuilderSimple: Unexpected Error!");
 		LOGGER::LogError(ex.what());
 		return 1; //Not OK
 	}
 }
 
-std::unordered_map<unsigned int, netxpert::NetworkBuilderResultArc> 
+std::unordered_map<unsigned int, netxpert::NetworkBuilderResultArc>
 netxpert::simple::NetworkBuilder::GetBuiltNetwork()
 {
 	std::unordered_map<unsigned int, netxpert::NetworkBuilderResultArc> result;
-	
+
 	if (this->builder)
 		result = this->builder->GetBuiltNetwork();
 

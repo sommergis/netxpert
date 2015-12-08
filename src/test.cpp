@@ -82,7 +82,7 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
 
         geos::io::WKTReader reader;
         auto geomPtr = reader.read(wkt);
-        auto mlPtr = unique_ptr<geos::geom::MultiLineString> (dynamic_cast<geos::geom::MultiLineString*>(geomPtr));
+        std::shared_ptr<geos::geom::MultiLineString> mlPtr (dynamic_cast<geos::geom::MultiLineString*>(geomPtr));
 
         FGDBWriter fgdb(cnfg);
         fgdb.CreateNetXpertDB();
@@ -93,7 +93,6 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
         fgdb.CommitCurrentTransaction();
         fgdb.CloseConnection();
 
-        //delete mlPtr;
     }
     catch (exception& ex)
     {
@@ -114,7 +113,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
 
         geos::io::WKTReader reader;
         auto geomPtr = reader.read(wkt);
-        geos::geom::MultiLineString* mlPtr = dynamic_cast<geos::geom::MultiLineString*>(geomPtr);
+        std::shared_ptr<geos::geom::MultiLineString> mlPtr (dynamic_cast<geos::geom::MultiLineString*>(geomPtr));
 
         SpatiaLiteWriter sldb( cnfg );
         sldb.CreateNetXpertDB();
@@ -436,7 +435,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
 
         transp.Solve();
 
-        Network net = *transp.network;
+        Network net = *transp.net;
 
         LOGGER::LogInfo("Done!");
         LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );

@@ -73,61 +73,8 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         LOGGER::LogInfo("Optimum: " + to_string(mst.GetOptimum()));
         LOGGER::LogInfo("Count of MST: " + to_string(mst.GetMinimumSpanningTree().size()) );
 
-        unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry;
-        switch (cnfg.ResultDBType)
-        {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
-                {
-                    //Override result DB Path with original netXpert DB path
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, NETXPERT_CNFG.NetXDBPath));
-                }
-                else
-				{
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
-                writer->CreateNetXpertDB(); //create before preparing query
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
-                writer->CommitCurrentTransaction();
-                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {*/
-                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
-                //}
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-                writer->CreateNetXpertDB();
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
-                writer->CommitCurrentTransaction();
-                writer->CloseConnection();
-            }
-                break;
-        }
+        mst.SaveResults(cnfg.ResultTableName, cmap);
 
-        LOGGER::LogDebug("Writing Geometries..");
-
-        //Processing and Saving Results are handled within net.ProcessResultArcs()
-
-        string arcIDs;
-        unordered_set<string> arcIDlist = net.GetOriginalArcIDs(mst.GetMinimumSpanningTree(), cnfg.IsDirected);
-        for (string id : arcIDlist)
-        {
-            // 13-14 min on 840000 arcs
-            //arcIDs = arcIDs + id + ","; //+= is c++ concat operator!
-            arcIDs += id += ","; //optimized! 0.2 seconds on 840000 arcs
-        }
-        arcIDs.pop_back(); //trim last comma
-
-        net.ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
-
-        LOGGER::LogDebug("Done!");
         return 0; //OK
     }
     catch (exception& ex)

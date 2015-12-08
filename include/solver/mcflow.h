@@ -15,29 +15,29 @@ namespace netxpert {
     class MinCostFlow : public ISolver
     {
         public:
-            MinCostFlow(Config& cnfg);
+            MinCostFlow(netxpert::Config& cnfg);
             virtual ~MinCostFlow();
             void Solve(std::string net);
-            void Solve(Network& net);
+            void Solve(netxpert::Network& net);
             bool IsDirected;
-            std::vector<FlowCost> GetMinCostFlow() const;
-            MCFAlgorithm GetAlgorithm() const;
-            void SetAlgorithm(MCFAlgorithm mcfAlgorithm);
-            MCFSolverStatus GetSolverStatus() const;
+            std::vector<netxpert::FlowCost> GetMinCostFlow() const;
+            netxpert::MCFAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(netxpert::MCFAlgorithm mcfAlgorithm);
+            netxpert::MCFSolverStatus GetSolverStatus() const;
             double GetOptimum() const;
 
         protected:
             Config NETXPERT_CNFG;
             double optimum = 0;
-            MCFSolverStatus solverStatus;
-            MCFAlgorithm algorithm;
-            vector<FlowCost> flowCost;
-            shared_ptr<IMinCostFlow> mcf;
-            void solve (Network& net);
-            bool validateNetworkData(Network& net);
-            void convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-                                                    vector<unsigned int>& eNds, vector<double>& supply,
-                                                    vector<double>& caps, vector<double>& costs);
+            netxpert::MCFSolverStatus solverStatus;
+            netxpert::MCFAlgorithm algorithm;
+            std::vector<netxpert::FlowCost> flowCost;
+            std::shared_ptr<netxpert::IMinCostFlow> mcf;
+            void solve (netxpert::Network& net);
+            bool validateNetworkData(netxpert::Network& net);
+            void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
+                                                    std::vector<unsigned int>& eNds, std::vector<double>& supply,
+                                                    std::vector<double>& caps, std::vector<double>& costs);
     };
 }
 #endif // MINCOSTFLOW_H

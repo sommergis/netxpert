@@ -28,8 +28,11 @@ namespace netxpert {
 
             double GetOptimum() const;
             vector<InternalArc> GetMinimumSpanningTree() const;
+            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
 
         private:
+            std::unique_ptr<netxpert::Network> net;
+            netxpert::Config NETXPERT_CNFG;
             vector<InternalArc> minimumSpanTree;
             MSTAlgorithm algorithm;
             shared_ptr<IMinSpanTree> mst;
