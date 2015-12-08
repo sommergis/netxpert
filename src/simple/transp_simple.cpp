@@ -12,7 +12,7 @@ int netxpert::simple::Transportation::Solve()
     try
     {
         Config cnfg = NETXPERT_CNFG;
-//1. Config
+        //1. Config
         if (!DBHELPER::IsInitialized)
         {
             DBHELPER::Initialize(cnfg);
@@ -102,158 +102,8 @@ int netxpert::simple::Transportation::Solve()
         unordered_map<ODPair, DistributionArc> result = transp.GetDistribution();
         LOGGER::LogInfo("Count of Distributions: " + to_string(result.size()) );
 
-        unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+        transp.SaveResults(cnfg.ResultTableName, cmap);
 
-        switch (cnfg.ResultDBType)
-        {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
-                {
-                    //Override result DB Path with original netXpert DB path
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, NETXPERT_CNFG.NetXDBPath));
-                }
-                else
-				{
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
-                writer->CreateNetXpertDB(); //create before preparing query
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
-                writer->CommitCurrentTransaction();
-                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {*/
-                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
-                //}
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-                writer->CreateNetXpertDB();
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
-                writer->CommitCurrentTransaction();
-            }
-                break;
-        }
-
-        LOGGER::LogDebug("Writing Geometries..");
-        writer->OpenNewTransaction();
-
-		std::string arcIDs = "";
-		std::unordered_set<string> totalArcIDs;
-		std::unordered_map<ODPair, DistributionArc>::iterator it;
-
-		if (NETXPERT_CNFG.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
-		{
-			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
-
-			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
-			{
-				//populate arcIDs
-				for (it = result.begin(); it != result.end(); ++it)
-				{
-					#pragma omp single nowait
-					{
-						auto kv = *it;
-						ODPair key = kv.first;
-						DistributionArc value = kv.second;
-						CompressedPath path = value.path;
-						std::vector<unsigned int> ends = path.first;
-						std::vector<InternalArc> route;
-						std::unordered_set<std::string> arcIDlist;
-
-						route = transp.UncompressRoute(key.origin, ends);
-						arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
-
-						if (arcIDlist.size() > 0)
-						{
-							#pragma omp critical
-							{
-								for (std::string id : arcIDlist)
-								{
-									if (id != "dummy")
-										totalArcIDs.insert(id);
-								}
-							}
-						}
-					}//omp single
-				}
-			}//omp parallel
-
-			for (string id : totalArcIDs)
-				arcIDs += id += ",";
-
-			if (arcIDs.size() > 0)
-			{
-				arcIDs.pop_back(); //trim last comma
-				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
-			}
-			LOGGER::LogDebug("Done!");
-		}
-
-        int counter = 0;
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
-        {
-
-        for (it = result.begin(); it != result.end(); ++it)
-        {
-            #pragma omp single nowait
-            {
-            auto dist = *it;
-
-            counter += 1;
-            if (counter % 2500 == 0)
-                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
-
-            ODPair key = dist.first;
-            DistributionArc val = dist.second;
-
-            string arcIDs = "";
-            CompressedPath path = val.path;
-            double cost = path.second;
-            double flow = val.flow;
-            //TODO: get capacity per arc
-            double cap = -1;
-
-            vector<InternalArc> arcs = transp.UncompressRoute(key.origin, path.first);
-            vector<ArcData> arcData = net.GetOriginalArcData(arcs, cnfg.IsDirected);
-
-            for (ArcData& arcD : arcData)
-            {
-                //cout << arcD.extArcID << endl;
-                arcIDs += arcD.extArcID += ",";
-                //TODO: get capacity per arc
-                //cap = arcD.capacity;
-            }
-            if (arcIDs.size() > 0)
-                arcIDs.pop_back(); //trim last comma
-
-            string orig;
-            string dest;
-            try{
-                orig = net.GetOriginalStartOrEndNodeID(key.origin);
-            }
-            catch (exception& ex) {
-                orig = net.GetOriginalNodeID(key.origin);
-            }
-            try{
-                dest = net.GetOriginalStartOrEndNodeID(key.dest);
-            }
-            catch (exception& ex) {
-                dest = net.GetOriginalNodeID(key.dest);
-            }
-            net.ProcessResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
-            }//omp single
-        }
-        }//omp paralell
-
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
         return 0; //OK
     }
     catch (exception& ex)
@@ -270,6 +120,7 @@ double netxpert::simple::Transportation::GetOptimum()
         result = this->solver->GetOptimum();
     return result;
 }
+
 std::string netxpert::simple::Transportation::GetDistributionAsJSON()
 {
     string result;

@@ -278,17 +278,14 @@ void FGDBWriter::SaveResultArc(const std::string& orig, const std::string& dest,
             // Set the point array to the array from the read geometry.
             FileGDBAPI::Point* points;
             lineGeometry.GetPoints(points);
-            const geos::geom::CoordinateSequence* coordsPtr = route.getCoordinates();
-            const auto& coords = *coordsPtr;
-            int length = static_cast<int>(coords.getSize());
+            std::shared_ptr<const geos::geom::CoordinateSequence> coordsPtr (route.getCoordinates());
+            int length = static_cast<int>(coordsPtr->getSize());
             for (int i = 0; i < length; i++)
             {
-                const geos::geom::Coordinate c = coords.getAt(i);
+                const geos::geom::Coordinate c = coordsPtr->getAt(i);
                 FileGDBAPI::Point p {c.x, c.y};
-                //Point p { x = coords->getAt(i).x, y = coords->getAt(i).y };
                 points[i] = p;
             }
-            delete coordsPtr; //else there are memory leaks!
 
             // Set the parts array to the array from the read geometry.
             int* parts;
@@ -302,14 +299,12 @@ void FGDBWriter::SaveResultArc(const std::string& orig, const std::string& dest,
             // geos::geom::CoordinateArraySequence::clone() const (CoordinateArraySequence.cpp:77
             for (int i = 1; i < numParts; i++)
             {
-                const geos::geom::Geometry* geoPartPtr = route.getGeometryN(static_cast<size_t>(i - 1));
+                std::shared_ptr<const geos::geom::Geometry> geoPartPtr (route.getGeometryN(static_cast<size_t>(i - 1)));
                 //get position of last coordinate in part
-                const auto coordsPtr = geoPartPtr->getCoordinates();
-                //delete geoPart;
+                std::shared_ptr<const geos::geom::CoordinateSequence> coordsPtr (geoPartPtr->getCoordinates());
                 partNumber = static_cast<int>(coordsPtr->getSize());
                 //add number to last position
                 parts[i] = partNumber + parts[i - 1];
-                delete coordsPtr; //delete only this pointer! not geoPart!
             }
 
             lineGeometry.CalculateExtent();

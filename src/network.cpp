@@ -149,7 +149,33 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadEndNodes(const 
     //}//omp parallel
     return endNodes;
 }
+unsigned int netxpert::Network::AddStartNode(std::string extArcID,
+                          double x, double y, double supply,
+                          int treshold, const netxpert::ColumnMap& cmap, bool withCapacity)
+{
+    NewNode n { extArcID, Coordinate {x, y}, supply};
 
+    const string arcsTableName = NETXPERT_CNFG.ArcsTableName;
+    const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
+
+    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                            cmap, ArcIDColumnDataType::Number, withCapacity);
+    return AddStartNode(n, treshold, *qry, withCapacity);
+}
+
+unsigned int netxpert::Network::AddEndNode(std::string extArcID,
+                          double x, double y, double supply,
+                          int treshold, const netxpert::ColumnMap& cmap, bool withCapacity)
+{
+    NewNode n { extArcID, Coordinate {x, y}, supply};
+
+    const string arcsTableName = NETXPERT_CNFG.ArcsTableName;
+    const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
+
+    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                            cmap, ArcIDColumnDataType::Number, withCapacity);
+    return AddEndNode(n, treshold, *qry, withCapacity);
+}
 //Vorgehen:
 //1. Hol die nächste Kante (per Spatialite) ArcID + Geometrie
 //2. Wurde die Kante schon aufgebrochen oder nicht?
@@ -1625,9 +1651,9 @@ void Network::saveResultsMem(const std::string orig, const std::string dest, con
                 auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
                 //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
                 //MultilineString could also contain only one Linestring
+
                 unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
 
-                //cout << mLine->toString() << endl;
                 #pragma omp critical
                 {
                 sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
@@ -1650,25 +1676,29 @@ void Network::saveResultsMem(const std::string orig, const std::string dest, con
                 //Stopwatch<> sw;
                 //sw.start();
                 if (arcIDs.size() > 0)
-                    mLineDB = DBHELPER::GetArcGeometriesFromMem(arcIDs);
+                    mLineDB = move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
                 //sw.stop();
                 //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
                 //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - merge");
                 //merge routeParts with original arcs
                 //sw.start();
                 LineMerger lm;
-                lm.add(mLine.get());
+                if (! (mLine->isEmpty()) )
+                    lm.add(mLine.get());
 
-                if (mLineDB)
+                if (! (mLineDB->isEmpty()) )
                     lm.add(mLineDB.get());
 
-                vector<LineString *> *mls = lm.getMergedLineStrings();
-                auto& mlsRef = *mls;
+                std::unique_ptr< vector<LineString *> > mls ( lm.getMergedLineStrings() );
                 vector<Geometry*> mls2;
-                for (auto l : mlsRef)
+                for (auto& l : *mls)
+                {
+                    //if (!l->isEmpty())
                     mls2.push_back(dynamic_cast<Geometry*>(l));
+                }
 
                 unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
+
                 //sw.stop();
                 //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
 
@@ -1698,23 +1728,26 @@ void Network::saveResultsMem(const std::string orig, const std::string dest, con
             //Stopwatch<> sw;
             //sw.start();
             if (arcIDs.size() > 0)
-                mLineDB = DBHELPER::GetArcGeometriesFromMem(arcIDs);
+                mLineDB = move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
             //sw.stop();
             //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
 
             //merge
             //sw.start();
             LineMerger lm;
-            lm.add(mLine.get());
+            if (! (mLine->isEmpty()) )
+                lm.add(mLine.get());
 
-            if (mLineDB)
+            if (! (mLineDB->isEmpty()) )
                 lm.add(mLineDB.get());
 
-            vector<LineString *> *mls = lm.getMergedLineStrings();
-            auto& mlsRef = *mls;
+            std::unique_ptr< vector<LineString *> > mls ( lm.getMergedLineStrings() );
             vector<Geometry*> mls2;
-            for (auto l : mlsRef)
+            for (auto& l : *mls)
+            {
+                //if (!l->isEmpty())
                 mls2.push_back(dynamic_cast<Geometry*>(l));
+            }
 
             unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
             //sw.stop();

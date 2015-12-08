@@ -7,6 +7,7 @@ MinimumSpanningTree::MinimumSpanningTree(Config& cnfg)
     //ctor
     LOGGER::LogInfo("MinimumSpanningTree Solver instantiated");
     algorithm = cnfg.MstAlgorithm;
+    this->NETXPERT_CNFG = cnfg;
 }
 
 MSTAlgorithm MinimumSpanningTree::GetAlgorithm()
@@ -21,6 +22,74 @@ double MinimumSpanningTree::GetOptimum() const
 {
     return mst->MSTGetF0();
 }
+void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+{
+    try
+    {
+        Config cnfg = this->NETXPERT_CNFG;
+
+        unique_ptr<DBWriter> writer;
+        unique_ptr<SQLite::Statement> qry;
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
+                {
+                    //Override result DB Path with original netXpert DB path
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+                }
+                else
+				{
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
+                writer->CreateNetXpertDB(); //create before preparing query
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                //}
+            }
+                break;
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+                writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
+                writer->CommitCurrentTransaction();
+                writer->CloseConnection();
+            }
+                break;
+        }
+
+        LOGGER::LogDebug("Writing Geometries..");
+
+        //Processing and Saving Results are handled within net.ProcessResultArcs()
+
+        string arcIDs;
+        unordered_set<string> arcIDlist = this->net->GetOriginalArcIDs(this->GetMinimumSpanningTree(), cnfg.IsDirected);
+        for (string id : arcIDlist)
+        {
+            // 13-14 min on 840000 arcs
+            //arcIDs = arcIDs + id + ","; //+= is c++ concat operator!
+            arcIDs += id += ","; //optimized! 0.2 seconds on 840000 arcs
+        }
+        arcIDs.pop_back(); //trim last comma
+
+        this->net->ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
+
+        LOGGER::LogDebug("Done!");
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("MinimumSpanningTree::SaveResults() - Unexpected Error!");
+        LOGGER::LogError(ex.what());
+    }
+}
 
 void MinimumSpanningTree::Solve(string net)
 {
@@ -29,6 +98,8 @@ void MinimumSpanningTree::Solve(string net)
 
 void MinimumSpanningTree::Solve(Network& net)
 {
+    this->net = std::unique_ptr<Network>( move(&net));
+    //TODO CHECK
     solve(net);
 }
 

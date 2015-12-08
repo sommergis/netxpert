@@ -379,8 +379,8 @@ namespace netxpert {
     **/
     struct NewNode
     {
-        string extNodeID;
-        Coordinate coord;
+        std::string extNodeID;
+        geos::geom::Coordinate coord;
         double supply;
     };
 

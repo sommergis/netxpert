@@ -518,7 +518,7 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
 std::vector<NetworkBuilderInputArc>
 DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMap& _map)
 {
-    std::vector<NetworkBuilderInputArc> arcTbl;
+	NetworkBuilderInputArcs arcTbl;
     string sqlStr = "";
     bool oneway = false;
     bool hasCapacity = false;
