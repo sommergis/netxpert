@@ -2,6 +2,9 @@
 #define NETWORKBUILDER_H
 
 #include "dbhelper.h" //includes already logger, config, data, utils
+#include "dbwriter.h"
+#include "slitewriter.h"
+#include "fgdbwriter.h"
 #include <vector>
 #include "geos/io/WKBReader.h"
 #include "geos/io/WKBWriter.h"
@@ -36,7 +39,7 @@ namespace netxpert {
             *     - Multilinestrings that cannot be merged as a Linestring will throw an exception
             **/
             void LoadData();
-
+            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
             std::unordered_map<unsigned int, NetworkBuilderResultArc> GetBuiltNetwork();
 
         private:

@@ -7,7 +7,6 @@
 #include "logger.h"
 #include "SQLiteCpp/Database.h"
 #include "SQLiteCpp/Transaction.h"
-//#include <boost/filesystem.hpp>
 #include "geos/io/WKBReader.h"
 #include "geos/io/WKBWriter.h"
 #include "geos/geom/Point.h"

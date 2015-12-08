@@ -47,6 +47,9 @@ namespace netxpert {
 
             double GetOptimum() const;
 
+            void SaveResults(const std::string& resultTableName,
+                             const netxpert::ColumnMap& cmap) const;
+
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:
@@ -74,6 +77,7 @@ namespace netxpert {
             double buildCompressedRoute(vector<unsigned int>& route, unsigned int orig, unsigned int dest,
                                             unordered_map<unsigned int, unsigned int>& arcPredescessors);
             double getArcCost(const InternalArc& arc);
+            Config NETXPERT_CNFG;
     };
 }
 #endif // SPTREE_H

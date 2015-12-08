@@ -11,12 +11,188 @@ Transportation::Transportation(Config& cnfg) : MinCostFlow(cnfg)
     algorithm = cnfg.McfAlgorithm;
     solverStatus = MCFSolverStatus::MCFUnSolved;
     IsDirected = true; //TODO CHECK always true
-
+    this->NETXPERT_CNFG = cnfg;
 }
 
 Transportation::~Transportation()
 {
     //dtor
+}
+
+void Transportation::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+{
+    try
+    {
+        Config cnfg = this->NETXPERT_CNFG;
+
+        unique_ptr<DBWriter> writer;
+        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
+                {
+                    //Override result DB Path with original netXpert DB path
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+                }
+                else
+				{
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
+                writer->CreateNetXpertDB(); //create before preparing query
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                //}
+            }
+                break;
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+                writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
+                writer->CommitCurrentTransaction();
+            }
+                break;
+        }
+
+        LOGGER::LogDebug("Writing Geometries..");
+        writer->OpenNewTransaction();
+
+		std::string arcIDs = "";
+		std::unordered_set<string> totalArcIDs;
+		std::unordered_map<ODPair, DistributionArc>::const_iterator it;
+
+		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+		{
+			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
+			{
+				//populate arcIDs
+				for (it = this->distribution.begin(); it != this->distribution.end(); ++it)
+				{
+					#pragma omp single nowait
+					{
+						auto kv = *it;
+						ODPair key = kv.first;
+						DistributionArc value = kv.second;
+						CompressedPath path = value.path;
+						std::vector<unsigned int> ends = path.first;
+						std::vector<InternalArc> route;
+						std::unordered_set<std::string> arcIDlist;
+
+						route = this->UncompressRoute(key.origin, ends);
+						arcIDlist = this->net->GetOriginalArcIDs(route, cnfg.IsDirected);
+
+						if (arcIDlist.size() > 0)
+						{
+							#pragma omp critical
+							{
+								for (std::string id : arcIDlist)
+								{
+									if (id != "dummy")
+										totalArcIDs.insert(id);
+								}
+							}
+						}
+					}//omp single
+				}
+			}//omp parallel
+
+			for (string id : totalArcIDs)
+				arcIDs += id += ",";
+
+			if (arcIDs.size() > 0)
+			{
+				arcIDs.pop_back(); //trim last comma
+				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+			}
+			LOGGER::LogDebug("Done!");
+		}
+
+        int counter = 0;
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+        {
+
+        for (it = this->distribution.begin(); it != this->distribution.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto dist = *it;
+
+            counter += 1;
+            if (counter % 2500 == 0)
+                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+            ODPair key = dist.first;
+            DistributionArc val = dist.second;
+
+            string arcIDs = "";
+            CompressedPath path = val.path;
+            double cost = path.second;
+            double flow = val.flow;
+            //TODO: get capacity per arc
+            double cap = -1;
+
+            vector<InternalArc> arcs = this->UncompressRoute(key.origin, path.first);
+            vector<ArcData> arcData = this->net->GetOriginalArcData(arcs, cnfg.IsDirected);
+
+            for (ArcData& arcD : arcData)
+            {
+                //cout << arcD.extArcID << endl;
+                arcIDs += arcD.extArcID += ",";
+                //TODO: get capacity per arc
+                //cap = arcD.capacity;
+            }
+            if (arcIDs.size() > 0)
+                arcIDs.pop_back(); //trim last comma
+
+            string orig;
+            string dest;
+            try{
+                orig = this->net->GetOriginalStartOrEndNodeID(key.origin);
+            }
+            catch (exception& ex) {
+                try {
+                    orig = this->net->GetOriginalNodeID(key.origin);
+                }
+                catch (exception& ex){
+                    orig = to_string(key.origin);
+                }
+            }
+            try{
+                dest = this->net->GetOriginalStartOrEndNodeID(key.dest);
+            }
+            catch (exception& ex) {
+                try {
+                    orig = this->net->GetOriginalNodeID(key.dest);
+                }
+                catch (exception& ex){
+                    orig = to_string(key.dest);
+                }
+            }
+            this->net->ProcessResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
+            }//omp single
+        }
+        }//omp paralell
+
+        writer->CommitCurrentTransaction();
+        writer->CloseConnection();
+        LOGGER::LogDebug("Done!");
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("Transportation::SaveResults() - Unexpected Error!");
+        LOGGER::LogError(ex.what());
+    }
 }
 
 vector<unsigned int> Transportation::GetOrigins() const
@@ -61,7 +237,7 @@ std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
         vector<unsigned int> ends = val.path.first;
 
         // only one arc
-        unordered_set<string> arcIDs = network->GetOriginalArcIDs(vector<InternalArc>
+        unordered_set<string> arcIDs = net->GetOriginalArcIDs(vector<InternalArc>
                                                                     { InternalArc  {key.origin, key.dest} }, IsDirected);
         ExtArcID arcID = *arcIDs.begin();
 
@@ -73,13 +249,13 @@ std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
         string orig;
         string dest;
         try{
-            orig = network->GetOriginalNodeID(key.origin);
+            orig = net->GetOriginalNodeID(key.origin);
         }
         catch (exception& ex) {
             LOGGER::LogError(ex.what());
         }
         try{
-            dest = network->GetOriginalNodeID(key.dest);
+            dest = net->GetOriginalNodeID(key.dest);
         }
         catch (exception& ex) {
             LOGGER::LogError(ex.what());
@@ -159,10 +335,10 @@ void Transportation::Solve()
     //Network net(arcs, nodes, cmap, cnfg);
     //net.ConvertInputNetwork(autoCleanNetwork);
 
-    this->network = std::unique_ptr<Network>(new Network(arcs, nodes, cmap, cnfg));
-    this->network->ConvertInputNetwork(autoCleanNetwork);
+    this->net = std::unique_ptr<Network>(new Network(arcs, nodes, cmap, cnfg));
+    this->net->ConvertInputNetwork(autoCleanNetwork);
 
-    Network net = *this->network;
+    Network net = *this->net;
 
     //Check Balancing of Transportation Problem Instance and
     //transform the instance if needed is already done in
@@ -236,6 +412,9 @@ void Transportation::Solve()
 
 void Transportation::Solve(Network& net)
 {
+    //TODO: Checkme!
+    this->net = std::unique_ptr<Network>( move(&net) );
+
     if (this->originNodes.size() == 0 || this->destinationNodes.size() == 0)
         throw std::runtime_error("Origin nodes and destination nodes must be filled in Transportation Solver!");
 
@@ -396,6 +575,7 @@ void Transportation::Solve(Network& net)
         }
     }
 }
+
 
 vector<InternalArc> Transportation::UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const
 {

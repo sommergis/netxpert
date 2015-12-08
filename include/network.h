@@ -51,6 +51,19 @@ namespace netxpert
             Network(Arcs arcData, std::unordered_map<ExtArcID,IntNodeID> distinctNodeIDs,
                        NodeSupplies _nodeSupplies);
 
+            /**
+            * Simple Interface for adding start nodes
+            */
+            unsigned int AddStartNode(std::string extArcID,
+                                      double x, double y, double supply,
+                                      int treshold, const netxpert::ColumnMap& cmap, bool withCapacity);
+            /**
+            * Simple Interface for adding end nodes
+            */
+            unsigned int AddEndNode(std::string extArcID,
+                                      double x, double y, double supply,
+                                      int treshold, const netxpert::ColumnMap& cmap, bool withCapacity);
+
             unsigned int AddStartNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
             unsigned int AddEndNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
 

@@ -56,7 +56,7 @@ void NetworkBuilder::LoadData()
             {
                 #pragma omp critical
                 {
-                geoms.push_back( it->geom->clone() );
+                geoms.push_back( it->geom.get() );
                 }
                 break;
             }
@@ -92,6 +92,108 @@ void NetworkBuilder::LoadData()
     this->geoGraph = unique_ptr<geos::geomgraph::GeometryGraph>(new geos::geomgraph::GeometryGraph( 0, mLine.get() ));
 }
 
+void NetworkBuilder::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+{
+    try
+    {
+        Config cnfg = this->NETXPERT_CNFG;
+
+        std::unique_ptr<DBWriter> writer;
+		std::unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+		switch (cnfg.ResultDBType)
+		{
+			case RESULT_DB_TYPE::SpatiaLiteDB:
+			{
+				if (cnfg.ResultDBPath == cnfg.NetXDBPath)
+				{
+					//Override result DB Path with original netXpert DB path
+					writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+				}
+				else
+				{
+					writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
+				writer->CreateNetXpertDB(); //create before preparing query
+				writer->OpenNewTransaction();
+				writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
+				writer->CommitCurrentTransaction();
+				/*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+				{*/
+				auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+				qry = unique_ptr<SQLite::Statement>(sldbWriter.PrepareSaveNetworkBuilderArc(resultTableName));
+				//}
+				break;
+			}
+			case RESULT_DB_TYPE::ESRI_FileGDB:
+			{
+				writer = unique_ptr<DBWriter>(new FGDBWriter(cnfg));
+				writer->CreateNetXpertDB();
+				writer->OpenNewTransaction();
+				writer->CreateSolverResultTable(resultTableName, NetXpertSolver::NetworkBuilderResult, true);
+				writer->CommitCurrentTransaction();
+
+				break;
+			}
+		}
+
+		LOGGER::LogDebug("Writing Geometries..");
+		writer->OpenNewTransaction();
+
+		unordered_map< unsigned int, NetworkBuilderResultArc>::const_iterator it;
+		int counter = 0;
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+		{
+			for (it = this->builtNetwork.begin(); it != this->builtNetwork.end(); ++it)
+			{
+			#pragma omp single nowait
+            {
+                //auto kv = it;
+
+                counter += 1;
+                if (counter % 2500 == 0)
+                    LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+                unsigned int key = it->first;
+
+                NetworkBuilderResultArc value = it->second;
+
+                switch (cnfg.ResultDBType)
+                {
+                    case RESULT_DB_TYPE::SpatiaLiteDB:
+                    {
+                        auto& sldb = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                        #pragma omp critical
+                        {
+                            sldb.SaveNetworkBuilderArc(value.extArcID, value.fromNode, value.toNode, value.cost,
+                                value.capacity, value.oneway, *(value.geom), resultTableName, *qry);
+                        }
+                        break;
+                    }
+                    case RESULT_DB_TYPE::ESRI_FileGDB:
+                    {
+                        auto& fgdb = dynamic_cast<FGDBWriter&>(*writer);
+                        #pragma omp critical
+                        {
+                            fgdb.SaveNetworkBuilderArc(value.extArcID, value.fromNode, value.toNode, value.cost,
+                                value.capacity, value.oneway, *(value.geom), resultTableName);
+                        }
+                        break;
+                    }
+                }
+				}
+			}//omp single
+		}//omp paralell
+
+		writer->CommitCurrentTransaction();
+		writer->CloseConnection();
+		LOGGER::LogDebug("Done!");
+    }
+	catch (exception& ex)
+	{
+		LOGGER::LogError("NetworkBuilder - SaveResults(): Unexpected Error!");
+		LOGGER::LogError(ex.what());
+	}
+}
 void NetworkBuilder::calcNodes()
 {
     std::vector< geos::geomgraph::Node * > * nodePtr = this->geoGraph->getBoundaryNodes();

@@ -427,6 +427,100 @@ class FlowCosts(_object):
 FlowCosts_swigregister = _pynetxpert.FlowCosts_swigregister
 FlowCosts_swigregister(FlowCosts)
 
+class Destinations(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Destinations, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Destinations, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _pynetxpert.Destinations_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _pynetxpert.Destinations___nonzero__(self)
+    def __bool__(self): return _pynetxpert.Destinations___bool__(self)
+    def __len__(self): return _pynetxpert.Destinations___len__(self)
+    def pop(self): return _pynetxpert.Destinations_pop(self)
+    def __getslice__(self, *args): return _pynetxpert.Destinations___getslice__(self, *args)
+    def __setslice__(self, *args): return _pynetxpert.Destinations___setslice__(self, *args)
+    def __delslice__(self, *args): return _pynetxpert.Destinations___delslice__(self, *args)
+    def __delitem__(self, *args): return _pynetxpert.Destinations___delitem__(self, *args)
+    def __getitem__(self, *args): return _pynetxpert.Destinations___getitem__(self, *args)
+    def __setitem__(self, *args): return _pynetxpert.Destinations___setitem__(self, *args)
+    def append(self, *args): return _pynetxpert.Destinations_append(self, *args)
+    def empty(self): return _pynetxpert.Destinations_empty(self)
+    def size(self): return _pynetxpert.Destinations_size(self)
+    def clear(self): return _pynetxpert.Destinations_clear(self)
+    def swap(self, *args): return _pynetxpert.Destinations_swap(self, *args)
+    def get_allocator(self): return _pynetxpert.Destinations_get_allocator(self)
+    def begin(self): return _pynetxpert.Destinations_begin(self)
+    def end(self): return _pynetxpert.Destinations_end(self)
+    def rbegin(self): return _pynetxpert.Destinations_rbegin(self)
+    def rend(self): return _pynetxpert.Destinations_rend(self)
+    def pop_back(self): return _pynetxpert.Destinations_pop_back(self)
+    def erase(self, *args): return _pynetxpert.Destinations_erase(self, *args)
+    def __init__(self, *args): 
+        this = _pynetxpert.new_Destinations(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _pynetxpert.Destinations_push_back(self, *args)
+    def front(self): return _pynetxpert.Destinations_front(self)
+    def back(self): return _pynetxpert.Destinations_back(self)
+    def assign(self, *args): return _pynetxpert.Destinations_assign(self, *args)
+    def resize(self, *args): return _pynetxpert.Destinations_resize(self, *args)
+    def insert(self, *args): return _pynetxpert.Destinations_insert(self, *args)
+    def reserve(self, *args): return _pynetxpert.Destinations_reserve(self, *args)
+    def capacity(self): return _pynetxpert.Destinations_capacity(self)
+    __swig_destroy__ = _pynetxpert.delete_Destinations
+    __del__ = lambda self : None;
+Destinations_swigregister = _pynetxpert.Destinations_swigregister
+Destinations_swigregister(Destinations)
+
+class ODNodes(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, ODNodes, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, ODNodes, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _pynetxpert.ODNodes_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _pynetxpert.ODNodes___nonzero__(self)
+    def __bool__(self): return _pynetxpert.ODNodes___bool__(self)
+    def __len__(self): return _pynetxpert.ODNodes___len__(self)
+    def pop(self): return _pynetxpert.ODNodes_pop(self)
+    def __getslice__(self, *args): return _pynetxpert.ODNodes___getslice__(self, *args)
+    def __setslice__(self, *args): return _pynetxpert.ODNodes___setslice__(self, *args)
+    def __delslice__(self, *args): return _pynetxpert.ODNodes___delslice__(self, *args)
+    def __delitem__(self, *args): return _pynetxpert.ODNodes___delitem__(self, *args)
+    def __getitem__(self, *args): return _pynetxpert.ODNodes___getitem__(self, *args)
+    def __setitem__(self, *args): return _pynetxpert.ODNodes___setitem__(self, *args)
+    def append(self, *args): return _pynetxpert.ODNodes_append(self, *args)
+    def empty(self): return _pynetxpert.ODNodes_empty(self)
+    def size(self): return _pynetxpert.ODNodes_size(self)
+    def clear(self): return _pynetxpert.ODNodes_clear(self)
+    def swap(self, *args): return _pynetxpert.ODNodes_swap(self, *args)
+    def get_allocator(self): return _pynetxpert.ODNodes_get_allocator(self)
+    def begin(self): return _pynetxpert.ODNodes_begin(self)
+    def end(self): return _pynetxpert.ODNodes_end(self)
+    def rbegin(self): return _pynetxpert.ODNodes_rbegin(self)
+    def rend(self): return _pynetxpert.ODNodes_rend(self)
+    def pop_back(self): return _pynetxpert.ODNodes_pop_back(self)
+    def erase(self, *args): return _pynetxpert.ODNodes_erase(self, *args)
+    def __init__(self, *args): 
+        this = _pynetxpert.new_ODNodes(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _pynetxpert.ODNodes_push_back(self, *args)
+    def front(self): return _pynetxpert.ODNodes_front(self)
+    def back(self): return _pynetxpert.ODNodes_back(self)
+    def assign(self, *args): return _pynetxpert.ODNodes_assign(self, *args)
+    def resize(self, *args): return _pynetxpert.ODNodes_resize(self, *args)
+    def insert(self, *args): return _pynetxpert.ODNodes_insert(self, *args)
+    def reserve(self, *args): return _pynetxpert.ODNodes_reserve(self, *args)
+    def capacity(self): return _pynetxpert.ODNodes_capacity(self)
+    __swig_destroy__ = _pynetxpert.delete_ODNodes
+    __del__ = lambda self : None;
+ODNodes_swigregister = _pynetxpert.ODNodes_swigregister
+ODNodes_swigregister(ODNodes)
+
 
 def Version():
   return _pynetxpert.Version()
@@ -952,6 +1046,8 @@ class Network(_object):
         try: self.this.append(this)
         except: self.this = this
     def ConvertInputNetwork(self, *args): return _pynetxpert.Network_ConvertInputNetwork(self, *args)
+    def AddStartNode(self, *args): return _pynetxpert.Network_AddStartNode(self, *args)
+    def AddEndNode(self, *args): return _pynetxpert.Network_AddEndNode(self, *args)
     def LoadStartNodes(self, *args): return _pynetxpert.Network_LoadStartNodes(self, *args)
     def LoadEndNodes(self, *args): return _pynetxpert.Network_LoadEndNodes(self, *args)
     def GetOriginalNodeID(self, *args): return _pynetxpert.Network_GetOriginalNodeID(self, *args)
@@ -1065,6 +1161,7 @@ class MinimumSpanningTree(ISolver):
     def GetAlgorithm(self): return _pynetxpert.MinimumSpanningTree_GetAlgorithm(self)
     def SetAlgorithm(self, *args): return _pynetxpert.MinimumSpanningTree_SetAlgorithm(self, *args)
     def GetOptimum(self): return _pynetxpert.MinimumSpanningTree_GetOptimum(self)
+    def SaveResults(self, *args): return _pynetxpert.MinimumSpanningTree_SaveResults(self, *args)
     def GetMinimumSpanningTree(self): return _pynetxpert.MinimumSpanningTree_GetMinimumSpanningTree(self)
 MinimumSpanningTree_swigregister = _pynetxpert.MinimumSpanningTree_swigregister
 MinimumSpanningTree_swigregister(MinimumSpanningTree)
@@ -1098,6 +1195,7 @@ class OriginDestinationMatrix(ISolver):
     def GetShortestPaths(self): return _pynetxpert.OriginDestinationMatrix_GetShortestPaths(self)
     def GetODMatrix(self): return _pynetxpert.OriginDestinationMatrix_GetODMatrix(self)
     def GetOptimum(self): return _pynetxpert.OriginDestinationMatrix_GetOptimum(self)
+    def SaveResults(self, *args): return _pynetxpert.OriginDestinationMatrix_SaveResults(self, *args)
     def UncompressRoute(self, *args): return _pynetxpert.OriginDestinationMatrix_UncompressRoute(self, *args)
 OriginDestinationMatrix_swigregister = _pynetxpert.OriginDestinationMatrix_swigregister
 OriginDestinationMatrix_swigregister(OriginDestinationMatrix)
@@ -1130,6 +1228,7 @@ class ShortestPathTree(ISolver):
     def GetReachedDests(self): return _pynetxpert.ShortestPathTree_GetReachedDests(self)
     def GetShortestPaths(self): return _pynetxpert.ShortestPathTree_GetShortestPaths(self)
     def GetOptimum(self): return _pynetxpert.ShortestPathTree_GetOptimum(self)
+    def SaveResults(self, *args): return _pynetxpert.ShortestPathTree_SaveResults(self, *args)
     def UncompressRoute(self, *args): return _pynetxpert.ShortestPathTree_UncompressRoute(self, *args)
 ShortestPathTree_swigregister = _pynetxpert.ShortestPathTree_swigregister
 ShortestPathTree_swigregister(ShortestPathTree)
@@ -1180,6 +1279,7 @@ class Transportation(MinCostFlow):
     def GetJSONExtDistribution(self): return _pynetxpert.Transportation_GetJSONExtDistribution(self)
     def GetSolverJSONResult(self): return _pynetxpert.Transportation_GetSolverJSONResult(self)
     def UncompressRoute(self, *args): return _pynetxpert.Transportation_UncompressRoute(self, *args)
+    def SaveResults(self, *args): return _pynetxpert.Transportation_SaveResults(self, *args)
     def Solve(self): return _pynetxpert.Transportation_Solve(self)
 Transportation_swigregister = _pynetxpert.Transportation_swigregister
 Transportation_swigregister(Transportation)
@@ -1197,6 +1297,7 @@ class NetworkBuilder(_object):
     __swig_destroy__ = _pynetxpert.delete_NetworkBuilder
     __del__ = lambda self : None;
     def LoadData(self): return _pynetxpert.NetworkBuilder_LoadData(self)
+    def SaveResults(self, *args): return _pynetxpert.NetworkBuilder_SaveResults(self, *args)
     def GetBuiltNetwork(self): return _pynetxpert.NetworkBuilder_GetBuiltNetwork(self)
 NetworkBuilder_swigregister = _pynetxpert.NetworkBuilder_swigregister
 NetworkBuilder_swigregister(NetworkBuilder)

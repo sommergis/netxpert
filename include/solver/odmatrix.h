@@ -51,6 +51,10 @@ namespace netxpert {
             unordered_map<ODPair, double> GetODMatrix() const;
 
             double GetOptimum() const;
+
+            void SaveResults(const std::string& resultTableName,
+                 const netxpert::ColumnMap& cmap) const;
+
             vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
 
         private:
@@ -58,6 +62,7 @@ namespace netxpert {
             bool isDirected;
             int sptHeapCard;
             double optimum;
+            netxpert::Config NETXPERT_CNFG;
             vector<unsigned int> destinationNodes;
             vector<unsigned int> reachedDests;
             vector<unsigned int> originNodes;
