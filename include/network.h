@@ -15,6 +15,8 @@
 #include "geos/linearref/ExtractLineByLocation.h"
 #include "geos/linearref/LengthIndexOfPoint.h"
 #include "geos/linearref/LocationIndexOfLine.h"
+#include "geos/linearref/LocationIndexedLine.h"
+#include "geos/linearref/LengthLocationMap.h"
 #include "geos/io/WKTReader.h"
 #include "geos/opLinemerge.h"
 #include <cmath>
@@ -64,8 +66,10 @@ namespace netxpert
                                       double x, double y, double supply,
                                       int treshold, const netxpert::ColumnMap& cmap, bool withCapacity);
 
-            unsigned int AddStartNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
-            unsigned int AddEndNode(const NewNode& newNode, const int treshold, SQLite::Statement& closestArcQry, const bool withCapacity);
+            unsigned int AddStartNode(const NewNode& newNode, const int treshold,
+                                      SQLite::Statement& closestArcQry, const bool withCapacity);
+            unsigned int AddEndNode(const NewNode& newNode, const int treshold,
+                                    SQLite::Statement& closestArcQry, const bool withCapacity);
 
             std::vector< std::pair<unsigned int, std::string> > LoadStartNodes(const std::vector<NewNode>& newNodes, const int treshold,
                                                                 const std::string arcsTableName, const std::string geomColumnName,
@@ -75,9 +79,11 @@ namespace netxpert
                                                                 const ColumnMap& cmap, const bool withCapacity);
 
             /** Method for processing and saving a subset of original arcs as results (e.g. MST) */
-            void ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
-                                   const double capacity, const double flow, const std::string& arcIDs,
+            void ProcessResultArcs(/*const std::string& orig, const std::string& dest,  const double cost,
+                                   const double capacity, const double flow, */
+                                   const std::string& arcIDs,
                                    const std::string& resultTableName);
+
             /** For Testing purposes only */
             void ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
                                    const double capacity, const double flow,
@@ -91,13 +97,34 @@ namespace netxpert
                                    const std::string& resultTableName, netxpert::DBWriter& writer,
                                    SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                    );
-            /** Main method for processing and saving result arcs (preloading geometry into memory) */
-            void ProcessResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
+            /** Main method for processing and saving result arcs (preloading geometry into memory)
+                Solver: MCF, TPs
+                */
+            void ProcessMCFResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
                                         const double capacity, const double flow,
                                         const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
                                         const std::string& resultTableName, netxpert::DBWriter& writer,
                                         SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                         );
+            /** Main method for processing and saving result arcs (preloading geometry into memory)
+                Solver: SPT, ODM
+                */
+            void ProcessSPTResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
+                                        const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
+                                        const std::string& resultTableName, netxpert::DBWriter& writer,
+                                        SQLite::Statement& qry //can be null in case of ESRI FileGDB
+                                        );
+
+            /** Main method for processing and saving result arcs (preloading geometry into memory)
+                Solver: Isolines
+                */
+            void ProcessIsoResultArcsMem(const std::string& orig, const double cost,
+                                        const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
+                                        const std::string& resultTableName, netxpert::DBWriter& writer,
+                                        SQLite::Statement& qry, //can be null in case of ESRI FileGDB
+                                        const std::unordered_map<ExtNodeID, std::vector<double> > cutOffs
+                                        );
+
             void ConvertInputNetwork(bool autoClean);
 
             //Network Helpers
@@ -154,8 +181,6 @@ namespace netxpert
             vector<InternalArc> insertNewEndNode(const bool isDirected, netxpert::SplittedArc& splittedLine,
                                                  const std::string& extArcID, const std::string& extNodeID,
                                                  const geos::geom::Coordinate& endPoint);
-            double getRelativeValueFromGeomLength(const double attrValue, const geos::geom::MultiLineString& totalGeom,
-                                                    const geos::geom::LineString& segmentGeom);
             void renameNodes();
             void readNetworkFromTable(const bool autoClean, const bool oneWay);
             void processArc(const netxpert::InputArc& arc, const unsigned int internalStartNode,
@@ -163,8 +188,15 @@ namespace netxpert
             void processBarriers();
 
             std::shared_ptr<geos::geom::MultiLineString> splitLine(const geos::geom::Coordinate& coord,
-                                        const geos::geom::Geometry& lineGeom);
+                                                                   const geos::geom::Geometry& lineGeom);
 
+            std::unique_ptr<geos::geom::MultiLineString> cutLine(const geos::geom::Coordinate& startCoord,
+                                                            const geos::geom::Geometry& lineGeom,
+                                                            const double cutOff,
+                                                            double& cost //out
+                                                            );
+            double getRelativeValueFromGeomLength(const double attrValue, const geos::geom::MultiLineString& totalGeom,
+                                                    const geos::geom::LineString& segmentGeom);
             std::vector<geos::geom::Geometry*> processRouteParts(std::vector<netxpert::InternalArc>& routeNodeArcRep);
 
             netxpert::Config NETXPERT_CNFG;
@@ -174,10 +206,11 @@ namespace netxpert
             unsigned int getCurrentArcCount();
 
             /**
-            * For results of a subset of original arcs only (NETXPERT_CNFG.ResultDB == NETXPERT_CNFG.SQLiteDBPath)
+            * For results of a subset of original arcs only
             */
-            void saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
-                                const double flow, const std::string& arcIDs, const std::string& resultTableName);
+            void saveResults(const std::string& arcIDs, const std::string& resultTableName);
+
+
             /**
             * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
             */
@@ -198,10 +231,22 @@ namespace netxpert
                              const std::string& resultTableName, netxpert::DBWriter& writer,
                              SQLite::Statement& qry //only used when saved not to the netxpert db
                                         );
-            void saveResultsMem(const std::string orig, const std::string dest, const double cost, const double capacity,
+            //MCF, TP
+            void saveMCFResultsMem(const std::string orig, const std::string dest, const double cost, const double capacity,
                                 const double flow, const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
                                 const std::string& resultTableName, netxpert::DBWriter& writer,
                                 SQLite::Statement& qry  );
+            //SPT, ODM
+            void saveSPTResultsMem(const std::string orig, const std::string dest, const double cost,
+                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                const std::string& resultTableName, netxpert::DBWriter& writer,
+                                SQLite::Statement& qry  );
+            //Isolines
+            void saveIsoResultsMem(const std::string orig, const double cost,
+                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                const std::string& resultTableName, netxpert::DBWriter& writer,
+                                SQLite::Statement& qry,
+                                const std::unordered_map<ExtNodeID, std::vector<double> >& cutOffs);
             //MCF
             double calcTotalDemand ();
             double calcTotalSupply ();
@@ -233,7 +278,9 @@ namespace netxpert
             std::unordered_set<string> eliminatedArcs;
             //TODO: vector?
             std::list<ExternalArc> arcLoops;
+            //TODO: check internal arcs for duplicate arcs with different costs
             netxpert::Arcs internalArcData;
+
 
             //Network changes
             netxpert::Arcs oldArcs;

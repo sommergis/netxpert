@@ -39,6 +39,8 @@ namespace netxpert {
             SPT_LEM_2Heap(unsigned int nmx = 0 , unsigned int mmx = 0 , bool Drctd = true);
             SPT_LEM_2Heap (SPT_LEM_2Heap const &) {} //copy constrcutor
             virtual ~SPT_LEM_2Heap(); //deconstructor
+            //void ShortestPathTree(double maxCutOff); //for isolines
+
             /* MCFClass SPTree Interface */
             void ShortestPathTree();
             void LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
@@ -53,7 +55,7 @@ namespace netxpert {
             unsigned int* Predecessors( void );
             void GetArcPredecessors ( unsigned int *outArcPrd );
             void GetPredecessors( unsigned int *outPrd );
-            void GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn );
+
             ISPTreePtr create () const        // Virtual constructor (creation)
             {
                 return ISPTreePtr(new SPT_LEM_2Heap() );
@@ -63,7 +65,7 @@ namespace netxpert {
                 return ISPTreePtr(new SPT_LEM_2Heap (*this));
             }
             /* end of MCFClass SPTree Interface */
-
+            void GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn );
             void PrintResult();
 
         protected:

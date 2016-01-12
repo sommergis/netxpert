@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1448307291 source:/home/hahne/dev/netxpert/test/main.cpp
+1451772655 source:/home/hahne/dev/netxpert/test/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -15,7 +15,7 @@
 	"config.h"
 	"utils.h"
 
-1448655448 /home/hahne/dev/netxpert/include/config.h
+1450385972 /home/hahne/dev/netxpert/include/config.h
 	<map>
 	<vector>
 	<string>
@@ -150,7 +150,7 @@
 	<cereal/cereal.hpp>
 	<vector>
 
-1448295998 /home/hahne/dev/netxpert/include/fgdbwriter.h
+1451489604 /home/hahne/dev/netxpert/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -206,7 +206,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1448307687 /home/hahne/dev/netxpert/include/slitewriter.h
+1451488474 /home/hahne/dev/netxpert/include/slitewriter.h
 	"utils.h"
 	<string>
 	"dbwriter.h"
@@ -242,7 +242,7 @@
 1447145112 /home/hahne/dev/netxpert/libs/SQLiteCpp/Transaction.h
 	<SQLiteCpp/Exception.h>
 
-1448968642 /home/hahne/dev/netxpert/include/data.h
+1451482763 /home/hahne/dev/netxpert/include/data.h
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
 	"geos/geom/MultiLineString.h"
@@ -259,7 +259,7 @@
 
 1440100970 al
 
-1448973372 /home/hahne/dev/netxpert/include/network.h
+1451678552 /home/hahne/dev/netxpert/include/network.h
 	"utils.h"
 	"dbhelper.h"
 	"slitewriter.h"
@@ -274,6 +274,8 @@
 	"geos/linearref/ExtractLineByLocation.h"
 	"geos/linearref/LengthIndexOfPoint.h"
 	"geos/linearref/LocationIndexOfLine.h"
+	"geos/linearref/LocationIndexedLine.h"
+	"geos/linearref/LengthLocationMap.h"
 	"geos/io/WKTReader.h"
 	"geos/opLinemerge.h"
 	<cmath>
@@ -438,7 +440,7 @@
 	"MCFClass.h"
 	"isptree.h"
 
-1445630178 /home/hahne/dev/netxpert/include/core/sptlem.h
+1450902503 /home/hahne/dev/netxpert/include/core/sptlem.h
 	<string>
 	"lemon/smart_graph.h"
 	"lemon/dijkstra.h"
@@ -449,7 +451,7 @@
 	"lemon/fib_heap.h"
 	"isptree.h"
 
-1440339921 /home/hahne/dev/netxpert/include/solver/mstree.h
+1449581382 /home/hahne/dev/netxpert/include/solver/mstree.h
 	"isolver.h"
 	"imstree.h"
 	"mstlem.h"
@@ -487,7 +489,7 @@
 	<unistd.h>
 	<sys/stat.h>
 
-1449579962 /home/hahne/dev/netxpert/include/solver/mcflow.h
+1451770622 /home/hahne/dev/netxpert/include/solver/mcflow.h
 	"isolver.h"
 	"imcflow.h"
 	"MCFSimplex.h"
@@ -508,7 +510,7 @@
 	<limits.h>
 	<string.h>
 
-1449580787 /home/hahne/dev/netxpert/include/solver/transportation.h
+1451770756 /home/hahne/dev/netxpert/include/solver/transportation.h
 	"mcflow.h"
 	"odmatrix.h"
 
@@ -2031,43 +2033,46 @@
 
 1440845401 /home/hahne/dev/netxpert/include/core/imcflow.h
 
-1445278932 /home/hahne/dev/netxpert/include/simple/odmatrix_simple.h
+1450292029 /home/hahne/dev/netxpert/include/simple/odmatrix_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"odmatrix.h"
 
-1440878673 /home/hahne/dev/netxpert/include/simple/mstree_simple.h
+1450292009 /home/hahne/dev/netxpert/include/simple/mstree_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"mstree.h"
 
-1449128042 /home/hahne/dev/netxpert/include/simple/sptree_simple.h
+1450291971 /home/hahne/dev/netxpert/include/simple/sptree_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"sptree.h"
 
-1440878425 /home/hahne/dev/netxpert/include/simple/transp_simple.h
+1450292044 /home/hahne/dev/netxpert/include/simple/transp_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"transportation.h"
 
-1443881004 /home/hahne/dev/netxpert/include/simple/mcfp_simple.h
+1450291981 /home/hahne/dev/netxpert/include/simple/mcfp_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"mcflow.h"
 
-1448309286 /home/hahne/dev/netxpert/include/networkbuilder.h
+1449585063 /home/hahne/dev/netxpert/include/networkbuilder.h
 	"dbhelper.h"
+	"dbwriter.h"
+	"slitewriter.h"
+	"fgdbwriter.h"
 	<vector>
 	"geos/io/WKBReader.h"
 	"geos/io/WKBWriter.h"
@@ -2165,10 +2170,35 @@
 1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/geomgraph/GeometryGraph.inl
 	<geos/geomgraph/GeometryGraph.h>
 
-1448651050 /home/hahne/dev/netxpert/include/simple/netbuilder_simple.h
+1450292017 /home/hahne/dev/netxpert/include/simple/netbuilder_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"networkbuilder.h"
+
+1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/linearref/LocationIndexedLine.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/Lineal.h>
+	<geos/linearref/LinearLocation.h>
+	<geos/linearref/LocationIndexOfPoint.h>
+	<geos/linearref/LocationIndexOfLine.h>
+	<geos/util/IllegalArgumentException.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/linearref/LocationIndexOfPoint.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/util/IllegalArgumentException.h
+	<geos/export.h>
+	<string>
+	<geos/util/GEOSException.h>
+
+1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/linearref/LengthLocationMap.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
 

@@ -2943,72 +2943,79 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_difference_type swig_types[2]
 #define SWIGTYPE_p_first_type swig_types[3]
 #define SWIGTYPE_p_geos__geom__Coordinate swig_types[4]
-#define SWIGTYPE_p_netxpert__ColumnMap swig_types[5]
-#define SWIGTYPE_p_netxpert__Config swig_types[6]
-#define SWIGTYPE_p_netxpert__DBHELPER swig_types[7]
-#define SWIGTYPE_p_netxpert__ExtDistributionArc swig_types[8]
-#define SWIGTYPE_p_netxpert__ExtNodeSupply swig_types[9]
-#define SWIGTYPE_p_netxpert__ExtSPTreeArc swig_types[10]
-#define SWIGTYPE_p_netxpert__ExtTransportationData swig_types[11]
-#define SWIGTYPE_p_netxpert__ExternalArc swig_types[12]
-#define SWIGTYPE_p_netxpert__FlowCost swig_types[13]
-#define SWIGTYPE_p_netxpert__ISolver swig_types[14]
-#define SWIGTYPE_p_netxpert__InputArc swig_types[15]
-#define SWIGTYPE_p_netxpert__InputNode swig_types[16]
-#define SWIGTYPE_p_netxpert__IntNodeID swig_types[17]
-#define SWIGTYPE_p_netxpert__InternalArc swig_types[18]
-#define SWIGTYPE_p_netxpert__LOGGER swig_types[19]
-#define SWIGTYPE_p_netxpert__MinCostFlow swig_types[20]
-#define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[21]
-#define SWIGTYPE_p_netxpert__Network swig_types[22]
-#define SWIGTYPE_p_netxpert__NetworkBuilder swig_types[23]
-#define SWIGTYPE_p_netxpert__NetworkBuilderResultArc swig_types[24]
-#define SWIGTYPE_p_netxpert__NewNode swig_types[25]
-#define SWIGTYPE_p_netxpert__ODPair swig_types[26]
-#define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[27]
-#define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[28]
-#define SWIGTYPE_p_netxpert__Transportation swig_types[29]
-#define SWIGTYPE_p_netxpert__simple__MinCostFlow swig_types[30]
-#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[31]
-#define SWIGTYPE_p_netxpert__simple__NetworkBuilder swig_types[32]
-#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[33]
-#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[34]
-#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[35]
-#define SWIGTYPE_p_p_PyObject swig_types[36]
-#define SWIGTYPE_p_second_type swig_types[37]
-#define SWIGTYPE_p_size_type swig_types[38]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[39]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[40]
-#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[41]
-#define SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t swig_types[42]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[43]
-#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[44]
-#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[45]
-#define SWIGTYPE_p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t swig_types[46]
-#define SWIGTYPE_p_std__allocatorT_unsigned_int_t swig_types[47]
-#define SWIGTYPE_p_std__invalid_argument swig_types[48]
-#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[49]
-#define SWIGTYPE_p_std__shared_ptrT_geos__geom__Geometry_t swig_types[50]
-#define SWIGTYPE_p_std__string swig_types[51]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[52]
-#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[53]
-#define SWIGTYPE_p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t swig_types[54]
-#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[55]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[56]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[57]
-#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[58]
-#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[59]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[60]
-#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[61]
-#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[62]
-#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[63]
-#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[64]
-#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[65]
-#define SWIGTYPE_p_string swig_types[66]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[67]
-#define SWIGTYPE_p_value_type swig_types[68]
-static swig_type_info *swig_types[70];
-static swig_module_info swig_module = {swig_types, 69, 0, 0, 0, 0};
+#define SWIGTYPE_p_key_type swig_types[5]
+#define SWIGTYPE_p_mapped_type swig_types[6]
+#define SWIGTYPE_p_netxpert__ColumnMap swig_types[7]
+#define SWIGTYPE_p_netxpert__Config swig_types[8]
+#define SWIGTYPE_p_netxpert__DBHELPER swig_types[9]
+#define SWIGTYPE_p_netxpert__ExtDistributionArc swig_types[10]
+#define SWIGTYPE_p_netxpert__ExtNodeSupply swig_types[11]
+#define SWIGTYPE_p_netxpert__ExtSPTreeArc swig_types[12]
+#define SWIGTYPE_p_netxpert__ExtTransportationData swig_types[13]
+#define SWIGTYPE_p_netxpert__ExternalArc swig_types[14]
+#define SWIGTYPE_p_netxpert__FlowCost swig_types[15]
+#define SWIGTYPE_p_netxpert__ISolver swig_types[16]
+#define SWIGTYPE_p_netxpert__InputArc swig_types[17]
+#define SWIGTYPE_p_netxpert__InputNode swig_types[18]
+#define SWIGTYPE_p_netxpert__IntNodeID swig_types[19]
+#define SWIGTYPE_p_netxpert__InternalArc swig_types[20]
+#define SWIGTYPE_p_netxpert__Isolines swig_types[21]
+#define SWIGTYPE_p_netxpert__LOGGER swig_types[22]
+#define SWIGTYPE_p_netxpert__MinCostFlow swig_types[23]
+#define SWIGTYPE_p_netxpert__MinimumSpanningTree swig_types[24]
+#define SWIGTYPE_p_netxpert__Network swig_types[25]
+#define SWIGTYPE_p_netxpert__NetworkBuilder swig_types[26]
+#define SWIGTYPE_p_netxpert__NetworkBuilderResultArc swig_types[27]
+#define SWIGTYPE_p_netxpert__NewNode swig_types[28]
+#define SWIGTYPE_p_netxpert__ODPair swig_types[29]
+#define SWIGTYPE_p_netxpert__OriginDestinationMatrix swig_types[30]
+#define SWIGTYPE_p_netxpert__ShortestPathTree swig_types[31]
+#define SWIGTYPE_p_netxpert__Transportation swig_types[32]
+#define SWIGTYPE_p_netxpert__simple__MinCostFlow swig_types[33]
+#define SWIGTYPE_p_netxpert__simple__MinimumSpanningTree swig_types[34]
+#define SWIGTYPE_p_netxpert__simple__NetworkBuilder swig_types[35]
+#define SWIGTYPE_p_netxpert__simple__OriginDestinationMatrix swig_types[36]
+#define SWIGTYPE_p_netxpert__simple__ShortestPathTree swig_types[37]
+#define SWIGTYPE_p_netxpert__simple__Transportation swig_types[38]
+#define SWIGTYPE_p_p_PyObject swig_types[39]
+#define SWIGTYPE_p_second_type swig_types[40]
+#define SWIGTYPE_p_size_type swig_types[41]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtDistributionArc_t swig_types[42]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtNodeSupply_t swig_types[43]
+#define SWIGTYPE_p_std__allocatorT_netxpert__ExtSPTreeArc_t swig_types[44]
+#define SWIGTYPE_p_std__allocatorT_netxpert__FlowCost_t swig_types[45]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputArc_t swig_types[46]
+#define SWIGTYPE_p_std__allocatorT_netxpert__InputNode_t swig_types[47]
+#define SWIGTYPE_p_std__allocatorT_netxpert__NewNode_t swig_types[48]
+#define SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t swig_types[49]
+#define SWIGTYPE_p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t swig_types[50]
+#define SWIGTYPE_p_std__allocatorT_unsigned_int_t swig_types[51]
+#define SWIGTYPE_p_std__invalid_argument swig_types[52]
+#define SWIGTYPE_p_std__lessT_std__string_t swig_types[53]
+#define SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t swig_types[54]
+#define SWIGTYPE_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t swig_types[55]
+#define SWIGTYPE_p_std__shared_ptrT_geos__geom__Geometry_t swig_types[56]
+#define SWIGTYPE_p_std__string swig_types[57]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_double_t swig_types[58]
+#define SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t swig_types[59]
+#define SWIGTYPE_p_std__unordered_mapT_unsigned_int_netxpert__NetworkBuilderResultArc_t swig_types[60]
+#define SWIGTYPE_p_std__vectorT__Tp__Alloc_t swig_types[61]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtDistributionArc_std__allocatorT_netxpert__ExtDistributionArc_t_t swig_types[62]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtNodeSupply_std__allocatorT_netxpert__ExtNodeSupply_t_t swig_types[63]
+#define SWIGTYPE_p_std__vectorT_netxpert__ExtSPTreeArc_std__allocatorT_netxpert__ExtSPTreeArc_t_t swig_types[64]
+#define SWIGTYPE_p_std__vectorT_netxpert__FlowCost_std__allocatorT_netxpert__FlowCost_t_t swig_types[65]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputArc_std__allocatorT_netxpert__InputArc_t_t swig_types[66]
+#define SWIGTYPE_p_std__vectorT_netxpert__InputNode_std__allocatorT_netxpert__InputNode_t_t swig_types[67]
+#define SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t swig_types[68]
+#define SWIGTYPE_p_std__vectorT_netxpert__NewNode_std__allocatorT_netxpert__NewNode_t_t swig_types[69]
+#define SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t swig_types[70]
+#define SWIGTYPE_p_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t swig_types[71]
+#define SWIGTYPE_p_string swig_types[72]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[73]
+#define SWIGTYPE_p_value_type swig_types[74]
+#define SWIGTYPE_p_vectorT_unsigned_int_t swig_types[75]
+static swig_type_info *swig_types[77];
+static swig_module_info swig_module = {swig_types, 76, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3503,6 +3510,7 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include "mcflow.h"
 #include "transportation.h"
 #include "networkbuilder.h"
+#include "isolines.h"
 
 /* Simple Solver Interface */
 
@@ -5937,6 +5945,300 @@ SWIGINTERN void std_vector_Sl_std_pair_Sl_unsigned_SS_int_Sc_std_string_Sg__Sg__
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
+
+namespace swig {
+  template <> struct traits<double > {
+    typedef value_category category;
+    static const char* type_name() { return"double"; }
+  };  
+  template <>  struct traits_asval<double > {   
+    typedef double value_type;
+    static int asval(PyObject *obj, value_type *val) { 
+      return SWIG_AsVal_double (obj, val);
+    }
+  };
+  template <>  struct traits_from<double > {
+    typedef double value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_double  (val);
+    }
+  };
+}
+
+
+      namespace swig {
+	template <>  struct traits<std::vector<double, std::allocator< double > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "double" "," "std::allocator< double >" " >";
+	  }
+	};
+      }
+    
+
+      namespace swig {
+	template <>  struct traits<std::pair< std::string, std::vector< double,std::allocator< double > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::pair<" "std::string" "," "std::vector< double,std::allocator< double > >" " >";
+	  }
+	};
+      }
+    
+
+  namespace swig {
+    template <class ValueType>
+    struct from_key_oper 
+    {
+      typedef const ValueType& argument_type;
+      typedef  PyObject *result_type;
+      result_type operator()(argument_type v) const
+      {
+	return swig::from(v.first);
+      }
+    };
+
+    template <class ValueType>
+    struct from_value_oper 
+    {
+      typedef const ValueType& argument_type;
+      typedef  PyObject *result_type;
+      result_type operator()(argument_type v) const
+      {
+	return swig::from(v.second);
+      }
+    };
+
+    template<class OutIterator, class FromOper, class ValueType = typename OutIterator::value_type>
+    struct SwigPyMapIterator_T : SwigPyIteratorClosed_T<OutIterator, ValueType, FromOper>
+    {
+      SwigPyMapIterator_T(OutIterator curr, OutIterator first, OutIterator last, PyObject *seq)
+	: SwigPyIteratorClosed_T<OutIterator,ValueType,FromOper>(curr, first, last, seq)
+      {
+      }
+    };
+
+
+    template<class OutIterator,
+	     class FromOper = from_key_oper<typename OutIterator::value_type> >
+    struct SwigPyMapKeyIterator_T : SwigPyMapIterator_T<OutIterator, FromOper>
+    {
+      SwigPyMapKeyIterator_T(OutIterator curr, OutIterator first, OutIterator last, PyObject *seq)
+	: SwigPyMapIterator_T<OutIterator, FromOper>(curr, first, last, seq)
+      {
+      }
+    };
+
+    template<typename OutIter>
+    inline SwigPyIterator*
+    make_output_key_iterator(const OutIter& current, const OutIter& begin, const OutIter& end, PyObject *seq = 0)
+    {
+      return new SwigPyMapKeyIterator_T<OutIter>(current, begin, end, seq);
+    }
+
+    template<class OutIterator,
+	     class FromOper = from_value_oper<typename OutIterator::value_type> >
+    struct SwigPyMapValueITerator_T : SwigPyMapIterator_T<OutIterator, FromOper>
+    {
+      SwigPyMapValueITerator_T(OutIterator curr, OutIterator first, OutIterator last, PyObject *seq)
+	: SwigPyMapIterator_T<OutIterator, FromOper>(curr, first, last, seq)
+      {
+      }
+    };
+    
+
+    template<typename OutIter>
+    inline SwigPyIterator*
+    make_output_value_iterator(const OutIter& current, const OutIter& begin, const OutIter& end, PyObject *seq = 0)
+    {
+      return new SwigPyMapValueITerator_T<OutIter>(current, begin, end, seq);
+    }
+  }
+
+
+  namespace swig {
+    template <class SwigPySeq, class K, class T, class Compare, class Alloc >
+    inline void
+    assign(const SwigPySeq& swigpyseq, std::map<K,T,Compare,Alloc > *map) {
+      typedef typename std::map<K,T,Compare,Alloc >::value_type value_type;
+      typename SwigPySeq::const_iterator it = swigpyseq.begin();
+      for (;it != swigpyseq.end(); ++it) {
+	map->insert(value_type(it->first, it->second));
+      }
+    }
+
+    template <class K, class T, class Compare, class Alloc>
+    struct traits_asptr<std::map<K,T,Compare,Alloc > >  {
+      typedef std::map<K,T,Compare,Alloc > map_type;
+      static int asptr(PyObject *obj, map_type **val) {
+	int res = SWIG_ERROR;
+	SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+	if (PyDict_Check(obj)) {
+	  SwigVar_PyObject items = PyObject_CallMethod(obj,(char *)"items",NULL);
+#if PY_VERSION_HEX >= 0x03000000
+          /* In Python 3.x the ".items()" method returns a dict_items object */
+          items = PySequence_Fast(items, ".items() didn't return a sequence!");
+#endif
+	  res = traits_asptr_stdseq<map_type, std::pair<K, T> >::asptr(items, val);
+	} else {
+	  map_type *p;
+	  res = SWIG_ConvertPtr(obj,(void**)&p,swig::type_info<map_type>(),0);
+	  if (SWIG_IsOK(res) && val)  *val = p;
+	}
+	SWIG_PYTHON_THREAD_END_BLOCK;
+	return res;
+      }      
+    };
+      
+    template <class K, class T, class Compare, class Alloc >
+    struct traits_from<std::map<K,T,Compare,Alloc > >  {
+      typedef std::map<K,T,Compare,Alloc > map_type;
+      typedef typename map_type::const_iterator const_iterator;
+      typedef typename map_type::size_type size_type;
+
+      static PyObject *asdict(const map_type& map) {
+	SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+	size_type size = map.size();
+	int pysize = (size <= (size_type) INT_MAX) ? (int) size : -1;
+	if (pysize < 0) {
+	  PyErr_SetString(PyExc_OverflowError,
+			  "map size not valid in python");
+	  SWIG_PYTHON_THREAD_END_BLOCK;
+	  return NULL;
+	}
+	PyObject *obj = PyDict_New();
+	for (const_iterator i= map.begin(); i!= map.end(); ++i) {
+	  swig::SwigVar_PyObject key = swig::from(i->first);
+	  swig::SwigVar_PyObject val = swig::from(i->second);
+	  PyDict_SetItem(obj, key, val);
+	}
+	SWIG_PYTHON_THREAD_END_BLOCK;
+	return obj;
+      }
+                
+      static PyObject *from(const map_type& map) {
+	swig_type_info *desc = swig::type_info<map_type>();
+	if (desc && desc->clientdata) {
+	  return SWIG_InternalNewPointerObj(new map_type(map), desc, SWIG_POINTER_OWN);
+	} else {
+	  return asdict(map);
+	}
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::map<std::string, std::vector< double,std::allocator< double > >, std::less< std::string >, std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::map<" "std::string" "," "std::vector< double,std::allocator< double > >" "," "std::less< std::string >" "," "std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > >" " >";
+	  }
+	};
+      }
+    
+SWIGINTERN swig::SwigPyIterator *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__iterator(std::map< std::string,std::vector< double > > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN bool std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____nonzero__(std::map< std::string,std::vector< double > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN bool std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____bool__(std::map< std::string,std::vector< double > > const *self){
+      return !(self->empty());
+    }
+SWIGINTERN std::map< std::string,std::vector< double > >::size_type std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____len__(std::map< std::string,std::vector< double > > const *self){
+      return self->size();
+    }
+SWIGINTERN std::map< std::string,std::vector< double > >::mapped_type const &std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____getitem__(std::map< std::string,std::vector< double > > *self,std::map< std::string,std::vector< double > >::key_type const &key){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::const_iterator i = self->find(key);
+      if (i != self->end())
+	return i->second;
+      else
+	throw std::out_of_range("key not found");
+    }
+SWIGINTERN void std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____delitem__(std::map< std::string,std::vector< double > > *self,std::map< std::string,std::vector< double > >::key_type const &key){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::iterator i = self->find(key);
+      if (i != self->end())
+	self->erase(i);
+      else
+	throw std::out_of_range("key not found");
+    }
+SWIGINTERN bool std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__has_key(std::map< std::string,std::vector< double > > const *self,std::map< std::string,std::vector< double > >::key_type const &key){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::const_iterator i = self->find(key);
+      return i != self->end();
+    }
+SWIGINTERN PyObject *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__keys(std::map< std::string,std::vector< double > > *self){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type size = self->size();
+      int pysize = (size <= (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type) INT_MAX) ? (int) size : -1;
+      SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+      if (pysize < 0) {
+	PyErr_SetString(PyExc_OverflowError,
+			"map size not valid in python");
+	SWIG_PYTHON_THREAD_END_BLOCK;
+	return NULL;
+      }
+      PyObject* keyList = PyList_New(pysize);
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::const_iterator i = self->begin();
+      for (int j = 0; j < pysize; ++i, ++j) {
+	PyList_SET_ITEM(keyList, j, swig::from(i->first));
+      }
+      SWIG_PYTHON_THREAD_END_BLOCK;
+      return keyList;
+    }
+SWIGINTERN PyObject *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__values(std::map< std::string,std::vector< double > > *self){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type size = self->size();
+      int pysize = (size <= (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type) INT_MAX) ? (int) size : -1;
+      SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+      if (pysize < 0) {
+	PyErr_SetString(PyExc_OverflowError,
+			"map size not valid in python");
+	SWIG_PYTHON_THREAD_END_BLOCK;
+	return NULL;
+      }
+      PyObject* valList = PyList_New(pysize);
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::const_iterator i = self->begin();
+      for (int j = 0; j < pysize; ++i, ++j) {
+	PyList_SET_ITEM(valList, j, swig::from(i->second));
+      }
+      SWIG_PYTHON_THREAD_END_BLOCK;
+      return valList;
+    }
+SWIGINTERN PyObject *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__items(std::map< std::string,std::vector< double > > *self){
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type size = self->size();
+      int pysize = (size <= (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::size_type) INT_MAX) ? (int) size : -1;
+      SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+      if (pysize < 0) {
+	PyErr_SetString(PyExc_OverflowError,
+			"map size not valid in python");
+	SWIG_PYTHON_THREAD_END_BLOCK;
+	return NULL;
+      }    
+      PyObject* itemList = PyList_New(pysize);
+      std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >::const_iterator i = self->begin();
+      for (int j = 0; j < pysize; ++i, ++j) {
+	PyList_SET_ITEM(itemList, j, swig::from(*i));
+      }
+      SWIG_PYTHON_THREAD_END_BLOCK;
+      return itemList;
+    }
+SWIGINTERN bool std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____contains__(std::map< std::string,std::vector< double > > *self,std::map< std::string,std::vector< double > >::key_type const &key){
+      return self->find(key) != self->end();
+    }
+SWIGINTERN swig::SwigPyIterator *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__key_iterator(std::map< std::string,std::vector< double > > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_key_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN swig::SwigPyIterator *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__value_iterator(std::map< std::string,std::vector< double > > *self,PyObject **PYTHON_SELF){
+      return swig::make_output_value_iterator(self->begin(), self->begin(), self->end(), *PYTHON_SELF);
+    }
+SWIGINTERN void std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____setitem____SWIG_0(std::map< std::string,std::vector< double > > *self,std::map< std::string,std::vector< double > >::key_type const &key){
+      self->erase(key);
+    }
+SWIGINTERN void std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____setitem____SWIG_1(std::map< std::string,std::vector< double > > *self,std::map< std::string,std::vector< double > >::key_type const &key,std::map< std::string,std::vector< double > >::mapped_type const &x){
+      (*self)[key] = x;
+    }
+SWIGINTERN PyObject *std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__asdict(std::map< std::string,std::vector< double > > *self){
+      return swig::traits_from< std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > >::asdict(*self);
+    }
 SWIGINTERN char *netxpert_InputNode___str__(netxpert::InputNode *self){
        static char tmp [1024];
        sprintf(tmp,"InputNode('%s',%g)", self->extNodeID.c_str(), self->nodeSupply);
@@ -25608,6 +25910,1374 @@ SWIGINTERN PyObject *ODNodes_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_CutOffs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::less< std::string > *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_CutOffs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_std__lessT_std__string_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CutOffs" "', argument " "1"" of type '" "std::less< std::string > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CutOffs" "', argument " "1"" of type '" "std::less< std::string > const &""'"); 
+  }
+  arg1 = reinterpret_cast< std::less< std::string > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::map< std::string,std::vector< double > > *)new std::map< std::string,std::vector< double > >((std::less< std::string > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_iterator" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___nonzero__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs___nonzero__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___nonzero__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____nonzero__((std::map< std::string,std::vector< double > > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___bool__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs___bool__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___bool__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____bool__((std::map< std::string,std::vector< double > > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___len__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs___len__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___len__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____len__((std::map< std::string,std::vector< double > > const *)arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___getitem__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::mapped_type *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs___getitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___getitem__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs___getitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___getitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      result = (std::map< std::string,std::vector< double > >::mapped_type *) &std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____getitem__(arg1,(std::string const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = swig::from(static_cast< std::vector<double,std::allocator< double > > >(*result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___delitem__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs___delitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___delitem__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs___delitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___delitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____delitem__(arg1,(std::string const &)*arg2);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_has_key(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_has_key",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_has_key" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_has_key" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_has_key" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__has_key((std::map< std::string,std::vector< double > > const *)arg1,(std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_keys(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_keys",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_keys" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PyObject *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__keys(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = result;
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_values(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_values",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_values" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PyObject *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__values(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = result;
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_items(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_items",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_items" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PyObject *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__items(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = result;
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___contains__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs___contains__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___contains__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs___contains__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___contains__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____contains__(arg1,(std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_key_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_key_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_key_iterator" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__key_iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_value_iterator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  PyObject **arg2 = (PyObject **) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  swig::SwigPyIterator *result = 0 ;
+  
+  arg2 = &obj0;
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_value_iterator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_value_iterator" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (swig::SwigPyIterator *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__value_iterator(arg1,arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_swig__SwigPyIterator, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___setitem____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs___setitem__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___setitem__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs___setitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___setitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____setitem____SWIG_0(arg1,(std::string const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___setitem____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  std::map< std::string,std::vector< double > >::mapped_type *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CutOffs___setitem__",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs___setitem__" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs___setitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___setitem__" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::vector<double,std::allocator< double > > *ptr = (std::vector<double,std::allocator< double > > *)0;
+    res3 = swig::asptr(obj2, &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CutOffs___setitem__" "', argument " "3"" of type '" "std::map< std::string,std::vector< double > >::mapped_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs___setitem__" "', argument " "3"" of type '" "std::map< std::string,std::vector< double > >::mapped_type const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  try {
+    {
+      SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+      std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg____setitem____SWIG_1(arg1,(std::string const &)*arg2,(std::vector< double,std::allocator< double > > const &)*arg3);
+      SWIG_PYTHON_THREAD_END_ALLOW;
+    }
+  }
+  catch(std::out_of_range &_e) {
+    SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
+  }
+  
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs___setitem__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_CutOffs___setitem____SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = swig::asptr(argv[2], (std::vector<double,std::allocator< double > >**)(0));
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_CutOffs___setitem____SWIG_1(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CutOffs___setitem__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::map< std::string,std::vector< double > >::__setitem__(std::map< std::string,std::vector< double > >::key_type const &)\n"
+    "    std::map< std::string,std::vector< double > >::__setitem__(std::map< std::string,std::vector< double > >::key_type const &,std::map< std::string,std::vector< double > >::mapped_type const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_asdict(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_asdict",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_asdict" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (PyObject *)std_map_Sl_std_string_Sc_std_vector_Sl_double_Sg__Sg__asdict(arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = result;
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CutOffs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_CutOffs")) SWIG_fail;
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::map< std::string,std::vector< double > > *)new std::map< std::string,std::vector< double > >();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CutOffs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double,std::allocator< double > > > *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > > *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_CutOffs",&obj0)) SWIG_fail;
+  {
+    std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > *ptr = (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > *)0;
+    res1 = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_CutOffs" "', argument " "1"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_CutOffs" "', argument " "1"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (std::map< std::string,std::vector< double > > *)new std::map< std::string,std::vector< double > >((std::map< std::string,std::vector< double,std::allocator< double > > > const &)*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_CutOffs(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[2];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 1) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_CutOffs__SWIG_1(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_std__lessT_std__string_t, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_CutOffs__SWIG_0(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_CutOffs__SWIG_2(self, args);
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_CutOffs'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::map< std::string,std::vector< double > >::map(std::less< std::string > const &)\n"
+    "    std::map< std::string,std::vector< double > >::map()\n"
+    "    std::map< std::string,std::vector< double > >::map(std::map< std::string,std::vector< double,std::allocator< double > > > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_empty(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_empty",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_empty" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (bool)((std::map< std::string,std::vector< double > > const *)arg1)->empty();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_size",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_size" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::map< std::string,std::vector< double > > const *)arg1)->size();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_clear(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_clear",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_clear" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->clear();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_swap(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double,std::allocator< double > > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_swap",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_swap" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_swap" "', argument " "2"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_swap" "', argument " "2"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::map< std::string,std::vector< double,std::allocator< double > > > * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->swap(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_get_allocator(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  SwigValueWrapper< std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_get_allocator",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_get_allocator" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::map< std::string,std::vector< double > > const *)arg1)->get_allocator();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new std::map< std::string,std::vector< double > >::allocator_type(static_cast< const std::map< std::string,std::vector< double > >::allocator_type& >(result))), SWIGTYPE_p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_begin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_begin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_begin" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->begin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_end(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_end",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_end" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->end();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_rbegin(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_rbegin",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_rbegin" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rbegin();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_rend(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< std::string,std::vector< double > >::reverse_iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:CutOffs_rend",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_rend" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->rend();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::reverse_iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_erase__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_erase" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->erase((std::map< std::string,std::vector< double > >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::size_type result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_count",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_count" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > const *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_count" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_count" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((std::map< std::string,std::vector< double > > const *)arg1)->count((std::map< std::string,std::vector< double > >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_size_t(static_cast< size_t >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_erase__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::iterator arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_erase",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_erase" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->erase(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_erase__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::iterator arg2 ;
+  std::map< std::string,std::vector< double > >::iterator arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  swig::SwigPyIterator *iter2 = 0 ;
+  int res2 ;
+  swig::SwigPyIterator *iter3 = 0 ;
+  int res3 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:CutOffs_erase",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_erase" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, SWIG_as_voidptrptr(&iter2), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res2) || !iter2) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter2);
+    if (iter_t) {
+      arg2 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+    }
+  }
+  res3 = SWIG_ConvertPtr(obj2, SWIG_as_voidptrptr(&iter3), swig::SwigPyIterator::descriptor(), 0);
+  if (!SWIG_IsOK(res3) || !iter3) {
+    SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "3"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+  } else {
+    swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *iter_t = dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter3);
+    if (iter_t) {
+      arg3 = iter_t->get_current();
+    } else {
+      SWIG_exception_fail(SWIG_ArgError(SWIG_TypeError), "in method '" "CutOffs_erase" "', argument " "3"" of type '" "std::map< std::string,std::vector< double > >::iterator""'");
+    }
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->erase(arg2,arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_erase(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[4];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 3) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter) != 0));
+      if (_v) {
+        return _wrap_CutOffs_erase__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_CutOffs_erase__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      swig::SwigPyIterator *iter = 0;
+      int res = SWIG_ConvertPtr(argv[1], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+      _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter) != 0));
+      if (_v) {
+        swig::SwigPyIterator *iter = 0;
+        int res = SWIG_ConvertPtr(argv[2], SWIG_as_voidptrptr(&iter), swig::SwigPyIterator::descriptor(), 0);
+        _v = (SWIG_IsOK(res) && iter && (dynamic_cast<swig::SwigPyIterator_T<std::map< std::string,std::vector< double > >::iterator > *>(iter) != 0));
+        if (_v) {
+          return _wrap_CutOffs_erase__SWIG_2(self, args);
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'CutOffs_erase'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    std::map< std::string,std::vector< double > >::erase(std::map< std::string,std::vector< double > >::key_type const &)\n"
+    "    std::map< std::string,std::vector< double > >::erase(std::map< std::string,std::vector< double > >::iterator)\n"
+    "    std::map< std::string,std::vector< double > >::erase(std::map< std::string,std::vector< double > >::iterator,std::map< std::string,std::vector< double > >::iterator)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_find(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_find",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_find" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_find" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_find" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->find((std::map< std::string,std::vector< double > >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_lower_bound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_lower_bound",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_lower_bound" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_lower_bound" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_lower_bound" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->lower_bound((std::map< std::string,std::vector< double > >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_CutOffs_upper_bound(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  std::map< std::string,std::vector< double > >::key_type *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  std::map< std::string,std::vector< double > >::iterator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:CutOffs_upper_bound",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CutOffs_upper_bound" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CutOffs_upper_bound" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CutOffs_upper_bound" "', argument " "2"" of type '" "std::map< std::string,std::vector< double > >::key_type const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->upper_bound((std::map< std::string,std::vector< double > >::key_type const &)*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(swig::make_output_iterator(static_cast< const std::map< std::string,std::vector< double > >::iterator & >(result)),
+    swig::SwigPyIterator::descriptor(),SWIG_POINTER_OWN);
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_CutOffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  std::map< std::string,std::vector< double > > *arg1 = (std::map< std::string,std::vector< double > > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_CutOffs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_CutOffs" "', argument " "1"" of type '" "std::map< std::string,std::vector< double > > *""'"); 
+  }
+  arg1 = reinterpret_cast< std::map< std::string,std::vector< double > > * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *CutOffs_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_Version(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   std::string result;
@@ -31810,7 +33480,7 @@ SWIGINTERN PyObject *Config_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObjec
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_Network(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Network__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::InputArcs arg1 ;
   netxpert::ColumnMap arg2 ;
@@ -31864,6 +33534,132 @@ SWIGINTERN PyObject *_wrap_new_Network(PyObject *SWIGUNUSEDPARM(self), PyObject 
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Network__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::InputArcs arg1 ;
+  netxpert::InputNodes arg2 ;
+  netxpert::ColumnMap arg3 ;
+  netxpert::Config *arg4 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  netxpert::Network *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:new_Network",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  {
+    std::vector<netxpert::InputArc,std::allocator< netxpert::InputArc > > *ptr = (std::vector<netxpert::InputArc,std::allocator< netxpert::InputArc > > *)0;
+    int res = swig::asptr(obj0, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "1"" of type '" "netxpert::InputArcs""'"); 
+    }
+    arg1 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    std::vector<netxpert::InputNode,std::allocator< netxpert::InputNode > > *ptr = (std::vector<netxpert::InputNode,std::allocator< netxpert::InputNode > > *)0;
+    int res = swig::asptr(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "new_Network" "', argument " "2"" of type '" "netxpert::InputNodes""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::ColumnMap""'"); 
+    }  
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "3"" of type '" "netxpert::ColumnMap""'");
+    } else {
+      netxpert::ColumnMap * temp = reinterpret_cast< netxpert::ColumnMap * >(argp3);
+      arg3 = *temp;
+      if (SWIG_IsNewObj(res3)) delete temp;
+    }
+  }
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_netxpert__Config,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Network" "', argument " "4"" of type '" "netxpert::Config &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Network" "', argument " "4"" of type '" "netxpert::Config &""'"); 
+  }
+  arg4 = reinterpret_cast< netxpert::Config * >(argp4);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::Network *)new netxpert::Network(arg1,arg2,arg3,*arg4);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Network, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Network(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 3) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_netxpert__ColumnMap, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_netxpert__Config, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          return _wrap_new_Network__SWIG_0(self, args);
+        }
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    int res = swig::asptr(argv[0], (std::vector<netxpert::InputArc,std::allocator< netxpert::InputArc > >**)(0));
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = swig::asptr(argv[1], (std::vector<netxpert::InputNode,std::allocator< netxpert::InputNode > >**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_netxpert__ColumnMap, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_netxpert__Config, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_new_Network__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Network'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::Network::Network(netxpert::InputArcs,netxpert::ColumnMap,netxpert::Config &)\n"
+    "    netxpert::Network::Network(netxpert::InputArcs,netxpert::InputNodes,netxpert::ColumnMap,netxpert::Config &)\n");
+  return 0;
 }
 
 
@@ -32341,6 +34137,31 @@ SWIGINTERN PyObject *_wrap_Network_GetOriginalStartOrEndNodeID(PyObject *SWIGUNU
     SWIG_PYTHON_THREAD_END_ALLOW;
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Network_Reset(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Network *arg1 = (netxpert::Network *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Network_Reset",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Network, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Network_Reset" "', argument " "1"" of type '" "netxpert::Network *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Network * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Reset();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -34570,6 +36391,645 @@ SWIGINTERN PyObject *ShortestPathTree_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_new_Isolines(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Config *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::Isolines *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Isolines",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_netxpert__Config,  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Isolines" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Isolines" "', argument " "1"" of type '" "netxpert::Config &""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Config * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::Isolines *)new netxpert::Isolines(*arg1);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_netxpert__Isolines, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Isolines(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Isolines",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Isolines" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    delete arg1;
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_Solve" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Isolines_Solve" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_Solve" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Isolines_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__Isolines, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Isolines_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__Isolines, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_AsPtr_std_string(argv[1], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Isolines_Solve__SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Isolines_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::Isolines::Solve(std::string)\n"
+    "    netxpert::Isolines::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::SPTAlgorithm result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetAlgorithm",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetAlgorithm" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::SPTAlgorithm)((netxpert::Isolines const *)arg1)->GetAlgorithm();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SetAlgorithm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  netxpert::SPTAlgorithm arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_SetAlgorithm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SetAlgorithm" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Isolines_SetAlgorithm" "', argument " "2"" of type '" "netxpert::SPTAlgorithm""'");
+  } 
+  arg2 = static_cast< netxpert::SPTAlgorithm >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetAlgorithm(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetSPTHeapCard",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetSPTHeapCard" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (int)((netxpert::Isolines const *)arg1)->GetSPTHeapCard();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SetSPTHeapCard(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_SetSPTHeapCard",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SetSPTHeapCard" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Isolines_SetSPTHeapCard" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetSPTHeapCard(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  netxpert::GEOMETRY_HANDLING result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetGeometryHandling",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetGeometryHandling" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (netxpert::GEOMETRY_HANDLING)((netxpert::Isolines const *)arg1)->GetGeometryHandling();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SetGeometryHandling(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  netxpert::GEOMETRY_HANDLING arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_SetGeometryHandling",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SetGeometryHandling" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Isolines_SetGeometryHandling" "', argument " "2"" of type '" "netxpert::GEOMETRY_HANDLING""'");
+  } 
+  arg2 = static_cast< netxpert::GEOMETRY_HANDLING >(val2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetGeometryHandling(arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetOrigins",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetOrigins" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Isolines const *)arg1)->GetOrigins();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = swig::from(static_cast< std::vector<std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_SetOrigins",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SetOrigins" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__vectorT_std__pairT_unsigned_int_std__string_t_std__allocatorT_std__pairT_unsigned_int_std__string_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Isolines_SetOrigins" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_SetOrigins" "', argument " "2"" of type '" "std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< std::pair< unsigned int,std::string >,std::allocator< std::pair< unsigned int,std::string > > > * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetOrigins(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetCutOffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::map< netxpert::ExtNodeID,std::vector< double,std::allocator< double > >,std::less< netxpert::ExtNodeID >,std::allocator< std::pair< netxpert::ExtNodeID const,std::vector< double,std::allocator< double > > > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetCutOffs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetCutOffs" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (arg1)->GetCutOffs();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = swig::from(static_cast< std::map<std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SetCutOffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  std::map< std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Isolines_SetCutOffs",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SetCutOffs" "', argument " "1"" of type '" "netxpert::Isolines *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Isolines_SetCutOffs" "', argument " "2"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_SetCutOffs" "', argument " "2"" of type '" "std::map< std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > &""'"); 
+  }
+  arg2 = reinterpret_cast< std::map< std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->SetCutOffs(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetOptimum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetOptimum",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetOptimum" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = (double)((netxpert::Isolines const *)arg1)->GetOptimum();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_SaveResults(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  std::string *arg2 = 0 ;
+  netxpert::ColumnMap *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Isolines_SaveResults",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_SaveResults" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(obj1, &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Isolines_SaveResults" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_SaveResults" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_netxpert__ColumnMap,  0  | 0);
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Isolines_SaveResults" "', argument " "3"" of type '" "netxpert::ColumnMap const &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_SaveResults" "', argument " "3"" of type '" "netxpert::ColumnMap const &""'"); 
+  }
+  arg3 = reinterpret_cast< netxpert::ColumnMap * >(argp3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    ((netxpert::Isolines const *)arg1)->SaveResults((std::string const &)*arg2,(netxpert::ColumnMap const &)*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_GetShortestPaths(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::unordered_map< netxpert::ODPair,netxpert::CompressedPath > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Isolines_GetShortestPaths",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_GetShortestPaths" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Isolines const *)arg1)->GetShortestPaths();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >(static_cast< const std::unordered_map< netxpert::ODPair,netxpert::CompressedPath >& >(result))), SWIGTYPE_p_std__unordered_mapT_netxpert__ODPair_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Isolines_UncompressRoute(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Isolines *arg1 = (netxpert::Isolines *) 0 ;
+  unsigned int arg2 ;
+  vector< unsigned int > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  unsigned int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  SwigValueWrapper< std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > > > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Isolines_UncompressRoute",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Isolines, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Isolines_UncompressRoute" "', argument " "1"" of type '" "netxpert::Isolines const *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Isolines * >(argp1);
+  ecode2 = SWIG_AsVal_unsigned_SS_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Isolines_UncompressRoute" "', argument " "2"" of type '" "unsigned int""'");
+  } 
+  arg2 = static_cast< unsigned int >(val2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_vectorT_unsigned_int_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Isolines_UncompressRoute" "', argument " "3"" of type '" "vector< unsigned int > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Isolines_UncompressRoute" "', argument " "3"" of type '" "vector< unsigned int > &""'"); 
+  }
+  arg3 = reinterpret_cast< vector< unsigned int > * >(argp3);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    result = ((netxpert::Isolines const *)arg1)->UncompressRoute(arg2,*arg3);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_NewPointerObj((new std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >(static_cast< const std::vector< netxpert::InternalArc,std::allocator< netxpert::InternalArc > >& >(result))), SWIGTYPE_p_std__vectorT_netxpert__InternalArc_std__allocatorT_netxpert__InternalArc_t_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Isolines_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_netxpert__Isolines, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_delete_MinCostFlow(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::MinCostFlow *arg1 = (netxpert::MinCostFlow *) 0 ;
@@ -34954,6 +37414,111 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Transportation_Solve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Transportation *arg1 = (netxpert::Transportation *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Transportation_Solve",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_Solve" "', argument " "1"" of type '" "netxpert::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve();
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Transportation_Solve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  netxpert::Transportation *arg1 = (netxpert::Transportation *) 0 ;
+  netxpert::Network *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Transportation_Solve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Transportation, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_Solve" "', argument " "1"" of type '" "netxpert::Transportation *""'"); 
+  }
+  arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_netxpert__Network,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Transportation_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Transportation_Solve" "', argument " "2"" of type '" "netxpert::Network &""'"); 
+  }
+  arg2 = reinterpret_cast< netxpert::Network * >(argp2);
+  {
+    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+    (arg1)->Solve(*arg2);
+    SWIG_PYTHON_THREAD_END_ALLOW;
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Transportation_Solve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__Transportation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Transportation_Solve__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_netxpert__Transportation, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_netxpert__Network, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Transportation_Solve__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Transportation_Solve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    netxpert::Transportation::Solve()\n"
+    "    netxpert::Transportation::Solve(netxpert::Network &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Transportation_GetOrigins(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   netxpert::Transportation *arg1 = (netxpert::Transportation *) 0 ;
@@ -35325,31 +37890,6 @@ SWIGINTERN PyObject *_wrap_Transportation_SaveResults(PyObject *SWIGUNUSEDPARM(s
   return resultobj;
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Transportation_Solve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  netxpert::Transportation *arg1 = (netxpert::Transportation *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Transportation_Solve",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_netxpert__Transportation, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Transportation_Solve" "', argument " "1"" of type '" "netxpert::Transportation *""'"); 
-  }
-  arg1 = reinterpret_cast< netxpert::Transportation * >(argp1);
-  {
-    SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-    (arg1)->Solve();
-    SWIG_PYTHON_THREAD_END_ALLOW;
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
   return NULL;
 }
 
@@ -36576,6 +39116,38 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ODNodes_capacity", _wrap_ODNodes_capacity, METH_VARARGS, NULL},
 	 { (char *)"delete_ODNodes", _wrap_delete_ODNodes, METH_VARARGS, NULL},
 	 { (char *)"ODNodes_swigregister", ODNodes_swigregister, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_iterator", _wrap_CutOffs_iterator, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___nonzero__", _wrap_CutOffs___nonzero__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___bool__", _wrap_CutOffs___bool__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___len__", _wrap_CutOffs___len__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___getitem__", _wrap_CutOffs___getitem__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___delitem__", _wrap_CutOffs___delitem__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_has_key", _wrap_CutOffs_has_key, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_keys", _wrap_CutOffs_keys, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_values", _wrap_CutOffs_values, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_items", _wrap_CutOffs_items, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___contains__", _wrap_CutOffs___contains__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_key_iterator", _wrap_CutOffs_key_iterator, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_value_iterator", _wrap_CutOffs_value_iterator, METH_VARARGS, NULL},
+	 { (char *)"CutOffs___setitem__", _wrap_CutOffs___setitem__, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_asdict", _wrap_CutOffs_asdict, METH_VARARGS, NULL},
+	 { (char *)"new_CutOffs", _wrap_new_CutOffs, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_empty", _wrap_CutOffs_empty, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_size", _wrap_CutOffs_size, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_clear", _wrap_CutOffs_clear, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_swap", _wrap_CutOffs_swap, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_get_allocator", _wrap_CutOffs_get_allocator, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_begin", _wrap_CutOffs_begin, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_end", _wrap_CutOffs_end, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_rbegin", _wrap_CutOffs_rbegin, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_rend", _wrap_CutOffs_rend, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_count", _wrap_CutOffs_count, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_erase", _wrap_CutOffs_erase, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_find", _wrap_CutOffs_find, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_lower_bound", _wrap_CutOffs_lower_bound, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_upper_bound", _wrap_CutOffs_upper_bound, METH_VARARGS, NULL},
+	 { (char *)"delete_CutOffs", _wrap_delete_CutOffs, METH_VARARGS, NULL},
+	 { (char *)"CutOffs_swigregister", CutOffs_swigregister, METH_VARARGS, NULL},
 	 { (char *)"Version", _wrap_Version, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_set", _wrap_ColumnMap_arcIDColName_set, METH_VARARGS, NULL},
 	 { (char *)"ColumnMap_arcIDColName_get", _wrap_ColumnMap_arcIDColName_get, METH_VARARGS, NULL},
@@ -36799,6 +39371,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Network_LoadEndNodes", _wrap_Network_LoadEndNodes, METH_VARARGS, NULL},
 	 { (char *)"Network_GetOriginalNodeID", _wrap_Network_GetOriginalNodeID, METH_VARARGS, NULL},
 	 { (char *)"Network_GetOriginalStartOrEndNodeID", _wrap_Network_GetOriginalStartOrEndNodeID, METH_VARARGS, NULL},
+	 { (char *)"Network_Reset", _wrap_Network_Reset, METH_VARARGS, NULL},
 	 { (char *)"delete_Network", _wrap_delete_Network, METH_VARARGS, NULL},
 	 { (char *)"Network_swigregister", Network_swigregister, METH_VARARGS, NULL},
 	 { (char *)"delete_LOGGER", _wrap_delete_LOGGER, METH_VARARGS, NULL},
@@ -36867,6 +39440,24 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ShortestPathTree_SaveResults", _wrap_ShortestPathTree_SaveResults, METH_VARARGS, NULL},
 	 { (char *)"ShortestPathTree_UncompressRoute", _wrap_ShortestPathTree_UncompressRoute, METH_VARARGS, NULL},
 	 { (char *)"ShortestPathTree_swigregister", ShortestPathTree_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_Isolines", _wrap_new_Isolines, METH_VARARGS, NULL},
+	 { (char *)"delete_Isolines", _wrap_delete_Isolines, METH_VARARGS, NULL},
+	 { (char *)"Isolines_Solve", _wrap_Isolines_Solve, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetAlgorithm", _wrap_Isolines_GetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SetAlgorithm", _wrap_Isolines_SetAlgorithm, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetSPTHeapCard", _wrap_Isolines_GetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SetSPTHeapCard", _wrap_Isolines_SetSPTHeapCard, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetGeometryHandling", _wrap_Isolines_GetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SetGeometryHandling", _wrap_Isolines_SetGeometryHandling, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetOrigins", _wrap_Isolines_GetOrigins, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SetOrigins", _wrap_Isolines_SetOrigins, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetCutOffs", _wrap_Isolines_GetCutOffs, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SetCutOffs", _wrap_Isolines_SetCutOffs, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetOptimum", _wrap_Isolines_GetOptimum, METH_VARARGS, NULL},
+	 { (char *)"Isolines_SaveResults", _wrap_Isolines_SaveResults, METH_VARARGS, NULL},
+	 { (char *)"Isolines_GetShortestPaths", _wrap_Isolines_GetShortestPaths, METH_VARARGS, NULL},
+	 { (char *)"Isolines_UncompressRoute", _wrap_Isolines_UncompressRoute, METH_VARARGS, NULL},
+	 { (char *)"Isolines_swigregister", Isolines_swigregister, METH_VARARGS, NULL},
 	 { (char *)"delete_MinCostFlow", _wrap_delete_MinCostFlow, METH_VARARGS, NULL},
 	 { (char *)"MinCostFlow_Solve", _wrap_MinCostFlow_Solve, METH_VARARGS, NULL},
 	 { (char *)"MinCostFlow_IsDirected_set", _wrap_MinCostFlow_IsDirected_set, METH_VARARGS, NULL},
@@ -36878,6 +39469,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"MinCostFlow_swigregister", MinCostFlow_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Transportation", _wrap_new_Transportation, METH_VARARGS, NULL},
 	 { (char *)"delete_Transportation", _wrap_delete_Transportation, METH_VARARGS, NULL},
+	 { (char *)"Transportation_Solve", _wrap_Transportation_Solve, METH_VARARGS, NULL},
 	 { (char *)"Transportation_GetOrigins", _wrap_Transportation_GetOrigins, METH_VARARGS, NULL},
 	 { (char *)"Transportation_SetOrigins", _wrap_Transportation_SetOrigins, METH_VARARGS, NULL},
 	 { (char *)"Transportation_GetDestinations", _wrap_Transportation_GetDestinations, METH_VARARGS, NULL},
@@ -36889,7 +39481,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Transportation_GetSolverJSONResult", _wrap_Transportation_GetSolverJSONResult, METH_VARARGS, NULL},
 	 { (char *)"Transportation_UncompressRoute", _wrap_Transportation_UncompressRoute, METH_VARARGS, NULL},
 	 { (char *)"Transportation_SaveResults", _wrap_Transportation_SaveResults, METH_VARARGS, NULL},
-	 { (char *)"Transportation_Solve", _wrap_Transportation_Solve, METH_VARARGS, NULL},
 	 { (char *)"Transportation_swigregister", Transportation_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_NetworkBuilder", _wrap_new_NetworkBuilder, METH_VARARGS, NULL},
 	 { (char *)"delete_NetworkBuilder", _wrap_delete_NetworkBuilder, METH_VARARGS, NULL},
@@ -36947,6 +39538,9 @@ static void *_p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver(void *x,
 static void *_p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((netxpert::ISolver *)  ((netxpert::MinimumSpanningTree *) x));
 }
+static void *_p_netxpert__IsolinesTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((netxpert::ISolver *)  ((netxpert::Isolines *) x));
+}
 static void *_p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((netxpert::ISolver *)  ((netxpert::ShortestPathTree *) x));
 }
@@ -36958,6 +39552,8 @@ static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_first_type = {"_p_first_type", "first_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_geos__geom__Coordinate = {"_p_geos__geom__Coordinate", "geos::geom::Coordinate *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_key_type = {"_p_key_type", "key_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_mapped_type = {"_p_mapped_type", "mapped_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__ColumnMap = {"_p_netxpert__ColumnMap", "netxpert::ColumnMap *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__Config = {"_p_netxpert__Config", "netxpert::Config *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__DBHELPER = {"_p_netxpert__DBHELPER", "netxpert::DBHELPER *", 0, 0, (void*)0, 0};
@@ -36972,6 +39568,7 @@ static swig_type_info _swigt__p_netxpert__InputArc = {"_p_netxpert__InputArc", "
 static swig_type_info _swigt__p_netxpert__InputNode = {"_p_netxpert__InputNode", "std::vector< netxpert::InputNode >::value_type *|netxpert::InputNode *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__IntNodeID = {"_p_netxpert__IntNodeID", "netxpert::IntNodeID *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__InternalArc = {"_p_netxpert__InternalArc", "netxpert::InternalArc *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_netxpert__Isolines = {"_p_netxpert__Isolines", "netxpert::Isolines *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__LOGGER = {"_p_netxpert__LOGGER", "netxpert::LOGGER *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__MinCostFlow = {"_p_netxpert__MinCostFlow", "netxpert::MinCostFlow *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_netxpert__MinimumSpanningTree = {"_p_netxpert__MinimumSpanningTree", "netxpert::MinimumSpanningTree *", 0, 0, (void*)0, 0};
@@ -36999,9 +39596,12 @@ static swig_type_info _swigt__p_std__allocatorT_netxpert__FlowCost_t = {"_p_std_
 static swig_type_info _swigt__p_std__allocatorT_netxpert__InputArc_t = {"_p_std__allocatorT_netxpert__InputArc_t", "std::allocator< netxpert::InputArc > *|std::vector< netxpert::InputArc >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__InputNode_t = {"_p_std__allocatorT_netxpert__InputNode_t", "std::vector< netxpert::InputNode >::allocator_type *|std::allocator< netxpert::InputNode > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_netxpert__NewNode_t = {"_p_std__allocatorT_netxpert__NewNode_t", "std::vector< netxpert::NewNode >::allocator_type *|std::allocator< netxpert::NewNode > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t = {"_p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t", "std::map< std::string,std::vector< double > >::allocator_type *|std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t = {"_p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t", "std::allocator< std::pair< unsigned int,std::string > > *|std::vector< std::pair< unsigned int,std::string > >::allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__allocatorT_unsigned_int_t = {"_p_std__allocatorT_unsigned_int_t", "std::vector< unsigned int >::allocator_type *|std::allocator< unsigned int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__lessT_std__string_t = {"_p_std__lessT_std__string_t", "std::less< std::string > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t = {"_p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t", "std::map< std::string,std::vector< double > > *|std::map< std::string,std::vector< double,std::allocator< double > >,std::less< std::string >,std::allocator< std::pair< std::string const,std::vector< double,std::allocator< double > > > > > *|std::map< std::string,std::vector< double,std::allocator< double > > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t = {"_p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t", "std::pair< std::vector< unsigned int,std::allocator< unsigned int > >,double > *|netxpert::CompressedPath *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__shared_ptrT_geos__geom__Geometry_t = {"_p_std__shared_ptrT_geos__geom__Geometry_t", "std::shared_ptr< geos::geom::Geometry > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__string = {"_p_std__string", "netxpert::ExtNodeID *|std::string *|netxpert::ExtArcID *", 0, 0, (void*)0, 0};
@@ -37022,6 +39622,7 @@ static swig_type_info _swigt__p_std__vectorT_unsigned_int_std__allocatorT_unsign
 static swig_type_info _swigt__p_string = {"_p_string", "string *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_unsigned_int_t = {"_p_vectorT_unsigned_int_t", "vector< unsigned int > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_allocator_type,
@@ -37029,6 +39630,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_difference_type,
   &_swigt__p_first_type,
   &_swigt__p_geos__geom__Coordinate,
+  &_swigt__p_key_type,
+  &_swigt__p_mapped_type,
   &_swigt__p_netxpert__ColumnMap,
   &_swigt__p_netxpert__Config,
   &_swigt__p_netxpert__DBHELPER,
@@ -37043,6 +39646,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_netxpert__InputNode,
   &_swigt__p_netxpert__IntNodeID,
   &_swigt__p_netxpert__InternalArc,
+  &_swigt__p_netxpert__Isolines,
   &_swigt__p_netxpert__LOGGER,
   &_swigt__p_netxpert__MinCostFlow,
   &_swigt__p_netxpert__MinimumSpanningTree,
@@ -37070,9 +39674,12 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__allocatorT_netxpert__InputArc_t,
   &_swigt__p_std__allocatorT_netxpert__InputNode_t,
   &_swigt__p_std__allocatorT_netxpert__NewNode_t,
+  &_swigt__p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t,
   &_swigt__p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t,
   &_swigt__p_std__allocatorT_unsigned_int_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__lessT_std__string_t,
+  &_swigt__p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t,
   &_swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t,
   &_swigt__p_std__shared_ptrT_geos__geom__Geometry_t,
   &_swigt__p_std__string,
@@ -37093,6 +39700,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_string,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_value_type,
+  &_swigt__p_vectorT_unsigned_int_t,
 };
 
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -37100,6 +39708,8 @@ static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_first_type[] = {  {&_swigt__p_first_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_geos__geom__Coordinate[] = {  {&_swigt__p_geos__geom__Coordinate, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_key_type[] = {  {&_swigt__p_key_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_mapped_type[] = {  {&_swigt__p_mapped_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__ColumnMap[] = {  {&_swigt__p_netxpert__ColumnMap, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__Config[] = {  {&_swigt__p_netxpert__Config, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__DBHELPER[] = {  {&_swigt__p_netxpert__DBHELPER, 0, 0, 0},{0, 0, 0, 0}};
@@ -37109,11 +39719,12 @@ static swig_cast_info _swigc__p_netxpert__ExtSPTreeArc[] = {  {&_swigt__p_netxpe
 static swig_cast_info _swigc__p_netxpert__ExtTransportationData[] = {  {&_swigt__p_netxpert__ExtTransportationData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__ExternalArc[] = {  {&_swigt__p_netxpert__ExternalArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__FlowCost[] = {  {&_swigt__p_netxpert__FlowCost, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__MinCostFlow, _p_netxpert__MinCostFlowTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__Transportation, _p_netxpert__TransportationTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__OriginDestinationMatrix, _p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ShortestPathTree, _p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__ISolver[] = {  {&_swigt__p_netxpert__MinCostFlow, _p_netxpert__MinCostFlowTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__Transportation, _p_netxpert__TransportationTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ISolver, 0, 0, 0},  {&_swigt__p_netxpert__OriginDestinationMatrix, _p_netxpert__OriginDestinationMatrixTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__MinimumSpanningTree, _p_netxpert__MinimumSpanningTreeTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__Isolines, _p_netxpert__IsolinesTo_p_netxpert__ISolver, 0, 0},  {&_swigt__p_netxpert__ShortestPathTree, _p_netxpert__ShortestPathTreeTo_p_netxpert__ISolver, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputArc[] = {  {&_swigt__p_netxpert__InputArc, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InputNode[] = {  {&_swigt__p_netxpert__InputNode, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__IntNodeID[] = {  {&_swigt__p_netxpert__IntNodeID, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__InternalArc[] = {  {&_swigt__p_netxpert__InternalArc, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_netxpert__Isolines[] = {  {&_swigt__p_netxpert__Isolines, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__LOGGER[] = {  {&_swigt__p_netxpert__LOGGER, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__MinCostFlow[] = {  {&_swigt__p_netxpert__MinCostFlow, 0, 0, 0},  {&_swigt__p_netxpert__Transportation, _p_netxpert__TransportationTo_p_netxpert__MinCostFlow, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_netxpert__MinimumSpanningTree[] = {  {&_swigt__p_netxpert__MinimumSpanningTree, 0, 0, 0},{0, 0, 0, 0}};
@@ -37141,9 +39752,12 @@ static swig_cast_info _swigc__p_std__allocatorT_netxpert__FlowCost_t[] = {  {&_s
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputArc_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputArc_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__InputNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__InputNode_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_netxpert__NewNode_t[] = {  {&_swigt__p_std__allocatorT_netxpert__NewNode_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t[] = {  {&_swigt__p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t[] = {  {&_swigt__p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__allocatorT_unsigned_int_t[] = {  {&_swigt__p_std__allocatorT_unsigned_int_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__lessT_std__string_t[] = {  {&_swigt__p_std__lessT_std__string_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t[] = {  {&_swigt__p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t[] = {  {&_swigt__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__shared_ptrT_geos__geom__Geometry_t[] = {  {&_swigt__p_std__shared_ptrT_geos__geom__Geometry_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
@@ -37164,6 +39778,7 @@ static swig_cast_info _swigc__p_std__vectorT_unsigned_int_std__allocatorT_unsign
 static swig_cast_info _swigc__p_string[] = {  {&_swigt__p_string, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_unsigned_int_t[] = {  {&_swigt__p_vectorT_unsigned_int_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_allocator_type,
@@ -37171,6 +39786,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_difference_type,
   _swigc__p_first_type,
   _swigc__p_geos__geom__Coordinate,
+  _swigc__p_key_type,
+  _swigc__p_mapped_type,
   _swigc__p_netxpert__ColumnMap,
   _swigc__p_netxpert__Config,
   _swigc__p_netxpert__DBHELPER,
@@ -37185,6 +39802,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_netxpert__InputNode,
   _swigc__p_netxpert__IntNodeID,
   _swigc__p_netxpert__InternalArc,
+  _swigc__p_netxpert__Isolines,
   _swigc__p_netxpert__LOGGER,
   _swigc__p_netxpert__MinCostFlow,
   _swigc__p_netxpert__MinimumSpanningTree,
@@ -37212,9 +39830,12 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__allocatorT_netxpert__InputArc_t,
   _swigc__p_std__allocatorT_netxpert__InputNode_t,
   _swigc__p_std__allocatorT_netxpert__NewNode_t,
+  _swigc__p_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t,
   _swigc__p_std__allocatorT_std__pairT_unsigned_int_std__string_t_t,
   _swigc__p_std__allocatorT_unsigned_int_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__lessT_std__string_t,
+  _swigc__p_std__mapT_std__string_std__vectorT_double_std__allocatorT_double_t_t_std__lessT_std__string_t_std__allocatorT_std__pairT_std__string_const_std__vectorT_double_std__allocatorT_double_t_t_t_t_t,
   _swigc__p_std__pairT_std__vectorT_unsigned_int_std__allocatorT_unsigned_int_t_t_double_t,
   _swigc__p_std__shared_ptrT_geos__geom__Geometry_t,
   _swigc__p_std__string,
@@ -37235,6 +39856,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_string,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_value_type,
+  _swigc__p_vectorT_unsigned_int_t,
 };
 
 

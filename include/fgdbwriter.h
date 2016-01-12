@@ -38,9 +38,22 @@ namespace netxpert {
                                        const geos::geom::Geometry& arc,
                                        const std::string& _tableName);
 
-
+            //MCF, TP
             void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
                                const double capacity, const double flow, const geos::geom::MultiLineString& route,
+                               const std::string& _tableName);
+            //SPT, ODM
+            void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                               const geos::geom::MultiLineString& route,
+                               const std::string& _tableName);
+            //MST
+            void SaveResultArc(const std::string& originalArcID, const double cost,
+                               const geos::geom::MultiLineString& route,
+                               const std::string& _tableName);
+            //Isolines
+            void SaveResultArc(const std::string& orig, const double cost,
+                               const double cutoff,
+                               const geos::geom::MultiLineString& route,
                                const std::string& _tableName);
 
             virtual void CloseConnection();
@@ -52,8 +65,11 @@ namespace netxpert {
             void openTable(const string& _tableName);
             void dropTable (const string& _tableName);
             unique_ptr<FileGDBAPI::Table> currentTblPtr;
-            const string resultTblDefPath = "FGDB_NETXPERT_RESULT_SCHEMA.XML";
-            const string resultNetBuilderDefPath = "FGDB_NETXPERT_NETBUILD_SCHEMA.XML";
+            const string resultMCFDefPath           = "FGDB_NETXPERT_MCF_SCHEMA.XML";
+            const string resultNetBuilderDefPath    = "FGDB_NETXPERT_NETBUILD_SCHEMA.XML";
+            const string resultMSTDefPath           = "FGDB_NETXPERT_MST_SCHEMA.XML";
+            const string resultIsoLinesDefPath      = "FGDB_NETXPERT_ISOLINES_SCHEMA.XML";
+            const string resultSPTDefPath           = "FGDB_NETXPERT_SPT_SCHEMA.XML";
             Config NETXPERT_CNFG;
     };
 }

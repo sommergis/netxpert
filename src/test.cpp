@@ -119,7 +119,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         sldb.CreateNetXpertDB();
         sldb.OpenNewTransaction();
         sldb.CreateSolverResultTable(resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
-        auto queryPtr = sldb.PrepareSaveResultArc(resultTblName);
+        auto queryPtr = sldb.PrepareSaveResultArc(resultTblName, NetXpertSolver::UndefinedNetXpertSolver);
         //depointerization "on the fly"
         sldb.SaveResultArc(orig, dest, 1.0, 99999.0, 1.0, *mlPtr, resultTblName, *queryPtr);
         sldb.CommitCurrentTransaction();
@@ -171,7 +171,7 @@ void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
         //segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));
         //cout << "insert done "<< endl;
 
-        sldb.MergeAndSaveResultArcs("orig", "dest", 0.0, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
+        sldb.MergeAndSaveResultArcs("1", "2", -1, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
                                     cnfg.ArcsTableName, "1,2", *mPtr, resultTblName);
 
         sldb.CommitCurrentTransaction();

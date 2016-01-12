@@ -50,7 +50,7 @@ void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const 
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
                 auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::MinSpanningTreeSolver));
                 //}
             }
                 break;
@@ -80,7 +80,7 @@ void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const 
         }
         arcIDs.pop_back(); //trim last comma
 
-        this->net->ProcessResultArcs("", "", -1, -1, -1, arcIDs, resultTableName);
+        this->net->ProcessResultArcs(arcIDs, resultTableName);
 
         LOGGER::LogDebug("Done!");
     }
@@ -100,7 +100,7 @@ void MinimumSpanningTree::Solve(Network& net)
 {
     this->net = std::unique_ptr<Network>( move(&net));
     //TODO CHECK
-    solve(net);
+    solve(*(this->net));
 }
 
 vector<InternalArc> MinimumSpanningTree::GetMinimumSpanningTree() const
@@ -128,6 +128,9 @@ void MinimumSpanningTree::solve (Network& net)
         switch (algorithm)
         {
             case MSTAlgorithm::Kruskal_LEMON:
+                mst = shared_ptr<IMinSpanTree>(new MST_LEMON());
+                break;
+            default:
                 mst = shared_ptr<IMinSpanTree>(new MST_LEMON());
                 break;
         }
