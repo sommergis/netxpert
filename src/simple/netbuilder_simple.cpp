@@ -62,7 +62,7 @@ int netxpert::simple::NetworkBuilder::Build()
 		unordered_map< unsigned int, NetworkBuilderResultArc> kvArcs = builder->GetBuiltNetwork();
 		LOGGER::LogDebug("Size of built network: " + to_string(kvArcs.size()));
 
-		this->builder->SaveResults(cnfg.ResultTableName, cmap);
+		this->builder->SaveResults(resultTableName, cmap);
 
 		return 0; //OK
 	}
@@ -83,8 +83,4 @@ netxpert::simple::NetworkBuilder::GetBuiltNetwork()
 		result = this->builder->GetBuiltNetwork();
 
 	return result;
-}
-
-netxpert::simple::NetworkBuilder::~NetworkBuilder()
-{
 }

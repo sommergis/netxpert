@@ -14,6 +14,7 @@ namespace netxpert {
     {
         public:
             MinimumSpanningTree(std::string jsonCnfg);
+            virtual ~MinimumSpanningTree() {};
             int Solve();
             double GetOptimum();
             std::string GetMinimumSpanningTreeAsJSON();

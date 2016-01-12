@@ -521,6 +521,55 @@ class ODNodes(_object):
 ODNodes_swigregister = _pynetxpert.ODNodes_swigregister
 ODNodes_swigregister(ODNodes)
 
+class CutOffs(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, CutOffs, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, CutOffs, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _pynetxpert.CutOffs_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _pynetxpert.CutOffs___nonzero__(self)
+    def __bool__(self): return _pynetxpert.CutOffs___bool__(self)
+    def __len__(self): return _pynetxpert.CutOffs___len__(self)
+    def __iter__(self): return self.key_iterator()
+    def iterkeys(self): return self.key_iterator()
+    def itervalues(self): return self.value_iterator()
+    def iteritems(self): return self.iterator()
+    def __getitem__(self, *args): return _pynetxpert.CutOffs___getitem__(self, *args)
+    def __delitem__(self, *args): return _pynetxpert.CutOffs___delitem__(self, *args)
+    def has_key(self, *args): return _pynetxpert.CutOffs_has_key(self, *args)
+    def keys(self): return _pynetxpert.CutOffs_keys(self)
+    def values(self): return _pynetxpert.CutOffs_values(self)
+    def items(self): return _pynetxpert.CutOffs_items(self)
+    def __contains__(self, *args): return _pynetxpert.CutOffs___contains__(self, *args)
+    def key_iterator(self): return _pynetxpert.CutOffs_key_iterator(self)
+    def value_iterator(self): return _pynetxpert.CutOffs_value_iterator(self)
+    def __setitem__(self, *args): return _pynetxpert.CutOffs___setitem__(self, *args)
+    def asdict(self): return _pynetxpert.CutOffs_asdict(self)
+    def __init__(self, *args): 
+        this = _pynetxpert.new_CutOffs(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _pynetxpert.CutOffs_empty(self)
+    def size(self): return _pynetxpert.CutOffs_size(self)
+    def clear(self): return _pynetxpert.CutOffs_clear(self)
+    def swap(self, *args): return _pynetxpert.CutOffs_swap(self, *args)
+    def get_allocator(self): return _pynetxpert.CutOffs_get_allocator(self)
+    def begin(self): return _pynetxpert.CutOffs_begin(self)
+    def end(self): return _pynetxpert.CutOffs_end(self)
+    def rbegin(self): return _pynetxpert.CutOffs_rbegin(self)
+    def rend(self): return _pynetxpert.CutOffs_rend(self)
+    def count(self, *args): return _pynetxpert.CutOffs_count(self, *args)
+    def erase(self, *args): return _pynetxpert.CutOffs_erase(self, *args)
+    def find(self, *args): return _pynetxpert.CutOffs_find(self, *args)
+    def lower_bound(self, *args): return _pynetxpert.CutOffs_lower_bound(self, *args)
+    def upper_bound(self, *args): return _pynetxpert.CutOffs_upper_bound(self, *args)
+    __swig_destroy__ = _pynetxpert.delete_CutOffs
+    __del__ = lambda self : None;
+CutOffs_swigregister = _pynetxpert.CutOffs_swigregister
+CutOffs_swigregister(CutOffs)
+
 
 def Version():
   return _pynetxpert.Version()
@@ -1052,6 +1101,7 @@ class Network(_object):
     def LoadEndNodes(self, *args): return _pynetxpert.Network_LoadEndNodes(self, *args)
     def GetOriginalNodeID(self, *args): return _pynetxpert.Network_GetOriginalNodeID(self, *args)
     def GetOriginalStartOrEndNodeID(self, *args): return _pynetxpert.Network_GetOriginalStartOrEndNodeID(self, *args)
+    def Reset(self): return _pynetxpert.Network_Reset(self)
     __swig_destroy__ = _pynetxpert.delete_Network
     __del__ = lambda self : None;
 Network_swigregister = _pynetxpert.Network_swigregister
@@ -1233,6 +1283,38 @@ class ShortestPathTree(ISolver):
 ShortestPathTree_swigregister = _pynetxpert.ShortestPathTree_swigregister
 ShortestPathTree_swigregister(ShortestPathTree)
 
+class Isolines(ISolver):
+    __swig_setmethods__ = {}
+    for _s in [ISolver]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Isolines, name, value)
+    __swig_getmethods__ = {}
+    for _s in [ISolver]: __swig_getmethods__.update(getattr(_s,'__swig_getmethods__',{}))
+    __getattr__ = lambda self, name: _swig_getattr(self, Isolines, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _pynetxpert.new_Isolines(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _pynetxpert.delete_Isolines
+    __del__ = lambda self : None;
+    def Solve(self, *args): return _pynetxpert.Isolines_Solve(self, *args)
+    def GetAlgorithm(self): return _pynetxpert.Isolines_GetAlgorithm(self)
+    def SetAlgorithm(self, *args): return _pynetxpert.Isolines_SetAlgorithm(self, *args)
+    def GetSPTHeapCard(self): return _pynetxpert.Isolines_GetSPTHeapCard(self)
+    def SetSPTHeapCard(self, *args): return _pynetxpert.Isolines_SetSPTHeapCard(self, *args)
+    def GetGeometryHandling(self): return _pynetxpert.Isolines_GetGeometryHandling(self)
+    def SetGeometryHandling(self, *args): return _pynetxpert.Isolines_SetGeometryHandling(self, *args)
+    def GetOrigins(self): return _pynetxpert.Isolines_GetOrigins(self)
+    def SetOrigins(self, *args): return _pynetxpert.Isolines_SetOrigins(self, *args)
+    def GetCutOffs(self): return _pynetxpert.Isolines_GetCutOffs(self)
+    def SetCutOffs(self, *args): return _pynetxpert.Isolines_SetCutOffs(self, *args)
+    def GetOptimum(self): return _pynetxpert.Isolines_GetOptimum(self)
+    def SaveResults(self, *args): return _pynetxpert.Isolines_SaveResults(self, *args)
+    def GetShortestPaths(self): return _pynetxpert.Isolines_GetShortestPaths(self)
+    def UncompressRoute(self, *args): return _pynetxpert.Isolines_UncompressRoute(self, *args)
+Isolines_swigregister = _pynetxpert.Isolines_swigregister
+Isolines_swigregister(Isolines)
+
 class MinCostFlow(ISolver):
     __swig_setmethods__ = {}
     for _s in [ISolver]: __swig_setmethods__.update(getattr(_s,'__swig_setmethods__',{}))
@@ -1269,6 +1351,7 @@ class Transportation(MinCostFlow):
         except: self.this = this
     __swig_destroy__ = _pynetxpert.delete_Transportation
     __del__ = lambda self : None;
+    def Solve(self, *args): return _pynetxpert.Transportation_Solve(self, *args)
     def GetOrigins(self): return _pynetxpert.Transportation_GetOrigins(self)
     def SetOrigins(self, *args): return _pynetxpert.Transportation_SetOrigins(self, *args)
     def GetDestinations(self): return _pynetxpert.Transportation_GetDestinations(self)
@@ -1280,7 +1363,6 @@ class Transportation(MinCostFlow):
     def GetSolverJSONResult(self): return _pynetxpert.Transportation_GetSolverJSONResult(self)
     def UncompressRoute(self, *args): return _pynetxpert.Transportation_UncompressRoute(self, *args)
     def SaveResults(self, *args): return _pynetxpert.Transportation_SaveResults(self, *args)
-    def Solve(self): return _pynetxpert.Transportation_Solve(self)
 Transportation_swigregister = _pynetxpert.Transportation_swigregister
 Transportation_swigregister(Transportation)
 

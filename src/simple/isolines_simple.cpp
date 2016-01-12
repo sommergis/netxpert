@@ -1,12 +1,37 @@
-#include "mcfp_simple.h"
+#include "isolines_simple.h"
 
-netxpert::simple::MinCostFlow::MinCostFlow(std::string jsonCnfg)
+netxpert::simple::Isolines::Isolines(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    this->NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
 }
 
-int netxpert::simple::MinCostFlow::Solve()
+netxpert::simple::Isolines::~Isolines()
+{
+    //dtor
+}
+
+double netxpert::simple::Isolines::GetOptimum()
+{
+    return this->optimum;
+}
+
+std::string netxpert::simple::Isolines::GetShortestPathsAsJSON()
+{
+    string result;
+    /*if (this->solver)
+        result = this->solver->GetShortestPathsAsJSON();*/
+    return result;
+}
+std::vector<netxpert::ExtSPTreeArc> netxpert::simple::Isolines::GetShortestPaths()
+{
+    std::vector<netxpert::ExtSPTreeArc> result;
+    /*if (this->solver)
+        result = this->solver->GetShortestPaths();*/
+    return result;
+}
+
+int netxpert::simple::Isolines::Solve()
 {
     using namespace netxpert; //local scope!
 
@@ -42,12 +67,9 @@ int netxpert::simple::MinCostFlow::Solve()
 
         string nodesTableName = cnfg.NodesTableName;
         string nodesGeomColName = cnfg.NodesGeomColumnName;
-        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_mcf" : cnfg.ResultTableName;
-        //bool dropFirst = true;
 
+        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_spt" : cnfg.ResultTableName;
         bool autoCleanNetwork = cnfg.CleanNetwork;
-
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
@@ -57,13 +79,15 @@ int netxpert::simple::MinCostFlow::Solve()
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
+		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+
         //2. Load Network
         DBHELPER::OpenNewTransaction();
         LOGGER::LogInfo("Loading Data from DB..!");
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
-        LOGGER::LogInfo("Done!");
 
+        LOGGER::LogInfo("Done!");
         Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
@@ -73,59 +97,47 @@ int netxpert::simple::MinCostFlow::Solve()
         LOGGER::LogInfo("Loading Start nodes..");
         vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
-        LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
-                                                                        cnfg.ArcsGeomColumnName, cmap, withCapacity);
-
-        LOGGER::LogInfo("Done!");
-        LOGGER::LogInfo("Converting Data into internal network..");
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
-        LOGGER::LogInfo("Done!");
 
-        //MCF Solver
-        solver = unique_ptr<netxpert::MinCostFlow>(new netxpert::MinCostFlow (cnfg));
-        auto& mcf = *solver;
-        mcf.Solve(net);
-        LOGGER::LogInfo("Done!");
+        //solve
+        this->solver = unique_ptr<netxpert::ShortestPathTree> (new netxpert::ShortestPathTree(cnfg));
+        auto& spt = *solver;
 
-        vector<FlowCost> mcfResult = mcf.GetMinCostFlow();
+        //for start in starts
+        vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+        for (auto s : startNodes)
+            origs.push_back(s.first);
 
-        LOGGER::LogInfo("Optimum: " + to_string(mcf.GetOptimum()));
-        LOGGER::LogInfo("Count of MCF: " + to_string(mcfResult.size()) );
+        vector<unsigned int>::const_iterator it;
+        this->optimum = 0;
 
-        mcf.SaveResults(resultTableName, cmap);
+        for (it = origs.begin(); it != origs.end(); it++)
+        {
+            auto start = *it;
+            spt.SetOrigin(start);
+            vector<unsigned int> dests = {}; //null -> all dests
 
-        return 0; //OK
+            spt.SetDestinations( dests );
+            spt.Solve(net);
+            this->optimum += spt.GetOptimum();
+            auto localSPTs = spt.GetShortestPaths();
+            this->totalSPTs.insert(this->totalSPTs.end(), localSPTs.begin(), localSPTs.end() );
+            //TODO: cut off
+            spt.SaveResults(cnfg.ResultTableName, cmap);
+        }
+
+        LOGGER::LogInfo("Optimum: " + to_string(this->optimum));
+        LOGGER::LogInfo("Count of ShortestPaths: " +to_string( this->totalSPTs.size() ) );
+
+        return 0; // OK
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("MinCostFlow_Simple::Solve() - Unexpected Error!");
+        LOGGER::LogError("Isolines_Simple::Solve() - Unexpected Error!");
         LOGGER::LogError(ex.what());
-        return 1; //Not OK
+        return 1;
     }
 }
 
-double netxpert::simple::MinCostFlow::GetOptimum()
-{
-    double result = 0;
-    if (this->solver)
-        result = this->solver->GetOptimum();
-    return result;
-}
-
-std::string netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
-{
-    std::string result;
-
-    return result;
-}
-
-std::vector<netxpert::FlowCost> netxpert::simple::MinCostFlow::GetMinimumCostFlow()
-{
-    std::vector<netxpert::FlowCost> result;
-    if (this->solver)
-        result = this->solver->GetMinCostFlow();
-    return result;
-}

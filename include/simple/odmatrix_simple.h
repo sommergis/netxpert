@@ -14,6 +14,7 @@ namespace netxpert {
     {
         public:
             OriginDestinationMatrix(std::string jsonCnfg);
+            virtual ~OriginDestinationMatrix(){};
             int Solve();
             int Solve(bool parallel);
             double GetOptimum();

@@ -93,6 +93,7 @@
 		<Unit filename="include/simple/sptree_simple.h" />
 		<Unit filename="include/simple/transp_simple.h" />
 		<Unit filename="include/slitewriter.h" />
+		<Unit filename="include/solver/isolines.h" />
 		<Unit filename="include/solver/isolver.h" />
 		<Unit filename="include/solver/mcflow.h" />
 		<Unit filename="include/solver/mstree.h" />
@@ -138,10 +139,11 @@
 		<Unit filename="src/simple/mcfp_simple.cpp" />
 		<Unit filename="src/simple/mstree_simple.cpp" />
 		<Unit filename="src/simple/netbuilder_simple.cpp" />
-		<Unit filename="src/simple/omatrix_simple.cpp" />
+		<Unit filename="src/simple/odmatrix_simple.cpp" />
 		<Unit filename="src/simple/sptree_simple.cpp" />
 		<Unit filename="src/simple/transp_simple.cpp" />
 		<Unit filename="src/slitewriter.cpp" />
+		<Unit filename="src/solver/isolines.cpp" />
 		<Unit filename="src/solver/mcflow.cpp" />
 		<Unit filename="src/solver/mstree.cpp" />
 		<Unit filename="src/solver/odmatrix.cpp" />

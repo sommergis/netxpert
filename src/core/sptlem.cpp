@@ -59,6 +59,30 @@ void SPT_LEM_2Heap::ShortestPathTree()
 	//delete dijk;
 }
 
+/*void SPT_LEM_2Heap::ShortestPathTree(double maxCutOff)
+{
+    dijk->init();
+    dijk->addSource(orig);
+
+    //break if max cut off value is reached
+    double currentLength = 0;
+    cout << "Max dist: "<<maxCutOff << endl;
+    while ( !dijk->emptyQueue() )
+    {
+        if (currentLength > maxCutOff)
+            continue; //process next node
+
+        lemon::SmartDigraph::Node currNode = dijk->nextNode();
+        dijk->start(currNode);
+
+        cout << "Current dist: "<<currentLength << endl;
+        //get length so far
+        if (dijk->reached(currNode))
+            currentLength += dijk->dist(currNode);
+    }
+    cout << "Exited at dist: "<<currentLength << endl;
+}*/
+
 void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
 		      double *pU , double *pC , double *pDfct ,
 		      unsigned int *pSn , unsigned int *pEn )

@@ -37,13 +37,14 @@ namespace netxpert {
     enum NetXpertSolver
     {
         UndefinedNetXpertSolver = -1,
-        ShortestPathTreeSolver = 0, //double or int
+        ShortestPathTreeSolver = 0,
         ODMatrixSolver = 1,
         TransportationSolver = 2,
         MinCostFlowSolver = 3,
         MinSpanningTreeSolver = 4,
         TransshipmentSolver = 5,
-        NetworkBuilderResult = 6
+        NetworkBuilderResult = 6,
+        IsolinesSolver = 7
     };
 
     /**

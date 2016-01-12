@@ -32,6 +32,18 @@ void ShortestPathTree::Solve(Network& net)
     unsigned int arcCount = net.GetCurrentArcCount();
     unsigned int nodeCount = net.GetCurrentNodeCount();
 
+    //TODO: check for node supply in network
+    /*NodeSupplies ns = net.GetNodeSupplies();
+    for (auto kv : ns)
+    {
+        IntNodeID id = kv.first;
+        NodeSupply s = kv.second;
+        if (s.supply < 0)
+            this->originNode = id;
+        if (s.supply > 0)
+            this->destinationNodes.push_back(id);
+    }*/
+
     if (destinationNodes.size() == 0)
     {
         //set the size for the heap to m/n (arcs/nodes) if -1
@@ -647,7 +659,7 @@ void netxpert::ShortestPathTree::SaveResults(const std::string& resultTableName,
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
                 auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::ShortestPathTreeSolver));
                 //}
             }
                 break;
@@ -745,8 +757,8 @@ void netxpert::ShortestPathTree::SaveResults(const std::string& resultTableName,
                 arcIDs.pop_back(); //trim last comma
             }
 
-            string orig;
-            string dest;
+            string orig = "";
+            string dest = "";
             try{
                 orig = this->net->GetOriginalStartOrEndNodeID(key.origin);
             }
@@ -763,13 +775,13 @@ void netxpert::ShortestPathTree::SaveResults(const std::string& resultTableName,
             }
             catch (exception& ex) {
                 try {
-                    orig = this->net->GetOriginalNodeID(key.dest);
+                    dest = this->net->GetOriginalNodeID(key.dest);
                 }
                 catch (exception& ex){
-                    orig = to_string(key.dest);
+                    dest = to_string(key.dest);
                 }
             }
-            this->net->ProcessResultArcsMem(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
+            this->net->ProcessSPTResultArcsMem(orig, dest, costPerPath, arcIDs, route, resultTableName, *writer, *qry);
             }//omp single
         }
         }//omp paralell
@@ -780,7 +792,7 @@ void netxpert::ShortestPathTree::SaveResults(const std::string& resultTableName,
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("Network::SaveResults() - Unexpected Error!");
+        LOGGER::LogError("ShortestPaths::SaveResults() - Unexpected Error!");
         LOGGER::LogError(ex.what());
     }
 }
@@ -834,24 +846,13 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
     }
 
     supply.resize( net.GetMaxNodeCount(), 0 ); //Größe muss passen!
-    //cout << "supply vector size: "<< supply.size() << endl;
-    /*cout << "net supply size: " << net.GetNodeSupplies().size() <<endl;
-    for (auto item : net.GetNodeSupplies() )
-    {
-        unsigned int key = item.first;
-        NodeSupply value = item.second;
-        // key is 1-based thus -1 for index
-        // only care for real supply and demand values
-        // transshipment nodes (=0) are already present in the array (because of new array)
-        supply[key - 1] = value.supply;
-    }*/
-    //cout << "ready converting data" << endl;
 }
 
 bool ShortestPathTree::validateNetworkData(Network& net, unsigned int orig)
 {
     bool valid = false;
-
+    //
+    cout << "Orig: "<<orig << endl;
     //IMPORTANT Checks
     if (orig == 0){
         LOGGER::LogFatal("Origin Node ID must be greater than zero!");

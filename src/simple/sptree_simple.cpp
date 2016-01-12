@@ -3,7 +3,7 @@
 netxpert::simple::ShortestPathTree::ShortestPathTree(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    this->NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
 }
 
 int netxpert::simple::ShortestPathTree::Solve()
@@ -101,7 +101,7 @@ int netxpert::simple::ShortestPathTree::Solve()
         LOGGER::LogInfo("Optimum: " + to_string(spt.GetOptimum()));
         LOGGER::LogInfo("Count of ShortestPaths: " +to_string( spt.GetShortestPaths().size() ) );
 
-        spt.SaveResults(cnfg.ResultTableName, cmap);
+        spt.SaveResults(resultTableName, cmap);
 
         return 0; // OK
     }
