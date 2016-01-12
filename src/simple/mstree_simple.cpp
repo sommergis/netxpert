@@ -73,7 +73,7 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         LOGGER::LogInfo("Optimum: " + to_string(mst.GetOptimum()));
         LOGGER::LogInfo("Count of MST: " + to_string(mst.GetMinimumSpanningTree().size()) );
 
-        mst.SaveResults(cnfg.ResultTableName, cmap);
+        mst.SaveResults(resultTableName, cmap);
 
         return 0; //OK
     }

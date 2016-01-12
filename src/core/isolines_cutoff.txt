@@ -1,0 +1,16 @@
+	//ISOLINES (cutoff)
+	if (allDests)
+	{
+		dijk->init();
+		dijk->addSource(orig);
+		unsigned dest = 0;
+		SmartDigraph::Node n = g.nodeFromId(dest);
+		double cutoff = 100;
+		while (!dijk->emptyQueue())
+		{
+			if (dijk->dist(n) <= cutoff)
+			{
+				dijk->processNextNode();
+			}
+		}
+	}

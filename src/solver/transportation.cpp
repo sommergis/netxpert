@@ -48,7 +48,7 @@ void Transportation::SaveResults(const std::string& resultTableName, const netxp
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
                 auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::TransportationSolver));
                 //}
             }
                 break;
@@ -155,8 +155,8 @@ void Transportation::SaveResults(const std::string& resultTableName, const netxp
             if (arcIDs.size() > 0)
                 arcIDs.pop_back(); //trim last comma
 
-            string orig;
-            string dest;
+            string orig = "";
+            string dest = "";
             try{
                 orig = this->net->GetOriginalStartOrEndNodeID(key.origin);
             }
@@ -173,13 +173,13 @@ void Transportation::SaveResults(const std::string& resultTableName, const netxp
             }
             catch (exception& ex) {
                 try {
-                    orig = this->net->GetOriginalNodeID(key.dest);
+                    dest = this->net->GetOriginalNodeID(key.dest);
                 }
                 catch (exception& ex){
-                    orig = to_string(key.dest);
+                    dest = to_string(key.dest);
                 }
             }
-            this->net->ProcessResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
+            this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
             }//omp single
         }
         }//omp paralell
@@ -332,10 +332,9 @@ void Transportation::Solve()
     bool autoCleanNetwork = cnfg.CleanNetwork;
 
     //construct network from external ODMatrix
-    //Network net(arcs, nodes, cmap, cnfg);
-    //net.ConvertInputNetwork(autoCleanNetwork);
-
-    this->net = std::unique_ptr<Network>(new Network(arcs, nodes, cmap, cnfg));
+    //TODO: checkme (pointer resource dealloc)
+    Network n (arcs, nodes, cmap, cnfg);
+    this->net = &n;
     this->net->ConvertInputNetwork(autoCleanNetwork);
 
     Network net = *this->net;
@@ -413,7 +412,7 @@ void Transportation::Solve()
 void Transportation::Solve(Network& net)
 {
     //TODO: Checkme!
-    this->net = std::unique_ptr<Network>( move(&net) );
+    this->net = &net;
 
     if (this->originNodes.size() == 0 || this->destinationNodes.size() == 0)
         throw std::runtime_error("Origin nodes and destination nodes must be filled in Transportation Solver!");

@@ -120,7 +120,7 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const netxp
 				/*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
 				{*/
 				auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-				qry = unique_ptr<SQLite::Statement>(sldbWriter.PrepareSaveNetworkBuilderArc(resultTableName));
+				qry = unique_ptr<SQLite::Statement>(sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::NetworkBuilderResult));
 				//}
 				break;
 			}

@@ -322,6 +322,7 @@ unordered_map<ODPair, double> OriginDestinationMatrix::GetODMatrix() const
 double OriginDestinationMatrix::GetOptimum() const {
     return this->optimum;
 }
+
 void OriginDestinationMatrix::SaveResults(const std::string& resultTableName,
                                             const netxpert::ColumnMap& cmap) const
 {
@@ -350,7 +351,7 @@ void OriginDestinationMatrix::SaveResults(const std::string& resultTableName,
                 /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
                 {*/
                 auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName));
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::ODMatrixSolver));
                 //}
             }
                 break;
@@ -451,8 +452,8 @@ void OriginDestinationMatrix::SaveResults(const std::string& resultTableName,
                 arcIDs.pop_back(); //trim last comma
             }
 
-            string orig;
-            string dest;
+            string orig = "";
+            string dest = "";
             try{
                 orig = this->net->GetOriginalStartOrEndNodeID(key.origin);
             }
@@ -469,16 +470,16 @@ void OriginDestinationMatrix::SaveResults(const std::string& resultTableName,
             }
             catch (exception& ex) {
                 try {
-                    orig = this->net->GetOriginalNodeID(key.dest);
+                    dest = this->net->GetOriginalNodeID(key.dest);
                 }
                 catch (exception& ex){
-                    orig = to_string(key.dest);
+                    dest = to_string(key.dest);
                 }
             }
-            sw.start();
-            this->net->ProcessResultArcsMem(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer, *qry);
-            sw.stop();
-            avgGeoProcTime += sw.elapsed();
+            //sw.start();
+            this->net->ProcessSPTResultArcsMem(orig, dest, costPerPath, arcIDs, route, resultTableName, *writer, *qry);
+            //sw.stop();
+            //avgGeoProcTime += sw.elapsed();
             }//omp single
         }
 

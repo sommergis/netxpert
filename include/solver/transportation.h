@@ -42,7 +42,7 @@ namespace netxpert {
 
             std::vector<InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
-            std::unique_ptr<Network> net;
+            Network* net;
 
             void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
 

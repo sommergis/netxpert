@@ -25,8 +25,10 @@ namespace netxpert {
             void SetAlgorithm(netxpert::MCFAlgorithm mcfAlgorithm);
             netxpert::MCFSolverStatus GetSolverStatus() const;
             double GetOptimum() const;
+            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
 
         protected:
+            //visible also to derived classes
             Config NETXPERT_CNFG;
             double optimum = 0;
             netxpert::MCFSolverStatus solverStatus;
@@ -38,6 +40,10 @@ namespace netxpert {
             void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
                                                     std::vector<unsigned int>& eNds, std::vector<double>& supply,
                                                     std::vector<double>& caps, std::vector<double>& costs);
+
+        private:
+            //private is only visible to MCF instance - not to derived classes (like TP)
+            Network* net;
     };
 }
 #endif // MINCOSTFLOW_H

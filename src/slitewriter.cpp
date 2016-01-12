@@ -264,8 +264,6 @@ void SpatiaLiteWriter::createTable (const string& _tableName, const NetXpertSolv
             strSQL = "CREATE TABLE "+_tableName +
                            " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
                            "originalArcID TEXT,"+
-                            /*"fromCoord TEXT,"
-                            "toCoord TEXT," */
                             "fromNode INTEGER,"+
                             "toNode INTEGER,"+
                             "cost DOUBLE,"+
@@ -274,12 +272,49 @@ void SpatiaLiteWriter::createTable (const string& _tableName, const NetXpertSolv
                             "geometry LINESTRING)";
             break;
         }
-        default:
+        case NetXpertSolver::MinSpanningTreeSolver:
+        {
+            strSQL = "CREATE TABLE "+_tableName +
+                           " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                           "originalArcID TEXT,"+
+                            "cost DOUBLE,"+
+                            "geometry MULTILINESTRING)";
+            break;
+        }
+        case NetXpertSolver::ShortestPathTreeSolver:
+        {
+            strSQL = "CREATE TABLE "+_tableName +
+                           " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                            "fromNode TEXT,"+
+                            "toNode TEXT,"+
+                            "cost DOUBLE,"+
+                            "geometry MULTILINESTRING)";
+            break;
+        }
+        case NetXpertSolver::ODMatrixSolver:
+        {
+            strSQL = "CREATE TABLE "+_tableName +
+                           " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                            "fromNode TEXT,"+
+                            "toNode TEXT,"+
+                            "cost DOUBLE,"+
+                            "geometry MULTILINESTRING)";
+            break;
+        }
+        case NetXpertSolver::IsolinesSolver:
+        {
+            strSQL = "CREATE TABLE "+_tableName +
+                           " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                            "fromNode TEXT,"+
+                            "cost DOUBLE,"+
+                            "cutoff DOUBLE,"+
+                            "geometry MULTILINESTRING)";
+            break;
+        }
+        default: //MCF, TPs
         {
             strSQL = "CREATE TABLE "+_tableName +
                    " (PK_UID INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    /*"fromCoord TEXT,"
-                    "toCoord TEXT," */
                     "fromNode TEXT,"+
                     "toNode TEXT,"+
                     "cost DOUBLE,"+
@@ -292,7 +327,7 @@ void SpatiaLiteWriter::createTable (const string& _tableName, const NetXpertSolv
 
     SQLite::Database& db = *connPtr;
     SQLite::Statement query(db, strSQL);
-
+    cout << strSQL << endl;
     query.exec();
     query.reset();
 }
@@ -334,40 +369,46 @@ void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColN
     }
 }
 
-std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveNetworkBuilderArc(const std::string& _tableName)
+
+std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const std::string& _tableName,
+                                                                          const netxpert::NetXpertSolver solverType)
 {
     try
     {
         if (!isConnected)
             connect();
 
-        const string sqlStr = "INSERT INTO "+_tableName +"(originalArcID,fromNode,toNode,cost,capacity,oneway,geometry) VALUES " +
+        string sqlStr = "";
+
+        switch (solverType)
+        {
+        case NetXpertSolver::NetworkBuilderResult:
+            sqlStr = "INSERT INTO "+_tableName +"(originalArcID,fromNode,toNode,cost,capacity,oneway,geometry) VALUES " +
                                            "(@originalArcID,@fromNode,@toNode,@cost,@cap,@oneway,GeomFromWKB(@geom))";
-        SQLite::Database& db = *connPtr;
-        //cout << sqlStr << endl;
-        auto query = unique_ptr<SQLite::Statement>(new SQLite::Statement(db, sqlStr));
-
-        //LOGGER::LogDebug("Successfully prepared query.");
-        return query;
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error preparing query!" );
-        LOGGER::LogError( ex.what() );
-        return nullptr;
-    }
-}
-
-
-std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const std::string& _tableName)
-{
-    try
-    {
-        if (!isConnected)
-            connect();
-
-        const string sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,capacity,flow,geometry) VALUES " +
+            break;
+        case NetXpertSolver::MinSpanningTreeSolver:
+            sqlStr = "INSERT INTO "+_tableName +"(originalArcID,cost,geometry) VALUES " +
+                                           "(@originalArcID,@cost,GeomFromWKB(@geom))";
+            break;
+        case NetXpertSolver::ShortestPathTreeSolver:
+            sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,geometry) VALUES " +
+                                           "(@orig,@dest,@cost,GeomFromWKB(@geom))";
+            break;
+        case NetXpertSolver::ODMatrixSolver:
+            sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,geometry) VALUES " +
+                                           "(@orig,@dest,@cost,GeomFromWKB(@geom))";
+            break;
+        case NetXpertSolver::IsolinesSolver:
+            sqlStr = "INSERT INTO "+_tableName +"(fromNode,cost,cutoff,geometry) VALUES " +
+                                           "(@orig,@cost,@cutoff,GeomFromWKB(@geom))";
+            break;
+        default: //+MinCostFlow, Transportation, Transshipment
+            sqlStr = "INSERT INTO "+_tableName +"(fromNode,toNode,cost,capacity,flow,geometry) VALUES " +
                                            "(@orig,@dest,@cost,@cap,@flow,GeomFromWKB(@geom))";
+            break;
+        }
+
+
         SQLite::Database& db = *connPtr;
         auto query = unique_ptr<SQLite::Statement>(new SQLite::Statement(db, sqlStr));
 
@@ -382,6 +423,7 @@ std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const 
     }
 }
 
+//NetworkBuilder
 void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
                                        const unsigned int toNode, const double cost,
                                        const double capacity, const std::string& oneway,
@@ -432,7 +474,7 @@ void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const 
     }
 }
 
-
+//default : MCF, TP
 void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
                                      const double capacity, const double flow, const geos::geom::MultiLineString& route,
                                      const std::string& _tableName, SQLite::Statement& query)
@@ -447,7 +489,6 @@ void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string&
         query.bind("@flow", flow);
 
         WKBWriter writer;
-        //cout<<"WKBtest: machine byte order: "<<BYTE_ORDER<<endl;
         std::stringstream oss (ios::out|ios::binary);
 
         writer.write(route, oss);
@@ -467,10 +508,9 @@ void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string&
 
         query.bind("@geom", blob, static_cast<int>(offset));
 
-        //cout << "binding complete"<<endl;
-
         query.exec();
         query.reset();
+
     }
     catch (std::exception& ex)
     {
@@ -478,6 +518,136 @@ void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string&
         LOGGER::LogError( ex.what() );
     }
 }
+
+//SPT + ODM
+void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
+                                     const geos::geom::MultiLineString& route,
+                                     const std::string& _tableName, SQLite::Statement& query)
+{
+    try
+    {
+        // Bind values to the parameters of the SQL query
+        query.bind("@orig", orig);
+        query.bind("@dest", dest);
+        query.bind("@cost", cost);
+
+        WKBWriter writer;
+        std::stringstream oss (ios::out|ios::binary);
+
+        writer.write(route, oss);
+
+        //Get length
+        oss.seekp(0, ios::end);
+        stringstream::pos_type offset = oss.tellp();
+        //oss.seekp(0, ios::beg); //set to the start of stream
+
+        //DON'T
+        //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+        //const char* blob = oss.str().c_str();
+
+        //CORRECT
+        string s = oss.str();
+        const char* blob = s.c_str();
+
+        query.bind("@geom", blob, static_cast<int>(offset));
+
+        query.exec();
+        query.reset();
+
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error saving results to NetXpert SpatiaLite DB!" );
+        LOGGER::LogError( ex.what() );
+    }
+}
+
+//Isolines
+void SpatiaLiteWriter::SaveResultArc(const std::string& orig, const double cost, const double cutoff,
+                                     const geos::geom::MultiLineString& route,
+                                     const std::string& _tableName, SQLite::Statement& query)
+{
+    try
+    {
+        // Bind values to the parameters of the SQL query
+        query.bind("@orig", orig);
+        query.bind("@cost", cost);
+        query.bind("@cutoff", cutoff);
+
+        WKBWriter writer;
+        std::stringstream oss (ios::out|ios::binary);
+
+        writer.write(route, oss);
+
+        //Get length
+        oss.seekp(0, ios::end);
+        stringstream::pos_type offset = oss.tellp();
+        //oss.seekp(0, ios::beg); //set to the start of stream
+
+        //DON'T
+        //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+        //const char* blob = oss.str().c_str();
+
+        //CORRECT
+        string s = oss.str();
+        const char* blob = s.c_str();
+
+        query.bind("@geom", blob, static_cast<int>(offset));
+
+        query.exec();
+        query.reset();
+
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error saving results to NetXpert SpatiaLite DB!" );
+        LOGGER::LogError( ex.what() );
+    }
+}
+
+//MST
+void SpatiaLiteWriter::SaveResultArc(const std::string& extArcID, const double cost,
+                                     const geos::geom::MultiLineString& route,
+                                     const std::string& _tableName, SQLite::Statement& query)
+{
+    try
+    {
+        // Bind values to the parameters of the SQL query
+        query.bind("@originalArcID", extArcID);
+        query.bind("@cost", cost);
+
+        WKBWriter writer;
+        std::stringstream oss (ios::out|ios::binary);
+
+        writer.write(route, oss);
+
+        //Get length
+        oss.seekp(0, ios::end);
+        stringstream::pos_type offset = oss.tellp();
+        //oss.seekp(0, ios::beg); //set to the start of stream
+
+        //DON'T
+        //http://blog.sensecodons.com/2013/04/dont-let-stdstringstreamstrcstr-happen.html
+        //const char* blob = oss.str().c_str();
+
+        //CORRECT
+        string s = oss.str();
+        const char* blob = s.c_str();
+
+        query.bind("@geom", blob, static_cast<int>(offset));
+
+        query.exec();
+        query.reset();
+
+    }
+    catch (std::exception& ex)
+    {
+        LOGGER::LogError( "Error saving results to NetXpert SpatiaLite DB!" );
+        LOGGER::LogError( ex.what() );
+    }
+}
+
+//--> UNUSED!
 /**
 *   Case: Route parts and original arc ids form a result arc.
 */
@@ -503,7 +673,7 @@ void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std
     }
 }
 
-
+// UNUSED
 void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
                                      string geomColumnName, string arcIDColumnName, string arcTableName,
                                      const string& arcIDs, const MultiLineString& mLine, string resultTableName)
@@ -584,9 +754,7 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
 /**
 *   Case: Original arc ids form a result arc.
 */
-void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std::string& dest, const double cost,
-                                        const double capacity, const double flow,
-                                        const std::string& geomColumnName, const std::string arcIDColumnName,
+void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& costColumnName, const std::string& geomColumnName, const std::string arcIDColumnName,
                                         const std::string& arcTableName, const std::string& arcIDs,
                                         const std::string& resultTableName)
 {
@@ -595,7 +763,7 @@ void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std
         if (!isConnected)
             connect();
 
-        mergeAndSaveResultArcs(orig, dest, cost, capacity, flow, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
+        mergeAndSaveResultArcs(costColumnName, geomColumnName, arcIDColumnName, arcTableName, arcIDs,
                                             resultTableName);
         return;
     }
@@ -605,13 +773,12 @@ void SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string& orig, const std
         throw ex;
     }
 }
-void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double cost, double capacity, double flow,
-                                                string geomColumnName, string arcIDColumnName, string arcTableName,
+void SpatiaLiteWriter::mergeAndSaveResultArcs(string costColumnName, string geomColumnName, string arcIDColumnName, string arcTableName,
                                                 const string& arcIDs, string resultTableName)
 {
     //Outputs SRID is always 0
-    const string sqlStr = "INSERT INTO "+ resultTableName+"(fromNode, toNode, cost, capacity, flow, geometry) " +
-                " SELECT @orig, @dest, @cost, @capacity, @flow, SetSRID(CastToMultiLineString(" + geomColumnName +"),0) " +
+    const string sqlStr = "INSERT INTO "+ resultTableName+"(originalArcID, cost, geometry) " +
+                " SELECT "+arcIDColumnName+","+ costColumnName +", SetSRID(CastToMultiLineString(" + geomColumnName +"),0) " +
                 "  FROM "+arcTableName+" WHERE "+arcIDColumnName+" IN ("+ arcIDs +") ";
 
     //cout << sqlStr << endl;
@@ -619,12 +786,6 @@ void SpatiaLiteWriter::mergeAndSaveResultArcs(string orig, string dest, double c
 
     SQLite::Database& db = *connPtr;
     SQLite::Statement qry(db, sqlStr);
-
-    qry.bind("@orig", orig);
-    qry.bind("@dest", dest);
-    qry.bind("@cost", cost);
-    qry.bind("@capacity", capacity);
-    qry.bind("@flow", flow);
 
     qry.exec();
 }

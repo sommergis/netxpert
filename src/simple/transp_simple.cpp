@@ -102,7 +102,7 @@ int netxpert::simple::Transportation::Solve()
         unordered_map<ODPair, DistributionArc> result = transp.GetDistribution();
         LOGGER::LogInfo("Count of Distributions: " + to_string(result.size()) );
 
-        transp.SaveResults(cnfg.ResultTableName, cmap);
+        transp.SaveResults(resultTableName, cmap);
 
         return 0; //OK
     }

@@ -21,6 +21,9 @@ void MinCostFlow::Solve(string net){}
 
 void MinCostFlow::Solve(Network& net)
 {
+    //TODO: Checkme
+    this->net = &net;
+
     //Check Balancing of Min Cost Flow Instance
     auto type = net.GetMinCostFlowInstanceType();
     LOGGER::LogInfo("Type of Min Cost Flow Instance: "+ to_string(type));
@@ -34,6 +37,167 @@ void MinCostFlow::Solve(Network& net)
     catch (exception& ex)
     {
         LOGGER::LogError("Exception solving MCF Problem.");
+    }
+}
+
+void MinCostFlow::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+{
+    try
+    {
+        Config cnfg = this->NETXPERT_CNFG;
+
+        unique_ptr<DBWriter> writer;
+        unique_ptr<SQLite::Statement> qry;
+        switch (cnfg.ResultDBType)
+        {
+            case RESULT_DB_TYPE::SpatiaLiteDB:
+            {
+                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
+                {
+                    //Override result DB Path with original netXpert DB path
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+                }
+                else
+				{
+                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+				}
+                writer->CreateNetXpertDB(); //create before preparing query
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
+                writer->CommitCurrentTransaction();
+                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+                {*/
+                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::MinCostFlowSolver));
+                //}
+            }
+                break;
+            case RESULT_DB_TYPE::ESRI_FileGDB:
+            {
+                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+                writer->CreateNetXpertDB();
+                writer->OpenNewTransaction();
+                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
+                writer->CommitCurrentTransaction();
+            }
+                break;
+        }
+
+        LOGGER::LogDebug("Writing Geometries..");
+        writer->OpenNewTransaction();
+
+        std::string arcIDs = "";
+        std::unordered_set<string> totalArcIDs;
+        std::vector<FlowCost>::iterator it;
+        vector<FlowCost> mcfResult = this->GetMinCostFlow();
+
+		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+		{
+			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
+			{
+				//populate arcIDs
+				for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+				{
+					#pragma omp single nowait
+					{
+						auto arcFlow = *it;
+						InternalArc key = arcFlow.intArc;
+						double cost = arcFlow.cost;
+						double flow = arcFlow.flow;
+						vector<InternalArc> arc{ key };
+						string id = "";
+
+						vector<ArcData> arcData = this->net->GetOriginalArcData(arc, cnfg.IsDirected);
+						// is only one arc
+						if (arcData.size() > 0)
+						{
+							ArcData arcD = *arcData.begin();
+							id = arcD.extArcID;
+							#pragma omp critical
+							{
+								if (id != "dummy")
+									totalArcIDs.insert(id);
+							}
+						}
+					}//omp single
+				}
+			}//omp parallel
+
+			for (string id : totalArcIDs)
+				arcIDs += id += ",";
+
+			if (arcIDs.size() > 0)
+			{
+				arcIDs.pop_back(); //trim last comma
+				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+			}
+			LOGGER::LogDebug("Done!");
+		}
+
+        int counter = 0;
+		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+        {
+        for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+        {
+            #pragma omp single nowait
+            {
+            auto arcFlow = *it;
+
+            counter += 1;
+            if (counter % 2500 == 0)
+                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+            string arcIDs = "";
+            InternalArc key = arcFlow.intArc;
+            double cost = arcFlow.cost;
+            double flow = arcFlow.flow;
+            double cap = -1;
+            vector<InternalArc> arc { key };
+
+            // cout << key.fromNode << "->" << key.toNode << endl;
+
+            vector<ArcData> arcData = this->net->GetOriginalArcData(arc, cnfg.IsDirected);
+            // is only one arc
+            if (arcData.size() > 0)
+            {
+                ArcData arcD = *arcData.begin();
+                arcIDs = arcD.extArcID;
+                cap = arcD.capacity;
+            }
+
+            string orig;
+            string dest;
+            try{
+                orig = this->net->GetOriginalStartOrEndNodeID(key.fromNode);
+            }
+            catch (exception& ex) {
+                orig = this->net->GetOriginalNodeID(key.fromNode);
+            }
+            try{
+                dest = this->net->GetOriginalStartOrEndNodeID(key.toNode);
+            }
+            catch (exception& ex) {
+                dest = this->net->GetOriginalNodeID(key.toNode);
+            }
+
+            if (orig != "dummy" && dest != "dummy")
+                this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer, *qry);
+            else
+                LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
+                                                to_string(cap) + ", flow: " +to_string(flow));
+            }//omp single
+        }
+        }//omp paralell
+        writer->CommitCurrentTransaction();
+        writer->CloseConnection();
+        LOGGER::LogDebug("Done!");
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError("MinCostFlow::SaveResults() - Unexpected Error!");
+        LOGGER::LogError(ex.what());
     }
 }
 

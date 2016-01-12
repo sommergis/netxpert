@@ -701,7 +701,7 @@ std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, co
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
-        //cout << sqlStr << endl;
+        cout << sqlStr << endl;
         SQLite::Statement query(db, sqlStr);
         //fetch data
         while (query.executeStep())
