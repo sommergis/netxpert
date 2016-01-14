@@ -22,7 +22,7 @@ namespace netxpert {
             ShortestPathTree(Config& cnfg);
 
             /** Default destructor */
-            virtual ~ShortestPathTree();
+            virtual ~ShortestPathTree() {}
 
             void Solve(string net);
             void Solve(Network& net);

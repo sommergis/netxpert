@@ -24,7 +24,7 @@ namespace netxpert {
             OriginDestinationMatrix(Config& cnfg);
 
             /** Default destructor */
-            virtual ~OriginDestinationMatrix();
+            virtual ~OriginDestinationMatrix() {}
 
             void Solve(string net);
             void Solve(Network& net);

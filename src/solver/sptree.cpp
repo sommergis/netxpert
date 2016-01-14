@@ -14,13 +14,6 @@ ShortestPathTree::ShortestPathTree(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-ShortestPathTree::~ShortestPathTree()
-{
-    //dtor
-    // no need for deleting Network pointer, because it's not a dynamically
-    // allocated (new()..)
-}
-
 void ShortestPathTree::Solve(string net){
     throw;
 }

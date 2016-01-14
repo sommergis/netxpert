@@ -23,7 +23,7 @@ namespace netxpert {
     {
         public:
             Isolines(Config& cnfg);
-            virtual ~Isolines() {};
+            virtual ~Isolines() {}
             void Solve(std::string net);
             void Solve(Network& net);
 

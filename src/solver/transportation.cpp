@@ -14,11 +14,6 @@ Transportation::Transportation(Config& cnfg) : MinCostFlow(cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-Transportation::~Transportation()
-{
-    //dtor
-}
-
 void Transportation::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
 {
     try
