@@ -269,8 +269,3 @@ bool MinimumSpanningTree::validateNetworkData(Network& net)
     valid = true;
     return valid;
 }
-
-MinimumSpanningTree::~MinimumSpanningTree()
-{
-    //dtor
-}

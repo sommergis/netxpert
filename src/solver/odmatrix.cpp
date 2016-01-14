@@ -14,11 +14,6 @@ OriginDestinationMatrix::OriginDestinationMatrix(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-OriginDestinationMatrix::~OriginDestinationMatrix()
-{
-    //dtor
-}
-
 void OriginDestinationMatrix::Solve(string net){
     throw;
 }

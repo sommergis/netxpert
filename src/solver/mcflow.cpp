@@ -12,11 +12,6 @@ MinCostFlow::MinCostFlow(Config& cnfg)
     IsDirected = true; //TODO CHECK always true?
 }
 
-MinCostFlow::~MinCostFlow()
-{
-    //dtor
-}
-
 void MinCostFlow::Solve(string net){}
 
 void MinCostFlow::Solve(Network& net)

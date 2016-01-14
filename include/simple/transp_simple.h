@@ -14,7 +14,7 @@ namespace netxpert {
     {
         public:
             Transportation(std::string jsonCnfg);
-            virtual ~Transportation(){};
+            virtual ~Transportation() {}
             int Solve();
             double GetOptimum();
             std::string GetDistributionAsJSON();

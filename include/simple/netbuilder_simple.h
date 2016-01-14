@@ -14,7 +14,7 @@ namespace netxpert {
 	{
 		public:
 			NetworkBuilder(std::string jsonCnfg);
-			virtual ~NetworkBuilder(){};
+			virtual ~NetworkBuilder() {}
 
 			int Build();
 

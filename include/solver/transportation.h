@@ -14,7 +14,7 @@ namespace netxpert {
     {
         public:
             Transportation(Config& cnfg);
-            virtual ~Transportation();
+            virtual ~Transportation() {}
 
             std::vector<unsigned int> GetOrigins() const;
             void SetOrigins(std::vector<unsigned int> origs);
