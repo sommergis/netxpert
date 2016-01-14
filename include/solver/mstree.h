@@ -18,7 +18,7 @@ namespace netxpert {
             MinimumSpanningTree(Config& cnfg);
 
             /** Default destructor */
-            virtual ~MinimumSpanningTree();
+            virtual ~MinimumSpanningTree() {}
 
             void Solve(string net);
             void Solve(Network& net);

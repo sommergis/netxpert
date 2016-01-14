@@ -14,7 +14,7 @@ namespace netxpert {
     {
         public:
             MinCostFlow(std::string jsonCnfg);
-            virtual ~MinCostFlow() {};
+            virtual ~MinCostFlow() {}
             int Solve();
             double GetOptimum();
             std::string GetMinimumCostFlowAsJSON();

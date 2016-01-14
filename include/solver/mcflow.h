@@ -16,7 +16,7 @@ namespace netxpert {
     {
         public:
             MinCostFlow(netxpert::Config& cnfg);
-            virtual ~MinCostFlow();
+            virtual ~MinCostFlow() {}
             void Solve(std::string net);
             void Solve(netxpert::Network& net);
             bool IsDirected;
