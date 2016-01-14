@@ -6,11 +6,6 @@ netxpert::simple::Isolines::Isolines(std::string jsonCnfg)
     this->NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
 }
 
-netxpert::simple::Isolines::~Isolines()
-{
-    //dtor
-}
-
 double netxpert::simple::Isolines::GetOptimum()
 {
     return this->optimum;
@@ -122,8 +117,11 @@ int netxpert::simple::Isolines::Solve()
             spt.SetDestinations( dests );
             spt.Solve(net);
             this->optimum += spt.GetOptimum();
-            auto localSPTs = spt.GetShortestPaths();
-            this->totalSPTs.insert(this->totalSPTs.end(), localSPTs.begin(), localSPTs.end() );
+			auto localSPTs = spt.GetShortestPaths();
+
+			//TODO: from unordered_map<ODPair, CompressedPath> to vector<ExtSPTreeArc>
+
+			//this->totalSPTs.insert();
             //TODO: cut off
             spt.SaveResults(cnfg.ResultTableName, cmap);
         }
