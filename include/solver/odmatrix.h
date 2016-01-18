@@ -10,6 +10,7 @@
 #include "SPTree_LDeque.h"
 #include "SPTree_LQueue.h"
 #include "sptlem.h"
+#include "sptlem_bijkstra.h"
 #include "data.h"
 
 namespace netxpert {

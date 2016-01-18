@@ -129,6 +129,10 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
             lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
             break;
+        case SPTAlgorithm::Bijkstra_2Heap_LEMON:
+            lspt = shared_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                    isDirected));
+            break;
         default:
             lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
@@ -146,9 +150,9 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.resize(anz + 1);
-    pre.resize(anz + 1);
-    nodes.resize(anz + 1);
+    a_pre.reserve(anz + 1);
+    pre.reserve(anz + 1);
+    nodes.reserve(anz + 1);
 
     vector<unsigned int>::iterator origIt;
 
@@ -181,6 +185,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         }
 
         unordered_map<unsigned int,unsigned int> arcs;
+        arcs.reserve(lspt->MCFmmax());
         int i;
         //omp: local arcs --> no concurrent writes per thread
         for (i = nmax; i > 0; i--)

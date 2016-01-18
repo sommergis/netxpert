@@ -40571,6 +40571,7 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "LDeque_MCFClass",SWIG_From_int(static_cast< int >(netxpert::LDeque_MCFClass)));
   SWIG_Python_SetConstant(d, "Dijkstra_Heap_MCFClass",SWIG_From_int(static_cast< int >(netxpert::Dijkstra_Heap_MCFClass)));
   SWIG_Python_SetConstant(d, "Dijkstra_2Heap_LEMON",SWIG_From_int(static_cast< int >(netxpert::Dijkstra_2Heap_LEMON)));
+  SWIG_Python_SetConstant(d, "Bijkstra_2Heap_LEMON",SWIG_From_int(static_cast< int >(netxpert::Bijkstra_2Heap_LEMON)));
   SWIG_Python_SetConstant(d, "NetworkSimplex_MCF",SWIG_From_int(static_cast< int >(netxpert::NetworkSimplex_MCF)));
   SWIG_Python_SetConstant(d, "NetworkSimplex_LEMON",SWIG_From_int(static_cast< int >(netxpert::NetworkSimplex_LEMON)));
   SWIG_Python_SetConstant(d, "Kruskal_LEMON",SWIG_From_int(static_cast< int >(netxpert::Kruskal_LEMON)));

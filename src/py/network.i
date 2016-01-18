@@ -209,7 +209,9 @@ namespace netxpert
         LQueue_MCFClass = 1,
         LDeque_MCFClass = 2,
         Dijkstra_Heap_MCFClass = 3,
-        Dijkstra_2Heap_LEMON = 4} ;
+        Dijkstra_2Heap_LEMON = 4,
+        Bijkstra_2Heap_LEMON = 5
+    } ;
 
     enum MCFAlgorithm {
         NetworkSimplex_MCF = 0,

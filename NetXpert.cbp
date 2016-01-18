@@ -73,12 +73,14 @@
 		<Unit filename="include/core/SPTree_Heap.h" />
 		<Unit filename="include/core/SPTree_LDeque.h" />
 		<Unit filename="include/core/SPTree_LQueue.h" />
+		<Unit filename="include/core/bijkstra.h" />
 		<Unit filename="include/core/imcflow.h" />
 		<Unit filename="include/core/imstree.h" />
 		<Unit filename="include/core/isptree.h" />
 		<Unit filename="include/core/mstlem.h" />
 		<Unit filename="include/core/netsimplexlem.h" />
 		<Unit filename="include/core/sptlem.h" />
+		<Unit filename="include/core/sptlem_bijkstra.h" />
 		<Unit filename="include/data.h" />
 		<Unit filename="include/dbhelper.h" />
 		<Unit filename="include/dbwriter.h" />
@@ -86,6 +88,7 @@
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
+		<Unit filename="include/simple/isolines_simple.h" />
 		<Unit filename="include/simple/mcfp_simple.h" />
 		<Unit filename="include/simple/mstree_simple.h" />
 		<Unit filename="include/simple/netbuilder_simple.h" />
@@ -127,6 +130,7 @@
 		<Unit filename="src/core/mstlem.cpp" />
 		<Unit filename="src/core/netsimplexlem.cpp" />
 		<Unit filename="src/core/sptlem.cpp" />
+		<Unit filename="src/core/sptlem_bijkstra.cpp" />
 		<Unit filename="src/dbhelper.cpp" />
 		<Unit filename="src/fgdbwriter.cpp" />
 		<Unit filename="src/logger.cpp" />
@@ -136,6 +140,7 @@
 		<Unit filename="src/py/network.i">
 			<Option compile="1" />
 		</Unit>
+		<Unit filename="src/simple/isolines_simple.cpp" />
 		<Unit filename="src/simple/mcfp_simple.cpp" />
 		<Unit filename="src/simple/mstree_simple.cpp" />
 		<Unit filename="src/simple/netbuilder_simple.cpp" />
