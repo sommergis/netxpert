@@ -939,6 +939,7 @@ LQueue_MCFClass = _pynetxpert.LQueue_MCFClass
 LDeque_MCFClass = _pynetxpert.LDeque_MCFClass
 Dijkstra_Heap_MCFClass = _pynetxpert.Dijkstra_Heap_MCFClass
 Dijkstra_2Heap_LEMON = _pynetxpert.Dijkstra_2Heap_LEMON
+Bijkstra_2Heap_LEMON = _pynetxpert.Bijkstra_2Heap_LEMON
 NetworkSimplex_MCF = _pynetxpert.NetworkSimplex_MCF
 NetworkSimplex_LEMON = _pynetxpert.NetworkSimplex_LEMON
 Kruskal_LEMON = _pynetxpert.Kruskal_LEMON

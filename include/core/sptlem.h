@@ -6,9 +6,11 @@
 
 #include "lemon/smart_graph.h"
 #include "lemon/dijkstra.h"
+#include "bijkstra.h"
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
+#include <vector>
 
 //Heap
 #include "lemon/quad_heap.h"
@@ -31,7 +33,8 @@ namespace netxpert {
     typedef Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>> DijkstraInternal;
 
     /**
-    *  \Class Core Solver for the Shortest Path Tree Problem with binary Heap structure and Dijkstra's algorithm of LEMON.
+    *  \Class Core Solver for the Shortest Path Tree Problem with binary Heap structure and
+    *   Dijkstra's algorithm of LEMON.
     */
     class SPT_LEM_2Heap : public ISPTree
     {

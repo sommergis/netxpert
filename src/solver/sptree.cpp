@@ -85,9 +85,9 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
 
     unsigned int nmax;
     unsigned int anz;
-    vector<unsigned int> a_pre;
+    /*vector<unsigned int> a_pre;
     vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    vector<unsigned int> nodes;*/
 
     vector<unsigned int> sNds;
     vector<unsigned int> eNds;
@@ -118,6 +118,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
             case SPTAlgorithm::Dijkstra_2Heap_LEMON:
                 spt = unique_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                             isDirected));
+                break;
+            case SPTAlgorithm::Bijkstra_2Heap_LEMON:
+                spt = unique_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
                 break;
             default:
                 break;
@@ -183,9 +187,15 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
 
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
-    a_pre.resize(anz + 1);
-    pre.resize(anz + 1);
-    nodes.resize(anz + 1);
+
+    vector<unsigned int> a_pre;
+    vector<unsigned int> pre;
+    vector<unsigned int> nodes;
+
+    a_pre.reserve(anz + 1);
+    pre.reserve(anz + 1);
+    nodes.reserve(anz + 1);
+
     try
     {
         // vector::data() returns pointer
@@ -199,15 +209,20 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
     }
 
     unordered_map<unsigned int,unsigned int> arcs;
+    arcs.reserve(spt->MCFmmax());
+    #pragma omp critical
+    {
     for (int i = nmax; i > 0; i--)
     {
         if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
             arcs.insert( make_pair(i,pre[i]));
     }
-    //Compute nodes vector
+
     for (int i = 1; i < anz + 1; i++) {
         nodes.push_back( (unsigned int)i );
     }
+    }//omp critical
+
     // Direction is irrelevant - the solver deals with the direction.
     // Thus it's not necessary to pay attention at this when building the route
     // out of the predecessors.
@@ -215,6 +230,8 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
     shortestPaths.clear();
     vector<unsigned int> route;
 
+    #pragma omp critical
+    {
     // Get all routes from orig to dest in nodes-List
     for (unsigned int dest : nodes)
     {
@@ -234,6 +251,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
             reachedDests.push_back(dest);
         }
     }
+    }//omp critical
     optimum = totalCost;
     //spt.Dispose();
 }
@@ -250,9 +268,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     unsigned int nmax;
     unsigned int anz;
+    /*
     vector<unsigned int> a_pre;
     vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    vector<unsigned int> nodes;*/
 
     vector<unsigned int> sNds;
     vector<unsigned int> eNds;
@@ -283,6 +302,15 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
             case SPTAlgorithm::Dijkstra_2Heap_LEMON:
                 spt = unique_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
+                break;
+            case SPTAlgorithm::Bijkstra_2Heap_LEMON:
+                {
+
+                LOGGER::LogDebug("Bijkstra..");
+                spt = unique_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+
+                }
                 break;
             default:
                 break;
@@ -354,8 +382,14 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
-    a_pre.resize(anz + 1);
-    pre.resize(anz + 1);
+
+    vector<unsigned int> a_pre;
+    vector<unsigned int> pre;
+    vector<unsigned int> nodes;
+
+    a_pre.reserve(anz + 1);
+    pre.reserve(anz + 1);
+    nodes.reserve(anz + 1);
 
     try
     {
@@ -370,6 +404,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     }
 
     unordered_map<unsigned int,unsigned int> arcs (nmax);
+    arcs.reserve(spt->MCFmmax());
     for (unsigned int i = nmax; i > 0; i--)
     {
         if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
@@ -410,9 +445,9 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     unsigned int nmax;
     unsigned int anz;
-    vector<unsigned int> a_pre;
+    /*vector<unsigned int> a_pre;
     vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    vector<unsigned int> nodes;*/
 
     vector<unsigned int> sNds;
     vector<unsigned int> eNds;
@@ -442,6 +477,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
                 break;
             case SPTAlgorithm::Dijkstra_2Heap_LEMON:
                 spt = unique_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+                break;
+            case SPTAlgorithm::Bijkstra_2Heap_LEMON:
+                spt = unique_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
                 break;
             default:
@@ -509,9 +548,15 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
-    a_pre.resize(anz + 1);
-    pre.resize(anz + 1);
-    nodes.resize(anz + 1);
+
+    vector<unsigned int> a_pre;
+    vector<unsigned int> pre;
+    vector<unsigned int> nodes;
+
+    a_pre.reserve(anz + 1);
+    pre.reserve(anz + 1);
+    nodes.reserve(anz + 1);
+
     try
     {
         // vector::data() returns pointer
@@ -525,6 +570,7 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     }
 
     unordered_map<unsigned int,unsigned int> arcs;
+    arcs.reserve(spt->MCFmmax());
     for (int i = nmax; i > 0; i--)
     {
         if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
