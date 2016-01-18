@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1451772655 source:/home/hahne/dev/netxpert/test/main.cpp
+1453046422 source:/home/hahne/dev/netxpert/test/main.cpp
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -15,7 +15,7 @@
 	"config.h"
 	"utils.h"
 
-1450385972 /home/hahne/dev/netxpert/include/config.h
+1453151427 /home/hahne/dev/netxpert/include/config.h
 	<map>
 	<vector>
 	<string>
@@ -391,7 +391,7 @@
 	<string>
 	"network.h"
 
-1449128451 /home/hahne/dev/netxpert/include/solver/sptree.h
+1453151288 /home/hahne/dev/netxpert/include/solver/sptree.h
 	"isolver.h"
 	"isptree.h"
 	"SPTree_Dijkstra.h"
@@ -399,6 +399,7 @@
 	"SPTree_LDeque.h"
 	"SPTree_LQueue.h"
 	"sptlem.h"
+	"sptlem_bijkstra.h"
 	"data.h"
 
 1440339921 /home/hahne/dev/netxpert/include/solver/isptree.h
@@ -440,25 +441,27 @@
 	"MCFClass.h"
 	"isptree.h"
 
-1450902503 /home/hahne/dev/netxpert/include/core/sptlem.h
+1453151549 /home/hahne/dev/netxpert/include/core/sptlem.h
 	<string>
 	"lemon/smart_graph.h"
 	"lemon/dijkstra.h"
+	"bijkstra.h"
 	<stdio.h>
 	<limits.h>
 	<string.h>
+	<vector>
 	"lemon/quad_heap.h"
 	"lemon/fib_heap.h"
 	"isptree.h"
 
-1449581382 /home/hahne/dev/netxpert/include/solver/mstree.h
+1452803732 /home/hahne/dev/netxpert/include/solver/mstree.h
 	"isolver.h"
 	"imstree.h"
 	"mstlem.h"
 
 1440339921 /home/hahne/dev/netxpert/include/solver/imstree.h
 
-1449348010 /home/hahne/dev/netxpert/include/solver/odmatrix.h
+1453151789 /home/hahne/dev/netxpert/include/solver/odmatrix.h
 	<omp.h>
 	"isolver.h"
 	"isptree.h"
@@ -467,6 +470,7 @@
 	"SPTree_LDeque.h"
 	"SPTree_LQueue.h"
 	"sptlem.h"
+	"sptlem_bijkstra.h"
 	"data.h"
 
 1446668438 /home/hahne/dev/netxpert/include/utils.h
@@ -489,7 +493,7 @@
 	<unistd.h>
 	<sys/stat.h>
 
-1451770622 /home/hahne/dev/netxpert/include/solver/mcflow.h
+1452803720 /home/hahne/dev/netxpert/include/solver/mcflow.h
 	"isolver.h"
 	"imcflow.h"
 	"MCFSimplex.h"
@@ -510,7 +514,7 @@
 	<limits.h>
 	<string.h>
 
-1451770756 /home/hahne/dev/netxpert/include/solver/transportation.h
+1452803765 /home/hahne/dev/netxpert/include/solver/transportation.h
 	"mcflow.h"
 	"odmatrix.h"
 
@@ -2033,35 +2037,35 @@
 
 1440845401 /home/hahne/dev/netxpert/include/core/imcflow.h
 
-1450292029 /home/hahne/dev/netxpert/include/simple/odmatrix_simple.h
+1452803816 /home/hahne/dev/netxpert/include/simple/odmatrix_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"odmatrix.h"
 
-1450292009 /home/hahne/dev/netxpert/include/simple/mstree_simple.h
+1452803803 /home/hahne/dev/netxpert/include/simple/mstree_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"mstree.h"
 
-1450291971 /home/hahne/dev/netxpert/include/simple/sptree_simple.h
+1452803820 /home/hahne/dev/netxpert/include/simple/sptree_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"sptree.h"
 
-1450292044 /home/hahne/dev/netxpert/include/simple/transp_simple.h
+1452803823 /home/hahne/dev/netxpert/include/simple/transp_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
 	"dbhelper.h"
 	"transportation.h"
 
-1450291981 /home/hahne/dev/netxpert/include/simple/mcfp_simple.h
+1452803798 /home/hahne/dev/netxpert/include/simple/mcfp_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
@@ -2170,7 +2174,7 @@
 1425417421 /home/hahne/dev/netxpert/libs/geos-3.4.2/include/geos/geomgraph/GeometryGraph.inl
 	<geos/geomgraph/GeometryGraph.h>
 
-1450292017 /home/hahne/dev/netxpert/include/simple/netbuilder_simple.h
+1452803807 /home/hahne/dev/netxpert/include/simple/netbuilder_simple.h
 	"data.h"
 	"utils.h"
 	"network.h"
@@ -2201,4 +2205,25 @@
 	<geos/geom/Coordinate.h>
 	<geos/geom/Geometry.h>
 	<geos/linearref/LinearLocation.h>
+
+1453045404 /home/hahne/dev/netxpert/include/core/bijkstra.h
+	<limits>
+	<lemon/list_graph.h>
+	<lemon/bin_heap.h>
+	<lemon/bits/path_dump.h>
+	<lemon/core.h>
+	<lemon/error.h>
+	<lemon/maps.h>
+	<lemon/path.h>
+
+1453151587 /home/hahne/dev/netxpert/include/core/sptlem_bijkstra.h
+	"lemon/smart_graph.h"
+	"bijkstra.h"
+	<stdio.h>
+	<limits.h>
+	<string.h>
+	<vector>
+	"lemon/quad_heap.h"
+	"lemon/fib_heap.h"
+	"isptree.h"
 

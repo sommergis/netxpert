@@ -1,5 +1,4 @@
 #include "sptlem.h"
-#include <vector>
 
 using namespace std;
 using namespace lemon;
@@ -37,11 +36,11 @@ void SPT_LEM_2Heap::ShortestPathTree()
 
 	if (allDests)
 	{
-		dijk->run(orig);
+        dijk->run(orig);
 	}
 	else
 	{
-		dijk->run(orig,dest);
+        dijk->run(orig,dest);
 	}
 	//if (allDests)
 	//{
@@ -147,7 +146,7 @@ void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 		}
     }
 	//init Dijkstra here
-	dijk = new DijkstraInternal(g,lengthVal);
+    dijk = new DijkstraInternal(g,lengthVal);
 	//DijkstraInternal dijk(g,lengthVal);
 }
 
@@ -174,7 +173,6 @@ bool SPT_LEM_2Heap::Reached( unsigned int NodeID )
     //1. uint to Lemon Node
 	SmartDigraph::Node node = nodes[NodeID-1];
     return dijk->reached(node);
-    //return false;
 }
 
 void SPT_LEM_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn )
@@ -183,8 +181,8 @@ void SPT_LEM_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, unsigned in
 	{
 		//id to lemon node
 		SmartDigraph::Node pathDest = nodes[Dst-1];
-
 		Path<SmartDigraph> path = dijk->path(pathDest);
+
 		for (int i = 0; i < path.length(); i++)
 		/*for (Path<SmartDigraph>::ArcIt a(path); a != INVALID; a++)*/
 		{
@@ -205,11 +203,12 @@ unsigned int* SPT_LEM_2Heap::ArcPredecessors( void )
 {
 	arcPredecessors = new unsigned int [MCFnmax()+1];
 	arcPredecessors[0] = 0; //first entry of pred has no predecessor
-	for (int i = 1; i < MCFnmax()+1; i++)
-	{
-		arcPredecessors[i] = g.id(dijk->predArc(nodes[i-1]));
-	}
-	return arcPredecessors;
+
+    for (int i = 1; i < MCFnmax()+1; i++)
+    {
+        arcPredecessors[i] = g.id(dijk->predArc(nodes[i-1]));
+    }
+    return arcPredecessors;
 }
 
 /**< Return a cIndex* vector p[] such that p[ i ] is the predecessor of node
@@ -221,10 +220,10 @@ unsigned int* SPT_LEM_2Heap::Predecessors( void )
 {
 	predecessors = new unsigned int [MCFnmax()+1];
 	predecessors[0] = 0; //first entry of pred has no predecessor
-	for (int i = 1; i < MCFnmax()+1; i++)
-	{
-		predecessors[i] = g.id(dijk->predNode(nodes[i-1])) + 1;
-	}
+    for (int i = 1; i < MCFnmax()+1; i++)
+    {
+        predecessors[i] = g.id(dijk->predNode(nodes[i-1])) + 1;
+    }
 	return predecessors;
 }
 
@@ -279,7 +278,7 @@ void SPT_LEM_2Heap::PrintResult( void )
 SPT_LEM_2Heap::~SPT_LEM_2Heap()
 {
     //dtor
-	delete dijk;
+    delete dijk;
 	delete distMap;
 	delete length;
 }
