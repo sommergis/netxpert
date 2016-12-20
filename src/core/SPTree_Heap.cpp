@@ -33,7 +33,7 @@
 #include "assert.h"
 #include "SPTree_Heap.h"
 
-using namespace netxpert;
+using namespace netxpert::core;
 
 /*--------------------------------------------------------------------------*/
 /*--------------------------------- MACROS ---------------------------------*/

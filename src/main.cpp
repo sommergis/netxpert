@@ -12,8 +12,12 @@
 #include "test.h"
 
 using namespace std;
-using namespace netxpert;
 using namespace cereal;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::utils;
+
 
 int main(int argc, char** argv)
 {
@@ -113,7 +117,7 @@ int main(int argc, char** argv)
         switch (cnfg.TestCase){
 
             case TESTCASE::NetworkConvert:
-                netxpert::Test::NetworkConvert(cnfg);
+                netxpert::test::NetworkConvert(cnfg);
                 break;
 
         }

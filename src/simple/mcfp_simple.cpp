@@ -1,14 +1,20 @@
 #include "mcfp_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::MinCostFlow::MinCostFlow(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 
 int netxpert::simple::MinCostFlow::Solve()
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -122,9 +128,9 @@ std::string netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
     return result;
 }
 
-std::vector<netxpert::FlowCost> netxpert::simple::MinCostFlow::GetMinimumCostFlow()
+std::vector<netxpert::data::FlowCost> netxpert::simple::MinCostFlow::GetMinimumCostFlow()
 {
-    std::vector<netxpert::FlowCost> result;
+    std::vector<netxpert::data::FlowCost> result;
     if (this->solver)
         result = this->solver->GetMinCostFlow();
     return result;

@@ -33,6 +33,7 @@
 #endif
 
 namespace netxpert {
+    namespace utils {
 
     template<typename TimeT = std::chrono::microseconds,
         typename ClockT=std::chrono::high_resolution_clock,
@@ -91,5 +92,6 @@ namespace netxpert {
             static std::string ReplaceAll(std::string& str, const std::string& from, const std::string& to);
             static bool IsEqual (const std::string& a, const std::string& b) { return a == b; }
     };
-}
+} //namespace utils
+}//namespace netxpert
 #endif // UTILS_H

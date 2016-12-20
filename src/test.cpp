@@ -2,8 +2,14 @@
 
 using namespace std;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::utils;
 
-void netxpert::Test::NetworkConvert(Config& cnfg)
+using namespace geos::geom;
+
+void netxpert::test::NetworkConvert(Config& cnfg)
 {
     try
     {
@@ -62,7 +68,7 @@ void netxpert::Test::NetworkConvert(Config& cnfg)
     }
 }
 
-void netxpert::Test::TestNetworkBuilder(Config& cnfg)
+void netxpert::test::TestNetworkBuilder(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -70,7 +76,7 @@ void netxpert::Test::TestNetworkBuilder(Config& cnfg)
 	simpleSolver.Build();
 }
 
-void netxpert::Test::TestFileGDBWriter(Config& cnfg)
+void netxpert::test::TestFileGDBWriter(Config& cnfg)
 {
     try
     {
@@ -101,7 +107,7 @@ void netxpert::Test::TestFileGDBWriter(Config& cnfg)
     }
 }
 
-void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
+void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 {
     try
     {
@@ -134,7 +140,7 @@ void netxpert::Test::TestSpatiaLiteWriter(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }
-void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
+void netxpert::test::TestCreateRouteGeometries(Config& cnfg)
 {
 	using namespace std;
 
@@ -184,7 +190,7 @@ void netxpert::Test::TestCreateRouteGeometries(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }
-void netxpert::Test::TestAddNodes(Config& cnfg)
+void netxpert::test::TestAddNodes(Config& cnfg)
 {
 	using namespace std;
 
@@ -316,7 +322,7 @@ void netxpert::Test::TestAddNodes(Config& cnfg)
     }
 }
 
-void netxpert::Test::TestMST(Config& cnfg)
+void netxpert::test::TestMST(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -324,7 +330,7 @@ void netxpert::Test::TestMST(Config& cnfg)
 	simpleSolver.Solve();
 }
 
-void netxpert::Test::TestSPT(Config& cnfg)
+void netxpert::test::TestSPT(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -332,7 +338,7 @@ void netxpert::Test::TestSPT(Config& cnfg)
 	simpleSolver.Solve();
 }
 
-void netxpert::Test::TestODMatrix(Config& cnfg)
+void netxpert::test::TestODMatrix(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -340,7 +346,15 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
 	simpleSolver.Solve(true);
 }
 
-void netxpert::Test::TestTransportation(Config& cnfg)
+void netxpert::test::TestODMatrix2(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::OriginDestinationMatrix simpleSolver(s, true); //experimental
+	simpleSolver.Solve(true);
+}
+
+void netxpert::test::TestTransportation(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -348,7 +362,7 @@ void netxpert::Test::TestTransportation(Config& cnfg)
 	simpleSolver.Solve();
 }
 
-void netxpert::Test::TestMCF(Config& cnfg)
+void netxpert::test::TestMCF(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
 	cout << s << endl;
@@ -356,7 +370,7 @@ void netxpert::Test::TestMCF(Config& cnfg)
 	simpleSolver.Solve();
 }
 
-void netxpert::Test::TestTransportationExt(Config& cnfg)
+void netxpert::test::TestTransportationExt(Config& cnfg)
 {
     try
     {
@@ -531,7 +545,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
 }
 
 
-/*void netxpert::Test::TestMCF(Config& cnfg)
+/*void netxpert::test::TestMCF(Config& cnfg)
 {
     try
     {
@@ -684,7 +698,7 @@ void netxpert::Test::TestTransportationExt(Config& cnfg)
 }*/
 
 /*
-void netxpert::Test::TestMST(Config& cnfg)
+void netxpert::test::TestMST(Config& cnfg)
 {
     try
     {
@@ -786,7 +800,7 @@ void netxpert::Test::TestMST(Config& cnfg)
     }
 }*/
 /*
-void netxpert::Test::TestSPT(Config& cnfg)
+void netxpert::test::TestSPT(Config& cnfg)
 {
     try
     {
@@ -945,7 +959,7 @@ void netxpert::Test::TestSPT(Config& cnfg)
 */
 
 /*
-void netxpert::Test::TestODMatrix(Config& cnfg)
+void netxpert::test::TestODMatrix(Config& cnfg)
 {
     try
     {
@@ -1111,7 +1125,7 @@ void netxpert::Test::TestODMatrix(Config& cnfg)
 
 
 /*
-void netxpert::Test::TestTransportation(Config& cnfg)
+void netxpert::test::TestTransportation(Config& cnfg)
 {
     try
     {

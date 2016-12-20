@@ -16,6 +16,7 @@
 #include "mstree.h"
 #include "sptree.h"
 #include "odmatrix.h"
+#include "odmatrix2.h"
 #include "mcflow.h"
 #include "transportation.h"
 #include "networkbuilder.h"
@@ -32,20 +33,21 @@ namespace netxpert
     /**
     * \Static Test functions for NetXpert
     **/
-    namespace Test
+    namespace test
     {
-        void NetworkConvert(Config& cnfg);
-        void TestFileGDBWriter(Config& cnfg);
-        void TestSpatiaLiteWriter(Config& cnfg);
-        void TestAddNodes(Config& cnfg);
-        void TestMST(Config& cnfg);
-        void TestSPT(Config& cnfg);
-        void TestODMatrix(Config& cnfg);
-        void TestCreateRouteGeometries(Config& cnfg);
-        void TestMCF(Config& cnfg);
-        void TestTransportation(Config& cnfg);
-        void TestTransportationExt(Config& cnfg);
-        void TestNetworkBuilder(Config& cnfg);
+        void NetworkConvert(netxpert::cnfg::Config& cnfg);
+        void TestFileGDBWriter(netxpert::cnfg::Config& cnfg);
+        void TestSpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
+        void TestAddNodes(netxpert::cnfg::Config& cnfg);
+        void TestMST(netxpert::cnfg::Config& cnfg);
+        void TestSPT(netxpert::cnfg::Config& cnfg);
+        void TestODMatrix(netxpert::cnfg::Config& cnfg);
+        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
+        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
+        void TestMCF(netxpert::cnfg::Config& cnfg);
+        void TestTransportation(netxpert::cnfg::Config& cnfg);
+        void TestTransportationExt(netxpert::cnfg::Config& cnfg);
+        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
     }
 }
 

@@ -2,6 +2,7 @@
 #define IMINCOSTFLOW_H
 
 namespace netxpert {
+    namespace core {
     /**
     * \Class Abstract Class (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.
     */
@@ -24,5 +25,6 @@ namespace netxpert {
             virtual void CheckDSol()=0;
             /* end of MCFClass MCFsimplex Interface */
     };
-}
+} //namespace core
+}//namespace netxpert
 #endif // IMINCOSTFLOW_H

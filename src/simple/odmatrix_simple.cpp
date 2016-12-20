@@ -1,13 +1,25 @@
 #include "odmatrix_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::OriginDestinationMatrix::OriginDestinationMatrix(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
+}
+netxpert::simple::OriginDestinationMatrix::OriginDestinationMatrix(std::string jsonCnfg, bool experimentalVersion)
+{
+    //Convert JSON Config to real Config Object
+    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
+    this->experimentalVersion = experimentalVersion;
 }
 int netxpert::simple::OriginDestinationMatrix::Solve()
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -26,23 +38,23 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
                 LOGGER::Initialize(cnfg);
             }
         }
-        catch (exception& ex)
+        catch (std::exception& ex)
         {
-            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
-            cout << ex.what() << endl;
+            std::cout << "Error creating log file: " + cnfg.LogFileFullPath << std::endl;
+            std::cout << ex.what() << std::endl;
         }
 
         InputArcs arcsTable;
-        vector<NewNode> nodesTable;
+        std::vector<NewNode> nodesTable;
 
-        string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
+        std::string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
 
-        string pathToSpatiaLiteDB = cnfg.NetXDBPath;
-        string arcsTableName = cnfg.ArcsTableName;
+        std::string pathToSpatiaLiteDB = cnfg.NetXDBPath;
+        std::string arcsTableName = cnfg.ArcsTableName;
 
-        string nodesTableName = cnfg.NodesTableName;
-        string nodesGeomColName = cnfg.NodesGeomColumnName;
-        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_odm" : cnfg.ResultTableName;
+        std::string nodesTableName = cnfg.NodesTableName;
+        std::string nodesGeomColName = cnfg.NodesGeomColumnName;
+        std::string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_odm" : cnfg.ResultTableName;
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
@@ -67,25 +79,25 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<unsigned int, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<unsigned int, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
         // Solver
-        solver = unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
+        solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
         auto& odm = *solver;
-        vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+        std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
         for (auto s : startNodes)
             origs.push_back(s.first);
 
         odm.SetOrigins( origs );
 
-        vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
         for (auto e : endNodes)
             dests.push_back(e.first);
 
@@ -100,7 +112,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
 
         return 0; //OK
     }
-    catch (exception& ex)
+    catch (std::exception& ex)
     {
         LOGGER::LogError("OriginDestination_Simple::Solve() - Unexpected Error!");
         LOGGER::LogError(ex.what());
@@ -111,7 +123,9 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
 
 int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -130,23 +144,23 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
                 LOGGER::Initialize(cnfg);
             }
         }
-        catch (exception& ex)
+        catch (std::exception& ex)
         {
-            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
-            cout << ex.what() << endl;
+            std::cout << "Error creating log file: " + cnfg.LogFileFullPath << std::endl;
+            std::cout << ex.what() << std::endl;
         }
 
         InputArcs arcsTable;
-        vector<NewNode> nodesTable;
+        std::vector<NewNode> nodesTable;
 
-        string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
+        std::string arcsGeomColumnName = cnfg.ArcsGeomColumnName;
 
-        string pathToSpatiaLiteDB = cnfg.NetXDBPath;
-        string arcsTableName = cnfg.ArcsTableName;
+        std::string pathToSpatiaLiteDB = cnfg.NetXDBPath;
+        std::string arcsTableName = cnfg.ArcsTableName;
 
-        string nodesTableName = cnfg.NodesTableName;
-        string nodesGeomColName = cnfg.NodesGeomColumnName;
-        string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_odm" : cnfg.ResultTableName;
+        std::string nodesTableName = cnfg.NodesTableName;
+        std::string nodesGeomColName = cnfg.NodesGeomColumnName;
+        std::string resultTableName = cnfg.ResultTableName.empty() ? cnfg.ArcsTableName + "_odm" : cnfg.ResultTableName;
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
@@ -173,40 +187,69 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<unsigned int, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<unsigned int, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
-        // Solver
-        solver = unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
-        auto& odm = *solver;
-        vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
-        for (auto s : startNodes)
-            origs.push_back(s.first);
+        if (this->experimentalVersion)
+        {
+            solver2 = std::unique_ptr<netxpert::OriginDestinationMatrix2> (new netxpert::OriginDestinationMatrix2(cnfg));
+            auto& odm = *solver2;
+            std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+            for (auto s : startNodes)
+                origs.push_back(s.first);
 
-        odm.SetOrigins( origs );
+            odm.SetOrigins( origs );
 
-        vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
-        for (auto e : endNodes)
-            dests.push_back(e.first);
+            std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+            for (auto e : endNodes)
+                dests.push_back(e.first);
 
-        odm.SetDestinations( dests );
+            odm.SetDestinations( dests );
 
-        odm.Solve(net);
+            odm.Solve(net);
 
-        LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
-        LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
+            LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
+            LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
 
-        odm.SaveResults(resultTableName, cmap);
+            odm.SaveResults(resultTableName, cmap);
 
-        return 0; //OK
+            return 0; //OK
+        }
+
+        else
+        {
+            solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
+            auto& odm = *solver;
+
+            std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+            for (auto s : startNodes)
+                origs.push_back(s.first);
+
+            odm.SetOrigins( origs );
+
+            std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+            for (auto e : endNodes)
+                dests.push_back(e.first);
+
+            odm.SetDestinations( dests );
+
+            odm.Solve(net);
+
+            LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
+            LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
+
+            odm.SaveResults(resultTableName, cmap);
+
+            return 0; //OK
+        }
     }
-    catch (exception& ex)
+    catch (std::exception& ex)
     {
         LOGGER::LogError("OriginDestination_Simple::Solve() - Unexpected Error!");
         LOGGER::LogError(ex.what());
@@ -229,9 +272,9 @@ std::string netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON()
         result = this->solver->GetODMatrixAsJSON();*/
     return result;
 }
-std::vector<netxpert::ExtSPTreeArc> netxpert::simple::OriginDestinationMatrix::GetODMatrix()
+std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::OriginDestinationMatrix::GetODMatrix()
 {
-    std::vector<netxpert::ExtSPTreeArc> result;
+    std::vector<netxpert::data::ExtSPTreeArc> result;
     /*if (this->solver)
         result = this->solver->GetODMatrix();*/
     return result;

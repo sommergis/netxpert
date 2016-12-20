@@ -180,10 +180,11 @@ namespace MCFClass_di_unipi_it
 	     about this in the code. */
 
 namespace netxpert {
+    namespace core {
 /**
 *  \Class Core Solver for the Shortest Path Tree Problem with deque structure and label correcting algorithm.
 */
-class SPTree_LDeque : public MCFClass, public ISPTree
+class SPTree_LDeque : public MCFClass, public netxpert::core::ISPTree
 {
 
 /*--------------------------------------------------------------------------*/
@@ -900,6 +901,7 @@ inline void SPTree_LDeque::GetDests( unsigned int *outDstBse )
 	memcpy( outDstBse, originals, size * sizeof( MCFClass::cIndex ) ) ;
 }
 
+} //namespace core
 } //namespace NetXpert
 
 #if( OPT_USE_NAMESPACES )

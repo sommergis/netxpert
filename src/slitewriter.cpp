@@ -13,8 +13,15 @@
  }
  #endif
 
-using namespace netxpert;
+using namespace std;
 using namespace geos::io;
+using namespace geos::geom;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 
 SpatiaLiteWriter::SpatiaLiteWriter(Config& cnfg)
 {
@@ -371,7 +378,7 @@ void SpatiaLiteWriter::recoverGeometryColumn(string _tableName, string _geomColN
 
 
 std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const std::string& _tableName,
-                                                                          const netxpert::NetXpertSolver solverType)
+                                                                          const NetXpertSolver solverType)
 {
     try
     {

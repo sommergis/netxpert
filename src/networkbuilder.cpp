@@ -1,5 +1,13 @@
 #include "networkbuilder.h"
+
+using namespace std;
+using namespace geos::geom;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 
 NetworkBuilder::NetworkBuilder(Config& cnfg)
 {
@@ -11,7 +19,7 @@ NetworkBuilder::NetworkBuilder(Config& cnfg)
     // muss.
     // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
     // (nur die Kanten, die aufgebrochen werden)
-    // --> Zusammengefügt werden die Kanten (Route) ja in der DB bei Spatialite (FGDB?).
+
 	unique_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
 	// Initialize global factory with defined PrecisionModel
@@ -28,7 +36,7 @@ void NetworkBuilder::LoadData()
 {
     LOGGER::LogInfo("Loading data from DB..");
 
-    netxpert::ColumnMap cmap {  NETXPERT_CNFG.ArcIDColumnName,  NETXPERT_CNFG.FromNodeColumnName,
+    ColumnMap cmap {  NETXPERT_CNFG.ArcIDColumnName,  NETXPERT_CNFG.FromNodeColumnName,
                                 NETXPERT_CNFG.ToNodeColumnName, NETXPERT_CNFG.CostColumnName,
                                 NETXPERT_CNFG.CapColumnName,    NETXPERT_CNFG.OnewayColumnName,
                                 NETXPERT_CNFG.NodeIDColumnName, NETXPERT_CNFG.NodeSupplyColumnName };
@@ -92,7 +100,7 @@ void NetworkBuilder::LoadData()
     this->geoGraph = unique_ptr<geos::geomgraph::GeometryGraph>(new geos::geomgraph::GeometryGraph( 0, mLine.get() ));
 }
 
-void NetworkBuilder::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+void NetworkBuilder::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
 {
     try
     {

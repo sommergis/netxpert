@@ -11,6 +11,8 @@
 
 using namespace std;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::utils;
 using namespace cereal;
 
 int main(int argc, char** argv)
@@ -30,7 +32,7 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
+        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TranspCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_2.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/NetworkBuilder_small.json";
@@ -90,40 +92,43 @@ int main(int argc, char** argv)
         switch (cnfg.TestCase)
         {
         case TESTCASE::TestNetworkBuilder:
-            netxpert::Test::TestNetworkBuilder(cnfg);
+            netxpert::test::TestNetworkBuilder(cnfg);
             break;
         case TESTCASE::NetworkConvert:
-            netxpert::Test::NetworkConvert(cnfg);
+            netxpert::test::NetworkConvert(cnfg);
             break;
         case TESTCASE::TestFileGDBWriter:
-            netxpert::Test::TestFileGDBWriter(cnfg);
+            netxpert::test::TestFileGDBWriter(cnfg);
             break;
         case TESTCASE::TestSpatiaLiteWriter:
-            netxpert::Test::TestSpatiaLiteWriter(cnfg);
+            netxpert::test::TestSpatiaLiteWriter(cnfg);
             break;
         case TESTCASE::TestAddNodes:
-            netxpert::Test::TestAddNodes(cnfg);
+            netxpert::test::TestAddNodes(cnfg);
             break;
         case TESTCASE::MSTCOM:
-            netxpert::Test::TestMST(cnfg);
+            netxpert::test::TestMST(cnfg);
             break;
         case TESTCASE::ShortestPathTreeCOM:
-            netxpert::Test::TestSPT(cnfg);
+            netxpert::test::TestSPT(cnfg);
             break;
         case TESTCASE::ODMatrixCOM:
-            netxpert::Test::TestODMatrix(cnfg);
+            netxpert::test::TestODMatrix(cnfg);
             break;
         case TESTCASE::TestCreateRouteGeometries:
-            netxpert::Test::TestCreateRouteGeometries(cnfg);
+            netxpert::test::TestCreateRouteGeometries(cnfg);
             break;
         case TESTCASE::MCFCOM:
-            netxpert::Test::TestMCF(cnfg);
+            netxpert::test::TestMCF(cnfg);
             break;
         case TESTCASE::TransportationCOM:
-            netxpert::Test::TestTransportation(cnfg);
+            netxpert::test::TestTransportation(cnfg);
             break;
         case TESTCASE::TransportationCOMExt:
-            netxpert::Test::TestTransportationExt(cnfg);
+            netxpert::test::TestTransportationExt(cnfg);
+            break;
+        case TESTCASE::ODMatrixCOM2:
+            netxpert::test::TestODMatrix2(cnfg);
             break;
         }
 

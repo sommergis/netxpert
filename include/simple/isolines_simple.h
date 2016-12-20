@@ -1,5 +1,5 @@
-#ifndef SHORTESTPATHTREE_SIMPLE_H
-#define SHORTESTPATHTREE_SIMPLE_H
+#ifndef ISOLINES_H
+#define ISOLINES_H
 
 #include "data.h"
 #include "utils.h"
@@ -10,21 +10,24 @@
 namespace netxpert {
  namespace simple {
 
-    class ShortestPathTree
+    class Isolines
     {
         public:
-            ShortestPathTree(std::string jsonCnfg);
-            virtual ~ShortestPathTree() {}
+            Isolines(std::string jsonCnfg);
+            virtual ~Isolines() {}
             int Solve();
+            void SetCutOffs(std::string cutOffsAsJSON);
+            void SetCutOffs(std::unordered_map<netxpert::data::ExtNodeID, double> cutOffs);
             double GetOptimum();
             std::string GetShortestPathsAsJSON();
             std::vector<netxpert::data::ExtSPTreeArc> GetShortestPaths();
+
         private:
+            double optimum;
+            std::vector<netxpert::data::ExtSPTreeArc> totalSPTs;
             netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::ShortestPathTree> solver = nullptr;
     };
-
   }
 }
-
-#endif // SHORTESTPATHTREE_SIMPLE_H
+#endif // ISOLINES_H

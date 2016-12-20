@@ -5,42 +5,40 @@
 #include "imstree.h"
 #include "mstlem.h"
 
-using namespace std;
-
 namespace netxpert {
     /**
     * \Class Solver for the Minimum Spanning Tree Problem
     */
-    class MinimumSpanningTree : public ISolver
+    class MinimumSpanningTree : public netxpert::ISolver
     {
         public:
             /** Default constructor */
-            MinimumSpanningTree(Config& cnfg);
+            MinimumSpanningTree(netxpert::cnfg::Config& cnfg);
 
             /** Default destructor */
             virtual ~MinimumSpanningTree() {}
 
-            void Solve(string net);
-            void Solve(Network& net);
+            void Solve(std::string net);
+            void Solve(netxpert::Network& net);
 
-            MSTAlgorithm GetAlgorithm();
-            void SetAlgorithm(MSTAlgorithm mstAlgorithm);
+            netxpert::cnfg::MSTAlgorithm GetAlgorithm();
+            void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
 
             double GetOptimum() const;
-            vector<InternalArc> GetMinimumSpanningTree() const;
-            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
+            std::vector<netxpert::data::InternalArc> GetMinimumSpanningTree() const;
+            void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
 
         private:
             std::unique_ptr<netxpert::Network> net;
-            netxpert::Config NETXPERT_CNFG;
-            vector<InternalArc> minimumSpanTree;
-            MSTAlgorithm algorithm;
-            shared_ptr<IMinSpanTree> mst;
-            void solve (Network& net);
-            bool validateNetworkData(Network& net);
-            void convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-                                                    vector<unsigned int>& eNds, vector<double>& supply,
-                                                    vector<double>& caps, vector<double>& costs);
+            netxpert::cnfg::Config NETXPERT_CNFG;
+            std::vector<netxpert::data::InternalArc> minimumSpanTree;
+            netxpert::cnfg::MSTAlgorithm algorithm;
+            std::shared_ptr<netxpert::core::IMinSpanTree> mst;
+            void solve (netxpert::Network& net);
+            bool validateNetworkData(netxpert::Network& net);
+            void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
+                                                    std::vector<unsigned int>& eNds, std::vector<double>& supply,
+                                                    std::vector<double>& caps, std::vector<double>& costs);
     };
 }
 #endif // MINSPANTREE_H

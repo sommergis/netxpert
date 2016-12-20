@@ -1,21 +1,29 @@
 #include "dbhelper.h"
-#include <exception>
+#include <stdexcept>
 
-using namespace netxpert;
+using namespace std;
 using namespace geos::io;
 using namespace geos::geom;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::data;
+using namespace netxpert::utils;
 
 //Init static member variables must be out of class scope!
 std::unique_ptr<SQLite::Database> DBHELPER::connPtr = nullptr;
 std::unique_ptr<SQLite::Transaction> DBHELPER::currentTransactionPtr = nullptr;
-netxpert::Config DBHELPER::NETXPERT_CNFG;
+netxpert::cnfg::Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
 std::unordered_set<std::string> DBHELPER::EliminatedArcs;
 std::shared_ptr<geos::geom::GeometryFactory> DBHELPER::GEO_FACTORY;
 std::unordered_map<std::string, std::shared_ptr<geos::geom::LineString>> DBHELPER::KV_Network;
 
+
 namespace netxpert {
+    namespace io {
+    /* must reside in a cpp-File */
     class GeometryEmptyException: public std::exception
     {
       virtual const char* what() const throw()
@@ -23,6 +31,7 @@ namespace netxpert {
         return "Geometry is empty!";
       }
     } GeometryEmptyException;
+}
 }
 
 //gets not called, because everything else is static
@@ -392,7 +401,7 @@ void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap&
     }
 }
 
-netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map)
+InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map)
 {
     InputArcs arcTbl;
     string sqlStr = "";
@@ -418,7 +427,9 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
                                _map.costColName+","+
                                _map.capColName +","+
                                _map.onewayColName +
-                                   " FROM "+ _tableName + ";";
+                                " FROM "+ _tableName +
+                                " ORDER BY "+_map.fromColName+ ";";
+
         }
         if (!oneway && hasCapacity)
         {
@@ -427,7 +438,8 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
                                _map.toColName+","+
                                _map.costColName+","+
                                _map.capColName +
-                                   " FROM "+ _tableName + ";";
+                                " FROM "+ _tableName +
+                                " ORDER BY "+_map.fromColName+ ";";
         }
         if (oneway && !hasCapacity)
         {
@@ -436,7 +448,8 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
                                _map.toColName+","+
                                _map.costColName+","+
                                _map.onewayColName +
-                                   " FROM "+ _tableName + ";";
+                                " FROM "+ _tableName +
+                                " ORDER BY "+_map.fromColName+ ";";
         }
         if (!oneway && !hasCapacity)
         {
@@ -444,10 +457,12 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
                                _map.fromColName+","+
                                _map.toColName+","+
                                _map.costColName+
-                                   " FROM "+ _tableName + ";";
+                                " FROM "+ _tableName +
+                                " ORDER BY "+_map.fromColName+ ";";
         }
 
-        //cout << sqlStr << endl;
+        netxpert::utils::LOGGER::LogDebug(sqlStr);
+
         SQLite::Statement query(db, sqlStr);
         //fetch data
 
@@ -511,6 +526,7 @@ netxpert::InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, c
     {
         LOGGER::LogError( "Error preparing query!" );
         LOGGER::LogError( ex.what() );
+        LOGGER::LogError( sqlStr);
         return arcTbl;
     }
 }
@@ -675,6 +691,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
     {
         LOGGER::LogError( "Error preparing query!" );
         LOGGER::LogError( ex.what() );
+        LOGGER::LogError( sqlStr);
         return arcTbl;
     }
 }
@@ -701,7 +718,7 @@ std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, co
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
-        cout << sqlStr << endl;
+        //cout << sqlStr << endl;
         SQLite::Statement query(db, sqlStr);
         //fetch data
         while (query.executeStep())
@@ -739,6 +756,7 @@ std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, co
     {
         LOGGER::LogError( "Error preparing query!" );
         LOGGER::LogError( ex.what() );
+        LOGGER::LogError( sqlStr);
         return nodesTbl;
     }
 }
@@ -746,7 +764,7 @@ std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, co
 std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std::string& tableName,
                                                         const std::string& geomColName,
                                                         const ColumnMap& cmap,
-                                                        const netxpert::ArcIDColumnDataType arcIDColDataType,
+                                                        const ArcIDColumnDataType arcIDColDataType,
                                                         const bool withCapacity)
 {
     string eliminatedArcIDs = "";
@@ -818,7 +836,7 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
     }
 }
 
-netxpert::ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
+ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
                                                        const int treshold, SQLite::Statement& qry,
                                                        const bool withCapacity)
 {

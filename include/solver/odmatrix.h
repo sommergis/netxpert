@@ -18,69 +18,69 @@ namespace netxpert {
     /**
     * \Class Solver for computing an Origin Destination Matrix
     */
-    class OriginDestinationMatrix : public ISolver
+    class OriginDestinationMatrix : public netxpert::ISolver
     {
         public:
             /** Default constructor */
-            OriginDestinationMatrix(Config& cnfg);
+            OriginDestinationMatrix(netxpert::cnfg::Config& cnfg);
 
             /** Default destructor */
             virtual ~OriginDestinationMatrix() {}
 
-            void Solve(string net);
-            void Solve(Network& net);
+            void Solve(std::string net);
+            void Solve(netxpert::Network& net);
 
-            SPTAlgorithm GetAlgorithm() const;
-            void SetAlgorithm(SPTAlgorithm mstAlgorithm);
+            netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
 
             int GetSPTHeapCard() const;
             void SetSPTHeapCard(int heapCard);
 
-            GEOMETRY_HANDLING GetGeometryHandling() const;
-            void SetGeometryHandling(GEOMETRY_HANDLING geomHandling);
+            netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
+            void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
 
-            vector<unsigned int> GetOrigins() const;
-            void SetOrigins(vector<unsigned int>& origs);
-            void SetOrigins(vector<pair<unsigned int, string>>& origs);
+            std::vector<unsigned int> GetOrigins() const;
+            void SetOrigins(std::vector<unsigned int>& origs);
+            void SetOrigins(std::vector<pair<unsigned int, string>>& origs);
 
-            vector<unsigned int> GetDestinations() const;
-            void SetDestinations(vector<unsigned int>& dests);
-            void SetDestinations(vector<pair<unsigned int, string>>& dests);
+            std::vector<unsigned int> GetDestinations() const;
+            void SetDestinations(std::vector<unsigned int>& dests);
+            void SetDestinations(std::vector<pair<unsigned int, string>>& dests);
 
-            vector<unsigned int> GetReachedDests() const;
-            unordered_map<ODPair, CompressedPath> GetShortestPaths() const;
-            unordered_map<ODPair, double> GetODMatrix() const;
+            std::vector<unsigned int> GetReachedDests() const;
+            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+            std::unordered_map<netxpert::data::ODPair, double> GetODMatrix() const;
 
             double GetOptimum() const;
 
             void SaveResults(const std::string& resultTableName,
-                 const netxpert::ColumnMap& cmap) const;
+                 const netxpert::data::ColumnMap& cmap) const;
 
-            vector<InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
+            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
         private:
-            Network* net;  //raw pointer ok, no dynamic allocation (new())
+            netxpert::Network* net;  //raw pointer ok, no dynamic allocation (new())
             bool isDirected;
             int sptHeapCard;
             double optimum;
-            netxpert::Config NETXPERT_CNFG;
-            vector<unsigned int> destinationNodes;
-            vector<unsigned int> reachedDests;
-            vector<unsigned int> originNodes;
-            unordered_map<ODPair, CompressedPath> shortestPaths;
-            unordered_map<ODPair, double> odMatrix;
-            GEOMETRY_HANDLING geometryHandling;
-            SPTAlgorithm algorithm;
-            shared_ptr<ISPTree> spt;
-            void solve (Network& net, vector<unsigned int>& originNodes, vector<unsigned int>& destinationNodes, bool isDirected);
-            bool validateNetworkData(Network& net, vector<unsigned int>& origs, vector<unsigned int>& dests);
-            void convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-                                                    vector<unsigned int>& eNds, vector<double>& supply,
-                                                    vector<double>& caps, vector<double>& costs);
+            netxpert::cnfg::Config NETXPERT_CNFG;
+            std::vector<unsigned int> destinationNodes;
+            std::vector<unsigned int> reachedDests;
+            std::vector<unsigned int> originNodes;
+            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> shortestPaths;
+            std::unordered_map<netxpert::data::ODPair, double> odMatrix;
+            netxpert::cnfg::GEOMETRY_HANDLING geometryHandling;
+            netxpert::cnfg::SPTAlgorithm algorithm;
+            std::shared_ptr<netxpert::core::ISPTree> spt;
+            void solve (netxpert::Network& net, std::vector<unsigned int>& originNodes, std::vector<unsigned int>& destinationNodes, bool isDirected);
+            bool validateNetworkData(netxpert::Network& net, std::vector<unsigned int>& origs, std::vector<unsigned int>& dests);
+            void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
+                                                    std::vector<unsigned int>& eNds, std::vector<double>& supply,
+                                                    std::vector<double>& caps, std::vector<double>& costs);
             void checkSPTHeapCard(unsigned int arcCount, unsigned int nodeCount);
-            double buildCompressedRoute(vector<unsigned int>& route, unsigned int orig, unsigned int dest,
-                                            unordered_map<unsigned int, unsigned int>& arcPredescessors);
-            double getArcCost(const InternalArc& arc);
+            double buildCompressedRoute(std::vector<unsigned int>& route, unsigned int orig, unsigned int dest,
+                                            std::unordered_map<unsigned int, unsigned int>& arcPredescessors);
+            double getArcCost(const netxpert::data::InternalArc& arc);
     };
 }
 #endif // ODMATRIX_H

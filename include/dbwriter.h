@@ -7,9 +7,9 @@
 #include "geos/geom/Geometry.h"
 #include "geos/geom/CoordinateSequence.h"
 
-using namespace std;
-
 namespace netxpert {
+
+    namespace io {
     /**
     * \Abstract Abstract Class (Interface) for the output DB
     **/
@@ -22,8 +22,10 @@ namespace netxpert {
             // Sonst gibt es Fehler beim Kompilieren...
             virtual void CommitCurrentTransaction() = 0;
             virtual void CreateNetXpertDB() = 0;
-            virtual void CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType) = 0;
-            virtual void CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType,
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType) = 0;
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst) = 0;
             virtual void OpenNewTransaction() = 0;
             /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
@@ -34,7 +36,8 @@ namespace netxpert {
                                     bool truncateBeforeInsert, SQLiteCommand cmd) = 0;*/
             virtual void CloseConnection() = 0;
     };
-}
+} //namespace io
+} //namespace netxpert
 
 
 #endif // DBWRITER_H

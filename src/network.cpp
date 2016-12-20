@@ -1,7 +1,16 @@
 #include "network.h"
 
 using namespace std;
+using namespace geos::geom;
+using namespace geos::operation::distance;
+using namespace geos::linearref;
+using namespace geos::operation::linemerge;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 
 // ColumnMap can override entries in Config
 Network::Network(const InputArcs& _arcsTbl, const InputNodes& _nodesTbl, const ColumnMap& _map, const Config& cnfg)
@@ -9,6 +18,7 @@ Network::Network(const InputArcs& _arcsTbl, const InputNodes& _nodesTbl, const C
     //ctor
     try
     {
+
         arcIDColName = _map.arcIDColName;
         fromColName = _map.fromColName;
         toColName = _map.toColName;
@@ -151,7 +161,7 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadEndNodes(const 
 }
 unsigned int netxpert::Network::AddStartNode(std::string extArcID,
                           double x, double y, double supply,
-                          int treshold, const netxpert::ColumnMap& cmap, bool withCapacity)
+                          int treshold, const ColumnMap& cmap, bool withCapacity)
 {
     NewNode n { extArcID, Coordinate {x, y}, supply};
     cout << "X: " << n.coord.x << " Y: "<<n.coord.y<<endl;
@@ -165,7 +175,7 @@ unsigned int netxpert::Network::AddStartNode(std::string extArcID,
 
 unsigned int netxpert::Network::AddEndNode(std::string extArcID,
                           double x, double y, double supply,
-                          int treshold, const netxpert::ColumnMap& cmap, bool withCapacity)
+                          int treshold, const ColumnMap& cmap, bool withCapacity)
 {
     NewNode n { extArcID, Coordinate {x, y}, supply};
 
@@ -316,7 +326,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
 }
 
 
-std::vector<InternalArc> Network::insertNewStartNode(const bool isDirected, netxpert::SplittedArc& splittedLine,
+std::vector<InternalArc> Network::insertNewStartNode(const bool isDirected, SplittedArc& splittedLine,
                                                      const std::string& extArcID, const std::string& extNodeID,
                                                      const geos::geom::Coordinate& startPoint)
 {
@@ -581,7 +591,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
     }
 }
 
-std::vector<InternalArc> Network::insertNewEndNode(const bool isDirected, netxpert::SplittedArc& splittedLine,
+std::vector<InternalArc> Network::insertNewEndNode(const bool isDirected, SplittedArc& splittedLine,
                                                    const std::string& extArcID, const std::string& extNodeID,
                                                    const geos::geom::Coordinate& endPoint)
 {
@@ -714,7 +724,7 @@ void Network::ProcessResultArcs(/*const std::string& orig, const std::string& de
 void Network::ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
                                 const double capacity, const double flow,
                                 const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
-                                const std::string& resultTableName, netxpert::DBWriter& writer)
+                                const std::string& resultTableName, netxpert::io::DBWriter& writer)
 {
     vector<Geometry*> routeParts;
 
@@ -742,7 +752,7 @@ void Network::ProcessResultArcs(const std::string& orig, const std::string& dest
 void Network::ProcessResultArcs(const std::string& orig, const std::string& dest, const double cost,
                                 const double capacity, const double flow, const std::string& arcIDs,
                                 std::vector<InternalArc>& routeNodeArcRep, const std::string& resultTableName,
-                                netxpert::DBWriter& writer, SQLite::Statement& qry)
+                                netxpert::io::DBWriter& writer, SQLite::Statement& qry)
 {
     vector<Geometry*> routeParts;
 
@@ -770,7 +780,7 @@ void Network::ProcessResultArcs(const std::string& orig, const std::string& dest
 void Network::ProcessMCFResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
                                      const double capacity, const double flow,
                                      const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
-                                     const std::string& resultTableName, netxpert::DBWriter& writer,
+                                     const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry)
 {
     vector<Geometry*> routeParts;
@@ -791,7 +801,7 @@ void Network::ProcessMCFResultArcsMem(const std::string& orig, const std::string
 //SPT, ODM
 void Network::ProcessSPTResultArcsMem(const std::string& orig, const std::string& dest, const double cost,
                                      const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
-                                     const std::string& resultTableName, netxpert::DBWriter& writer,
+                                     const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry)
 {
     vector<Geometry*> routeParts;
@@ -812,7 +822,7 @@ void Network::ProcessSPTResultArcsMem(const std::string& orig, const std::string
 //Isolines
 void Network::ProcessIsoResultArcsMem(const std::string& orig, const double cost,
                                      const std::string& arcIDs, std::vector<InternalArc>& routeNodeArcRep,
-                                     const std::string& resultTableName, netxpert::DBWriter& writer,
+                                     const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry,
                                      const std::unordered_map<ExtNodeID, std::vector<double> > cutOffs)
 {
@@ -831,7 +841,7 @@ void Network::ProcessIsoResultArcsMem(const std::string& orig, const double cost
 }
 
 //calculation time is minimal
-std::vector<geos::geom::Geometry*> Network::processRouteParts(std::vector<netxpert::InternalArc>& routeNodeArcRep)
+std::vector<geos::geom::Geometry*> Network::processRouteParts(std::vector<InternalArc>& routeNodeArcRep)
 {
     //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : start - processRouteParts()");
     //order of start or end segments do not matter
@@ -1072,6 +1082,18 @@ std::vector<ArcData> Network::GetOriginalArcData(const std::vector<InternalArc>&
                     result.push_back(arcData);
                     }
                 }
+                /*else
+                {
+                    LOGGER::LogDebug("Getting ArcData from splitted arcs..");
+                    //check in new arcs
+                    auto newArcData = this->newArcs.at(ftNode);
+                    //extArcID is empty
+                    ArcData a {"", newArcData.cost, newArcData.capacity};
+                    #pragma omp critical
+                    {
+                    result.push_back(a);
+                    }
+                }*/
             }
         }
     }
@@ -1089,6 +1111,18 @@ std::vector<ArcData> Network::GetOriginalArcData(const std::vector<InternalArc>&
                     result.push_back(arcData);
                     }
                 }
+                /*else
+                {
+                    LOGGER::LogDebug("Getting ArcData from splitted arcs..");
+                    //check in new arcs
+                    auto newArcData = this->newArcs.at(ftNode);
+                    //extArcID is empty
+                    ArcData a {"", newArcData.cost, newArcData.capacity};
+                    #pragma omp critical
+                    {
+                    result.push_back(a);
+                    }
+                }*/
             }
             else {
                 //reverse direction also
@@ -1103,6 +1137,18 @@ std::vector<ArcData> Network::GetOriginalArcData(const std::vector<InternalArc>&
                         result.push_back(arcData);
                         }
                     }
+                    /*else
+                    {
+                        LOGGER::LogDebug("Getting ArcData from splitted arcs..");
+                        //check in new arcs
+                        auto newArcData = this->newArcs.at(flippedFTNode);
+                        //extArcID is empty
+                        ArcData a {"", newArcData.cost, newArcData.capacity};
+                        #pragma omp critical
+                        {
+                        result.push_back(a);
+                        }
+                    }*/
                 }
             }
         }
@@ -1226,7 +1272,7 @@ Coordinate Network::GetStartOrEndNodeGeometry(const std::string& externalNodeID)
 }
 
 
-netxpert::SplittedArc Network::GetSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
+SplittedArc Network::GetSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
                                                                const int treshold)
 {
     try
@@ -1291,7 +1337,7 @@ netxpert::SplittedArc Network::GetSplittedClosestNewArcToPoint(const geos::geom:
 }
 
 
-netxpert::SplittedArc Network::GetSplittedClosestOldArcToPoint(const geos::geom::Coordinate coord, const int treshold,
+SplittedArc Network::GetSplittedClosestOldArcToPoint(const geos::geom::Coordinate coord, const int treshold,
                                                      const std::pair<ExternalArc,ArcData>& arcData,
                                                      const geos::geom::Geometry& arc)
 {
@@ -1474,7 +1520,7 @@ double Network::GetPositionOfPointAlongLine(const geos::geom::Coordinate& coord,
     }
 }
 
-netxpert::StartOrEndLocationOfLine Network::GetLocationOfPointOnLine(const geos::geom::Coordinate& coord,
+StartOrEndLocationOfLine Network::GetLocationOfPointOnLine(const geos::geom::Coordinate& coord,
                                                            const geos::geom::Geometry& arc)
 {
     try
@@ -1702,7 +1748,7 @@ void Network::saveResults(/*const std::string orig, const std::string dest, cons
 * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry
 */
 void Network::saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
-                          const double flow, const string& resultTableName, netxpert::DBWriter& writer //,
+                          const double flow, const string& resultTableName, netxpert::io::DBWriter& writer //,
                                         //SQLite::Statement& qry //can be null for ESRI FileGDB
                                         )
 {
@@ -1769,7 +1815,7 @@ void Network::saveResults(const std::string orig, const std::string dest, const 
 //MCF, TP
 void Network::saveMCFResultsMem(const std::string orig, const std::string dest, const double cost, const double capacity,
                                const double flow, const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
-                               const std::string& resultTableName, netxpert::DBWriter& writer,
+                               const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                SQLite::Statement& qry )
 {
    //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - enter");
@@ -1849,6 +1895,7 @@ void Network::saveMCFResultsMem(const std::string orig, const std::string dest, 
                 {
                 auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
                 //save merged route geometry to db
+                LOGGER::LogDebug("cap: save sqlite arc " + to_string(capacity) );
                 sldb.SaveResultArc(orig, dest, cost, capacity, flow, *route, resultTableName, qry);
                 //sw.stop();
                 //LOGGER::LogDebug("SaveResultArc() took " + to_string(sw.elapsed())+" mcs");
@@ -1913,7 +1960,7 @@ void Network::saveMCFResultsMem(const std::string orig, const std::string dest, 
 //SPT, ODM
 void Network::saveSPTResultsMem(const std::string orig, const std::string dest, const double cost,
                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
-                               const std::string& resultTableName, netxpert::DBWriter& writer,
+                               const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                SQLite::Statement& qry )
 {
    //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - enter");
@@ -2031,7 +2078,7 @@ void Network::saveSPTResultsMem(const std::string orig, const std::string dest, 
 //Isolines
 void Network::saveIsoResultsMem(const std::string orig, const double cost,
                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
-                               const std::string& resultTableName, netxpert::DBWriter& writer,
+                               const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                SQLite::Statement& qry,
                                const std::unordered_map<ExtNodeID, std::vector<double> >& cutOffs )
 {
@@ -2166,7 +2213,7 @@ void Network::saveIsoResultsMem(const std::string orig, const double cost,
 
 void Network::saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
                           const double flow, const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
-                          const std::string& resultTableName, netxpert::DBWriter& writer,
+                          const std::string& resultTableName, netxpert::io::DBWriter& writer,
                           SQLite::Statement& qry //only used when saved not to the netxpert db
                                         )
 {
@@ -2310,7 +2357,7 @@ void Network::saveResults(const std::string orig, const std::string dest, const 
 * For GEOMETRTY_HANDLING::StraightLines and GEOMETRTY_HANDLING::NoGeometry and once prepared statement
 */
 void Network::saveResults(const std::string orig, const std::string dest, const double cost, const double capacity,
-                          const double flow, const string& resultTableName, netxpert::DBWriter& writer,
+                          const double flow, const string& resultTableName, netxpert::io::DBWriter& writer,
                           SQLite::Statement& qry)
 {
     //create empty MultiLineString that is filled or not
@@ -2454,7 +2501,7 @@ void Network::readNetworkFromTable(const bool autoClean, const bool oneWay)
         cout << s << endl;*/
 }
 //TODO: isDirected evtl. von Klasse nehmen, nicht vom Config
-void Network::processArc(const netxpert::InputArc& arc, const unsigned int internalStartNode,
+void Network::processArc(const InputArc& arc, const unsigned int internalStartNode,
                         const unsigned int internalEndNode)
 {
     bool isDirected = NETXPERT_CNFG.IsDirected;
@@ -2661,6 +2708,25 @@ void Network::Reset()
     }
 }
 
+void ExportToDIMACS(const std::string& path)
+{
+    /*
+    *  p min 4 4
+    n 1 3
+    n 4 -3
+    a 1 2 0 2 3
+    a 2 3 0 2 1
+    a 3 4 0 2 1
+    a 1 4 0 2 2
+    */
+    std::ofstream outfile;
+    outfile.open(path, std::ios::out );
+
+
+    outfile.close();
+
+}
+
 // MCF
 double Network::calcTotalSupply ()
 {
@@ -2750,7 +2816,7 @@ void Network::processSupplyOrDemand()
 
     // Dummy-Kosten (0 km) in Netzwerk hinzufügen
     const double cost = 0;
-    const double capacity = netxpert::DOUBLE_INFINITY;
+    const double capacity = DOUBLE_INFINITY;
     for (auto node : nodeSupplies) //Filter dummy und transshipment nodes (=0) raus
     {
         if (node.first == newNodeID) //Filter dummy
