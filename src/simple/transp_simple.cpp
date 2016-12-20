@@ -1,13 +1,19 @@
 #include "transp_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::Transportation::Transportation(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 int netxpert::simple::Transportation::Solve()
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -129,9 +135,9 @@ std::string netxpert::simple::Transportation::GetDistributionAsJSON()
     return result;
 }
 
-std::vector<netxpert::ExtDistributionArc> netxpert::simple::Transportation::GetDistribution()
+std::vector<netxpert::data::ExtDistributionArc> netxpert::simple::Transportation::GetDistribution()
 {
-    std::vector<netxpert::ExtDistributionArc> result;
+    std::vector<netxpert::data::ExtDistributionArc> result;
     if (this->solver)
         result = this->solver->GetExtDistribution();
     return result;

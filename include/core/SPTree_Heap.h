@@ -183,11 +183,12 @@ namespace MCFClass_di_unipi_it
 	     about this in the code. */
 
 namespace netxpert {
+    namespace core {
 
 /**
 *  \Class Core Solver for the Shortest Path Tree Problem with configurable Heap structure (n) and Dijkstra's algorithm.
 */
-class SPTree_Heap : public MCFClass, public ISPTree
+class SPTree_Heap : public MCFClass, public netxpert::core::ISPTree
 {
 
 /*--------------------------------------------------------------------------*/
@@ -841,7 +842,7 @@ inline void SPTree_Heap::SetDest( cIndex NewDst )
  localNewDst = NewDst + 1;
  std::cout << "adding +1 to UINT_MAX" << std::endl;
 #endif
- 
+
  if( Dest != localNewDst + USENAME0 ) {
   //#if( LABEL_SETTING )
    Dest = localNewDst + USENAME0;
@@ -927,7 +928,7 @@ inline void SPTree_Heap::GetDests( unsigned int *outDstBse )
 	MCFClass::cIndex_Set originals = Dests();
 	memcpy( outDstBse, originals, size * sizeof( MCFClass::cIndex ) ) ;
 }
-
+} //namespace core
 } //namespace NetXpert
 
 #if( OPT_USE_NAMESPACES )

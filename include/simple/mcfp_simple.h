@@ -18,10 +18,10 @@ namespace netxpert {
             int Solve();
             double GetOptimum();
             std::string GetMinimumCostFlowAsJSON();
-            std::vector<netxpert::FlowCost> GetMinimumCostFlow();
+            std::vector<netxpert::data::FlowCost> GetMinimumCostFlow();
 
         private:
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::MinCostFlow> solver = nullptr;
     };
  }

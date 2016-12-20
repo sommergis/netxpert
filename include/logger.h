@@ -5,9 +5,8 @@
 #include "config.h"
 #include "utils.h"
 
-using namespace std;
-
 namespace netxpert {
+    namespace utils {
 
     /**
     * \Static Class for logging
@@ -18,24 +17,25 @@ namespace netxpert {
             LOGGER() {}
         public:
             ~LOGGER() {}
-            static void Initialize(const Config& cnfg);
-            static void LogDebug(string logMsg);
-            static void LogInfo(string logMsg);
-            static void LogWarning(string logMsg);
-            static void LogError(string logMsg);
-            static void LogFatal(string logMsg);
+            static void Initialize(const netxpert::cnfg::Config& cnfg);
+            static void LogDebug(std::string logMsg);
+            static void LogInfo(std::string logMsg);
+            static void LogWarning(std::string logMsg);
+            static void LogError(std::string logMsg);
+            static void LogFatal(std::string logMsg);
             static bool IsInitialized;
-            static string FullLogFileName;
+            static std::string FullLogFileName;
 
         private:
-            static Config NETXPERT_CNFG;
-            static void writeLog(string logMsg, LOG_LEVEL);
-            static string sTime;
-            static string sPath;
-            static string sFileName;
-            static LOG_LEVEL applicationLogLevel;
-            static string readConfig();
+            static netxpert::cnfg::Config NETXPERT_CNFG;
+            static void writeLog(std::string logMsg, netxpert::cnfg::LOG_LEVEL);
+            static std::string sTime;
+            static std::string sPath;
+            static std::string sFileName;
+            static netxpert::cnfg::LOG_LEVEL applicationLogLevel;
+            static std::string readConfig();
     };
-}
+} //namespace utils
+}//namespace netxpert
 
 #endif // LOGGER_H

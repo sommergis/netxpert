@@ -1,31 +1,36 @@
-// *** ADDED BY HEADER FIXUP ***
-#include <map>
-#include <vector>
-// *** END ***
 #ifndef CONFIG_H
 #define CONFIG_H
 
 #include <string>
+#include <stdexcept>
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
 #include <omp.h>
 
-using namespace std;
-using namespace cereal;
-
 namespace netxpert {
+
+    static const std::string Version()
+    {
+        return "0.9.2";
+    };
+
+    namespace cnfg {
 
     /**
     * 80% of available CPU Power (=number of threads) is used
     */
-	static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
-
-    static const std::string Version()
-    {
-        return "0.9.1";
-    };
+    //#ifdef OMP_H
+	//static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
+	//#else
+	#ifdef DEBUG
+        static int LOCAL_NUM_THREADS = 1; //std::floor(omp_get_max_threads() * 0.8);
+    #endif // DEBUG
+    #ifndef DEBUG
+        static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
+    #endif
+	//#endif // OMP_H
 
     /**
     * \Enum Geometry Handling.
@@ -55,7 +60,8 @@ namespace netxpert {
         TestAddNodes = 10,
         TestCreateRouteGeometries = 11,
         MCFCOM = 12,
-        TransportationCOMExt = 13
+        TransportationCOMExt = 13,
+        ODMatrixCOM2 = 14
     };
 
     /**
@@ -66,6 +72,7 @@ namespace netxpert {
         SpatiaLiteDB = 0,
         ESRI_FileGDB = 1
     };
+
     /**
     * \Enum Type of the Log Level.
     **/
@@ -87,7 +94,9 @@ namespace netxpert {
         LDeque_MCFClass = 2,
         Dijkstra_Heap_MCFClass = 3,
         Dijkstra_2Heap_LEMON = 4,
-        Bijkstra_2Heap_LEMON = 5
+        Bijkstra_2Heap_LEMON = 5,   //EXPERIMENTAL
+        Dijkstra_dheap_BOOST = 6,   //EXPERIMENTAL
+        ODM_LEM_2Heap = 7           //EXPERIMENTAL
     } ;
     /**
     * \Enum Type of the Minimum Cost Flow algorithms.
@@ -109,45 +118,45 @@ namespace netxpert {
     **/
     struct Config
     {
-        string NetXDBPath; //!< Member variable "netxDBPath"
-        string ResultDBPath; //!< Member variable "resultDBPath"
-        RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
-        string ResultTableName; //!< Member variable "resultTableName"
+        std::string NetXDBPath; //!< Member variable "netxDBPath"
+        std::string ResultDBPath; //!< Member variable "resultDBPath"
+        netxpert::cnfg::RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
+        std::string ResultTableName; //!< Member variable "resultTableName"
         bool SPTAllDests;//!< Member variable "sptAllDests"
         int SPTHeapCard; //!< Member variable "sptHeapCard"
-        SPTAlgorithm SptAlgorithm; //!< Member variable "sptAlgorithm"
-        MCFAlgorithm McfAlgorithm; //!< Member variable "mcfAlgorithm"
-        MSTAlgorithm MstAlgorithm; //!< Member variable "mstAlgorithm"
+        netxpert::cnfg::SPTAlgorithm SptAlgorithm; //!< Member variable "sptAlgorithm"
+        netxpert::cnfg::MCFAlgorithm McfAlgorithm; //!< Member variable "mcfAlgorithm"
+        netxpert::cnfg::MSTAlgorithm MstAlgorithm; //!< Member variable "mstAlgorithm"
         bool IsDirected; //!< Member variable "isDirected"
-        string ArcsTableName; //!< Member variable "arcsTableName"
-        string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
-        string ArcIDColumnName; //!< Member variable "arcIDColumnName"
-        string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
-        string ToNodeColumnName; //!< Member variable "toNodeColumnName"
-        string CostColumnName; //!< Member variable "costColumnName"
-        string CapColumnName; //!< Member variable "capColumnName"
-        string OnewayColumnName;//!< Member variable "onewayColumnName"
-        string NodesTableName; //!< Member variable "nodesTableName"
-        string NodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
-        string NodeIDColumnName;//!< Member variable "nodeIDColumnName"
-        string NodeSupplyColumnName;//!< Member variable "nodeSupplyColumnName"
-        string BarrierPolyTableName;//!< Member variable "barrierPolyTableName"
-        string BarrierPolyGeomColumnName;//!< Member variable "barrierPolyGeomColumnName"
-        string BarrierLineTableName;//!< Member variable "barrierLineTableName"
-        string BarrierLineGeomColumnName;//!< Member variable "barrierLineGeomColumnName"
-        string BarrierPointTableName;//!< Member variable "barrierPointTableName"
-        string BarrierPointGeomColumnName;//!< Member variable "barrierPointGeomColumnName"
+        std::string ArcsTableName; //!< Member variable "arcsTableName"
+        std::string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
+        std::string ArcIDColumnName; //!< Member variable "arcIDColumnName"
+        std::string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
+        std::string ToNodeColumnName; //!< Member variable "toNodeColumnName"
+        std::string CostColumnName; //!< Member variable "costColumnName"
+        std::string CapColumnName; //!< Member variable "capColumnName"
+        std::string OnewayColumnName;//!< Member variable "onewayColumnName"
+        std::string NodesTableName; //!< Member variable "nodesTableName"
+        std::string NodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
+        std::string NodeIDColumnName;//!< Member variable "nodeIDColumnName"
+        std::string NodeSupplyColumnName;//!< Member variable "nodeSupplyColumnName"
+        std::string BarrierPolyTableName;//!< Member variable "barrierPolyTableName"
+        std::string BarrierPolyGeomColumnName;//!< Member variable "barrierPolyGeomColumnName"
+        std::string BarrierLineTableName;//!< Member variable "barrierLineTableName"
+        std::string BarrierLineGeomColumnName;//!< Member variable "barrierLineGeomColumnName"
+        std::string BarrierPointTableName;//!< Member variable "barrierPointTableName"
+        std::string BarrierPointGeomColumnName;//!< Member variable "barrierPointGeomColumnName"
         int Treshold; //!< Member variable "treshold" for distance search: closest edge of network to given point
         bool UseSpatialIndex;//!< Member variable "useSpatialIndex"
         bool LoadDBIntoMemory;//!< Member variable "loadDBIntoMemory"
         int NumberOfTests;//!< Member variable "numberOfTests"
-        string SpatiaLiteHome;//!< Member variable "spatiaLiteHome"
-        string SpatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
-        GEOMETRY_HANDLING GeometryHandling;//!< Member variable "geometryHandling"
-        TESTCASE TestCase;//!< Member variable "testCase"
+        std::string SpatiaLiteHome;//!< Member variable "spatiaLiteHome"
+        std::string SpatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
+        netxpert::cnfg::GEOMETRY_HANDLING GeometryHandling;//!< Member variable "geometryHandling"
+        netxpert::cnfg::TESTCASE TestCase;//!< Member variable "testCase"
+        netxpert::cnfg::LOG_LEVEL LogLevel;
         bool CleanNetwork;//!< Member variable "cleanNetwork"
-        LOG_LEVEL LogLevel;
-        string LogFileFullPath;
+        std::string LogFileFullPath;
 
         /**
         * Serialize struct members to json
@@ -206,9 +215,10 @@ namespace netxpert {
         public:
             ConfigReader() {}
             ~ConfigReader() {}
-            Config GetConfigFromJSON(string jsonString);
-            void GetConfigFromJSONFile(string fileName, Config& cnfg);
+            Config GetConfigFromJSON(std::string jsonString);
+            void GetConfigFromJSONFile(std::string fileName, netxpert::cnfg::Config& cnfg);
     };
-}
+} //namespace cnfg
+} //namespace netxpert
 
 #endif // CONFIG_H

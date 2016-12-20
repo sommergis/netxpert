@@ -2,7 +2,7 @@
 
 using namespace std;
 using namespace lemon;
-using namespace netxpert;
+using namespace netxpert::core;
 
 SPT_LEM_2Heap::SPT_LEM_2Heap( unsigned int nmx, unsigned int mmx , bool Drctd)
 {
@@ -89,17 +89,26 @@ void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 	nmax = nmx;
 	mmax = mmx;
 
+	//smart graph
     distMap = new SmartDigraph::NodeMap<double> (g);
     length = new SmartDigraph::ArcMap<double> (g);
+
+	//static graph
+    //distMap = new StaticDigraph::NodeMap<double> (g);
+    //length = new StaticDigraph::ArcMap<double> (g);
 
     int origNode;
     int destNode;
 
     //Populate all nodes
     //std::vector<typename SmartDigraph::Node> nodes;
+
+    //smart graph
     nodes.resize(nmax);
     for (unsigned int i = 0; i < nmax; ++i) {
       nodes[i] = g.addNode();
+
+
    //   if (pDfct[i] < 0)
 	  //{
    //     cout << "Startnode "<< i+1 << endl;
@@ -111,40 +120,66 @@ void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
    //     dest = nodes[i];
 	  //}
       //cout << "Node "<< i << endl;
-    }
+
 
     // construct arcs
     //depointerize
 	SmartDigraph::ArcMap<double>& lengthVal = *length;
+	//StaticDigraph::ArcMap<double>& lengthVal = *length;
 	double cost;
     SmartDigraph::Arc arc;
 
+    //std::vector<std::pair<int,int>> arcList(mmax);
+    //isDrctd = true;
 	if (isDrctd)
     {
-		for (unsigned int i = 0; i < mmx; ++i) {
+        //unsigned int lastSrcId = 0;
+		for (unsigned int i = 0; i < mmax; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
 
+            /*if (origNode < lastSrcId)
+            {
+                std::cout << "ignored " << to_string(origNode)<< " < " << to_string(lastSrcId) << std::endl;
+            }
+            else*/
 			arc = g.addArc(nodes[origNode-1],nodes[destNode-1]);
+            //    arcList.push_back(std::make_pair( origNode, destNode));
+
+            //lastSrcId = origNode;
 			lengthVal[arc] = cost;
+
 			//cout << "Arc: #" << i << " " << origNode << " " << destNode << " " << cost <<  endl;
 		}
 	}
 	else // both directions
 	{
-		for (unsigned int i = 0; i < mmx; ++i) {
+
+		std::cout << "\n BOTH DIRECTIONS "<< std::endl;
+
+		for (unsigned int i = 0; i < mmax; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
 			arc = g.addArc(nodes[origNode-1],nodes[destNode-1]);
+			//arcList.push_back(std::make_pair(origNode, destNode));
 			lengthVal[arc] = cost;
 			//cout << "Arc: #" << i << " " << origNode << " " << destNode << " " << cost <<  endl;
 			arc = g.addArc(nodes[destNode-1],nodes[origNode-1]);
+			//arcList.push_back(std::make_pair(destNode, origNode));
 			lengthVal[arc] = cost;
 			//cout << "Arc: #" << i << " " << destNode << " " << origNode << " " << cost <<  endl;
 		}
     }
+    //static graph
+	//g.build(nmax, arcList.begin(), arcList.end());
+
+    //populate costMap
+    //for (unsigned int i = 0; i < mmax; ++i)
+    //    lengthVal[ g.arc(i) ] = pC[i];
+
+
 	//init Dijkstra here
     dijk = new DijkstraInternal(g,lengthVal);
 	//DijkstraInternal dijk(g,lengthVal);
@@ -154,6 +189,8 @@ void SPT_LEM_2Heap::SetOrigin( unsigned int NewOrg )
 {
     //1. uint to Lemon Node
 	orig = nodes[NewOrg-1];
+	//multiple sources?
+	//dijk->addSource(orig);
 }
 
 void SPT_LEM_2Heap::SetDest( unsigned int NewDst )
@@ -172,6 +209,7 @@ bool SPT_LEM_2Heap::Reached( unsigned int NodeID )
 {
     //1. uint to Lemon Node
 	SmartDigraph::Node node = nodes[NodeID-1];
+	//StaticDigraph::Node node = nodes [NodeID-1];
     return dijk->reached(node);
 }
 
@@ -182,6 +220,8 @@ void SPT_LEM_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, unsigned in
 		//id to lemon node
 		SmartDigraph::Node pathDest = nodes[Dst-1];
 		Path<SmartDigraph> path = dijk->path(pathDest);
+		/*StaticDigraph::Node pathDest = nodes[Dst-1];
+		Path<StaticDigraph> path = dijk->path(pathDest);*/
 
 		for (int i = 0; i < path.length(); i++)
 		/*for (Path<SmartDigraph>::ArcIt a(path); a != INVALID; a++)*/
@@ -245,19 +285,21 @@ void SPT_LEM_2Heap::GetPredecessors( unsigned int *outPrd )
 
 unsigned int SPT_LEM_2Heap::MCFnmax( void)
 {
-	return ( nmax );
+	return ( this->nmax );
 }
 
 unsigned int SPT_LEM_2Heap::MCFmmax( void)
 {
-	return ( mmax );
+	return ( this->mmax );
 }
 
 void SPT_LEM_2Heap::PrintResult( void )
 {
 //    SmartDigraph::NodeMap<double> d = dijk->distMap();
     //depointerize distMap
+
     SmartDigraph::NodeMap<double>& distMapVal = *distMap;
+    //StaticDigraph::NodeMap<double>& distMapVal = *distMap;
 	cout << "***********************************************" << endl;
 	cout << "C++ Output START" << endl;
 	if (!allDests)

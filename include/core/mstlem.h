@@ -17,10 +17,11 @@ using namespace lemon;
 using namespace std;
 
 namespace netxpert {
+    namespace core {
     /**
     *  \Class Core Solver for the Minimum Spanning Tree Problem
     */
-    class MST_LEMON : public IMinSpanTree
+    class MST_LEMON : public netxpert::core::IMinSpanTree
     {
         public:
             MST_LEMON();
@@ -46,5 +47,7 @@ namespace netxpert {
             SmartDigraph::ArcMap<bool>* edgeBoolMapPtr;
             vector<typename SmartDigraph::Node> nodes;
     };
-}
+}//namespace core
+}//namespace netxpert
+
 #endif // CORE_MSTLEM_H

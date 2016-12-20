@@ -2,6 +2,7 @@
 #define IMINSPANTREE_H
 
 namespace netxpert {
+    namespace core {
     /**
     * \Class Abstract Class (Interface) for all Minimum Spanning Tree Solvers in netxpert core.
     */
@@ -17,5 +18,6 @@ namespace netxpert {
             virtual void SolveMST()=0;
             virtual double MSTGetF0()=0;
     };
-}
+} //namespace core
+}//namespace netxpert
 #endif // IMINSPANTREE_H

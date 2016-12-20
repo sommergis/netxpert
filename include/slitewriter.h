@@ -9,31 +9,30 @@
 #include "SQLiteCpp/Transaction.h"
 #include "geos/io/WKBWriter.h"
 
-using namespace std;
-using namespace geos::geom;
-using namespace SQLite;
-
 namespace netxpert {
 
+    namespace io {
     /**
     * \Class Writes the result of NetXpert into a SpatiaLite DB
     **/
-    class SpatiaLiteWriter : public DBWriter
+    class SpatiaLiteWriter : public netxpert::io::DBWriter
     {
         public:
-            SpatiaLiteWriter(Config& cnfg);
-            SpatiaLiteWriter(Config& cnfg, std::string dbPath);
+            SpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
+            SpatiaLiteWriter(netxpert::cnfg::Config& cnfg, std::string dbPath);
             virtual ~SpatiaLiteWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType);
-            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType,
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType);
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst);
             virtual void OpenNewTransaction();
 
 
             std::unique_ptr<SQLite::Statement> PrepareSaveResultArc(const std::string& _tableName,
-                                                                    const netxpert::NetXpertSolver solverType);
+                                                                    const netxpert::data::NetXpertSolver solverType);
 
             /**
             * \Brief For saving the result arc in the netXpert result DB
@@ -108,18 +107,19 @@ namespace netxpert {
             bool isConnected = false;
             void initSpatialMetaData();
             bool performInitialCommand();
-            void createTable (const std::string& _tableName, const NetXpertSolver solverType);
+            void createTable (const std::string& _tableName, const netxpert::data::NetXpertSolver solverType);
             void dropTable (const std::string& _tableName);
             void recoverGeometryColumn (std::string _tableName, std::string _geomColName, std::string _geomType);
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             //UNUSED
             void mergeAndSaveResultArcs(std::string orig, std::string dest, double cost, double capacity, double flow,
                                         std::string geomColumnName, std::string arcIDColumnName, std::string arcTableName,
-                                        const std::string& arcIDs, const MultiLineString& mLine, std::string resultTableName);
+                                        const std::string& arcIDs, const geos::geom::MultiLineString& mLine, std::string resultTableName);
 
             void mergeAndSaveResultArcs(std::string costColumnName, std::string geomColumnName, std::string arcIDColumnName,
                                         std::string arcTableName, const std::string& arcIDs, std::string resultTableName);
     };
-}
+} //namespace io
+} //namespace netxpert
 
 #endif // SPATIALITEWRITER_H

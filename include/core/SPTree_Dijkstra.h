@@ -183,10 +183,12 @@ namespace MCFClass_di_unipi_it
 
 namespace netxpert {
 
+    namespace core {
+
 /**
 *  \Class Core Solver for the Shortest Path Tree Problem with Dijkstra's algorithm.
 */
-class SPTree_Dijkstra : public MCFClass, public ISPTree
+class SPTree_Dijkstra : public MCFClass, public netxpert::core::ISPTree
 {
 
 /*--------------------------------------------------------------------------*/
@@ -910,6 +912,7 @@ inline void SPTree_Dijkstra::GetDests( unsigned int *outDstBse )
 	memcpy( outDstBse, originals, size * sizeof( MCFClass::cIndex ) ) ;
 }
 
+} //namespace core
 } //namespace NetXpert
 
 #if( OPT_USE_NAMESPACES )

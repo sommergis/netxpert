@@ -18,9 +18,9 @@ namespace netxpert {
             int Solve();
             double GetOptimum();
             std::string GetMinimumSpanningTreeAsJSON();
-            std::vector<netxpert::ExternalArc> GetMinimumSpanningTree();
+            std::vector<netxpert::data::ExternalArc> GetMinimumSpanningTree();
         private:
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::MinimumSpanningTree> solver = nullptr;
     };
   }

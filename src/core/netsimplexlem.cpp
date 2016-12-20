@@ -1,7 +1,7 @@
 #include "netsimplexlem.h"
 
 using namespace std;
-using namespace netxpert;
+using namespace netxpert::core;
 
 NetworkSimplex::NetworkSimplex( void )
 {

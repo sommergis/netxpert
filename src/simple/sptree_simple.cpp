@@ -1,14 +1,20 @@
 #include "sptree_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::ShortestPathTree::ShortestPathTree(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    this->NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    this->NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 
 int netxpert::simple::ShortestPathTree::Solve()
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -127,9 +133,9 @@ std::string netxpert::simple::ShortestPathTree::GetShortestPathsAsJSON()
         result = this->solver->GetShortestPathsAsJSON();*/
     return result;
 }
-std::vector<netxpert::ExtSPTreeArc> netxpert::simple::ShortestPathTree::GetShortestPaths()
+std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::ShortestPathTree::GetShortestPaths()
 {
-    std::vector<netxpert::ExtSPTreeArc> result;
+    std::vector<netxpert::data::ExtSPTreeArc> result;
     /*if (this->solver)
         result = this->solver->GetShortestPaths();*/
     return result;

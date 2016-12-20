@@ -4,8 +4,6 @@
 #include <string>
 #include "network.h"
 
-using namespace std;
-
 namespace netxpert {
     /**
     * \Abstract Abstract Class (Interface) for all Solvers
@@ -15,8 +13,8 @@ namespace netxpert {
         public:
             /** Default destructor */
             virtual ~ISolver() {}
-            virtual void Solve(string net) = 0;
-            virtual void Solve(Network& net) = 0;
+            virtual void Solve(std::string net) = 0;
+            virtual void Solve(netxpert::Network& net) = 0;
             virtual double GetOptimum() const=0;
     };
 }

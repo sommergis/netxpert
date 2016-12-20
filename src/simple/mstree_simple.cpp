@@ -1,14 +1,20 @@
 #include "mstree_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::MinimumSpanningTree::MinimumSpanningTree(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 
 int netxpert::simple::MinimumSpanningTree::Solve()
 {
-    using namespace netxpert; //local scope!
+    //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {
@@ -101,9 +107,9 @@ std::string netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTreeAsJSON(
     return result;
 }
 
-std::vector<netxpert::ExternalArc> netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTree()
+std::vector<netxpert::data::ExternalArc> netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTree()
 {
-    std::vector<netxpert::ExternalArc> result;
+    std::vector<netxpert::data::ExternalArc> result;
     /*if (this->solver)
         result = this->solver->GetMinimumSpanningTree();*/
     return result;

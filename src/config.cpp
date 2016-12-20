@@ -1,11 +1,11 @@
 #include <fstream>
 #include "config.h"
 
-using namespace netxpert;
-using namespace cereal;
 using namespace std;
+using namespace cereal;
+using namespace netxpert::cnfg;
 
- Config ConfigReader::GetConfigFromJSON(string jsonString)
+Config ConfigReader::GetConfigFromJSON(string jsonString)
 {
     stringstream ss (jsonString);
     try

@@ -5,24 +5,20 @@
 #include "geos/geom/Geometry.h"
 #include "geos/geom/MultiLineString.h"
 #include "geos/geom/LineString.h"
-#include <map>
 #include <unordered_map>
-#include <unordered_set>
-#include <list>
 #include <vector>
 #include <cereal/cereal.hpp>
 #include <cereal/archives/json.hpp>
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/vector.hpp>
 //#include <boost/bimap.hpp>
-//#include <pair>
 
 //Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
 //TODO: data structure: LEMON? structs? maps?
-using namespace std;
-using namespace geos::geom;
 
 namespace netxpert {
+
+    namespace data {
 
     /**
     * \const Value that shall be used instead of Infinity for arc values (e.g. capacity).
@@ -106,18 +102,18 @@ namespace netxpert {
         End = 2               ///< point is identical to the end point of the line
     };
 
-    typedef string ExtArcID;
-    typedef string ExtNodeID;
+    typedef std::string ExtArcID;
+    typedef std::string ExtNodeID;
 
     struct ExtClosestArcAndPoint
     {
-        string extArcID;
-        string extFromNode;
-        string extToNode;
+        std::string extArcID;
+        std::string extFromNode;
+        std::string extToNode;
         double cost;
         double capacity;
-        Coordinate closestPoint;
-        shared_ptr<Geometry> arcGeom;
+        geos::geom::Coordinate closestPoint;
+        std::shared_ptr<geos::geom::Geometry> arcGeom;
     };
 
     /**
@@ -140,14 +136,14 @@ namespace netxpert {
     **/
     struct ExtNodeSupply
     {
-        ExtNodeID extNodeID;
+        netxpert::data::ExtNodeID extNodeID;
         double supply;
 
         template<class Archive>
         void serialize( Archive & ar )
         {
             ar( cereal::make_nvp("nodeid", extNodeID),
-                cereal::make_nvp("supply",supply) );
+                cereal::make_nvp("supply", supply) );
         }
     };
 
@@ -156,8 +152,8 @@ namespace netxpert {
     **/
     struct ExtSPTreeArc
     {
-        ExtArcID extArcID;
-        ExternalArc extArc;
+        netxpert::data::ExtArcID extArcID;
+        netxpert::data::ExternalArc extArc;
         double cost;
 
         template<class Archive>
@@ -191,13 +187,13 @@ namespace netxpert {
         }
     };*/
 
-    typedef std::vector<netxpert::ExtSPTreeArc> ExtSPTArcs;
-    typedef std::vector<netxpert::ExtNodeSupply> ExtNodeSupplies;
+    typedef std::vector<netxpert::data::ExtSPTreeArc> ExtSPTArcs;
+    typedef std::vector<netxpert::data::ExtNodeSupply> ExtNodeSupplies;
 
     struct ExtTransportationData
     {
-        ExtSPTArcs odm;
-        ExtNodeSupplies supply;
+        netxpert::data::ExtSPTArcs odm;
+        netxpert::data::ExtNodeSupplies supply;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -244,7 +240,7 @@ namespace netxpert {
     **/
     struct DuplicateArcData
     {
-        string extArcID;
+        std::string extArcID;
         double cost;
     };
     /**
@@ -252,7 +248,7 @@ namespace netxpert {
     **/
     struct ArcData
     {
-        string extArcID;
+        std::string extArcID;
         double cost;
         double capacity;
     };
@@ -261,7 +257,7 @@ namespace netxpert {
     **/
     struct ArcDataAndFlow
     {
-        string oldArcID;
+        std::string oldArcID;
         double cost;
         double capacity;
         double flow;
@@ -271,7 +267,7 @@ namespace netxpert {
     **/
     struct FlowCost
     {
-        InternalArc intArc;
+        netxpert::data::InternalArc intArc;
         double flow;
         double cost;
     };
@@ -279,21 +275,21 @@ namespace netxpert {
     /**
     * \Custom data type for storing tuple <CompressedPath,cost>
     **/
-    typedef pair<vector<unsigned int>,double> CompressedPath;
+    typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
     /**
     * \Custom data type for storing tuple <CompressedPath,flow>
     **/
     struct DistributionArc
     {
-        CompressedPath path;
+        netxpert::data::CompressedPath path;
         double flow;
     };
 
 
     struct ExtDistributionArc
     {
-        ExtArcID arcid;
-        ExternalArc extArc;
+        netxpert::data::ExtArcID arcid;
+        netxpert::data::ExternalArc extArc;
         double cost;
         double flow;
 
@@ -308,7 +304,7 @@ namespace netxpert {
         }
     };
 
-    typedef std::vector<netxpert::ExtDistributionArc> ExtDistribution;
+    typedef std::vector<netxpert::data::ExtDistributionArc> ExtDistribution;
 
     /**
     * \Custom data type for storing the result of the Transpotation Solver in JSON-Format.
@@ -316,7 +312,7 @@ namespace netxpert {
     struct TransportationResult
     {
         double optimum;
-        std::vector<ExtDistributionArc> dist;
+        std::vector<netxpert::data::ExtDistributionArc> dist;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -332,7 +328,7 @@ namespace netxpert {
     struct MSTResult
     {
         double optimum;
-        std::vector<netxpert::ExternalArc> mst;
+        std::vector<netxpert::data::ExternalArc> mst;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -348,7 +344,7 @@ namespace netxpert {
     struct SPTResult
     {
         double optimum;
-        std::vector<netxpert::ExtSPTreeArc> spt;
+        std::vector<netxpert::data::ExtSPTreeArc> spt;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -363,15 +359,15 @@ namespace netxpert {
     **/
     struct AddedPoint
     {
-        string extNodeID;
-        Coordinate coord;
+        std::string extNodeID;
+        geos::geom::Coordinate coord;
     };
     /**
     * \Custom data type for storing tuple <extNodeID,supply>
     **/
     struct NodeSupply
     {
-        string extNodeID;
+        std::string extNodeID;
         double supply;
     };
 
@@ -390,17 +386,17 @@ namespace netxpert {
     **/
     struct NewArc
     {
-        shared_ptr<LineString> arcGeom;
+        std::shared_ptr<geos::geom::LineString> arcGeom;
         //LineString& arcGeom;
         //LineString* arcGeom;
-        AddedNodeType nodeType;
+        netxpert::data::AddedNodeType nodeType;
         double cost;
         double capacity;
     };
 
     struct SwappedOldArc
     {
-        InternalArc ftNode;
+        netxpert::data::InternalArc ftNode;
         double cost;
         double capacity;
     };
@@ -410,64 +406,64 @@ namespace netxpert {
     **/
     struct SplittedArc
     {
-        InternalArc ftNode;
+        netxpert::data::InternalArc ftNode;
         double cost;
         double capacity;
-        shared_ptr<MultiLineString> arcGeom;
+        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
     };
 
     struct InputArc
     {
-        string extArcID;
-        string extFromNode;
-        string extToNode;
+        std::string extArcID;
+        std::string extFromNode;
+        std::string extToNode;
         double cost;
         double capacity;
-        string oneway;
+        std::string oneway;
     };
 
     struct InputNode
     {
-        string extNodeID;
+        std::string extNodeID;
         double nodeSupply;
     };
 
     struct ColumnMap
     {
-        string arcIDColName;
-        string fromColName;
-        string toColName;
-        string costColName;
-        string capColName;
-        string onewayColName;
-        string nodeIDColName;
-        string supplyColName;
+        std::string arcIDColName;
+        std::string fromColName;
+        std::string toColName;
+        std::string costColName;
+        std::string capColName;
+        std::string onewayColName;
+        std::string nodeIDColName;
+        std::string supplyColName;
     };
 
     typedef unsigned int IntNodeID;
 
-    typedef unordered_map<InternalArc, ArcData> Arcs;
+    typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::ArcData> Arcs;
     //typedef boost::bimap< FTNode, ArcData > Arcs;
-    typedef unordered_map<IntNodeID, AddedPoint> AddedPoints;
-    typedef unordered_map<IntNodeID, NodeSupply> NodeSupplies;
+    typedef std::unordered_map<netxpert::data::IntNodeID, netxpert::data::AddedPoint> AddedPoints;
+    typedef std::unordered_map<netxpert::data::IntNodeID, netxpert::data::NodeSupply> NodeSupplies;
 
     //TODO find structure of NewArcs / OldArcs
     //Dictionary<Tuple<uint, uint>, Tuple<IGeometry, AddedNodeType, double, double>> newEdges;
-    typedef unordered_map<InternalArc, NewArc> NewArcs; //container for the new parts of arcs that where splitted
+    typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::NewArc> NewArcs; //container for the new parts of arcs that where splitted
     //Dictionary<Tuple<uint, uint>, Tuple<string, double, double>> oldEdges;
     //Query in both directions necessary --> bimap?
 
-    typedef std::vector<NewNode> NewNodes;
+    typedef std::vector<netxpert::data::NewNode> NewNodes;
 
-    typedef unordered_map<string, SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
+    typedef std::unordered_map<std::string, netxpert::data::SwappedOldArc> SwappedOldArcs; //container for the original arcs that where splitted with original key
 
     //typedef map<string,string> ColumnMap;
-    typedef vector<InputArc> InputArcs;
-    typedef vector<InputNode> InputNodes;
+    typedef std::vector<netxpert::data::InputArc> InputArcs;
+    typedef std::vector<netxpert::data::InputNode> InputNodes;
 
     struct NetworkBuilderInputArc
     {
-        ExtArcID extArcID;
+        netxpert::data::ExtArcID extArcID;
         double cost;
         double capacity;
         std::string oneway;
@@ -476,13 +472,13 @@ namespace netxpert {
 		//--> std::unique_ptr funktioniert nicht als data member
 		std::shared_ptr<geos::geom::Geometry> geom;
     };
-    typedef vector<NetworkBuilderInputArc> NetworkBuilderInputArcs;
+    typedef std::vector<netxpert::data::NetworkBuilderInputArc> NetworkBuilderInputArcs;
 
     struct NetworkBuilderResultArc
     {
-        ExtArcID extArcID;
-        IntNodeID fromNode;
-        IntNodeID toNode;
+        netxpert::data::ExtArcID extArcID;
+        netxpert::data::IntNodeID fromNode;
+        netxpert::data::IntNodeID toNode;
         double cost;
         double capacity;
         std::string oneway;
@@ -499,10 +495,12 @@ namespace netxpert {
 			return *this;
 		}*/
     };
-    typedef unordered_map< unsigned int, NetworkBuilderResultArc> NetworkBuilderResultArcs;
+    typedef std::unordered_map< unsigned int, netxpert::data::NetworkBuilderResultArc> NetworkBuilderResultArcs;
 
-    typedef unordered_map< unique_ptr<geos::geom::Point>, IntNodeID> NetworkBuilderResultNodes;
-}
+    typedef std::unordered_map< std::unique_ptr<geos::geom::Point>, netxpert::data::IntNodeID> NetworkBuilderResultNodes;
+
+ } //namespace data
+} //namespace netxpert
 
 namespace std
 {
@@ -512,12 +510,12 @@ namespace std
     * \unordered map.
     **/
     template <>
-    class hash<netxpert::InternalArc>
+    class hash<netxpert::data::InternalArc>
     {
       public:
-        long operator()(const netxpert::InternalArc& x) const
+        long operator()(const netxpert::data::InternalArc& x) const
         {
-            hash<string> z;
+            hash<std::string> z;
             return z(to_string(x.fromNode) + to_string(x.toNode));
         }
     };
@@ -526,10 +524,10 @@ namespace std
     * \Equal_to operator for custom key type InternalArc in unordered map.
     **/
     template <>
-    class equal_to<netxpert::InternalArc>
+    class equal_to<netxpert::data::InternalArc>
     {
       public:
-         bool operator()(const netxpert::InternalArc& a, const netxpert::InternalArc& b) const
+         bool operator()(const netxpert::data::InternalArc& a, const netxpert::data::InternalArc& b) const
          {
             return a.fromNode == b.fromNode && a.toNode == b.toNode;
          }
@@ -540,12 +538,12 @@ namespace std
     * \unordered map.
     **/
     template <>
-    class hash<netxpert::ODPair>
+    class hash<netxpert::data::ODPair>
     {
       public:
-        long operator()(const netxpert::ODPair& x) const
+        long operator()(const netxpert::data::ODPair& x) const
         {
-            hash<string> z;
+            hash<std::string> z;
             return z(to_string(x.origin) + to_string(x.dest));
         }
     };
@@ -554,13 +552,13 @@ namespace std
     * \Equal_to operator for custom key type ODPair in unordered map.
     **/
     template <>
-    class equal_to<netxpert::ODPair>
+    class equal_to<netxpert::data::ODPair>
     {
       public:
-         bool operator()(const netxpert::ODPair& a, const netxpert::ODPair& b) const
+         bool operator()(const netxpert::data::ODPair& a, const netxpert::data::ODPair& b) const
          {
             return a.origin == b.origin && a.dest == b.dest;
          }
     };
-}
+} //namespace std
 #endif // DATA_H

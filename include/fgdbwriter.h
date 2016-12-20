@@ -8,25 +8,24 @@
 #include "FileGDB_API/include/FileGDBAPI.h"
 #include "utils.h"
 #include <algorithm>
-//#include <boost/algorithm/string.hpp>
-
-using namespace std;
-using namespace geos;
 
 namespace netxpert {
 
+    namespace io {
     /**
     * \Class Writes the result of NetXpert into a ESRI FileGeodatabase
     **/
-    class FGDBWriter : public DBWriter
+    class FGDBWriter : public netxpert::io::DBWriter
     {
         public:
-            FGDBWriter( Config& netxpertConfig );
+            FGDBWriter( netxpert::cnfg::Config& netxpertConfig );
             virtual ~FGDBWriter();
             virtual void CommitCurrentTransaction();
             virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType);
-            virtual void CreateSolverResultTable(const std::string& _tableName, const NetXpertSolver solverType,
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType);
+            virtual void CreateSolverResultTable(const std::string& _tableName,
+                                                 const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst);
             virtual void OpenNewTransaction();
             /**
@@ -58,21 +57,23 @@ namespace netxpert {
 
             virtual void CloseConnection();
         private:
-            unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;
+            std::unique_ptr<FileGDBAPI::Geodatabase> geodatabasePtr;
             void connect();
             bool isConnected = false;
-            void createTable (const std::string& _tableName, const NetXpertSolver solverType);
-            void openTable(const string& _tableName);
-            void dropTable (const string& _tableName);
-            unique_ptr<FileGDBAPI::Table> currentTblPtr;
-            const string resultMCFDefPath           = "FGDB_NETXPERT_MCF_SCHEMA.XML";
-            const string resultNetBuilderDefPath    = "FGDB_NETXPERT_NETBUILD_SCHEMA.XML";
-            const string resultMSTDefPath           = "FGDB_NETXPERT_MST_SCHEMA.XML";
-            const string resultIsoLinesDefPath      = "FGDB_NETXPERT_ISOLINES_SCHEMA.XML";
-            const string resultSPTDefPath           = "FGDB_NETXPERT_SPT_SCHEMA.XML";
-            Config NETXPERT_CNFG;
+            void createTable (const std::string& _tableName,
+                              const netxpert::data::NetXpertSolver solverType);
+            void openTable(const std::string& _tableName);
+            void dropTable (const std::string& _tableName);
+            std::unique_ptr<FileGDBAPI::Table> currentTblPtr;
+            const std::string resultMCFDefPath           = "FGDB_NETXPERT_MCF_SCHEMA.XML";
+            const std::string resultNetBuilderDefPath    = "FGDB_NETXPERT_NETBUILD_SCHEMA.XML";
+            const std::string resultMSTDefPath           = "FGDB_NETXPERT_MST_SCHEMA.XML";
+            const std::string resultIsoLinesDefPath      = "FGDB_NETXPERT_ISOLINES_SCHEMA.XML";
+            const std::string resultSPTDefPath           = "FGDB_NETXPERT_SPT_SCHEMA.XML";
+            netxpert::cnfg::Config NETXPERT_CNFG;
     };
-}
+} //namespace io
+} //namespace netxpert
 
 
 #endif // FGDBWRITER_H

@@ -1,7 +1,12 @@
 #include "sptree.h"
 
-using namespace netxpert;
 using namespace std;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
 
 ShortestPathTree::ShortestPathTree(Config& cnfg)
 {
@@ -123,6 +128,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
                 spt = unique_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
                 break;
+            case SPTAlgorithm::Dijkstra_dheap_BOOST:
+                spt = unique_ptr<ISPTree>(new SPT_BGL_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+                break;
             default:
                 break;
         }
@@ -188,18 +197,18 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
 
-    vector<unsigned int> a_pre;
+    //vector<unsigned int> a_pre;
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.reserve(anz + 1);
+    //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
     try
     {
         // vector::data() returns pointer
-        spt->GetArcPredecessors(a_pre.data());
+        //spt->GetArcPredecessors(a_pre.data());
         spt->GetPredecessors(pre.data());
     }
     catch (exception& ex)
@@ -214,8 +223,9 @@ void ShortestPathTree::solve (Network& net, unsigned int orig, bool isDirected)
     {
     for (int i = nmax; i > 0; i--)
     {
-        if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
-            arcs.insert( make_pair(i,pre[i]));
+        //if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+        if (pre[i] != ign[0] && pre[i] != ign[1])
+            arcs.insert( make_pair( i,pre[i] ));
     }
 
     for (int i = 1; i < anz + 1; i++) {
@@ -312,6 +322,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
 
                 }
                 break;
+            case SPTAlgorithm::Dijkstra_dheap_BOOST:
+                spt = unique_ptr<ISPTree>(new SPT_BGL_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+                break;
             default:
                 break;
         }
@@ -383,18 +397,18 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
 
-    vector<unsigned int> a_pre;
+    //vector<unsigned int> a_pre;
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.reserve(anz + 1);
+    //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
     try
     {
         // vector::data() returns pointer
-        spt->GetArcPredecessors(a_pre.data());
+        //spt->GetArcPredecessors(a_pre.data());
         spt->GetPredecessors(pre.data());
     }
     catch (exception& ex)
@@ -407,7 +421,8 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     arcs.reserve(spt->MCFmmax());
     for (unsigned int i = nmax; i > 0; i--)
     {
-        if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+        //if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+        if (pre[i] != ign[0] && pre[i] != ign[1])
             arcs.insert( make_pair( i,pre[i] ));
     }
 
@@ -483,6 +498,10 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
                 spt = unique_ptr<ISPTree>(new SPT_LEM_Bijkstra_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
                 break;
+            case SPTAlgorithm::Dijkstra_dheap_BOOST:
+                spt = unique_ptr<ISPTree>(new SPT_BGL_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
+                break;
             default:
                 break;
         }
@@ -549,18 +568,18 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     nmax = spt->MCFnmax();
     anz = spt->MCFnmax();
 
-    vector<unsigned int> a_pre;
+    //vector<unsigned int> a_pre;
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.reserve(anz + 1);
+    //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
     try
     {
         // vector::data() returns pointer
-        spt->GetArcPredecessors(a_pre.data());
+        //spt->GetArcPredecessors(a_pre.data());
         spt->GetPredecessors(pre.data());
     }
     catch (exception& ex)
@@ -573,7 +592,8 @@ void ShortestPathTree::solve (Network& net, unsigned int orig,
     arcs.reserve(spt->MCFmmax());
     for (int i = nmax; i > 0; i--)
     {
-        if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+        //if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+        if (pre[i] != ign[0] && pre[i] != ign[1])
             arcs.insert( make_pair(i,pre[i]));
     }
 
@@ -670,8 +690,8 @@ double ShortestPathTree::GetOptimum() const {
     return this->optimum;
 }
 
-void netxpert::ShortestPathTree::SaveResults(const std::string& resultTableName,
-                                            const netxpert::ColumnMap& cmap) const
+void ShortestPathTree::SaveResults(const std::string& resultTableName,
+                                            const ColumnMap& cmap) const
 {
     try
     {
@@ -849,6 +869,17 @@ vector<InternalArc> ShortestPathTree::UncompressRoute(unsigned int orig, vector<
     return startsNends;
 }
 
+bool internalArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
+                            std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
+    return a.first.fromNode > b.first.fromNode;
+}
+
+bool sortedArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
+                            std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
+    return  (a.first == b.first) ;
+}
+
+
 void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
             vector<unsigned int>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
 {
@@ -856,15 +887,31 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
     // das böse Erwachen in Form eines Heap Corruption errors bzw. einer System Access Violation
 
     Arcs arcs = net.GetInternalArcData();
+
+    //sort per fromNode for static graph of LEMON
+    netxpert::utils::LOGGER::LogDebug("Start sorting arcs..");
+    std::vector< std::pair<InternalArc, ArcData> > sortedArcsVec (arcs.begin(), arcs.end());
+    std::sort(sortedArcsVec.begin(), sortedArcsVec.end(), internalArcComp);
+    netxpert::utils::LOGGER::LogDebug("End of sorting.");
+    arcs.clear();
+
+    Arcs sortedArcs (sortedArcsVec.begin(), sortedArcsVec.end());
+    sortedArcsVec.clear();
+
     vector<InternalArc> keys;
-    for(Arcs::iterator it = arcs.begin(); it != arcs.end(); ++it) {
+    for(Arcs::iterator it = sortedArcs.begin(); it != sortedArcs.end(); ++it) {
       keys.push_back(it->first);
     }
+
+    /*for(std::vector< std::pair<InternalArc, ArcData> >::const_iterator it = sortedArcs.begin(); it != sortedArcs.end(); ++it) {
+      keys.push_back(it->first);
+    }*/
 
     // Für Shortest Path Tree Tree auf die Richtung achten
     // --> doppelter Input der Kanten notwendig bei undirected
     sNds.resize(keys.size());
     eNds.resize(keys.size());
+
     //cout << "size of arcs: " << keys.size() << endl;
     for (int i = 0; i < keys.size(); i++)
     {
@@ -877,12 +924,34 @@ void ShortestPathTree::convertInternalNetworkToSolverData(Network& net, vector<u
     for (int i = 0; i < keys.size(); i++)
     {
         ArcData oldArcData;
-        if (arcs.count(keys[i]) > 0)
-            oldArcData = arcs.at(keys[i]);
+        if (sortedArcs.count(keys[i]) > 0)
+            oldArcData = sortedArcs.at(keys[i]);
         costs[i] = oldArcData.cost;
         //SPTree does not care about capacity
         //caps[i] = 0; //oldArcData.capacity;
     }
+
+    /*for (int i = 0; i < keys.size(); i++)
+    {
+        ArcData oldArcData;
+        //binary search for ordered elements - find for unordered
+        //but we use find_if for getting the element if it has been found
+        auto key = keys[i];
+        std::vector< std::pair<InternalArc, ArcData> >::const_iterator element =
+                std::find_if(sortedArcs.begin(), sortedArcs.end(),
+                //lamdba for comparing the keys only
+                [key](const std::pair<InternalArc,ArcData>& element)
+                {
+                    return element.first == key;
+                });
+
+
+        if ( element != sortedArcs.end() )
+            oldArcData = element->second;
+        costs[i] = oldArcData.cost;
+        //SPTree does not care about capacity
+        //caps[i] = 0; //oldArcData.capacity;
+    }*/
 
     supply.resize( net.GetMaxNodeCount(), 0 ); //Größe muss passen!
 }

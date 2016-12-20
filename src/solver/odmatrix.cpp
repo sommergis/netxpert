@@ -1,7 +1,12 @@
 #include "odmatrix.h"
 
-using namespace netxpert;
 using namespace std;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
 
 OriginDestinationMatrix::OriginDestinationMatrix(Config& cnfg)
 {
@@ -146,11 +151,11 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
     nmax = lspt->MCFnmax();
     anz = lspt->MCFnmax();
 
-    vector<unsigned int> a_pre;
+    //vector<unsigned int> a_pre;
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.reserve(anz + 1);
+    //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
@@ -174,7 +179,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         lspt->ShortestPathTree();
         //LOGGER::LogDebug("SPT solved! ");
 
-        lspt->GetArcPredecessors(a_pre.data());
+        //lspt->GetArcPredecessors(a_pre.data());
         lspt->GetPredecessors(pre.data());
 
         //omp: local intReachedDests --> no concurrent writes per thread
@@ -190,7 +195,7 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
         //omp: local arcs --> no concurrent writes per thread
         for (i = nmax; i > 0; i--)
         {
-            if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+            if (pre[i] != ign[0] && pre[i] != ign[1])
                 arcs.insert( make_pair(i,pre[i]) );
         }
 
@@ -202,6 +207,10 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
         //for (unsigned int dest : dests)
         //{
+        LOGGER::LogDebug("Arc predecessors: ");
+        for (auto arc : arcs)
+            LOGGER::LogDebug("Arc: " + to_string(arc.first) + "->" +to_string(arc.second));
+
 
         vector<unsigned int> route;
         vector<unsigned int>::iterator destIt;
@@ -324,7 +333,7 @@ double OriginDestinationMatrix::GetOptimum() const {
 }
 
 void OriginDestinationMatrix::SaveResults(const std::string& resultTableName,
-                                            const netxpert::ColumnMap& cmap) const
+                                            const ColumnMap& cmap) const
 {
     try
     {

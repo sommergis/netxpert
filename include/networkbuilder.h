@@ -19,16 +19,16 @@ namespace netxpert {
     * - Multipart to Single Part Linestrings
 	* - StartPoint(Linestring): FromNode, EndPoint(Linestring): ToNode
 	* - Undirected als Standard in Solver input
-	* --> Vorteil  ggü. Planarisierung: kein Attributverlust an den Kanten des Graphen
-	* --> Nachteil ggü. Planarisierung: viel mehr (unnötige) Kanten und Knoten im Graph
-    * --> IN: Linien
-    * --> OUT: Netzwerk mit FromNode ToNode und allen Attributen
+	* --> Pro (compared to planarization): no loss of attribute information on the edges of the graph
+	* --> Con (compared to planarization): much more (useless) egdes and nodes in the resulting graph
+    * --> IN: lines
+    * --> OUT: edges in network structure with FromNode and ToNode and all input attributes
     **/
     class NetworkBuilder
     {
         public:
 
-            NetworkBuilder(Config& cnfg);
+            NetworkBuilder(netxpert::cnfg::Config& cnfg);
 
             virtual ~NetworkBuilder()  {};
 
@@ -39,19 +39,18 @@ namespace netxpert {
             *     - Multilinestrings that cannot be merged as a Linestring will throw an exception
             **/
             void LoadData();
-            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
-            std::unordered_map<unsigned int, NetworkBuilderResultArc> GetBuiltNetwork();
+            void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
+            std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
 
         private:
-            netxpert::Config NETXPERT_CNFG;
-            std::vector<NetworkBuilderInputArc> inputArcs;
-            std::unordered_map<unsigned int, NetworkBuilderResultArc> builtNetwork;
-            std::unordered_map< std::string, IntNodeID> builtNodes;
+            netxpert::cnfg::Config NETXPERT_CNFG;
+            std::vector<netxpert::data::NetworkBuilderInputArc> inputArcs;
+            std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> builtNetwork;
+            std::unordered_map< std::string, netxpert::data::IntNodeID> builtNodes;
             std::unique_ptr<geos::geomgraph::GeometryGraph> geoGraph;
             void calcNodes();
             std::unique_ptr<geos::geom::LineString> mergeMultiLineString(geos::geom::Geometry& geom);
             std::unique_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
-
     };
 }
 #endif // NETWORKBUILDER_H

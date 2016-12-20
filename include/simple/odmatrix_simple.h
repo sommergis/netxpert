@@ -6,6 +6,7 @@
 #include "network.h"
 #include "dbhelper.h"
 #include "odmatrix.h"
+#include "odmatrix2.h"
 
 namespace netxpert {
  namespace simple {
@@ -13,16 +14,19 @@ namespace netxpert {
     class OriginDestinationMatrix
     {
         public:
+            OriginDestinationMatrix(std::string jsonCnfg, bool experimentalVersion);
             OriginDestinationMatrix(std::string jsonCnfg);
             virtual ~OriginDestinationMatrix() {}
             int Solve();
             int Solve(bool parallel);
             double GetOptimum();
             std::string GetODMatrixAsJSON();
-            std::vector<netxpert::ExtSPTreeArc> GetODMatrix();
+            std::vector<netxpert::data::ExtSPTreeArc> GetODMatrix();
         private:
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::OriginDestinationMatrix> solver = nullptr;
+            std::unique_ptr<netxpert::OriginDestinationMatrix2> solver2 = nullptr;
+            bool experimentalVersion = false; //->OriginDestinationMatrix2
     };
   }
 }

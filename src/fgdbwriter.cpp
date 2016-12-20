@@ -1,8 +1,12 @@
 #include "fgdbwriter.h"
 
-using namespace netxpert;
 using namespace std;
 using namespace FileGDBAPI;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::utils;
 
 
 FGDBWriter::FGDBWriter(Config& netxpertConfig)

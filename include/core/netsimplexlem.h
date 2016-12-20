@@ -12,11 +12,11 @@
 #include <string.h> //memcpy
 
 namespace netxpert {
-
+    namespace core {
     /**
     *  \Class Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON.
     */
-    class NetworkSimplex : public IMinCostFlow
+    class NetworkSimplex : public netxpert::core::IMinCostFlow
     {
         public:
             NetworkSimplex(void);
@@ -56,5 +56,7 @@ namespace netxpert {
             //double* flowX;
             lemon::NetworkSimplex<lemon::SmartDigraph,int,double>::ProblemType status;
     };
-}
+} //namespace core
+} //namespace netxpert
+
 #endif // NETSIMPLEXLEM_H
