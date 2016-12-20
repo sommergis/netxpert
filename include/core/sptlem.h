@@ -5,6 +5,7 @@
 #define SPT_LEM_H
 
 #include "lemon/smart_graph.h"
+#include "lemon/static_graph.h"
 #include "lemon/dijkstra.h"
 #include "bijkstra.h"
 #include <stdio.h>
@@ -21,6 +22,7 @@
 using namespace lemon;
 
 namespace netxpert {
+    namespace core {
 
     template <typename T>
     class Inf {
@@ -30,13 +32,13 @@ namespace netxpert {
     };
 
     //typedef FibHeap<SmartDigraph::ArcMap<double>, SmartDigraph::NodeMap<double>> FibonacciHeap;
-    typedef Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>> DijkstraInternal;
+    //using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
 
     /**
     *  \Class Core Solver for the Shortest Path Tree Problem with binary Heap structure and
     *   Dijkstra's algorithm of LEMON.
     */
-    class SPT_LEM_2Heap : public ISPTree
+    class SPT_LEM_2Heap : public netxpert::core::ISPTree
     {
         public:
             SPT_LEM_2Heap(unsigned int nmx = 0 , unsigned int mmx = 0 , bool Drctd = true);
@@ -76,20 +78,32 @@ namespace netxpert {
             unsigned int mmax; //max count arcs
 
         private:
+			//using DijkstraInternal = Dijkstra<StaticDigraph, StaticDigraph::ArcMap<double>>;
+			using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
             bool isDrctd;
             bool allDests;
-            SmartDigraph g;
 
-            //Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>* dijk;
-            //Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>, DijkstraDefaultTraits<SmartDigraph, SmartDigraph::ArcMap<double>>>* dijk;
             DijkstraInternal* dijk;
+            //smart graph
+            SmartDigraph g;
             SmartDigraph::NodeMap<double>* distMap;
             SmartDigraph::ArcMap<double>* length;
             SmartDigraph::Node orig;
             SmartDigraph::Node dest;
             std::vector<typename SmartDigraph::Node> nodes;
+            //Static graph
+			/*
+            StaticDigraph g;
+            StaticDigraph::NodeMap<double>* distMap;
+            StaticDigraph::ArcMap<double>* length;
+            StaticDigraph::Node orig;
+            StaticDigraph::Node dest;
+            std::vector<StaticDigraph::Node> nodes;*/
+            //->
             unsigned int* predecessors;
             unsigned int* arcPredecessors;
     };
-}
+} //namespace core
+} //namespace netxpert
+
 #endif // SPT_LEM_H

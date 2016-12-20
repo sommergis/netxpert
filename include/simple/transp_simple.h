@@ -18,9 +18,9 @@ namespace netxpert {
             int Solve();
             double GetOptimum();
             std::string GetDistributionAsJSON();
-            std::vector<netxpert::ExtDistributionArc> GetDistribution();
+            std::vector<netxpert::data::ExtDistributionArc> GetDistribution();
         private:
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::Transportation> solver = nullptr;
     };
   }

@@ -1,6 +1,12 @@
 #include "mstree.h"
 
+using namespace std;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
 
 MinimumSpanningTree::MinimumSpanningTree(Config& cnfg)
 {
@@ -22,7 +28,7 @@ double MinimumSpanningTree::GetOptimum() const
 {
     return mst->MSTGetF0();
 }
-void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
 {
     try
     {

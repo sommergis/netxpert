@@ -12,13 +12,9 @@
 #include "geos/geom/Point.h"
 #include "geos/geom/PrecisionModel.h"
 
-using namespace std;
-using namespace geos::geom;
-using namespace SQLite;
+namespace netxpert {
 
-
-namespace netxpert
-{
+    namespace io {
     /**
     * \Static Static Class that controls the SpatiaLite DB processing access
     **/
@@ -27,25 +23,27 @@ namespace netxpert
         protected:
              DBHELPER(){}
         public:
-            static void Initialize(const netxpert::Config& cnfg);
+            static void Initialize(const netxpert::cnfg::Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
             static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(const std::string& tableName,
-                                        const std::string& geomColumnName, const ColumnMap& cmap,
-                                        const netxpert::ArcIDColumnDataType arcIDColDataType,
+                                        const std::string& geomColumnName, const netxpert::data::ColumnMap& cmap,
+                                        const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                         const bool withCapacity);
-            static netxpert::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
+            static netxpert::data::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
                                                                           const int treshold, SQLite::Statement& qry,
                                                                           const bool withCapacity);
-            static netxpert::InputArcs LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map);
-            static netxpert::NetworkBuilderInputArcs LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMap& _map);
-            static std::vector<netxpert::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
-                                                                  const ColumnMap& _map);
+            static netxpert::data::InputArcs LoadNetworkFromDB(const std::string& _tableName,
+                                                               const netxpert::data::ColumnMap& _map);
+            static netxpert::data::NetworkBuilderInputArcs LoadNetworkToBuildFromDB(const std::string& _tableName,
+                                                                                    const netxpert::data::ColumnMap& _map);
+            static std::vector<netxpert::data::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
+                                                                  const netxpert::data::ColumnMap& _map);
 
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromDB(const std::string& tableName,
                                                                            const std::string& arcIDColumnName,
                                                                            const std::string& geomColumnName,
-                                                                           const ArcIDColumnDataType arcIDColDataType,
+                                                                           const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                                                            const std::string& arcIDs );
 
             static std::unordered_set<std::string> GetIntersectingArcs(const std::string& barrierTableName,
@@ -55,11 +53,21 @@ namespace netxpert
                                                                        const std::string& arcGeomColName);
 
             //UNUSED -->
-            static std::unique_ptr<SQLite::Statement> PrepareIsPointOnArcQuery(std::string tableName, std::string arcIDColumnName,
-                                        std::string geomColumnName, ArcIDColumnDataType arcIDColDataType );
-            static bool IsPointOnArc(Coordinate coords, std::string extArcID, std::shared_ptr<SQLite::Statement> qry);
-            static double GetPositionOfClosestPoint(std::string arcsGeomColumnName, std::string arcsTableName, Coordinate coord,
-                                                    std::string extArcID, SQLite::Statement& posOfClosestPointQry);
+            static std::unique_ptr<SQLite::Statement>
+            PrepareIsPointOnArcQuery(std::string tableName,
+                                     std::string arcIDColumnName,
+                                     std::string geomColumnName,
+                                     netxpert::data::ArcIDColumnDataType arcIDColDataType );
+
+            static bool IsPointOnArc(geos::geom::Coordinate coords,
+                                     std::string extArcID,
+                                     std::shared_ptr<SQLite::Statement> qry);
+
+            static double GetPositionOfClosestPoint(std::string arcsGeomColumnName,
+                                                    std::string arcsTableName,
+                                                    geos::geom::Coordinate coord,
+                                                    std::string extArcID,
+                                                    SQLite::Statement& posOfClosestPointQry);
             //-> //
 
             static void CloseConnection();
@@ -71,17 +79,17 @@ namespace netxpert
                Much faster (factor x10) than spatialite lookup per primary key lookup of IDs
             */
             /* Fills KV_Network */
-            static void LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+            static void LoadGeometryToMem(const std::string& _tableName, const netxpert::data::ColumnMap& _map,
                                           const std::string& geomColumnName);
             /* Fills KV_Network */
-            static void LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+            static void LoadGeometryToMem(const std::string& _tableName, const netxpert::data::ColumnMap& _map,
                                           const std::string& geomColumnName, const std::string& arcIDs);
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromMem(const std::string& arcIDs);
 
             ~DBHELPER();
         private:
             static std::unordered_map<std::string, std::shared_ptr<geos::geom::LineString>> KV_Network;
-            static netxpert::Config NETXPERT_CNFG;
+            static netxpert::cnfg::Config NETXPERT_CNFG;
             static std::unique_ptr<SQLite::Database> connPtr;
             static std::unique_ptr<SQLite::Transaction> currentTransactionPtr;
             //static void connect();
@@ -91,5 +99,7 @@ namespace netxpert
             static void initSpatialMetaData();
             static void optimizeSQLiteCon();
     };
-}
+} //namespace io
+} //namespace netxpert
+
 #endif // DBHELPER_H

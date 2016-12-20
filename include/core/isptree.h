@@ -4,13 +4,14 @@
 #include <memory>
 
 namespace netxpert {
+    namespace core {
     /**
     * \Class Abstract Class (Interface) for all Shortest Path Tree Solvers in netxpert core.
     */
     class ISPTree
     {
         public:
-            typedef std::shared_ptr<ISPTree> ISPTreePtr;
+            typedef std::shared_ptr<netxpert::core::ISPTree> ISPTreePtr;
             virtual ISPTreePtr create () const = 0; // Virtual constructor (creation)
             virtual ISPTreePtr clone () const = 0;  // Virtual constructor (for copying)
             /** Default destructor */
@@ -24,13 +25,14 @@ namespace netxpert {
             virtual void SetOrigin( unsigned int NewOrg )=0;
             virtual void SetDest( unsigned int NewDst )=0;
             virtual bool Reached( unsigned int NodeID )=0;
-            virtual unsigned int* ArcPredecessors( void )=0;
+            //virtual unsigned int* ArcPredecessors( void )=0;
             virtual unsigned int* Predecessors( void )=0;
-            virtual void GetArcPredecessors ( unsigned int *outArcPrd )=0;
+            //virtual void GetArcPredecessors ( unsigned int *outArcPrd )=0;
             virtual void GetPredecessors( unsigned int *outPrd )=0;
 
             //virtual void GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn );
             /* end of MCFClass SPTree Interface */
     };
-}
+} //namespace core
+} //namespace netxpert
 #endif // ISPTREE_H

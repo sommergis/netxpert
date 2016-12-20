@@ -1,6 +1,6 @@
 #include "mstlem.h"
 
-using namespace netxpert;
+using namespace netxpert::core;
 
 MST_LEMON::MST_LEMON()
 {

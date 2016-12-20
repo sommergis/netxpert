@@ -451,13 +451,13 @@ inline void DfltdSfInpt( istream *iStrm , T &Param , const T Dflt ,
      ss << buf;
      if( ! ( ss >> Param ) )
       break;
- 
+
      return;
      }
    }
   }
 
- Param = Dflt; 
+ Param = Dflt;
 
  }  // end( DfltdSfInpt )
 

@@ -1,9 +1,13 @@
 #include "isolines_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::Isolines::Isolines(std::string jsonCnfg)
 {
     //Convert JSON Config to real Config Object
-    this->NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+    this->NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 
 double netxpert::simple::Isolines::GetOptimum()
@@ -18,9 +22,9 @@ std::string netxpert::simple::Isolines::GetShortestPathsAsJSON()
         result = this->solver->GetShortestPathsAsJSON();*/
     return result;
 }
-std::vector<netxpert::ExtSPTreeArc> netxpert::simple::Isolines::GetShortestPaths()
+std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::Isolines::GetShortestPaths()
 {
-    std::vector<netxpert::ExtSPTreeArc> result;
+    std::vector<netxpert::data::ExtSPTreeArc> result;
     /*if (this->solver)
         result = this->solver->GetShortestPaths();*/
     return result;
@@ -28,7 +32,9 @@ std::vector<netxpert::ExtSPTreeArc> netxpert::simple::Isolines::GetShortestPaths
 
 int netxpert::simple::Isolines::Solve()
 {
-    using namespace netxpert; //local scope!
+     //local scope!
+    using namespace netxpert;
+    using namespace netxpert::data;
 
     try
     {

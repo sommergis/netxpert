@@ -33,7 +33,7 @@
 #include "assert.h"
 #include "SPTree_LQueue.h"
 
-using namespace netxpert;
+using namespace netxpert::core;
 
 /*--------------------------------------------------------------------------*/
 /*--------------------------------- MACROS ---------------------------------*/

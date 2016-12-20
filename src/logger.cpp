@@ -7,6 +7,8 @@
 using namespace std;
 using namespace boost::posix_time;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::utils;
 
 //Init static member variables must be out of class scope!
 string LOGGER::FullLogFileName = "";

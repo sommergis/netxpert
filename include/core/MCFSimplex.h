@@ -38,6 +38,7 @@
 /*--------------------------- NAMESPACE ------------------------------------*/
 /*--------------------------------------------------------------------------*/
 namespace netxpert {
+    namespace core {
 
 #if( OPT_USE_NAMESPACES )
 namespace MCFClass_di_unipi_it
@@ -91,7 +92,7 @@ namespace MCFClass_di_unipi_it
 /**
 *  \Class Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of MCFSimplex (University of Pisa).
 */
-class MCFSimplex: public MCFClass, public IMinCostFlow
+class MCFSimplex: public MCFClass, public netxpert::core::IMinCostFlow
 {
 
 /*--------------------------------------------------------------------------*/
@@ -1097,7 +1098,8 @@ inline MCFSimplex::CNumber MCFSimplex::ReductCost( A *a )
 #if( OPT_USE_NAMESPACES )
 };  // end( namespace MCFClass_di_unipi_it )
 #endif
-}
+} //namespace core
+} //namespace netxpert
 /*-------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------*/
 

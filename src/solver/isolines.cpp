@@ -1,7 +1,12 @@
 #include "isolines.h"
 
-using namespace netxpert;
 using namespace std;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
 
 Isolines::Isolines(Config& cnfg)
 {
@@ -12,7 +17,6 @@ Isolines::Isolines(Config& cnfg)
     sptHeapCard = cnfg.SPTHeapCard;
     geometryHandling = cnfg.GeometryHandling;
     this->NETXPERT_CNFG = cnfg;
-
 }
 
 void Isolines::Solve(std::string net)
@@ -48,7 +52,7 @@ void Isolines::Solve(Network& net)
 
 
 void Isolines::SaveResults(const std::string& resultTableName,
-                            const netxpert::ColumnMap& cmap) const
+                            const ColumnMap& cmap) const
 {
     try
     {
@@ -308,11 +312,11 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
     nmax = lspt->MCFnmax();
     anz = lspt->MCFnmax();
 
-    vector<unsigned int> a_pre;
+    //vector<unsigned int> a_pre;
     vector<unsigned int> pre;
     vector<unsigned int> nodes;
 
-    a_pre.reserve(anz + 1);
+    //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
@@ -336,7 +340,7 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
         lspt->ShortestPathTree();
         //LOGGER::LogDebug("SPT solved! ");
 
-        lspt->GetArcPredecessors(a_pre.data());
+        //lspt->GetArcPredecessors(a_pre.data());
         lspt->GetPredecessors(pre.data());
 
         //LOGGER::LogDebug("before arcs preprocessing");
@@ -347,7 +351,7 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
         //omp: local arcs --> no concurrent writes per thread
         for (i = nmax; i > 0; i--)
         {
-            if (a_pre[i] != ign[0] && a_pre[i] != ign[1])
+            if (pre[i] != ign[0] && pre[i] != ign[1])
                 arcs.insert( make_pair(i,pre[i]) );
         }
         //LOGGER::LogDebug("arcs preprocessed");

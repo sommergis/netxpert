@@ -1,7 +1,13 @@
 #include "transportation.h"
 
-using namespace netxpert;
 using namespace std;
+using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
+
 
 Transportation::Transportation(Config& cnfg) : MinCostFlow(cnfg)
 {
@@ -14,7 +20,7 @@ Transportation::Transportation(Config& cnfg) : MinCostFlow(cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-void Transportation::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+void Transportation::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
 {
     try
     {
@@ -328,8 +334,16 @@ void Transportation::Solve()
 
     //construct network from external ODMatrix
     //TODO: checkme (pointer resource dealloc)
-    Network n (arcs, nodes, cmap, cnfg);
-    this->net = &n;
+
+    //problem line, because this->net seems not to be persistent anymore
+    // when used outside this scope
+
+    //OLD:
+    //Network n (arcs, nodes, cmap, cnfg);
+    //this->net = &n;
+
+    //NEW:
+    this->net = unique_ptr<Network> ( new Network(arcs, nodes, cmap, cnfg) );
     this->net->ConvertInputNetwork(autoCleanNetwork);
 
     Network net = *this->net;
@@ -407,7 +421,7 @@ void Transportation::Solve()
 void Transportation::Solve(Network& net)
 {
     //TODO: Checkme!
-    this->net = &net;
+    this->net = unique_ptr<Network>(&net);
 
     if (this->originNodes.size() == 0 || this->destinationNodes.size() == 0)
         throw std::runtime_error("Origin nodes and destination nodes must be filled in Transportation Solver!");

@@ -1,9 +1,13 @@
 #include "netbuilder_simple.h"
 
+using namespace netxpert::cnfg;
+using namespace netxpert::io;
+using namespace netxpert::utils;
+
 netxpert::simple::NetworkBuilder::NetworkBuilder(std::string jsonCnfg)
 {
 	//Convert JSON Config to real Config Object
-	NETXPERT_CNFG = netxpert::UTILS::DeserializeJSONtoObject<netxpert::Config>(jsonCnfg);
+	NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<Config>(jsonCnfg);
 }
 
 std::string netxpert::simple::NetworkBuilder::GetBuiltNetworkAsJSON()
@@ -15,6 +19,11 @@ std::string netxpert::simple::NetworkBuilder::GetBuiltNetworkAsJSON()
 
 int netxpert::simple::NetworkBuilder::Build()
 {
+    //local scope!
+    using namespace std;
+    using namespace netxpert;
+    using namespace netxpert::data;
+
 	try
 	{
 		Config cnfg = this->NETXPERT_CNFG;
@@ -32,7 +41,7 @@ int netxpert::simple::NetworkBuilder::Build()
 				LOGGER::Initialize(cnfg);
 			}
 		}
-		catch (exception& ex)
+		catch (std::exception& ex)
 		{
 			std::cout << "Error creating log file: " + cnfg.LogFileFullPath << std::endl;
 			std::cout << ex.what() << std::endl;
@@ -74,10 +83,10 @@ int netxpert::simple::NetworkBuilder::Build()
 	}
 }
 
-std::unordered_map<unsigned int, netxpert::NetworkBuilderResultArc>
+std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc>
 netxpert::simple::NetworkBuilder::GetBuiltNetwork()
 {
-	std::unordered_map<unsigned int, netxpert::NetworkBuilderResultArc> result;
+	std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> result;
 
 	if (this->builder)
 		result = this->builder->GetBuiltNetwork();

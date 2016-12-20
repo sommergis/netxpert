@@ -6,35 +6,36 @@
 #include "MCFSimplex.h"
 #include "netsimplexlem.h"
 
-using namespace std;
+//using namespace std;
 
 namespace netxpert {
     /**
     * \Class Solver for the Minimum Cost Flow Problem
     */
-    class MinCostFlow : public ISolver
+    class MinCostFlow : public netxpert::ISolver
     {
         public:
-            MinCostFlow(netxpert::Config& cnfg);
+            MinCostFlow(netxpert::cnfg::Config& cnfg);
             virtual ~MinCostFlow() {}
             void Solve(std::string net);
             void Solve(netxpert::Network& net);
             bool IsDirected;
-            std::vector<netxpert::FlowCost> GetMinCostFlow() const;
-            netxpert::MCFAlgorithm GetAlgorithm() const;
-            void SetAlgorithm(netxpert::MCFAlgorithm mcfAlgorithm);
-            netxpert::MCFSolverStatus GetSolverStatus() const;
+            std::vector<netxpert::data::FlowCost> GetMinCostFlow() const;
+            netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(netxpert::cnfg::MCFAlgorithm mcfAlgorithm);
+            netxpert::data::MCFSolverStatus GetSolverStatus() const;
             double GetOptimum() const;
-            void SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const;
+            void SaveResults(const std::string& resultTableName,
+                             const netxpert::data::ColumnMap& cmap) const;
 
         protected:
             //visible also to derived classes
-            Config NETXPERT_CNFG;
+            netxpert::cnfg::Config NETXPERT_CNFG;
             double optimum = 0;
-            netxpert::MCFSolverStatus solverStatus;
-            netxpert::MCFAlgorithm algorithm;
-            std::vector<netxpert::FlowCost> flowCost;
-            std::shared_ptr<netxpert::IMinCostFlow> mcf;
+            netxpert::data::MCFSolverStatus solverStatus;
+            netxpert::cnfg::MCFAlgorithm algorithm;
+            std::vector<netxpert::data::FlowCost> flowCost;
+            std::shared_ptr<netxpert::core::IMinCostFlow> mcf;
             void solve (netxpert::Network& net);
             bool validateNetworkData(netxpert::Network& net);
             void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
@@ -43,7 +44,7 @@ namespace netxpert {
 
         private:
             //private is only visible to MCF instance - not to derived classes (like TP)
-            Network* net;
+            netxpert::Network* net;
     };
 }
 #endif // MINCOSTFLOW_H

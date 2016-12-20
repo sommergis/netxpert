@@ -1,6 +1,7 @@
 #include "utils.h"
 
 using namespace netxpert;
+using namespace netxpert::utils;
 
 std::string UTILS::GetCurrentDir()
 {

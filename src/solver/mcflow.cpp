@@ -1,6 +1,12 @@
 #include "mcflow.h"
 
+using namespace std;
 using namespace netxpert;
+using namespace netxpert::cnfg;
+using namespace netxpert::data;
+using namespace netxpert::io;
+using namespace netxpert::core;
+using namespace netxpert::utils;
 
 MinCostFlow::MinCostFlow(Config& cnfg)
 {
@@ -16,7 +22,7 @@ void MinCostFlow::Solve(string net){}
 
 void MinCostFlow::Solve(Network& net)
 {
-    //TODO: Checkme
+    //TODO: Check for leaks
     this->net = &net;
 
     //Check Balancing of Min Cost Flow Instance
@@ -35,7 +41,7 @@ void MinCostFlow::Solve(Network& net)
     }
 }
 
-void MinCostFlow::SaveResults(const std::string& resultTableName, const netxpert::ColumnMap& cmap) const
+void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
 {
     try
     {
@@ -152,7 +158,8 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const netxpert
             vector<InternalArc> arc { key };
 
             // cout << key.fromNode << "->" << key.toNode << endl;
-
+            //TODO:
+            //works only on non-splitted arcs!
             vector<ArcData> arcData = this->net->GetOriginalArcData(arc, cnfg.IsDirected);
             // is only one arc
             if (arcData.size() > 0)
@@ -160,6 +167,7 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const netxpert
                 ArcData arcD = *arcData.begin();
                 arcIDs = arcD.extArcID;
                 cap = arcD.capacity;
+                cout << "cap: " <<cap << endl;
             }
 
             string orig;
@@ -268,30 +276,32 @@ void MinCostFlow::solve (Network& net)
         //throw new InvalidValueException(string.Format("Problem data does not fit the {0} Solver!", this.ToString()));
         throw;
 
-    int srcCount = 0;
-    int transshipCount = 0;
-    int sinkCount = 0;
-    for (auto& s : supply)
-    {
-        if (s > 0)
-            srcCount += 1;
-        if (s == 0)
-            transshipCount += 1;
-        if (s < 0)
-            sinkCount += 1;
-    }
-
     LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
-    LOGGER::LogDebug("Sources: "+ to_string(srcCount));
-    LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
-    LOGGER::LogDebug("Sinks: "+ to_string(sinkCount));
-    LOGGER::LogDebug("Solving..");
 
     //Read the network
     try
     {
         convertInternalNetworkToSolverData(net, sNds, eNds, supply, caps, costs);
+
+        int srcCount = 0;
+        int transshipCount = 0;
+        int sinkCount = 0;
+        for (auto& s : supply)
+        {
+            if (s > 0)
+                srcCount += 1;
+            if (s == 0)
+                transshipCount += 1;
+            if (s < 0)
+                sinkCount += 1;
+        }
+
+        LOGGER::LogDebug("Sources: "+ to_string(srcCount));
+        LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
+        LOGGER::LogDebug("Sinks: "+ to_string(sinkCount));
+        LOGGER::LogDebug("Solving..");
+
         //vector::data() returns direct pointer to data
         mcf->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
                         static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),

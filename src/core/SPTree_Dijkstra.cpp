@@ -32,7 +32,7 @@
 // compile error: "assert" not found
 #include "assert.h"
 #include "SPTree_Dijkstra.h"
-using namespace netxpert;
+using namespace netxpert::core;
 
 /*--------------------------------------------------------------------------*/
 /*--------------------------------- MACROS ---------------------------------*/
