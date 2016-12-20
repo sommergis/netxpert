@@ -107,7 +107,7 @@ void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
     nodes.resize(nmax);
     for (unsigned int i = 0; i < nmax; ++i) {
       nodes[i] = g.addNode();
-
+    }
 
    //   if (pDfct[i] < 0)
 	  //{
