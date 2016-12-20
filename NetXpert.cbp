@@ -63,11 +63,12 @@
 			<Add directory="/usr/include/python2.7" />
 			<Add directory="include" />
 			<Add directory="libs/lemon-1.3.1" />
+			<Add directory="libs/lemon-1.3.1/contrib/lemon-astar/src" />
 			<Add directory="libs/geos-3.4.2/include" />
 			<Add directory="libs/geos-3.4.2/include/geos" />
 		</Compiler>
 		<Linker>
-			<Add option="-pthread  -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/home/maxval/libs" />
+			<Add option="-pthread  -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/usr/local/lib/netxpert" />
 			<Add directory="libs/FileGDB_API/lib" />
 			<Add directory="libs/SQLiteCpp" />
 			<Add directory="/usr/local/lib" />
