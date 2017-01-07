@@ -53,7 +53,8 @@ void LOGGER::Initialize(const Config& cnfg)
             + sTime + "_" + sFileName + ".log";
     }
 
-    cout << "Logfile is: " << FullLogFileName << endl;
+    if (NETXPERT_CNFG.LogLevel != netxpert::cnfg::LOG_LEVEL::LogQuiet)
+        cout << "Logfile is: " << FullLogFileName << endl;
 
     ofstream outfile(FullLogFileName.c_str());
     IsInitialized = true;
@@ -61,8 +62,11 @@ void LOGGER::Initialize(const Config& cnfg)
 string LOGGER::readConfig()
 {
     applicationLogLevel = NETXPERT_CNFG.LogLevel;
-    cout << "App Log Level: "<< applicationLogLevel <<endl;
-    cout << "Logfile: "<< NETXPERT_CNFG.LogFileFullPath <<endl;
+    if (applicationLogLevel != netxpert::cnfg::LOG_LEVEL::LogQuiet)
+    {
+        cout << "App Log Level: "<< applicationLogLevel <<endl;
+        cout << "Logfile: "<< NETXPERT_CNFG.LogFileFullPath <<endl;
+    }
     return NETXPERT_CNFG.LogFileFullPath;
     //return "/home/hahne/dev/netxpert/NetXpert/bin/Debug/NetXpert.log";
 }

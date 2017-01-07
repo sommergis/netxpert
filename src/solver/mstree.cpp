@@ -104,8 +104,7 @@ void MinimumSpanningTree::Solve(string net)
 
 void MinimumSpanningTree::Solve(Network& net)
 {
-    this->net = std::unique_ptr<Network>( move(&net));
-    //TODO CHECK
+    this->net = std::unique_ptr<Network>(&net);
     solve(*(this->net));
 }
 
