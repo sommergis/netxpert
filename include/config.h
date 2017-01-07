@@ -13,13 +13,15 @@ namespace netxpert {
 
     static const std::string Version()
     {
-        return "0.9.2";
+        return "0.9.4";
     };
 
     namespace cnfg {
 
     /**
     * 80% of available CPU Power (=number of threads) is used
+    * (can be overridden by setting environment variable
+    *  OMP_NUM_THREADS to a higher value)
     */
     //#ifdef OMP_H
 	//static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
@@ -82,7 +84,8 @@ namespace netxpert {
        LogInfo = 1,
        LogWarning = 2,
        LogError = 3,
-       LogFatal = 4
+       LogFatal = 4,
+       LogQuiet = 5
     };
     /**
     * \Enum Type of the Shortest Path Tree algorithms.

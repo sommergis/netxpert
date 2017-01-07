@@ -267,7 +267,7 @@ void DBHELPER::OpenNewTransaction()
 
         SQLite::Database& db = *connPtr;
         currentTransactionPtr = unique_ptr<SQLite::Transaction>(new SQLite::Transaction (db));
-        cout << db.getFilename() << endl;
+        LOGGER::LogDebug(db.getFilename());
         LOGGER::LogDebug("Successfully opened new transaction.");
     }
     catch (std::exception& ex)
@@ -822,8 +822,8 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
 
         SQLite::Database& db = *connPtr;
         unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
-        cout << db.getFilename() << endl;
-        cout << db.tableExists(NETXPERT_CNFG.ArcsTableName) << endl;
+        LOGGER::LogDebug(db.getFilename());
+        LOGGER::LogDebug("Table exists: " + to_string( db.tableExists(NETXPERT_CNFG.ArcsTableName) ) );
         //std::shared_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
         LOGGER::LogDebug("Successfully prepared query.");
         return qryPtr;

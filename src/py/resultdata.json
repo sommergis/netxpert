@@ -1,0 +1,35 @@
+{
+    "result": {
+        "optimum": 18,
+        "distribution": [
+            {
+                "arcid": "6",
+                "fromNode": "5",
+                "toNode": "4",
+                "cost": 3,
+                "flow": 1
+            },
+            {
+                "arcid": "4",
+                "fromNode": "3",
+                "toNode": "4",
+                "cost": 1,
+                "flow": 5
+            },
+            {
+                "arcid": "2",
+                "fromNode": "4",
+                "toNode": "1",
+                "cost": 1,
+                "flow": 2
+            },
+            {
+                "arcid": "5",
+                "fromNode": "4",
+                "toNode": "2",
+                "cost": 2,
+                "flow": 4
+            }
+        ]
+    }
+ }

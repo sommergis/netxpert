@@ -52,7 +52,7 @@ namespace netxpert
 {
     static const std::string Version()
     {
-        return "0.9.2";
+        return "0.9.3";
     };
 
     namespace data {
@@ -226,7 +226,8 @@ namespace netxpert
            LogInfo = 1,
            LogWarning = 2,
            LogError = 3,
-           LogFatal = 4   };
+           LogFatal = 4,
+           LogQuiet = 5   };
 
     enum SPTAlgorithm {
 

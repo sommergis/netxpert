@@ -17,7 +17,6 @@
 					<Add option="-Wall" />
 					<Add option="-std=c++11" />
 					<Add option="-pg" />
-					<Add option="-m64" />
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="include" />
@@ -27,7 +26,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-pg" />
-					<Add option="-m64" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -42,19 +40,16 @@
 					<Add option="-O3" />
 					<Add option="-Wall" />
 					<Add option="-std=c++11" />
-					<Add option="-m64" />
-					<Add option="-fopenmp" />
 					<Add directory="include" />
 					<Add directory="include/core" />
 					<Add directory="include/solver" />
 					<Add directory="include/simple" />
 				</Compiler>
-				<Linker>
-					<Add option="-m64" />
-				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-m64" />
 			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
 			<Add option="-DSQLITE_ENABLE_RTREE=1" />
@@ -68,7 +63,8 @@
 			<Add directory="libs/geos-3.4.2/include/geos" />
 		</Compiler>
 		<Linker>
-			<Add option="-pthread  -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/usr/local/lib/netxpert" />
+			<Add option="-m64" />
+			<Add option="-pthread  -fopenmp -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/usr/local/lib/netxpert" />
 			<Add directory="libs/FileGDB_API/lib" />
 			<Add directory="libs/SQLiteCpp" />
 			<Add directory="/usr/local/lib" />

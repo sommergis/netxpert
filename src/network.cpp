@@ -164,7 +164,7 @@ unsigned int netxpert::Network::AddStartNode(std::string extArcID,
                           int treshold, const ColumnMap& cmap, bool withCapacity)
 {
     NewNode n { extArcID, Coordinate {x, y}, supply};
-    cout << "X: " << n.coord.x << " Y: "<<n.coord.y<<endl;
+    LOGGER::LogDebug("X: " + to_string( n.coord.x ) +  " Y: "+ to_string( n.coord.y ) );
     const string arcsTableName = NETXPERT_CNFG.ArcsTableName;
     const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
 
@@ -474,7 +474,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
             treshold, closestArcQry, withCapacity);
 
     if (!closestArcAndPoint.arcGeom)
-        cout << "Geom really empty" << endl;
+        LOGGER::LogDebug("Geom really empty!");
 
     string extArcID = closestArcAndPoint.extArcID; //kann noch auf leeren String gesetzt werden bei bereits aufgebrochenen Kante
     const Coordinate closestPoint = closestArcAndPoint.closestPoint;
@@ -2610,7 +2610,7 @@ void Network::processBarriers()
                                       NETXPERT_CNFG.ArcsGeomColumnName);
         for (auto& id : arcIDs)
         {
-            cout << "Elim arc " << id << endl;
+            LOGGER::LogDebug("Elim arc: " + id );
             this->eliminatedArcs.insert(id);
         }
         LOGGER::LogDebug("Got "+ to_string(arcIDs.size()) +" intersecting barrier polygons from " + NETXPERT_CNFG.BarrierPolyTableName +".");

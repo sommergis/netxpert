@@ -38,13 +38,13 @@ void SPT_BGL_Dijkstra::ShortestPathTree()
     }
     */
 
-    graph_traits < DirectedGraph >::vertex_iterator vi3, vend3;
+    /*graph_traits < DirectedGraph >::vertex_iterator vi3, vend3;
     for (boost::tie(vi3, vend3) = vertices(g); vi3 != vend3; ++vi3) {
         std::cout << "distance " << this->distMap[*vi3] << std::endl;
         //vertex_descriptor v = *vi3;
         //std::cout << get(DistanceMap, v) << std::endl;
         std::cout << "color " << this->colorMap[*vi3] << std::endl;
-    }
+    }*/
 
     //boost::two_bit_color_map< std::vector<boost::default_color_type> > color(num_vertices(g), vertex_index_map( boost::get(boost::vertex_index, this->g));
 

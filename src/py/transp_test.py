@@ -1,7 +1,7 @@
+# Simple (JSON) Transportation Solver Test
 
-# Transportation Solver
-
-import sys
+import sys, datetime
+sys.path.append('/usr/local/lib')
 sys.path.append('/usr/local/lib/netxpert')
 
 import pynetxpert as netx
@@ -24,14 +24,14 @@ def test_data():
                                              ]
   return odmatrix, nodeSupply
 
-def convert_test_data(_odmatrix, _supply):
+def convert_test_data(odmatrix, _supply):
 
   odm = netx.ExtSPTArcs()
   supply = netx.ExtNodeSupplies()
 
   for item in _odmatrix:
     o = netx.ExtSPTreeArc()
-    #print item   
+    #print item
     o.extArcID = item["arcid"]
     e = netx.ExternalArc()
     e.extFromNode = item["fromNode"]
@@ -54,42 +54,87 @@ def tpsolve(odmatrix, nodeSupply):
 
   cnfg.LogLevel = -1
   cnfg.LogFileFullPath = "/var/www/apps/netxpert/netXpert.log"
-  cnfg.SpatiaLiteHome = "/usr/local/netxpert/libs"
+  cnfg.SpatiaLiteHome = "/usr/local/libs"
   cnfg.SpatiaLiteCoreName = "./libspatialite"
   cnfg.CleanNetwork = False
   cnfg.McfAlgorithm = 1
 
-  #print netx.LOGGER.IsInitialized
-
-  #if not netx.LOGGER.IsInitialized:
-  print "init logger"
   netx.LOGGER.Initialize(cnfg)
 
-  transp = netx.Transportation(cnfg);
+  solver = netx.Transportation(cnfg);
 
   data = netx.ExtTransportationData()
-  
+
   data.odm = odmatrix
   data.supply = nodeSupply
 
-  transp.SetExtODMatrix(data.odm)
-  transp.SetExtNodeSupply(data.supply)
+  solver.SetExtODMatrix(data.odm)
+  solver.SetExtNodeSupply(data.supply)
 
-  transp.Solve()
+  solver.Solve()
 
-  optimum = transp.GetOptimum()
-  dist = transp.GetExtDistribution()
-  result = transp.GetSolverJSONResult()
+  optimum = solver.GetOptimum()
+  dist = solver.GetExtDistribution()
+  result = solver.GetSolverJSONResult()
+
+  del net, solver
+  #print "Optimum:",optimum
 
   return result
 
+def check_result(json_result):
+
+  if json_result.replace(r'\n', '') == '''{
+    "result": {
+        "optimum": 18,
+        "distribution": [
+            {
+                "arcid": "6",
+                "fromNode": "5",
+                "toNode": "4",
+                "cost": 3,
+                "flow": 1
+            },
+            {
+                "arcid": "4",
+                "fromNode": "3",
+                "toNode": "4",
+                "cost": 1,
+                "flow": 5
+            },
+            {
+                "arcid": "2",
+                "fromNode": "4",
+                "toNode": "1",
+                "cost": 1,
+                "flow": 2
+            },
+            {
+                "arcid": "5",
+                "fromNode": "4",
+                "toNode": "2",
+                "cost": 2,
+                "flow": 4
+            }
+        ]
+    }
+ }'''.replace(r'\n',''):
+    return True
+
+  else:
+    return False
+
 if __name__ == '__main__':
-  o, s = test_data()
-  print o
-  print s
-  odm, supply = convert_test_data(o, s)
-  
-  #print odm, supply
-  
-  print tpsolve(odm, supply)
-  print "ready"
+    print(netx.Version())
+    o, s = test_data()
+    #print o
+    #print s
+    odm, supply = convert_test_data(o, s)
+
+    #print odm, supply
+    result = tpsolve(odm, supply)
+
+    if check_result(result):
+        print("test succeeded.")
+    else:
+        print("test failed!")
