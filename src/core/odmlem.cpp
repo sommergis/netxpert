@@ -102,7 +102,7 @@ void ODM_LEM_2Heap::SetOrigin( unsigned int NewOrg )
 {
     //1. uint to Lemon Node
 	orig = nodes[NewOrg-1];
-	std::cout << "Adding new source "<< NewOrg << std::endl;
+	//std::cout << "Adding new source "<< NewOrg << std::endl;
 	dijk->addSource(orig);
 }
 
