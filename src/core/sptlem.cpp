@@ -156,7 +156,7 @@ void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 	else // both directions
 	{
 
-		std::cout << "\n BOTH DIRECTIONS "<< std::endl;
+		//std::cout << "\n BOTH DIRECTIONS "<< std::endl;
 
 		for (unsigned int i = 0; i < mmax; ++i) {
 			origNode = pSn[i];

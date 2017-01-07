@@ -207,10 +207,12 @@ void OriginDestinationMatrix::solve (Network& net, vector<unsigned int>& origs,
 
         //for (unsigned int dest : dests)
         //{
-        LOGGER::LogDebug("Arc predecessors: ");
+
+
+        /*LOGGER::LogDebug("Arc predecessors: ");
         for (auto arc : arcs)
             LOGGER::LogDebug("Arc: " + to_string(arc.first) + "->" +to_string(arc.second));
-
+        */
 
         vector<unsigned int> route;
         vector<unsigned int>::iterator destIt;
