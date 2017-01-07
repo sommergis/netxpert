@@ -4,17 +4,17 @@ import pynetxpert as netx
 import json
 
 def main():
-  f = open(r"/home/hahne/dev/netxpert/bin/Release/ODMatrixCnfg.json", "r")
+  f = open(r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json", "r")
   content = f.read()
   f.close()
 
   config_json = json.loads(content)['c'] #c is root
-  
+
   cnfg = netx.Config()
 
   cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')
   cnfg.ArcsTableName = config_json["ArcsTableName"].encode('ascii', 'ignore')
-  cnfg.SQLiteDBPath = config_json["SQLiteDBPath"].encode('ascii', 'ignore')
+  cnfg.NetXDBPath = config_json["NetXDBPath"].encode('ascii', 'ignore')
   cnfg.TestCase = config_json["TestCase"]
   cnfg.NodesTableName = config_json["NodesTableName"].encode('ascii', 'ignore')
   cnfg.NodesGeomColumnName = config_json["NodesGeomColumnName"].encode('ascii', 'ignore')
@@ -34,6 +34,7 @@ def main():
   cnfg.CleanNetwork = config_json["CleanNetwork"]
   cnfg.ResultDBType = config_json["ResultDBType"]
   cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
+  cnfg.Treshold = config_json["Treshold"]
 
   #print netx.LOGGER.IsInitialized
 
@@ -59,7 +60,7 @@ def main():
   ntblname = cnfg.NodesTableName
 
   arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
-  nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname, cmap)
+  #nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname, cmap)
 
   #net = netx.Network(arcsTable, cmap, cnfg)
   net = netx.Network(arcsTable, nodesTable, cmap, cnfg)
