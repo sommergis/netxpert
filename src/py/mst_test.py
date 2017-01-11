@@ -51,7 +51,7 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -104,10 +104,13 @@ def test_mst_load_nodes(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_Big.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_small.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_Big.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
+
+    cnfg.SpatiaLiteHome = r'/usr/local/lib'
+    cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -122,7 +125,7 @@ if __name__ == "__main__":
                      "mst | load nodes"
                     ]
 
-    active_tests = active_tests
+    active_tests = active_tests[:1]
 
     if "mst" in active_tests:
         for i in range(2, 3):

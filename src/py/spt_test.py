@@ -176,7 +176,6 @@ def test_spt_add_nodes_1_all(cnfg, cmap):
     return optimum
     #return solver.GetOptimum()
 
-
 def test_spt_load_nodes_1_n(cnfg, cmap):
 
     atblname = cnfg.ArcsTableName
@@ -212,6 +211,11 @@ if __name__ == "__main__":
     path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
+
+    cnfg.SpatiaLiteHome = r'/usr/local/lib'
+    cnfg.SpatiaLiteCoreName = './mod_spatialite'
+
+    print cnfg.SpatiaLiteHome
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)

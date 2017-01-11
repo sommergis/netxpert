@@ -55,7 +55,12 @@ namespace netxpert {
             std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
         private:
-            netxpert::Network* net; //raw pointer ok, no dynamic allocation (new())
+            //raw pointer ok, no dynamic allocation (new())
+            //smart pointers will not work, because Network is passed by reference and
+            //shall be assigned to the class member this->net
+            //with smart pointers there are double frees on clean up -> memory errors
+            //raw pointers will not leak int this case even without delete in the deconstructor
+            netxpert::Network* net;
             bool isDirected;
             int sptHeapCard;
             double optimum;

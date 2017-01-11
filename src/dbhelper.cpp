@@ -1242,6 +1242,7 @@ bool DBHELPER::performInitialCommand()
 		query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
         query.executeStep();
         db.disableExtensions(); */
+		//spatialite > 4.2.0 : mod_spatialite should be used - not spatialite.dll | libspatialite.so
 		//new way
 		#ifdef _WIN32
 		db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
