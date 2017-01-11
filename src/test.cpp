@@ -449,7 +449,7 @@ void netxpert::test::TestTransportationExt(Config& cnfg)
 
         transp.Solve();
 
-        Network net = *transp.net;
+        Network net = transp.GetNetwork();
 
         LOGGER::LogInfo("Done!");
         LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );

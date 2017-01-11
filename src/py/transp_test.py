@@ -24,7 +24,7 @@ def test_data():
                                              ]
   return odmatrix, nodeSupply
 
-def convert_test_data(odmatrix, _supply):
+def convert_test_data(_odmatrix, _supply):
 
   odm = netx.ExtSPTArcs()
   supply = netx.ExtNodeSupplies()
@@ -77,7 +77,7 @@ def tpsolve(odmatrix, nodeSupply):
   dist = solver.GetExtDistribution()
   result = solver.GetSolverJSONResult()
 
-  del net, solver
+  del solver
   #print "Optimum:",optimum
 
   return result

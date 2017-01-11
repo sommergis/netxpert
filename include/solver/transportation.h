@@ -14,7 +14,8 @@ namespace netxpert {
     {
         public:
             Transportation(netxpert::cnfg::Config& cnfg);
-            virtual ~Transportation() {}
+            // we need a dctor, because of new alloc of an instance of Network in Solve()
+            virtual ~Transportation();
 
             std::vector<unsigned int> GetOrigins() const;
             void SetOrigins(std::vector<unsigned int> origs);
@@ -27,6 +28,8 @@ namespace netxpert {
             //void SetExtODMatrix(std::unordered_map<ExtArcID, ExtODMatrixArc> _extODMatrix);
             void SetExtODMatrix(std::vector<netxpert::data::ExtSPTreeArc> _extODMatrix);
             //void SetExtODMatrix(string _extODMatrixJSON);
+
+            const Network GetNetwork();
 
             //std::vector<ExtNodeSupply> GetNodeSupply() const;
             void SetExtNodeSupply(std::vector<netxpert::data::ExtNodeSupply> _nodeSupply);
@@ -42,8 +45,7 @@ namespace netxpert {
 
             std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
-            //netxpert::Network* net;
-            std::unique_ptr<Network> net;
+            //std::unique_ptr<Network> net;
 
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
 
@@ -59,6 +61,12 @@ namespace netxpert {
             void Solve(netxpert::Network& net);
 
         private:
+            //raw pointer ok, no dynamic allocation (new())
+            //smart pointers will not work, because Network is passed by reference and
+            //shall be assigned to the class member this->net
+            //with smart pointers there are double frees on clean up -> memory errors
+            //raw pointers will not leak int this case even without delete in the deconstructor
+            netxpert::Network* net;
 
             std::vector<unsigned int> destinationNodes;
             std::vector<unsigned int> originNodes;

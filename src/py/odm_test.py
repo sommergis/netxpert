@@ -156,10 +156,13 @@ def test_odm_load_nodes(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
+
+    cnfg.SpatiaLiteHome = r'/usr/local/lib'
+    cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)

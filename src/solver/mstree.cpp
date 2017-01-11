@@ -104,8 +104,8 @@ void MinimumSpanningTree::Solve(string net)
 
 void MinimumSpanningTree::Solve(Network& net)
 {
-    this->net = std::unique_ptr<Network>(&net);
-    solve(*(this->net));
+    this->net = &net;
+    solve(net);
 }
 
 vector<InternalArc> MinimumSpanningTree::GetMinimumSpanningTree() const
@@ -133,10 +133,10 @@ void MinimumSpanningTree::solve (Network& net)
         switch (algorithm)
         {
             case MSTAlgorithm::Kruskal_LEMON:
-                mst = shared_ptr<IMinSpanTree>(new MST_LEMON());
+                mst = unique_ptr<IMinSpanTree>(new MST_LEMON());
                 break;
             default:
-                mst = shared_ptr<IMinSpanTree>(new MST_LEMON());
+                mst = unique_ptr<IMinSpanTree>(new MST_LEMON());
                 break;
         }
     }
@@ -217,6 +217,7 @@ void MinimumSpanningTree::solve (Network& net)
     this->minimumSpanTree = result;
 
 }
+
 void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
             vector<unsigned int>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
 {
