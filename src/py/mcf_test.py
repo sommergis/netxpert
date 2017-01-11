@@ -51,7 +51,7 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
-    cnfg.LogLevel = 0
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -139,6 +139,9 @@ if __name__ == "__main__":
     path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MCFCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
+
+    cnfg.SpatiaLiteHome = r'/usr/local/lib'
+    cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)

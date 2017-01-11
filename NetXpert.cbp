@@ -132,6 +132,7 @@
 		<Unit filename="libs/sqlite3.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="libs/sqlite3.h" />
 		<Unit filename="src/config.cpp" />
 		<Unit filename="src/core/MCFSimplex.cpp" />
 		<Unit filename="src/core/SPTree_Dijkstra.cpp" />
