@@ -5,8 +5,9 @@
 #include <fstream>
 
 #include "data.h"
-#include "network.h"
+//#include "network.h"
 #include "dbhelper.h"
+#include "lemon-net.h"
 #include "test.h"
 
 using namespace std;
@@ -28,13 +29,16 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestCreateGeom.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestSpatialiteWriter.json";
-        //inFile = "/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json";
+//        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/ODMatrixCnfg_small.json";
+//        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_1_points_1_small.json";
+        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_4_points_4.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TestFGDBWriter.json";
-        inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert/test/bin/Release/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/TranspCnfg_small.json";
-        //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/SPTreeCnfg_small_2.json";
+        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/NetworkBuilder_small.json";
         //inFile = "/home/hahne/dev/netxpert/test/bin/Debug/MCFCnfg_small.json";
     }
@@ -60,6 +64,12 @@ int main(int argc, char** argv)
     }
     try
     {
+//        LOGGER::LogInfo("Testing Lemon Network..");
+//        netxpert::test::LemonNetworkConvert(cnfg);
+
+//        LOGGER::LogInfo("Testing Network..");
+//        netxpert::test::NetworkConvert(cnfg);
+
         //Data test
         /*Arcs t;
         FTNode n {n.fromNode = 1, n.toNode = 2};
@@ -86,50 +96,60 @@ int main(int argc, char** argv)
         InputArc arc2 = {"2", 2, 3, 3.0, 99999.9, ""};
         InputArc arc3 = {"3", 2, 3, 2.0, 99999.9, ""};
         InputArc arc4 = {"4", 3, 3, 4.0, -1, ""};
-        InputNode node {"1", 2.0};
+        InputNode node {"1", 2.0};*/
 
-        /* TEST CASES */
+
+
+        //TEST CASES
         switch (cnfg.TestCase)
         {
-        case TESTCASE::TestNetworkBuilder:
-            netxpert::test::TestNetworkBuilder(cnfg);
-            break;
-        case TESTCASE::NetworkConvert:
-            netxpert::test::NetworkConvert(cnfg);
-            break;
-        case TESTCASE::TestFileGDBWriter:
-            netxpert::test::TestFileGDBWriter(cnfg);
-            break;
-        case TESTCASE::TestSpatiaLiteWriter:
-            netxpert::test::TestSpatiaLiteWriter(cnfg);
-            break;
-        case TESTCASE::TestAddNodes:
-            netxpert::test::TestAddNodes(cnfg);
-            break;
-        case TESTCASE::MSTCOM:
-            netxpert::test::TestMST(cnfg);
-            break;
+//        case TESTCASE::TestNetworkBuilder:
+//            netxpert::test::TestNetworkBuilder(cnfg);
+//            break;
+//        case TESTCASE::NetworkConvert:
+//            netxpert::test::NetworkConvert(cnfg);
+//            break;
+
+
+
+//        case TESTCASE::TestFileGDBWriter:
+//            netxpert::test::TestFileGDBWriter(cnfg);
+//            break;
+//        case TESTCASE::TestSpatiaLiteWriter:
+//            netxpert::test::TestSpatiaLiteWriter(cnfg);
+//            break;
+
+
+
+
+//        case TESTCASE::TestAddNodes:
+//            netxpert::test::TestAddNodes(cnfg);
+//            break;
+//        case TESTCASE::MSTCOM:
+//            netxpert::test::TestMST(cnfg);
+//            break;
+
         case TESTCASE::ShortestPathTreeCOM:
             netxpert::test::TestSPT(cnfg);
             break;
         case TESTCASE::ODMatrixCOM:
             netxpert::test::TestODMatrix(cnfg);
             break;
-        case TESTCASE::TestCreateRouteGeometries:
-            netxpert::test::TestCreateRouteGeometries(cnfg);
-            break;
-        case TESTCASE::MCFCOM:
-            netxpert::test::TestMCF(cnfg);
-            break;
-        case TESTCASE::TransportationCOM:
-            netxpert::test::TestTransportation(cnfg);
-            break;
-        case TESTCASE::TransportationCOMExt:
-            netxpert::test::TestTransportationExt(cnfg);
-            break;
-        case TESTCASE::ODMatrixCOM2:
-            netxpert::test::TestODMatrix2(cnfg);
-            break;
+//        case TESTCASE::TestCreateRouteGeometries:
+//            netxpert::test::TestCreateRouteGeometries(cnfg);
+//            break;
+//        case TESTCASE::MCFCOM:
+//            netxpert::test::TestMCF(cnfg);
+//            break;
+//        case TESTCASE::TransportationCOM:
+//            netxpert::test::TestTransportation(cnfg);
+//            break;
+//        case TESTCASE::TransportationCOMExt:
+//            netxpert::test::TestTransportationExt(cnfg);
+//            break;
+//        case TESTCASE::ODMatrixCOM2:
+//            netxpert::test::TestODMatrix2(cnfg);
+//            break;
         }
 
         /*

@@ -22,6 +22,9 @@
 #include "geos/opLinemerge.h"
 #include <cmath>
 
+//better-net
+#include <lemon/smart_graph.h>
+
 namespace netxpert
 {
     /**
@@ -57,7 +60,7 @@ namespace netxpert
             /**
             * Simple Interface for adding start nodes
             */
-            unsigned int AddStartNode(std::string extArcID,
+            uint32_t AddStartNode(std::string extArcID,
                                       double x, double y, double supply,
                                       int treshold,
                                       const netxpert::data::ColumnMap& cmap,
@@ -65,26 +68,26 @@ namespace netxpert
             /**
             * Simple Interface for adding end nodes
             */
-            unsigned int AddEndNode(std::string extArcID,
+            uint32_t AddEndNode(std::string extArcID,
                                     double x, double y, double supply,
                                     int treshold,
                                     const netxpert::data::ColumnMap& cmap,
                                     bool withCapacity);
 
-            unsigned int AddStartNode(const netxpert::data::NewNode& newNode,
+            uint32_t AddStartNode(const netxpert::data::NewNode& newNode,
                                       const int treshold,
                                       SQLite::Statement& closestArcQry,
                                       const bool withCapacity);
 
-            unsigned int AddEndNode(const netxpert::data::NewNode& newNode,
+            uint32_t AddEndNode(const netxpert::data::NewNode& newNode,
                                     const int treshold,
                                     SQLite::Statement& closestArcQry,
                                     const bool withCapacity);
 
-            std::vector< std::pair<unsigned int, std::string> > LoadStartNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
+            std::vector< std::pair<uint32_t, std::string> > LoadStartNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
                                                                 const std::string arcsTableName, const std::string geomColumnName,
                                                                 const netxpert::data::ColumnMap& cmap, const bool withCapacity);
-            std::vector< std::pair<unsigned int, std::string> > LoadEndNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
+            std::vector< std::pair<uint32_t, std::string> > LoadEndNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
                                                                 const std::string arcsTableName, const std::string geomColumnName,
                                                                 const netxpert::data::ColumnMap& cmap, const bool withCapacity);
 
@@ -146,8 +149,6 @@ namespace netxpert
                                                         const std::pair<netxpert::data::ExternalArc,netxpert::data::ArcData>& arcData,
                                                         const geos::geom::Geometry& arc);
 
-            bool IsPointOnArc(const geos::geom::Coordinate& coords, const geos::geom::Geometry& arc);
-
             //Helpers for looking up original data
             std::unordered_set<std::string> GetOriginalArcIDs(const std::vector<netxpert::data::InternalArc>& ftNodes,
                                                             const bool isDirected) const;
@@ -158,20 +159,23 @@ namespace netxpert
                                             const std::list<netxpert::data::InternalArc>& startEndNodes,
                                             const bool isDirected);
 
-            std::string GetOriginalNodeID(const unsigned int internalNodeID);
-            unsigned int GetInternalNodeID(const std::string& externalNodeID);
-            std::string GetOriginalStartOrEndNodeID(const unsigned int internalNodeID);
-            geos::geom::Coordinate GetStartOrEndNodeGeometry(const unsigned int internalNodeID);
+            std::string GetOriginalNodeID(const uint32_t internalNodeID);
+            uint32_t GetInternalNodeID(const std::string& externalNodeID);
+            std::string GetOriginalStartOrEndNodeID(const uint32_t internalNodeID);
+            geos::geom::Coordinate GetStartOrEndNodeGeometry(const uint32_t internalNodeID);
             geos::geom::Coordinate GetStartOrEndNodeGeometry(const std::string& externalNodeID);
+
+            //GEO UTILS
             double GetPositionOfPointAlongLine(const geos::geom::Coordinate& coord,
                                                 const geos::geom::Geometry& arc);
             netxpert::data::StartOrEndLocationOfLine GetLocationOfPointOnLine(const geos::geom::Coordinate& coord,
                                                                 const geos::geom::Geometry& arc);
+            bool IsPointOnArc(const geos::geom::Coordinate& coords, const geos::geom::Geometry& arc);
 
-            unsigned int GetMaxNodeCount();
-            unsigned int GetMaxArcCount();
-            unsigned int GetCurrentNodeCount();
-            unsigned int GetCurrentArcCount();
+            uint32_t GetMaxNodeCount();
+            uint32_t GetMaxArcCount();
+            uint32_t GetCurrentNodeCount();
+            uint32_t GetCurrentArcCount();
             netxpert::data::Arcs& GetInternalArcData();
             netxpert::data::NodeSupplies GetNodeSupplies();
             netxpert::data::Arcs& GetOldArcs();
@@ -197,8 +201,8 @@ namespace netxpert
                                                  const geos::geom::Coordinate& endPoint);
             void renameNodes();
             void readNetworkFromTable(const bool autoClean, const bool oneWay);
-            void processArc(const netxpert::data::InputArc& arc, const unsigned int internalStartNode,
-                            const unsigned int internalEndNode);
+            void processArc(const netxpert::data::InputArc& arc, const uint32_t internalStartNode,
+                            const uint32_t internalEndNode);
             void processBarriers();
 
             std::shared_ptr<geos::geom::MultiLineString> splitLine(const geos::geom::Coordinate& coord,
@@ -215,9 +219,9 @@ namespace netxpert
 
             netxpert::cnfg::Config NETXPERT_CNFG;
             //TODO
-            unsigned int getCurrentNodeCount();
+            uint32_t getCurrentNodeCount();
             //TODO
-            unsigned int getCurrentArcCount();
+            uint32_t getCurrentArcCount();
 
             /**
             * For results of a subset of original arcs only
@@ -294,7 +298,6 @@ namespace netxpert
             std::list<netxpert::data::ExternalArc> arcLoops;
             //TODO: check internal arcs for duplicate arcs with different costs
             netxpert::data::Arcs internalArcData;
-
 
             //Network changes
             netxpert::data::Arcs oldArcs;

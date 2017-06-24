@@ -20,14 +20,14 @@ void NetworkSimplex::SolveMCF( void )
 	//cout << type << endl;
 }
 
-void NetworkSimplex::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
+void NetworkSimplex::LoadNet( uint32_t nmx , uint32_t mmx , uint32_t pn , uint32_t pm ,
 		      double *pU , double *pC , double *pDfct ,
-		      unsigned int *pSn , unsigned int *pEn )
+		      uint32_t *pSn , uint32_t *pEn )
 {
 	nmax = nmx;
 	mmax = mmx;
-	unsigned int source;
-	unsigned int target;
+	uint32_t source;
+	uint32_t target;
 
     costsPtr = new lemon::SmartDigraph::ArcMap<double> (g);
 	capacityPtr = new lemon::SmartDigraph::ArcMap<double> (g);
@@ -41,7 +41,7 @@ void NetworkSimplex::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int
 	//Populate all nodes
     //std::vector<typename SmartDigraph::Node> nodes;
     nodes.resize(nmax);
-    for (unsigned int i = 0; i < nmax; ++i) {
+    for (uint32_t i = 0; i < nmax; ++i) {
 		nodes[i] = g.addNode();
 		supplyMap.set(nodes[i], pDfct[i]);
     }
@@ -52,7 +52,7 @@ void NetworkSimplex::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int
 
     lemon::SmartDigraph::Arc arc;
 
-	for (unsigned int i = 0; i < mmx; ++i) {
+	for (uint32_t i = 0; i < mmx; ++i) {
 		source = pSn[i];
 		target = pEn[i];
 		cost = pC[i];
@@ -70,12 +70,12 @@ void NetworkSimplex::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int
 }
 
 
-unsigned int NetworkSimplex::MCFnmax( void)
+uint32_t NetworkSimplex::MCFnmax( void)
 {
 	return ( nmax );
 }
 
-unsigned int NetworkSimplex::MCFmmax( void)
+uint32_t NetworkSimplex::MCFmmax( void)
 {
 	return ( mmax );
 }
@@ -102,7 +102,7 @@ void NetworkSimplex::MCFGetX( double* flow )
 	delete[] flowX;
 }
 
-void NetworkSimplex::MCFArcs( unsigned int* startNodes, unsigned int* endNodes)
+void NetworkSimplex::MCFArcs( uint32_t* startNodes, uint32_t* endNodes)
 {
 	for (int i = 0; i < MCFmmax(); i++)
 	{

@@ -1,20 +1,15 @@
-// *** ADDED BY HEADER FIXUP ***
-#include <string>
-// *** END ***
 #ifndef CORE_MSTLEM_H
 #define CORE_MSTLEM_H
 
-#include "lemon/smart_graph.h"
-#include "lemon/kruskal.h"
-#include "lemon/maps.h"
 #include <stdio.h>
+#include <string>
 #include <limits.h> //UNIT_MAX
-#include <string.h> //memcpy
 //#include "lemon/min_cost_arborescence.h"
 #include "imstree.h"
+#include <lemon/kruskal.h>
 
 using namespace lemon;
-using namespace std;
+using namespace netxpert::data;
 
 namespace netxpert {
     namespace core {
@@ -24,28 +19,32 @@ namespace netxpert {
     class MST_LEMON : public netxpert::core::IMinSpanTree
     {
         public:
-            MST_LEMON();
-            void SolveMST();
 
-            void LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
-                    double* pU , double* pC , double* pDfct ,
-                    unsigned int* pSn , unsigned int* pEn );
-            unsigned int MCFnmax( void );
-            unsigned int MCFmmax( void );
-            void GetMST (unsigned int* outStartNodes, unsigned int* outEndNodes);
-            double MSTGetF0(void);
-            //void GetMST (unsigned int* outStartNodes, unsigned int[] outEndNodes);
-            virtual ~MST_LEMON(void);
+            MST_LEMON();
+            MST_LEMON (MST_LEMON const &) {} //copy constrcutor
+            ~MST_LEMON(); //deconstructor
+
+            /* LEMON friendly interface */
+            void LoadNet(const uint32_t nmax,  const uint32_t mmax,
+                                    lemon::FilterArcs<netxpert::data::graph_t,
+                                              netxpert::data::graph_t::ArcMap<bool>>* sg,
+                                    netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm);
+            const uint32_t GetArcCount();
+            const uint32_t GetNodeCount();
+            void SolveMST();
+            const double GetOptimum() const;
+            std::vector<netxpert::data::arc_t> GetMST();
+            /* end of LEMON friendly interface */
 
         protected:
-            unsigned int nmax; //max count nodes
-            unsigned int mmax; //max count arcs
-            SmartDigraph g; //undirected
+            uint32_t nmax; //max count nodes
+            uint32_t mmax; //max count arcs
+            netxpert::data::filtered_graph_t* g;
+            netxpert::data::filtered_graph_t::ArcMap<bool>* arcBoolMap;
+            netxpert::data::graph_t::ArcMap<cost_t>* costMap;
             double totalCost;
             //Kruskal<SmartDigraph,SmartDigraph::ArcMap<double>>* mst;
-            SmartDigraph::ArcMap<double>* costMapPtr;
-            SmartDigraph::ArcMap<bool>* edgeBoolMapPtr;
-            vector<typename SmartDigraph::Node> nodes;
+            std::vector<netxpert::data::node_t> nodes;
     };
 }//namespace core
 }//namespace netxpert

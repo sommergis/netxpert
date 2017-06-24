@@ -8,19 +8,19 @@ import pynetxpert as netx
 
 def test_data():
   odmatrix = [
-                                 {"arcid": str("5"),"fromNode": str("4"),"toNode": str("2"),"cost": 2 },
-                                 {"arcid": str("4"),"fromNode": str("3"),"toNode": str("4"),"cost": 1 },
-                                 {"arcid": str("3"),"fromNode": str("3"),"toNode": str("1"),"cost": 3 },
-                                 {"arcid": str("2"),"fromNode": str("4"),"toNode": str("1"),"cost": 1 },
-                                 {"arcid": str("1"),"fromNode": str("1"),"toNode": str("2"),"cost": 2 },
-                                 {"arcid": str("6"),"fromNode": str("5"),"toNode": str("4"),"cost": 3 },
-                                 {"arcid": str("7"),"fromNode": str("5"),"toNode": str("2"),"cost": 6 }
+                 {"arcid": str("5"),"fromNode": str("4"),"toNode": str("2"),"cost": 2 },
+                 {"arcid": str("4"),"fromNode": str("3"),"toNode": str("4"),"cost": 1 },
+                 {"arcid": str("3"),"fromNode": str("3"),"toNode": str("1"),"cost": 3 },
+                 {"arcid": str("2"),"fromNode": str("4"),"toNode": str("1"),"cost": 1 },
+                 {"arcid": str("1"),"fromNode": str("1"),"toNode": str("2"),"cost": 2 },
+                 {"arcid": str("6"),"fromNode": str("5"),"toNode": str("4"),"cost": 3 },
+                 {"arcid": str("7"),"fromNode": str("5"),"toNode": str("2"),"cost": 6 }
                                 ]
-  nodeSupply = [  { "nodeid": str("3"),"supply": 5 },
-                                                { "nodeid": str("4"),"supply": 0 },
-                                                { "nodeid": str("1"),"supply": -2},
-                                                { "nodeid": str("2"),"supply": -4},
-                                                { "nodeid": str("5"),"supply": 1 }
+  nodeSupply = [    { "nodeid": str("3"),"supply": 5 },
+                    { "nodeid": str("4"),"supply": 0 },
+                    { "nodeid": str("1"),"supply": -2},
+                    { "nodeid": str("2"),"supply": -4},
+                    { "nodeid": str("5"),"supply": 1 }
                                              ]
   return odmatrix, nodeSupply
 
@@ -127,6 +127,13 @@ def check_result(json_result):
 if __name__ == '__main__':
     print(netx.Version())
     o, s = test_data()
+
+    # test supply > demand
+    s[0]["supply"] = 7
+
+    # test supply < demand
+    #s[0]["supply"] = 3
+
     #print o
     #print s
     odm, supply = convert_test_data(o, s)

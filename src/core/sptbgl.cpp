@@ -3,7 +3,7 @@
 using namespace boost;
 using namespace netxpert::core;
 
-SPT_BGL_Dijkstra::SPT_BGL_Dijkstra(unsigned int nmx, unsigned int mmx , bool Drctd)
+SPT_BGL_Dijkstra::SPT_BGL_Dijkstra(uint32_t nmx, uint32_t mmx , bool Drctd)
 {
     //nmax = 0;
 	//mmax = 0;
@@ -138,9 +138,9 @@ void SPT_BGL_Dijkstra::ShortestPathTree()
     }*/
 }
 
-void SPT_BGL_Dijkstra::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
+void SPT_BGL_Dijkstra::LoadNet( uint32_t nmx , uint32_t mmx , uint32_t pn , uint32_t pm ,
 		      double *pU , double *pC , double *pDfct ,
-		      unsigned int *pSn , unsigned int *pEn )
+		      uint32_t *pSn , uint32_t *pEn )
 {
     nmax = nmx;
 	mmax = mmx;
@@ -159,7 +159,7 @@ void SPT_BGL_Dijkstra::LoadNet( unsigned int nmx , unsigned int mmx , unsigned i
 
     nodes.resize(nmax);
 
-    for (unsigned int i = 0; i < nmax; ++i){
+    for (uint32_t i = 0; i < nmax; ++i){
         nodes[i] = boost::add_vertex(g);
         //vertex_descriptor v = nodes[i];
 
@@ -170,7 +170,7 @@ void SPT_BGL_Dijkstra::LoadNet( unsigned int nmx , unsigned int mmx , unsigned i
 
     if (isDrctd)
     {
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -182,7 +182,7 @@ void SPT_BGL_Dijkstra::LoadNet( unsigned int nmx , unsigned int mmx , unsigned i
 	}
     else // both directions
 	{
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -194,13 +194,13 @@ void SPT_BGL_Dijkstra::LoadNet( unsigned int nmx , unsigned int mmx , unsigned i
 		}
 	}
 }
-void SPT_BGL_Dijkstra::SetOrigin( unsigned int NewOrg )
+void SPT_BGL_Dijkstra::SetOrigin( uint32_t NewOrg )
 {
     //1. uint to BGL Vertex
 	this->orig = nodes[NewOrg-1];
 }
 
-void SPT_BGL_Dijkstra::SetDest( unsigned int NewDst )
+void SPT_BGL_Dijkstra::SetDest( uint32_t NewDst )
 {
     //1. uint to BGL Vertex
 	if (NewDst != UINT_MAX)
@@ -209,7 +209,7 @@ void SPT_BGL_Dijkstra::SetDest( unsigned int NewDst )
 	}
 }
 //TODO
-bool SPT_BGL_Dijkstra::Reached( unsigned int NodeID )
+bool SPT_BGL_Dijkstra::Reached( uint32_t NodeID )
 {
     //1. uint to BGL Vertex
     //std::cout << NodeID << std::endl;
@@ -264,14 +264,14 @@ bool SPT_BGL_Dijkstra::Reached( unsigned int NodeID )
 }
 
 /*
-unsigned int* SPT_BGL_Dijkstra::ArcPredecessors( void )
+uint32_t* SPT_BGL_Dijkstra::ArcPredecessors( void )
 {
 	throw std::runtime_error("ArcPredecessors() not implemented!");
 }*/
 
-unsigned int* SPT_BGL_Dijkstra::Predecessors( void )
+uint32_t* SPT_BGL_Dijkstra::Predecessors( void )
 {
-	predecessors = new unsigned int [MCFnmax()+1];
+	predecessors = new uint32_t [MCFnmax()+1];
 	predecessors[0] = 0; //first entry of pred has no predecessor
     for (int i = 1; i < MCFnmax()+1; i++)
     {
@@ -280,25 +280,25 @@ unsigned int* SPT_BGL_Dijkstra::Predecessors( void )
 	return predecessors;
 }
 
-/*void SPT_BGL_Dijkstra::GetArcPredecessors( unsigned int *outArcPrd )
+/*void SPT_BGL_Dijkstra::GetArcPredecessors( uint32_t *outArcPrd )
 {
 	throw std::runtime_error("GetArcPredecessors() not implemented!");
 }*/
 
-void SPT_BGL_Dijkstra::GetPredecessors( unsigned int *outPrd )
+void SPT_BGL_Dijkstra::GetPredecessors( uint32_t *outPrd )
 {
-	unsigned int size = MCFnmax()+1;
+	uint32_t size = MCFnmax()+1;
 	auto predecessors = Predecessors();
-	memcpy(outPrd, predecessors, size * sizeof (unsigned int ) );
+	memcpy(outPrd, predecessors, size * sizeof (uint32_t ) );
 	delete[] predecessors;
 }
 
-unsigned int SPT_BGL_Dijkstra::MCFnmax()
+uint32_t SPT_BGL_Dijkstra::MCFnmax()
 {
 	return ( this->nmax );
 }
 
-unsigned int SPT_BGL_Dijkstra::MCFmmax()
+uint32_t SPT_BGL_Dijkstra::MCFmmax()
 {
 	return ( this->mmax );
 }

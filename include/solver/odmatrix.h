@@ -1,18 +1,15 @@
 #ifndef ODMATRIX_H
 #define ODMATRIX_H
 
-#include <omp.h>
-
 #include "isolver.h"
 #include "isptree.h"
-#include "SPTree_Dijkstra.h"
-#include "SPTree_Heap.h"
-#include "SPTree_LDeque.h"
-#include "SPTree_LQueue.h"
 #include "sptlem.h"
-#include "sptlem_bijkstra.h"
+//#include "sptbgl.h"
 #include "data.h"
+#include "lemon-net.h"
+#include <lemon/adaptors.h>
 
+#include <omp.h>
 namespace netxpert {
 
     /**
@@ -25,10 +22,10 @@ namespace netxpert {
             OriginDestinationMatrix(netxpert::cnfg::Config& cnfg);
 
             /** Default destructor */
-            virtual ~OriginDestinationMatrix() {}
+            ~OriginDestinationMatrix() {}
 
             void Solve(std::string net);
-            void Solve(netxpert::Network& net);
+            void Solve(netxpert::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
@@ -39,53 +36,79 @@ namespace netxpert {
             netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
             void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
 
-            std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(std::vector<unsigned int>& origs);
-            void SetOrigins(std::vector<pair<unsigned int, string>>& origs);
+            void SetOrigins(std::vector<netxpert::data::node_t>& origs);
+            /** Simple Wrapper for SWIG **/
+            void SetOrigins(const std::vector<uint32_t>& origs) {
+                std::vector<netxpert::data::node_t> result;
+                for (auto& orig : origs) {
+                    result.push_back(this->net->GetNodeFromID(orig));
+                }
+                this->SetOrigins(result);
+            };
+            //?
+            void SetOrigins(std::vector<std::pair<netxpert::data::node_t, std::string>>& origs);
+            std::vector<netxpert::data::node_t> GetOrigins() const;
+            /** Simple Wrapper for SWIG **/
+            std::vector<uint32_t> GetOriginIDs() const {
+                std::vector<uint32_t> result;
+                for (auto& orig : this->GetOrigins() ) {
+                    result.push_back(this->net->GetNodeID(orig));
+                }
+                return result;
+            };
 
-            std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int>& dests);
-            void SetDestinations(std::vector<pair<unsigned int, string>>& dests);
+            void SetDestinations(std::vector<netxpert::data::node_t>& dests);
+            /** Simple Wrapper for SWIG **/
+            void SetDestinations(const std::vector<uint32_t>& dests);
+            //?
+            void SetDestinations(std::vector<std::pair<netxpert::data::node_t, std::string>>& dests);
 
-            std::vector<unsigned int> GetReachedDests() const;
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
-            std::unordered_map<netxpert::data::ODPair, double> GetODMatrix() const;
+            std::vector<netxpert::data::node_t> GetDestinations() const;
+            /** Simple Wrapper for SWIG **/
+            std::vector<uint32_t> GetDestinationIDs() const;
 
-            double GetOptimum() const;
+            std::vector<netxpert::data::node_t> GetReachedDests() const;
+            /** Simple Wrapper for SWIG **/
+            std::vector<uint32_t> GetReachedDestIDs() const;
+
+            std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+            std::map<netxpert::data::ODPair, double> GetODMatrix() const;
+
+            const double GetOptimum() const;
 
             void SaveResults(const std::string& resultTableName,
-                 const netxpert::data::ColumnMap& cmap) const;
+                             const netxpert::data::ColumnMap& cmap) const;
 
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
 
         private:
             //raw pointer ok, no dynamic allocation (new())
             //smart pointers will not work, because Network is passed by reference and
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
-            //raw pointers will not leak int this case even without delete in the deconstructor
-            netxpert::Network* net;
+            //raw pointers will not leak in this case even without delete in the deconstructor
+            netxpert::InternalNet* net;
             bool isDirected;
             int sptHeapCard;
             double optimum;
             netxpert::cnfg::Config NETXPERT_CNFG;
-            std::vector<unsigned int> destinationNodes;
-            std::vector<unsigned int> reachedDests;
-            std::vector<unsigned int> originNodes;
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> shortestPaths;
-            std::unordered_map<netxpert::data::ODPair, double> odMatrix;
+            std::vector<netxpert::data::node_t> destinationNodes;
+            std::vector<netxpert::data::node_t> reachedDests;
+            std::vector<netxpert::data::node_t> originNodes;
+            std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> shortestPaths;
+            std::map<netxpert::data::ODPair, double> odMatrix;
             netxpert::cnfg::GEOMETRY_HANDLING geometryHandling;
             netxpert::cnfg::SPTAlgorithm algorithm;
             std::shared_ptr<netxpert::core::ISPTree> spt;
-            void solve (netxpert::Network& net, std::vector<unsigned int>& originNodes, std::vector<unsigned int>& destinationNodes, bool isDirected);
-            bool validateNetworkData(netxpert::Network& net, std::vector<unsigned int>& origs, std::vector<unsigned int>& dests);
-            void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
-                                                    std::vector<unsigned int>& eNds, std::vector<double>& supply,
-                                                    std::vector<double>& caps, std::vector<double>& costs);
-            void checkSPTHeapCard(unsigned int arcCount, unsigned int nodeCount);
-            double buildCompressedRoute(std::vector<unsigned int>& route, unsigned int orig, unsigned int dest,
-                                            std::unordered_map<unsigned int, unsigned int>& arcPredescessors);
-            double getArcCost(const netxpert::data::InternalArc& arc);
+            void solve (netxpert::InternalNet& net,
+                        std::vector<netxpert::data::node_t>& originNodes,
+                        std::vector<netxpert::data::node_t>& destinationNodes,
+                        bool isDirected);
+            bool validateNetworkData(netxpert::InternalNet& net,
+				     std::vector<netxpert::data::node_t>& origs,
+				     std::vector<netxpert::data::node_t>& dests);
+            lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
+             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+            void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
     };
 }
 #endif // ODMATRIX_H

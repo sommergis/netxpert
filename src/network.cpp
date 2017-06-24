@@ -100,13 +100,13 @@ Network::~Network()
     //dtor
 }
 
-std::vector< std::pair<unsigned int, std::string> > Network::LoadStartNodes(const std::vector<NewNode>& newNodes, const int treshold,
+std::vector< std::pair<uint32_t, std::string> > Network::LoadStartNodes(const std::vector<NewNode>& newNodes, const int treshold,
                                                                 const std::string arcsTableName, const std::string geomColumnName,
                                                                 const ColumnMap& cmap, const bool withCapacity)
 {
     auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
                                             cmap, ArcIDColumnDataType::Number, withCapacity);
-    vector<pair<unsigned int, string>> startNodes;
+    vector<pair<uint32_t, string>> startNodes;
 
     for (const auto& startNode : newNodes)
     {
@@ -115,7 +115,7 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadStartNodes(cons
             LOGGER::LogDebug("Loading Node "+ startNode.extNodeID + "..");
             try
             {
-                unsigned int newStartNodeID = AddStartNode(startNode, treshold, *qry, withCapacity);
+                uint32_t newStartNodeID = AddStartNode(startNode, treshold, *qry, withCapacity);
                 startNodes.push_back( make_pair(newStartNodeID, startNode.extNodeID ) );
                 LOGGER::LogDebug("New Start Node ID " + to_string(newStartNodeID)  + " - " + startNode.extNodeID);
             }
@@ -129,13 +129,13 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadStartNodes(cons
     return startNodes;
 }
 
-std::vector< std::pair<unsigned int, std::string> > Network::LoadEndNodes(const std::vector<NewNode>& newNodes, const int treshold,
+std::vector< std::pair<uint32_t, std::string> > Network::LoadEndNodes(const std::vector<NewNode>& newNodes, const int treshold,
                                                                 const std::string arcsTableName, const std::string geomColumnName,
                                                                 const ColumnMap& cmap, const bool withCapacity)
 {
     auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
                                             cmap, ArcIDColumnDataType::Number, withCapacity);
-    vector<pair<unsigned int, string>> endNodes;
+    vector<pair<uint32_t, string>> endNodes;
 
     for (const auto& endNode : newNodes)
     {
@@ -144,7 +144,7 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadEndNodes(const 
             LOGGER::LogDebug("Loading Node "+ endNode.extNodeID + "..");
             try
             {
-                unsigned int newEndNodeID = AddEndNode(endNode, treshold, *qry, withCapacity);
+                uint32_t newEndNodeID = AddEndNode(endNode, treshold, *qry, withCapacity);
                 endNodes.push_back( make_pair(newEndNodeID, endNode.extNodeID ) );
                 LOGGER::LogDebug("New End Node ID " + to_string(newEndNodeID) + " - " + endNode.extNodeID);
             }
@@ -159,7 +159,7 @@ std::vector< std::pair<unsigned int, std::string> > Network::LoadEndNodes(const 
     //}//omp parallel
     return endNodes;
 }
-unsigned int netxpert::Network::AddStartNode(std::string extArcID,
+uint32_t netxpert::Network::AddStartNode(std::string extArcID,
                           double x, double y, double supply,
                           int treshold, const ColumnMap& cmap, bool withCapacity)
 {
@@ -173,7 +173,7 @@ unsigned int netxpert::Network::AddStartNode(std::string extArcID,
     return AddStartNode(n, treshold, *qry, withCapacity);
 }
 
-unsigned int netxpert::Network::AddEndNode(std::string extArcID,
+uint32_t netxpert::Network::AddEndNode(std::string extArcID,
                           double x, double y, double supply,
                           int treshold, const ColumnMap& cmap, bool withCapacity)
 {
@@ -186,6 +186,7 @@ unsigned int netxpert::Network::AddEndNode(std::string extArcID,
                                             cmap, ArcIDColumnDataType::Number, withCapacity);
     return AddEndNode(n, treshold, *qry, withCapacity);
 }
+
 //Vorgehen:
 //1. Hol die nächste Kante (per Spatialite) ArcID + Geometrie
 //2. Wurde die Kante schon aufgebrochen oder nicht?
@@ -193,7 +194,7 @@ unsigned int netxpert::Network::AddEndNode(std::string extArcID,
 //4. isPointOnLine, position of closestPoint (Start / End ) alles in Memory (egal ob aufgebrochene Kante oder vorhandene Kante)
 //5. Splitte Kante
 // --> einmaliger DB-Zugriff, Rest in memory processing
-unsigned int Network::AddStartNode(const NewNode& newStartNode, const int treshold, SQLite::Statement& closestArcQry,
+uint32_t Network::AddStartNode(const NewNode& newStartNode, const int treshold, SQLite::Statement& closestArcQry,
                                     const bool withCapacity)
 {
     unordered_map<string, InternalArc> newSegments;
@@ -251,7 +252,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
             {
                 if (internalDistinctNodeIDs.count(extFromNode) > 0)
                 {
-                    unsigned int newID = internalDistinctNodeIDs.at(extFromNode);
+                    auto newID = internalDistinctNodeIDs.at(extFromNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     AddedPoint pVal  {extNodeID, startPoint};
                     addedStartPoints.insert(make_pair(newID, pVal));
@@ -267,7 +268,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
             {
                 if (internalDistinctNodeIDs.count(extToNode) > 0)
                 {
-                    unsigned int newID = internalDistinctNodeIDs.at(extToNode);
+                    auto newID = internalDistinctNodeIDs.at(extToNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     AddedPoint val  {extNodeID, startPoint};
                     addedStartPoints.insert(make_pair(newID, val));
@@ -284,7 +285,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
         {
             //split line
             ExternalArc ftPair  {extFromNode, extToNode};
-            ArcData val  {extArcID, cost, capacity};
+            ArcData val  {std::stoll(extArcID), cost, capacity};
             pair<ExternalArc,ArcData> arcData = make_pair(ftPair, val);
 
             auto splittedLine = GetSplittedClosestOldArcToPoint(startPoint, treshold, arcData, closestArc);
@@ -294,7 +295,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
             newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
             newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
-            unsigned int newID = newSegmentIDs[0].toNode;
+            uint32_t newID = newSegmentIDs[0].toNode;
 
             //add nodeSupply
             NodeSupply supVal  {extNodeID, nodeSupply};
@@ -315,7 +316,7 @@ unsigned int Network::AddStartNode(const NewNode& newStartNode, const int tresho
         newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
         newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
-        unsigned int newID = newSegmentIDs[0].toNode;
+        uint32_t newID = newSegmentIDs[0].toNode;
 
         //add nodeSupply
         NodeSupply supVal  {extNodeID, nodeSupply};
@@ -333,14 +334,14 @@ std::vector<InternalArc> Network::insertNewStartNode(const bool isDirected, Spli
     std::vector<InternalArc> result;
     result.reserve(2);
 
-    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    int newNodeID = GetMaxNodeCount() + 1;
     //Insert of new node between old start node and old to node
     InternalArc newArc1 { splittedLine.ftNode.fromNode, newNodeID };
     InternalArc newArc2 { newNodeID, splittedLine.ftNode.toNode };
 
     //ArcData geht aus der gesplitteten Linie hervor
     // extArcID kann aber auch leer sein
-    ArcData arcData { extArcID, splittedLine.cost, splittedLine.capacity};
+    ArcData arcData { std::stoll(extArcID), splittedLine.cost, splittedLine.capacity};
     if (oldArcs.count(splittedLine.ftNode) == 0)
     {
         oldArcs.insert( make_pair(splittedLine.ftNode, arcData) );
@@ -456,7 +457,7 @@ std::vector<InternalArc> Network::insertNewStartNode(const bool isDirected, Spli
     return result;
 }
 
-unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, SQLite::Statement& closestArcQry,
+uint32_t Network::AddEndNode(const NewNode& newEndNode, const int treshold, SQLite::Statement& closestArcQry,
                                   const bool withCapacity)
 {
     unordered_map<string, InternalArc> newSegments;
@@ -517,7 +518,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
             {
                 if (internalDistinctNodeIDs.count(extFromNode) > 0)
                 {
-                    unsigned int newID = internalDistinctNodeIDs.at(extFromNode);
+                    uint32_t newID = internalDistinctNodeIDs.at(extFromNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     AddedPoint pVal  {extNodeID, endPoint};
                     addedEndPoints.insert(make_pair(newID, pVal));
@@ -533,7 +534,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
             {
                 if (internalDistinctNodeIDs.count(extToNode) > 0)
                 {
-                    unsigned int newID = internalDistinctNodeIDs.at(extToNode);
+                    uint32_t newID = internalDistinctNodeIDs.at(extToNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     AddedPoint val  {extNodeID, endPoint};
                     addedEndPoints.insert(make_pair(newID, val));
@@ -560,7 +561,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
             newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
             newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
-            unsigned int newID = newSegmentIDs[0].toNode;
+            uint32_t newID = newSegmentIDs[0].toNode;
 
             //add nodeSupply
             NodeSupply supVal  {extNodeID, nodeSupply};
@@ -581,7 +582,7 @@ unsigned int Network::AddEndNode(const NewNode& newEndNode, const int treshold, 
         newSegments.insert( make_pair("toOrigArc", newSegmentIDs[0]) );
         newSegments.insert( make_pair("fromOrigArc", newSegmentIDs[1]) );
 
-        unsigned int newID = newSegmentIDs[0].toNode;
+        uint32_t newID = newSegmentIDs[0].toNode;
 
         //add nodeSupply
         NodeSupply supVal  {extNodeID, nodeSupply};
@@ -598,7 +599,7 @@ std::vector<InternalArc> Network::insertNewEndNode(const bool isDirected, Splitt
     std::vector<InternalArc> result;
     result.reserve(2);
 
-    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    uint32_t newNodeID = GetMaxNodeCount() + 1;
     //Insert of new node between old start node and old to node
     InternalArc newArc1 { splittedLine.ftNode.fromNode, newNodeID };
     InternalArc newArc2 { newNodeID, splittedLine.ftNode.toNode };
@@ -1166,9 +1167,9 @@ double Network::getRelativeValueFromGeomLength(const double attrValue, const geo
     return ( segment.getLength() / completeLine.getLength() ) * attrValue;
 }
 
-unsigned int Network::GetInternalNodeID(const std::string& externalNodeID)
+uint32_t Network::GetInternalNodeID(const std::string& externalNodeID)
 {
-    unsigned int internalNodeID {};
+    uint32_t internalNodeID {};
     try
     {
         internalNodeID = internalDistinctNodeIDs.at(externalNodeID);
@@ -1181,7 +1182,7 @@ unsigned int Network::GetInternalNodeID(const std::string& externalNodeID)
     return internalNodeID;
 }
 
-std::string Network::GetOriginalNodeID(const unsigned int internalNodeID)
+std::string Network::GetOriginalNodeID(const uint32_t internalNodeID)
 {
     string externalNodeID {};
     try
@@ -1195,7 +1196,7 @@ std::string Network::GetOriginalNodeID(const unsigned int internalNodeID)
     }
     return externalNodeID;
 }
-std::string Network::GetOriginalStartOrEndNodeID(const unsigned int internalNodeID)
+std::string Network::GetOriginalStartOrEndNodeID(const uint32_t internalNodeID)
 {
     AddedPoint externalNode;
     try
@@ -1213,7 +1214,7 @@ std::string Network::GetOriginalStartOrEndNodeID(const unsigned int internalNode
     return externalNode.extNodeID;
 }
 
-Coordinate Network::GetStartOrEndNodeGeometry(const unsigned int internalNodeID)
+Coordinate Network::GetStartOrEndNodeGeometry(const uint32_t internalNodeID)
 {
     AddedPoint externalNode;
     externalNode.coord = { 0, 0 };
@@ -1231,6 +1232,7 @@ Coordinate Network::GetStartOrEndNodeGeometry(const unsigned int internalNodeID)
     }
     return externalNode.coord;
 }
+
 Coordinate Network::GetStartOrEndNodeGeometry(const std::string& externalNodeID)
 {
     AddedPoint externalNode;
@@ -1349,8 +1351,8 @@ SplittedArc Network::GetSplittedClosestOldArcToPoint(const geos::geom::Coordinat
         shared_ptr<MultiLineString> mLine = splitLine(coord, arc);
 
         //Lookup ext. from / toNodes
-        unsigned int fromNode = GetInternalNodeID(nearestArcKey.extFromNode);
-        unsigned int toNode = GetInternalNodeID(nearestArcKey.extToNode);
+        uint32_t fromNode = GetInternalNodeID(nearestArcKey.extFromNode);
+        uint32_t toNode = GetInternalNodeID(nearestArcKey.extToNode);
 
         InternalArc ftNode {fromNode, toNode};
         SplittedArc result{ ftNode, nearestArc.cost, nearestArc.capacity, mLine };
@@ -1577,7 +1579,7 @@ void Network::renameNodes()
 
     // Count from 0 to sortedDistinctNodes.Count:
     // --> internal NodeIDs start from 1 to n.
-    for (unsigned int i = 0; i < sortedDistinctNodes.size(); i++)
+    for (uint32_t i = 0; i < sortedDistinctNodes.size(); i++)
     {
         // Add [oldNodeID],[internalNodeID]
         internalDistinctNodeIDs.insert( make_pair(sortedDistinctNodes[i], i+1) );
@@ -1591,7 +1593,7 @@ void Network::renameNodes()
         {
             auto itD = *it;
             string extNodeID;
-            unsigned int internalNodeID;
+            uint32_t internalNodeID;
             double nodeSupply;
             extNodeID = itD.extNodeID;
             nodeSupply = itD.nodeSupply;
@@ -1627,20 +1629,20 @@ void Network::renameNodes()
     }
 }
 
-unsigned int Network::GetMaxNodeCount() {
- return static_cast<unsigned int>(internalDistinctNodeIDs.size());
+uint32_t Network::GetMaxNodeCount() {
+ return static_cast<uint32_t>(internalDistinctNodeIDs.size());
 }
 
-unsigned int Network::GetMaxArcCount() {
- return static_cast<unsigned int>(internalArcData.size());
+uint32_t Network::GetMaxArcCount() {
+ return static_cast<uint32_t>(internalArcData.size());
 }
 
-unsigned int Network::GetCurrentNodeCount() {
- return static_cast<unsigned int>(internalDistinctNodeIDs.size());
+uint32_t Network::GetCurrentNodeCount() {
+ return static_cast<uint32_t>(internalDistinctNodeIDs.size());
 }
 
-unsigned int Network::GetCurrentArcCount() {
- return static_cast<unsigned int>(internalArcData.size());
+uint32_t Network::GetCurrentArcCount() {
+ return static_cast<uint32_t>(internalArcData.size());
 }
 
 Arcs& Network::GetInternalArcData()
@@ -2433,8 +2435,8 @@ void Network::readNetworkFromTable(const bool autoClean, const bool oneWay)
         string externalArcID = arc.extArcID;
         string externalStartNode = arc.extFromNode;
         string externalEndNode = arc.extToNode;
-        unsigned int internalStartNode;
-        unsigned int internalEndNode;
+        uint32_t internalStartNode;
+        uint32_t internalEndNode;
         try
         {
             internalStartNode = internalDistinctNodeIDs.at(externalStartNode);
@@ -2501,8 +2503,8 @@ void Network::readNetworkFromTable(const bool autoClean, const bool oneWay)
         cout << s << endl;*/
 }
 //TODO: isDirected evtl. von Klasse nehmen, nicht vom Config
-void Network::processArc(const InputArc& arc, const unsigned int internalStartNode,
-                        const unsigned int internalEndNode)
+void Network::processArc(const InputArc& arc, const uint32_t internalStartNode,
+                        const uint32_t internalEndNode)
 {
     bool isDirected = NETXPERT_CNFG.IsDirected;
     std::string externalArcID = arc.extArcID;
@@ -2597,6 +2599,7 @@ void Network::processArc(const InputArc& arc, const unsigned int internalStartNo
         }
     }
 }
+
 void Network::processBarriers()
 {
     if (!this->NETXPERT_CNFG.BarrierPolyTableName.empty())
@@ -2806,7 +2809,7 @@ void Network::transformExtraSupply()
 void Network::processSupplyOrDemand()
 {
     // Dummy Knoten
-    unsigned int newNodeID = GetMaxNodeCount() + 1;
+    uint32_t newNodeID = GetMaxNodeCount() + 1;
     internalDistinctNodeIDs.insert(make_pair("dummy", newNodeID));
     swappedInternalDistinctNodeIDs.insert( make_pair( newNodeID, "dummy" ));
     //cout << "Ausgleich: " << getSupplyDemandDifference() << endl;

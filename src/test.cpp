@@ -9,7 +9,66 @@ using namespace netxpert::utils;
 
 using namespace geos::geom;
 
-void netxpert::test::NetworkConvert(Config& cnfg)
+//void netxpert::test::NetworkConvert(Config& cnfg)
+//{
+//    try
+//    {
+//        //1. Config
+//        if (!DBHELPER::IsInitialized)
+//        {
+//            DBHELPER::Initialize(cnfg);
+//        }
+//
+//        try
+//        {
+//            if (!LOGGER::IsInitialized)
+//            {
+//                LOGGER::Initialize(cnfg);
+//            }
+//        }
+//        catch (exception& ex)
+//        {
+//            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
+//            cout << ex.what() << endl;
+//        }
+//
+//        InputArcs arcsTable;
+//        InputNodes nodesTable;
+//        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
+//
+//        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+//        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
+//
+//        string nodesTableName = cnfg.NodesTableName;
+//        string nodesGeomColName = cnfg.NodesGeomColumnName;
+//
+//        bool autoCleanNetwork = cnfg.CleanNetwork;
+//
+//        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+//                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+//                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+//
+//        //2. Load Network
+//        DBHELPER::OpenNewTransaction();
+//        arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
+//        Network net (arcsTable, cmap, cnfg);
+//        LOGGER::LogInfo("Converting Data into internal network..");
+//        net.ConvertInputNetwork(autoCleanNetwork);
+//        LOGGER::LogInfo("Done!");
+//
+//        LOGGER::LogInfo("Original node ID of 1: " + net.GetOriginalNodeID(1) );
+//
+//        DBHELPER::CommitCurrentTransaction();
+//        DBHELPER::CloseConnection();
+//    }
+//    catch (exception& ex)
+//    {
+//        LOGGER::LogError("NetworkConvert: Unerwarteter Fehler!");
+//        LOGGER::LogError(ex.what());
+//    }
+//}
+
+void netxpert::test::LemonNetworkConvert(Config& cnfg)
 {
     try
     {
@@ -33,7 +92,7 @@ void netxpert::test::NetworkConvert(Config& cnfg)
         }
 
         InputArcs arcsTable;
-        InputNodes nodesTable;
+        vector<NewNode> nodesTable;
         string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
 
         string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
@@ -51,30 +110,63 @@ void netxpert::test::NetworkConvert(Config& cnfg)
         //2. Load Network
         DBHELPER::OpenNewTransaction();
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
-        Network net (arcsTable, cmap, cnfg);
+        nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, nodesGeomColName, cmap);
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        netxpert::InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
+        // converting to internalNetwork is already done in ctor
+        //net.ConvertInputNetwork(autoCleanNetwork);
 
-        LOGGER::LogInfo("Original node ID of 1: " + net.GetOriginalNodeID(1) );
+        /*uint32_t arcID = 1;
+        LOGGER::LogInfo("Querying ArcID " + to_string(arcID) + "..");
+        auto arc = lemon_net.GetArcFromID(arcID);
+        LOGGER::LogInfo("Cost of Arc: "+ to_string(lemon_net.GetArcCost(arc)));
+        LOGGER::LogInfo("Capacity of Arc" + to_string(lemon_net.GetArcCapacity(arc)));
+        netxpert::data::ArcData arcData = lemon_net.GetArcData(arc);
+        LOGGER::LogInfo("ID of Arc: " + arcData.extArcID);
+        LOGGER::LogInfo("Cost of Arc: " + to_string(arcData.cost));
+        LOGGER::LogInfo("Capacity of Arc " + to_string(arcData.capacity));*/
+
+        std::string nodeID = "1";
+        LOGGER::LogInfo("Querying NodeID "+ nodeID + "..");
+        auto node = net.GetNodeFromOrigID(nodeID);
+        auto supply = net.GetNodeSupply(node);
+        //LOGGER::LogInfo("Supply: " + to_string(supply));
+
+        LOGGER::LogInfo("Original node ID of 1: " + net.GetOrigNodeID(node) );
+
+        LOGGER::LogDebug("Testing LoadStart/EndNodes..");
+        geos::geom::Coordinate coord = {703444, 5364720};
+        string extNodeID = "1";
+        //double supply = 5.0;
+        NewNode startNode {extNodeID, coord, supply};
+        NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
+
+        auto starts = net.LoadStartNodes(vector<NewNode> {startNode}, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+
+        auto ends = net.LoadEndNodes(vector<NewNode> {endNode}, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+
+        LOGGER::LogDebug("Done!");
+        /*cout << "Reset of Network.." << endl;
+        net.Reset();*/
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("NetworkConvert: Unerwarteter Fehler!");
+        LOGGER::LogError("LemonNetworkConvert: Unerwarteter Fehler!");
         LOGGER::LogError(ex.what());
     }
 }
 
-void netxpert::test::TestNetworkBuilder(Config& cnfg)
-{
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-	cout << s << endl;
-	netxpert::simple::NetworkBuilder simpleSolver(s);
-	simpleSolver.Build();
-}
+//void netxpert::test::TestNetworkBuilder(Config& cnfg)
+//{
+//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+//	cout << s << endl;
+//	netxpert::simple::NetworkBuilder simpleSolver(s);
+//	simpleSolver.Build();
+//}
 
 void netxpert::test::TestFileGDBWriter(Config& cnfg)
 {
@@ -140,196 +232,196 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }
-void netxpert::test::TestCreateRouteGeometries(Config& cnfg)
-{
-	using namespace std;
+//void netxpert::test::TestCreateRouteGeometries(Config& cnfg)
+//{
+//	using namespace std;
+//
+//    try
+//    {
+//        string wkt1 = "LINESTRING(1 2, 3 4, 5 6, 7 8, 9 10)";
+//        string wkt2 = "LINESTRING(11 12, 13 14)";
+//
+//        const string resultTblName = cnfg.ArcsTableName + "_test";
+//        const bool dropFirst = true;
+//
+//        geos::io::WKTReader reader;
+//        auto geomPtr1 = reader.read(wkt1);
+//        auto geomPtr2 = reader.read(wkt2);
+//
+//        SpatiaLiteWriter sldb( cnfg );
+//        sldb.OpenNewTransaction();
+//        sldb.CreateSolverResultTable (resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
+//
+//        vector<shared_ptr<Geometry>> segs;
+//        // {shared_ptr<Geometry>(geomPtr1), shared_ptr<Geometry>(geomPtr2) };
+//        vector<shared_ptr<Geometry>>::iterator it;
+//        segs.resize(2);
+//        it = segs.begin();
+//        cout << "vector init & resized.." << endl;
+//
+//        /*it = segs.insert(it, shared_ptr<Geometry>(geomPtr1));
+//        segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));*/
+//
+//        auto mPtr = unique_ptr<MultiLineString>( DBHELPER::GEO_FACTORY->createMultiLineString(
+//                                                    {geomPtr1, geomPtr2 }) );
+//
+//        //segs.insert(it, shared_ptr<Geometry>(geomPtr1));
+//        //segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));
+//        //cout << "insert done "<< endl;
+//
+//        sldb.MergeAndSaveResultArcs("1", "2", -1, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
+//                                    cnfg.ArcsTableName, "1,2", *mPtr, resultTblName);
+//
+//        sldb.CommitCurrentTransaction();
+//        sldb.CloseConnection();
+//
+//    }
+//    catch (exception& ex)
+//    {
+//        LOGGER::LogError("TestSpatiaLiteWriter: Unexpected Error!");
+//        LOGGER::LogError(ex.what());
+//    }
+//}
+//void netxpert::test::TestAddNodes(Config& cnfg)
+//{
+//	using namespace std;
+//
+//    try
+//    {
+//        //1. Config
+//        if (!DBHELPER::IsInitialized)
+//        {
+//            DBHELPER::Initialize(cnfg);
+//        }
+//
+//        try
+//        {
+//            if (!LOGGER::IsInitialized)
+//            {
+//                LOGGER::Initialize(cnfg);
+//            }
+//        }
+//        catch (exception& ex)
+//        {
+//            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
+//            cout << ex.what() << endl;
+//        }
+//
+//        InputArcs arcsTable;
+//        InputNodes nodesTable;
+//        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
+//
+//        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+//        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
+//
+//        string nodesTableName = cnfg.NodesTableName;
+//        string nodesGeomColName = cnfg.NodesGeomColumnName;
+//
+//        bool autoCleanNetwork = cnfg.CleanNetwork;
+//
+//        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+//                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+//                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+//
+//        bool withCapacity = false;
+//        if (!cnfg.CapColumnName.empty())
+//            withCapacity = true;
+//
+//        //2. Load Network
+//        DBHELPER::OpenNewTransaction();
+//
+//        LOGGER::LogInfo("Loading Data from DB..!");
+//        arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
+//        //nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cmap);
+//        LOGGER::LogInfo("Done!");
+//        Network net (arcsTable, cmap, cnfg);
+//        LOGGER::LogInfo("Converting Data into internal network..");
+//        net.ConvertInputNetwork(autoCleanNetwork);
+//        LOGGER::LogInfo("Done!");
+//
+//        auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, cnfg.ArcsGeomColumnName,
+//                                            cmap, ArcIDColumnDataType::Number, withCapacity);
+//
+//        geos::geom::Coordinate coord = {703444, 5364720};
+//        //LOGGER::LogDebug(to_string(coord.x) + " " + to_string(coord.y) );
+//
+//        /*ExtClosestArcAndPoint result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Treshold, *qry, withCapacity);
+//
+//        LOGGER::LogDebug("Closest Arc ID: " + result.extArcID);
+//        LOGGER::LogDebug("Closest Point X: " + to_string(result.closestPoint.x));
+//        LOGGER::LogDebug("Closest Point Y: " + to_string(result.closestPoint.y));
+//        LOGGER::LogDebug("Closest Arc cost: " + to_string(result.cost));
+//        LOGGER::LogDebug("Closest Arc cap: " + to_string(result.capacity));
+//        LOGGER::LogDebug("Closest Arc geom: " + result.arcGeom->toString());
+//
+//        ExtFTNode key = {result.extFromNode, result.extToNode};
+//        ArcData arcData = {result.extArcID, result.cost, result.capacity};
+//        //shared_ptr<LineString> line = dynamic_pointer_cast<LineString>(result.arcGeom);
+//        auto p = make_pair(key, arcData);
+//
+//        const Geometry& arc = *result.arcGeom;
+//        SplittedArc sArc = net.GetSplittedClosestOldArcToPoint(coord, cnfg.Treshold, p, arc);
+//
+//        stringstream ss;
+//        ss << "Splitted Closest New Arc is: " << endl
+//           << "     fromNode " << sArc.ftNode.fromNode << endl
+//           << "     toNode " << sArc.ftNode.toNode << endl
+//
+//           << sArc.arcGeom->toString() << endl;
+//
+//        cout << ss.str() << endl;*/
+//
+//        string extNodeID = "1";
+//        double supply = 5.0;
+//        NewNode startNode {extNodeID, coord, supply};
+//        NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
+//
+//        uint32_t newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
+//        cout << "New End Node ID: " << newEndNodeID << endl;
+//
+//        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
+//        cout << "New End Node ID: " << newEndNodeID << endl;
+//
+//        uint32_t newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
+//        cout << "New Start Node ID: " << newStartNodeID << endl;
+//
+//        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
+//        cout << "New Start Node ID: " << newStartNodeID << endl;
+//
+//        cout << "Reset of Network.." << endl;
+//        net.Reset();
+//
+//        newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
+//        cout << "New End Node ID: " << newEndNodeID << endl;
+//
+//        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
+//        cout << "New End Node ID: " << newEndNodeID << endl;
+//
+//        newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
+//        cout << "New Start Node ID: " << newStartNodeID << endl;
+//
+//        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
+//        cout << "New Start Node ID: " << newStartNodeID << endl;
+//        //delete qry;
+//
+//        DBHELPER::CommitCurrentTransaction();
+//        DBHELPER::CloseConnection();
+//    }
+//    catch (exception& ex)
+//    {
+//        LOGGER::LogError("AddStartNode: Unexpected Error!");
+//        LOGGER::LogError(ex.what());
+//    }
+//}
 
-    try
-    {
-        string wkt1 = "LINESTRING(1 2, 3 4, 5 6, 7 8, 9 10)";
-        string wkt2 = "LINESTRING(11 12, 13 14)";
-
-        const string resultTblName = cnfg.ArcsTableName + "_test";
-        const bool dropFirst = true;
-
-        geos::io::WKTReader reader;
-        auto geomPtr1 = reader.read(wkt1);
-        auto geomPtr2 = reader.read(wkt2);
-
-        SpatiaLiteWriter sldb( cnfg );
-        sldb.OpenNewTransaction();
-        sldb.CreateSolverResultTable (resultTblName, NetXpertSolver::UndefinedNetXpertSolver, dropFirst);
-
-        vector<shared_ptr<Geometry>> segs;
-        // {shared_ptr<Geometry>(geomPtr1), shared_ptr<Geometry>(geomPtr2) };
-        vector<shared_ptr<Geometry>>::iterator it;
-        segs.resize(2);
-        it = segs.begin();
-        cout << "vector init & resized.." << endl;
-
-        /*it = segs.insert(it, shared_ptr<Geometry>(geomPtr1));
-        segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));*/
-
-        auto mPtr = unique_ptr<MultiLineString>( DBHELPER::GEO_FACTORY->createMultiLineString(
-                                                    {geomPtr1, geomPtr2 }) );
-
-        //segs.insert(it, shared_ptr<Geometry>(geomPtr1));
-        //segs.insert(it+1, shared_ptr<Geometry>(geomPtr2));
-        //cout << "insert done "<< endl;
-
-        sldb.MergeAndSaveResultArcs("1", "2", -1, -1, -1, cnfg.ArcsGeomColumnName, cnfg.ArcIDColumnName,
-                                    cnfg.ArcsTableName, "1,2", *mPtr, resultTblName);
-
-        sldb.CommitCurrentTransaction();
-        sldb.CloseConnection();
-
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("TestSpatiaLiteWriter: Unexpected Error!");
-        LOGGER::LogError(ex.what());
-    }
-}
-void netxpert::test::TestAddNodes(Config& cnfg)
-{
-	using namespace std;
-
-    try
-    {
-        //1. Config
-        if (!DBHELPER::IsInitialized)
-        {
-            DBHELPER::Initialize(cnfg);
-        }
-
-        try
-        {
-            if (!LOGGER::IsInitialized)
-            {
-                LOGGER::Initialize(cnfg);
-            }
-        }
-        catch (exception& ex)
-        {
-            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
-            cout << ex.what() << endl;
-        }
-
-        InputArcs arcsTable;
-        InputNodes nodesTable;
-        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
-
-        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
-        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
-
-        string nodesTableName = cnfg.NodesTableName;
-        string nodesGeomColName = cnfg.NodesGeomColumnName;
-
-        bool autoCleanNetwork = cnfg.CleanNetwork;
-
-        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
-                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
-                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
-
-        bool withCapacity = false;
-        if (!cnfg.CapColumnName.empty())
-            withCapacity = true;
-
-        //2. Load Network
-        DBHELPER::OpenNewTransaction();
-
-        LOGGER::LogInfo("Loading Data from DB..!");
-        arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
-        //nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cmap);
-        LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
-        LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
-        LOGGER::LogInfo("Done!");
-
-        auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, cnfg.ArcsGeomColumnName,
-                                            cmap, ArcIDColumnDataType::Number, withCapacity);
-
-        geos::geom::Coordinate coord = {703444, 5364720};
-        //LOGGER::LogDebug(to_string(coord.x) + " " + to_string(coord.y) );
-
-        /*ExtClosestArcAndPoint result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Treshold, *qry, withCapacity);
-
-        LOGGER::LogDebug("Closest Arc ID: " + result.extArcID);
-        LOGGER::LogDebug("Closest Point X: " + to_string(result.closestPoint.x));
-        LOGGER::LogDebug("Closest Point Y: " + to_string(result.closestPoint.y));
-        LOGGER::LogDebug("Closest Arc cost: " + to_string(result.cost));
-        LOGGER::LogDebug("Closest Arc cap: " + to_string(result.capacity));
-        LOGGER::LogDebug("Closest Arc geom: " + result.arcGeom->toString());
-
-        ExtFTNode key = {result.extFromNode, result.extToNode};
-        ArcData arcData = {result.extArcID, result.cost, result.capacity};
-        //shared_ptr<LineString> line = dynamic_pointer_cast<LineString>(result.arcGeom);
-        auto p = make_pair(key, arcData);
-
-        const Geometry& arc = *result.arcGeom;
-        SplittedArc sArc = net.GetSplittedClosestOldArcToPoint(coord, cnfg.Treshold, p, arc);
-
-        stringstream ss;
-        ss << "Splitted Closest New Arc is: " << endl
-           << "     fromNode " << sArc.ftNode.fromNode << endl
-           << "     toNode " << sArc.ftNode.toNode << endl
-
-           << sArc.arcGeom->toString() << endl;
-
-        cout << ss.str() << endl;*/
-
-        string extNodeID = "1";
-        double supply = 5.0;
-        NewNode startNode {extNodeID, coord, supply};
-        NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
-
-        unsigned int newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
-        cout << "New End Node ID: " << newEndNodeID << endl;
-
-        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
-        cout << "New End Node ID: " << newEndNodeID << endl;
-
-        unsigned int newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
-        cout << "New Start Node ID: " << newStartNodeID << endl;
-
-        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
-        cout << "New Start Node ID: " << newStartNodeID << endl;
-
-        cout << "Reset of Network.." << endl;
-        net.Reset();
-
-        newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
-        cout << "New End Node ID: " << newEndNodeID << endl;
-
-        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
-        cout << "New End Node ID: " << newEndNodeID << endl;
-
-        newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
-        cout << "New Start Node ID: " << newStartNodeID << endl;
-
-        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
-        cout << "New Start Node ID: " << newStartNodeID << endl;
-        //delete qry;
-
-        DBHELPER::CommitCurrentTransaction();
-        DBHELPER::CloseConnection();
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("AddStartNode: Unexpected Error!");
-        LOGGER::LogError(ex.what());
-    }
-}
-
-void netxpert::test::TestMST(Config& cnfg)
-{
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-	cout << s << endl;
-	netxpert::simple::MinimumSpanningTree simpleSolver(s);
-	simpleSolver.Solve();
-}
-
+//void netxpert::test::TestMST(Config& cnfg)
+//{
+//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+//	cout << s << endl;
+//	netxpert::simple::MinimumSpanningTree simpleSolver(s);
+//	simpleSolver.Solve();
+//}
+//
 void netxpert::test::TestSPT(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
@@ -345,204 +437,204 @@ void netxpert::test::TestODMatrix(Config& cnfg)
 	netxpert::simple::OriginDestinationMatrix simpleSolver(s);
 	simpleSolver.Solve(true);
 }
+//
+//void netxpert::test::TestODMatrix2(Config& cnfg)
+//{
+//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+//	cout << s << endl;
+//	netxpert::simple::OriginDestinationMatrix simpleSolver(s, true); //experimental
+//	simpleSolver.Solve(true);
+//}
+//
+//void netxpert::test::TestTransportation(Config& cnfg)
+//{
+//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+//	cout << s << endl;
+//	netxpert::simple::Transportation simpleSolver(s);
+//	simpleSolver.Solve();
+//}
+//
+//void netxpert::test::TestMCF(Config& cnfg)
+//{
+//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+//	cout << s << endl;
+//	netxpert::simple::MinCostFlow simpleSolver(s);
+//	simpleSolver.Solve();
+//}
 
-void netxpert::test::TestODMatrix2(Config& cnfg)
-{
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-	cout << s << endl;
-	netxpert::simple::OriginDestinationMatrix simpleSolver(s, true); //experimental
-	simpleSolver.Solve(true);
-}
-
-void netxpert::test::TestTransportation(Config& cnfg)
-{
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-	cout << s << endl;
-	netxpert::simple::Transportation simpleSolver(s);
-	simpleSolver.Solve();
-}
-
-void netxpert::test::TestMCF(Config& cnfg)
-{
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-	cout << s << endl;
-	netxpert::simple::MinCostFlow simpleSolver(s);
-	simpleSolver.Solve();
-}
-
-void netxpert::test::TestTransportationExt(Config& cnfg)
-{
-    try
-    {
-        //1. Config
-        if (!DBHELPER::IsInitialized)
-        {
-            DBHELPER::Initialize(cnfg);
-        }
-
-        try
-        {
-            if (!LOGGER::IsInitialized)
-            {
-                LOGGER::Initialize(cnfg);
-            }
-        }
-        catch (exception& ex)
-        {
-            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
-            cout << ex.what() << endl;
-        }
-
-        InputArcs arcsTable;
-        vector<NewNode> nodesTable;
-
-        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
-
-        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
-        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
-
-        string nodesTableName = cnfg.NodesTableName;
-        string nodesGeomColName = cnfg.NodesGeomColumnName;
-        string resultTableName = cnfg.ArcsTableName + "_transpext";
-        bool dropFirst = true;
-
-        bool autoCleanNetwork = cnfg.CleanNetwork;
-
-        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
-                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
-                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
-
-        bool withCapacity = false;
-        if (!cnfg.CapColumnName.empty())
-            withCapacity = true;
-
-        //2. Load Network
-        DBHELPER::OpenNewTransaction();
-        LOGGER::LogInfo("Loading Data from DB..!");
-        arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
-        nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
-        LOGGER::LogInfo("Done!");
-
-        DBHELPER::CommitCurrentTransaction();
-        DBHELPER::CloseConnection();
-
-        //input arcs to extODMatrix
-        std::vector<ExtSPTreeArc> extODMatrix;
-        for (InputArc& a : arcsTable)
-		{
-			extODMatrix.push_back(ExtSPTreeArc{ a.extArcID, ExternalArc{ a.extFromNode, a.extToNode }, a.cost });
-        }
-        //input nodes to extNodeSupply - no coords!
-        vector<ExtNodeSupply> extNodeSupply;
-        for (NewNode& node : nodesTable)
-        {
-            extNodeSupply.push_back( ExtNodeSupply {node.extNodeID, node.supply} );
-        }
-        //Transportation Solver
-        Transportation transp(cnfg);
-        //TransportationExt -> external setting of ODMatrix and nodesupply
-
-        ExtTransportationData input {extODMatrix, extNodeSupply};
-
-        transp.SetExtODMatrix(input.odm);
-        transp.SetExtNodeSupply(input.supply);
-
-        transp.Solve();
-
-        Network net = transp.GetNetwork();
-
-        LOGGER::LogInfo("Done!");
-        LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );
-        LOGGER::LogInfo("Count of Distributions: " + to_string(transp.GetDistribution().size()) );
-
-        unordered_map<ODPair, DistributionArc> result = transp.GetDistribution();
-
-        unique_ptr<DBWriter> writer;
-        switch (cnfg.ResultDBType)
-        {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-            }
-                break;
-        }
-        writer->CreateNetXpertDB();
-        writer->OpenNewTransaction();
-        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
-        writer->CommitCurrentTransaction();
-        LOGGER::LogDebug("Writing Geometries..");
-        writer->OpenNewTransaction();
-
-        vector<ExtDistributionArc> distArcs;
-
-        unsigned int counter = 0;
-        for (auto& dist : result)
-        {
-            counter += 1;
-            if (counter % 2500 == 0)
-                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
-
-            ODPair key = dist.first;
-            DistributionArc val = dist.second;
-            CompressedPath path = val.path;
-            vector<unsigned int> ends = val.path.first;
-            double costPerPath = path.second;
-            double flow = val.flow;
-            //TODO: get capacity per arc
-            double cap = -1;
-
-            cout << key.origin << "_>" << key.dest << endl;
-            // only one arc
-            unordered_set<string> arcIDs = net.GetOriginalArcIDs(vector<InternalArc>
-                                                                        { InternalArc  {key.origin, key.dest} },
-                                                                        transp.IsDirected);
-            ExtArcID arcID = *arcIDs.begin();
-
-            //auto route = transp.UncompressRoute(key.origin, ends);
-            //cout << route.size() << endl;
-            //cout << "From: " << key.origin << " To: " << key.dest << " flows: " << flow << " ,cost: " << costPerPath << endl;
-
-            string orig;
-            string dest;
-            try{
-                orig = net.GetOriginalNodeID(key.origin);
-            }
-            catch (exception& ex) {
-                LOGGER::LogError(ex.what());
-            }
-            try{
-                dest = net.GetOriginalNodeID(key.dest);
-            }
-            catch (exception& ex) {
-                LOGGER::LogError(ex.what());
-            }
-
-            //JSON output!
-            distArcs.push_back( ExtDistributionArc {arcID, ExternalArc {orig, dest}, costPerPath, flow });
-
-            /*net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, flow, "", route,
-                                        resultTableName, *writer);*/
-
-        }
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-
-        TransportationResult transpRes {transp.GetOptimum(), distArcs};
-        cout << UTILS::SerializeObjectToJSON<TransportationResult>(transpRes, "result") + "\n }"<< endl;
-        LOGGER::LogDebug("Done!");
-
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("TestTransportationExt: Unexpected Error!");
-        LOGGER::LogError(ex.what());
-    }
-}
+//void netxpert::test::TestTransportationExt(Config& cnfg)
+//{
+//    try
+//    {
+//        //1. Config
+//        if (!DBHELPER::IsInitialized)
+//        {
+//            DBHELPER::Initialize(cnfg);
+//        }
+//
+//        try
+//        {
+//            if (!LOGGER::IsInitialized)
+//            {
+//                LOGGER::Initialize(cnfg);
+//            }
+//        }
+//        catch (exception& ex)
+//        {
+//            cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
+//            cout << ex.what() << endl;
+//        }
+//
+//        InputArcs arcsTable;
+//        vector<NewNode> nodesTable;
+//
+//        string arcsGeomColumnName = cnfg.ArcsGeomColumnName; //"Geometry";
+//
+//        string pathToSpatiaLiteDB = cnfg.NetXDBPath; //args[0].ToString(); //@"C:\data\TRANSPRT_40.sqlite";
+//        string arcsTableName = cnfg.ArcsTableName; //args[1].ToString(); //"TRANSPRT_GES_LINE_edges";
+//
+//        string nodesTableName = cnfg.NodesTableName;
+//        string nodesGeomColName = cnfg.NodesGeomColumnName;
+//        string resultTableName = cnfg.ArcsTableName + "_transpext";
+//        bool dropFirst = true;
+//
+//        bool autoCleanNetwork = cnfg.CleanNetwork;
+//
+//        ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+//                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+//                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+//
+//        bool withCapacity = false;
+//        if (!cnfg.CapColumnName.empty())
+//            withCapacity = true;
+//
+//        //2. Load Network
+//        DBHELPER::OpenNewTransaction();
+//        LOGGER::LogInfo("Loading Data from DB..!");
+//        arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
+//        nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
+//        LOGGER::LogInfo("Done!");
+//
+//        DBHELPER::CommitCurrentTransaction();
+//        DBHELPER::CloseConnection();
+//
+//        //input arcs to extODMatrix
+//        std::vector<ExtSPTreeArc> extODMatrix;
+//        for (InputArc& a : arcsTable)
+//		{
+//			extODMatrix.push_back(ExtSPTreeArc{ a.extArcID, ExternalArc{ a.extFromNode, a.extToNode }, a.cost });
+//        }
+//        //input nodes to extNodeSupply - no coords!
+//        vector<ExtNodeSupply> extNodeSupply;
+//        for (NewNode& node : nodesTable)
+//        {
+//            extNodeSupply.push_back( ExtNodeSupply {node.extNodeID, node.supply} );
+//        }
+//        //Transportation Solver
+//        Transportation transp(cnfg);
+//        //TransportationExt -> external setting of ODMatrix and nodesupply
+//
+//        ExtTransportationData input {extODMatrix, extNodeSupply};
+//
+//        transp.SetExtODMatrix(input.odm);
+//        transp.SetExtNodeSupply(input.supply);
+//
+//        transp.Solve();
+//
+//        Network net = transp.GetNetwork();
+//
+//        LOGGER::LogInfo("Done!");
+//        LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );
+//        LOGGER::LogInfo("Count of Distributions: " + to_string(transp.GetDistribution().size()) );
+//
+//        map<ODPair, DistributionArc> result = transp.GetDistribution();
+//
+//        unique_ptr<DBWriter> writer;
+//        switch (cnfg.ResultDBType)
+//        {
+//            case RESULT_DB_TYPE::SpatiaLiteDB:
+//            {
+//                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+//            }
+//                break;
+//            case RESULT_DB_TYPE::ESRI_FileGDB:
+//            {
+//                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+//            }
+//                break;
+//        }
+//        writer->CreateNetXpertDB();
+//        writer->OpenNewTransaction();
+//        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
+//        writer->CommitCurrentTransaction();
+//        LOGGER::LogDebug("Writing Geometries..");
+//        writer->OpenNewTransaction();
+//
+//        vector<ExtDistributionArc> distArcs;
+//
+//        uint32_t counter = 0;
+//        for (auto& dist : result)
+//        {
+//            counter += 1;
+//            if (counter % 2500 == 0)
+//                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+//
+//            ODPair key = dist.first;
+//            DistributionArc val = dist.second;
+//            CompressedPath path = val.path;
+//            vector<uint32_t> ends = val.path.first;
+//            double costPerPath = path.second;
+//            double flow = val.flow;
+//            //TODO: get capacity per arc
+//            double cap = -1;
+//
+//            //cout << key.origin << "_>" << key.dest << endl;
+//            // only one arc
+//            unordered_set<string> arcIDs = net.GetOrigArcIDs(vector<InternalArc>
+//                                                                        { InternalArc  {key.origin, key.dest} },
+//                                                                        transp.IsDirected);
+//            ExtArcID arcID = *arcIDs.begin();
+//
+//            //auto route = transp.UncompressRoute(key.origin, ends);
+//            //cout << route.size() << endl;
+//            //cout << "From: " << key.origin << " To: " << key.dest << " flows: " << flow << " ,cost: " << costPerPath << endl;
+//
+//            string orig;
+//            string dest;
+//            try{
+//                orig = net.GetOrigNodeID(key.origin);
+//            }
+//            catch (exception& ex) {
+//                LOGGER::LogError(ex.what());
+//            }
+//            try{
+//                dest = net.GetOrigNodeID(key.dest);
+//            }
+//            catch (exception& ex) {
+//                LOGGER::LogError(ex.what());
+//            }
+//
+//            //JSON output!
+//            distArcs.push_back( ExtDistributionArc {arcID, ExternalArc {orig, dest}, costPerPath, flow });
+//
+//            /*net.BuildTotalRouteGeometry(orig, dest, costPerPath, -1, flow, "", route,
+//                                        resultTableName, *writer);*/
+//
+//        }
+//        writer->CommitCurrentTransaction();
+//        writer->CloseConnection();
+//
+//        TransportationResult transpRes {transp.GetOptimum(), distArcs};
+//        cout << UTILS::SerializeObjectToJSON<TransportationResult>(transpRes, "result") + "\n }"<< endl;
+//        LOGGER::LogDebug("Done!");
+//
+//    }
+//    catch (exception& ex)
+//    {
+//        LOGGER::LogError("TestTransportationExt: Unexpected Error!");
+//        LOGGER::LogError(ex.what());
+//    }
+//}
 
 
 /*void netxpert::test::TestMCF(Config& cnfg)
@@ -605,10 +697,10 @@ void netxpert::test::TestTransportationExt(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
@@ -858,9 +950,9 @@ void netxpert::test::TestSPT(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
-        vector<pair<unsigned int, string>> endNodes;
+        vector<pair<uint32_t, string>> endNodes;
         if (!cnfg.SPTAllDests) {
             LOGGER::LogInfo("Loading End nodes..");
             endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
@@ -874,7 +966,7 @@ void netxpert::test::TestSPT(Config& cnfg)
         ShortestPathTree spt(cnfg);
 
         spt.SetOrigin(startNodes.at(0).first);
-        vector<unsigned int> dests = {};// newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        vector<uint32_t> dests = {};// newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
 
         if (!cnfg.SPTAllDests)
         {
@@ -917,7 +1009,7 @@ void netxpert::test::TestSPT(Config& cnfg)
             string arcIDs = "";
             ODPair key = kv.first;
             CompressedPath value = kv.second;
-            vector<unsigned int> ends = value.first;
+            vector<uint32_t> ends = value.first;
             double costPerPath = value.second;
 
             auto route = spt.UncompressRoute(key.origin, ends);
@@ -1017,10 +1109,10 @@ void netxpert::test::TestODMatrix(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
@@ -1028,13 +1120,13 @@ void netxpert::test::TestODMatrix(Config& cnfg)
 
         // Solver
         OriginDestinationMatrix odm(cnfg);
-        vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+        vector<uint32_t> origs = {}; //newStartNodeID, newStartNodeID2};
         for (auto s : startNodes)
             origs.push_back(s.first);
 
         odm.SetOrigins( origs );
 
-        vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        vector<uint32_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
         for (auto e : endNodes)
             dests.push_back(e.first);
 
@@ -1083,7 +1175,7 @@ void netxpert::test::TestODMatrix(Config& cnfg)
             string arcIDs = "";
             ODPair key = kv.first;
             CompressedPath value = kv.second;
-            vector<unsigned int> ends = value.first;
+            vector<uint32_t> ends = value.first;
             double costPerPath = value.second;
 
             auto route = odm.UncompressRoute(key.origin, ends);
@@ -1185,10 +1277,10 @@ void netxpert::test::TestTransportation(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
@@ -1198,11 +1290,11 @@ void netxpert::test::TestTransportation(Config& cnfg)
         //Transportation Solver
         Transportation transp(cnfg);
 
-        vector<unsigned int> origs;
+        vector<uint32_t> origs;
         for (auto& p : startNodes)
             origs.push_back(p.first);
 
-        vector<unsigned int> dests;
+        vector<uint32_t> dests;
         for (auto& p : endNodes)
             dests.push_back(p.first);
 

@@ -1,6 +1,7 @@
 #ifndef DATA_H
 #define DATA_H
 
+#include <stdint.h>
 #include "geos/geom/Coordinate.h"
 #include "geos/geom/Geometry.h"
 #include "geos/geom/MultiLineString.h"
@@ -11,10 +12,16 @@
 #include <cereal/archives/json.hpp>
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/vector.hpp>
+
+
 //#include <boost/bimap.hpp>
 
-//Dictionary<Tuple<unsigned int, unsigned int>, Tuple<string, double, double>> internalArcData;
-//TODO: data structure: LEMON? structs? maps?
+//Dictionary<Tuple<uint32_t, uint32_t>, Tuple<string, double, double>> internalArcData;
+//typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::ArcData> internalArcData
+
+#include <lemon/smart_graph.h>
+#include <lemon/concepts/path.h>
+#include <lemon/adaptors.h>
 
 namespace netxpert {
 
@@ -26,12 +33,55 @@ namespace netxpert {
     const double DOUBLE_INFINITY = 999999;
     const double DOUBLE_NULL = -1;
 
+
+    typedef lemon::SmartDigraph graph_t;
+    typedef lemon::FilterArcs<netxpert::data::graph_t,
+                              netxpert::data::graph_t::ArcMap<bool>> filtered_graph_t;
+    typedef graph_t::Node node_t;
+    typedef graph_t::Arc arc_t;
+    typedef double cost_t;
+    typedef double capacity_t;
+    typedef double supply_t;
+    typedef uint32_t  intarcid_t;
+    typedef uint32_t  extarcid_t;
+
+
+    /**
+    * \Custom data type for storing <arc,cost,capacity,segmentGeoms>
+    **/
+    template<typename arc_t>
+    struct IntNetSplittedArc
+    {
+        arc_t       arc;
+        cost_t      cost;
+        capacity_t  capacity;
+//        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
+        std::pair< std::shared_ptr<geos::geom::Geometry>,
+                   std::shared_ptr<geos::geom::Geometry> > segments;
+    };
+
+    template<typename arc_t>
+    struct IntNetSplittedArc2
+    {
+        arc_t       arc;
+        cost_t      cost;
+        capacity_t  capacity;
+//        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
+        std::vector< std::shared_ptr<geos::geom::Geometry>> segments;
+    };
+
+    enum ArcState : int32_t {
+        original = 0,
+        originalAndSplit = 1,
+        added = 2,
+        addedAndSplit = 3
+    };
+
     /**
     * \Enum
     * Enum that reflects the type of the netXpert Solver
     **/
-    enum NetXpertSolver
-    {
+    enum NetXpertSolver : int16_t {
         UndefinedNetXpertSolver = -1,
         ShortestPathTreeSolver = 0,
         ODMatrixSolver = 1,
@@ -48,8 +98,7 @@ namespace netxpert {
     * Enum that reflects the type of the ArcID Column in the netxpert database. Used for building
     * the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).
     **/
-    enum ArcIDColumnDataType
-    {
+    enum ArcIDColumnDataType : int16_t {
         Number = 0, //double or int
         Std_String = 1
     };
@@ -59,8 +108,7 @@ namespace netxpert {
     * Needed for building the total geometry of the route, if the network has been broken up through
     * additional start or end nodes.
     **/
-    enum AddedNodeType
-    {
+    enum AddedNodeType : int16_t {
         UndefinedAddedNodeType = 0,
         StartArc = 1,
         EndArc = 2
@@ -69,8 +117,7 @@ namespace netxpert {
     * \Enum
     * Enum that reflects the type of the Minimum Cost Flow instance.
     **/
-    enum MinCostFlowInstanceType
-    {
+    enum MinCostFlowInstanceType : int16_t {
         MCFUndefined = 0,     ///< undefined MCF problem type
         MCFBalanced = 1,      ///< balanced MCF problem
         MCFExtrasupply = 2,   ///< MCF problem with more supply than demand
@@ -81,8 +128,7 @@ namespace netxpert {
     * \Enum
     * Enum that reflects the status of the Minimum Cost Flow solver.
     **/
-    enum MCFSolverStatus
-    {
+    enum MCFSolverStatus : int16_t {
        MCFUnSolved = -1 ,     ///< no solution available
        MCFOK = 0 ,            ///< optimal solution found
        MCFStopped = 1,        ///< optimization stopped
@@ -95,8 +141,7 @@ namespace netxpert {
     * \Enum
     * Enum that reflects the location of a given point on a line.
     **/
-    enum StartOrEndLocationOfLine
-    {
+    enum StartOrEndLocationOfLine : int16_t {
         Intermediate = 0,     ///< points location is somewhere between the start and end point of the line
         Start = 1,            ///< point is identical to the start point of the line
         End = 2               ///< point is identical to the end point of the line
@@ -110,8 +155,8 @@ namespace netxpert {
         std::string extArcID;
         std::string extFromNode;
         std::string extToNode;
-        double cost;
-        double capacity;
+        cost_t      cost;
+        capacity_t  capacity;
         geos::geom::Coordinate closestPoint;
         std::shared_ptr<geos::geom::Geometry> arcGeom;
     };
@@ -137,7 +182,7 @@ namespace netxpert {
     struct ExtNodeSupply
     {
         netxpert::data::ExtNodeID extNodeID;
-        double supply;
+        supply_t                  supply;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -152,9 +197,9 @@ namespace netxpert {
     **/
     struct ExtSPTreeArc
     {
-        netxpert::data::ExtArcID extArcID;
+        netxpert::data::ExtArcID    extArcID;
         netxpert::data::ExternalArc extArc;
-        double cost;
+        cost_t                      cost;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -208,24 +253,25 @@ namespace netxpert {
     **/
     struct InternalArc
     {
-        unsigned int fromNode;
-        unsigned int toNode;
+        uint32_t fromNode;
+        uint32_t toNode;
 
       bool operator==(const InternalArc& p2) const {
         const InternalArc& p1=(*this);
         return p1.fromNode == p2.fromNode && p1.toNode == p2.toNode;
       }
     };
+
     /**
     * \Custom data type for storing ODPair tuple <origin,dest>
     **/
-    struct ODPair
+    /*struct ODPair
     {
-        unsigned int origin;
-        unsigned int dest;
+        uint32_t origin;
+        uint32_t dest;
 
         bool operator==(const ODPair& p2) const {
-          const ODPair& p1=(*this);
+          const ODPair_& p1=(*this);
           return p1.origin == p2.origin && p1.dest == p2.dest;
         }
         template<class Archive>
@@ -234,23 +280,59 @@ namespace netxpert {
             ar( cereal::make_nvp("origin",origin),
                 cereal::make_nvp("destination",dest) );
         }
+    };*/
+
+    /**
+    * \Custom data type for storing lemon ODPair tuple <origin,dest>
+    **/
+    struct ODPair
+    {
+        netxpert::data::node_t origin;
+        netxpert::data::node_t dest;
+
+        bool operator==(const ODPair& p2) const {
+          //const ODPair& p1=(*this);
+          bool ret = (this->origin == p2.origin) && (this->dest == p2.dest);
+          //std::cout << "operator== is " << ret << std::endl;
+          return ret;
+        }
+        bool operator<(const ODPair& p2) const {
+//          const ODPair& p1=(*this);
+          bool ret = (this->origin < p2.origin) || (this->dest < p2.dest);
+          //std::cout << "operator< is " << ret << std::endl;
+          return ret;
+        }
+
+        /*template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("origin",origin),
+                cereal::make_nvp("destination",dest) );
+        }*/
     };
     /**
-    * \Custom data type for storing tuple <oldArcID,cost,capacity>
+    * \Custom data type for storing tuple <extArcID,cost,capacity>
     **/
     struct DuplicateArcData
     {
         std::string extArcID;
-        double cost;
+        cost_t      cost;
     };
     /**
-    * \Custom data type for storing tuple <oldArcID,cost,capacity>
+    * \Custom data type for storing tuple <extArcID,cost,capacity>
     **/
     struct ArcData
     {
-        std::string extArcID;
-        double cost;
-        double capacity;
+        //std::string extArcID;
+        extarcid_t  extArcID;
+        cost_t      cost;
+        capacity_t  capacity;
+    };
+    struct ArcData2
+    {
+        uint32_t    extArcID;
+        cost_t      cost;
+        capacity_t  capacity;
     };
     /**
     * \Custom data type for storing tuple <oldArcID,cost,capacity,flow>
@@ -258,9 +340,9 @@ namespace netxpert {
     struct ArcDataAndFlow
     {
         std::string oldArcID;
-        double cost;
-        double capacity;
-        double flow;
+        cost_t      cost;
+        capacity_t  capacity;
+        capacity_t  flow;
     };
     /**
     * \Custom data type for storing tuple <fromNode,toNode,flow,cost>
@@ -268,30 +350,31 @@ namespace netxpert {
     struct FlowCost
     {
         netxpert::data::InternalArc intArc;
-        double flow;
-        double cost;
+        capacity_t                  flow;
+        cost_t                      cost;
     };
 
     /**
     * \Custom data type for storing tuple <CompressedPath,cost>
     **/
-    typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
+    /*typedef std::pair<std::vector<uint32_t>,double> CompressedPath;*/
+    typedef std::pair<std::vector<netxpert::data::arc_t>, netxpert::data::cost_t> CompressedPath;
     /**
     * \Custom data type for storing tuple <CompressedPath,flow>
     **/
     struct DistributionArc
     {
-        netxpert::data::CompressedPath path;
-        double flow;
+        netxpert::data::CompressedPath  path;
+        capacity_t                      flow;
     };
 
 
     struct ExtDistributionArc
     {
-        netxpert::data::ExtArcID arcid;
+        netxpert::data::ExtArcID    arcid;
         netxpert::data::ExternalArc extArc;
-        double cost;
-        double flow;
+        cost_t                      cost;
+        capacity_t                  flow;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -311,7 +394,7 @@ namespace netxpert {
     **/
     struct TransportationResult
     {
-        double optimum;
+        cost_t optimum;
         std::vector<netxpert::data::ExtDistributionArc> dist;
 
         template<class Archive>
@@ -327,7 +410,7 @@ namespace netxpert {
     **/
     struct MSTResult
     {
-        double optimum;
+        cost_t optimum;
         std::vector<netxpert::data::ExternalArc> mst;
 
         template<class Archive>
@@ -343,7 +426,7 @@ namespace netxpert {
     **/
     struct SPTResult
     {
-        double optimum;
+        cost_t optimum;
         std::vector<netxpert::data::ExtSPTreeArc> spt;
 
         template<class Archive>
@@ -359,8 +442,8 @@ namespace netxpert {
     **/
     struct AddedPoint
     {
-        std::string extNodeID;
-        geos::geom::Coordinate coord;
+        std::string             extNodeID;
+        geos::geom::Coordinate  coord;
     };
     /**
     * \Custom data type for storing tuple <extNodeID,supply>
@@ -368,7 +451,7 @@ namespace netxpert {
     struct NodeSupply
     {
         std::string extNodeID;
-        double supply;
+        supply_t    supply;
     };
 
     /**
@@ -376,29 +459,39 @@ namespace netxpert {
     **/
     struct NewNode
     {
-        std::string extNodeID;
-        geos::geom::Coordinate coord;
-        double supply;
+        std::string             extNodeID;
+        geos::geom::Coordinate  coord;
+        supply_t                supply;
     };
+
+//    #include "dbhelper.h"
+//    using netxpert::io::DBHELPER::GEO_FACTORY;
 
     /**
     * \Custom data type for storing tuple <arcGeom,nodeType,cost,capacity>
     **/
     struct NewArc
     {
+        NewArc(geos::geom::LineString& _arcGeom, netxpert::data::AddedNodeType _nodeType, cost_t _cost, capacity_t _capacity ) {
+            arcGeom     = std::shared_ptr<geos::geom::LineString>(dynamic_cast<geos::geom::LineString*>( _arcGeom.clone()) );
+            nodeType    = _nodeType;
+            cost        = _cost;
+            capacity    = _capacity;
+        }
+
         std::shared_ptr<geos::geom::LineString> arcGeom;
-        //LineString& arcGeom;
+        //geos::geom::LineString& arcGeom = ( *gf->createEmptyGeometry() );
         //LineString* arcGeom;
-        netxpert::data::AddedNodeType nodeType;
-        double cost;
-        double capacity;
+        netxpert::data::AddedNodeType           nodeType;
+        cost_t                                  cost;
+        capacity_t                              capacity;
     };
 
     struct SwappedOldArc
     {
         netxpert::data::InternalArc ftNode;
-        double cost;
-        double capacity;
+        cost_t                      cost;
+        capacity_t                  capacity;
     };
 
     /**
@@ -407,8 +500,8 @@ namespace netxpert {
     struct SplittedArc
     {
         netxpert::data::InternalArc ftNode;
-        double cost;
-        double capacity;
+        cost_t                      cost;
+        capacity_t                  capacity;
         std::shared_ptr<geos::geom::MultiLineString> arcGeom;
     };
 
@@ -417,15 +510,15 @@ namespace netxpert {
         std::string extArcID;
         std::string extFromNode;
         std::string extToNode;
-        double cost;
-        double capacity;
+        cost_t      cost;
+        capacity_t  capacity;
         std::string oneway;
     };
 
     struct InputNode
     {
         std::string extNodeID;
-        double nodeSupply;
+        supply_t    nodeSupply;
     };
 
     struct ColumnMap
@@ -440,7 +533,7 @@ namespace netxpert {
         std::string supplyColName;
     };
 
-    typedef unsigned int IntNodeID;
+    typedef uint32_t IntNodeID;
 
     typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::ArcData> Arcs;
     //typedef boost::bimap< FTNode, ArcData > Arcs;
@@ -464,9 +557,9 @@ namespace netxpert {
     struct NetworkBuilderInputArc
     {
         netxpert::data::ExtArcID extArcID;
-        double cost;
-        double capacity;
-        std::string oneway;
+        cost_t                   cost;
+        capacity_t               capacity;
+        std::string              oneway;
 		//Bug in VS2013: can't move for default copy
 		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
 		//--> std::unique_ptr funktioniert nicht als data member
@@ -476,12 +569,12 @@ namespace netxpert {
 
     struct NetworkBuilderResultArc
     {
-        netxpert::data::ExtArcID extArcID;
-        netxpert::data::IntNodeID fromNode;
-        netxpert::data::IntNodeID toNode;
-        double cost;
-        double capacity;
-        std::string oneway;
+        netxpert::data::ExtArcID    extArcID;
+        netxpert::data::IntNodeID   fromNode;
+        netxpert::data::IntNodeID   toNode;
+        cost_t                      cost;
+        capacity_t                  capacity;
+        std::string                 oneway;
 		//Bug in VS2013: can't move for default copy
 		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
 		//--> std::unique_ptr funktioniert nicht als data member
@@ -495,7 +588,7 @@ namespace netxpert {
 			return *this;
 		}*/
     };
-    typedef std::unordered_map< unsigned int, netxpert::data::NetworkBuilderResultArc> NetworkBuilderResultArcs;
+    typedef std::unordered_map< uint32_t, netxpert::data::NetworkBuilderResultArc> NetworkBuilderResultArcs;
 
     typedef std::unordered_map< std::unique_ptr<geos::geom::Point>, netxpert::data::IntNodeID> NetworkBuilderResultNodes;
 
@@ -537,28 +630,28 @@ namespace std
     * \Extension for custom key type ODPair specifying how to hash; serves as key in
     * \unordered map.
     **/
-    template <>
+    /*template <>
     class hash<netxpert::data::ODPair>
     {
       public:
         long operator()(const netxpert::data::ODPair& x) const
         {
             hash<std::string> z;
-            return z(to_string(x.origin) + to_string(x.dest));
+            return z(x.origin) ^ z(x.dest);
         }
-    };
+    };*/
 
     /**
     * \Equal_to operator for custom key type ODPair in unordered map.
     **/
-    template <>
+    /*template <>
     class equal_to<netxpert::data::ODPair>
     {
       public:
          bool operator()(const netxpert::data::ODPair& a, const netxpert::data::ODPair& b) const
          {
-            return a.origin == b.origin && a.dest == b.dest;
+            return (a.origin == b.origin) && (a.dest == b.dest);
          }
-    };
+    };*/
 } //namespace std
 #endif // DATA_H

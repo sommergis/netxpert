@@ -30,7 +30,7 @@ namespace netxpert {
 
             NetworkBuilder(netxpert::cnfg::Config& cnfg);
 
-            virtual ~NetworkBuilder()  {};
+            ~NetworkBuilder()  {};
 
             /**
             * Loads the Edge Data into a Graph.
@@ -40,12 +40,12 @@ namespace netxpert {
             **/
             void LoadData();
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
-            std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
+            std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
 
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
             std::vector<netxpert::data::NetworkBuilderInputArc> inputArcs;
-            std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> builtNetwork;
+            std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> builtNetwork;
             std::unordered_map< std::string, netxpert::data::IntNodeID> builtNodes;
             std::unique_ptr<geos::geomgraph::GeometryGraph> geoGraph;
             void calcNodes();

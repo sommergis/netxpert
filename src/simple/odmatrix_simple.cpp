@@ -9,15 +9,10 @@ netxpert::simple::OriginDestinationMatrix::OriginDestinationMatrix(std::string j
     //Convert JSON Config to real Config Object
     NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
-netxpert::simple::OriginDestinationMatrix::OriginDestinationMatrix(std::string jsonCnfg, bool experimentalVersion)
-{
-    //Convert JSON Config to real Config Object
-    NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
-    this->experimentalVersion = experimentalVersion;
-}
 int netxpert::simple::OriginDestinationMatrix::Solve()
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -72,17 +67,16 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
 
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        std::vector<std::pair<unsigned int, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        std::vector<std::pair<unsigned int, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
@@ -91,15 +85,15 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
         // Solver
         solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
         auto& odm = *solver;
-        std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+        std::vector<netxpert::data::node_t> origs = {}; //newStartNodeID, newStartNodeID2};
         for (auto s : startNodes)
-            origs.push_back(s.first);
+            origs.push_back(net.GetNodeFromID(s.first));
 
         odm.SetOrigins( origs );
 
-        std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        std::vector<netxpert::data::node_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
         for (auto e : endNodes)
-            dests.push_back(e.first);
+            dests.push_back(net.GetNodeFromID(e.first));
 
         odm.SetDestinations( dests );
 
@@ -124,6 +118,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
 int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -171,42 +166,40 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+//		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         //2. Load Network
         DBHELPER::OpenNewTransaction();
         LOGGER::LogInfo("Loading Data from DB..!");
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
-
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        std::vector<std::pair<unsigned int, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        std::vector<std::pair<unsigned int, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
-        if (this->experimentalVersion)
+        /*if (this->experimentalVersion)
         {
             solver2 = std::unique_ptr<netxpert::OriginDestinationMatrix2> (new netxpert::OriginDestinationMatrix2(cnfg));
             auto& odm = *solver2;
-            std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+            std::vector<uint32_t> origs = {}; //newStartNodeID, newStartNodeID2};
             for (auto s : startNodes)
                 origs.push_back(s.first);
 
             odm.SetOrigins( origs );
 
-            std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+            std::vector<uint32_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
             for (auto e : endNodes)
                 dests.push_back(e.first);
 
@@ -223,19 +216,19 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         }
 
         else
-        {
+        {*/
             solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
             auto& odm = *solver;
 
-            std::vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+            std::vector<netxpert::data::node_t> origs = {}; //newStartNodeID, newStartNodeID2};
             for (auto s : startNodes)
-                origs.push_back(s.first);
+                origs.push_back(net.GetNodeFromID(s.first));
 
             odm.SetOrigins( origs );
 
-            std::vector<unsigned int> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+            std::vector<netxpert::data::node_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
             for (auto e : endNodes)
-                dests.push_back(e.first);
+                dests.push_back(net.GetNodeFromID(e.first));
 
             odm.SetDestinations( dests );
 
@@ -247,7 +240,7 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
             odm.SaveResults(resultTableName, cmap);
 
             return 0; //OK
-        }
+//        }
     }
     catch (std::exception& ex)
     {
@@ -267,7 +260,7 @@ double netxpert::simple::OriginDestinationMatrix::GetOptimum()
 
 std::string netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON()
 {
-    string result;
+    std::string result;
     /*if (this->solver)
         result = this->solver->GetODMatrixAsJSON();*/
     return result;

@@ -438,7 +438,7 @@ private:
     private:
         sqlite3*        mpSQLite;    //!< Pointer to SQLite Database Connection Handle
         sqlite3_stmt*   mpStmt;      //!< Pointer to SQLite Statement Object
-        unsigned int*   mpRefCount;  //!< Pointer to the heap allocated reference counter of the sqlite3_stmt
+        uint32_t*   mpRefCount;  //!< Pointer to the heap allocated reference counter of the sqlite3_stmt
                                      //!< (to share it with Column objects)
     };
 

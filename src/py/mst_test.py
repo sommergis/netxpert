@@ -39,7 +39,7 @@ def read_config(path_to_cnfg):
     cnfg.CostColumnName = config_json["CostColumnName"].encode('ascii', 'ignore')
     cnfg.CapColumnName = config_json["CapColumnName"].encode('ascii', 'ignore')
     cnfg.OnewayColumnName = config_json["OnewayColumnName"].encode('ascii', 'ignore')
-    cnfg.IsDirected = config_json["IsDirected"]
+    cnfg.IsDirected = True #config_json["IsDirected"]
     cnfg.LogLevel = config_json["LogLevel"]
     cnfg.LogFileFullPath = config_json["LogFileFullPath"].encode('ascii', 'ignore')
     cnfg.SpatiaLiteHome = config_json["SpatiaLiteHome"].encode('ascii', 'ignore')
@@ -51,7 +51,7 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
-    cnfg.LogLevel = -1
+    cnfg.LogLevel = 5
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -71,12 +71,12 @@ def test_mst(cnfg, cmap):
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
     solver = netx.MinimumSpanningTree(cnfg)
     solver.Solve(net)
 
     optimum = solver.GetOptimum()
+    #print len(solver.GetMinimumSpanningTree())
     del net, solver
 
     return optimum
@@ -90,7 +90,6 @@ def test_mst_load_nodes(cnfg, cmap):
     nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname, cnfg.NodesGeomColumnName, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
     solver = netx.MinimumSpanningTree(cnfg)
 
@@ -104,13 +103,15 @@ def test_mst_load_nodes(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_Big.json"
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MSTCnfg_small.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_Big.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    cnfg.SpatiaLiteHome = r'/usr/local/lib'
-    cnfg.SpatiaLiteCoreName = './mod_spatialite'
+    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+    cnfg.SpatiaLiteCoreName = './libspatialite'
+
+    print cnfg.SpatiaLiteHome
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)

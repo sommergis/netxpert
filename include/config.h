@@ -1,6 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <stdint.h>
 #include <string>
 #include <stdexcept>
 #include <cereal/cereal.hpp>
@@ -11,9 +12,8 @@
 
 namespace netxpert {
 
-    static const std::string Version()
-    {
-        return "0.9.4";
+    static const std::string Version() {
+        return "0.9.8";
     };
 
     namespace cnfg {
@@ -37,8 +37,7 @@ namespace netxpert {
     /**
     * \Enum Geometry Handling.
     **/
-    enum GEOMETRY_HANDLING
-    {
+    enum GEOMETRY_HANDLING : int16_t {
         NoGeometry = 0,
         StraightLines = 1,
         RealGeometry = 2
@@ -47,8 +46,7 @@ namespace netxpert {
     /**
     * \Enum TestCases, that can be started per entry "TestCase" in Config file.
     **/
-    enum TESTCASE
-    {
+    enum TESTCASE : int16_t {
         TestNetworkBuilder = 0,
         ShortestPathTreeCOM = 1,
         ODMatrixCOM = 2,
@@ -69,8 +67,7 @@ namespace netxpert {
     /**
     * \Enum Type of the output DB in which the solver result is been written.
     **/
-    enum RESULT_DB_TYPE
-    {
+    enum RESULT_DB_TYPE : int16_t {
         SpatiaLiteDB = 0,
         ESRI_FileGDB = 1
     };
@@ -78,7 +75,7 @@ namespace netxpert {
     /**
     * \Enum Type of the Log Level.
     **/
-    enum LOG_LEVEL {
+    enum LOG_LEVEL : int16_t {
        LogAll = -1,
        LogDebug = 0,
        LogInfo = 1,
@@ -90,31 +87,26 @@ namespace netxpert {
     /**
     * \Enum Type of the Shortest Path Tree algorithms.
     **/
-    enum SPTAlgorithm {
-
-        Dijkstra_MCFClass = 0, //Buggy
-        LQueue_MCFClass = 1,
-        LDeque_MCFClass = 2,
-        Dijkstra_Heap_MCFClass = 3,
+    enum SPTAlgorithm : int16_t {
         Dijkstra_2Heap_LEMON = 4,
         Bijkstra_2Heap_LEMON = 5,   //EXPERIMENTAL
         Dijkstra_dheap_BOOST = 6,   //EXPERIMENTAL
         ODM_LEM_2Heap = 7           //EXPERIMENTAL
-    } ;
+    };
     /**
     * \Enum Type of the Minimum Cost Flow algorithms.
     **/
-    enum MCFAlgorithm {
-        NetworkSimplex_MCF = 0,
+    enum MCFAlgorithm : int16_t {
         NetworkSimplex_LEMON = 1
-        } ;
+    };
     /**
     * \Enum Type of the Minimum Spanning Tree algorithms.
     **/
-    enum MSTAlgorithm {
+    enum MSTAlgorithm : int16_t {
         //Kruskal_QuickGraph = 0, //.NET!
         //Prim_QuickGraph = 1,    //.NET!
-        Kruskal_LEMON = 2};
+        Kruskal_LEMON = 2
+    };
 
     /**
     * \Class Storage for the configuration of NetXpert
