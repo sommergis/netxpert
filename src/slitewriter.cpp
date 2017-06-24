@@ -431,8 +431,8 @@ std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const 
 }
 
 //NetworkBuilder
-void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
-                                       const unsigned int toNode, const double cost,
+void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const uint32_t fromNode,
+                                       const uint32_t toNode, const double cost,
                                        const double capacity, const std::string& oneway,
                                        const geos::geom::Geometry& arc,
                                        const std::string& _tableName,

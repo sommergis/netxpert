@@ -13,6 +13,7 @@ netxpert::simple::MinCostFlow::MinCostFlow(std::string jsonCnfg)
 int netxpert::simple::MinCostFlow::Solve()
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -53,7 +54,7 @@ int netxpert::simple::MinCostFlow::Solve()
 
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+//		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
@@ -77,10 +78,10 @@ int netxpert::simple::MinCostFlow::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");

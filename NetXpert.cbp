@@ -15,8 +15,8 @@
 				<Compiler>
 					<Add option="-march=corei7-avx" />
 					<Add option="-Wall" />
-					<Add option="-std=c++11" />
-					<Add option="-pg" />
+					<Add option="-std=c++14" />
+					<Add option="-m64" />
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="include" />
@@ -25,7 +25,7 @@
 					<Add directory="include/simple" />
 				</Compiler>
 				<Linker>
-					<Add option="-pg" />
+					<Add option="-m64" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -37,85 +37,77 @@
 				<Compiler>
 					<Add option="-march=corei7-avx" />
 					<Add option="-fexpensive-optimizations" />
-					<Add option="-O3" />
+					<Add option="-O2" />
 					<Add option="-Wall" />
-					<Add option="-std=c++11" />
+					<Add option="-std=c++14" />
+					<Add option="-m64" />
 					<Add directory="include" />
 					<Add directory="include/core" />
 					<Add directory="include/solver" />
 					<Add directory="include/simple" />
 				</Compiler>
+				<Linker>
+					<Add option="-m64" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
+			<Add option="-std=c++14" />
 			<Add option="-m64" />
 			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
-			<Add option="-fopenmp" />
 			<Add option="-DSQLITE_ENABLE_RTREE=1" />
 			<Add option="-DSQLITECPP_ENABLE_ASSERT_HANDLER" />
 			<Add directory="libs" />
 			<Add directory="/usr/include/python2.7" />
 			<Add directory="include" />
 			<Add directory="libs/lemon-1.3.1" />
-			<Add directory="libs/lemon-1.3.1/contrib/lemon-astar/src" />
 			<Add directory="libs/geos-3.4.2/include" />
 			<Add directory="libs/geos-3.4.2/include/geos" />
-			<Add directory="/usr/local/include" />
-			<Add directory="/usr/local/boost_1_57_0" />
+			<Add directory="../1_libs/FileGDB_API-64gcc51/include" />
+			<Add directory="/home/hahne/dev/lemon-contrib/lemon-astar/src" />
 		</Compiler>
 		<Linker>
 			<Add option="-m64" />
-			<Add option="-pthread  -fopenmp -ldl -lpython2.7 -lgeos -lFileGDBAPI -lfgdbunixrtl -Wl,-rpath=/usr/local/lib" />
-			<Add directory="libs/FileGDB_API/lib" />
+			<Add option="-fopenmp" />
+			<Add library="pthread" />
+			<Add library="dl" />
+			<Add library="python2.7" />
+			<Add library="FileGDBAPI" />
+			<Add library="geos" />
 			<Add directory="libs/SQLiteCpp" />
-			<Add directory="/usr/local/lib" />
-			<Add directory="/usr/lib" />
+			<Add directory="../1_libs/FileGDB_API-64gcc51/lib" />
 		</Linker>
 		<Unit filename="include/config.h" />
-		<Unit filename="include/core/MCFClass.h" />
-		<Unit filename="include/core/MCFSimplex.h" />
-		<Unit filename="include/core/OPTUtils.h" />
-		<Unit filename="include/core/SPTree_Dijkstra.h" />
-		<Unit filename="include/core/SPTree_Heap.h" />
-		<Unit filename="include/core/SPTree_LDeque.h" />
-		<Unit filename="include/core/SPTree_LQueue.h" />
-		<Unit filename="include/core/bijkstra.h" />
-		<Unit filename="include/core/imcflow.h" />
 		<Unit filename="include/core/imstree.h" />
 		<Unit filename="include/core/isptree.h" />
 		<Unit filename="include/core/mstlem.h" />
-		<Unit filename="include/core/netsimplexlem.h" />
-		<Unit filename="include/core/odmlem.h" />
-		<Unit filename="include/core/sptbgl.h" />
 		<Unit filename="include/core/sptlem.h" />
-		<Unit filename="include/core/sptlem_bijkstra.h" />
 		<Unit filename="include/data.h" />
 		<Unit filename="include/dbhelper.h" />
 		<Unit filename="include/dbwriter.h" />
 		<Unit filename="include/fgdbwriter.h" />
+		<Unit filename="include/lemon-net.h" />
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
-		<Unit filename="include/simple/isolines_simple.h" />
-		<Unit filename="include/simple/mcfp_simple.h" />
-		<Unit filename="include/simple/mstree_simple.h" />
-		<Unit filename="include/simple/netbuilder_simple.h" />
 		<Unit filename="include/simple/odmatrix_simple.h" />
 		<Unit filename="include/simple/sptree_simple.h" />
-		<Unit filename="include/simple/transp_simple.h" />
 		<Unit filename="include/slitewriter.h" />
-		<Unit filename="include/solver/isolines.h" />
 		<Unit filename="include/solver/isolver.h" />
-		<Unit filename="include/solver/mcflow.h" />
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />
-		<Unit filename="include/solver/odmatrix2.h" />
 		<Unit filename="include/solver/sptree.h" />
-		<Unit filename="include/solver/transportation.h" />
 		<Unit filename="include/test.h" />
 		<Unit filename="include/utils.h" />
+		<Unit filename="libs/FileGDB_API/include/FileGDBAPI.h" />
+		<Unit filename="libs/FileGDB_API/include/FileGDBCore.h" />
+		<Unit filename="libs/FileGDB_API/include/Geodatabase.h" />
+		<Unit filename="libs/FileGDB_API/include/GeodatabaseManagement.h" />
+		<Unit filename="libs/FileGDB_API/include/Raster.h" />
+		<Unit filename="libs/FileGDB_API/include/Row.h" />
+		<Unit filename="libs/FileGDB_API/include/Table.h" />
+		<Unit filename="libs/FileGDB_API/include/Util.h" />
 		<Unit filename="libs/SQLiteCpp/Assertion.h" />
 		<Unit filename="libs/SQLiteCpp/Backup.cpp" />
 		<Unit filename="libs/SQLiteCpp/Backup.h" />
@@ -134,41 +126,76 @@
 		</Unit>
 		<Unit filename="libs/sqlite3.h" />
 		<Unit filename="src/config.cpp" />
-		<Unit filename="src/core/MCFSimplex.cpp" />
-		<Unit filename="src/core/SPTree_Dijkstra.cpp" />
-		<Unit filename="src/core/SPTree_Heap.cpp" />
-		<Unit filename="src/core/SPTree_LDeque.cpp" />
-		<Unit filename="src/core/SPTree_LQueue.cpp" />
 		<Unit filename="src/core/mstlem.cpp" />
-		<Unit filename="src/core/netsimplexlem.cpp" />
-		<Unit filename="src/core/odmlem.cpp" />
-		<Unit filename="src/core/sptbgl.cpp" />
+		<Unit filename="src/core/netsimplexlem.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/core/sptbgl.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/core/sptlem.cpp" />
-		<Unit filename="src/core/sptlem_bijkstra.cpp" />
 		<Unit filename="src/dbhelper.cpp" />
 		<Unit filename="src/fgdbwriter.cpp" />
+		<Unit filename="src/lemon-net.cpp" />
 		<Unit filename="src/logger.cpp" />
-		<Unit filename="src/main.cpp" />
-		<Unit filename="src/network.cpp" />
+		<Unit filename="src/main.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/network.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/networkbuilder.cpp" />
-		<Unit filename="src/py/network.i">
+		<Unit filename="src/py/mcf_test.py" />
+		<Unit filename="src/py/mst_test.py" />
+		<Unit filename="src/py/network_test.py" />
+		<Unit filename="src/py/odm_test.py" />
+		<Unit filename="src/py/pynetxpert.i">
 			<Option compile="1" />
 		</Unit>
-		<Unit filename="src/simple/isolines_simple.cpp" />
-		<Unit filename="src/simple/mcfp_simple.cpp" />
-		<Unit filename="src/simple/mstree_simple.cpp" />
-		<Unit filename="src/simple/netbuilder_simple.cpp" />
+		<Unit filename="src/py/spt_test.py" />
+		<Unit filename="src/py/transp_test.py" />
+		<Unit filename="src/simple/isolines_simple.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/simple/mcfp_simple.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/simple/mstree_simple.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/simple/netbuilder_simple.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/simple/odmatrix_simple.cpp" />
 		<Unit filename="src/simple/sptree_simple.cpp" />
-		<Unit filename="src/simple/transp_simple.cpp" />
+		<Unit filename="src/simple/transp_simple.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/slitewriter.cpp" />
-		<Unit filename="src/solver/isolines.cpp" />
-		<Unit filename="src/solver/mcflow.cpp" />
+		<Unit filename="src/solver/isolines.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src/solver/mcflow.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/solver/mstree.cpp" />
 		<Unit filename="src/solver/odmatrix.cpp" />
-		<Unit filename="src/solver/odmatrix2.cpp" />
 		<Unit filename="src/solver/sptree.cpp" />
-		<Unit filename="src/solver/transportation.cpp" />
+		<Unit filename="src/solver/transportation.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
 		<Unit filename="src/test.cpp" />
 		<Unit filename="src/utils.cpp" />
 		<Extensions>

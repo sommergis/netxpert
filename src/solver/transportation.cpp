@@ -92,7 +92,7 @@ void Transportation::SaveResults(const std::string& resultTableName, const Colum
 						ODPair key = kv.first;
 						DistributionArc value = kv.second;
 						CompressedPath path = value.path;
-						std::vector<unsigned int> ends = path.first;
+						std::vector<uint32_t> ends = path.first;
 						std::vector<InternalArc> route;
 						std::unordered_set<std::string> arcIDlist;
 
@@ -202,20 +202,20 @@ void Transportation::SaveResults(const std::string& resultTableName, const Colum
     }
 }
 
-vector<unsigned int> Transportation::GetOrigins() const
+vector<uint32_t> Transportation::GetOrigins() const
 {
     return this->originNodes;
 }
-void Transportation::SetOrigins(vector<unsigned int> origs)
+void Transportation::SetOrigins(vector<uint32_t> origs)
 {
     this->originNodes = origs;
 }
 
-vector<unsigned int> Transportation::GetDestinations() const
+vector<uint32_t> Transportation::GetDestinations() const
 {
     return this->destinationNodes;
 }
-void Transportation::SetDestinations(vector<unsigned int> dests)
+void Transportation::SetDestinations(vector<uint32_t> dests)
 {
     this->destinationNodes = dests;
 }
@@ -231,7 +231,7 @@ std::unordered_map<ODPair, DistributionArc> Transportation::GetDistribution() co
 std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
 {
     vector<ExtDistributionArc> distArcs;
-    unsigned int counter = 0;
+    uint32_t counter = 0;
     for (auto& dist : distribution)
     {
         counter += 1;
@@ -241,7 +241,7 @@ std::vector<ExtDistributionArc> Transportation::GetExtDistribution() const
         ODPair key = dist.first;
         DistributionArc val = dist.second;
         CompressedPath path = val.path;
-        vector<unsigned int> ends = val.path.first;
+        vector<uint32_t> ends = val.path.first;
 
         // only one arc
         unordered_set<string> arcIDs = net->GetOriginalArcIDs(vector<InternalArc>
@@ -380,7 +380,7 @@ void Transportation::Solve()
     for (auto& fc : flowCost)
     {
         // Here the original node id can be an arbitrary string, because it was set externally
-        // so we cannot translate back to unsigned ints as in Solve(net)
+        // so we cannot translate back to uint_fast32_ts as in Solve(net)
         string oldStartNodeStr;
         string oldEndNodeStr;
         try
@@ -401,7 +401,7 @@ void Transportation::Solve()
                 auto data = getFlowCostData(flowCost, resultKey);
 
                 // there is no path, because we do not have the values from the OD solver
-                DistributionArc resultVal { CompressedPath { make_pair(vector<unsigned int> {}, data.second) }, data.first };
+                DistributionArc resultVal { CompressedPath { make_pair(vector<uint32_t> {}, data.second) }, data.first };
 
                 this->distribution.insert(make_pair(resultKey, resultVal));
             }
@@ -589,7 +589,7 @@ const Network Transportation::GetNetwork()
     return *this->net;
 }
 
-vector<InternalArc> Transportation::UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const
+vector<InternalArc> Transportation::UncompressRoute(uint32_t orig, vector<uint32_t>& ends) const
 {
     vector<InternalArc> startsNends;
     for (int i = 0; i < ends.size(); i++)

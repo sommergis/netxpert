@@ -52,7 +52,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = 1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -72,7 +72,6 @@ def test_odm_add_nodes(cnfg, cmap):
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
     solver = netx.OriginDestinationMatrix(cnfg)
 
@@ -80,6 +79,7 @@ def test_odm_add_nodes(cnfg, cmap):
     x = 703444
     y = 5364720
     supply = 0
+
     withCap = False
     startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Treshold,
                                     cmap, withCap))
@@ -100,14 +100,14 @@ def test_odm_add_nodes(cnfg, cmap):
     destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
                                     cmap, withCap))
 
-    starts = netx.ODNodes()
+    starts = netx.Nodes()
     for s in startIDs:
-        starts.append((s, str(s)))
+        starts.append(s)
     solver.SetOrigins(starts)
-    dests = netx.ODNodes()
+    dests = netx.Nodes()
 
     for d in destIDs:
-        dests.append((d, str(d)))
+        dests.append(d)
 
     solver.SetDestinations(dests)
 
@@ -128,20 +128,20 @@ def test_odm_load_nodes(cnfg, cmap):
     withCapacity = False
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
+    #type is ODNodes
     startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
     endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     solver = netx.OriginDestinationMatrix(cnfg)
 
-    starts = netx.ODNodes()
+    starts = netx.Nodes()
     for s in startNodes:
-        starts.append(s)
+        starts.append(s[0]) #first item of tuple is the new internal id
 
-    dests = netx.ODNodes()
+    dests = netx.Nodes()
     for d in endNodes:
-        dests.append(d)
+        dests.append(d[0]) #first item of tuple is the new internal id
 
     solver.SetOrigins(starts)
     solver.SetDestinations(dests)
@@ -156,13 +156,15 @@ def test_odm_load_nodes(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json"
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    cnfg.SpatiaLiteHome = r'/usr/local/lib'
-    cnfg.SpatiaLiteCoreName = './mod_spatialite'
+    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+    cnfg.SpatiaLiteCoreName = './libspatialite'
+
+    print cnfg.SpatiaLiteHome
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -181,17 +183,17 @@ if __name__ == "__main__":
                      "n-n | load nodes"
                     ]
 
-    active_tests = active_tests
+    active_tests = active_tests[:2]
 
     if "2-2 | add nodes" in active_tests:
-        for i in range(1, 7):
-            cnfg.SptAlgorithm = i
-            print(("Testing ODM (add nodes) with Algorithm {0}..".format(alg_dict[i])))
+        #for i in range(4, 6):
+            cnfg.SptAlgorithm = 4 # always regular dijkstra
+            print(("Testing ODM (add nodes) with Algorithm {0}..".format(alg_dict[cnfg.SptAlgorithm])))
             starttime = datetime.datetime.now()
             result = test_odm_add_nodes(cnfg, cmap)
             stoptime = datetime.datetime.now()
             print(("Duration: {0}".format(stoptime - starttime)))
-            #print(result)
+            print(result)
             if "Big" in path_to_cnfg:
                 if str(result) != str(69.7588758141):
                     print("test failed!")
@@ -204,14 +206,14 @@ if __name__ == "__main__":
                     print("test succeeded.")
 
     if "n-n | load nodes" in active_tests:
-        for i in range(1, 7):
-            cnfg.SptAlgorithm = i
-            print(("Testing ODM (load nodes) with Algorithm {0}..".format(alg_dict[i])))
+        #for i in range(4, 6):
+            cnfg.SptAlgorithm = 4 # always regular dijkstra
+            print(("Testing ODM (load nodes) with Algorithm {0}..".format(alg_dict[cnfg.SptAlgorithm])))
             starttime = datetime.datetime.now()
             result = test_odm_load_nodes(cnfg, cmap)
             stoptime = datetime.datetime.now()
             print(("Duration: {0}".format(stoptime - starttime)))
-            #print(result)
+            print(result)
             if "Big" in path_to_cnfg:
                 if str(result) != str(15156313.8398):
                     print("test failed!")

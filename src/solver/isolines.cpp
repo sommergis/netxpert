@@ -28,8 +28,8 @@ void Isolines::Solve(Network& net)
 {
     this->net = &net;
 
-    unsigned int arcCount = net.GetCurrentArcCount();
-    unsigned int nodeCount = net.GetCurrentNodeCount();
+    uint32_t arcCount = net.GetCurrentArcCount();
+    uint32_t nodeCount = net.GetCurrentNodeCount();
 
     if (this->originNodes.size() == 0)
     {
@@ -41,7 +41,7 @@ void Isolines::Solve(Network& net)
         //set the size for the heap to m/n (arcs/nodes) if -1
         checkSPTHeapCard(arcCount, nodeCount);
         //pass the vector with the internal originNodes only
-        std::vector<unsigned int> nodes;
+        std::vector<uint32_t> nodes;
         for (auto kv : this->originNodes)
         {
             nodes.push_back(kv.first);
@@ -115,7 +115,7 @@ void Isolines::SaveResults(const std::string& resultTableName,
                 auto kv = *it;
                 ODPair key = kv.first;
                 CompressedPath value = kv.second;
-                std::vector<unsigned int> ends = value.first;
+                std::vector<uint32_t> ends = value.first;
                 std::vector<InternalArc> route;
                 std::unordered_set<std::string> arcIDlist;
 
@@ -162,7 +162,7 @@ void Isolines::SaveResults(const std::string& resultTableName,
             string arcIDs = "";
             ODPair key = kv.first;
             CompressedPath value = kv.second;
-            vector<unsigned int> ends = value.first;
+            vector<uint32_t> ends = value.first;
             //TODO: costPerPath relative to geom length
             double costPerPath = value.second;
             vector<InternalArc> route;
@@ -211,7 +211,7 @@ void Isolines::SaveResults(const std::string& resultTableName,
 
 
 
-void Isolines::checkSPTHeapCard(unsigned int arcCount, unsigned int nodeCount)
+void Isolines::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount)
 {
     if (sptHeapCard == -1)
     {
@@ -230,21 +230,21 @@ void Isolines::checkSPTHeapCard(unsigned int arcCount, unsigned int nodeCount)
 /**
 * n - all
 */
-void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDirected)
+void Isolines::solve (Network& net, std::vector<uint32_t> origs, bool isDirected)
 {
     //vector<long> ign = { 0, -1, (long)4294967295, (long)4261281277 };
     // 0 is a valid ignore value for linux!
     //TODO check in windows
     vector<long> ign  { -1, (long)4294967295, (long)4261281277 };
 
-    unsigned int nmax;
-    unsigned int anz;
-    /*vector<unsigned int> a_pre;
-    vector<unsigned int> pre;
-    vector<unsigned int> nodes;*/
+    uint32_t nmax;
+    uint32_t anz;
+    /*vector<uint32_t> a_pre;
+    vector<uint32_t> pre;
+    vector<uint32_t> nodes;*/
 
-    vector<unsigned int> sNds;
-    vector<unsigned int> eNds;
+    vector<uint32_t> sNds;
+    vector<uint32_t> eNds;
     vector<double> supply;
     vector<double> costs;
     vector<double> caps;
@@ -275,24 +275,8 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
     shared_ptr<ISPTree> lspt;
     switch (algorithm)
     {
-        case SPTAlgorithm::Dijkstra_MCFClass:
-            lspt = shared_ptr<ISPTree>(new SPTree_Dijkstra(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                        isDirected));
-            break;
-        case SPTAlgorithm::LQueue_MCFClass:
-            lspt = shared_ptr<ISPTree>(new SPTree_LQueue(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                        isDirected));
-            break;
-        case SPTAlgorithm::LDeque_MCFClass:
-            lspt = shared_ptr<ISPTree>(new SPTree_LDeque(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                        isDirected));
-            break;
-        case SPTAlgorithm::Dijkstra_Heap_MCFClass:
-            lspt = shared_ptr<ISPTree>(new SPTree_Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
-                                        isDirected, sptHeapCard));
-            break;
         case SPTAlgorithm::Dijkstra_2Heap_LEMON:
-            lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+            lspt = shared_ptr<ISPTree>(new SPT_LEM(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
             break;
         case SPTAlgorithm::Bijkstra_2Heap_LEMON:
@@ -300,33 +284,33 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
                                     isDirected));
             break;
         default:
-            lspt = shared_ptr<ISPTree>(new SPT_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+            lspt = shared_ptr<ISPTree>(new SPT_LEM(net.GetMaxNodeCount(), net.GetMaxArcCount(),
                                         isDirected));
             break;
     }
 
-    lspt->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
-                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
+    lspt->LoadNet( static_cast<uint32_t>( net.GetMaxNodeCount() ), static_cast<uint32_t>( net.GetMaxArcCount()),
+                        static_cast<uint32_t>( net.GetMaxNodeCount() ),static_cast<uint32_t>( net.GetMaxArcCount() ),
                         caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
 
     nmax = lspt->MCFnmax();
     anz = lspt->MCFnmax();
 
-    //vector<unsigned int> a_pre;
-    vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    //vector<uint32_t> a_pre;
+    vector<uint32_t> pre;
+    vector<uint32_t> nodes;
 
     //a_pre.reserve(anz + 1);
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
 
-    vector<unsigned int>::iterator origIt;
+    vector<uint32_t>::iterator origIt;
 
     for (origIt = origs.begin(); origIt!=origs.end(); origIt++)
     {
         #pragma omp single nowait
         {
-        unsigned int orig = *origIt;
+        uint32_t orig = *origIt;
 
         lspt->SetOrigin(orig);
 
@@ -345,7 +329,7 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
 
         //LOGGER::LogDebug("before arcs preprocessing");
 
-        unordered_map<unsigned int,unsigned int> arcs;
+        unordered_map<uint32_t,uint32_t> arcs;
         int i;
         arcs.reserve(lspt->MCFmmax());
         //omp: local arcs --> no concurrent writes per thread
@@ -358,13 +342,13 @@ void Isolines::solve (Network& net, std::vector<unsigned int> origs, bool isDire
 
         //Compute nodes vector
         for (int i = 1; i < anz + 1; i++) {
-            nodes.push_back( (unsigned int)i );
+            nodes.push_back( (uint32_t)i );
             //std::cout << i << std::endl;
         }
 
 
-        vector<unsigned int> route;
-        vector<unsigned int>::iterator nodesIt;
+        vector<uint32_t> route;
+        vector<uint32_t>::iterator nodesIt;
         for (nodesIt = nodes.begin(); nodesIt != nodes.end(); nodesIt++)
         {
             auto dest = *nodesIt;
@@ -400,7 +384,7 @@ double Isolines::GetOptimum() const {
 }
 
 
-vector<InternalArc> Isolines::UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const
+vector<InternalArc> Isolines::UncompressRoute(uint32_t orig, vector<uint32_t>& ends) const
 {
     vector<InternalArc> startsNends;
     for (int i = 0; i < ends.size(); i++)
@@ -413,8 +397,8 @@ vector<InternalArc> Isolines::UncompressRoute(unsigned int orig, vector<unsigned
     return startsNends;
 }
 
-void Isolines::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-            vector<unsigned int>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
+void Isolines::convertInternalNetworkToSolverData(Network& net, vector<uint32_t>& sNds,
+            vector<uint32_t>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
 {
     // Die Größe der Arrays müssen passen (ob 0 drin steht ist egal, sonst gibts später bei Dispose
     // das böse Erwachen in Form eines Heap Corruption errors bzw. einer System Access Violation
@@ -452,12 +436,12 @@ void Isolines::convertInternalNetworkToSolverData(Network& net, vector<unsigned 
 }
 
 
-bool Isolines::validateNetworkData(Network& net, vector<unsigned int>& origs)
+bool Isolines::validateNetworkData(Network& net, vector<uint32_t>& origs)
 {
     bool valid = false;
 
     //IMPORTANT Checks
-    for (unsigned int orig : origs)
+    for (uint32_t orig : origs)
     {
         if (orig == 0){
             LOGGER::LogFatal("Origin Node ID must be greater than zero!");
@@ -475,12 +459,12 @@ bool Isolines::validateNetworkData(Network& net, vector<unsigned int>& origs)
     return valid;
 }
 
-double Isolines::buildCompressedRoute(vector<unsigned int>& route, unsigned int orig, unsigned int dest,
-                                                unordered_map<unsigned int, unsigned int>& arcPredescessors)
+double Isolines::buildCompressedRoute(vector<uint32_t>& route, uint32_t orig, uint32_t dest,
+                                                unordered_map<uint32_t, uint32_t>& arcPredescessors)
 {
     double totalCost = 0;
     //Neu - nur die Enden hinzufuegen
-    unsigned int curr = dest;
+    uint32_t curr = dest;
     /* //cout << "orig " << orig << endl;
     //TODO: implement break if cutoff is reached
     //funktioniert nicht, weil der Pfad von dest zu orig aufgelöst wird
@@ -624,12 +608,12 @@ void Isolines::SetSPTHeapCard(int heapCard)
     this->sptHeapCard = heapCard;
 }
 
-std::vector< std::pair<unsigned int,std::string> > Isolines::GetOrigins() const
+std::vector< std::pair<uint32_t,std::string> > Isolines::GetOrigins() const
 {
     return this->originNodes;
 }
 
-void Isolines::SetOrigins(std::vector< std::pair<unsigned int,std::string> >& origs)
+void Isolines::SetOrigins(std::vector< std::pair<uint32_t,std::string> >& origs)
 {
     this->originNodes = origs;
 }

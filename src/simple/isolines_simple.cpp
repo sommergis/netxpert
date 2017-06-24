@@ -17,7 +17,7 @@ double netxpert::simple::Isolines::GetOptimum()
 
 std::string netxpert::simple::Isolines::GetShortestPathsAsJSON()
 {
-    string result;
+    std::string result;
     /*if (this->solver)
         result = this->solver->GetShortestPathsAsJSON();*/
     return result;
@@ -33,6 +33,7 @@ std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::Isolines::GetShortes
 int netxpert::simple::Isolines::Solve()
 {
      //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -80,7 +81,7 @@ int netxpert::simple::Isolines::Solve()
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+//		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         //2. Load Network
         DBHELPER::OpenNewTransaction();
@@ -96,7 +97,7 @@ int netxpert::simple::Isolines::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
@@ -107,18 +108,18 @@ int netxpert::simple::Isolines::Solve()
         auto& spt = *solver;
 
         //for start in starts
-        vector<unsigned int> origs = {}; //newStartNodeID, newStartNodeID2};
+        vector<uint32_t> origs = {}; //newStartNodeID, newStartNodeID2};
         for (auto s : startNodes)
             origs.push_back(s.first);
 
-        vector<unsigned int>::const_iterator it;
+        vector<uint32_t>::const_iterator it;
         this->optimum = 0;
 
         for (it = origs.begin(); it != origs.end(); it++)
         {
             auto start = *it;
             spt.SetOrigin(start);
-            vector<unsigned int> dests = {}; //null -> all dests
+            vector<uint32_t> dests = {}; //null -> all dests
 
             spt.SetDestinations( dests );
             spt.Solve(net);

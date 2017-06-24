@@ -2,6 +2,10 @@
 #define ISPTREE_H
 
 #include <memory>
+#include <vector>
+#include "lemon/concepts/path.h"
+#include "lemon/adaptors.h"
+#include "lemon-net.h"
 
 namespace netxpert {
     namespace core {
@@ -11,27 +15,25 @@ namespace netxpert {
     class ISPTree
     {
         public:
-            typedef std::shared_ptr<netxpert::core::ISPTree> ISPTreePtr;
-            virtual ISPTreePtr create () const = 0; // Virtual constructor (creation)
-            virtual ISPTreePtr clone () const = 0;  // Virtual constructor (for copying)
             /** Default destructor */
             virtual ~ISPTree() {}
-            /* start of MCFClass SPTree Interface */
-            virtual void LoadNet(unsigned int nmx, unsigned int mmx, unsigned int pn, unsigned int pm, double* pU,
-                            double* pC, double* pDfct, unsigned int* pSn, unsigned int* pEn)=0;
-            virtual unsigned int MCFmmax()=0;
-            virtual unsigned int MCFnmax()=0;
-            virtual void ShortestPathTree()=0;
-            virtual void SetOrigin( unsigned int NewOrg )=0;
-            virtual void SetDest( unsigned int NewDst )=0;
-            virtual bool Reached( unsigned int NodeID )=0;
-            //virtual unsigned int* ArcPredecessors( void )=0;
-            virtual unsigned int* Predecessors( void )=0;
-            //virtual void GetArcPredecessors ( unsigned int *outArcPrd )=0;
-            virtual void GetPredecessors( unsigned int *outPrd )=0;
 
-            //virtual void GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn );
-            /* end of MCFClass SPTree Interface */
+            /* LEMON friendly interface */
+            virtual void LoadNet(const uint32_t nmax,  const uint32_t mmax,
+                                    lemon::FilterArcs<netxpert::data::graph_t,
+                                              netxpert::data::graph_t::ArcMap<bool>>* sg,
+                      netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm)=0;
+            virtual const uint32_t GetArcCount()=0;
+            virtual const uint32_t GetNodeCount()=0;
+            virtual void SolveSPT(netxpert::data::cost_t treshold = -1, bool bidirectional = false )=0;
+            virtual void SetOrigin( netxpert::data::node_t NewOrg )=0;
+            virtual void SetDest( netxpert::data::node_t NewDst )=0;
+            virtual bool Reached( netxpert::data::node_t NodeID )=0;
+            virtual const std::vector<netxpert::data::node_t> GetPredecessors(netxpert::data::node_t _dest)=0;
+            virtual const std::vector<netxpert::data::arc_t> GetPath(netxpert::data::node_t _dest)=0;
+            virtual const netxpert::data::cost_t GetDist(netxpert::data::node_t _dest)=0;
+            /* end of LEMON friendly interface */
+
     };
 } //namespace core
 } //namespace netxpert

@@ -322,7 +322,7 @@ Statement::Ptr::Ptr(sqlite3* apSQLite, std::string& aQuery) :
     // Initialize the reference counter of the sqlite3_stmt :
     // used to share the mStmtPtr between Statement and Column objects;
     // This is needed to enable Column objects to live longer than the Statement objet it refers to.
-    mpRefCount = new unsigned int(1);  // NOLINT(readability/casting)
+    mpRefCount = new uint32_t(1);  // NOLINT(readability/casting)
 }
 
 /**

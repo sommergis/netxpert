@@ -14,9 +14,9 @@ namespace netxpert {
     {
         public:
             ShortestPathTree(std::string jsonCnfg);
-            virtual ~ShortestPathTree() {}
+            ~ShortestPathTree() {}
             int Solve();
-            double GetOptimum();
+            const double GetOptimum() const;
             std::string GetShortestPathsAsJSON();
             std::vector<netxpert::data::ExtSPTreeArc> GetShortestPaths();
         private:

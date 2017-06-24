@@ -13,6 +13,7 @@ netxpert::simple::ShortestPathTree::ShortestPathTree(std::string jsonCnfg)
 int netxpert::simple::ShortestPathTree::Solve()
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -60,7 +61,7 @@ int netxpert::simple::ShortestPathTree::Solve()
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+//      LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         //2. Load Network
         DBHELPER::OpenNewTransaction();
@@ -69,21 +70,25 @@ int netxpert::simple::ShortestPathTree::Solve()
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
 
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg, netxpert::data::InputNodes{}, autoCleanNetwork);
         LOGGER::LogInfo("Done!");
 
+//        net.PrintGraph();
+
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
-        vector<pair<unsigned int, string>> endNodes;
+//        net.PrintGraph();
+
+        vector<pair<uint32_t, string>> endNodes;
         if (!cnfg.SPTAllDests) {
             LOGGER::LogInfo("Loading End nodes..");
             endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         }
+//        net.PrintGraph();
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
@@ -92,13 +97,13 @@ int netxpert::simple::ShortestPathTree::Solve()
         this->solver = unique_ptr<netxpert::ShortestPathTree> (new netxpert::ShortestPathTree(cnfg));
         auto& spt = *solver;
 
-        spt.SetOrigin(startNodes.at(0).first); //spt has only 1 start!
-        vector<unsigned int> dests = {};// newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        spt.SetOrigin(net.GetNodeFromID(startNodes.at(0).first)); //spt has only 1 start!
+        vector<netxpert::data::node_t> dests = {};// newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
 
         if (!cnfg.SPTAllDests)
         {
             for (auto d : endNodes)
-                dests.push_back(d.first);
+                dests.push_back(net.GetNodeFromID(d.first));
         }
         spt.SetDestinations( dests );
 
@@ -119,8 +124,8 @@ int netxpert::simple::ShortestPathTree::Solve()
     }
 }
 
-double netxpert::simple::ShortestPathTree::GetOptimum()
-{
+const double
+netxpert::simple::ShortestPathTree::GetOptimum() const {
     double result = 0;
     if (this->solver)
         result = this->solver->GetOptimum();
@@ -128,7 +133,7 @@ double netxpert::simple::ShortestPathTree::GetOptimum()
 }
 std::string netxpert::simple::ShortestPathTree::GetShortestPathsAsJSON()
 {
-    string result;
+    std::string result;
     /*if (this->solver)
         result = this->solver->GetShortestPathsAsJSON();*/
     return result;

@@ -5,7 +5,7 @@ using namespace std;
 using namespace lemon;
 using namespace netxpert::core;
 
-SPT_LEM_Bijkstra_2Heap::SPT_LEM_Bijkstra_2Heap(unsigned int nmx, unsigned int mmx , bool Drctd)
+SPT_LEM_Bijkstra_2Heap::SPT_LEM_Bijkstra_2Heap(uint32_t nmx, uint32_t mmx , bool Drctd)
 {
 	//nmax = 0;
 	//mmax = 0;
@@ -24,9 +24,9 @@ void SPT_LEM_Bijkstra_2Heap::ShortestPathTree()
         bijk->run(orig,dest);
 	}
 }
-void SPT_LEM_Bijkstra_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
+void SPT_LEM_Bijkstra_2Heap::LoadNet( uint32_t nmx , uint32_t mmx , uint32_t pn , uint32_t pm ,
 		      double *pU , double *pC , double *pDfct ,
-		      unsigned int *pSn , unsigned int *pEn )
+		      uint32_t *pSn , uint32_t *pEn )
 {
 	nmax = nmx;
 	mmax = mmx;
@@ -40,7 +40,7 @@ void SPT_LEM_Bijkstra_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsi
     //Populate all nodes
     //std::vector<typename SmartDigraph::Node> nodes;
     nodes.resize(nmax);
-    for (unsigned int i = 0; i < nmax; ++i) {
+    for (uint32_t i = 0; i < nmax; ++i) {
       nodes[i] = g.addNode();
     }
 
@@ -52,7 +52,7 @@ void SPT_LEM_Bijkstra_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsi
 
 	if (isDrctd)
     {
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -64,7 +64,7 @@ void SPT_LEM_Bijkstra_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsi
 	}
 	else // both directions
 	{
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -80,13 +80,13 @@ void SPT_LEM_Bijkstra_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsi
     bijk = new BijkstraInternal(g, lengthVal);
 }
 
-void SPT_LEM_Bijkstra_2Heap::SetOrigin( unsigned int NewOrg )
+void SPT_LEM_Bijkstra_2Heap::SetOrigin( uint32_t NewOrg )
 {
     //1. uint to Lemon Node
 	orig = nodes[NewOrg-1];
 }
 
-void SPT_LEM_Bijkstra_2Heap::SetDest( unsigned int NewDst )
+void SPT_LEM_Bijkstra_2Heap::SetDest( uint32_t NewDst )
 {
     //1. uint to Lemon Node
 	if (NewDst != UINT_MAX)
@@ -99,14 +99,14 @@ void SPT_LEM_Bijkstra_2Heap::SetDest( unsigned int NewDst )
 	}
 }
 
-bool SPT_LEM_Bijkstra_2Heap::Reached( unsigned int NodeID )
+bool SPT_LEM_Bijkstra_2Heap::Reached( uint32_t NodeID )
 {
     //1. uint to Lemon Node
 	SmartDigraph::Node node = nodes[NodeID-1];
     return bijk->reached(node);
 }
 
-void SPT_LEM_Bijkstra_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn )
+void SPT_LEM_Bijkstra_2Heap::GetPath ( uint32_t Dst, uint32_t *outSn, uint32_t *outEn )
 {
 	if (!allDests)
 	{
@@ -131,9 +131,9 @@ void SPT_LEM_Bijkstra_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, un
    for the Origin (that has p[ Origin ] == 0), however, it is guaranteed that
    a[ Origin ] == Inf<Index>(). */
 
-unsigned int* SPT_LEM_Bijkstra_2Heap::ArcPredecessors( void )
+uint32_t* SPT_LEM_Bijkstra_2Heap::ArcPredecessors( void )
 {
-	arcPredecessors = new unsigned int [MCFnmax()+1];
+	arcPredecessors = new uint32_t [MCFnmax()+1];
 	arcPredecessors[0] = 0; //first entry of pred has no predecessor
 
     for (int i = 1; i < MCFnmax()+1; i++)
@@ -149,9 +149,9 @@ unsigned int* SPT_LEM_Bijkstra_2Heap::ArcPredecessors( void )
    i == Origin, i does not belong to the connected component of the origin or
    the computation have been stopped before reaching i, then p[ i ] == 0. */
 
-unsigned int* SPT_LEM_Bijkstra_2Heap::Predecessors( void )
+uint32_t* SPT_LEM_Bijkstra_2Heap::Predecessors( void )
 {
-	predecessors = new unsigned int [MCFnmax()+1];
+	predecessors = new uint32_t [MCFnmax()+1];
 	predecessors[0] = 0; //first entry of pred has no predecessor
     for (int i = 1; i < MCFnmax()+1; i++)
     {
@@ -161,28 +161,28 @@ unsigned int* SPT_LEM_Bijkstra_2Heap::Predecessors( void )
 	return predecessors;
 }
 
-void SPT_LEM_Bijkstra_2Heap::GetArcPredecessors( unsigned int *outArcPrd )
+void SPT_LEM_Bijkstra_2Heap::GetArcPredecessors( uint32_t *outArcPrd )
 {
-	unsigned int size = MCFnmax()+1;
+	uint32_t size = MCFnmax()+1;
 	auto arcPredecessors = ArcPredecessors();
-	memcpy(outArcPrd, arcPredecessors, size * sizeof (unsigned int ) );
+	memcpy(outArcPrd, arcPredecessors, size * sizeof (uint32_t ) );
 	delete[] arcPredecessors;
 }
 
-void SPT_LEM_Bijkstra_2Heap::GetPredecessors( unsigned int *outPrd )
+void SPT_LEM_Bijkstra_2Heap::GetPredecessors( uint32_t *outPrd )
 {
-	unsigned int size = MCFnmax()+1;
+	uint32_t size = MCFnmax()+1;
 	auto predecessors = Predecessors();
-	memcpy(outPrd, predecessors, size * sizeof (unsigned int ) );
+	memcpy(outPrd, predecessors, size * sizeof (uint32_t ) );
 	delete[] predecessors;
 }
 
-unsigned int SPT_LEM_Bijkstra_2Heap::MCFnmax( void)
+uint32_t SPT_LEM_Bijkstra_2Heap::MCFnmax( void)
 {
 	return ( nmax );
 }
 
-unsigned int SPT_LEM_Bijkstra_2Heap::MCFmmax( void)
+uint32_t SPT_LEM_Bijkstra_2Heap::MCFmmax( void)
 {
 	return ( mmax );
 }
