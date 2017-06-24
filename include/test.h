@@ -11,22 +11,26 @@
 
 #include "data.h"
 #include "utils.h"
-#include "network.h"
+#include "lemon-net.h"
 #include "dbhelper.h"
-#include "mstree.h"
 #include "sptree.h"
-#include "odmatrix.h"
-#include "odmatrix2.h"
-#include "mcflow.h"
-#include "transportation.h"
-#include "networkbuilder.h"
 
+
+#include "network.h"
+//#include "mstree.h"
+//#include "sptree.h"
+//#include "odmatrix.h"
+//#include "odmatrix2.h"
+//#include "mcflow.h"
+//#include "transportation.h"
+//#include "networkbuilder.h"
+//
 #include "odmatrix_simple.h"
-#include "mstree_simple.h"
+//#include "mstree_simple.h"
 #include "sptree_simple.h"
-#include "transp_simple.h"
-#include "mcfp_simple.h"
-#include "netbuilder_simple.h"
+//#include "transp_simple.h"
+//#include "mcfp_simple.h"
+//#include "netbuilder_simple.h"
 
 namespace netxpert
 {
@@ -35,19 +39,20 @@ namespace netxpert
     **/
     namespace test
     {
-        void NetworkConvert(netxpert::cnfg::Config& cnfg);
+//        void NetworkConvert(netxpert::cnfg::Config& cnfg);
+        void LemonNetworkConvert(netxpert::cnfg::Config& cnfg);
         void TestFileGDBWriter(netxpert::cnfg::Config& cnfg);
         void TestSpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
-        void TestAddNodes(netxpert::cnfg::Config& cnfg);
-        void TestMST(netxpert::cnfg::Config& cnfg);
+//        void TestAddNodes(netxpert::cnfg::Config& cnfg);
+//        void TestMST(netxpert::cnfg::Config& cnfg);
         void TestSPT(netxpert::cnfg::Config& cnfg);
         void TestODMatrix(netxpert::cnfg::Config& cnfg);
-        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
-        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
-        void TestMCF(netxpert::cnfg::Config& cnfg);
-        void TestTransportation(netxpert::cnfg::Config& cnfg);
-        void TestTransportationExt(netxpert::cnfg::Config& cnfg);
-        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
+//        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
+//        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
+//        void TestMCF(netxpert::cnfg::Config& cnfg);
+//        void TestTransportation(netxpert::cnfg::Config& cnfg);
+//        void TestTransportationExt(netxpert::cnfg::Config& cnfg);
+//        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
     }
 }
 

@@ -68,7 +68,7 @@ int netxpert::simple::NetworkBuilder::Build()
 
 		LOGGER::LogInfo("Calculating Network..");
 
-		unordered_map< unsigned int, NetworkBuilderResultArc> kvArcs = builder->GetBuiltNetwork();
+		unordered_map< uint32_t, NetworkBuilderResultArc> kvArcs = builder->GetBuiltNetwork();
 		LOGGER::LogDebug("Size of built network: " + to_string(kvArcs.size()));
 
 		this->builder->SaveResults(resultTableName, cmap);
@@ -83,10 +83,10 @@ int netxpert::simple::NetworkBuilder::Build()
 	}
 }
 
-std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc>
+std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc>
 netxpert::simple::NetworkBuilder::GetBuiltNetwork()
 {
-	std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> result;
+	std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> result;
 
 	if (this->builder)
 		result = this->builder->GetBuiltNetwork();

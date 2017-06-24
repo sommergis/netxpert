@@ -13,6 +13,7 @@ netxpert::simple::MinimumSpanningTree::MinimumSpanningTree(std::string jsonCnfg)
 int netxpert::simple::MinimumSpanningTree::Solve()
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -61,10 +62,9 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         LOGGER::LogInfo("Loading Data from DB..!");
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
@@ -100,7 +100,7 @@ double netxpert::simple::MinimumSpanningTree::GetOptimum()
 
 std::string netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTreeAsJSON()
 {
-    string result;
+    std::string result;
     /*if (this->solver)
         result = this->solver->GetMinimumSpanningTreeAsJSON();
     */

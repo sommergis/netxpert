@@ -233,27 +233,23 @@ void MinCostFlow::solve (Network& net)
 
     vector<FlowCost> result;
 
-    vector<unsigned int> sNds;
-    vector<unsigned int> eNds;
+    vector<uint32_t> sNds;
+    vector<uint32_t> eNds;
     vector<double> supply;
     vector<double> costs;
     vector<double> caps;
-    unsigned int nmx = net.GetMaxNodeCount();
-    unsigned int mmx = net.GetMaxArcCount();
+    uint32_t nmx = net.GetMaxNodeCount();
+    uint32_t mmx = net.GetMaxArcCount();
 
     try
     {
         switch (algorithm)
         {
-            case MCFAlgorithm::NetworkSimplex_MCF:
-            {
-                mcf = shared_ptr<IMinCostFlow>(new MCFSimplex());
-            }
-                break;
             case MCFAlgorithm::NetworkSimplex_LEMON:
-            {
                 mcf = shared_ptr<IMinCostFlow>(new NetworkSimplex());
-            }
+                break;
+            default:
+                mcf = shared_ptr<IMinCostFlow>(new NetworkSimplex());
                 break;
         }
     }
@@ -303,8 +299,8 @@ void MinCostFlow::solve (Network& net)
         LOGGER::LogDebug("Solving..");
 
         //vector::data() returns direct pointer to data
-        mcf->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
-                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
+        mcf->LoadNet( static_cast<uint32_t>( net.GetMaxNodeCount() ), static_cast<uint32_t>( net.GetMaxArcCount()),
+                        static_cast<uint32_t>( net.GetMaxNodeCount() ),static_cast<uint32_t>( net.GetMaxArcCount() ),
                         caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
     }
     catch (exception& ex)
@@ -348,8 +344,8 @@ void MinCostFlow::solve (Network& net)
         //cout << "mcf: cost_flow.size(): "<< cost_flow.size()<< endl;
         for (int i = 0; i < cost_flow.size(); i++)
         {
-            unsigned int startNode = sNds[i];
-            unsigned int endNode = eNds[i];
+            uint32_t startNode = sNds[i];
+            uint32_t endNode = eNds[i];
             double flow = cost_flow[i];
             double cost = costs[i];
             //cout << "s: " << startNode << " e: " <<endNode<<" f: "<<flow << " c: "<<cost << endl;
@@ -378,8 +374,8 @@ bool MinCostFlow::validateNetworkData(Network& net)
     return valid;
 }
 
-void MinCostFlow::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-                                                    vector<unsigned int>& eNds, vector<double>& supply,
+void MinCostFlow::convertInternalNetworkToSolverData(Network& net, vector<uint32_t>& sNds,
+                                                    vector<uint32_t>& eNds, vector<double>& supply,
                                                     vector<double>& caps, vector<double>& costs)
 {
     // Die Größe der Arrays müssen passen (ob 0 drin steht ist egal, sonst gibts später bei Dispose
@@ -447,7 +443,7 @@ void MinCostFlow::convertInternalNetworkToSolverData(Network& net, vector<unsign
     //cout << "net supply size: " << net.GetNodeSupplies().size() <<endl;
     for (auto item : net.GetNodeSupplies() )
     {
-        unsigned int key = item.first;
+        uint32_t key = item.first;
         NodeSupply value = item.second;
         // key is 1-based thus -1 for index
         // only care for real supply and demand values

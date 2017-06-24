@@ -20,15 +20,15 @@ namespace netxpert {
         public:
             SpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
             SpatiaLiteWriter(netxpert::cnfg::Config& cnfg, std::string dbPath);
-            virtual ~SpatiaLiteWriter();
-            virtual void CommitCurrentTransaction();
-            virtual void CreateNetXpertDB();
-            virtual void CreateSolverResultTable(const std::string& _tableName,
+            ~SpatiaLiteWriter();
+            void CommitCurrentTransaction();
+            void CreateNetXpertDB();
+            void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType);
-            virtual void CreateSolverResultTable(const std::string& _tableName,
+            void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst);
-            virtual void OpenNewTransaction();
+            void OpenNewTransaction();
 
 
             std::unique_ptr<SQLite::Statement> PrepareSaveResultArc(const std::string& _tableName,
@@ -60,8 +60,8 @@ namespace netxpert {
             /**
             * \Brief For saving the result arc of a built network into the netXpert result DB
             */
-            void SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
-                                       const unsigned int toNode, const double cost,
+            void SaveNetworkBuilderArc(const std::string& extArcID, const uint32_t fromNode,
+                                       const uint32_t toNode, const double cost,
                                        const double capacity, const std::string& oneway,
                                        const geos::geom::Geometry& arc,
                                        const std::string& _tableName,
@@ -97,7 +97,7 @@ namespace netxpert {
                                         const geos::geom::MultiLineString& mLine,
                                         const std::string& resultTableName);
 
-            virtual void CloseConnection();
+            void CloseConnection();
             //string ConnStr;
         private:
             std::string dbPath;

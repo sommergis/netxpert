@@ -12,6 +12,7 @@ netxpert::simple::Transportation::Transportation(std::string jsonCnfg)
 int netxpert::simple::Transportation::Solve()
 {
     //local scope!
+    using namespace std;
     using namespace netxpert;
     using namespace netxpert::data;
 
@@ -60,7 +61,7 @@ int netxpert::simple::Transportation::Solve()
         if (!cnfg.CapColumnName.empty())
             withCapacity = true;
 
-		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
+//		LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
         //2. Load Network
         DBHELPER::OpenNewTransaction();
@@ -76,10 +77,10 @@ int netxpert::simple::Transportation::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<unsigned int, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<unsigned int, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
@@ -90,11 +91,11 @@ int netxpert::simple::Transportation::Solve()
         solver = unique_ptr<netxpert::Transportation> (new netxpert::Transportation(cnfg));
         auto& transp = *solver;
 
-        vector<unsigned int> origs;
+        vector<uint32_t> origs;
         for (auto& p : startNodes)
             origs.push_back(p.first);
 
-        vector<unsigned int> dests;
+        vector<uint32_t> dests;
         for (auto& p : endNodes)
             dests.push_back(p.first);
 
@@ -129,7 +130,7 @@ double netxpert::simple::Transportation::GetOptimum()
 
 std::string netxpert::simple::Transportation::GetDistributionAsJSON()
 {
-    string result;
+    std::string result;
     if (this->solver)
         result = this->solver->GetJSONExtDistribution();
     return result;

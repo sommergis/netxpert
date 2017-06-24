@@ -16,26 +16,30 @@ MinimumSpanningTree::MinimumSpanningTree(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-MSTAlgorithm MinimumSpanningTree::GetAlgorithm()
-{
+MSTAlgorithm
+ MinimumSpanningTree::GetAlgorithm() const {
     return algorithm;
 }
-void MinimumSpanningTree::SetAlgorithm(MSTAlgorithm mstAlgorithm)
-{
+
+void
+ MinimumSpanningTree::SetAlgorithm(MSTAlgorithm mstAlgorithm) {
     algorithm = mstAlgorithm;
 }
-double MinimumSpanningTree::GetOptimum() const
-{
-    return mst->MSTGetF0();
+
+const double
+ MinimumSpanningTree::GetOptimum() const {
+    return mst->GetOptimum();
 }
-void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
-{
+
+void
+ MinimumSpanningTree::SaveResults(const std::string& resultTableName,
+                                  const ColumnMap& cmap) const {
     try
     {
         Config cnfg = this->NETXPERT_CNFG;
-
         unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry;
+        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+
         switch (cnfg.ResultDBType)
         {
             case RESULT_DB_TYPE::SpatiaLiteDB:
@@ -73,11 +77,10 @@ void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const 
         }
 
         LOGGER::LogDebug("Writing Geometries..");
-
         //Processing and Saving Results are handled within net.ProcessResultArcs()
 
-        string arcIDs;
-        unordered_set<string> arcIDlist = this->net->GetOriginalArcIDs(this->GetMinimumSpanningTree(), cnfg.IsDirected);
+        std::string arcIDs = "";
+        std::unordered_set<string> arcIDlist = this->net->GetOrigArcIDs(this->GetMinimumSpanningTree());
         for (string id : arcIDlist)
         {
             // 13-14 min on 840000 arcs
@@ -97,39 +100,28 @@ void MinimumSpanningTree::SaveResults(const std::string& resultTableName, const 
     }
 }
 
-void MinimumSpanningTree::Solve(string net)
-{
-
+void
+ MinimumSpanningTree::Solve(string net) {
+  throw;
 }
 
-void MinimumSpanningTree::Solve(Network& net)
-{
+void
+ MinimumSpanningTree::Solve(netxpert::InternalNet& net) {
     this->net = &net;
     solve(net);
 }
 
-vector<InternalArc> MinimumSpanningTree::GetMinimumSpanningTree() const
-{
+std::vector<netxpert::data::arc_t>
+ MinimumSpanningTree::GetMinimumSpanningTree() const {
     return minimumSpanTree;
 }
 
-void MinimumSpanningTree::solve (Network& net)
-{
-    //vector<long> ign = { 0, -1, (long)4294967295, (long)4261281277 };
-    // 0 is a valid ignore value for linux!
-    //TODO check in windows
-    vector<long> ign = { -1, (long)4294967295, (long)4261281277 };
+void
+ MinimumSpanningTree::solve (netxpert::InternalNet& net) {
 
-    vector<InternalArc> result;
+    vector<netxpert::data::arc_t> result;
 
-    vector<unsigned int> sNds;
-    vector<unsigned int> eNds;
-    vector<double> supply;
-    vector<double> costs;
-    vector<double> caps;
-
-    try
-    {
+    try {
         switch (algorithm)
         {
             case MSTAlgorithm::Kruskal_LEMON:
@@ -160,115 +152,49 @@ void MinimumSpanningTree::solve (Network& net)
         //throw new InvalidValueException(string.Format("Problem data does not fit the {0} Solver!", this.ToString()));
         throw;
 
-    LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
-    LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Arcs: " + to_string(net.GetArcCount() ));
+    LOGGER::LogDebug("Nodes: "+ to_string(net.GetNodeCount() ));
     LOGGER::LogDebug("Solving..");
 
     //Read the network
-    try
-    {
-        convertInternalNetworkToSolverData(net, sNds, eNds, supply, caps, costs);
+    auto sg = convertInternalNetworkToSolverData(net);
+    mst->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
 
-        //vector::data() returns direct pointer to data
-        mst->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
-                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
-                        caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogFatal( ex.what() );
-        result.clear();
-    }
+    mst->SolveMST();
 
-    try
-    {
-        mst->SolveMST();
-    }
-    catch (exception& ex)
-    {
-        //throw new ApplicationException(ex.Message, ex.InnerException);
-    }
-
-    unsigned int* mstSNds = new unsigned int [net.GetMaxArcCount()];
-    unsigned int* mstENds = new unsigned int [net.GetMaxArcCount()];
-
-    mst->GetMST(mstSNds, mstENds);
-
-    for (int i = 0; i < mst->MCFmmax(); i++)
-    {
-        try
-        {
-            unsigned int source = mstSNds[i];
-            unsigned int target = mstENds[i];
-            if (source != ign[0] && source != ign[1] && source != ign[2] &&
-                target != ign[0] && target != ign[1] && target != ign[2])
-            {
-                result.push_back( {source, target} );
-            }
-        }
-        catch (exception& ex)
-        {
-            LOGGER::LogDebug("mmax: " +to_string( mst->MCFmmax() ) +" i: "+ to_string(i));
-        }
-    }
-    delete[] mstSNds;
-    delete[] mstENds;
+    result = mst->GetMST();
 
     this->minimumSpanTree = result;
 
+    LOGGER::LogDebug("Number of MST Arcs: "+ to_string(result.size()));
 }
 
-void MinimumSpanningTree::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-            vector<unsigned int>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
+lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
+ MinimumSpanningTree::convertInternalNetworkToSolverData(InternalNet& net
+                                                            /*lemon::FilterArcs<netxpert::data::graph_t,
+                                                                              lemon::IterableBoolMap<netxpert::data::graph_t,
+                                                                                                     netxpert::data::arc_t>
+                                                                              >& arcFilter //OUT*/
+                                                            )
 {
-    // Die Größe der Arrays müssen passen (ob 0 drin steht ist egal, sonst gibts später bei Dispose
-    // das böse Erwachen in Form eines Heap Corruption errors bzw. einer System Access Violation
+    using namespace netxpert::data;
+    LOGGER::LogInfo("#Arcs internal graph: " +to_string(lemon::countArcs(*net.GetGraph())));
 
-    Arcs arcs = net.GetInternalArcData();
-    vector<InternalArc> keys;
-    for(Arcs::iterator it = arcs.begin(); it != arcs.end(); ++it) {
-      keys.push_back(it->first);
-    }
+    lemon::FilterArcs<graph_t, graph_t::ArcMap<bool>> sg(*net.GetGraph(), *net.GetArcFilterMap());
 
-    // Für Min Span Tree ist eine Richtung ausreichend, weil eh nur die Kante an sich betrachtet wird
-    // --> kein doppelter Input der Kanten notwendig
-    sNds.resize(keys.size());
-    eNds.resize(keys.size());
-    //cout << "size of arcs: " << keys.size() << endl;
-    for (int i = 0; i < keys.size(); i++)
-    {
-        sNds[i] = keys[i].fromNode;
-        eNds[i] = keys[i].toNode;
-    }
+    assert(lemon::countArcs(sg) > 0);
 
-    costs.resize(keys.size()); //Größe muss passen!
-    caps.resize(keys.size());  //Größe muss passen!
-    for (int i = 0; i < keys.size(); i++)
-    {
-        ArcData oldArcData;
-        if (arcs.count(keys[i]) > 0)
-            oldArcData = arcs.at(keys[i]);
-        costs[i] = oldArcData.cost;
-        //Min span tree does not care about capacity
-        caps[i] = 0; //oldArcData.capacity;
-    }
+    LOGGER::LogInfo("#Arcs filtered graph: " +to_string(lemon::countArcs(sg)));
 
-    //Min span tree does not care about capacity
-    /*
-    supply.resize( net.GetMaxNodeCount() ); //Größe muss passen!
-    for (auto item : net.GetNodeSupplies() )
-    {
-        unsigned int key = item.first;
-        NodeSupply value = item.second;
-        // key is 1-based thus -1 for index
-        // only care for real supply and demand values
-        // transshipment nodes (=0) are already present in the array (because of new array)
-        supply[key - 1] = value.supply;
-    }*/
+//    for (filtered_graph_t::ArcIt it(sg); it != lemon::INVALID; ++it)
+//        std::cout << sg.id(sg.source(it)) << "->" << sg.id(sg.target(it)) << " , ";
+//
+//    std::cout << std::endl;
+    return sg;
 }
 
-bool MinimumSpanningTree::validateNetworkData(Network& net)
-{
+bool
+ MinimumSpanningTree::validateNetworkData(netxpert::InternalNet& net) {
     bool valid = false;
 
 

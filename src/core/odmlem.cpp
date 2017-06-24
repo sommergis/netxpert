@@ -4,7 +4,7 @@ using namespace std;
 using namespace lemon;
 using namespace netxpert::core;
 
-ODM_LEM_2Heap::ODM_LEM_2Heap(unsigned int nmx, unsigned int mmx, bool Drctd)
+ODM_LEM_2Heap::ODM_LEM_2Heap(uint32_t nmx, uint32_t mmx, bool Drctd)
 {
     //ctor
     isDrctd = Drctd;
@@ -42,9 +42,9 @@ void ODM_LEM_2Heap::ShortestPathTree()
 }
 
 
-void ODM_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
+void ODM_LEM_2Heap::LoadNet( uint32_t nmx , uint32_t mmx , uint32_t pn , uint32_t pm ,
 		      double *pU , double *pC , double *pDfct ,
-		      unsigned int *pSn , unsigned int *pEn )
+		      uint32_t *pSn , uint32_t *pEn )
 {
 	nmax = nmx;
 	mmax = mmx;
@@ -56,7 +56,7 @@ void ODM_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 
     //Populate all nodes
     nodes.resize(nmax);
-    for (unsigned int i = 0; i < nmax; ++i) {
+    for (uint32_t i = 0; i < nmax; ++i) {
       nodes[i] = g.addNode();
     }
 
@@ -68,7 +68,7 @@ void ODM_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 
 	if (isDrctd)
     {
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -80,7 +80,7 @@ void ODM_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 	}
 	else // both directions
 	{
-		for (unsigned int i = 0; i < mmx; ++i) {
+		for (uint32_t i = 0; i < mmx; ++i) {
 			origNode = pSn[i];
 			destNode = pEn[i];
 			cost = pC[i];
@@ -98,7 +98,7 @@ void ODM_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int 
 	//DijkstraInternal dijk(g,lengthVal);
 }
 
-void ODM_LEM_2Heap::SetOrigin( unsigned int NewOrg )
+void ODM_LEM_2Heap::SetOrigin( uint32_t NewOrg )
 {
     //1. uint to Lemon Node
 	orig = nodes[NewOrg-1];
@@ -106,7 +106,7 @@ void ODM_LEM_2Heap::SetOrigin( unsigned int NewOrg )
 	dijk->addSource(orig);
 }
 
-void ODM_LEM_2Heap::SetDest( unsigned int NewDst )
+void ODM_LEM_2Heap::SetDest( uint32_t NewDst )
 {
     //1. uint to Lemon Node
 	if (NewDst != UINT_MAX)
@@ -118,7 +118,7 @@ void ODM_LEM_2Heap::SetDest( unsigned int NewDst )
 		allDests = true;
 	}
 }
-bool ODM_LEM_2Heap::Reached( unsigned int NodeID )
+bool ODM_LEM_2Heap::Reached( uint32_t NodeID )
 {
     //1. uint to Lemon Node
 	SmartDigraph::Node node = nodes[NodeID-1];
@@ -131,9 +131,9 @@ bool ODM_LEM_2Heap::Reached( unsigned int NodeID )
    for the Origin (that has p[ Origin ] == 0), however, it is guaranteed that
    a[ Origin ] == Inf<Index>(). */
 
-unsigned int* ODM_LEM_2Heap::ArcPredecessors( void )
+uint32_t* ODM_LEM_2Heap::ArcPredecessors( void )
 {
-	arcPredecessors = new unsigned int [MCFnmax()+1];
+	arcPredecessors = new uint32_t [MCFnmax()+1];
 	arcPredecessors[0] = 0; //first entry of pred has no predecessor
 
     for (int i = 1; i < MCFnmax()+1; i++)
@@ -148,9 +148,9 @@ unsigned int* ODM_LEM_2Heap::ArcPredecessors( void )
    i == Origin, i does not belong to the connected component of the origin or
    the computation have been stopped before reaching i, then p[ i ] == 0. */
 
-unsigned int* ODM_LEM_2Heap::Predecessors( void )
+uint32_t* ODM_LEM_2Heap::Predecessors( void )
 {
-	predecessors = new unsigned int [MCFnmax()+1];
+	predecessors = new uint32_t [MCFnmax()+1];
 	predecessors[0] = 0; //first entry of pred has no predecessor
     for (int i = 1; i < MCFnmax()+1; i++)
     {
@@ -159,25 +159,25 @@ unsigned int* ODM_LEM_2Heap::Predecessors( void )
 	return predecessors;
 }
 
-void ODM_LEM_2Heap::GetArcPredecessors( unsigned int *outArcPrd )
+void ODM_LEM_2Heap::GetArcPredecessors( uint32_t *outArcPrd )
 {
-	unsigned int size = MCFnmax()+1;
+	uint32_t size = MCFnmax()+1;
 	auto arcPredecessors = ArcPredecessors();
-	memcpy(outArcPrd, arcPredecessors, size * sizeof (unsigned int ) );
+	memcpy(outArcPrd, arcPredecessors, size * sizeof (uint32_t ) );
 	delete[] arcPredecessors;
 }
 
-void ODM_LEM_2Heap::GetPredecessors( unsigned int *outPrd )
+void ODM_LEM_2Heap::GetPredecessors( uint32_t *outPrd )
 {
-	unsigned int size = MCFnmax()+1;
+	uint32_t size = MCFnmax()+1;
 	auto predecessors = Predecessors();
-	memcpy(outPrd, predecessors, size * sizeof (unsigned int ) );
+	memcpy(outPrd, predecessors, size * sizeof (uint32_t ) );
 	delete[] predecessors;
 }
-std::vector<std::pair<unsigned int, unsigned int>>
- ODM_LEM_2Heap::GetPath ( unsigned int s, unsigned int t )
+std::vector<std::pair<uint32_t, uint32_t>>
+ ODM_LEM_2Heap::GetPath ( uint32_t s, uint32_t t )
 {
-    std::vector<std::pair<unsigned int, unsigned int>> result;
+    std::vector<std::pair<uint32_t, uint32_t>> result;
 
     //id to lemon node
     SmartDigraph::Node pathSrc = nodes[s-1];
@@ -203,12 +203,12 @@ std::vector<std::pair<unsigned int, unsigned int>>
 }
 
 
-unsigned int ODM_LEM_2Heap::MCFnmax( void)
+uint32_t ODM_LEM_2Heap::MCFnmax( void)
 {
 	return ( this->nmax );
 }
 
-unsigned int ODM_LEM_2Heap::MCFmmax( void)
+uint32_t ODM_LEM_2Heap::MCFmmax( void)
 {
 	return ( this->mmax );
 }

@@ -2,6 +2,8 @@
 #define DBHELPER_H
 
 #include <string>
+//determination of type
+#include <typeinfo>
 #include "utils.h"
 #include "data.h"
 #include "logger.h"
@@ -40,17 +42,26 @@ namespace netxpert {
             static std::vector<netxpert::data::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
                                                                   const netxpert::data::ColumnMap& _map);
 
+            static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometryFromDB(const std::string& tableName,
+                                                             const std::string& arcIDColumnName,
+                                                             const std::string& geomColumnName,
+                                                             const netxpert::data::ArcIDColumnDataType arcIDColDataType,
+                                                             const netxpert::data::extarcid_t& arcID);
+
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromDB(const std::string& tableName,
                                                                            const std::string& arcIDColumnName,
                                                                            const std::string& geomColumnName,
                                                                            const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                                                            const std::string& arcIDs );
 
-            static std::unordered_set<std::string> GetIntersectingArcs(const std::string& barrierTableName,
+            static std::unordered_set<netxpert::data::extarcid_t> GetIntersectingArcs(const std::string& barrierTableName,
                                                                        const std::string& barrierGeomColName,
                                                                        const std::string& arcsTableName,
                                                                        const std::string& arcIDColName,
                                                                        const std::string& arcGeomColName);
+
+            static std::vector<std::unique_ptr<geos::geom::Geometry>> GetBarrierGeometriesFromDB(const std::string& barrierTableName,
+                                                                       const std::string& barrierGeomColName);
 
             //UNUSED -->
             static std::unique_ptr<SQLite::Statement>
@@ -72,7 +83,7 @@ namespace netxpert {
 
             static void CloseConnection();
             static bool IsInitialized;
-            static std::unordered_set<std::string> EliminatedArcs;
+            static std::unordered_set<netxpert::data::extarcid_t> EliminatedArcs;
             static std::shared_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
 
             /* Methods for loading IDs and geometry into a map in memory for fast access to geometries.
@@ -88,7 +99,7 @@ namespace netxpert {
 
             ~DBHELPER();
         private:
-            static std::unordered_map<std::string, std::shared_ptr<geos::geom::LineString>> KV_Network;
+            static std::unordered_map<netxpert::data::extarcid_t, std::shared_ptr<geos::geom::LineString>> KV_Network;
             static netxpert::cnfg::Config NETXPERT_CNFG;
             static std::unique_ptr<SQLite::Database> connPtr;
             static std::unique_ptr<SQLite::Transaction> currentTransactionPtr;

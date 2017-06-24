@@ -147,7 +147,7 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const Colum
 		LOGGER::LogDebug("Writing Geometries..");
 		writer->OpenNewTransaction();
 
-		unordered_map< unsigned int, NetworkBuilderResultArc>::const_iterator it;
+		unordered_map< uint32_t, NetworkBuilderResultArc>::const_iterator it;
 		int counter = 0;
 		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
 		{
@@ -161,7 +161,7 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const Colum
                 if (counter % 2500 == 0)
                     LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-                unsigned int key = it->first;
+                uint32_t key = it->first;
 
                 NetworkBuilderResultArc value = it->second;
 
@@ -205,7 +205,7 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const Colum
 void NetworkBuilder::calcNodes()
 {
     std::vector< geos::geomgraph::Node * > * nodePtr = this->geoGraph->getBoundaryNodes();
-    unsigned int counter = 0;
+    uint32_t counter = 0;
     std::vector< geos::geomgraph::Node* >& nodeRef = *nodePtr;
     std::vector< geos::geomgraph::Node* >::const_iterator it = nodeRef.begin();
     for (it = nodeRef.begin(); it != nodeRef.end(); ++it)
@@ -221,16 +221,16 @@ void NetworkBuilder::calcNodes()
     }
 }
 
-std::unordered_map<unsigned int, NetworkBuilderResultArc>
+std::unordered_map<uint32_t, NetworkBuilderResultArc>
 NetworkBuilder::GetBuiltNetwork()
 {
     using namespace geos::geom;
     LOGGER::LogDebug("Calculating nodes..");
     calcNodes();
     LOGGER::LogDebug("Done!");
-    std::unordered_map<unsigned int, NetworkBuilderResultArc> result(this->inputArcs.size());
+    std::unordered_map<uint32_t, NetworkBuilderResultArc> result(this->inputArcs.size());
 
-    unsigned int counter = 0;
+    uint32_t counter = 0;
     //kein const_iterator, weil move() unten angewendet wird!
     std::vector<NetworkBuilderInputArc>::iterator it;
 
@@ -249,8 +249,8 @@ NetworkBuilder::GetBuiltNetwork()
 
         unique_ptr<Point> startPoint (linePtr->getStartPoint() );
         unique_ptr<Point> endPoint   (linePtr->getEndPoint() );
-        unsigned int fromNode   = 0;
-        unsigned int toNode     = 0;
+        uint32_t fromNode   = 0;
+        uint32_t toNode     = 0;
 
         if ( this->builtNodes.count(startPoint->toString()) > 0)
         {

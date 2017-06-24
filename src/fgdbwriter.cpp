@@ -642,8 +642,8 @@ void FGDBWriter::SaveResultArc(const std::string& orig, const double cost,
 }
 
 //NetworkBuilder
-void FGDBWriter::SaveNetworkBuilderArc(const std::string& extArcID, const unsigned int fromNode,
-                                       const unsigned int toNode, const double cost,
+void FGDBWriter::SaveNetworkBuilderArc(const std::string& extArcID, const uint32_t fromNode,
+                                       const uint32_t toNode, const double cost,
                                        const double capacity, const std::string& oneway,
                                        const geos::geom::Geometry& arc,
                                        const std::string& _tableName)

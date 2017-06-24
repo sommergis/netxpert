@@ -4,7 +4,7 @@ using namespace std;
 using namespace lemon;
 using namespace netxpert::core;
 
-SPT_LEM_2Heap::SPT_LEM_2Heap( unsigned int nmx, unsigned int mmx , bool Drctd)
+SPT_LEM::SPT_LEM(bool Drctd)
 {
 	//nmax = 0;
 	//mmax = 0;
@@ -12,315 +12,286 @@ SPT_LEM_2Heap::SPT_LEM_2Heap( unsigned int nmx, unsigned int mmx , bool Drctd)
 	allDests = true; //unless set with SetDest()
 }
 
-void SPT_LEM_2Heap::ShortestPathTree()
-{
-	//dijk = new Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>(g, lengthVal);
-	/* Change Heap */
+/*void
+ SPT_LEM::SolveSPT(netxpert::data::cost_t treshold){
 
-	/*SmartDigraph::NodeMap<double> heap_cross_ref(g);
-	FibonacciHeap heap(heap_cross_ref);      */
-	//dijk = new Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>, DijkstraDefaultTraits<SmartDigraph, SmartDigraph::ArcMap<double>>>::SetHeap<FibonacciHeap, SmartDigraph::NodeMap<double>> (g, lengthVal);
-	//Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>::SetHeap<FibonacciHeap, SmartDigraph::NodeMap<double>>::Create d(g, lengthVal);
-	//dijk = &d;
-	//
-	//dijk->heap( heap, heap_cross_ref );
+    using namespace netxpert::data;
 
-	//DijkstraInternal d(g,lengthVal);
+    //this->dijk = new Dijkstra<graph_t, graph_t::ArcMap<cost_t>>(this->g, *this->costMap);
+    //  Dijkstra<filtered_graph_t, graph_t::ArcMap<cost_t>>::SetPath<path_t, NodeMap>::Create
+    this->dijk = new dijkstra_t (*this->g, *this->costMap);
+    //this->predMap = new lemon::concepts::ReadWriteMap<node_t, arc_t>();
+    //this->distMap = new netxpert::data::graph_t::NodeMap<cost_t>(*this->g, t);
+    //this->dijk->distMap(*this->distMap);
+    //this->dijk->predMap(*this->predMap);
 
-	//dijk->heap(heap, heap_cross_ref);
+    this->dijk->init();
+    this->dijk->addSource(this->orig);
 
-	//Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>::SetHeap<FibonacciHeap, SmartDigraph::NodeMap<double>>()
+    auto currentNode = this->dijk->nextNode();
 
- //   dijk->distMap(distVal);
-	//
-
-	if (allDests)
-	{
-        dijk->run(orig);
-	}
-	else
-	{
-        dijk->run(orig,dest);
-	}
-	//if (allDests)
-	//{
-	//	d.run(orig);
-	//}
-	//else
-	//{
-	//	d.run(orig, dest);
-	//}
-	//Alternate to run():
-	//dijk->init();
-	//dijk->addSource(orig);
-	//dijk->start();
-
-	//delete dijk;
-}
-
-/*void SPT_LEM_2Heap::ShortestPathTree(double maxCutOff)
-{
-    dijk->init();
-    dijk->addSource(orig);
-
-    //break if max cut off value is reached
-    double currentLength = 0;
-    cout << "Max dist: "<<maxCutOff << endl;
-    while ( !dijk->emptyQueue() )
-    {
-        if (currentLength > maxCutOff)
-            continue; //process next node
-
-        lemon::SmartDigraph::Node currNode = dijk->nextNode();
-        dijk->start(currNode);
-
-        cout << "Current dist: "<<currentLength << endl;
-        //get length so far
-        if (dijk->reached(currNode))
-            currentLength += dijk->dist(currNode);
+    if (treshold > 0) {
+        while (currentNode != INVALID &&
+                !this->dijk->emptyQueue() &&
+                this->dijk->dist(currentNode) <= treshold ) {
+            this->dijk->processNextNode();
+            currentNode = this->dijk->nextNode();
+        }
     }
-    cout << "Exited at dist: "<<currentLength << endl;
+    else {
+        while (currentNode != INVALID &&
+                !this->dijk->emptyQueue() ) {
+            this->dijk->processNextNode();
+            currentNode = this->dijk->nextNode();
+        }
+    }
 }*/
 
-void SPT_LEM_2Heap::LoadNet( unsigned int nmx , unsigned int mmx , unsigned int pn , unsigned int pm ,
-		      double *pU , double *pC , double *pDfct ,
-		      unsigned int *pSn , unsigned int *pEn )
-{
-	nmax = nmx;
-	mmax = mmx;
+void
+ SPT_LEM::SolveSPT(netxpert::data::cost_t treshold, bool bidirectional){
 
-	//smart graph
-    distMap = new SmartDigraph::NodeMap<double> (g);
-    length = new SmartDigraph::ArcMap<double> (g);
+    this->bidirectional = bidirectional;
 
-	//static graph
-    //distMap = new StaticDigraph::NodeMap<double> (g);
-    //length = new StaticDigraph::ArcMap<double> (g);
+    using namespace netxpert::data;
 
-    int origNode;
-    int destNode;
+    //this->dijk = new Dijkstra<graph_t, graph_t::ArcMap<cost_t>>(this->g, *this->costMap);
+    //this->predMap = new lemon::concepts::ReadWriteMap<node_t, arc_t>();
+    //this->distMap = new netxpert::data::graph_t::NodeMap<cost_t>(*this->g, t);
+    //this->dijk->distMap(*this->distMap);
+    //this->dijk->predMap(*this->predMap);
 
-    //Populate all nodes
-    //std::vector<typename SmartDigraph::Node> nodes;
+    if (this->bidirectional) {
+        //std::cout << "Bidirectional Dijkstra" << std::endl;
+        //this->bijk = new bijkstra_t (*this->g, *this->costMap);
+        this->bijk = std::unique_ptr<bijkstra_t> (new bijkstra_t (*this->g, *this->costMap));
 
-    //smart graph
-    nodes.resize(nmax);
-    for (unsigned int i = 0; i < nmax; ++i) {
-      nodes[i] = g.addNode();
-    }
+        this->bijk->init();
+        this->bijk->addSource(this->orig);
 
-   //   if (pDfct[i] < 0)
-	  //{
-   //     cout << "Startnode "<< i+1 << endl;
-   //     orig = nodes[i];
-	  //}
-   //   if (pDfct[i] > 0)
-	  //{
-   //     cout << "Endnode "<< i+1 << endl;
-   //     dest = nodes[i];
-	  //}
-      //cout << "Node "<< i << endl;
+        /*auto currentNode = this->bijk->nextNode();
 
-
-    // construct arcs
-    //depointerize
-	SmartDigraph::ArcMap<double>& lengthVal = *length;
-	//StaticDigraph::ArcMap<double>& lengthVal = *length;
-	double cost;
-    SmartDigraph::Arc arc;
-
-    //std::vector<std::pair<int,int>> arcList(mmax);
-    //isDrctd = true;
-	if (isDrctd)
-    {
-        //unsigned int lastSrcId = 0;
-		for (unsigned int i = 0; i < mmax; ++i) {
-			origNode = pSn[i];
-			destNode = pEn[i];
-			cost = pC[i];
-
-            /*if (origNode < lastSrcId)
-            {
-                std::cout << "ignored " << to_string(origNode)<< " < " << to_string(lastSrcId) << std::endl;
+        if (treshold > 0) {
+            while (currentNode != INVALID &&
+                    !this->bijk->emptyQueue() &&
+                    this->bijk->dist(currentNode) <= treshold
+                    && !this->bijk->processed(this->dest)
+                    ) {
+                this->bijk->processNextNode();
+                currentNode = this->bijk->nextNode();
             }
-            else*/
-			arc = g.addArc(nodes[origNode-1],nodes[destNode-1]);
-            //    arcList.push_back(std::make_pair( origNode, destNode));
+        }
+        else {
+            while (currentNode != INVALID &&
+                    !this->bijk->emptyQueue()
+                     && !this->bijk->processed(this->dest)
+                    ) {
+                this->bijk->processNextNode();
+                currentNode = this->bijk->nextNode();
+            }
+        }*/
 
-            //lastSrcId = origNode;
-			lengthVal[arc] = cost;
-
-			//cout << "Arc: #" << i << " " << origNode << " " << destNode << " " << cost <<  endl;
-		}
-	}
-	else // both directions
-	{
-
-		//std::cout << "\n BOTH DIRECTIONS "<< std::endl;
-
-		for (unsigned int i = 0; i < mmax; ++i) {
-			origNode = pSn[i];
-			destNode = pEn[i];
-			cost = pC[i];
-			arc = g.addArc(nodes[origNode-1],nodes[destNode-1]);
-			//arcList.push_back(std::make_pair(origNode, destNode));
-			lengthVal[arc] = cost;
-			//cout << "Arc: #" << i << " " << origNode << " " << destNode << " " << cost <<  endl;
-			arc = g.addArc(nodes[destNode-1],nodes[origNode-1]);
-			//arcList.push_back(std::make_pair(destNode, origNode));
-			lengthVal[arc] = cost;
-			//cout << "Arc: #" << i << " " << destNode << " " << origNode << " " << cost <<  endl;
-		}
+        this->bijk->run(this->orig, this->dest);
     }
-    //static graph
-	//g.build(nmax, arcList.begin(), arcList.end());
+    else {
+        //std::cout << "Regular Dijkstra" << std::endl;
+        //this->dijk = new dijkstra_t (*this->g, *this->costMap);
+        this->dijk = std::unique_ptr<dijkstra_t> (new dijkstra_t (*this->g, *this->costMap));
 
-    //populate costMap
-    //for (unsigned int i = 0; i < mmax; ++i)
-    //    lengthVal[ g.arc(i) ] = pC[i];
+        this->dijk->init();
+        this->dijk->addSource(this->orig);
 
+        auto currentNode = this->dijk->nextNode();
 
-	//init Dijkstra here
-    dijk = new DijkstraInternal(g,lengthVal);
-	//DijkstraInternal dijk(g,lengthVal);
-}
-
-void SPT_LEM_2Heap::SetOrigin( unsigned int NewOrg )
-{
-    //1. uint to Lemon Node
-	orig = nodes[NewOrg-1];
-	//multiple sources?
-	//dijk->addSource(orig);
-}
-
-void SPT_LEM_2Heap::SetDest( unsigned int NewDst )
-{
-    //1. uint to Lemon Node
-	if (NewDst != UINT_MAX)
-	{
-		dest = nodes[NewDst-1];
-	}
-	else
-	{
-		allDests = true;
-	}
-}
-bool SPT_LEM_2Heap::Reached( unsigned int NodeID )
-{
-    //1. uint to Lemon Node
-	SmartDigraph::Node node = nodes[NodeID-1];
-	//StaticDigraph::Node node = nodes [NodeID-1];
-    return dijk->reached(node);
-}
-
-void SPT_LEM_2Heap::GetPath ( unsigned int Dst, unsigned int *outSn, unsigned int *outEn )
-{
-	if (!allDests)
-	{
-		//id to lemon node
-		SmartDigraph::Node pathDest = nodes[Dst-1];
-		Path<SmartDigraph> path = dijk->path(pathDest);
-		/*StaticDigraph::Node pathDest = nodes[Dst-1];
-		Path<StaticDigraph> path = dijk->path(pathDest);*/
-
-		for (int i = 0; i < path.length(); i++)
-		/*for (Path<SmartDigraph>::ArcIt a(path); a != INVALID; a++)*/
-		{
-			outSn[i] = g.id(g.source(path.nth(i))); // gets the source node of nth arc of the path
-			outEn[i] = g.id(g.target(path.nth(i))); // gets the target node of nth arc of the path
-			//cout << "From: " << g.id(g.source(path.nth(i))) + 1 << " To: " << g.id(g.target(path.nth(i))) + 1 << endl;
-		}
-	}
-}
-
-/**< Return a cIndex* vector a[] such that a[ i ] is the index of the arc
-   ( p[ i ] , i ), being p[] the vector returned by the above method, and
-   with the same structure. If p[ i ] == 0, then a[ i ] is not significative:
-   for the Origin (that has p[ Origin ] == 0), however, it is guaranteed that
-   a[ Origin ] == Inf<Index>(). */
-
-unsigned int* SPT_LEM_2Heap::ArcPredecessors( void )
-{
-	arcPredecessors = new unsigned int [MCFnmax()+1];
-	arcPredecessors[0] = 0; //first entry of pred has no predecessor
-
-    for (int i = 1; i < MCFnmax()+1; i++)
-    {
-        arcPredecessors[i] = g.id(dijk->predArc(nodes[i-1]));
+        //only if search distance is defined
+        if (treshold > 0) {
+            //s-t search
+            if (!this->allDests) {
+                while (currentNode != INVALID &&
+                        !this->dijk->emptyQueue() &&
+                        this->dijk->dist(currentNode) <= treshold
+                        && !this->dijk->processed(dest) //search only until dest is reached; -30 secs on 2 Mio arcs
+                         ) {
+                    this->dijk->processNextNode();
+                    currentNode = this->dijk->nextNode();
+                }
+            }
+            //shortest path tree
+            else {
+                while (currentNode != INVALID &&
+                        !this->dijk->emptyQueue() &&
+                        this->dijk->dist(currentNode) <= treshold
+                         ) {
+                    this->dijk->processNextNode();
+                    currentNode = this->dijk->nextNode();
+                }
+            }
+        }
+        else {
+            //s-t search
+            if (!this->allDests) {
+                while (currentNode != INVALID &&
+                        !this->dijk->emptyQueue()
+                        && !this->dijk->processed(dest) //search only until dest is reached; -30 secs on 2 Mio arcs
+                        ) {
+                    this->dijk->processNextNode();
+                    currentNode = this->dijk->nextNode();
+                }
+            }
+            //shortest path tree
+            else {
+                while (currentNode != INVALID &&
+                        !this->dijk->emptyQueue()
+                        ) {
+                    this->dijk->processNextNode();
+                    currentNode = this->dijk->nextNode();
+                }
+            }
+        }
     }
-    return arcPredecessors;
 }
 
-/**< Return a cIndex* vector p[] such that p[ i ] is the predecessor of node
-   i in the shortest path tree. If a node i has no predecessor, i.e.,
-   i == Origin, i does not belong to the connected component of the origin or
-   the computation have been stopped before reaching i, then p[ i ] == 0. */
+const uint32_t
+ SPT_LEM::GetArcCount() {
 
-unsigned int* SPT_LEM_2Heap::Predecessors( void )
+    return lemon::countArcs(*this->g);
+}
+
+const uint32_t
+ SPT_LEM::GetNodeCount() {
+
+    return lemon::countNodes(*this->g);
+}
+
+void
+ SPT_LEM::LoadNet(const uint32_t nmax,  const uint32_t mmax,
+                      /*const lemon::FilterArcs<const netxpert::data::graph_t,
+                                              const netxpert::data::graph_t::ArcMap<bool>>& sg,*/
+                      lemon::FilterArcs<netxpert::data::graph_t,
+                                              netxpert::data::graph_t::ArcMap<bool>>* sg,
+                      netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm)
 {
-	predecessors = new unsigned int [MCFnmax()+1];
-	predecessors[0] = 0; //first entry of pred has no predecessor
-    for (int i = 1; i < MCFnmax()+1; i++)
-    {
-        predecessors[i] = g.id(dijk->predNode(nodes[i-1])) + 1;
+    //TODO convert sg to g
+    using namespace lemon;
+    using namespace netxpert::data;
+
+    //this->distMap = new SmartDigraph::NodeMap<double> (g);
+    //this->length  = new SmartDigraph::ArcMap<double> (g);
+    this->g = sg;
+    this->costMap = cm;
+    /*graph_t::NodeMap<node_t> node_ref(this->g);
+    graph_t::ArcMap<netxpert::data::cost_t> sg_cost_map(this->g);
+    graph_t::ArcMap<arc_t> arc_cross_ref(this->g);
+
+    DigraphCopy<FilteredGraph, graph_t> cg(sg, this->g);
+    cg.nodeRef(node_ref);
+    cg.arcMap(cm, sg_cost_map);
+    cg.arcCrossRef(arc_cross_ref);
+    cg.run();
+    // use tmp_graph*/
+}
+
+void SPT_LEM::SetOrigin( netxpert::data::node_t _origin )
+{
+	this->orig = _origin;
+}
+
+void SPT_LEM::SetDest( netxpert::data::node_t _dest )
+{
+	if (_dest != lemon::INVALID) {
+		this->dest = _dest;
+	}
+	else {
+		this->allDests = true;
+	}
+}
+bool
+ SPT_LEM::Reached( netxpert::data::node_t _node )
+{
+    if (this->bidirectional) {
+        bool t1 = this->bijk->reached(_node);
+        //bool t2 = this->bijk->revReached(_node);
+        // true if either t1 or t2 is true
+        //return t1 || t2;
+        return t1;
     }
-	return predecessors;
+    else
+        return this->dijk->reached(_node);
 }
 
-void SPT_LEM_2Heap::GetArcPredecessors( unsigned int *outArcPrd )
-{
-	unsigned int size = MCFnmax()+1;
-	auto arcPredecessors = ArcPredecessors();
-	memcpy(outArcPrd, arcPredecessors, size * sizeof (unsigned int ) );
-	delete[] arcPredecessors;
+/* Walk in whole SPT is possible from specified orig and end
+   but dest must be part of the SPT and
+   an orig node must not be a dest node */
+const std::vector<netxpert::data::node_t>
+ SPT_LEM::GetPredecessors(netxpert::data::node_t _dest) {
+    std::vector<netxpert::data::node_t> result;
+
+    if (this->bidirectional) {
+        for (netxpert::data::node_t v = _dest; v != this->orig; v = this->bijk->predNode(v)) {
+          if (v != lemon::INVALID && this->bijk->reached(v)) {
+             result.push_back(v);
+          }
+        }
+    }
+    else {
+        for (netxpert::data::node_t v = _dest; v != this->orig; v = this->dijk->predNode(v)) {
+          if (v != lemon::INVALID && this->dijk->reached(v)) {
+             result.push_back(v);
+          }
+        }
+    }
+    result.push_back(this->orig);
+
+	return result;
 }
 
-void SPT_LEM_2Heap::GetPredecessors( unsigned int *outPrd )
-{
-	unsigned int size = MCFnmax()+1;
-	auto predecessors = Predecessors();
-	memcpy(outPrd, predecessors, size * sizeof (unsigned int ) );
-	delete[] predecessors;
+const netxpert::data::cost_t
+ SPT_LEM::GetDist(netxpert::data::node_t _dest) {
+
+    if (this->bidirectional) {
+        if (this->bijk->reached(_dest))
+            return this->bijk->dist(_dest);
+    }
+    else {
+        if (this->dijk->reached(_dest))
+            return this->dijk->dist(_dest);
+    }
 }
 
-unsigned int SPT_LEM_2Heap::MCFnmax( void)
-{
-	return ( this->nmax );
+const std::vector<netxpert::data::arc_t>
+ SPT_LEM::GetPath(netxpert::data::node_t _dest) {
+
+    using namespace netxpert::data;
+
+    std::vector<netxpert::data::arc_t> path;
+    /// walk the path from dest to orig with the help of predNode
+    /// and save the predArc for each node -->path
+    if (this->bidirectional) {
+        for (node_t v = _dest; v != this->orig; v = this->bijk->predNode(v)) {
+            auto arc = this->bijk->predArc(v);
+            if (arc != lemon::INVALID)
+                path.push_back(arc);
+        }
+    }
+    else {
+        for (node_t v = _dest; v != this->orig; v = this->dijk->predNode(v)) {
+            auto arc = this->dijk->predArc(v);
+            path.push_back(arc);
+//            std::cout << g->id(g->source(arc)) << "->" << g->id(g->target(arc)) << " , ";
+        }
+//        std::cout << std::endl;
+    }
+
+    //reverse arcs, so path goes from start to dest
+    std::reverse(path.begin(), path.end());
+
+    return path;
 }
 
-unsigned int SPT_LEM_2Heap::MCFmmax( void)
-{
-	return ( this->mmax );
-}
-
-void SPT_LEM_2Heap::PrintResult( void )
-{
-//    SmartDigraph::NodeMap<double> d = dijk->distMap();
-    //depointerize distMap
-
-    SmartDigraph::NodeMap<double>& distMapVal = *distMap;
-    //StaticDigraph::NodeMap<double>& distMapVal = *distMap;
-	cout << "***********************************************" << endl;
-	cout << "C++ Output START" << endl;
-	if (!allDests)
-	{
-		cout << "Dest reached: " << dijk->reached(dest) << endl;
-	}
-    cout << "Orig reached: " << dijk->reached(orig) << endl;
-	if (!allDests)
-	{
-		cout << "Path cost to dest: " << distMapVal[dest] << endl;
-	}
-	cout << "C++ Output END" << endl;
-	cout << "***********************************************" << endl;
-    //cout << "Path cost to orig: " << distMapVal[orig] << endl;
-    //printf("%i\n", distMapVal[start]);
-}
-
-SPT_LEM_2Heap::~SPT_LEM_2Heap()
+SPT_LEM::~SPT_LEM()
 {
     //dtor
-    delete dijk;
-	delete distMap;
-	delete length;
+    /*if (this->bidirectional)
+        delete bijk;
+    else
+        delete dijk;*/
 }

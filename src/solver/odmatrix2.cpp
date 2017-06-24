@@ -27,8 +27,8 @@ void OriginDestinationMatrix2::Solve(Network& net)
 {
     this->net = &net;
 
-    unsigned int arcCount = net.GetCurrentArcCount();
-    unsigned int nodeCount = net.GetCurrentNodeCount();
+    uint32_t arcCount = net.GetCurrentArcCount();
+    uint32_t nodeCount = net.GetCurrentNodeCount();
 
     if (destinationNodes.size() == 0 || originNodes.size() == 0)
     {
@@ -42,7 +42,7 @@ void OriginDestinationMatrix2::Solve(Network& net)
         solve(net, originNodes, destinationNodes, isDirected);
     }
 }
-void OriginDestinationMatrix2::checkSPTHeapCard(unsigned int arcCount, unsigned int nodeCount)
+void OriginDestinationMatrix2::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount)
 {
     if (sptHeapCard == -1)
     {
@@ -62,19 +62,19 @@ void OriginDestinationMatrix2::checkSPTHeapCard(unsigned int arcCount, unsigned 
 /**
 * n - n
 */
-void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
-                                vector<unsigned int>& dests, bool isDirected)
+void OriginDestinationMatrix2::solve (Network& net, vector<uint32_t>& origs,
+                                vector<uint32_t>& dests, bool isDirected)
 {
     //vector<long> ign = { 0, -1, (long)4294967295, (long)4261281277 };
     // 0 is a valid ignore value for linux!
     //TODO check in windows
     vector<long> ign  { -1, (long)4294967295, (long)4261281277 };
 
-    unsigned int nmax;
-    unsigned int anz;
+    uint32_t nmax;
+    uint32_t anz;
 
-    vector<unsigned int> sNds;
-    vector<unsigned int> eNds;
+    vector<uint32_t> sNds;
+    vector<uint32_t> eNds;
     vector<double> supply;
     vector<double> costs;
     vector<double> caps;
@@ -98,7 +98,7 @@ void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
     int counter = 0;
     auto origsSize = origs.size();
 
-    //for (unsigned int orig : origs)
+    //for (uint32_t orig : origs)
     /* OpenMP only wants iterator style in for-loops - no auto for loops
        The loop for the ODMatrix Calculation is being computed paralell with the critical keyword.
     */
@@ -117,18 +117,20 @@ void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
                                         isDirected));
             break;
         default:
+            lspt = shared_ptr<ISPTree>(new netxpert::core::ODM_LEM_2Heap(net.GetMaxNodeCount(), net.GetMaxArcCount(),
+                                        isDirected));
             break;
     }
 
-    lspt->LoadNet( static_cast<unsigned int>( net.GetMaxNodeCount() ), static_cast<unsigned int>( net.GetMaxArcCount()),
-                        static_cast<unsigned int>( net.GetMaxNodeCount() ),static_cast<unsigned int>( net.GetMaxArcCount() ),
+    lspt->LoadNet( static_cast<uint32_t>( net.GetMaxNodeCount() ), static_cast<uint32_t>( net.GetMaxArcCount()),
+                        static_cast<uint32_t>( net.GetMaxNodeCount() ),static_cast<uint32_t>( net.GetMaxArcCount() ),
                         caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
 
     nmax = lspt->MCFnmax();
     anz = lspt->MCFnmax();
 
-    vector<unsigned int> pre;
-    vector<unsigned int> nodes;
+    vector<uint32_t> pre;
+    vector<uint32_t> nodes;
 
     pre.reserve(anz + 1);
     nodes.reserve(anz + 1);
@@ -150,7 +152,7 @@ void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
 
     lspt->GetPredecessors(pre.data());
 
-    unordered_map<unsigned int,unsigned int> arcs;
+    unordered_map<uint32_t,uint32_t> arcs;
     arcs.reserve(lspt->MCFmmax());
     int i;
     //omp: local arcs --> no concurrent writes per thread
@@ -166,14 +168,14 @@ void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
 
     // Get all routes from orig to dest in nodes-List
 
-    //for (unsigned int dest : dests)
+    //for (uint32_t dest : dests)
     //{
 
     LOGGER::LogDebug("Arc predecessors: ");
     for (auto arc : arcs)
         LOGGER::LogDebug("Arc: " + to_string(arc.first) + "->" +to_string(arc.second));
 
-    vector<unsigned int> route;
+    vector<uint32_t> route;
     for (auto orig : this->originNodes)
     {
         LOGGER::LogDebug("Orig: " + to_string(orig) + "..");
@@ -194,7 +196,7 @@ void OriginDestinationMatrix2::solve (Network& net, vector<unsigned int>& origs,
                     //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
                     // bei sps auch die Vektoren geleert.
                     shortestPaths.insert( make_pair( ODPair {orig, dest},
-                                          make_pair( route, costPerRoute ) ));//vector<unsigned int> (route),
+                                          make_pair( route, costPerRoute ) ));//vector<uint32_t> (route),
                                                      //   costPerRoute)) );
                     odMatrix.insert( make_pair( ODPair {orig, dest},
                                         costPerRoute));
@@ -245,39 +247,39 @@ void OriginDestinationMatrix2::SetSPTHeapCard(int heapCard)
     this->sptHeapCard = heapCard;
 }
 
-vector<unsigned int> OriginDestinationMatrix2::GetOrigins() const
+vector<uint32_t> OriginDestinationMatrix2::GetOrigins() const
 {
     return this->originNodes;
 }
-void OriginDestinationMatrix2::SetOrigins(vector<unsigned int>& origs)
+void OriginDestinationMatrix2::SetOrigins(vector<uint32_t>& origs)
 {
     this->originNodes = origs;
 }
-void OriginDestinationMatrix2::SetOrigins(vector<pair<unsigned int, string>>& origs)
+void OriginDestinationMatrix2::SetOrigins(vector<pair<uint32_t, string>>& origs)
 {
-    vector<unsigned int> newOrigs;
+    vector<uint32_t> newOrigs;
     for (auto s : origs)
         newOrigs.push_back(s.first);
     this->originNodes = newOrigs;
 }
 
-vector<unsigned int> OriginDestinationMatrix2::GetDestinations() const
+vector<uint32_t> OriginDestinationMatrix2::GetDestinations() const
 {
     return this->destinationNodes;
 }
-void OriginDestinationMatrix2::SetDestinations(vector<unsigned int>& dests)
+void OriginDestinationMatrix2::SetDestinations(vector<uint32_t>& dests)
 {
     this->destinationNodes = dests;
 }
 
-void OriginDestinationMatrix2::SetDestinations(vector<pair<unsigned int, string>>& dests)
+void OriginDestinationMatrix2::SetDestinations(vector<pair<uint32_t, string>>& dests)
 {
-    vector<unsigned int> newDests;
+    vector<uint32_t> newDests;
     for (auto e : dests)
         newDests.push_back(e.first);
     this->destinationNodes = newDests;
 }
-vector<unsigned int> OriginDestinationMatrix2::GetReachedDests() const
+vector<uint32_t> OriginDestinationMatrix2::GetReachedDests() const
 {
     return this->reachedDests;
 }
@@ -358,7 +360,7 @@ void OriginDestinationMatrix2::SaveResults(const std::string& resultTableName,
 						auto kv = *it;
 						ODPair key = kv.first;
 						CompressedPath value = kv.second;
-						std::vector<unsigned int> ends = value.first;
+						std::vector<uint32_t> ends = value.first;
 						std::vector<InternalArc> route;
 						std::unordered_set<std::string> arcIDlist;
 
@@ -408,7 +410,7 @@ void OriginDestinationMatrix2::SaveResults(const std::string& resultTableName,
             string arcIDs = "";
             ODPair key = kv.first;
             CompressedPath value = kv.second;
-            vector<unsigned int> ends = value.first;
+            vector<uint32_t> ends = value.first;
             double costPerPath = value.second;
             vector<InternalArc> route;
             unordered_set<string> arcIDlist;
@@ -468,7 +470,7 @@ void OriginDestinationMatrix2::SaveResults(const std::string& resultTableName,
     }
 }
 
-vector<InternalArc> OriginDestinationMatrix2::UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const
+vector<InternalArc> OriginDestinationMatrix2::UncompressRoute(uint32_t orig, vector<uint32_t>& ends) const
 {
     vector<InternalArc> startsNends;
     for (int i = 0; i < ends.size(); i++)
@@ -481,8 +483,8 @@ vector<InternalArc> OriginDestinationMatrix2::UncompressRoute(unsigned int orig,
     return startsNends;
 }
 
-void OriginDestinationMatrix2::convertInternalNetworkToSolverData(Network& net, vector<unsigned int>& sNds,
-            vector<unsigned int>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
+void OriginDestinationMatrix2::convertInternalNetworkToSolverData(Network& net, vector<uint32_t>& sNds,
+            vector<uint32_t>& eNds, vector<double>& supply, vector<double>& caps, vector<double>& costs)
 {
     // Die Größe der Arrays müssen passen (ob 0 drin steht ist egal, sonst gibts später bei Dispose
     // das böse Erwachen in Form eines Heap Corruption errors bzw. einer System Access Violation
@@ -521,7 +523,7 @@ void OriginDestinationMatrix2::convertInternalNetworkToSolverData(Network& net, 
     /*cout << "net supply size: " << net.GetNodeSupplies().size() <<endl;
     for (auto item : net.GetNodeSupplies() )
     {
-        unsigned int key = item.first;
+        uint32_t key = item.first;
         NodeSupply value = item.second;
         // key is 1-based thus -1 for index
         // only care for real supply and demand values
@@ -531,12 +533,12 @@ void OriginDestinationMatrix2::convertInternalNetworkToSolverData(Network& net, 
     //cout << "ready converting data" << endl;
 }
 
-bool OriginDestinationMatrix2::validateNetworkData(Network& net, vector<unsigned int>& origs, vector<unsigned int>& dests)
+bool OriginDestinationMatrix2::validateNetworkData(Network& net, vector<uint32_t>& origs, vector<uint32_t>& dests)
 {
     bool valid = false;
 
     //IMPORTANT Checks
-    for (unsigned int orig : origs)
+    for (uint32_t orig : origs)
     {
         if (orig == 0){
             LOGGER::LogFatal("Origin Node ID must be greater than zero!");
@@ -563,12 +565,12 @@ bool OriginDestinationMatrix2::validateNetworkData(Network& net, vector<unsigned
     return valid;
 }
 
-double OriginDestinationMatrix2::buildCompressedRoute(vector<unsigned int>& route, unsigned int orig, unsigned int dest,
-                                                unordered_map<unsigned int, unsigned int>& arcPredescessors)
+double OriginDestinationMatrix2::buildCompressedRoute(vector<uint32_t>& route, uint32_t orig, uint32_t dest,
+                                                unordered_map<uint32_t, uint32_t>& arcPredescessors)
 {
     double totalCost = 0;
     //Neu - nur die Enden hinzufuegen
-    unsigned int curr = dest;
+    uint32_t curr = dest;
 
     while (curr != orig)
     {

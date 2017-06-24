@@ -15,16 +15,14 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-std=c++11" />
-					<Add option="-pg" />
 					<Add option="-m64" />
 					<Add option="-g" />
 					<Add directory="../bin/Debug" />
 				</Compiler>
 				<Linker>
-					<Add option="-pg" />
 					<Add option="-m64" />
-					<Add library="/home/hahne/dev/netxpert/bin/Debug/libnetxpert.so" />
-					<Add directory="../bin/Debug" />
+					<Add library="netxpert" />
+					<Add directory="/home/hahne/dev/netxpert1_0/bin/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -37,14 +35,14 @@
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-O3" />
 					<Add option="-Wall" />
-					<Add option="-std=c++11" />
+					<Add option="-std=c++14" />
 					<Add option="-m64" />
 					<Add directory="../bin/Release" />
 				</Compiler>
 				<Linker>
 					<Add option="-m64" />
-					<Add library="/home/hahne/dev/netxpert/bin/Release/libnetxpert.so" />
-					<Add directory="../bin/Release" />
+					<Add library="netxpert" />
+					<Add directory="/home/hahne/dev/netxpert1_0/bin/Release" />
 				</Linker>
 			</Target>
 		</Build>
@@ -62,16 +60,22 @@
 			<Add directory="../libs/geos-3.4.2/include" />
 			<Add directory="../libs/lemon-1.3.1" />
 			<Add directory="../include/simple" />
-			<Add directory="/usr/local/boost_1_57_0" />
+			<Add directory="/home/hahne/dev/lemon-contrib/lemon-astar/src" />
 		</Compiler>
 		<Linker>
 			<Add option="-fopenmp" />
-			<Add directory="../libs/FileGDB_API/lib" />
+			<Add library="FileGDBAPI" />
+			<Add library="fgdbunixrtl" />
+			<Add directory="/home/hahne/dev/1_libs/FileGDB_API-64gcc51/lib" />
 		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
-			<debugger />
+			<debugger>
+				<search_path add="/home/hahne/dev/netxpert1_0/src" />
+				<search_path add="/home/hahne/dev/netxpert1_0/src/core" />
+				<search_path add="/home/hahne/dev/netxpert1_0/src/simple" />
+			</debugger>
 			<envvars />
 		</Extensions>
 	</Project>
