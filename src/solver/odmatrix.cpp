@@ -19,12 +19,14 @@ OriginDestinationMatrix::OriginDestinationMatrix(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-void OriginDestinationMatrix::Solve(string net){
+void
+ OriginDestinationMatrix::Solve(std::string net) {
     throw;
 }
 
-void OriginDestinationMatrix::Solve(netxpert::InternalNet& net)
-{
+void
+ OriginDestinationMatrix::Solve(netxpert::InternalNet& net) {
+
     LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
     this->net = &net;
@@ -56,8 +58,10 @@ void OriginDestinationMatrix::Solve(netxpert::InternalNet& net)
         solve(net, originNodes, destinationNodes, isDirected);
     }
 }
-void OriginDestinationMatrix::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount)
-{
+
+void
+ OriginDestinationMatrix::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount) {
+
     if (sptHeapCard == -1)
     {
         if (isDirected) {
@@ -118,7 +122,6 @@ void
     }
 
     //Read the network
-    //TODO
     auto sg = convertInternalNetworkToSolverData(net);
     lspt->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
 
@@ -138,8 +141,7 @@ void
                             to_string(routesLeft) +" left..");
         // Set dests to lemon::INVALID --> no dest setting at all!
         lspt->SetDest(lemon::INVALID);
-        //lspt->SetDest(dests[2]);
-        //LOGGER::LogDebug("Starting to solve SPT..");
+
         lspt->SolveSPT();
         //LOGGER::LogDebug("SPT solved! ");
 
@@ -246,8 +248,7 @@ vector<netxpert::data::node_t>
 }
 
 vector<uint32_t>
- OriginDestinationMatrix::GetDestinationIDs() const
-{
+ OriginDestinationMatrix::GetDestinationIDs() const {
     vector<uint32_t> result;
     for (auto n : this->destinationNodes) {
         result.push_back(this->net->GetNodeID(n));
@@ -352,9 +353,10 @@ void
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
 
+        //Processing and Saving Results are handled within net.ProcessResultArcs()
         std::string arcIDs = "";
         std::unordered_set<string> totalArcIDs;
-        std::map<ODPair, CompressedPath>::const_iterator it;
+        std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath
 
 		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
 		{
@@ -370,7 +372,7 @@ void
 						auto kv = *it;
 						ODPair key = kv.first;
 						CompressedPath value = kv.second;
-						/* TODO resolve pred path to arcids */
+						/* resolve pred path to arcids */
 						/* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
 						auto path = value.first;
 
@@ -391,7 +393,7 @@ void
 
 			for (string id : totalArcIDs) {
 				arcIDs += id += ",";
-            		}
+            }
 
 			if (arcIDs.size() > 0)
 			{
