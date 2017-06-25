@@ -19,12 +19,14 @@ ShortestPathTree::ShortestPathTree(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-void ShortestPathTree::Solve(string net){
+void
+ ShortestPathTree::Solve(std::string net) {
     throw;
 }
 
-void ShortestPathTree::Solve(netxpert::InternalNet& net)
-{
+void
+ ShortestPathTree::Solve(netxpert::InternalNet& net) {
+
     LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
     this->net = &net;
@@ -64,8 +66,9 @@ void ShortestPathTree::Solve(netxpert::InternalNet& net)
         solve(net, originNode, destinationNodes, isDirected);
     }
 }
-void ShortestPathTree::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount)
-{
+void
+ ShortestPathTree::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount) {
+
     if (sptHeapCard == -1)
     {
         if (isDirected) {
@@ -82,8 +85,9 @@ void ShortestPathTree::checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount)
 * 1 - all
 * The whole shortest path tree is computed from the root node <orig>.
 */
-void ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig, bool isDirected)
-{
+void
+ ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig, bool isDirected) {
+
     try
     {
         switch (algorithm)
@@ -168,11 +172,13 @@ void ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig, boo
     }//omp critical
     this->optimum = totalCost;
 }
+
 /**
 * 1 - 1
 * The s-t shortest path is computed from the root node <orig> to the destination node <dest>.
 */
-void ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig,
+void
+ ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig,
                                 netxpert::data::node_t dest, bool isDirected) {
     try
     {
@@ -275,7 +281,8 @@ void ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig,
 * destination nodes <dests> is being retrieved. This is normally cheaper than computing each s-t pair
 * (even with bidirectional search).
 */
-void ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig,
+void
+ ShortestPathTree::solve (InternalNet& net, netxpert::data::node_t orig,
                                 std::vector<netxpert::data::node_t> dests, bool isDirected) {
     try
     {
@@ -364,65 +371,61 @@ SPTAlgorithm
     return this->algorithm;
 }
 
-void ShortestPathTree::SetAlgorithm(SPTAlgorithm sptAlgorithm)
-{
+void
+ ShortestPathTree::SetAlgorithm(SPTAlgorithm sptAlgorithm) {
     this->algorithm = sptAlgorithm;
 }
 
 GEOMETRY_HANDLING
- ShortestPathTree::GetGeometryHandling() const
-{
+ ShortestPathTree::GetGeometryHandling() const {
     return this->geometryHandling;
 }
-void ShortestPathTree::SetGeometryHandling(GEOMETRY_HANDLING geomHandling)
-{
+void
+ ShortestPathTree::SetGeometryHandling(GEOMETRY_HANDLING geomHandling) {
     this->geometryHandling = geomHandling;
 }
 
 int
- ShortestPathTree::GetSPTHeapCard() const
-{
+ ShortestPathTree::GetSPTHeapCard() const {
     return this->sptHeapCard;
 }
+
 void
- ShortestPathTree::SetSPTHeapCard(int heapCard)
-{
+ ShortestPathTree::SetSPTHeapCard(int heapCard) {
     this->sptHeapCard = heapCard;
 }
 
 const netxpert::data::node_t
- ShortestPathTree::GetOrigin() const
-{
+ ShortestPathTree::GetOrigin() const {
     return this->originNode;
 }
+
 void
- ShortestPathTree::SetOrigin(const netxpert::data::node_t  orig)
-{
+ ShortestPathTree::SetOrigin(const netxpert::data::node_t  orig) {
     this->originNode = orig;
 }
 
 vector<netxpert::data::node_t>
- ShortestPathTree::GetDestinations() const
-{
+ ShortestPathTree::GetDestinations() const {
     return this->destinationNodes;
 }
+
 vector<uint32_t>
- ShortestPathTree::GetDestinationIDs() const
-{
+ ShortestPathTree::GetDestinationIDs() const {
     vector<uint32_t> result;
     for (auto n : this->destinationNodes) {
         result.push_back(this->net->GetNodeID(n));
     }
     return result;
 }
+
 void
- ShortestPathTree::SetDestinations(const vector<netxpert::data::node_t >& dests)
-{
+ ShortestPathTree::SetDestinations(const vector<netxpert::data::node_t >& dests) {
     this->destinationNodes = dests;
 }
+
 void
- ShortestPathTree::SetDestinations(const vector<uint32_t >& dests)
-{
+ ShortestPathTree::SetDestinations(const vector<uint32_t >& dests) {
     vector<netxpert::data::node_t> tmp;
     for (auto n : dests) {
         tmp.push_back(this->net->GetNodeFromID(n));
@@ -431,13 +434,12 @@ void
 }
 
 vector<netxpert::data::node_t>
- ShortestPathTree::GetReachedDests() const
-{
+ ShortestPathTree::GetReachedDests() const {
     return this->reachedDests;
 }
+
 vector<uint32_t>
- ShortestPathTree::GetReachedDestIDs() const
-{
+ ShortestPathTree::GetReachedDestIDs() const {
     vector<uint32_t> result;
     for (auto n : this->reachedDests) {
         result.push_back(this->net->GetNodeID(n));
@@ -495,7 +497,6 @@ void ShortestPathTree::SaveResults(const std::string& resultTableName,
                 writer->OpenNewTransaction();
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
                 writer->CommitCurrentTransaction();
-                writer->CloseConnection();
             }
                 break;
         }
@@ -504,10 +505,9 @@ void ShortestPathTree::SaveResults(const std::string& resultTableName,
         writer->OpenNewTransaction();
 
         //Processing and Saving Results are handled within net.ProcessResultArcs()
-
-	      std::string arcIDs = "";
+        std::string arcIDs = "";
         std::unordered_set<string> totalArcIDs;
-        std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath?
+        std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath
 
 		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
 		{
@@ -592,7 +592,7 @@ void ShortestPathTree::SaveResults(const std::string& resultTableName,
             }//omp single
         }
         }//omp paralell
-
+        LOGGER::LogDebug("Committing..");
         writer->CommitCurrentTransaction();
         writer->CloseConnection();
         LOGGER::LogDebug("Done!");

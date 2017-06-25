@@ -91,9 +91,12 @@
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
+		<Unit filename="include/simple/mstree_simple.h" />
+		<Unit filename="include/simple/netbuilder_simple.h" />
 		<Unit filename="include/simple/odmatrix_simple.h" />
 		<Unit filename="include/simple/sptree_simple.h" />
 		<Unit filename="include/slitewriter.h" />
+		<Unit filename="include/solver/isolines.h" />
 		<Unit filename="include/solver/isolver.h" />
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />
@@ -166,14 +169,8 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/simple/mstree_simple.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/simple/netbuilder_simple.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/simple/mstree_simple.cpp" />
+		<Unit filename="src/simple/netbuilder_simple.cpp" />
 		<Unit filename="src/simple/odmatrix_simple.cpp" />
 		<Unit filename="src/simple/sptree_simple.cpp" />
 		<Unit filename="src/simple/transp_simple.cpp">
@@ -181,10 +178,7 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="src/slitewriter.cpp" />
-		<Unit filename="src/solver/isolines.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/solver/isolines.cpp" />
 		<Unit filename="src/solver/mcflow.cpp">
 			<Option compile="0" />
 			<Option link="0" />
