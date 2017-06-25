@@ -71,16 +71,15 @@ void
                 writer->OpenNewTransaction();
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinSpanningTreeSolver, true);
                 writer->CommitCurrentTransaction();
-                writer->CloseConnection();
             }
                 break;
         }
 
         LOGGER::LogDebug("Writing Geometries..");
         //Processing and Saving Results are handled within net.ProcessResultArcs()
-
         std::string arcIDs = "";
         std::unordered_set<string> arcIDlist = this->net->GetOrigArcIDs(this->GetMinimumSpanningTree());
+
         for (string id : arcIDlist)
         {
             // 13-14 min on 840000 arcs

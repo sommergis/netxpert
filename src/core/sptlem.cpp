@@ -123,6 +123,8 @@ void
                          ) {
                     this->dijk->processNextNode();
                     currentNode = this->dijk->nextNode();
+                    //todo: save all processed nodes (that are within the search radius)
+                    //and keep all arcs with processed nodes as end nodes
                 }
             }
         }

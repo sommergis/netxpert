@@ -19,7 +19,7 @@ namespace netxpert {
 			int Build();
 
 			std::string GetBuiltNetworkAsJSON();
-			std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
+			std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
 
 		private:
 			std::unique_ptr<netxpert::NetworkBuilder> builder;
