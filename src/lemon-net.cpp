@@ -149,7 +149,7 @@ const cost_t
 *
 * (documentation goes here)
 */
-netxpert::data::ArcData
+const netxpert::data::ArcData
 //netxpert::data::ArcData2
  InternalNet::GetArcData(const arc_t& arc) {
     netxpert::data::ArcData result;
@@ -162,6 +162,14 @@ netxpert::data::ArcData
     return result;
 }
 
+void
+ InternalNet::SetArcData(const arc_t& arc, const ArcData& arcData) {
+
+    (*this->extArcIDMap)[arc] = arcData.extArcID; //can be 'dummy' in case of MCF
+    (*this->costMap)[arc] = arcData.cost;
+    (*this->capMap)[arc] = arcData.capacity;
+}
+
 const std::unordered_set<std::string>
  InternalNet::GetOrigArcIDs(const std::vector<netxpert::data::arc_t>& path){
 
@@ -172,12 +180,12 @@ const std::unordered_set<std::string>
 
     for (auto arc : path) {
         auto extArcID = (*this->extArcIDMap)[arc];
-        if (extArcID > 0) {
+//        if (extArcID > 0) {
 //            std::cout << extArcID << std::endl;
-            //auto extArcID = ((*this->arcDataMap)[it]).extArcID;
-            resultIDs.insert(std::to_string(extArcID));
-        }
-        //resultIDs.insert(extArcID);
+//            resultIDs.insert(std::to_string(extArcID));
+//
+        if (!extArcID.empty())
+            resultIDs.insert(extArcID);
     }
 
     return resultIDs;
@@ -201,6 +209,14 @@ const uint32_t
 const netxpert::data::node_t
  InternalNet::GetNodeFromID(const uint32_t nodeID) {
     return this->g->nodeFromId(nodeID);
+}
+const netxpert::data::node_t
+ InternalNet::GetSourceNode(const netxpert::data::arc_t& arc) {
+    return this->g->source(arc);
+}
+const netxpert::data::node_t
+ InternalNet::GetTargetNode(const netxpert::data::arc_t& arc) {
+    return this->g->target(arc);
 }
 
 /** @brief (one liner)
@@ -256,6 +272,12 @@ const netxpert::data::supply_t
 const netxpert::data::graph_t::NodeIt
  InternalNet::GetNodesIter() {
     netxpert::data::graph_t::NodeIt iter(*this->g);
+    return iter;
+}
+
+const netxpert::data::graph_t::ArcIt
+ InternalNet::GetArcsIter() {
+    netxpert::data::graph_t::ArcIt iter(*this->g);
     return iter;
 }
 
@@ -341,7 +363,8 @@ const uint32_t
     const cost_t capacity    = closestArcAndPoint.capacity;
 
     //2. Wenn die originale Kante bereits aufgebrochen wurde hol die nächste Linie zum Punkt aus den aufgebrochenen Kanten
-    auto origArc = GetArcFromOrigID(std::stoul(extArcID));
+//    auto origArc = GetArcFromOrigID(std::stoul(extArcID));
+    auto origArc = GetArcFromOrigID(extArcID);
     //bool isArcSplitAlready = (*this->splittedArcsMap)[origArc];
     bool isArcUnchanged = ( (*this->arcChangesMap)[origArc] == ArcState::original ) ? true : false;
 
@@ -398,22 +421,22 @@ const uint32_t
                         case AddedNodeType::EndArc:
                             addedEndPoints.insert(make_pair(resultNode, pVal));
                             break;
-                        std::cout << "point " << point.toString() << std::endl;
+//                        std::cout << "point " << point.toString() << std::endl;
                     }
 
                     //add nodeSupply
                     (*this->nodeSupplyMap)[resultNode] = nodeSupply;
-                    this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
                 }
                 break;
             }
             case StartOrEndLocationOfLine::Intermediate: {
-                //point lies somewhere between start and end coordinate of the line --> split original line
+                LOGGER::LogDebug("Closest point lies somewhere between start and end coordinate of the line..");
+                // --> split original line
 
                 //unused
                 ExternalArc ftPair  {extFromNode, extToNode};
-                ArcData val  {std::stoul(extArcID), cost, capacity};
-//                ArcData val  {extArcID, cost, capacity};
+//                ArcData val  {std::stoul(extArcID), cost, capacity};
+                ArcData val  {extArcID, cost, capacity};
                 pair<ExternalArc,ArcData> arcData = make_pair(ftPair, val);
 
                 auto splittedLine = getSplittedClosestOrigArcToPoint(point, treshold, arcData, closestArc);
@@ -422,7 +445,9 @@ const uint32_t
                 resultNode = insertNewNode(true, splittedLine, extArcID, extNodeID, point, startOrEnd);
 
                 //add nodeSupply
+                std::cout << "adding node supply of "<< this->g->id(resultNode) << ": "<<nodeSupply << std::endl;
                 (*this->nodeSupplyMap)[resultNode] = nodeSupply;
+                std::cout << "extNodeID: " << extNodeID << std::endl;
                 this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
 
                 //arc changes
@@ -468,7 +493,6 @@ const node_t
     auto origArc = splittedLine.arc;
 
     //Get relative cost to geometry length
-    //Capacity is not relative!
     auto segments = splittedLine.segments;
     auto ptr1 = segments.first;
     auto ptr2 = segments.second;
@@ -483,12 +507,15 @@ const node_t
     auto newArc1Cost = getRelativeValueFromGeomLength<netxpert::data::cost_t>(splittedLine.cost, completeLine, segment1);
     auto newArc2Cost = getRelativeValueFromGeomLength<netxpert::data::cost_t>(splittedLine.cost, completeLine, segment2);
 
+    //Capacity is not relative!
+
     auto newNode = this->g->addNode();
 
     auto origFromNode   = this->g->source(origArc);
     auto origToNode     = this->g->target(origArc);
 
     //detect if arc is reverse also in the graph
+    //TODO Check for performance on large graphs
     auto revOrigArc = lemon::findArc(*this->g, this->g->target(origArc),this->g->source(origArc), lemon::INVALID);
     if (revOrigArc != lemon::INVALID)
         isDirected = false;
@@ -515,6 +542,10 @@ const node_t
         //set in cost map
         (*this->costMap)[newArc1] = newArc1Cost;
         (*this->costMap)[newArc2] = newArc2Cost;
+
+        //cap map - not relative to segment length!
+        (*this->capMap)[newArc1] = splittedLine.capacity;
+        (*this->capMap)[newArc2] = splittedLine.capacity;
 
         //disable orig Arc in arcFilterMap
         //-->Remove orig arc from internal graph
@@ -579,12 +610,17 @@ const node_t
         (*this->costMap)[revNewArc1] = newArc1Cost;
         (*this->costMap)[revNewArc2] = newArc2Cost;
 
+        //cap map - not relative to segment length!
+        (*this->capMap)[newArc1] = splittedLine.capacity;
+        (*this->capMap)[newArc2] = splittedLine.capacity;
+        (*this->capMap)[revNewArc1] = splittedLine.capacity;
+        (*this->capMap)[revNewArc2] = splittedLine.capacity;
+
         //disable orig Arc in arcFilterMap
         //-->Remove orig arc from internal graph
         (*this->arcFilterMap)[origArc] = false;
 
-        //-->Remove reversed orig arc also from internal graph+
-        //TODO Check for performance on large graphs
+        //-->Remove reversed orig arc also from internal graphs
         if (revOrigArc != lemon::INVALID)
             (*this->arcFilterMap)[revOrigArc] = false;
 
@@ -603,8 +639,7 @@ const node_t
             addedEndPoints.insert( make_pair(newNode, AddedPoint {extNodeID, point}) );
             break;
     }
-    std::cout << "point " << point.toString() << std::endl;
-    std::cout << "point " << addedStartPoints.at(newNode).coord.toString() << std::endl;
+    //std::cout << "point " << point.toString() << std::endl;
 
     return newNode;
 }
@@ -698,7 +733,7 @@ const uint32_t
     assert(this->nodeIDMap.count(extNodeID) == 0);
 
     NewNode n { extNodeID, Coordinate {x, y}, supply};
-    LOGGER::LogDebug("X: " + to_string( n.coord.x ) +  " Y: "+ to_string( n.coord.y ) );
+
     const string arcsTableName  = NETXPERT_CNFG.ArcsTableName;
     const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
 
@@ -861,11 +896,11 @@ void
 //TODO: Geometry_Handling
 //Isolines
 void
- InternalNet::ProcessIsoResultArcsMem(const std::string& orig, const double cost,
-                                     const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
-                                     const std::string& resultTableName, netxpert::io::DBWriter& writer,
-                                     SQLite::Statement& qry,
-                                     const std::unordered_map<ExtNodeID, std::vector<double> > cutOffs)
+ InternalNet::ProcessIsoResultArcsMem(const std::string& orig, const netxpert::data::cost_t cost,
+                                      const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
+                                      const std::string& resultTableName, netxpert::io::DBWriter& writer,
+                                      SQLite::Statement& qry,
+                                      const std::unordered_map<ExtNodeID, std::vector<double> > cutOffs)
 {
     using namespace netxpert::cnfg;
     std::vector<geos::geom::Geometry*> routeParts;
@@ -877,6 +912,31 @@ void
             routeParts = addRoutePartGeoms(routeNodeArcRep);
             saveIsoResultsMem(orig, cost, arcIDs, routeParts, resultTableName, writer, qry,
                             cutOffs);
+        }
+        break;
+    }
+}
+
+
+void
+ InternalNet::ProcessMCFResultArcsMem(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
+                                      const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                      const std::string& arcIDs, std::vector<netxpert::data::arc_t>& routeNodeArcRep,
+                                      const std::string& resultTableName, netxpert::io::DBWriter& writer,
+                                      SQLite::Statement& qry //can be null in case of ESRI FileGDB
+
+                                  )
+{
+
+    using namespace netxpert::cnfg;
+    std::vector<geos::geom::Geometry*> routeParts;
+
+    switch (NETXPERT_CNFG.GeometryHandling)
+    {
+        case GEOMETRY_HANDLING::RealGeometry:
+        {
+            routeParts = addRoutePartGeoms(routeNodeArcRep);
+            saveMCFResultsMem(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer, qry);
         }
         break;
     }
@@ -1065,7 +1125,7 @@ void
 }
 
 //Isolines
-void InternalNet::saveIsoResultsMem(const std::string orig, const double cost,
+void InternalNet::saveIsoResultsMem(const std::string orig, const netxpert::data::cost_t cost,
                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
                                const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                SQLite::Statement& qry,
@@ -1209,7 +1269,155 @@ void InternalNet::saveIsoResultsMem(const std::string orig, const double cost,
 
 }
 
+//MCF
+void InternalNet::saveMCFResultsMem(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,
+                                 const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                 const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                 const std::string& resultTableName, netxpert::io::DBWriter& writer,
+                                 SQLite::Statement& qry ) {
 
+    using namespace std;
+    using namespace geos::geom;
+    using namespace geos::operation::linemerge;
+    using namespace netxpert::cnfg;
+    using namespace netxpert::io;
+    using namespace netxpert::utils;
+
+    bool isResultDBequalNetXpertDB = false;
+    if (NETXPERT_CNFG.ResultDBPath == NETXPERT_CNFG.NetXDBPath)
+    {
+        isResultDBequalNetXpertDB = true;
+    }
+
+    switch (NETXPERT_CNFG.ResultDBType)
+    {
+        case RESULT_DB_TYPE::SpatiaLiteDB:
+        {
+            //special case: we can write directly into netxpert db without creating a new db
+            if (isResultDBequalNetXpertDB)
+            {
+                auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+                //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
+                //MultilineString could also contain only one Linestring
+                unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+
+                #pragma omp critical
+                {
+                sldb.MergeAndSaveResultArcs(orig, dest, cost, capacity, flow, NETXPERT_CNFG.ArcsGeomColumnName,
+                    NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.ArcsTableName,
+                    arcIDs, *mLine, resultTableName);
+                }
+            }
+            else
+            {
+                //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
+                //MultilineString could also contain only one Linestring
+                unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+
+                unique_ptr<MultiLineString> mLineDB;
+                //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
+
+                //load geometry from db
+                //TODO: 0,5 bis 1 sec pro Ladevorgang
+                //Stopwatch<> sw;
+                //sw.start();
+
+                if (arcIDs.size() > 0)
+                    mLineDB = move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
+                //sw.stop();
+                //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
+                //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - merge");
+                //merge routeParts with original arcs
+                //sw.start();
+                LineMerger lm;
+
+                if (! (mLine->isEmpty()) )
+                    lm.add(mLine.get());
+
+                if (mLineDB)
+                    lm.add(mLineDB.get());
+
+                std::unique_ptr< vector<LineString *> > mls ( lm.getMergedLineStrings() );
+                vector<Geometry*> mls2;
+                for (auto& l : *mls)
+                {
+                    //if (!l->isEmpty())
+                    mls2.push_back(dynamic_cast<Geometry*>(l));
+                }
+
+                unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
+
+                //sw.stop();
+                //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
+
+                //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - save to DB");
+
+                //sw.start();
+                #pragma omp critical
+                {
+                auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+                //save merged route geometry to db
+                LOGGER::LogDebug("cap: save sqlite arc " + to_string(capacity) );
+                sldb.SaveResultArc(orig, dest, cost, capacity, flow, *route, resultTableName, qry);
+                //sw.stop();
+                //LOGGER::LogDebug("SaveResultArc() took " + to_string(sw.elapsed())+" mcs");
+                }
+            }
+        }
+            break;
+
+        case RESULT_DB_TYPE::ESRI_FileGDB:
+        {
+            /*
+                Get all geometries from Spatialite DB (per arcIDs) of one route and merge them with
+                all the segments of routeParts;
+                Save the geometry with SaveSolveQueryToDB()
+            */
+            unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+
+            unique_ptr<MultiLineString> mLineDB;
+            //Stopwatch<> sw;
+            //sw.start();
+            if (arcIDs.size() > 0)
+                mLineDB = move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
+            //sw.stop();
+            //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
+
+            //merge
+            //sw.start();
+            LineMerger lm;
+            if (! (mLine->isEmpty()) )
+                lm.add(mLine.get());
+
+            if (mLineDB)
+                lm.add(mLineDB.get());
+
+            std::unique_ptr< vector<LineString *> > mls ( lm.getMergedLineStrings() );
+            vector<Geometry*> mls2;
+            for (auto& l : *mls)
+            {
+                //if (!l->isEmpty())
+                mls2.push_back(dynamic_cast<Geometry*>(l));
+            }
+
+            unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
+            //sw.stop();
+            //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
+            auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+            //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - save to DB");
+            #pragma omp critical
+            {
+            //sw.start();
+            fgdb.SaveResultArc(orig, dest, cost, capacity, flow,
+                                *route, resultTableName);
+            //sw.stop();
+            //LOGGER::LogDebug("SaveResultArc() took " + to_string(sw.elapsed())+" mcs");
+            }
+        }
+            break;
+    }
+    //cout << "nexpert::Network - saved" <<endl;
+}
 
 /**
 * For results of original arcs only
@@ -1721,7 +1929,8 @@ void
 
         for (auto& id : arcIDs)
         {
-            LOGGER::LogDebug("Elim arc: " + std::to_string(id) );
+//            LOGGER::LogDebug("Elim arc: " + std::to_string(id) );
+            LOGGER::LogDebug("Elim arc: " + id );
             this->eliminatedArcs.insert(id);
         }
         LOGGER::LogDebug("Got "+ std::to_string(arcIDs.size()) +" intersecting barrier polygons from " + NETXPERT_CNFG.BarrierPolyTableName +".");
@@ -1772,7 +1981,8 @@ void
     for (InputArcs::const_iterator it = arcsTbl.begin(); it != arcsTbl.end(); ++it)
     {
         InputArc arc = *it;
-        extarcid_t externalArcID = std::stoul( arc.extArcID ) ;
+//        extarcid_t externalArcID = std::stoul( arc.extArcID ) ;
+        extarcid_t externalArcID = arc.extArcID;
         // String -> so content of nodeID fields could be string, int or double
         string externalStartNode = arc.extFromNode;
         string externalEndNode = arc.extToNode;
@@ -1936,15 +2146,158 @@ std::vector<std::string>
 }
 
 void
- InternalNet::processArc(const InputArc& arc,
+ InternalNet::processArc(const InputArc& _arc,
                          const node_t internalStartNode,
                          const node_t internalEndNode) {
 
-    auto lem_arc = this->g->addArc(internalStartNode, internalEndNode);
+    auto arc = this->g->addArc(internalStartNode, internalEndNode);
 
-    (*this->extArcIDMap)[lem_arc] = std::stoul(arc.extArcID);
-    (*this->costMap)[lem_arc] = arc.cost;
-    (*this->capMap)[lem_arc] = arc.capacity;
-    (*this->arcFilterMap)[lem_arc] = true;
+//    this->SetArcData(arc, ArcData { std::stoul(_arc.extArcID),
+    this->SetArcData(arc, ArcData { _arc.extArcID,
+                                        _arc.cost,
+                                        _arc.capacity} );
+    (*this->arcFilterMap)[arc] = true;
 }
 //--|Region Network core functions
+
+//-->Region MinCostFlow functions
+
+double
+ InternalNet::calcTotalSupply () {
+
+    supply_t supplyValue = 0;
+    auto nodeIter = this->GetNodesIter();
+    for ( ; nodeIter != lemon::INVALID; ++nodeIter) {
+        auto supply = (*this->nodeSupplyMap)[nodeIter];
+        if (supply > 0)
+            supplyValue += supply;
+    }
+//    std::cout << supplyValue << std::endl;
+    return supplyValue;
+}
+
+double
+ InternalNet::calcTotalDemand () {
+
+    supply_t demandValue = 0;
+    auto nodeIter = this->GetNodesIter();
+    for ( ; nodeIter != lemon::INVALID; ++nodeIter) {
+        auto demand = (*this->nodeSupplyMap)[nodeIter];
+        if (demand < 0)
+            demandValue += demand;
+    }
+//    std::cout << demandValue << std::endl;
+    return abs(demandValue);
+}
+
+MinCostFlowInstanceType
+ InternalNet::GetMinCostFlowInstanceType() {
+
+    using namespace std;
+
+    supply_t totalSupply = calcTotalSupply();
+    supply_t totalDemand = calcTotalDemand();
+
+    LOGGER::LogDebug("Supply - Demand: " + to_string( totalSupply ) + " - " + to_string(totalDemand));
+
+    if (totalSupply > totalDemand)
+        return MinCostFlowInstanceType::MCFExtrasupply;
+    if (totalSupply < totalDemand)
+        return MinCostFlowInstanceType::MCFExtrademand;
+    else
+        return MinCostFlowInstanceType::MCFBalanced;
+}
+
+// Arbeiten mit Dummy Nodes; Ziel ist die Ausgewogene Verteilung von Angebot und Nachfrage
+void
+ InternalNet::TransformUnbalancedMCF(MinCostFlowInstanceType mcfInstanceType) {
+    switch (mcfInstanceType)
+    {
+        case MinCostFlowInstanceType::MCFExtrasupply:
+            transformExtraSupply();
+            break;
+        case MinCostFlowInstanceType::MCFExtrademand:
+            transformExtraDemand();
+            break;
+        case MinCostFlowInstanceType::MCFBalanced: //Nothing to do
+            break;
+        default: //MCFUndefined
+            break;
+    }
+}
+
+void
+ InternalNet::transformExtraDemand() {
+    // Dummy Angebotsknoten mit überschüssiger Nachfrage hinzufügen
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
+    // --> In Networkx schon
+
+    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
+    // siehe getSupplyDemandDifference()
+    processSupplyOrDemand();
+}
+
+void InternalNet::transformExtraSupply() {
+    // Dummy Nachfrageknoten mit überschüssigem Angebot hinzufügen
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
+
+    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
+    // siehe getSupplyDemandDifference()
+    processSupplyOrDemand();
+}
+
+void
+ InternalNet::processSupplyOrDemand() {
+    // Dummy Knoten
+    /*uint32_t newNodeID = GetNodeCount() + 1;
+    internalDistinctNodeIDs.insert(make_pair("dummy", newNodeID));
+    swappedInternalDistinctNodeIDs.insert( make_pair( newNodeID, "dummy" ));*/
+
+    //New dummy node
+    auto newNode = this->g->addNode();
+//    std::cout << "Ausgleich: " << getSupplyDemandDifference() << endl;
+    auto diff = getSupplyDemandDifference();
+
+    //NodeSupply sup {"dummy", diff }; //Differenz ist positiv oder negativ, je nach Überschuss
+    //nodeSupplies.insert( make_pair( newNodeID, sup));
+    (*this->nodeSupplyMap)[newNode] = diff;
+
+    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    const cost_t cost = 0;
+    const capacity_t capacity = DOUBLE_INFINITY;
+    auto nodeIter = this->GetNodesIter();
+    for (; nodeIter != lemon::INVALID; ++nodeIter) //Filter dummy und transshipment nodes (=0) raus
+    {
+        auto curNode = nodeIter;
+        if (curNode == newNode) //Filter new dummy
+            continue;
+        if ( (*this->nodeSupplyMap)[curNode] == 0) //Filter transshipment nodes (=0)
+            continue;
+
+        arc_t arc;
+        if (diff > 0) {
+            arc = this->g->addArc(newNode, curNode);
+            // enable arc in filters
+            (*this->arcFilterMap)[arc] = true;
+        }
+        else {
+            arc = this->g->addArc(curNode, newNode);
+            // enable arc in filters
+            (*this->arcFilterMap)[arc] = true;
+        }
+
+        ArcData arcData  {"dummy", cost, capacity };
+        this->SetArcData(arc, arcData);
+    }
+}
+
+double
+ InternalNet::getSupplyDemandDifference() {
+    //can be negative or positive
+    return (calcTotalDemand() - calcTotalSupply());
+}
+
+
+//--|Region MinCostFlow functions

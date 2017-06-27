@@ -1,175 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
-	<ActiveTarget name="Release" />
-	<File name="src/core/mstlem.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<ActiveTarget name="Debug" />
+	<File name="libs/SQLiteCpp/Assertion.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1193" topLine="39" />
+			<Cursor1 position="335" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src/dbhelper.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="libs/FileGDB_API/include/Geodatabase.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="44179" topLine="1209" />
+			<Cursor1 position="15232" topLine="266" />
 		</Cursor>
 	</File>
-	<File name="src/core/sptlem.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="src/solver/mcflow.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5256" topLine="122" />
+			<Cursor1 position="9592" topLine="138" />
 		</Cursor>
+		<Folding>
+			<Collapse line="46" />
+		</Folding>
 	</File>
-	<File name="libs/SQLiteCpp/Exception.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="include/lemon-net.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="887" topLine="14" />
-		</Cursor>
-	</File>
-	<File name="src/py/pynetxpert.i" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1286" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="include/core/sptlem.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2978" topLine="54" />
-		</Cursor>
-	</File>
-	<File name="src/main.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3379" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src/utils.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="400" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="libs/SQLiteCpp/Database.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3831" topLine="114" />
-		</Cursor>
-	</File>
-	<File name="src/simple/netbuilder_simple.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="411" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src/solver/sptree.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4653" topLine="141" />
-		</Cursor>
-	</File>
-	<File name="include/solver/sptree.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="850" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="src/simple/sptree_simple.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="519" topLine="11" />
-		</Cursor>
-	</File>
-	<File name="src/config.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="116" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src/test.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="16094" topLine="418" />
-		</Cursor>
-	</File>
-	<File name="include/networkbuilder.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1110" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="src/py/mcf_test.py" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7083" topLine="171" />
-		</Cursor>
-	</File>
-	<File name="src/network.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="33361" topLine="790" />
-		</Cursor>
-	</File>
-	<File name="include/fgdbwriter.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2665" topLine="39" />
-		</Cursor>
-	</File>
-	<File name="include/simple/sptree_simple.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="430" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include/dbhelper.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6798" topLine="93" />
-		</Cursor>
-	</File>
-	<File name="include/slitewriter.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5625" topLine="82" />
-		</Cursor>
-	</File>
-	<File name="include/data.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="12521" topLine="426" />
-		</Cursor>
-	</File>
-	<File name="include/solver/odmatrix.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3768" topLine="84" />
-		</Cursor>
-	</File>
-	<File name="include/utils.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1277" topLine="39" />
-		</Cursor>
-	</File>
-	<File name="libs/FileGDB_API/include/FileGDBAPI.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="102" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include/solver/isolines.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3504" topLine="61" />
-		</Cursor>
-	</File>
-	<File name="libs/SQLiteCpp/Statement.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10694" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src/simple/odmatrix_simple.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5468" topLine="160" />
-		</Cursor>
-	</File>
-	<File name="src/networkbuilder.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="240" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="libs/sqlite3.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1611946" topLine="43432" />
-		</Cursor>
-	</File>
-	<File name="libs/SQLiteCpp/Database.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="16848" topLine="370" />
-		</Cursor>
-	</File>
-	<File name="include/dbwriter.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="347" topLine="17" />
-		</Cursor>
-	</File>
-	<File name="src/solver/odmatrix.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="12982" topLine="410" />
+			<Cursor1 position="6716" topLine="184" />
 		</Cursor>
 	</File>
 	<File name="src/py/odm_test.py" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -180,59 +33,19 @@
 			<Collapse line="17" />
 		</Folding>
 	</File>
-	<File name="libs/FileGDB_API/include/Geodatabase.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/solver/sptree.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="15232" topLine="266" />
+			<Cursor1 position="20" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src/logger.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="libs/SQLiteCpp/Database.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="16" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include/config.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1741" topLine="57" />
-		</Cursor>
-	</File>
-	<File name="include/test.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1689" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="src/solver/isolines.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10601" topLine="327" />
-		</Cursor>
-	</File>
-	<File name="include/solver/mstree.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1027" topLine="17" />
-		</Cursor>
-	</File>
-	<File name="include/logger.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="207" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="src/simple/isolines_simple.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3440" topLine="77" />
+			<Cursor1 position="16848" topLine="370" />
 		</Cursor>
 	</File>
 	<File name="include/core/imstree.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="509" zoom_1="-1" zoom_2="-1">
 		<Cursor>
-			<Cursor1 position="1148" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="libs/SQLiteCpp/Assertion.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="335" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include/simple/odmatrix_simple.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="325" topLine="2" />
+			<Cursor1 position="443" topLine="3" />
 		</Cursor>
 	</File>
 	<File name="libs/SQLiteCpp/Backup.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -240,54 +53,39 @@
 			<Cursor1 position="2929" topLine="88" />
 		</Cursor>
 	</File>
-	<File name="src/slitewriter.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="include/solver/sptree.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="850" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="src/solver/mstree.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="libs/SQLiteCpp/Transaction.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="700" topLine="5" />
+			<Cursor1 position="1181" topLine="35" />
 		</Cursor>
 	</File>
-	<File name="include/lemon-net.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+	<File name="libs/SQLiteCpp/Statement.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="16315" topLine="384" />
+			<Cursor1 position="10694" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include/core/isptree.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="185" zoom_1="-2" zoom_2="-2">
+	<File name="src/main.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="35" topLine="0" />
+			<Cursor1 position="3379" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src/solver/mcflow.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/simple/mcfp_simple.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="13757" topLine="416" />
+			<Cursor1 position="3540" topLine="91" />
 		</Cursor>
 	</File>
-	<File name="include/core/mstlem.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="include/logger.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1759" topLine="27" />
+			<Cursor1 position="207" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="src/py/pynetxpert_wrap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/dbhelper.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1485540" topLine="35646" />
-		</Cursor>
-	</File>
-	<File name="include/network.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="15533" topLine="250" />
-		</Cursor>
-	</File>
-	<File name="libs/SQLiteCpp/Statement.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="18801" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src/fgdbwriter.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="893" topLine="24" />
+			<Cursor1 position="36365" topLine="960" />
 		</Cursor>
 	</File>
 	<File name="libs/SQLiteCpp/SQLiteCpp.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -295,14 +93,254 @@
 			<Cursor1 position="880" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src/lemon-net.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+	<File name="src/simple/isolines_simple.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="74832" topLine="1888" />
+			<Cursor1 position="3440" topLine="77" />
+		</Cursor>
+	</File>
+	<File name="include/core/mstlem.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1759" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="src/solver/mstree.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="include/solver/isolines.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3504" topLine="61" />
+		</Cursor>
+	</File>
+	<File name="include/core/sptlem.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2942" topLine="74" />
+		</Cursor>
+	</File>
+	<File name="src/core/mstlem.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1464" topLine="45" />
 		</Cursor>
 	</File>
 	<File name="include/solver/isolver.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="561" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/core/isptree.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="185" zoom_1="-2" zoom_2="-2">
+		<Cursor>
+			<Cursor1 position="1636" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="src/lemon-net.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="31107" topLine="770" />
+		</Cursor>
+	</File>
+	<File name="include/simple/odmatrix_simple.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="325" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="libs/FileGDB_API/include/FileGDBAPI.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="102" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/solver/odmatrix.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3768" topLine="84" />
+		</Cursor>
+	</File>
+	<File name="include/data.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1443" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="include/simple/sptree_simple.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="430" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/core/imcflow.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1508" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="src/network.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="111983" topLine="2820" />
+		</Cursor>
+	</File>
+	<File name="src/logger.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/test.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17030" topLine="450" />
+		</Cursor>
+	</File>
+	<File name="src/solver/transportation.cpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="20969" topLine="560" />
+		</Cursor>
+	</File>
+	<File name="src/simple/sptree_simple.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="519" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="src/fgdbwriter.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="893" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="src/solver/odmatrix.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3769" topLine="117" />
+		</Cursor>
+	</File>
+	<File name="src/core/sptlem.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6090" topLine="169" />
+		</Cursor>
+	</File>
+	<File name="include/solver/mcflow.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="318" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="include/dbhelper.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6798" topLine="93" />
+		</Cursor>
+	</File>
+	<File name="include/core/nslem.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1899" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="libs/sqlite3.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1611946" topLine="43432" />
+		</Cursor>
+	</File>
+	<File name="include/network.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10694" topLine="171" />
+		</Cursor>
+	</File>
+	<File name="src/networkbuilder.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="240" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="src/config.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="116" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/test.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="623" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="src/py/pynetxpert.i" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="17874" topLine="519" />
+		</Cursor>
+	</File>
+	<File name="src/core/nslem.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="228" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include/utils.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1277" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="src/simple/odmatrix_simple.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5468" topLine="160" />
+		</Cursor>
+	</File>
+	<File name="libs/SQLiteCpp/Database.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3831" topLine="114" />
+		</Cursor>
+	</File>
+	<File name="include/dbwriter.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="347" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="include/config.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1741" topLine="57" />
+		</Cursor>
+	</File>
+	<File name="libs/SQLiteCpp/Exception.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="887" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="include/fgdbwriter.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2665" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="libs/SQLiteCpp/Statement.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18801" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/py/mcf_test.py" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7083" topLine="171" />
+		</Cursor>
+	</File>
+	<File name="include/solver/mstree.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1027" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="src/slitewriter.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3630" topLine="122" />
+		</Cursor>
+	</File>
+	<File name="include/networkbuilder.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1110" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="include/slitewriter.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5625" topLine="82" />
+		</Cursor>
+	</File>
+	<File name="src/py/pynetxpert_wrap.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1485540" topLine="35646" />
+		</Cursor>
+	</File>
+	<File name="src/solver/isolines.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10601" topLine="327" />
+		</Cursor>
+	</File>
+	<File name="src/utils.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="400" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="src/simple/netbuilder_simple.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="411" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

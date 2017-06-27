@@ -3,8 +3,7 @@
 
 #include "isolver.h"
 #include "imcflow.h"
-#include "MCFSimplex.h"
-#include "netsimplexlem.h"
+#include "nslem.h"
 
 //using namespace std;
 
@@ -18,13 +17,13 @@ namespace netxpert {
             MinCostFlow(netxpert::cnfg::Config& cnfg);
             virtual ~MinCostFlow() {}
             void Solve(std::string net);
-            void Solve(netxpert::Network& net);
+            void Solve(netxpert::InternalNet& net);
             bool IsDirected;
             std::vector<netxpert::data::FlowCost> GetMinCostFlow() const;
             netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::MCFAlgorithm mcfAlgorithm);
             netxpert::data::MCFSolverStatus GetSolverStatus() const;
-            double GetOptimum() const;
+            const double GetOptimum() const;
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap) const;
 
@@ -36,11 +35,10 @@ namespace netxpert {
             netxpert::cnfg::MCFAlgorithm algorithm;
             std::vector<netxpert::data::FlowCost> flowCost;
             std::shared_ptr<netxpert::core::IMinCostFlow> mcf;
-            void solve (netxpert::Network& net);
-            bool validateNetworkData(netxpert::Network& net);
-            void convertInternalNetworkToSolverData(netxpert::Network& net, std::vector<unsigned int>& sNds,
-                                                    std::vector<unsigned int>& eNds, std::vector<double>& supply,
-                                                    std::vector<double>& caps, std::vector<double>& costs);
+            void solve (netxpert::InternalNet& net);
+            bool validateNetworkData(netxpert::InternalNet& net);
+            lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
+             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
 
         private:
             //private is only visible to MCF instance - not to derived classes (like TP)
@@ -50,7 +48,7 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak int this case even without delete in the deconstructor
-            netxpert::Network* net;
+            netxpert::InternalNet* net;
     };
 }
 #endif // MINCOSTFLOW_H

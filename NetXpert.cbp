@@ -79,9 +79,11 @@
 			<Add directory="../1_libs/FileGDB_API-64gcc51/lib" />
 		</Linker>
 		<Unit filename="include/config.h" />
+		<Unit filename="include/core/imcflow.h" />
 		<Unit filename="include/core/imstree.h" />
 		<Unit filename="include/core/isptree.h" />
 		<Unit filename="include/core/mstlem.h" />
+		<Unit filename="include/core/nslem.h" />
 		<Unit filename="include/core/sptlem.h" />
 		<Unit filename="include/data.h" />
 		<Unit filename="include/dbhelper.h" />
@@ -91,6 +93,7 @@
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
+		<Unit filename="include/simple/mcfp_simple.h" />
 		<Unit filename="include/simple/mstree_simple.h" />
 		<Unit filename="include/simple/netbuilder_simple.h" />
 		<Unit filename="include/simple/odmatrix_simple.h" />
@@ -98,6 +101,7 @@
 		<Unit filename="include/slitewriter.h" />
 		<Unit filename="include/solver/isolines.h" />
 		<Unit filename="include/solver/isolver.h" />
+		<Unit filename="include/solver/mcflow.h" />
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />
 		<Unit filename="include/solver/sptree.h" />
@@ -130,10 +134,7 @@
 		<Unit filename="libs/sqlite3.h" />
 		<Unit filename="src/config.cpp" />
 		<Unit filename="src/core/mstlem.cpp" />
-		<Unit filename="src/core/netsimplexlem.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/core/nslem.cpp" />
 		<Unit filename="src/core/sptbgl.cpp">
 			<Option compile="0" />
 			<Option link="0" />
@@ -165,10 +166,7 @@
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="src/simple/mcfp_simple.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/simple/mcfp_simple.cpp" />
 		<Unit filename="src/simple/mstree_simple.cpp" />
 		<Unit filename="src/simple/netbuilder_simple.cpp" />
 		<Unit filename="src/simple/odmatrix_simple.cpp" />
@@ -179,10 +177,7 @@
 		</Unit>
 		<Unit filename="src/slitewriter.cpp" />
 		<Unit filename="src/solver/isolines.cpp" />
-		<Unit filename="src/solver/mcflow.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/solver/mcflow.cpp" />
 		<Unit filename="src/solver/mstree.cpp" />
 		<Unit filename="src/solver/odmatrix.cpp" />
 		<Unit filename="src/solver/sptree.cpp" />

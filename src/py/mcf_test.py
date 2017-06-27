@@ -71,7 +71,6 @@ def test_mcf(cnfg, cmap):
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
     startIDs = []
     x = 702370
@@ -81,16 +80,16 @@ def test_mcf(cnfg, cmap):
     startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Treshold,
                                      cmap, withCap))
 
-    x = 702360
+    x = 701360
     y = 5352530
-    supply = 5
+    supply = 15
     startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Treshold,
                                      cmap, withCap))
 
     destIDs = []
     x = 699022
     y = 5355445
-    supply = -5
+    supply = -10
     destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
                                   cmap, withCap))
 
@@ -99,6 +98,7 @@ def test_mcf(cnfg, cmap):
     supply = -15
     destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
                                   cmap, withCap))
+
 
     solver = netx.MinCostFlow(cnfg)
     solver.Solve(net)
@@ -118,7 +118,6 @@ def test_mcf_load_nodes(cnfg, cmap):
     withCapacity = True
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
     startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
     endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
@@ -135,13 +134,15 @@ def test_mcf_load_nodes(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MCFCnfg_Big.json"
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/MCFCnfg_small.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_Big.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    cnfg.SpatiaLiteHome = r'/usr/local/lib'
-    cnfg.SpatiaLiteCoreName = './mod_spatialite'
+    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+    cnfg.SpatiaLiteCoreName = './libspatialite'
+
+    print cnfg.SpatiaLiteHome
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -155,10 +156,10 @@ if __name__ == "__main__":
                      "mcf | load nodes"
                     ]
 
-    active_tests = active_tests[:1]
+#    active_tests = active_tests[:1]
 
     if "mcf | add nodes" in active_tests:
-        for i in range(0, 2):
+        for i in range(1, 2):
             cnfg.McfAlgorithm = i
             print(("Testing MCF with Algorithm {0}..".format(alg_dict[i])))
             starttime = datetime.datetime.now()
@@ -178,7 +179,7 @@ if __name__ == "__main__":
                     print("test succeeded.")
 
     if "mcf | load nodes" in active_tests:
-        for i in range(0, 2):
+        for i in range(1, 2):
             cnfg.McfAlgorithm = i
             print(("Testing MCF (load nodes) with Algorithm {0}..".format(alg_dict[i])))
             starttime = datetime.datetime.now()

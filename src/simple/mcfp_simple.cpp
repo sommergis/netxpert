@@ -71,10 +71,8 @@ int netxpert::simple::MinCostFlow::Solve()
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
         LOGGER::LogInfo("Done!");
 
-        Network net (arcsTable, cmap, cnfg);
-
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
@@ -85,7 +83,6 @@ int netxpert::simple::MinCostFlow::Solve()
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
-        LOGGER::LogInfo("Converting Data into internal network..");
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
