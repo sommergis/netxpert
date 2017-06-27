@@ -454,13 +454,13 @@ void netxpert::test::TestODMatrix(Config& cnfg)
 //	simpleSolver.Solve();
 //}
 //
-//void netxpert::test::TestMCF(Config& cnfg)
-//{
-//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-//	cout << s << endl;
-//	netxpert::simple::MinCostFlow simpleSolver(s);
-//	simpleSolver.Solve();
-//}
+void netxpert::test::TestMCF(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::MinCostFlow simpleSolver(s);
+	simpleSolver.Solve();
+}
 
 //void netxpert::test::TestTransportationExt(Config& cnfg)
 //{

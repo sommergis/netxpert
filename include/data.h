@@ -40,10 +40,12 @@ namespace netxpert {
     typedef graph_t::Node node_t;
     typedef graph_t::Arc arc_t;
     typedef double cost_t;
+    typedef double flow_t;
     typedef double capacity_t;
     typedef double supply_t;
     typedef uint32_t  intarcid_t;
-    typedef uint32_t  extarcid_t;
+    //typedef uint32_t  extarcid_t; // does not work for MCF-Solver ('dummy'!)
+    typedef std::string  extarcid_t; // necessary for MCF-Solver ('dummy'!)
 
 
     /**
@@ -323,11 +325,11 @@ namespace netxpert {
     **/
     struct ArcData
     {
-        //std::string extArcID;
         extarcid_t  extArcID;
         cost_t      cost;
         capacity_t  capacity;
     };
+
     struct ArcData2
     {
         uint32_t    extArcID;
@@ -342,16 +344,16 @@ namespace netxpert {
         std::string oldArcID;
         cost_t      cost;
         capacity_t  capacity;
-        capacity_t  flow;
+        flow_t      flow;
     };
     /**
     * \Custom data type for storing tuple <fromNode,toNode,flow,cost>
     **/
     struct FlowCost
     {
-        netxpert::data::InternalArc intArc;
-        capacity_t                  flow;
-        cost_t                      cost;
+        arc_t        intArc;
+        capacity_t   flow;
+        cost_t       cost;
     };
 
     /**
@@ -364,8 +366,8 @@ namespace netxpert {
     **/
     struct DistributionArc
     {
-        netxpert::data::CompressedPath  path;
-        capacity_t                      flow;
+        CompressedPath  path;
+        flow_t          flow;
     };
 
 
@@ -374,7 +376,7 @@ namespace netxpert {
         netxpert::data::ExtArcID    arcid;
         netxpert::data::ExternalArc extArc;
         cost_t                      cost;
-        capacity_t                  flow;
+        flow_t                      flow;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -499,9 +501,9 @@ namespace netxpert {
     **/
     struct SplittedArc
     {
-        netxpert::data::InternalArc ftNode;
-        cost_t                      cost;
-        capacity_t                  capacity;
+        netxpert::data::InternalArc                  ftNode;
+        cost_t                                       cost;
+        capacity_t                                   capacity;
         std::shared_ptr<geos::geom::MultiLineString> arcGeom;
     };
 

@@ -137,9 +137,13 @@ namespace netxpert {
             const netxpert::data::intarcid_t
              GetArcID(const netxpert::data::arc_t& arc);
 
-            netxpert::data::ArcData
+            const netxpert::data::ArcData
             //netxpert::data::ArcData2
              GetArcData(const netxpert::data::arc_t& arc);
+
+            void
+             SetArcData(const netxpert::data::arc_t& arc,
+                        const netxpert::data::ArcData& arcData);
 
             const netxpert::data::cost_t
              GetArcCost(const netxpert::data::arc_t& arc);
@@ -168,6 +172,15 @@ namespace netxpert {
 
             const netxpert::data::graph_t::NodeIt
              GetNodesIter();
+
+            const netxpert::data::graph_t::ArcIt
+             GetArcsIter();
+
+            const netxpert::data::node_t
+             GetSourceNode(const netxpert::data::arc_t& arc);
+
+            const netxpert::data::node_t
+             GetTargetNode(const netxpert::data::arc_t& arc);
 
             const geos::geom::Coordinate
              GetStartOrEndNodeGeometry(const netxpert::data::ExtNodeID node);
@@ -199,6 +212,11 @@ namespace netxpert {
              GetArcFilterMap() {
                 return this->arcFilterMap.get();
              };
+
+            netxpert::data::graph_t::NodeMap<netxpert::data::supply_t>*
+             GetSupplyMap() {
+                return this->nodeSupplyMap.get();
+            };
 
             //--|Region Getters
 
@@ -269,15 +287,35 @@ namespace netxpert {
                 Solver: Isolines
             */
             void
-             ProcessIsoResultArcsMem(const std::string& orig, const double cost,
+             ProcessIsoResultArcsMem(const std::string& orig, const netxpert::data::cost_t cost,
                                      const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
                                      const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry,
                                      const std::unordered_map<netxpert::data::ExtNodeID, std::vector<double> > cutOffs);
 
+            /** Main method for processing and saving result arcs (preloading geometry into memory)
+                Solver: MCF, TPs
+                */
+            void ProcessMCFResultArcsMem(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
+                                         const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                         const std::string& arcIDs, std::vector<netxpert::data::arc_t>& routeNodeArcRep,
+                                         const std::string& resultTableName, netxpert::io::DBWriter& writer,
+                                         SQLite::Statement& qry //can be null in case of ESRI FileGDB
+                                        );
             //--|Region Save Results
 
             void PrintGraph();
+
+            //-->Region MinCostFlow functions
+
+            netxpert::data::MinCostFlowInstanceType
+             GetMinCostFlowInstanceType();
+
+            /** Arbeiten mit Dummy Nodes; Ziel ist die Ausgewogene Verteilung von Angebot und Nachfrage */
+            void
+             TransformUnbalancedMCF(netxpert::data::MinCostFlowInstanceType mcfInstanceType);
+
+            //--|Region MinCostFlow functions
 
         private:
 
@@ -302,8 +340,6 @@ namespace netxpert {
                         const netxpert::data::node_t internalEndNode);
 
             //--|Region Network core functions
-
-
 
 
             //-->Region Add Points
@@ -376,18 +412,48 @@ namespace netxpert {
                                             SQLite::Statement& qry );
 
             //Isolines
-            void saveIsoResultsMem(const std::string orig, const double cost,
+            void saveIsoResultsMem(const std::string orig, const netxpert::data::cost_t cost,
                                     const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
                                     const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                     SQLite::Statement& qry,
                                     const std::unordered_map<netxpert::data::ExtNodeID, std::vector<double> >& cutOffs);
+
+            //MCF
+            void saveMCFResultsMem(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,
+                                 const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                 const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                 const std::string& resultTableName, netxpert::io::DBWriter& writer,
+                                 SQLite::Statement& qry);
             //MST
             void
              saveResults(const std::string& arcIDs, const std::string& resultTableName);
 
-
-
             //--|Region Save Results
+
+            //-->Region MinCostFlow functions
+
+            double
+             calcTotalSupply ();
+
+            double
+             calcTotalDemand ();
+
+            void
+             transformExtraDemand();
+
+            void
+             transformExtraSupply();
+
+            void
+             processSupplyOrDemand();
+
+            double
+             getSupplyDemandDifference();
+
+            //--|Region MinCostFlow functions
+
+
+
 
             //-->Region data members
             std::unique_ptr<netxpert::data::graph_t> g;

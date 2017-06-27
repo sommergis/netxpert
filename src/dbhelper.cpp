@@ -291,7 +291,8 @@ void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap&
             connect(NETXPERT_CNFG.LoadDBIntoMemory);
 
         for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
-            eliminatedArcIDs += ","+ std::to_string(elem);
+//            eliminatedArcIDs += ","+ std::to_string(elem);
+            eliminatedArcIDs += ","+ elem;
         }
 
         //trim comma on first
@@ -785,12 +786,14 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
         {
             case ArcIDColumnDataType::Std_String:
                 for (const extarcid_t& elem : DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
             default: //double or int
                 for (const extarcid_t& elem : DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += "," + std::to_string(elem);
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
         }
@@ -987,7 +990,8 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(c
         for (auto s : arcIDList)
         {
             //LOGGER::LogDebug("Querying arcid #" + s +"..");
-            auto t = std::stoul(s);
+//            auto t = std::stoul(s);
+            auto t = s;
 
             if (DBHELPER::EliminatedArcs.count(t) == 0 ) //filter out eliminated arcs
             {
@@ -1030,12 +1034,14 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromDB(co
         {
             case ArcIDColumnDataType::Std_String:
                 for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
             default: //double or int
                 for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ","+ std::to_string(elem);
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
                 }
                 break;
         }
@@ -1107,11 +1113,13 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometryFromDB(cons
         switch  (arcIDColDataType) {
             case ArcIDColumnDataType::Number: {
                 sqlStr = "SELECT AsBinary(CastToMultiLineString(" + geomColumnName + "))"+
-                        " FROM "+tableName+" WHERE "+arcIDColumnName+ " = " + std::to_string(arcID) ;
+//                        " FROM "+tableName+" WHERE "+arcIDColumnName+ " = " + std::to_string(arcID) ;
+                        " FROM "+tableName+" WHERE "+arcIDColumnName+ " = " + arcID ;
+
             }
             case ArcIDColumnDataType::Std_String: {
                 sqlStr = "SELECT AsBinary(CastToMultiLineString(" + geomColumnName + "))"+
-                        " FROM "+tableName+" WHERE "+arcIDColumnName+ " = '" + std::to_string(arcID) +"'";
+                        " FROM "+tableName+" WHERE "+arcIDColumnName+ " = '" + arcID +"'";
             }
         }
 
@@ -1192,7 +1200,9 @@ std::unordered_set<netxpert::data::extarcid_t>
                     auto value = col.getText();
 
                     if (typeid(extarcid_t).hash_code() == typeid(uint32_t).hash_code() )
-                        arcIDs.insert(std::stoul(value));
+//                        arcIDs.insert(std::stoul(value));
+                        arcIDs.insert(value);
+
 
 //                    if (typeid(extarcid_t).hash_code() == typeid(std::string).hash_code() )
 //                        arcIDs.insert(value);
@@ -1202,7 +1212,8 @@ std::unordered_set<netxpert::data::extarcid_t>
                     auto value = col.getInt();
 
                     if (typeid(extarcid_t).hash_code() == typeid(uint32_t).hash_code() )
-                        arcIDs.insert(value);
+//                        arcIDs.insert(value);
+                        arcIDs.insert(std::to_string(value));
 
 //                    if (typeid(extarcid_t).hash_code() == typeid(std::string).hash_code() )
 //                        arcIDs.insert(std::to_string(value));
@@ -1286,12 +1297,14 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tab
         {
             case ArcIDColumnDataType::Std_String:
                 for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ",'"+ std::to_string(elem)+ "'";
+//                    eliminatedArcIDs += ","+ std::to_string(elem);
+                    eliminatedArcIDs += ",'"+ elem+ "'";
                 }
                 break;
             default: //double or int
                 for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
-                    eliminatedArcIDs += ","+ std::to_string(elem);
+//                    eliminatedArcIDs += ","+ std::to_string(elem);
+                    eliminatedArcIDs += ","+ elem;
                 }
                 break;
         }
