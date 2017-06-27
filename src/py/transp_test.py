@@ -54,14 +54,14 @@ def tpsolve(odmatrix, nodeSupply):
 
   cnfg.LogLevel = -1
   cnfg.LogFileFullPath = "/var/www/apps/netxpert/netXpert.log"
-  cnfg.SpatiaLiteHome = "/usr/local/libs"
-  cnfg.SpatiaLiteCoreName = "./libspatialite"
+  cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+  cnfg.SpatiaLiteCoreName = './libspatialite'
   cnfg.CleanNetwork = False
   cnfg.McfAlgorithm = 1
 
   netx.LOGGER.Initialize(cnfg)
 
-  solver = netx.Transportation(cnfg);
+  solver = netx.Transportation(cnfg)
 
   data = netx.ExtTransportationData()
 

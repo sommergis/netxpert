@@ -17,11 +17,45 @@ namespace netxpert {
             // we need a dctor, because of new alloc of an instance of Network in Solve()
             virtual ~Transportation();
 
-            std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(std::vector<unsigned int> origs);
+            void SetOrigins(std::vector<netxpert::data::node_t>& origs);
+            /** Simple Wrapper for SWIG **/
+            void SetOrigins(const std::vector<uint32_t>& origs) {
+                std::vector<netxpert::data::node_t> newOrigs;
+                for (auto& orig : origs)
+                    newOrigs.push_back(this->net->GetNodeFromID(orig));
 
-            std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int> dests);
+                this->SetOrigins(newOrigs);
+            };
+
+            std::vector<netxpert::data::node_t> GetOrigins() const;
+            /** Simple Wrapper for SWIG **/
+            std::vector<uint32_t> GetOriginIDs() const {
+                std::vector<uint32_t> result;
+                for (auto& orig : this->GetOrigins() )
+                    result.push_back(this->net->GetNodeID(orig));
+
+                return result;
+            };
+
+            void SetDestinations(std::vector<netxpert::data::node_t>& dests);
+            /** Simple Wrapper for SWIG **/
+            void SetDestinations(const std::vector<uint32_t>& dests) {
+                std::vector<netxpert::data::node_t> newDests;
+                for (auto& e : dests)
+                    newDests.push_back(this->net->GetNodeFromID(e));
+
+                this->SetDestinations(newDests);
+            };
+
+            std::vector<netxpert::data::node_t> GetDestinations() const;
+            /** Simple Wrapper for SWIG **/
+            std::vector<uint32_t> GetDestinationIDs() const {
+                std::vector<uint32_t> result;
+                for (auto& n : this->destinationNodes)
+                    result.push_back(this->net->GetNodeID(n));
+
+                return result;
+            }
 
             //std::unordered_map<ExtArcID, ExtODMatrixArc> GetExtODMatrix() const;
             //std::vector<ExtODMatrixArc> GetExtODMatrix() const;
@@ -29,23 +63,19 @@ namespace netxpert {
             void SetExtODMatrix(std::vector<netxpert::data::ExtSPTreeArc> _extODMatrix);
             //void SetExtODMatrix(string _extODMatrixJSON);
 
-            const Network GetNetwork();
+            netxpert::InternalNet* GetNetwork();
 
             //std::vector<ExtNodeSupply> GetNodeSupply() const;
             void SetExtNodeSupply(std::vector<netxpert::data::ExtNodeSupply> _nodeSupply);
             //void SetNodeSupply(string _nodeSupplyJSON);
 
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::DistributionArc> GetDistribution() const;
+            std::map<netxpert::data::ODPair, netxpert::data::DistributionArc> GetDistribution() const;
 
             //simplified json output
             std::string GetSolverJSONResult() const;
 
             std::vector<netxpert::data::ExtDistributionArc> GetExtDistribution() const;
             std::string GetJSONExtDistribution() const;
-
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
-
-            //std::unique_ptr<Network> net;
 
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
 
@@ -58,7 +88,7 @@ namespace netxpert {
             *  Solves the Transportation Problem with the given network and all origin and destination nodes.
             *  Uses the NetXpert OriginDestinationMatrix Solver internally.
             */
-            void Solve(netxpert::Network& net);
+            void Solve(netxpert::InternalNet& net);
 
         private:
             //raw pointer ok, no dynamic allocation (new())
@@ -66,19 +96,18 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak int this case even without delete in the deconstructor
-            netxpert::Network* net;
+            netxpert::InternalNet* net;
 
-            std::vector<unsigned int> destinationNodes;
-            std::vector<unsigned int> originNodes;
-
-            std::unordered_map<netxpert::data::ODPair, double> odMatrix;
-            //std::unordered_map<ExtArcID, ExtODMatrixArc> extODMatrix;
+            std::vector<netxpert::data::node_t> destinationNodes;
+            std::vector<netxpert::data::node_t> originNodes;
+            std::map<netxpert::data::ODPair, netxpert::data::cost_t> odMatrix;
             std::vector<netxpert::data::ExtSPTreeArc> extODMatrix;
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::DistributionArc> distribution;
-            std::unordered_map<netxpert::data::ExtNodeID, double> nodeSupply;
+            std::map<netxpert::data::ODPair, netxpert::data::DistributionArc> distribution;
+            std::map<netxpert::data::ExtNodeID, netxpert::data::supply_t> nodeSupply;
             std::vector<netxpert::data::ExtNodeSupply> extNodeSupply;
 
-            std::pair<double,double> getFlowCostData(const std::vector<netxpert::data::FlowCost>& fc, const netxpert::data::ODPair& key) const;
+            std::pair<netxpert::data::flow_t,netxpert::data::cost_t> getFlowCostData(const std::vector<netxpert::data::FlowCost>& fc,
+                                                     const netxpert::data::ODPair& key) const;
     };
 }
 #endif // TRANSPORTATION_H

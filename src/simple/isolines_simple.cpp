@@ -90,10 +90,9 @@ int netxpert::simple::Isolines::Solve()
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
 
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");

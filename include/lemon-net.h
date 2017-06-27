@@ -154,6 +154,10 @@ namespace netxpert {
             const std::unordered_set<std::string>
              GetOrigArcIDs(const std::vector<netxpert::data::arc_t>& path);
 
+            const netxpert::data::arc_t
+             GetArcFromNodes(const netxpert::data::node_t& source,
+                             const netxpert::data::node_t& target);
+
             /* Access Nodes of internal network */
             const netxpert::data::node_t
              GetNodeFromOrigID(const std::string nodeID);

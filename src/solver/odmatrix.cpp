@@ -269,14 +269,6 @@ void
     this->destinationNodes = newDests;
 }
 
-void
- OriginDestinationMatrix::SetDestinations(const vector<uint32_t>& dests) {
-    vector<netxpert::data::node_t> newDests;
-    for (auto& e : dests)
-        newDests.push_back(this->net->GetNodeFromID(e));
-    this->destinationNodes = newDests;
-}
-
 vector<netxpert::data::node_t>
  OriginDestinationMatrix::GetReachedDests() const {
     return this->reachedDests;

@@ -191,6 +191,14 @@ const std::unordered_set<std::string>
     return resultIDs;
 }
 
+
+const netxpert::data::arc_t
+ InternalNet::GetArcFromNodes(const netxpert::data::node_t& source,
+                              const netxpert::data::node_t& target) {
+
+    return lemon::findArc(*this->g, source, target, lemon::INVALID);
+}
+
 /** @brief (one liner)
 *
 * (documentation goes here)
@@ -229,19 +237,19 @@ const std::string
     std::string nodeID;
 
     nodeID = (*this->nodeMap)[node];
-    std::cout <<"1. Orig node id from nodeMap is: " << nodeID << std::endl;
+//    std::cout <<"1. Orig node id from nodeMap is: " << nodeID << std::endl;
 
     if (nodeID.empty()) {
         if ( this->addedStartPoints.count(node) != 0 ) {
             auto a = this->addedStartPoints.at(node);
             nodeID = a.extNodeID;
-            std::cout <<"2. Orig node id from nodeMap is: " << nodeID << std::endl;
+//            std::cout <<"2. Orig node id from nodeMap is: " << nodeID << std::endl;
         }
         else {
             if (this->addedEndPoints.count(node) != 0) {
                 auto a = this->addedEndPoints.at(node);
                 nodeID = a.extNodeID;
-                std::cout <<"3. Orig node id from nodeMap is: " << nodeID << std::endl;
+//                std::cout <<"3. Orig node id from nodeMap is: " << nodeID << std::endl;
             }
         }
     }
@@ -286,7 +294,7 @@ const geos::geom::Coordinate
 
     geos::geom::Coordinate result;
     auto node = this->nodeIDMap.at(nodeID);
-    std::cout << "GetStartOrEndNodeGeometry()" << std::endl;
+//    std::cout << "GetStartOrEndNodeGeometry()" << std::endl;
 
     /*for (auto kv : nodeIDMap){
         auto key = kv.first;
@@ -296,20 +304,20 @@ const geos::geom::Coordinate
             std::cout << "node id: "<< key << "coord: " << addedStartPoints.at(node).coord.toString() << std::endl;
         }
     }*/
-    std::cout << "ext node id: " << nodeID << " int node id: " << this->g->id(node) << std::endl;
-    std::cout << "point " << addedStartPoints.at(node).coord.toString() << std::endl;
+//    std::cout << "ext node id: " << nodeID << " int node id: " << this->g->id(node) << std::endl;
+//    std::cout << "point " << addedStartPoints.at(node).coord.toString() << std::endl;
     try
     {
         if ( this->addedStartPoints.count(node) != 0 ) {
             auto externalNode = this->addedStartPoints.at(node);
             result = externalNode.coord;
-            std::cout << result.toString() << std::endl;
+//            std::cout << result.toString() << std::endl;
         }
         else {
             if (this->addedEndPoints.count(node) != 0) {
                 auto externalNode = this->addedEndPoints.at(node);
                 result = externalNode.coord;
-                std::cout << result.toString() << std::endl;
+//                std::cout << result.toString() << std::endl;
             }
         }
 
@@ -516,6 +524,7 @@ const node_t
 
     //detect if arc is reverse also in the graph
     //TODO Check for performance on large graphs
+    //TODO Check for duplicate arcs!
     auto revOrigArc = lemon::findArc(*this->g, this->g->target(origArc),this->g->source(origArc), lemon::INVALID);
     if (revOrigArc != lemon::INVALID)
         isDirected = false;
@@ -776,12 +785,15 @@ std::vector< std::pair<uint32_t, std::string> >
 
     for (const auto& startNode : newNodes)
     {
-        //check extNodeID if already present in nodeIDMap
-        assert(this->nodeIDMap.count(startNode.extNodeID) == 0);
-
         if (startNode.supply > 0)
         {
             LOGGER::LogDebug("Loading Node "+ startNode.extNodeID + "..");
+
+            //check extNodeID if already present in nodeIDMap
+            if (this->nodeIDMap.count(startNode.extNodeID) != 0) {
+                throw std::runtime_error("External Node ID "+ startNode.extNodeID + " already present!");
+            }
+
             try
             {
                 auto newStartNodeID = AddNode(startNode, treshold, *qry, withCapacity, AddedNodeType::StartArc);
@@ -811,12 +823,15 @@ std::vector< std::pair<uint32_t, std::string> >
 
     for (const auto& endNode : newNodes)
     {
-        //check extNodeID if already present in nodeIDMap
-        assert(this->nodeIDMap.count(endNode.extNodeID) == 0);
-
         if (endNode.supply < 0)
         {
             LOGGER::LogDebug("Loading Node "+ endNode.extNodeID + "..");
+
+            //check extNodeID if already present in nodeIDMap
+            if (this->nodeIDMap.count(endNode.extNodeID) != 0) {
+                throw std::runtime_error("External Node ID "+ endNode.extNodeID + " already present!");
+            }
+
             try
             {
                 auto newEndNodeID = AddNode(endNode, treshold, *qry, withCapacity, AddedNodeType::EndArc);
@@ -1995,8 +2010,8 @@ void
 
         try
         {
-            internalStartNode = this->nodeIDMap.at(externalStartNode);
-            internalEndNode = this->nodeIDMap.at(externalEndNode);
+            internalStartNode   = this->nodeIDMap.at(externalStartNode);
+            internalEndNode     = this->nodeIDMap.at(externalEndNode);
         }
         catch (exception& ex)
         {
