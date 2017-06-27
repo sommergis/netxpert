@@ -28,7 +28,7 @@
 #include "odmatrix_simple.h"
 #include "mstree_simple.h"
 #include "sptree_simple.h"
-//#include "transp_simple.h"
+#include "transp_simple.h"
 #include "mcfp_simple.h"
 //#include "netbuilder_simple.h"
 
@@ -44,13 +44,13 @@ namespace netxpert
         void TestFileGDBWriter(netxpert::cnfg::Config& cnfg);
         void TestSpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
 //        void TestAddNodes(netxpert::cnfg::Config& cnfg);
-//        void TestMST(netxpert::cnfg::Config& cnfg);
+        void TestMST(netxpert::cnfg::Config& cnfg);
         void TestSPT(netxpert::cnfg::Config& cnfg);
         void TestODMatrix(netxpert::cnfg::Config& cnfg);
 //        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
 //        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
         void TestMCF(netxpert::cnfg::Config& cnfg);
-//        void TestTransportation(netxpert::cnfg::Config& cnfg);
+        void TestTransportation(netxpert::cnfg::Config& cnfg);
 //        void TestTransportationExt(netxpert::cnfg::Config& cnfg);
 //        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
     }

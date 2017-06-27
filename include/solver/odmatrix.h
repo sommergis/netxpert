@@ -39,11 +39,11 @@ namespace netxpert {
             void SetOrigins(std::vector<netxpert::data::node_t>& origs);
             /** Simple Wrapper for SWIG **/
             void SetOrigins(const std::vector<uint32_t>& origs) {
-                std::vector<netxpert::data::node_t> result;
-                for (auto& orig : origs) {
-                    result.push_back(this->net->GetNodeFromID(orig));
-                }
-                this->SetOrigins(result);
+                std::vector<netxpert::data::node_t> newOrigs;
+                for (auto& orig : origs)
+                    newOrigs.push_back(this->net->GetNodeFromID(orig));
+
+                this->SetOrigins(newOrigs);
             };
             //?
             void SetOrigins(std::vector<std::pair<netxpert::data::node_t, std::string>>& origs);
@@ -59,7 +59,13 @@ namespace netxpert {
 
             void SetDestinations(std::vector<netxpert::data::node_t>& dests);
             /** Simple Wrapper for SWIG **/
-            void SetDestinations(const std::vector<uint32_t>& dests);
+            void SetDestinations(const std::vector<uint32_t>& dests) {
+                std::vector<netxpert::data::node_t> newDests;
+                for (auto& e : dests)
+                    newDests.push_back(this->net->GetNodeFromID(e));
+
+                this->SetDestinations(newDests);
+            };
             //?
             void SetDestinations(std::vector<std::pair<netxpert::data::node_t, std::string>>& dests);
 
@@ -72,7 +78,7 @@ namespace netxpert {
             std::vector<uint32_t> GetReachedDestIDs() const;
 
             std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
-            std::map<netxpert::data::ODPair, double> GetODMatrix() const;
+            std::map<netxpert::data::ODPair, netxpert::data::cost_t> GetODMatrix() const;
 
             const double GetOptimum() const;
 

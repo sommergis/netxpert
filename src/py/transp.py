@@ -64,4 +64,3 @@ def main(odmatrix, nodeSupply):
   transp.Solve()
 
   return transp.GetOptimum()
-

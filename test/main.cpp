@@ -5,7 +5,6 @@
 #include <fstream>
 
 #include "data.h"
-//#include "network.h"
 #include "dbhelper.h"
 #include "lemon-net.h"
 #include "test.h"
@@ -37,10 +36,10 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TestFGDBWriter.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
-        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
+        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/NetworkBuilder_small.json";
-        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_small.json";
+//        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_small.json";
     }
 
     Config cnfg;
@@ -141,9 +140,9 @@ int main(int argc, char** argv)
         case TESTCASE::MCFCOM:
             netxpert::test::TestMCF(cnfg);
             break;
-//        case TESTCASE::TransportationCOM:
-//            netxpert::test::TestTransportation(cnfg);
-//            break;
+        case TESTCASE::TransportationCOM:
+            netxpert::test::TestTransportation(cnfg);
+            break;
 //        case TESTCASE::TransportationCOMExt:
 //            netxpert::test::TestTransportationExt(cnfg);
 //            break;

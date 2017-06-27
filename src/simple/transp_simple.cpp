@@ -70,10 +70,8 @@ int netxpert::simple::Transportation::Solve()
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
         LOGGER::LogInfo("Done!");
 
-        Network net (arcsTable, cmap, cnfg);
-
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
@@ -106,7 +104,7 @@ int netxpert::simple::Transportation::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Optimum: " + to_string(transp.GetOptimum()) );
-        unordered_map<ODPair, DistributionArc> result = transp.GetDistribution();
+        map<ODPair, DistributionArc> result = transp.GetDistribution();
         LOGGER::LogInfo("Count of Distributions: " + to_string(result.size()) );
 
         transp.SaveResults(resultTableName, cmap);
