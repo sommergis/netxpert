@@ -93,11 +93,13 @@
 		<Unit filename="include/logger.h" />
 		<Unit filename="include/network.h" />
 		<Unit filename="include/networkbuilder.h" />
+		<Unit filename="include/simple/isolines_simple.h" />
 		<Unit filename="include/simple/mcfp_simple.h" />
 		<Unit filename="include/simple/mstree_simple.h" />
 		<Unit filename="include/simple/netbuilder_simple.h" />
 		<Unit filename="include/simple/odmatrix_simple.h" />
 		<Unit filename="include/simple/sptree_simple.h" />
+		<Unit filename="include/simple/transp_simple.h" />
 		<Unit filename="include/slitewriter.h" />
 		<Unit filename="include/solver/isolines.h" />
 		<Unit filename="include/solver/isolver.h" />
@@ -105,6 +107,7 @@
 		<Unit filename="include/solver/mstree.h" />
 		<Unit filename="include/solver/odmatrix.h" />
 		<Unit filename="include/solver/sptree.h" />
+		<Unit filename="include/solver/transportation.h" />
 		<Unit filename="include/test.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="libs/FileGDB_API/include/FileGDBAPI.h" />
@@ -162,29 +165,20 @@
 		</Unit>
 		<Unit filename="src/py/spt_test.py" />
 		<Unit filename="src/py/transp_test.py" />
-		<Unit filename="src/simple/isolines_simple.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/simple/isolines_simple.cpp" />
 		<Unit filename="src/simple/mcfp_simple.cpp" />
 		<Unit filename="src/simple/mstree_simple.cpp" />
 		<Unit filename="src/simple/netbuilder_simple.cpp" />
 		<Unit filename="src/simple/odmatrix_simple.cpp" />
 		<Unit filename="src/simple/sptree_simple.cpp" />
-		<Unit filename="src/simple/transp_simple.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/simple/transp_simple.cpp" />
 		<Unit filename="src/slitewriter.cpp" />
 		<Unit filename="src/solver/isolines.cpp" />
 		<Unit filename="src/solver/mcflow.cpp" />
 		<Unit filename="src/solver/mstree.cpp" />
 		<Unit filename="src/solver/odmatrix.cpp" />
 		<Unit filename="src/solver/sptree.cpp" />
-		<Unit filename="src/solver/transportation.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
+		<Unit filename="src/solver/transportation.cpp" />
 		<Unit filename="src/test.cpp" />
 		<Unit filename="src/utils.cpp" />
 		<Extensions>

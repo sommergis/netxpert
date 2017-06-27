@@ -414,14 +414,14 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 //    }
 //}
 
-//void netxpert::test::TestMST(Config& cnfg)
-//{
-//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-//	cout << s << endl;
-//	netxpert::simple::MinimumSpanningTree simpleSolver(s);
-//	simpleSolver.Solve();
-//}
-//
+void netxpert::test::TestMST(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::MinimumSpanningTree simpleSolver(s);
+	simpleSolver.Solve();
+}
+
 void netxpert::test::TestSPT(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
@@ -446,14 +446,14 @@ void netxpert::test::TestODMatrix(Config& cnfg)
 //	simpleSolver.Solve(true);
 //}
 //
-//void netxpert::test::TestTransportation(Config& cnfg)
-//{
-//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-//	cout << s << endl;
-//	netxpert::simple::Transportation simpleSolver(s);
-//	simpleSolver.Solve();
-//}
-//
+void netxpert::test::TestTransportation(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::Transportation simpleSolver(s);
+	simpleSolver.Solve();
+}
+
 void netxpert::test::TestMCF(Config& cnfg)
 {
 	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
