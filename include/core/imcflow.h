@@ -1,6 +1,13 @@
 #ifndef IMINCOSTFLOW_H
 #define IMINCOSTFLOW_H
 
+#include <stdint.h>
+#include <memory>
+#include <vector>
+#include "lemon/concepts/path.h"
+#include "lemon/adaptors.h"
+#include "lemon-net.h"
+
 namespace netxpert {
     namespace core {
     /**
@@ -10,20 +17,23 @@ namespace netxpert {
     {
         public:
             virtual ~IMinCostFlow(){}
-            /* start of MCFClass MCFsimplex Interface */
-            virtual void MCFArcs(unsigned int* outStartNodes, unsigned int* outEndNodes)=0;
-            virtual void LoadNet(unsigned int nmx, unsigned int mmx, unsigned int pn, unsigned int pm, double* pU,
-                            double* pC, double* pDfct, unsigned int* pSn, unsigned int* pEn)=0;
-            virtual unsigned int MCFmmax()=0;
-            virtual unsigned int MCFnmax()=0;
+
+            /* LEMON friendly interface */
+            virtual void LoadNet(const uint32_t nmax,  const uint32_t mmax,
+                      lemon::FilterArcs<netxpert::data::graph_t,
+                                              netxpert::data::graph_t::ArcMap<bool>>* sg,
+                      netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* _costMap,
+                      netxpert::data::graph_t::ArcMap<netxpert::data::capacity_t>* _capMap,
+                      netxpert::data::graph_t::NodeMap<netxpert::data::supply_t>* _supplyMap)=0;
+            virtual const uint32_t GetArcCount()=0;
+            virtual const uint32_t GetNodeCount()=0;
             virtual void SolveMCF()=0;
-            virtual double MCFGetFO()=0;
-            virtual int MCFGetStatus()=0;
-            virtual void MCFCosts(double* outCosts)=0;
-            virtual void MCFGetX(double* outFlow)=0;
-            virtual void CheckPSol()=0;
-            virtual void CheckDSol()=0;
-            /* end of MCFClass MCFsimplex Interface */
+            virtual const double GetOptimum() const =0;
+            virtual std::vector<netxpert::data::arc_t> GetMCFArcs()=0;
+            virtual netxpert::data::graph_t::ArcMap<netxpert::data::flow_t>* GetMCFFlow()=0;
+            virtual netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* GetMCFCost()=0;
+            /* end of LEMON friendly interface */
+            virtual const int GetMCFStatus()=0;
     };
 } //namespace core
 }//namespace netxpert

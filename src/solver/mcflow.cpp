@@ -18,10 +18,11 @@ MinCostFlow::MinCostFlow(Config& cnfg)
     IsDirected = true; //TODO CHECK always true?
 }
 
-void MinCostFlow::Solve(string net){}
+void
+ MinCostFlow::Solve(std::string net){}
 
-void MinCostFlow::Solve(Network& net)
-{
+void
+ MinCostFlow::Solve(netxpert::InternalNet& net) {
     //TODO: Check for leaks
     this->net = &net;
 
@@ -41,8 +42,9 @@ void MinCostFlow::Solve(Network& net)
     }
 }
 
-void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const
-{
+void
+ MinCostFlow::SaveResults(const std::string& resultTableName,
+                          const ColumnMap& cmap) const {
     try
     {
         Config cnfg = this->NETXPERT_CNFG;
@@ -87,10 +89,10 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMa
         LOGGER::LogDebug("Writing Geometries..");
         writer->OpenNewTransaction();
 
+        //Processing and Saving Results are handled within net.ProcessResultArcs()
         std::string arcIDs = "";
         std::unordered_set<string> totalArcIDs;
-        std::vector<FlowCost>::iterator it;
-        vector<FlowCost> mcfResult = this->GetMinCostFlow();
+        std::vector<FlowCost>::const_iterator it;
 
 		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
 		{
@@ -99,29 +101,24 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMa
 			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
 			{
 				//populate arcIDs
-				for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+				for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
 				{
 					#pragma omp single nowait
 					{
 						auto arcFlow = *it;
-						InternalArc key = arcFlow.intArc;
+						auto arc = arcFlow.intArc;
 						double cost = arcFlow.cost;
 						double flow = arcFlow.flow;
-						vector<InternalArc> arc{ key };
-						string id = "";
 
-						vector<ArcData> arcData = this->net->GetOriginalArcData(arc, cnfg.IsDirected);
-						// is only one arc
-						if (arcData.size() > 0)
-						{
-							ArcData arcD = *arcData.begin();
-							id = arcD.extArcID;
-							#pragma omp critical
-							{
-								if (id != "dummy")
-									totalArcIDs.insert(id);
-							}
-						}
+						const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
+
+                        std::string id = arcData.extArcID;
+                        #pragma omp critical
+                        {
+                            if (id != "dummy")
+                                totalArcIDs.insert(id);
+                        }
+
 					}//omp single
 				}
 			}//omp parallel
@@ -140,7 +137,7 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMa
         int counter = 0;
 		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
         {
-        for (it = mcfResult.begin(); it != mcfResult.end(); ++it)
+        for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
         {
             #pragma omp single nowait
             {
@@ -150,43 +147,29 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMa
             if (counter % 2500 == 0)
                 LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-            string arcIDs = "";
-            InternalArc key = arcFlow.intArc;
-            double cost = arcFlow.cost;
-            double flow = arcFlow.flow;
-            double cap = -1;
-            vector<InternalArc> arc { key };
+            std::string arcIDs  = "";
+            auto arc            = arcFlow.intArc;
+            cost_t cost         = arcFlow.cost;
+            flow_t flow         = arcFlow.flow;
+            capacity_t cap      = -1;
 
-            // cout << key.fromNode << "->" << key.toNode << endl;
             //TODO:
             //works only on non-splitted arcs!
-            vector<ArcData> arcData = this->net->GetOriginalArcData(arc, cnfg.IsDirected);
-            // is only one arc
-            if (arcData.size() > 0)
-            {
-                ArcData arcD = *arcData.begin();
-                arcIDs = arcD.extArcID;
-                cap = arcD.capacity;
-                cout << "cap: " <<cap << endl;
-            }
+            const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
 
-            string orig;
-            string dest;
-            try{
-                orig = this->net->GetOriginalStartOrEndNodeID(key.fromNode);
-            }
-            catch (exception& ex) {
-                orig = this->net->GetOriginalNodeID(key.fromNode);
-            }
-            try{
-                dest = this->net->GetOriginalStartOrEndNodeID(key.toNode);
-            }
-            catch (exception& ex) {
-                dest = this->net->GetOriginalNodeID(key.toNode);
-            }
+            arcIDs  = arcData.extArcID;
+            cap     = arcData.capacity;
+            cout << "cap: " <<cap << endl;
+
+            string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
+            string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
+
+            std::vector<netxpert::data::arc_t> arcs {arc};
 
             if (orig != "dummy" && dest != "dummy")
-                this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arc, resultTableName, *writer, *qry);
+                this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs,
+                                                        arcs,
+                                                        resultTableName, *writer, *qry);
             else
                 LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
                                                 to_string(cap) + ", flow: " +to_string(flow));
@@ -204,155 +187,84 @@ void MinCostFlow::SaveResults(const std::string& resultTableName, const ColumnMa
     }
 }
 
-MCFAlgorithm MinCostFlow::GetAlgorithm() const
-{
+MCFAlgorithm
+ MinCostFlow::GetAlgorithm() const {
     return algorithm;
 }
 
-void MinCostFlow::SetAlgorithm(MCFAlgorithm mcfAlgorithm)
-{
+void
+ MinCostFlow::SetAlgorithm(MCFAlgorithm mcfAlgorithm) {
     algorithm = mcfAlgorithm;
 }
 
-double MinCostFlow::GetOptimum() const
-{
+const double
+ MinCostFlow::GetOptimum() const {
     return optimum;
 }
-vector<FlowCost> MinCostFlow::GetMinCostFlow() const
-{
+
+std::vector<FlowCost>
+ MinCostFlow::GetMinCostFlow() const {
     return flowCost;
 }
 
 //private
-void MinCostFlow::solve (Network& net)
-{
-    //vector<long> ign = { 0, -1, (long)4294967295, (long)4261281277 };
-    // 0 is a valid ignore value for linux!
-    //TODO check in windows
-    vector<long> ign = { -1, (long)4294967295, (long)4261281277 };
+void
+ MinCostFlow::solve (netxpert::InternalNet& net) {
 
     vector<FlowCost> result;
+    auto* costMap = net.GetCostMap();
+    auto* supplyMap = net.GetSupplyMap();
 
-    vector<uint32_t> sNds;
-    vector<uint32_t> eNds;
-    vector<double> supply;
-    vector<double> costs;
-    vector<double> caps;
-    uint32_t nmx = net.GetMaxNodeCount();
-    uint32_t mmx = net.GetMaxArcCount();
+    switch (algorithm)
+    {
+        case MCFAlgorithm::NetworkSimplex_LEMON:
+            mcf = shared_ptr<IMinCostFlow>(new NS_LEM());
+            break;
+        default:
+            mcf = shared_ptr<IMinCostFlow>(new NS_LEM());
+            break;
+    }
 
-    try
-    {
-        switch (algorithm)
-        {
-            case MCFAlgorithm::NetworkSimplex_LEMON:
-                mcf = shared_ptr<IMinCostFlow>(new NetworkSimplex());
-                break;
-            default:
-                mcf = shared_ptr<IMinCostFlow>(new NetworkSimplex());
-                break;
-        }
-    }
-    catch (exception& ex)
-    {
-        /*if (ex.GetInnermostException() is DllNotFoundException)
-        {
-            DllNotFoundException dllEx = (DllNotFoundException)ex.GetInnermostException();
-            Logger.WriteLog(string.Format("Fehler beim Instanziieren des MST-Solvers (Kern): {0}", dllEx.Message), LogLevel.Fatal);
-            throw dllEx;
-        }
-        else
-        {
-            Logger.WriteLog(string.Format("Fehler beim Instanziieren des MST-Solvers (Kern): {0}", ex.InnerException), LogLevel.Fatal);
-            Logger.WriteLog(string.Format("StackTrace: {0}", ex.StackTrace), LogLevel.Fatal);
-            throw ex;
-        }*/
-    }
     if (!validateNetworkData( net ))
-        //throw new InvalidValueException(string.Format("Problem data does not fit the {0} Solver!", this.ToString()));
         throw;
 
-    LOGGER::LogDebug("Arcs: " + to_string(net.GetMaxArcCount() ));
-    LOGGER::LogDebug("Nodes: "+ to_string(net.GetMaxNodeCount() ));
+    LOGGER::LogDebug("Arcs: " + to_string(net.GetArcCount() ));
+    LOGGER::LogDebug("Nodes: "+ to_string(net.GetNodeCount() ));
 
     //Read the network
-    try
-    {
-        convertInternalNetworkToSolverData(net, sNds, eNds, supply, caps, costs);
+    auto sg = convertInternalNetworkToSolverData(net);
+    mcf->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, costMap, net.GetCapMap(), supplyMap);
 
-        int srcCount = 0;
-        int transshipCount = 0;
-        int sinkCount = 0;
-        for (auto& s : supply)
-        {
-            if (s > 0)
-                srcCount += 1;
-            if (s == 0)
-                transshipCount += 1;
-            if (s < 0)
-                sinkCount += 1;
-        }
+    int srcCount = 0;
+    int transshipCount = 0;
+    int sinkCount = 0;
 
-        LOGGER::LogDebug("Sources: "+ to_string(srcCount));
-        LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
-        LOGGER::LogDebug("Sinks: "+ to_string(sinkCount));
-        LOGGER::LogDebug("Solving..");
+    //TODO network get infos for sinks & sources
 
-        //vector::data() returns direct pointer to data
-        mcf->LoadNet( static_cast<uint32_t>( net.GetMaxNodeCount() ), static_cast<uint32_t>( net.GetMaxArcCount()),
-                        static_cast<uint32_t>( net.GetMaxNodeCount() ),static_cast<uint32_t>( net.GetMaxArcCount() ),
-                        caps.data(), costs.data(), supply.data(), sNds.data(), eNds.data());
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogFatal( ex.what() );
-    }
+    LOGGER::LogDebug("Sources: "+ to_string(srcCount));
+    LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
+    LOGGER::LogDebug("Sinks: "+ to_string(sinkCount));
+    LOGGER::LogDebug("Solving..");
 
-    try
-    {
-        mcf->SolveMCF();
-    }
-    catch (exception& ex)
-    {
-        //throw new ApplicationException(ex.Message, ex.InnerException);
-    }
-    solverStatus = static_cast<MCFSolverStatus>(mcf->MCFGetStatus());
+    mcf->SolveMCF();
 
-    if (solverStatus == MCFSolverStatus::MCFOK)
-    {
-        try {
-            //Check Solutions - if there is a failure an exception is thrown!
-            mcf->CheckPSol(); //Primal Solution
-        }
-        catch (exception& ex) {
-            LOGGER::LogError(ex.what());
-        }
-        try {
-            mcf->CheckDSol(); //Dual Solution
-        }
-        catch (exception& ex) {
-            LOGGER::LogWarning(ex.what());
-        }
+    solverStatus = static_cast<MCFSolverStatus>(mcf->GetMCFStatus());
 
-        optimum = mcf->MCFGetFO();
+    if (solverStatus == MCFSolverStatus::MCFOK) {
 
-        vector<double> cost_flow;
-        cost_flow.resize(mmx, 0);
+        this->optimum = mcf->GetOptimum();
 
-        //fill data
-        mcf->MCFGetX(cost_flow.data()); //data() gets raw pointer
-        //cout << "mcf: cost_flow.size(): "<< cost_flow.size()<< endl;
-        for (int i = 0; i < cost_flow.size(); i++)
-        {
-            uint32_t startNode = sNds[i];
-            uint32_t endNode = eNds[i];
-            double flow = cost_flow[i];
-            double cost = costs[i];
+        auto* flowMap = mcf->GetMCFFlow();
+
+        //loop over all arcs
+        auto arcIter = this->net->GetArcsIter();
+        for ( ; arcIter != lemon::INVALID; ++arcIter) {
+            auto arc = arcIter;
+            flow_t flow = (*flowMap)[arc];
+            cost_t cost = (*costMap)[arc];
             //cout << "s: " << startNode << " e: " <<endNode<<" f: "<<flow << " c: "<<cost << endl;
-            if (flow > 0 && flow != ign[0] && flow != ign[1])
-            {
-                //double[] flowCost = { flow, cost };
-                FlowCost fc{ InternalArc {startNode, endNode}, flow, cost};
+            if (flow > 0) {
+                FlowCost fc{ arc, flow, cost};
                 result.push_back(fc);
             }
         }
@@ -366,90 +278,41 @@ void MinCostFlow::solve (Network& net)
     this->flowCost = result;
 }
 
-bool MinCostFlow::validateNetworkData(Network& net)
-{
+bool
+ MinCostFlow::validateNetworkData(netxpert::InternalNet& net) {
     bool valid = false;
+
+    auto nodesIter = this->net->GetNodesIter();
+    auto* supplyMap = this->net->GetSupplyMap();
+    for (; nodesIter != lemon::INVALID; ++nodesIter) {
+        std::cout << this->net->GetOrigNodeID(nodesIter) << " " << (*supplyMap)[nodesIter] << std::endl;
+    }
+
+    auto arcsIter = this->net->GetArcsIter();
+    auto* capMap = this->net->GetCapMap();
+    auto* costMap = this->net->GetCostMap();
+    for (; arcsIter != lemon::INVALID; ++arcsIter) {
+        std::cout << this->net->GetNodeID(this->net->GetSourceNode(arcsIter)) << "->"
+                  << this->net->GetNodeID(this->net->GetTargetNode(arcsIter)) << ": "
+                  << (*costMap)[arcsIter] << ": "
+                  << (*capMap)[arcsIter]
+                  << std::endl;
+    }
 
     valid = true;
     return valid;
 }
 
-void MinCostFlow::convertInternalNetworkToSolverData(Network& net, vector<uint32_t>& sNds,
-                                                    vector<uint32_t>& eNds, vector<double>& supply,
-                                                    vector<double>& caps, vector<double>& costs)
-{
-    // Die Größe der Arrays müssen passen (ob 0 drin steht ist egal, sonst gibts später bei Dispose
-    // das böse Erwachen in Form eines Heap Corruption errors bzw. einer System Access Violation
+lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
+ MinCostFlow::convertInternalNetworkToSolverData(netxpert::InternalNet& net) {
 
-    Arcs arcs = net.GetInternalArcData();
-    vector<InternalArc> keys;
-    for(Arcs::iterator it = arcs.begin(); it != arcs.end(); ++it) {
-      keys.push_back(it->first);
-    }
-    // Auf die Richtung achten
-    // --> doppelter Input der Kanten notwendig bei undirected
-    if (this->IsDirected)
-    {
-        sNds.resize(keys.size());
-        eNds.resize(keys.size());
-        //cout << "size of arcs: " << keys.size() << endl;
-        for (int i = 0; i < keys.size(); i++)
-        {
-            sNds[i] = keys[i].fromNode;
-            eNds[i] = keys[i].toNode;
-        }
+    using namespace netxpert::data;
+    LOGGER::LogInfo("#Arcs internal graph: " +to_string(lemon::countArcs(*net.GetGraph())));
 
-        costs.resize(keys.size(), 0); //Größe muss passen!
-        caps.resize(keys.size(), DOUBLE_INFINITY);  //Größe muss passen!
-        for (int i = 0; i < keys.size(); i++)
-        {
-            ArcData oldArcData;
-            if (arcs.count(keys[i]) > 0)
-                oldArcData = arcs.at(keys[i]);
-            costs[i] = oldArcData.cost;
-            caps[i] = oldArcData.capacity;
-        }
-    }
-    else //both directions!
-    {
-        sNds.resize(keys.size()*2);
-        eNds.resize(keys.size()*2);
-        //cout << "size of arcs: " << keys.size() << endl;
-        for (int i = 0; i < keys.size(); i++)
-        {
-            sNds[i] = keys[i].fromNode;
-            eNds[i] = keys[i].toNode;
-            //undirected
-            sNds[i + keys.size()] = keys[i].toNode;
-            eNds[i + keys.size()] = keys[i].fromNode;
-        }
+    lemon::FilterArcs<graph_t, graph_t::ArcMap<bool>> sg(*net.GetGraph(), *net.GetArcFilterMap());
 
-        costs.resize(keys.size()*2, 0); //Größe muss passen!
-        caps.resize(keys.size()*2, DOUBLE_INFINITY);  //Größe muss passen!
-        for (int i = 0; i < keys.size(); i++)
-        {
-            ArcData oldArcData;
-            if (arcs.count(keys[i]) > 0)
-                oldArcData = arcs.at(keys[i]);
-            costs[i] = oldArcData.cost;
-            caps[i] = oldArcData.capacity;
-            costs[i+keys.size()] = oldArcData.cost;
-            caps[i+keys.size()] = oldArcData.capacity;
-        }
-    }
-    //supply is direction independent
-    supply.resize( net.GetMaxNodeCount(), 0 ); //Größe muss passen!
-    //cout << "supply vector size: "<< supply.size() << endl;
-    //cout << "net supply size: " << net.GetNodeSupplies().size() <<endl;
-    for (auto item : net.GetNodeSupplies() )
-    {
-        uint32_t key = item.first;
-        NodeSupply value = item.second;
-        // key is 1-based thus -1 for index
-        // only care for real supply and demand values
-        // transshipment nodes (=0) are already present in the array (because of resize())
-        supply[key - 1] = value.supply;
-        //cout << "ns - " << key << ": " << value.supply << endl;
-    }
-    //cout << "ready converting data" << endl;
+    assert(lemon::countArcs(sg) > 0);
+
+    LOGGER::LogInfo("#Arcs filtered graph: " +to_string(lemon::countArcs(sg)));
+    return sg;
 }
