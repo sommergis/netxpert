@@ -30,7 +30,7 @@
 #include "sptree_simple.h"
 #include "transp_simple.h"
 #include "mcfp_simple.h"
-//#include "netbuilder_simple.h"
+#include "netbuilder_simple.h"
 
 namespace netxpert
 {
@@ -52,7 +52,7 @@ namespace netxpert
         void TestMCF(netxpert::cnfg::Config& cnfg);
         void TestTransportation(netxpert::cnfg::Config& cnfg);
 //        void TestTransportationExt(netxpert::cnfg::Config& cnfg);
-//        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
+        void TestNetworkBuilder(netxpert::cnfg::Config& cnfg);
     }
 }
 

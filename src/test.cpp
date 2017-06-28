@@ -142,9 +142,12 @@ void netxpert::test::LemonNetworkConvert(Config& cnfg)
         NewNode startNode {extNodeID, coord, supply};
         NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
 
-        auto starts = net.LoadStartNodes(vector<NewNode> {startNode}, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+        auto startNodes = vector<NewNode> {startNode};
+        auto endNodes   = vector<NewNode> {endNode};
 
-        auto ends = net.LoadEndNodes(vector<NewNode> {endNode}, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+        auto starts = net.LoadStartNodes(startNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+
+        auto ends = net.LoadEndNodes(endNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
 
         LOGGER::LogDebug("Done!");
         /*cout << "Reset of Network.." << endl;
@@ -160,13 +163,13 @@ void netxpert::test::LemonNetworkConvert(Config& cnfg)
     }
 }
 
-//void netxpert::test::TestNetworkBuilder(Config& cnfg)
-//{
-//	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
-//	cout << s << endl;
-//	netxpert::simple::NetworkBuilder simpleSolver(s);
-//	simpleSolver.Build();
-//}
+void netxpert::test::TestNetworkBuilder(Config& cnfg)
+{
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	cout << s << endl;
+	netxpert::simple::NetworkBuilder simpleSolver(s);
+	simpleSolver.Build();
+}
 
 void netxpert::test::TestFileGDBWriter(Config& cnfg)
 {
