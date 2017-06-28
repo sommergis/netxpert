@@ -205,7 +205,21 @@ const netxpert::data::arc_t
 */
 const node_t
  InternalNet::GetNodeFromOrigID(const std::string nodeID) {
-    auto node = this->nodeIDMap.at(nodeID);
+
+    netxpert::data::node_t node;
+
+    try {
+        node = this->nodeIDMap.at(nodeID);
+    }
+    catch (std::exception& ex) {
+        try {
+            this->nodeIDMap.at(nodeID + "@netXpert");
+        }
+        catch (std::exception& ex) {
+            LOGGER::LogWarning("Could not get node from orig node id: "+ nodeID);
+        }
+    }
+
     return node;
 }
 
@@ -293,7 +307,8 @@ const geos::geom::Coordinate
  InternalNet::GetStartOrEndNodeGeometry(const netxpert::data::ExtNodeID nodeID) {
 
     geos::geom::Coordinate result;
-    auto node = this->nodeIDMap.at(nodeID);
+
+    auto node = this->GetNodeFromOrigID(nodeID);
 //    std::cout << "GetStartOrEndNodeGeometry()" << std::endl;
 
     /*for (auto kv : nodeIDMap){
@@ -390,7 +405,7 @@ const uint32_t
                 //fromNode und toNode von oben nehmen und keinen Split durchführen
                 if (this->nodeIDMap.count(extFromNode) > 0)
                 {
-                    resultNode = this->nodeIDMap.at(extFromNode);
+                    resultNode = this->GetNodeFromOrigID(extFromNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     // no insertion of new node necessary (as with insertNewNode()
                     AddedPoint pVal  {extNodeID, point};
@@ -416,7 +431,7 @@ const uint32_t
                 //fromNode und toNode von oben nehmen und keinen Split durchführen
                 if (this->nodeIDMap.count(extToNode) > 0)
                 {
-                    resultNode = this->nodeIDMap.at(extToNode);
+                    resultNode = this->GetNodeFromOrigID(extToNode);
                     //save closestPoint geom for lookup later on straight lines for ODMatrix
                     // no insertion of new node necessary (as with insertNewNode()
                     AddedPoint pVal  {extNodeID, point};
@@ -739,7 +754,10 @@ const uint32_t
     using namespace geos::geom;
 
     //check extNodeID if already present in nodeIDMap
-    assert(this->nodeIDMap.count(extNodeID) == 0);
+    if (this->nodeIDMap.count(extNodeID) != 0) {
+        LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
+        extNodeID = extNodeID + "@netXpert";
+    }
 
     NewNode n { extNodeID, Coordinate {x, y}, supply};
 
@@ -760,7 +778,10 @@ const uint32_t
     using namespace geos::geom;
 
     //check extNodeID if already present in nodeIDMap
-    assert(this->nodeIDMap.count(extNodeID) == 0);
+    if (this->nodeIDMap.count(extNodeID) != 0) {
+        LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
+        extNodeID = extNodeID + "@netXpert";
+    }
 
     NewNode n { extNodeID, Coordinate {x, y}, supply};
 
@@ -773,7 +794,7 @@ const uint32_t
 }
 
 std::vector< std::pair<uint32_t, std::string> >
- InternalNet::LoadStartNodes(const std::vector<NewNode>& newNodes, const int treshold,
+ InternalNet::LoadStartNodes(std::vector<NewNode> newNodes, const int treshold,
                              const std::string arcsTableName, const std::string geomColumnName,
                              const ColumnMap& cmap, const bool withCapacity) {
 
@@ -783,7 +804,7 @@ std::vector< std::pair<uint32_t, std::string> >
                                             cmap, ArcIDColumnDataType::Number, withCapacity);
     vector<pair<uint32_t, string>> startNodes;
 
-    for (const auto& startNode : newNodes)
+    for (auto& startNode : newNodes)
     {
         if (startNode.supply > 0)
         {
@@ -791,7 +812,8 @@ std::vector< std::pair<uint32_t, std::string> >
 
             //check extNodeID if already present in nodeIDMap
             if (this->nodeIDMap.count(startNode.extNodeID) != 0) {
-                throw std::runtime_error("External Node ID "+ startNode.extNodeID + " already present!");
+                LOGGER::LogWarning("External Node ID "+ startNode.extNodeID + " already present! Renaming..");
+                startNode.extNodeID = startNode.extNodeID + "@netXpert";
             }
 
             try
@@ -802,8 +824,8 @@ std::vector< std::pair<uint32_t, std::string> >
             }
             catch (exception& ex)
             {
-                //pass
-                cout << "Exception!" << endl;
+                LOGGER::LogError("Exception raised at LoadStartNodes()!");
+                LOGGER::LogError(ex.what());
             }
         }
     }
@@ -811,7 +833,7 @@ std::vector< std::pair<uint32_t, std::string> >
 }
 
 std::vector< std::pair<uint32_t, std::string> >
- InternalNet::LoadEndNodes(const std::vector<NewNode>& newNodes, const int treshold,
+ InternalNet::LoadEndNodes(std::vector<NewNode> newNodes, const int treshold,
                            const std::string arcsTableName, const std::string geomColumnName,
                            const ColumnMap& cmap, const bool withCapacity) {
 
@@ -821,7 +843,7 @@ std::vector< std::pair<uint32_t, std::string> >
                                             cmap, ArcIDColumnDataType::Number, withCapacity);
     vector<pair<uint32_t, string>> endNodes;
 
-    for (const auto& endNode : newNodes)
+    for (auto& endNode : newNodes)
     {
         if (endNode.supply < 0)
         {
@@ -829,7 +851,8 @@ std::vector< std::pair<uint32_t, std::string> >
 
             //check extNodeID if already present in nodeIDMap
             if (this->nodeIDMap.count(endNode.extNodeID) != 0) {
-                throw std::runtime_error("External Node ID "+ endNode.extNodeID + " already present!");
+                LOGGER::LogWarning("External Node ID "+ endNode.extNodeID + " already present! Renaming..");
+                endNode.extNodeID = endNode.extNodeID + "@netXpert";
             }
 
             try
@@ -840,8 +863,8 @@ std::vector< std::pair<uint32_t, std::string> >
             }
             catch (exception& ex)
             {
-                //pass
-                cout << "Exception!" << endl;
+                LOGGER::LogError("Exception raised at LoadEndNodes()!");
+                LOGGER::LogError(ex.what());
             }
             //break;
         }
@@ -2010,8 +2033,8 @@ void
 
         try
         {
-            internalStartNode   = this->nodeIDMap.at(externalStartNode);
-            internalEndNode     = this->nodeIDMap.at(externalEndNode);
+            internalStartNode   = this->GetNodeFromOrigID(externalStartNode);
+            internalEndNode     = this->GetNodeFromOrigID(externalEndNode);
         }
         catch (exception& ex)
         {

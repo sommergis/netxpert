@@ -52,7 +52,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = -1
+    cnfg.LogLevel = 5
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
