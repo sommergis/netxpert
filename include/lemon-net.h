@@ -255,7 +255,7 @@ namespace netxpert {
             * Simple Method for adding multiple start nodes
             */
             std::vector< std::pair<uint32_t, std::string> >
-             LoadStartNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
+             LoadStartNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
                             const std::string arcsTableName, const std::string geomColumnName,
                             const netxpert::data::ColumnMap& cmap, const bool withCapacity);
 
@@ -263,7 +263,7 @@ namespace netxpert {
             * Simple Method for adding multiple end nodes
             */
             std::vector< std::pair<uint32_t, std::string> >
-             LoadEndNodes(const std::vector<netxpert::data::NewNode>& newNodes, const int treshold,
+             LoadEndNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
                           const std::string arcsTableName, const std::string geomColumnName,
                           const netxpert::data::ColumnMap& cmap, const bool withCapacity);
             void
