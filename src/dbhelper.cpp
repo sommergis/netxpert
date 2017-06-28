@@ -326,7 +326,7 @@ void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap&
 
             if (!idCol.isNull())
             {
-                id  = idCol.getInt();
+                id  = idCol.getText();
             }
             if (!geoCol.isNull())
             {
@@ -382,7 +382,7 @@ void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap&
 
             if (!idCol.isNull())
             {
-                id  = idCol.getInt();
+                id  = idCol.getText();
             }
             if (!geoCol.isNull())
             {
@@ -987,9 +987,10 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(c
     {
         vector<Geometry*> geoms;
         vector<string> arcIDList = UTILS::Split(arcIDs, ',');
+
         for (auto s : arcIDList)
         {
-            //LOGGER::LogDebug("Querying arcid #" + s +"..");
+//            LOGGER::LogDebug("Querying arcid #" + s +"..");
 //            auto t = std::stoul(s);
             auto t = s;
 
@@ -1009,7 +1010,7 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(c
     }
     catch (exception& ex)
     {
-        LOGGER::LogError( "Error getting arc geometries!" );
+        LOGGER::LogError( "GetArcGeometriesFromMem() - Error getting arc geometries!" );
         LOGGER::LogError( ex.what() );
         return nullptr;
     }
@@ -1041,7 +1042,7 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromDB(co
             default: //double or int
                 for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
 //                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
-                    eliminatedArcIDs += ",'" + elem + "'";
+                    eliminatedArcIDs += "," + elem;
                 }
                 break;
         }
@@ -1089,7 +1090,7 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromDB(co
     }
     catch (exception& ex)
     {
-        LOGGER::LogError( "Error getting arc geometries!" );
+        LOGGER::LogError( "GetArcGeometriesFromDB() - Error getting arc geometries!" );
         LOGGER::LogError( ex.what() );
         return nullptr;
     }
