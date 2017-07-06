@@ -1242,7 +1242,7 @@
 	"config.h"
 	"utils.h"
 
-1498251186 /home/hahne/dev/netxpert1_0/include/config.h
+1499348542 /home/hahne/dev/netxpert1_0/include/config.h
 	<stdint.h>
 	<string>
 	<stdexcept>
@@ -1415,7 +1415,7 @@
 	"geos/geom/Geometry.h"
 	"geos/geom/CoordinateSequence.h"
 
-1498470644 /home/hahne/dev/netxpert1_0/include/data.h
+1499370059 /home/hahne/dev/netxpert1_0/include/data.h
 	<stdint.h>
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
@@ -1840,7 +1840,7 @@
 	<geos/geom/PrecisionModel.h>
 	<cassert>
 
-1498588218 /home/hahne/dev/netxpert1_0/include/lemon-net.h
+1499367470 /home/hahne/dev/netxpert1_0/include/lemon-net.h
 	<cmath>
 	<unordered_map>
 	<vector>
@@ -2005,7 +2005,7 @@
 	<iostream>
 	<geos/inline.h>
 
-1498589124 /home/hahne/dev/netxpert1_0/include/test.h
+1498664384 /home/hahne/dev/netxpert1_0/include/test.h
 	<iostream>
 	"logger.h"
 	"fgdbwriter.h"
@@ -2024,6 +2024,7 @@
 	"sptree_simple.h"
 	"transp_simple.h"
 	"mcfp_simple.h"
+	"netbuilder_simple.h"
 
 1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/io/StringTokenizer.h
 	<geos/export.h>
@@ -2184,7 +2185,7 @@
 	"dbhelper.h"
 	"odmatrix.h"
 
-1498565041 /home/hahne/dev/netxpert1_0/include/solver/odmatrix.h
+1498855040 /home/hahne/dev/netxpert1_0/include/solver/odmatrix.h
 	"isolver.h"
 	"isptree.h"
 	"sptlem.h"
@@ -2245,7 +2246,7 @@
 	"dbhelper.h"
 	"mcflow.h"
 
-1498468523 /home/hahne/dev/netxpert1_0/include/solver/mcflow.h
+1499198657 /home/hahne/dev/netxpert1_0/include/solver/mcflow.h
 	"isolver.h"
 	"imcflow.h"
 	"nslem.h"
@@ -2280,7 +2281,116 @@
 	"dbhelper.h"
 	"transportation.h"
 
-1498589498 /home/hahne/dev/netxpert1_0/include/solver/transportation.h
+1499198265 /home/hahne/dev/netxpert1_0/include/solver/transportation.h
 	"mcflow.h"
 	"odmatrix.h"
+
+1498292362 /home/hahne/dev/netxpert1_0/include/simple/netbuilder_simple.h
+	"data.h"
+	"utils.h"
+	"network.h"
+	"dbhelper.h"
+	"networkbuilder.h"
+
+1494276443 /home/hahne/dev/netxpert1_0/include/networkbuilder.h
+	"dbhelper.h"
+	"dbwriter.h"
+	"slitewriter.h"
+	"fgdbwriter.h"
+	<vector>
+	"geos/io/WKBReader.h"
+	"geos/io/WKBWriter.h"
+	"geos/geom/Point.h"
+	"geos/geom/PrecisionModel.h"
+	"geos/operation/linemerge/LineMerger.h"
+	"geos/geomgraph/GeometryGraph.h"
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/GeometryGraph.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<memory>
+	<geos/geom/Coordinate.h>
+	<geos/geom/CoordinateSequence.h>
+	<geos/geomgraph/PlanarGraph.h>
+	<geos/geom/LineString.h>
+	<geos/inline.h>
+	"geos/geomgraph/GeometryGraph.inl"
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/PlanarGraph.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<memory>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/PlanarGraph.h>
+	<geos/geomgraph/NodeMap.h>
+	<geos/geomgraph/DirectedEdgeStar.h>
+	<geos/inline.h>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/NodeMap.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<string>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/Node.h>
+	<geos/inline.h>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/Node.h
+	<geos/export.h>
+	<geos/geomgraph/GraphComponent.h>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/EdgeEndStar.h>
+	<geos/geomgraph/EdgeEnd.h>
+	<geos/inline.h>
+	<cassert>
+	<string>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/GraphComponent.h
+	<geos/export.h>
+	<geos/inline.h>
+	<geos/geomgraph/Label.h>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/Label.h
+	<geos/export.h>
+	<geos/geomgraph/TopologyLocation.h>
+	<geos/inline.h>
+	<iosfwd>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/TopologyLocation.h
+	<geos/export.h>
+	<geos/inline.h>
+	<vector>
+	<string>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/EdgeEndStar.h
+	<geos/export.h>
+	<geos/geomgraph/EdgeEnd.h>
+	<geos/geom/Coordinate.h>
+	<geos/inline.h>
+	<set>
+	<string>
+	<vector>
+	<algorithm>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/EdgeEnd.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/Label.h>
+	<geos/inline.h>
+	<string>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/DirectedEdgeStar.h
+	<geos/export.h>
+	<set>
+	<string>
+	<vector>
+	<geos/geomgraph/EdgeEndStar.h>
+	<geos/geomgraph/Label.h>
+	<geos/geom/Coordinate.h>
+	<geos/inline.h>
+
+1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/GeometryGraph.inl
+	<geos/geomgraph/GeometryGraph.h>
 

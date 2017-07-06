@@ -33,6 +33,9 @@ void
     //And transform the instance if needed
     net.TransformUnbalancedMCF(type);
     LOGGER::LogInfo("Transformed Min Cost Flow Problem done.");
+
+    this->net->ExportToDIMACS("./mcfp.dmx");
+
     try {
         solve(net);
     }
@@ -100,31 +103,37 @@ void
 
 			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
 			{
-				//populate arcIDs
-				for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
-				{
-					#pragma omp single nowait
-					{
-						auto arcFlow = *it;
-						auto arc = arcFlow.intArc;
-						double cost = arcFlow.cost;
-						double flow = arcFlow.flow;
+            //populate arcIDs
+            for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+            {
+                #pragma omp single nowait
+                {
+                auto arcFlow = *it;
+                auto arc = arcFlow.intArc;
+                double cost = arcFlow.cost;
+                double flow = arcFlow.flow;
+                //only one arc
+                auto arcIDlist = this->net->GetOrigArcIDs(std::vector<arc_t>{arc});
+                std::unordered_set<string>::const_iterator it;
+                it = arcIDlist.begin();
 
-						const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
+                if (arcIDlist.size() > 0)
+                {
+                    std::string id = *it;
 
-                        std::string id = arcData.extArcID;
-                        #pragma omp critical
-                        {
-                            if (id != "dummy")
-                                totalArcIDs.insert(id);
-                        }
-
-					}//omp single
-				}
+                    #pragma omp critical
+                    {
+                        if (id != "dummy")
+                            totalArcIDs.insert(id);
+                    }
+                }
+                }//omp single
+            }
 			}//omp parallel
 
-			for (string id : totalArcIDs)
+			for (string id : totalArcIDs) {
 				arcIDs += id += ",";
+            }
 
 			if (arcIDs.size() > 0)
 			{
@@ -153,13 +162,12 @@ void
             flow_t flow         = arcFlow.flow;
             capacity_t cap      = -1;
 
-            //TODO:
-            //works only on non-splitted arcs!
+            //works only on non-splitted arcs - the rest of the route parts will
+            //be added through InternalNet::addRouteGeomParts()
             const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
 
             arcIDs  = arcData.extArcID;
             cap     = arcData.capacity;
-            cout << "cap: " <<cap << endl;
 
             string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
             string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
@@ -204,7 +212,7 @@ const double
 
 std::vector<FlowCost>
  MinCostFlow::GetMinCostFlow() const {
-    return flowCost;
+    return this->flowCost;
 }
 
 //private
@@ -238,8 +246,7 @@ void
     int srcCount = 0;
     int transshipCount = 0;
     int sinkCount = 0;
-
-    //TODO network get infos for sinks & sources
+    this->getSupplyNodesTypeCount(srcCount, transshipCount, sinkCount);
 
     LOGGER::LogDebug("Sources: "+ to_string(srcCount));
     LOGGER::LogDebug("Transshipment nodes: "+ to_string(transshipCount));
@@ -248,13 +255,16 @@ void
 
     mcf->SolveMCF();
 
-    solverStatus = static_cast<MCFSolverStatus>(mcf->GetMCFStatus());
+    solverStatus = static_cast<netxpert::data::MCFSolverStatus>(mcf->GetMCFStatus());
 
-    if (solverStatus == MCFSolverStatus::MCFOK) {
+    LOGGER::LogDebug("MCF Solver Status: " + std::to_string(mcf->GetMCFStatus()));
+
+    if (solverStatus == netxpert::data::MCFSolverStatus::MCFOK) {
 
         this->optimum = mcf->GetOptimum();
 
         auto* flowMap = mcf->GetMCFFlow();
+//        costMap = mcf->GetMCFCost();
 
         //loop over all arcs
         auto arcIter = this->net->GetArcsIter();
@@ -262,7 +272,9 @@ void
             auto arc = arcIter;
             flow_t flow = (*flowMap)[arc];
             cost_t cost = (*costMap)[arc];
-            //cout << "s: " << startNode << " e: " <<endNode<<" f: "<<flow << " c: "<<cost << endl;
+//            auto startNodeId  = this->net->GetNodeID(this->net->GetSourceNode(arc));
+//            auto endNodeId    = this->net->GetNodeID(this->net->GetTargetNode(arc));
+//            cout << "s: " << startNodeId << " e: " <<endNodeId<<" f: "<<flow << " c: "<<cost << endl;
             if (flow > 0) {
                 FlowCost fc{ arc, flow, cost};
                 result.push_back(fc);
@@ -278,11 +290,26 @@ void
     this->flowCost = result;
 }
 
+void
+ MinCostFlow::getSupplyNodesTypeCount(int& srcNodeCount, int& transshipNodeCount, int& sinkNodeCount ) {
+
+    auto nodesIter  = this->net->GetNodesIter();
+    for (; nodesIter != lemon::INVALID; ++nodesIter) {
+        if ( this->net->GetNodeSupply(nodesIter) > 0 )
+            srcNodeCount += 1;
+        if ( this->net->GetNodeSupply(nodesIter) == 0 )
+            transshipNodeCount += 1;
+        if ( this->net->GetNodeSupply(nodesIter) < 0 )
+            sinkNodeCount += 1;
+    }
+}
+
+
 bool
  MinCostFlow::validateNetworkData(netxpert::InternalNet& net) {
     bool valid = false;
 
-    auto nodesIter = this->net->GetNodesIter();
+    /*auto nodesIter = this->net->GetNodesIter();
     auto* supplyMap = this->net->GetSupplyMap();
     for (; nodesIter != lemon::INVALID; ++nodesIter) {
         std::cout << this->net->GetOrigNodeID(nodesIter) << " " << (*supplyMap)[nodesIter] << std::endl;
@@ -297,7 +324,7 @@ bool
                   << (*costMap)[arcsIter] << ": "
                   << (*capMap)[arcsIter]
                   << std::endl;
-    }
+    }*/
 
     valid = true;
     return valid;

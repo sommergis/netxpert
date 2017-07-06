@@ -31,6 +31,7 @@ namespace netxpert {
     #endif // DEBUG
     #ifndef DEBUG
         static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
+//        static int LOCAL_NUM_THREADS = 1;
     #endif
 	//#endif // OMP_H
 

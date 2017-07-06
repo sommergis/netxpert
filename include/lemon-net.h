@@ -120,7 +120,8 @@ namespace netxpert {
                         const netxpert::data::ColumnMap& _map = netxpert::data::ColumnMap(),
                         const netxpert::cnfg::Config& cnfg = netxpert::cnfg::Config(),
                         const netxpert::data::InputNodes& nodesTbl = netxpert::data::InputNodes(),
-                        const bool autoClean = true );
+                        const bool autoClean = true,
+                        const std::map<std::string, netxpert::data::IntNodeID>& extIntNodeMap = std::map<std::string, netxpert::data::IntNodeID>() );
 
             /// Deconstructor.
             ~InternalNet() {}
@@ -222,6 +223,9 @@ namespace netxpert {
                 return this->nodeSupplyMap.get();
             };
 
+            void
+             SetNodeData(const std::string& nodeID, const netxpert::data::node_t& node);
+
             //--|Region Getters
 
             //-->Region Add Points
@@ -308,7 +312,11 @@ namespace netxpert {
                                         );
             //--|Region Save Results
 
-            void PrintGraph();
+            void
+             PrintGraph();
+
+            void
+             ExportToDIMACS(const std::string& path);
 
             //-->Region MinCostFlow functions
 
@@ -325,7 +333,9 @@ namespace netxpert {
 
             //-->Region Network core functions
             void
-             readNodes(const netxpert::data::InputArcs& arcsTbl);
+             readNodes(const netxpert::data::InputArcs& arcsTbl,
+                       const netxpert::data::InputNodes& nodesTbl,
+                       const std::map<std::string, netxpert::data::IntNodeID>& extIntNodeMap);
 
             void
              processBarriers();
