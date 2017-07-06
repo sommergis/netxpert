@@ -89,13 +89,23 @@ int netxpert::simple::Transportation::Solve()
         solver = unique_ptr<netxpert::Transportation> (new netxpert::Transportation(cnfg));
         auto& transp = *solver;
 
+        /*
         vector<uint32_t> origs;
         for (auto& p : startNodes)
             origs.push_back(p.first);
 
         vector<uint32_t> dests;
         for (auto& p : endNodes)
-            dests.push_back(p.first);
+            dests.push_back(p.first);*/
+
+
+        vector<node_t> origs;
+        for (auto o : startNodes)
+            origs.push_back(net.GetNodeFromID(o.first));
+
+        vector<node_t> dests;
+        for (auto d : endNodes)
+            dests.push_back(net.GetNodeFromID(d.first));
 
         transp.SetOrigins(origs);
         transp.SetDestinations(dests);

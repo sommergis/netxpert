@@ -1,147 +1,211 @@
-# Simple (JSON) Transportation Solver Test
+# MCF Tests
 
-import sys, datetime
+import sys, datetime, os
 sys.path.append('/usr/local/lib')
 sys.path.append('/usr/local/lib/netxpert')
 
+parallelization = True  # True | False
+# must be done before module import of pynetxpert
+if parallelization:
+    import multiprocessing as mp
+    os.environ["OMP_NUM_THREADS"] = str(mp.cpu_count())
+else:
+    os.environ["OMP_NUM_THREADS"] = str(1)
+
 import pynetxpert as netx
+import json
 
-def test_data():
-  odmatrix = [
-                 {"arcid": str("5"),"fromNode": str("4"),"toNode": str("2"),"cost": 2 },
-                 {"arcid": str("4"),"fromNode": str("3"),"toNode": str("4"),"cost": 1 },
-                 {"arcid": str("3"),"fromNode": str("3"),"toNode": str("1"),"cost": 3 },
-                 {"arcid": str("2"),"fromNode": str("4"),"toNode": str("1"),"cost": 1 },
-                 {"arcid": str("1"),"fromNode": str("1"),"toNode": str("2"),"cost": 2 },
-                 {"arcid": str("6"),"fromNode": str("5"),"toNode": str("4"),"cost": 3 },
-                 {"arcid": str("7"),"fromNode": str("5"),"toNode": str("2"),"cost": 6 }
-                                ]
-  nodeSupply = [    { "nodeid": str("3"),"supply": 5 },
-                    { "nodeid": str("4"),"supply": 0 },
-                    { "nodeid": str("1"),"supply": -2},
-                    { "nodeid": str("2"),"supply": -4},
-                    { "nodeid": str("5"),"supply": 1 }
-                                             ]
-  return odmatrix, nodeSupply
+def read_config(path_to_cnfg):
 
-def convert_test_data(_odmatrix, _supply):
+    f = open(path_to_cnfg, "r")
+    content = f.read()
+    f.close()
 
-  odm = netx.ExtSPTArcs()
-  supply = netx.ExtNodeSupplies()
+    #c is root
+    config_json = json.loads(content)['c']
 
-  for item in _odmatrix:
-    o = netx.ExtSPTreeArc()
-    #print item
-    o.extArcID = item["arcid"]
-    e = netx.ExternalArc()
-    e.extFromNode = item["fromNode"]
-    e.extToNode = item["toNode"]
-    o.extArc = e
-    o.cost = item["cost"]
-    odm.append(o)
+    cnfg = netx.Config()
+    cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')
+    cnfg.ArcsTableName = config_json["ArcsTableName"].encode('ascii', 'ignore')
+    cnfg.NetXDBPath = config_json["NetXDBPath"].encode('ascii', 'ignore')
+    cnfg.TestCase = config_json["TestCase"]
+    cnfg.NodesTableName = config_json["NodesTableName"].encode('ascii', 'ignore')
+    cnfg.NodesGeomColumnName = config_json["NodesGeomColumnName"].encode('ascii', 'ignore')
+    cnfg.NodeIDColumnName = config_json["NodeIDColumnName"].encode('ascii', 'ignore')
+    cnfg.NodeSupplyColumnName = config_json["NodeSupplyColumnName"].encode('ascii', 'ignore')
+    cnfg.ArcIDColumnName = config_json["ArcIDColumnName"].encode('ascii', 'ignore')
+    cnfg.FromNodeColumnName = config_json["FromNodeColumnName"].encode('ascii', 'ignore')
+    cnfg.ToNodeColumnName = config_json["ToNodeColumnName"].encode('ascii', 'ignore')
+    cnfg.CostColumnName = config_json["CostColumnName"].encode('ascii', 'ignore')
+    cnfg.CapColumnName = config_json["CapColumnName"].encode('ascii', 'ignore')
+    cnfg.OnewayColumnName = config_json["OnewayColumnName"].encode('ascii', 'ignore')
+    cnfg.IsDirected = config_json["IsDirected"]
+    cnfg.LogLevel = config_json["LogLevel"]
+    cnfg.LogFileFullPath = config_json["LogFileFullPath"].encode('ascii', 'ignore')
+    cnfg.SpatiaLiteHome = config_json["SpatiaLiteHome"].encode('ascii', 'ignore')
+    cnfg.SpatiaLiteCoreName = config_json["SpatiaLiteCoreName"].encode('ascii', 'ignore')
+    cnfg.CleanNetwork = config_json["CleanNetwork"]
+    cnfg.ResultDBType = config_json["ResultDBType"]
+    cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
+    cnfg.Treshold = config_json["Treshold"]
+    cnfg.GeometryHandling = config_json["GeometryHandling"]
+    cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
+    cnfg.Treshold = 2500
+    cnfg.LogLevel = -1
 
-  for item in _supply:
-    n = netx.ExtNodeSupply()
-    n.extNodeID = item["nodeid"]
-    n.supply = item["supply"]
-    supply.append(n)
+    cmap = netx.ColumnMap()
+    cmap.arcIDColName = cnfg.ArcIDColumnName
+    cmap.fromColName = cnfg.FromNodeColumnName
+    cmap.toColName = cnfg.ToNodeColumnName
+    cmap.costColName = cnfg.CostColumnName
+    cmap.capColName = cnfg.CapColumnName
+    #cmap.onewayColName = cnfg.OnewayColumnName
+    cmap.nodeIDColName = cnfg.NodeIDColumnName
+    cmap.supplyColName = cnfg.NodeSupplyColumnName
 
-  return odm, supply
+    return cnfg, cmap
 
-def tpsolve(odmatrix, nodeSupply):
+def test_mcf(cnfg, cmap):
 
-  cnfg = netx.Config()
+    atblname = cnfg.ArcsTableName
+    arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
-  cnfg.LogLevel = -1
-  cnfg.LogFileFullPath = "/var/www/apps/netxpert/netXpert.log"
-  cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-  cnfg.SpatiaLiteCoreName = './libspatialite'
-  cnfg.CleanNetwork = False
-  cnfg.McfAlgorithm = 1
+    net = netx.Network(arcsTable, cmap, cnfg)
 
-  netx.LOGGER.Initialize(cnfg)
+    startIDs = []
+    x = 702370
+    y = 5352540
+    supply = 10
+    withCap = True
+    startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Treshold,
+                                     cmap, withCap))
 
-  solver = netx.Transportation(cnfg)
+    x = 701360
+    y = 5352530
+    supply = 10
+    startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Treshold,
+                                     cmap, withCap))
 
-  data = netx.ExtTransportationData()
+    destIDs = []
+    x = 699022
+    y = 5355445
+    supply = -5
+    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
+                                  cmap, withCap))
 
-  data.odm = odmatrix
-  data.supply = nodeSupply
+    x = 702237
+    y = 5358572
+    supply = -3
+    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
+                                  cmap, withCap))
 
-  solver.SetExtODMatrix(data.odm)
-  solver.SetExtNodeSupply(data.supply)
 
-  solver.Solve()
+    solver = netx.MinCostFlow(cnfg)
+    solver.Solve(net)
 
-  optimum = solver.GetOptimum()
-  dist = solver.GetExtDistribution()
-  result = solver.GetSolverJSONResult()
+    optimum = solver.GetOptimum()
+    del net, solver
 
-  del solver
-  #print "Optimum:",optimum
+    return optimum
+    #return solver.GetOptimum())
 
-  return result
+def test_tp_load_nodes(cnfg, cmap):
 
-def check_result(json_result):
+    atblname = cnfg.ArcsTableName
+    arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+    ntblname = cnfg.NodesTableName
+    nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname, cnfg.NodesGeomColumnName, cmap)
+    withCapacity = True
 
-  if json_result.replace(r'\n', '') == '''{
-    "result": {
-        "optimum": 18,
-        "distribution": [
-            {
-                "arcid": "6",
-                "fromNode": "5",
-                "toNode": "4",
-                "cost": 3,
-                "flow": 1
-            },
-            {
-                "arcid": "4",
-                "fromNode": "3",
-                "toNode": "4",
-                "cost": 1,
-                "flow": 5
-            },
-            {
-                "arcid": "2",
-                "fromNode": "4",
-                "toNode": "1",
-                "cost": 1,
-                "flow": 2
-            },
-            {
-                "arcid": "5",
-                "fromNode": "4",
-                "toNode": "2",
-                "cost": 2,
-                "flow": 4
-            }
-        ]
-    }
- }'''.replace(r'\n',''):
-    return True
+    net = netx.Network(arcsTable, cmap, cnfg)
 
-  else:
-    return False
+    startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
-if __name__ == '__main__':
+    solver = netx.MinCostFlow(cnfg)
+
+    solver.Solve(net)
+
+    optimum = solver.GetOptimum()
+    del net, solver
+
+    return optimum
+    #return solver.GetOptimum()
+
+if __name__ == "__main__":
     print(netx.Version())
-    o, s = test_data()
 
-    # test supply > demand
-    s[0]["supply"] = 7
+    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Debug/TransCnfg_small.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/TransCnfg_med_2_baysf.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/TransCnfg_med_baysf.json"
 
-    # test supply < demand
-    #s[0]["supply"] = 3
+    cnfg, cmap = read_config(path_to_cnfg)
 
-    #print o
-    #print s
-    odm, supply = convert_test_data(o, s)
+    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+    cnfg.SpatiaLiteCoreName = './libspatialite'
 
-    #print odm, supply
-    result = tpsolve(odm, supply)
+    print cnfg.SpatiaLiteHome
 
-    if check_result(result):
-        print("test succeeded.")
-    else:
-        print("test failed!")
+    netx.LOGGER.Initialize(cnfg)
+    netx.DBHELPER.Initialize(cnfg)
+
+    spt_alg_dict = {
+        0: "Dijkstra_MCFClass",
+        1: "LQueue_MCFClass",
+        2: "LDeque_MCFClass",
+        3: "Dijkstra_Heap_MCFClass",
+        4: "Dijkstra_2Heap_LEMON",
+        5: "Bijkstra_2Heap_LEMON",
+        6: "Dijkstra_dheap_BOOST"
+        }
+
+    mcf_alg_dict = {
+        0: "NetworkSimplex_MCF",
+        1: "NetworkSimplex_LEMON"
+        }
+
+    active_tests =  ["tp | add nodes",
+                     "tp | load nodes"
+                    ]
+
+    active_tests = active_tests[:1]
+
+    if "mcf | add nodes" in active_tests:
+        for i in range(1, 2):
+            cnfg.McfAlgorithm = i
+            print(("Testing MCF with Algorithm {0}..".format(alg_dict[i])))
+            starttime = datetime.datetime.now()
+            result = test_mcf(cnfg, cmap)
+            stoptime = datetime.datetime.now()
+            print(("Duration: {0}".format(stoptime - starttime)))
+            print(result)
+            if "Big" in path_to_cnfg:
+                if str(result) != str(0):
+                    print("test failed!")
+                else:
+                    print("test succeeded.")
+            if "small" in path_to_cnfg:
+                if str(result) != str(16.0):
+                    print("test failed!")
+                else:
+                    print("test succeeded.")
+
+    if "mcf | load nodes" in active_tests:
+        for i in range(1, 2):
+            cnfg.McfAlgorithm = i
+            print(("Testing MCF (load nodes) with Algorithm {0}..".format(alg_dict[i])))
+            starttime = datetime.datetime.now()
+            result = test_mcf_load_nodes(cnfg, cmap)
+            stoptime = datetime.datetime.now()
+            print(("Duration: {0}".format(stoptime - starttime)))
+            print(result)
+            if "Big" in path_to_cnfg:
+                if str(result) != str(0):
+                    print("test failed!")
+                else:
+                    print("test succeeded.")
+            if "small" in path_to_cnfg:
+                if str(result) != str(16.0):
+                    print("test failed!")
+                else:
+                    print("test succeeded.")
