@@ -12,7 +12,7 @@ NS_LEM::NS_LEM()
 void
  NS_LEM::SolveMCF() {
 
-    this->nsimplex = std::unique_ptr<netsimplex_t>(new netsimplex_t(*this->g));
+    this->nsimplex = std::unique_ptr<netsimplex_t>(new netsimplex_t(*this->g, false));
 
 	//set input maps
 	this->nsimplex->upperMap(*this->capacityMap);
@@ -37,7 +37,7 @@ const uint32_t
 void
  NS_LEM::LoadNet(const uint32_t nmax,  const uint32_t mmax,
                       lemon::FilterArcs<netxpert::data::graph_t,
-                                              netxpert::data::graph_t::ArcMap<bool>>* sg,
+                                              netxpert::data::graph_t::ArcMap<bool>>* _sg,
                       netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* _costMap,
                       netxpert::data::graph_t::ArcMap<netxpert::data::capacity_t>* _capMap,
                       netxpert::data::graph_t::NodeMap<supply_t>* _supplyMap)
@@ -45,10 +45,10 @@ void
     using namespace lemon;
     using namespace netxpert::data;
 
-    this->g = sg;
-    this->costMap = _costMap;
-    this->capacityMap = _capMap;
-	this->supplyMap = _supplyMap;
+    this->g             = _sg;
+    this->costMap       = _costMap;
+    this->capacityMap   = _capMap;
+	this->supplyMap     = _supplyMap;
     //output (must be filtered_graph_t)
 	this->flowMap = new netxpert::data::filtered_graph_t::ArcMap<flow_t>(*this->g);
 }

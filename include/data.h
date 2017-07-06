@@ -293,16 +293,25 @@ namespace netxpert {
         netxpert::data::node_t dest;
 
         bool operator==(const ODPair& p2) const {
-          //const ODPair& p1=(*this);
           bool ret = (this->origin == p2.origin) && (this->dest == p2.dest);
-          //std::cout << "operator== is " << ret << std::endl;
           return ret;
         }
         bool operator<(const ODPair& p2) const {
-//          const ODPair& p1=(*this);
-          bool ret = (this->origin < p2.origin) || (this->dest < p2.dest);
-          //std::cout << "operator< is " << ret << std::endl;
-          return ret;
+          //CRITICAL for correct use of ODPair Class in std::map!
+
+          //this will lead to out_of_range-exceptions!
+          //bool ret = (this->origin < p2.origin) || (this->dest < p2.dest);
+
+          //bool ret = (( this->origin < p2.origin) && (this->dest < p2.dest) ) ; //6 Dist on transp med 2 baysf
+          //bool ret = (( this->origin < p2.origin) && (p2.dest < this->dest) ) ; //1 Dist on transp med 2 baysf
+          //bool ret = (( this->origin < p2.origin) ) ;                           //22 Dist on transp med 2 baysf
+
+          // order first by origin and then by dest!
+          if ( this->origin != p2.origin )
+            return (this->origin < p2.origin );
+          else
+            return (this->dest < p2.dest );                                      //177 Dist on transp med 2 baysf
+
         }
 
         /*template<class Archive>

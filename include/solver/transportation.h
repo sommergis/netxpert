@@ -15,7 +15,7 @@ namespace netxpert {
         public:
             Transportation(netxpert::cnfg::Config& cnfg);
             // we need a dctor, because of new alloc of an instance of Network in Solve()
-            virtual ~Transportation();
+            ~Transportation();
 
             void SetOrigins(std::vector<netxpert::data::node_t>& origs);
             /** Simple Wrapper for SWIG **/
@@ -105,9 +105,6 @@ namespace netxpert {
             std::map<netxpert::data::ODPair, netxpert::data::DistributionArc> distribution;
             std::map<netxpert::data::ExtNodeID, netxpert::data::supply_t> nodeSupply;
             std::vector<netxpert::data::ExtNodeSupply> extNodeSupply;
-
-            std::pair<netxpert::data::flow_t,netxpert::data::cost_t> getFlowCostData(const std::vector<netxpert::data::FlowCost>& fc,
-                                                     const netxpert::data::ODPair& key) const;
     };
 }
 #endif // TRANSPORTATION_H

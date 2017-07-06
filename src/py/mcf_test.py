@@ -82,20 +82,20 @@ def test_mcf(cnfg, cmap):
 
     x = 701360
     y = 5352530
-    supply = 15
+    supply = 10
     startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Treshold,
                                      cmap, withCap))
 
     destIDs = []
     x = 699022
     y = 5355445
-    supply = -10
+    supply = -5
     destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
                                   cmap, withCap))
 
     x = 702237
     y = 5358572
-    supply = -15
+    supply = -3
     destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
                                   cmap, withCap))
 
@@ -156,7 +156,7 @@ if __name__ == "__main__":
                      "mcf | load nodes"
                     ]
 
-#    active_tests = active_tests[:1]
+    active_tests = active_tests[:1]
 
     if "mcf | add nodes" in active_tests:
         for i in range(1, 2):

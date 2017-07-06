@@ -22,119 +22,97 @@ Transportation::Transportation(Config& cnfg) : MinCostFlow(cnfg)
 
 Transportation::~Transportation()
 {
-    if (this->net)
-        delete this->net;
+// why does this lead to a invalid pointer memory error?
+// only on Solve(net) not on Solve()
+//    if (this->net)
+//        delete this->net;
 }
 
 void
  Transportation::Solve() {
 
-//    if (this->extODMatrix.size() == 0 || this->extNodeSupply.size() == 0)
-//        throw std::runtime_error("OD-Matrix and node supply must be filled in Transportation Solver!");
-//
-//    //arcData from ODMatrix
-//    InputArcs arcs;
-//    for (ExtSPTreeArc& v : extODMatrix)
-//    {
-//        ExtArcID key = v.extArcID;
-//        ExternalArc arc = v.extArc;
-//        double cost = v.cost;
-//        double cap = DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
-//        string fromNode = arc.extFromNode;
-//        string toNode = arc.extToNode;
-//        string oneway = "";
-//        arcs.push_back( InputArc {key, fromNode, toNode, cost, cap, oneway } );
-//    }
-//    Config cnfg = NETXPERT_CNFG;
-//    ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
-//                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
-//                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
-//
-//    //construct nodeSupply from external nodeSupply
-//    InputNodes nodes;
-//    for (ExtNodeSupply& v : extNodeSupply)
-//    {
-//        ExtNodeID key = v.extNodeID;
-//        double supply = v.supply;
-//        nodes.push_back( InputNode {key, supply });
-//    }
-//
-//    //construct network from external ODMatrix
-//    //TODO: checkme (pointer resource dealloc)
-//    //problem line, because this->net seems not to be persistent anymore
-//    // when used outside this scope
-//
-//    this->net = new InternalNet (arcs, nodes, cmap, cnfg);
-//    InternalNet net = *this->net;
-//
-//    //Check Balancing of Transportation Problem Instance and
-//    //transform the instance if needed is already done in
-//    //parent class method MinCostFlow::Solve()
-//
-//    //Call MCF Solver of parent class
-//    MinCostFlow::Solve(net);
-//
-//    //Go back from Origin->Dest: flow,cost to real path with a list of start and end nodes of the ODMatrix
-//    //1. Translate back to original node ids
-//    unordered_map<IntNodeID, ExtNodeID> startNodeMap;
-//    unordered_map<IntNodeID, ExtNodeID> endNodeMap;
-//    for (auto& n : net.GetNodeSupplies())
-//    {
-//        IntNodeID key = n.first;
-//        NodeSupply ns = n.second;
-//        if (ns.supply > 0 || ns.supply == 0) //start node
-//        {
-//            //cout<< "sm: inserting " << key << ": "<< ns.supply << endl;
-//            startNodeMap.insert(make_pair(key, net.GetOriginalNodeID(key)));
-//        }
-//        if (ns.supply < 0 || ns.supply == 0) //end node
-//        {
-//            //cout<< "em: inserting " << key << ": "<< ns.supply << endl;
-//            endNodeMap.insert(make_pair(key, net.GetOriginalNodeID(key)));
-//        }
-//    }
-//    //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
-//    // Min Cost Flow Solver result
-//    vector<FlowCost> flowCost = MinCostFlow::GetMinCostFlow();
-//    for (auto& fc : flowCost)
-//    {
-//        // Here the original node id can be an arbitrary string, because it was set externally
-//        // so we cannot translate back to uint_fast32_ts as in Solve(net)
-//        string oldStartNodeStr;
-//        string oldEndNodeStr;
-//        try
-//        {
-//            //TODO: dummys
-//            // At the moment they will not be given back, because their arc cannot be resolved
-//            oldStartNodeStr = startNodeMap.at(fc.intArc.fromNode);
-//            oldEndNodeStr = endNodeMap.at(fc.intArc.toNode);
-//
-//            if (oldStartNodeStr != "dummy" && oldEndNodeStr != "dummy")
-//            {
-//                //build key for result map
-//                ODPair resultKey {fc.intArc.fromNode, fc.intArc.toNode};
-//                // flow and cost
-//                // search for a match of startNode -> endNode in FlowCost,
-//                // take the first occurence
-//                // as flow and cost
-//                auto data = getFlowCostData(flowCost, resultKey);
-//
-//                // there is no path, because we do not have the values from the OD solver
-//                DistributionArc resultVal { CompressedPath { make_pair(vector<uint32_t> {}, data.second) }, data.first };
-//
-//                this->distribution.insert(make_pair(resultKey, resultVal));
-//            }
-//            /*else
-//            {
-//                LOGGER::LogInfo("Dummys!");
-//            }*/
-//        }
-//        catch (exception& ex)
-//        {
-//            LOGGER::LogError("Something strange happened - maybe a key error. ");
-//            LOGGER::LogError(ex.what());
-//        }
-//    }
+    if (this->extODMatrix.size() == 0 || this->extNodeSupply.size() == 0)
+        throw std::runtime_error("OD-Matrix and node supply must be filled in Transportation Solver!");
+
+    //arcData from ODMatrix
+    InputArcs arcs;
+    for (ExtSPTreeArc& v : extODMatrix)
+    {
+        ExtArcID key 	= v.extArcID;
+        ExternalArc arc = v.extArc;
+        cost_t cost 	= v.cost;
+        capacity_t cap 	= DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
+        string fromNode = arc.extFromNode;
+        string toNode 	= arc.extToNode;
+        string oneway = "";
+        arcs.push_back( InputArc {key, fromNode, toNode, cost, cap, oneway } );
+    }
+    Config cnfg = this->NETXPERT_CNFG;
+    ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+
+    //construct nodeSupply from external nodeSupply
+    InputNodes nodes;
+    for (ExtNodeSupply& v : extNodeSupply)
+    {
+        ExtNodeID key = v.extNodeID;
+        supply_t supply = v.supply;
+        nodes.push_back( InputNode {key, supply });
+    }
+
+    //construct network from external ODMatrix
+    //TODO: checkme (pointer resource dealloc)
+    //problem line, because this->net seems not to be persistent anymore
+    // when used outside this scope
+    this->net = new InternalNet (arcs, cmap, cnfg, nodes);
+
+    //Check Balancing of Transportation Problem Instance and
+    //transform the instance if needed is already done in
+    //parent class method MinCostFlow::Solve()
+
+    //Call MCF Solver of parent class
+    MinCostFlow::Solve(*this->net);
+
+    //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
+    // Min Cost Flow Solver result
+    vector<FlowCost> flowCost = MinCostFlow::GetMinCostFlow();
+    for (auto& fc : flowCost)
+    {
+        string oldStartNodeID;
+        string oldEndNodeID;
+
+        auto oldStartNode   = this->net->GetSourceNode(fc.intArc);
+        auto oldEndNode     = this->net->GetTargetNode(fc.intArc);
+
+        try
+        {
+            oldStartNodeID = this->net->GetOrigNodeID(oldStartNode);
+            oldEndNodeID   = this->net->GetOrigNodeID(oldEndNode);
+
+            if (oldStartNodeID != "dummy" && oldEndNodeID != "dummy")
+            {
+                //build key for result map
+                ODPair resultKey { oldStartNode, oldEndNode };
+
+                // there is no path, because we do not have the values from the OD solver
+                DistributionArc resultVal { CompressedPath { make_pair(vector<arc_t> {}, fc.cost) }, fc.flow };
+
+                this->distribution.insert(make_pair(resultKey, resultVal));
+            }
+            else
+            {
+                LOGGER::LogWarning("Dummy: FromTo "+
+                                    oldStartNodeID + " - "+ oldEndNodeID+
+                                    " could not be looked up!");
+            }
+        }
+        catch (exception& ex)
+        {
+            LOGGER::LogError("Something strange happened - maybe a key error. ");
+            LOGGER::LogError(ex.what());
+        }
+    }
 }
 
 void
@@ -155,17 +133,20 @@ void
     this->odMatrix = ODsolver.GetODMatrix();
 
     std::set<netxpert::data::node_t> odKeys;
+
     //arcData from ODMatrix
     InputArcs arcs;
     int counter = 0;
     for (auto& kv : this->odMatrix)
     {
         counter += 1;
-        ODPair key = kv.first;
-        auto cost = kv.second;
-        auto cap = DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
-        string fromNode = to_string(net.GetNodeID(key.origin));
-        string toNode   = to_string(net.GetNodeID(key.dest));
+        ODPair key      = kv.first;
+        auto cost       = kv.second;
+        auto cap        = DOUBLE_INFINITY; // TRANSPORTATION Problem, no caps
+        string fromNode = net.GetOrigNodeID(key.origin);
+        string toNode   = net.GetOrigNodeID(key.dest);
+
+//        std::cout << fromNode << "->" << toNode << "@" << cost << std::endl;
 
         string oneway = "";
         // We do not have a original ArcID - so we set counter as ArcID
@@ -182,130 +163,148 @@ void
                         cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
                         cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
 
-    // Node supply has been set already in the given Network (parameter for Solve())
-
     // Add nodes data only, if reached through ODMatrix Solver
     InputNodes nodes;
     auto* supplyMap = net.GetSupplyMap();
     auto nodesIter = net.GetNodesIter();
+
     for (; nodesIter != lemon::INVALID; ++nodesIter) {
         auto node       = nodesIter;
         supply_t supply = net.GetNodeSupply(node);
         // precondition: only reached nodes from ODMatrix solver shall be
         // processed
-        if (odKeys.count(node) > 0)
-            nodes.push_back( InputNode {to_string(net.GetNodeID(node)), supply });
+        if (odKeys.count(node) > 0) {
+            nodes.push_back( InputNode {net.GetOrigNodeID(node), supply });
+//            extIntNodeMap.insert (std::make_pair(net.GetOrigNodeID(node), net.GetNodeID(node)) );
+        }
     }
 
-    //construct network from ODMatrix
-    InternalNet newNet(arcs, cmap, cnfg, nodes);
+//    std::map<std::string, IntNodeID> extIntNodeMap;
+    // construct network from ODMatrix; the original nodes persist,
+    // but the internal nodes will be computed new
+    InternalNet mcfNet(arcs, cmap, cnfg, nodes);
+
+//    nodesIter = net.GetNodesIter();
+//    std::cout << " Net nodes " << std::endl;
+//    for (; nodesIter != lemon::INVALID; ++nodesIter) {
+//        std::cout << net.GetOrigNodeID(nodesIter) << " | " << net.GetNodeID(nodesIter) << std::endl;
+//    }
+//
+//    std::cout << " mcfNet nodes " << std::endl;
+//    auto nodesIter2 = mcfNet.GetNodesIter();
+//    for (; nodesIter2 != lemon::INVALID; ++nodesIter2) {
+//        std::cout << mcfNet.GetOrigNodeID(nodesIter2) << " | " << mcfNet.GetNodeID(nodesIter2) << std::endl;
+//        std::cout << net.GetOrigNodeID( net.GetNodeFromOrigID(mcfNet.GetOrigNodeID(nodesIter2))  ) << " | "
+//                  << net.GetOrigNodeID( net.GetNodeFromOrigID(mcfNet.GetOrigNodeID(nodesIter2)) ) << std::endl;
+//    }
+//
+//    throw;
 
     //Check Balancing of Transportation Problem Instance and
     //transform the instance if needed is already done in
     //parent class method MinCostFlow::Solve()
 
     //Call MCF Solver of parent class
-    MinCostFlow::Solve(newNet);
+    MinCostFlow::Solve(mcfNet);
 
     //Go back from Origin->Dest: flow,cost to real path with a list of start and end nodes of the ODMatrix
     //1. Translate back to original node ids
-    map<netxpert::data::node_t, ExtNodeID> startNodeMap;
-    map<netxpert::data::node_t, ExtNodeID> endNodeMap;
 
-    nodesIter = newNet.GetNodesIter();
-    supplyMap = newNet.GetSupplyMap();
-    for (; nodesIter != lemon::INVALID; ++nodesIter)
-    {
-        auto node       = nodesIter;
-        supply_t supply = newNet.GetNodeSupply(node);
-        auto extNodeID  = newNet.GetOrigNodeID(node);
-
-        if (supply > 0 || supply == 0) //start node
-        {
-            //cout<< "sm: inserting " << key << ": "<< ns.supply << endl;
-            // We know that the original node id is actually an uint because it was transformed in the ODMatrix solver		            }
-            // but dummys are possible because of balancing of the TP
-            if (extNodeID != "dummy")
-            {
-                IntNodeID origNodeID = static_cast<IntNodeID>(std::stoul(extNodeID, nullptr, 0));
-                startNodeMap.insert(make_pair(newNet.GetNodeFromID(origNodeID), extNodeID));
-            }
-        }
-        if (supply < 0 || supply == 0) //end node
-        {
-            //cout<< "em: inserting " << key << ": "<< ns.supply << endl;
-            // We know that the original node id is actually an uint because it was transformed in the ODMatrix solver
-            // but dummys are possible because of balancing of the TP
-            if (extNodeID != "dummy")
-            {
-                IntNodeID origNodeID = static_cast<IntNodeID>(std::stoul(extNodeID, nullptr, 0));
-                endNodeMap.insert(make_pair(newNet.GetNodeFromID(origNodeID), extNodeID));
-            }
-        }
-    }
-
-    //debug
-    /*for (auto& s : startNodeMap)
-        cout << s.first << "_>" << s.second << endl;
-    for (auto& e : endNodeMap)
-        cout << e.first << "_>" << e.second << endl;*/
 
     //2. Search for the ODpairs in ODMatrix Solver result with the original IDs of the
     // Min Cost Flow Solver result
-    vector<FlowCost> flowCost = MinCostFlow::GetMinCostFlow();
-    map<ODPair, CompressedPath> shortestPaths = ODsolver.GetShortestPaths();
-    for (auto& fc : flowCost)
+    vector<FlowCost> flowCost                   = MinCostFlow::GetMinCostFlow(); //was run with mcfNet
+    map<ODPair, CompressedPath> shortestPaths   = ODsolver.GetShortestPaths(); //was run with ODnet
+
+//    std::cout << "ODMatrix result (int node ids): " <<std::endl;
+//
+//    for (auto& s : shortestPaths) {
+//        std::cout << net.GetNodeID(s.first.origin) << " -> " << net.GetNodeID(s.first.dest)
+//                  << " c: " << s.second.second << std::endl;
+//    }
+//    std::cout << "ODMatrix result (orig node ids): " <<std::endl;
+//    for (auto& s : shortestPaths) {
+//        std::cout << net.GetOrigNodeID(s.first.origin) << " -> " << net.GetOrigNodeID(s.first.dest)
+//                  << " c: " << s.second.second << std::endl;
+//        auto path = shortestPaths.at(s.first);
+//        std::cout << "key test success" <<std::endl;
+//    }
+
+    std::vector<FlowCost>::const_iterator it;
+    #pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
     {
-        // We know that the original node id is actually an IntNodeID because it was transformed
-        // in the ODMatrix solver
+    for (it = flowCost.begin(); it != flowCost.end(); ++it)
+    {
+        #pragma omp single nowait
+        {
+        auto fc = *it;
         string oldStartNodeStr;
         string oldEndNodeStr;
-        IntNodeID oldStartNode = 0;
-        IntNodeID oldEndNode = 0;
 
-        //cout << newNet.GetOriginalNodeID(fc.intArc.fromNode) << "->" <<newNet.GetOriginalNodeID(fc.intArc.toNode) <<endl;
-        //cout << fc.intArc.fromNode << "->" <<fc.intArc.toNode << " f: "<< fc.flow << " c: "<<fc.cost <<endl;
-        try
-        {
-            oldStartNodeStr = newNet.GetOrigNodeID(newNet.GetSourceNode(fc.intArc));
-            oldEndNodeStr   = newNet.GetOrigNodeID(newNet.GetTargetNode(fc.intArc));
+        //only valid if mcfNet is queried!
+        auto mcfStartNode       = mcfNet.GetSourceNode(fc.intArc);
+        auto mcfEndNode         = mcfNet.GetTargetNode(fc.intArc);
+        auto mcfStartNodeIntID  = mcfNet.GetNodeID(mcfStartNode);
+        auto mcfEndNodeIntID    = mcfNet.GetNodeID(mcfEndNode);
 
-            if (oldStartNodeStr.size() > 0 && oldStartNodeStr != "dummy")
-                oldStartNode = static_cast<IntNodeID>(std::stoul(oldStartNodeStr, nullptr, 0));
-            if (oldEndNodeStr.size() > 0 && oldEndNodeStr != "dummy")
-                oldEndNode = static_cast<IntNodeID>(std::stoul(oldEndNodeStr, nullptr, 0));
+        // OD Matrix nodes
+        string mcfStartNodeID    = mcfNet.GetOrigNodeID( mcfStartNode );
+        string mcfEndNodeID      = mcfNet.GetOrigNodeID( mcfEndNode );
 
-            if (oldStartNode > 0 && oldEndNode > 0)
+        try {
+            // filter out dummy nodes because t hey cannot be resolved to shortest paths of ODMatrix
+            if (mcfStartNodeID != "dummy" && mcfEndNodeID != "dummy")
             {
-                //build key for result map
-                ODPair resultKey { newNet.GetNodeFromID(oldStartNode), newNet.GetNodeFromID(oldEndNode) };
-                // flow and cost
-                // search for a match of startNode -> endNode in FlowCost,
-                // take the first occurence
-                // as flow and cost
-                auto data = getFlowCostData(flowCost, ODPair { newNet.GetSourceNode(fc.intArc),
-                                                               newNet.GetTargetNode(fc.intArc) });
-                //cout << "flow: " << data.first << " :" << data.second << endl;
-                auto path = shortestPaths.at( resultKey );
+                //now query the OD net, because it has results od the ODMatrix Solver which was run with net
+                auto odStartNode        = net.GetNodeFromOrigID(mcfStartNodeID);
+                auto odEndNode          = net.GetNodeFromOrigID(mcfEndNodeID);
+                auto odStartNodeIntID   = net.GetNodeID(odStartNode);
+                auto odEndNodeIntID     = net.GetNodeID(odEndNode);
 
-                DistributionArc resultVal { path, data.first };
+//                std::cout << "ShortestPath query of " <<odStartNodeIntID <<"->" <<odEndNodeIntID <<".." << std::endl;
+                try
+                {
+                    #pragma omp critical
+                    {
+                        //build key for result map
+                        ODPair resultKey {odStartNode, odEndNode} ;
 
-                this->distribution.insert(make_pair(resultKey, resultVal));
+                        auto path = shortestPaths.at(resultKey);
+
+                        DistributionArc resultVal { path, fc.flow};
+
+                        this->distribution.insert(make_pair(resultKey, resultVal));
+                    }//omp critical
+                }
+                catch (std::out_of_range& ex) {
+                    LOGGER::LogError("Pair of shortest path "+
+                                     mcfStartNodeID + " - "+ mcfEndNodeID+
+                                    " could not be looked up!");
+
+                    std::cout << "int ids: "<< mcfStartNodeIntID << "->" << mcfEndNodeIntID
+                              << " VS " << odStartNodeIntID << "->" << odEndNodeIntID
+                              <<" flow: " << fc.flow << " cost: "<< fc.cost<< std::endl;
+                }
+                catch (std::exception& ex) {
+                    LOGGER::LogError(ex.what() );
+                }
             }
-            /*else
+            else
             {
                 LOGGER::LogWarning("Dummy: FromTo "+
-                                    oldStartNodeStr + " - "+ oldEndNodeStr+
+                                    mcfStartNodeID + " - "+ mcfEndNodeID+
                                     " could not be looked up!");
-            }*/
+            }
         }
-        catch (exception& ex)
-        {
-            LOGGER::LogError("Something strange happened - maybe a key error. ");
+        catch (exception& ex) {
+            LOGGER::LogError("Something strange happened.");
             LOGGER::LogError(ex.what());
         }
-    }
+        }//omp single
+    } //for
+    }//omp parallel
 }
+
 
 
 
@@ -375,12 +374,14 @@ std::vector<ExtDistributionArc>
         }
         catch (exception& ex) {
             LOGGER::LogError(ex.what());
+            orig = "dummy";
         }
         try{
             dest = net->GetOrigNodeID(key.dest);
         }
         catch (exception& ex) {
             LOGGER::LogError(ex.what());
+            dest = "dummy";
         }
         //JSON output!
         distArcs.push_back( ExtDistributionArc {arcID, ExternalArc {orig, dest}, costPerPath, flow });
@@ -403,21 +404,6 @@ std::string
 void
  Transportation::SetExtNodeSupply(vector<ExtNodeSupply> _nodeSupply) {
     this->extNodeSupply = _nodeSupply;
-}
-
-std::pair<netxpert::data::flow_t,netxpert::data::cost_t>
- Transportation::getFlowCostData(const vector<FlowCost>& fc, const ODPair& key) const {
-
-    pair<netxpert::data::flow_t,netxpert::data::cost_t> result;
-    for (const auto& f : fc) {
-        const ODPair vKey {this->net->GetSourceNode(f.intArc), this->net->GetTargetNode(f.intArc)};
-        if ( vKey == key )
-        {
-            result = make_pair(f.flow, f.cost);
-            break;
-        }
-    }
-    return result;
 }
 
  netxpert::InternalNet* Transportation::GetNetwork() {
@@ -516,6 +502,7 @@ void
 			if (arcIDs.size() > 0)
 			{
 				arcIDs.pop_back(); //trim last comma
+//				cout << "arcIDs: " << arcIDs << endl;
 				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
 			}
 			LOGGER::LogDebug("Done!");
@@ -551,8 +538,8 @@ void
 
             for (ArcData& arcD : arcData)
             {
-                //cout << arcD.extArcID << endl;
-                arcIDs += arcD.extArcID += ",";
+                if (arcD.extArcID.size() > 0)
+                    arcIDs += arcD.extArcID += ",";
                 //TODO: get capacity per arc
                 //cap = arcD.capacity;
             }
@@ -575,6 +562,8 @@ void
                 dest = to_string(this->net->GetNodeID(key.dest));
             }
 
+//            std::cout << orig<< " " << dest<< " " << cost<< " " << cap<< " " << flow<< " " << std::endl;
+//            cout << "arcIDs: " << arcIDs << endl;
             this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
             }//omp single
         }

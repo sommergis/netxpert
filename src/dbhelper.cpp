@@ -983,6 +983,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
 
 std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(const std::string& arcIDs)
 {
+//    LOGGER::LogDebug("GetArcGeometriesFromMem()");
     try
     {
         vector<Geometry*> geoms;
@@ -991,12 +992,10 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(c
         for (auto s : arcIDList)
         {
 //            LOGGER::LogDebug("Querying arcid #" + s +"..");
-//            auto t = std::stoul(s);
-            auto t = s;
 
-            if (DBHELPER::EliminatedArcs.count(t) == 0 ) //filter out eliminated arcs
+            if (DBHELPER::EliminatedArcs.count(s) == 0 ) //filter out eliminated arcs
             {
-                shared_ptr<LineString> g = DBHELPER::KV_Network.at(t);
+                shared_ptr<LineString> g = DBHELPER::KV_Network.at(s);
                 /*Geometry* gPtr = g.get();
                 LineString* lPtr = dynamic_cast<LineString*>(gPtr);
                 cout << lPtr->toString() << endl;
@@ -1012,6 +1011,12 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(c
     {
         LOGGER::LogError( "GetArcGeometriesFromMem() - Error getting arc geometries!" );
         LOGGER::LogError( ex.what() );
+
+        cout << "IDs of KV_Network are: " << endl;
+        for (auto& kv : DBHELPER::KV_Network) {
+            cout << kv.first << endl;
+        }
+
         return nullptr;
     }
 }

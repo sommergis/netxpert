@@ -39,6 +39,7 @@ namespace netxpert {
             bool validateNetworkData(netxpert::InternalNet& net);
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
              convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+            void getSupplyNodesTypeCount(int& srcNodeCount, int& transshipNodeCount, int& sinkNodeCount );
 
         private:
             //private is only visible to MCF instance - not to derived classes (like TP)

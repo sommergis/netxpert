@@ -152,7 +152,6 @@ void
         }
 
         // Get all routes from orig to dest in nodes-List
-
         vector<netxpert::data::node_t>::iterator destIt;
         for (destIt=dests.begin(); destIt!=dests.end(); destIt++)
         {

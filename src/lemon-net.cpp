@@ -9,7 +9,8 @@ using namespace netxpert::io;
                           const netxpert::data::ColumnMap& _map,
                           const netxpert::cnfg::Config& cnfg,
                           const netxpert::data::InputNodes& nodesTbl,
-                          const bool autoClean) {
+                          const bool autoClean,
+                          const std::map<std::string, netxpert::data::IntNodeID>& extIntNodeMap) {
 
     try {
         //populate lemon maps
@@ -67,7 +68,7 @@ using namespace netxpert::io;
 
         bool isDirected = cnfg.IsDirected;
 
-        readNodes(arcsTbl);
+        readNodes(arcsTbl, nodesTbl, extIntNodeMap);
 
         processBarriers();
 
@@ -77,8 +78,8 @@ using namespace netxpert::io;
         LOGGER::LogDebug("Count of arcsTbl: " + std::to_string(arcsTbl.size()));
         LOGGER::LogDebug("Count of internalDistinctNodes: " + std::to_string(this->nodeIDMap.size()));
         LOGGER::LogDebug("Count of eliminatedArcs: " + std::to_string(this->eliminatedArcs.size()));
-        /*LOGGER::LogDebug("Count of nodeSupplies: " + to_string(nodeSupplies.size()));
-        LOGGER::LogDebug("Count of nodesTbl: " + to_string(nodesTbl.size()));*/
+//        LOGGER::LogDebug("Count of nodeSupplies: " + to_string(nodeSupplies.size()));
+        LOGGER::LogDebug("Count of nodesTbl: " + std::to_string(nodesTbl.size()));
 
     }
     catch (std::exception& ex) {
@@ -87,11 +88,51 @@ using namespace netxpert::io;
     }
 }
 
-void InternalNet::PrintGraph() {
+void
+ InternalNet::PrintGraph() {
     for (graph_t::ArcIt it(*this->g); it != lemon::INVALID; ++it)
-        std::cout << this->g->id(this->g->source(it)) << "->" << this->g->id(this->g->target(it)) << " , ";
+        std::cout << this->g->id(this->g->source(it)) << "->" << this->g->id(this->g->target(it)) << " co: " << (*this->costMap)[it] << " ca: " << (*this->capMap)[it] << std::endl ;
 
-    std::cout << std::endl;
+    for (graph_t::NodeIt it(*this->g); it != lemon::INVALID; ++it)
+        std::cout << this->g->id(it) << " s:" << (*this->nodeSupplyMap)[it] << std::endl ;
+
+//    std::cout << std::endl;
+}
+
+void
+ InternalNet::ExportToDIMACS(const std::string& path)
+{
+    /*
+    *  p min 4 4
+    n 1 3
+    n 4 -3
+    a 1 2 0 2 3
+    a 2 3 0 2 1
+    a 3 4 0 2 1
+    a 1 4 0 2 2
+    */
+    std::ofstream outfile;
+    outfile.open(path, std::ios::out );
+
+    using namespace lemon;
+
+    outfile << "p min " << this->g->nodeNum() << " " << this->g->arcNum() << std::endl;
+
+    netxpert::data::graph_t::NodeMap<int> nodes(*this->g);
+    int i = 1;
+    for(netxpert::data::graph_t::NodeIt v(*this->g); v != INVALID; ++v) {
+      nodes.set(v, i);
+      outfile << "n " << i << " " << this->GetNodeSupply(v) << std::endl;
+      ++i;
+    }
+    for(netxpert::data::graph_t::ArcIt e(*this->g); e != INVALID; ++e) {
+      outfile << "a " << nodes[this->g->source(e)] << " " << nodes[this->g->target(e)]
+        << " 0 " << (*this->capMap)[e] << " " << (*this->costMap)[e]
+         << std::endl;
+    }
+
+    outfile.close();
+
 }
 
 /** @brief (one liner)
@@ -154,9 +195,9 @@ const netxpert::data::ArcData
  InternalNet::GetArcData(const arc_t& arc) {
     netxpert::data::ArcData result;
 //    netxpert::data::ArcData2 result;
-    result.extArcID = (*this->extArcIDMap)[arc];
-    result.cost = (*this->costMap)[arc];
-    result.capacity = (*this->capMap)[arc];
+    result.extArcID     = (*this->extArcIDMap)[arc];
+    result.cost         = (*this->costMap)[arc];
+    result.capacity     = (*this->capMap)[arc];
 //    result = (*this->arcDataMap)[arc];
 
     return result;
@@ -165,9 +206,16 @@ const netxpert::data::ArcData
 void
  InternalNet::SetArcData(const arc_t& arc, const ArcData& arcData) {
 
-    (*this->extArcIDMap)[arc] = arcData.extArcID; //can be 'dummy' in case of MCF
-    (*this->costMap)[arc] = arcData.cost;
-    (*this->capMap)[arc] = arcData.capacity;
+    (*this->extArcIDMap)[arc]   = arcData.extArcID; //can be 'dummy' in case of MCF
+    (*this->costMap)[arc]       = arcData.cost;
+    (*this->capMap)[arc]        = arcData.capacity;
+}
+
+void
+ InternalNet::SetNodeData(const std::string& nodeID, const netxpert::data::node_t& node) {
+
+    this->nodeIDMap.insert( std::make_pair(nodeID, node) );
+    (*this->nodeMap)[node] = nodeID;
 }
 
 const std::unordered_set<std::string>
@@ -180,11 +228,7 @@ const std::unordered_set<std::string>
 
     for (auto arc : path) {
         auto extArcID = (*this->extArcIDMap)[arc];
-//        if (extArcID > 0) {
-//            std::cout << extArcID << std::endl;
-//            resultIDs.insert(std::to_string(extArcID));
-//
-        if (!extArcID.empty())
+        if (extArcID.size() > 0)
             resultIDs.insert(extArcID);
     }
 
@@ -206,6 +250,8 @@ const netxpert::data::arc_t
 const node_t
  InternalNet::GetNodeFromOrigID(const std::string nodeID) {
 
+//    LOGGER::LogDebug("entering GetNodeFromOrigID()..");
+
     netxpert::data::node_t node;
 
     try {
@@ -217,6 +263,11 @@ const node_t
         }
         catch (std::exception& ex) {
             LOGGER::LogWarning("Could not get node from orig node id: "+ nodeID);
+
+            std::cout << "Nodes are: " << std::endl << "ext : int" << std::endl;
+            for (auto& kv : this->nodeIDMap) {
+                std::cout << kv.first << " : " << this->GetNodeID(kv.second) << std::endl;
+            }
         }
     }
 
@@ -248,12 +299,13 @@ const netxpert::data::node_t
 const std::string
  InternalNet::GetOrigNodeID(const node_t& node) {
 
+//    LOGGER::LogDebug("entering GetOrigNodeID()");
     std::string nodeID;
 
     nodeID = (*this->nodeMap)[node];
 //    std::cout <<"1. Orig node id from nodeMap is: " << nodeID << std::endl;
 
-    if (nodeID.empty()) {
+    if (nodeID.size() > 0) {
         if ( this->addedStartPoints.count(node) != 0 ) {
             auto a = this->addedStartPoints.at(node);
             nodeID = a.extNodeID;
@@ -266,6 +318,9 @@ const std::string
 //                std::cout <<"3. Orig node id from nodeMap is: " << nodeID << std::endl;
             }
         }
+    }
+    else {
+        throw std::runtime_error("Orig node id of internal node id " + std::to_string( this->GetNodeID(node) ) + " could not be looked up!");
     }
 
 
@@ -403,6 +458,7 @@ const uint32_t
                 LOGGER::LogDebug("Closest Point for start node "+extNodeID
                     +" is identical to a start node of the network!");
                 //fromNode und toNode von oben nehmen und keinen Split durchführen
+//                std::cout << "extFromNode " << extFromNode << " | " << " extNodeID " << extNodeID<< std::endl;
                 if (this->nodeIDMap.count(extFromNode) > 0)
                 {
                     resultNode = this->GetNodeFromOrigID(extFromNode);
@@ -422,13 +478,18 @@ const uint32_t
 
                     //add nodeSupply
                     (*this->nodeSupplyMap)[resultNode] = nodeSupply;
+                    //set extNodeID really?
+                    this->SetNodeData(extNodeID, resultNode);
                 }
+                else
+                    std::cout << "Node From ID " << extFromNode << " not found in nodeIDMap!"<< std::endl;
                 break;
             }
             case StartOrEndLocationOfLine::End: {
                 LOGGER::LogDebug("Closest Point for start node "+extNodeID
                     +" is identical to a end node of the network!");
                 //fromNode und toNode von oben nehmen und keinen Split durchführen
+//                std::cout << "extToNode " << extToNode << " | " << " extNodeID " << extNodeID<< std::endl;
                 if (this->nodeIDMap.count(extToNode) > 0)
                 {
                     resultNode = this->GetNodeFromOrigID(extToNode);
@@ -449,7 +510,11 @@ const uint32_t
 
                     //add nodeSupply
                     (*this->nodeSupplyMap)[resultNode] = nodeSupply;
+                    //set extNodeID really?
+                    this->SetNodeData(extNodeID, resultNode);
                 }
+//                else
+//                    std::cout << "Node To ID " << extToNode << " not found in nodeIDMap!"<< std::endl;
                 break;
             }
             case StartOrEndLocationOfLine::Intermediate: {
@@ -468,10 +533,11 @@ const uint32_t
                 resultNode = insertNewNode(true, splittedLine, extArcID, extNodeID, point, startOrEnd);
 
                 //add nodeSupply
-                std::cout << "adding node supply of "<< this->g->id(resultNode) << ": "<<nodeSupply << std::endl;
+//                std::cout << "adding node supply of "<< this->g->id(resultNode) << ": "<<nodeSupply << std::endl;
                 (*this->nodeSupplyMap)[resultNode] = nodeSupply;
-                std::cout << "extNodeID: " << extNodeID << std::endl;
-                this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
+//                std::cout << "extNodeID: " << extNodeID << std::endl;
+//                this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
+                this->SetNodeData(extNodeID, resultNode);
 
                 //arc changes
                 (*this->arcChangesMap)[splittedLine.arc] = ArcState::originalAndSplit;
@@ -491,7 +557,8 @@ const uint32_t
 
         //add nodeSupply
         (*this->nodeSupplyMap)[resultNode] = nodeSupply;
-        this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
+//        this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
+        this->SetNodeData(extNodeID, resultNode);
 
         //arc changes
         (*this->arcChangesMap)[splittedLine.arc] = ArcState::addedAndSplit;
@@ -513,6 +580,8 @@ const node_t
     using namespace std;
     using namespace geos::geom;
 
+//    cout << "insertNewNode() .." << endl;
+//    cout << "insert node on extarcid " << extArcID << endl;
     auto origArc = splittedLine.arc;
 
     //Get relative cost to geometry length
@@ -540,7 +609,7 @@ const node_t
     //detect if arc is reverse also in the graph
     //TODO Check for performance on large graphs
     //TODO Check for duplicate arcs!
-    auto revOrigArc = lemon::findArc(*this->g, this->g->target(origArc),this->g->source(origArc), lemon::INVALID);
+    auto revOrigArc = GetArcFromNodes(this->g->target(origArc),this->g->source(origArc));
     if (revOrigArc != lemon::INVALID)
         isDirected = false;
     else
@@ -1360,6 +1429,8 @@ void InternalNet::saveMCFResultsMem(const std::string orig, const std::string de
                 //Stopwatch<> sw;
                 //sw.start();
 
+//                LOGGER::LogDebug("ArcIDS: "+arcIDs);
+
                 if (arcIDs.size() > 0)
                     mLineDB = move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
                 //sw.stop();
@@ -1395,7 +1466,7 @@ void InternalNet::saveMCFResultsMem(const std::string orig, const std::string de
                 {
                 auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
                 //save merged route geometry to db
-                LOGGER::LogDebug("cap: save sqlite arc " + to_string(capacity) );
+
                 sldb.SaveResultArc(orig, dest, cost, capacity, flow, *route, resultTableName, qry);
                 //sw.stop();
                 //LOGGER::LogDebug("SaveResultArc() took " + to_string(sw.elapsed())+" mcs");
@@ -2099,7 +2170,8 @@ void
 }
 
 void
- InternalNet::readNodes(const InputArcs& arcsTbl) {
+ InternalNet::readNodes(const InputArcs& arcsTbl, const InputNodes& nodesTbl,
+                        const std::map<std::string, netxpert::data::IntNodeID>& extIntNodeMap) {
 
     using namespace std;
 
@@ -2111,25 +2183,24 @@ void
     for (vector<string>::const_iterator it = distinctNodes.begin(); it != distinctNodes.end(); ++it)
     {
         node_t lemNode = this->g->addNode();
-        (*this->nodeMap)[lemNode] = *it;
-        this->nodeIDMap.insert( make_pair(*it, lemNode) );
+//        (*this->nodeMap)[lemNode] = *it;
+//        this->nodeIDMap.insert( make_pair(*it, lemNode) );
+        this->SetNodeData(*it, lemNode);
     }
 
-    //TODO input nodes (nodesTbl)
     // We have to care for the nodes and their supply values also if they are present
-    /*if (nodesTbl.size() > 0)
+    if (nodesTbl.size() > 0)
     {
         for (InputNodes::const_iterator it = nodesTbl.begin(); it != nodesTbl.end(); it++) {
-            string extNodeID;
-            uint32_t internalNodeID;
-            double nodeSupply;
-            extNodeID = it->extNodeID;
-            nodeSupply = itD->nodeSupply;
+            node_t internalNode;
+            auto extNodeID = it->extNodeID;
+            auto nodeSupply = it->nodeSupply;
+
             //Get internal node ID from dictionary:
             //add values to NodeSupply
             //throws an exception if not found!
             try {
-                internalNodeID = this->nodeIDMap.at(extNodeID);
+                internalNode = this->nodeIDMap.at(extNodeID);
             }
             catch (exception& ex)
             {
@@ -2138,22 +2209,26 @@ void
                 continue;
                 //throw ex;
             }
-            try
-            {
+            try {
+//                std::cout <<"adding "<< extNodeID << ", " << nodeSupply << std::endl;
+                (*this->nodeSupplyMap)[internalNode] = nodeSupply;
+                // populate mapping for ext/int Nodes
+//                extIntNodeMap.insert( std::make_pair(extNodeID, this->GetNodeID(internalNode) ) );
+
                 //filter out transshipment nodes -> they're not important here.
                 //if (nodeSupply != 0)
                 //{
-                    NodeSupply sVal {extNodeID, nodeSupply};
-                    nodeSupplies.insert( make_pair(internalNodeID, sVal) );
+//                    NodeSupply sVal {extNodeID, nodeSupply};
+//                    nodeSupplies.insert( make_pair(internalNodeID, sVal) );
                 //}
             }
             catch (exception& ex)
             {
-                LOGGER::LogWarning("renameNodes(): Error inserting supply values!");
+                LOGGER::LogWarning("readNodes(): Error inserting supply values!");
                 LOGGER::LogWarning(ex.what());
             }
         }
-    }*/
+    }
 }
 
 std::vector<std::string>
@@ -2295,7 +2370,7 @@ void
 
     //New dummy node
     auto newNode = this->g->addNode();
-//    std::cout << "Ausgleich: " << getSupplyDemandDifference() << endl;
+    //std::cout << "Ausgleich: " << getSupplyDemandDifference() << std::endl;
     auto diff = getSupplyDemandDifference();
 
     //NodeSupply sup {"dummy", diff }; //Differenz ist positiv oder negativ, je nach Überschuss
@@ -2319,16 +2394,28 @@ void
             arc = this->g->addArc(newNode, curNode);
             // enable arc in filters
             (*this->arcFilterMap)[arc] = true;
+            LOGGER::LogDebug("Inserted arc from dummy node " + std::to_string(this->g->id(newNode)) +
+                    " to " + std::to_string(this->g->id(curNode)) +
+                    " with cost " + std::to_string(cost) +
+                    " and cap " + std::to_string(capacity));
         }
         else {
             arc = this->g->addArc(curNode, newNode);
             // enable arc in filters
             (*this->arcFilterMap)[arc] = true;
+            LOGGER::LogDebug("Inserted arc from node " + std::to_string(this->g->id(curNode)) +
+                    " to dummy node " + std::to_string(this->g->id(newNode)) +
+                    " with cost " + std::to_string(cost) +
+                    " and cap " + std::to_string(capacity));
         }
 
-        ArcData arcData  {"dummy", cost, capacity };
+        ArcData arcData  {std::to_string(this->g->id(arc)), cost, capacity };
         this->SetArcData(arc, arcData);
     }
+    // add dummy node
+    this->SetNodeData("dummy", newNode);
+    (*this->nodeSupplyMap)[newNode] = diff;
+    LOGGER::LogDebug("Inserted dummy node (" + std::to_string(this->g->id(newNode)) + ") with supply of "+ std::to_string(diff) );
 }
 
 double

@@ -244,8 +244,8 @@ def test_spt_load_nodes_1_n(cnfg, cmap):
 
 if __name__ == "__main__":
     print(netx.Version())
-    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
     #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
