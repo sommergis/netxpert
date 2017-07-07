@@ -1,6 +1,3 @@
-// *** ADDED BY HEADER FIXUP ***
-#include <string>
-// *** END ***
 #ifndef SPT_LEM_H
 #define SPT_LEM_H
 
