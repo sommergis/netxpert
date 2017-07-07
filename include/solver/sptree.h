@@ -62,10 +62,6 @@ namespace netxpert {
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap) const;
 
-            /*lemon::Path<netxpert::data::graph_t>
-             UncompressRoute(netxpert::data::node_t orig,
-                             std::vector<netxpert::data::node_t>& ends) const;*/
-
         private:
             //raw pointer ok, no dynamic allocation (new())
             //smart pointers will not work, because Network is passed by reference and
