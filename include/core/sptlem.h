@@ -19,6 +19,10 @@
 #include "lemon/adaptors.h"
 #include "isptree.h"
 
+//Contraction Hierarchies
+#include "CHInterface.h"
+#incluce <iostream>
+
 using namespace lemon;
 using namespace netxpert::data;
 
@@ -73,6 +77,12 @@ namespace netxpert {
             const netxpert::data::cost_t GetDist(netxpert::data::node_t _dest);
             /* end of LEMON friendly interface */
 
+            /* Contraction Hierarchies */
+            void ContractGraph();
+            void ExportContractedNetwork(std::ostream& os);
+            void ImportContractedNetwork(std::istream& is);
+            void SolveSPT_CH();
+
             //void PrintResult();
 
         protected:
@@ -80,8 +90,8 @@ namespace netxpert {
             uint32_t mmax; //max count arcs
 
         private:
-			//using DijkstraInternal = Dijkstra<StaticDigraph, StaticDigraph::ArcMap<double>>;
-			//using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
+            //using DijkstraInternal = Dijkstra<StaticDigraph, StaticDigraph::ArcMap<double>>;
+            //using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
             bool isDrctd;
             bool allDests;
             bool bidirectional = false;
