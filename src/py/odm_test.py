@@ -1,8 +1,13 @@
 # ODM Tests
 
 import sys, datetime, os
-sys.path.append('/usr/local/lib')
-sys.path.append('/usr/local/lib/netxpert')
+
+if 'linux' in sys.platform:
+    sys.path.append('/usr/local/lib')
+    sys.path.append('/usr/local/lib/netxpert')
+
+if 'win' in sys.platform:
+    pass
 
 parallelization = True  # True | False
 # must be done before module import of pynetxpert
@@ -155,14 +160,28 @@ def test_odm_load_nodes(cnfg, cmap):
     #return solver.GetOptimum()
 
 if __name__ == "__main__":
+
     print(netx.Version())
-    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_small.json"
+
+    if 'linux' in sys.platform:
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+
+    if 'win' in sys.platform:
+        #path_to_cnfg = "ODMatrixCnfg_Big.json"
+        path_to_cnfg = "ODMatrixCnfg_small.json"
+
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-    cnfg.SpatiaLiteCoreName = './libspatialite'
+    if 'linux' in sys.platform:
+        print 'Running test on Linux..'
+        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+        cnfg.SpatiaLiteCoreName = './libspatialite'
+
+    if 'win' in sys.platform:
+        print 'Running test on Windows..'
+        cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'
+        cnfg.SpatiaLiteCoreName = 'spatialite430'
 
     print cnfg.SpatiaLiteHome
 

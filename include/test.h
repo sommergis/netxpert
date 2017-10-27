@@ -2,29 +2,27 @@
 #define TEST_H
 
 #include <iostream>
-#include "logger.h"
-#include "fgdbwriter.h"
+//Fix for C2146 Error on Windows (lemon/adaptors.h error!)
+//#include "logger.h"
+#include "fgdbwriter.h" //has logger, logger has utils
 #include "slitewriter.h"
 #include <fstream>
 #include "geos/io/WKTReader.h"
 #include "geos/io/StringTokenizer.h"
 
 #include "data.h"
-#include "utils.h"
 #include "lemon-net.h"
 #include "dbhelper.h"
 #include "sptree.h"
 
-
-#include "network.h"
+//#include "network.h"
 //#include "mstree.h"
 //#include "sptree.h"
 //#include "odmatrix.h"
-//#include "odmatrix2.h"
 //#include "mcflow.h"
 //#include "transportation.h"
 //#include "networkbuilder.h"
-//
+
 #include "odmatrix_simple.h"
 #include "mstree_simple.h"
 #include "sptree_simple.h"
@@ -46,6 +44,9 @@ namespace netxpert
 //        void TestAddNodes(netxpert::cnfg::Config& cnfg);
         void TestMST(netxpert::cnfg::Config& cnfg);
         void TestSPT(netxpert::cnfg::Config& cnfg);
+        #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+        void TestSPTCH(netxpert::cnfg::Config& cnfg);
+        #endif
         void TestODMatrix(netxpert::cnfg::Config& cnfg);
 //        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
 //        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);

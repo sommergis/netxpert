@@ -248,7 +248,7 @@ const std::vector<netxpert::data::node_t>
 
 const netxpert::data::cost_t
  SPT_LEM::GetDist(netxpert::data::node_t _dest) {
-
+//    std::cout << "entering GetDist().." << std::endl;
     if (this->bidirectional) {
         if (this->bijk->reached(_dest))
             return this->bijk->dist(_dest);
@@ -263,6 +263,7 @@ const std::vector<netxpert::data::arc_t>
  SPT_LEM::GetPath(netxpert::data::node_t _dest) {
 
     using namespace netxpert::data;
+    cost_t optimum = 0;
 
     std::vector<netxpert::data::arc_t> path;
     /// walk the path from dest to orig with the help of predNode
@@ -270,14 +271,19 @@ const std::vector<netxpert::data::arc_t>
     if (this->bidirectional) {
         for (node_t v = _dest; v != this->orig; v = this->bijk->predNode(v)) {
             auto arc = this->bijk->predArc(v);
-            if (arc != lemon::INVALID)
+            if (arc != lemon::INVALID) {
                 path.push_back(arc);
+                optimum += (*this->costMap)[arc];
+              }
         }
     }
     else {
         for (node_t v = _dest; v != this->orig; v = this->dijk->predNode(v)) {
             auto arc = this->dijk->predArc(v);
-            path.push_back(arc);
+            if (arc != lemon::INVALID) {
+                path.push_back(arc);
+                optimum += (*this->costMap)[arc];
+              }
 //            std::cout << g->id(g->source(arc)) << "->" << g->id(g->target(arc)) << " , ";
         }
 //        std::cout << std::endl;
@@ -286,8 +292,106 @@ const std::vector<netxpert::data::arc_t>
     //reverse arcs, so path goes from start to dest
     std::reverse(path.begin(), path.end());
 
+//    std::cout << "Count of path is: " << path.size() << std::endl;
+//    std::cout << "Optimum for search is: " << std::setprecision(std::numeric_limits<double>::digits10) << optimum << std::endl;
+    //DON'T call a function here for the computed distance if in parallel!
+    //because in parallel situations when called from external thread it will crash the program!
+//    std::cout << "Dist for search is: " << std::setprecision(std::numeric_limits<double>::digits10) << this->GetDist(this->dest) << std::endl;
+
     return path;
 }
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+void
+ SPT_LEM::LoadNet_CH(CHInterface<DefaultPriority>* _cm,
+//                     graph_ch_t* _chg,
+                     netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>* _chCostMap,
+//                     filtered_graph_t::NodeMap<graph_ch_t::Node>* _nm)
+                      netxpert::data::graph_t::NodeMap<netxpert::data::graph_ch_t::Node>* _nm,
+                      netxpert::data::graph_ch_t::NodeMap<netxpert::data::graph_t::Node>* _cnm)
+//                      netxpert::data::graph_ch_t::ArcMap<netxpert::data::graph_t::Arc>* _am)
+                     {
+
+  this->chManager = _cm;
+//  this->chg = _chg;
+  this->chCostMap = _chCostMap;
+  this->chNodeRefMap = _nm;
+  this->chNodeCrossRefMap = _cnm;
+//  this->chArcRefMap = _am;
+
+  this->hasContractionHierarchies = true;
+}
+
+void
+ SPT_LEM::SolveSPT_CH() {
+
+//  this->chManager->printShortcuts();
+  if (this->hasContractionHierarchies) {
+
+    auto s = (*this->chNodeRefMap)[orig];
+    auto t = (*this->chNodeRefMap)[dest];
+    //init
+    this->chManager->initCHSearch();
+    this->chManager->runSearch(s, t);
+  }
+}
+
+const std::vector<netxpert::data::arc_t>
+ SPT_LEM::GetPath_CH() {
+
+  using namespace netxpert::data;
+
+  std::vector<arc_t> result;
+  auto path = this->chManager->getPath();
+
+  int counter = 0;
+  cost_t optimum = 0;
+  for (graph_ch_t::Arc& cArc : path) {
+    counter += 1;
+    //TODO Check for valid arc
+    optimum += (*this->chCostMap)[cArc];
+    //convert chgraph to orig smart graph
+    //TODO resolve from chArc to origArc via nodes that come from Import
+    //works if computed, but not on import
+//    result.push_back( (*this->chArcRefMap)[cArc] );
+    auto src = (*this->chNodeCrossRefMap)[this->chManager->source(cArc)];
+    auto tgt = (*this->chNodeCrossRefMap)[this->chManager->target(cArc)];
+
+    auto gArc = lemon::findArc((*this->g), src, tgt);
+    if (gArc != INVALID)
+      result.push_back(gArc);
+    else {
+      gArc = lemon::findArc((*this->g), tgt, src);
+      if (gArc != INVALID)
+        result.push_back(gArc);
+      else
+        std::cout << "SPT_LEM::GetPath_CH() - ERROR: could not lookup path!" << std::endl;
+    }
+  }
+
+  std::cout << "Count of CH path is: " << counter << std::endl;
+  std::cout << "Optimum for CH search is (from chCostMap): " << std::setprecision(std::numeric_limits<double>::digits10) << optimum << std::endl;
+//  std::cout << "Dist for CH search is: " << std::setprecision(std::numeric_limits<double>::digits10) << GetDist_CH() << std::endl;
+
+  //reverse result not necessary
+//  std::reverse(result.begin(), result.end());
+
+  return result;
+}
+
+const netxpert::data::cost_t
+ SPT_LEM::GetDist_CH() {
+  return this->chManager->dist();
+}
+
+bool
+ SPT_LEM::Reached_CH() {
+    if (this->GetDist_CH() > 0)
+        return true;
+    else
+        return false;
+}
+#endif
 
 SPT_LEM::~SPT_LEM()
 {

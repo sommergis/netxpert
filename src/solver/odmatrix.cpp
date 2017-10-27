@@ -100,10 +100,12 @@ void
        The loop for the ODMatrix Calculation is being computed paralell with the critical keyword.
     */
 
+    //shared(shortestPaths, odMatrix, reachedDests, origs)
+
     //#pragma omp parallel for shared(origs)
     //make spt local to be copied for parallel proc
     //no class member variables can be parallized
-	#pragma omp parallel default(shared) num_threads(LOCAL_NUM_THREADS)
+    #pragma omp parallel default(shared) num_threads(LOCAL_NUM_THREADS)
     {
     shared_ptr<ISPTree> lspt;
     switch (algorithm)
@@ -164,12 +166,14 @@ void
 
             if (orig != dest && isDestReached)
             {
+
                 const double costPerRoute = lspt->GetDist(dest);
                 const auto path = lspt->GetPath(dest);
-                totalCost += costPerRoute;
 
                 #pragma omp critical
                 {
+                totalCost += costPerRoute;
+
                 shortestPaths.insert( make_pair( ODPair {orig, dest},
                                       make_pair( path, costPerRoute ) ));//vector<uint32_t> (route),
                                                  //   costPerRoute)) );
@@ -361,7 +365,7 @@ void
 					#pragma omp single nowait
 					{
 						auto kv = *it;
-						ODPair key = kv.first;
+//						ODPair key = kv.first;
 						CompressedPath value = kv.second;
 						/* resolve pred path to arcids */
 						/* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
@@ -382,20 +386,20 @@ void
 				}
 			}//omp parallel
 
-			for (string id : totalArcIDs) {
-				arcIDs += id += ",";
-            }
+        for (string id : totalArcIDs) {
+          arcIDs += id += ",";
+        }
 
-			if (arcIDs.size() > 0)
-			{
-				arcIDs.pop_back(); //trim last comma
-				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
-			}
-			LOGGER::LogDebug("Done!");
-		}
+        if (arcIDs.size() > 0)
+        {
+          arcIDs.pop_back(); //trim last comma
+          DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+        }
+        LOGGER::LogDebug("Done!");
+      }
         int counter = 0;
 
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+        #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
         {
 
         Stopwatch<> sw;

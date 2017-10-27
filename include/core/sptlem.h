@@ -1,27 +1,36 @@
 #ifndef SPT_LEM_H
 #define SPT_LEM_H
 
-#include "lemon/smart_graph.h"
-//#include "lemon/static_graph.h"
-#include "lemon/dijkstra.h"
-#include "bijkstra.h"
-
 #include <stdio.h>
 #include <limits.h>
 #include <string.h>
 #include <vector>
+
+//Contraction Hierarchies
+#include <iostream>
+#include "lemon/smart_graph.h"
+//#include "lemon/static_graph.h"
+#include "lemon/dijkstra.h"
+#include "lemon/random.h"
+#include "lemon/list_graph.h"
+#include "lemon/time_measure.h"
+
+#include "bijkstra.h"
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #include "CHInterface.h"
+    #include "CH/DefaultPriority.h"
+#endif
 
 //Heap
 #include "lemon/quad_heap.h"
 #include "lemon/dheap.h"
 #include "lemon/fib_heap.h"
 
+//Filter of Arcs
 #include "lemon/adaptors.h"
-#include "isptree.h"
 
-//Contraction Hierarchies
-#include "CHInterface.h"
-#incluce <iostream>
+#include "isptree.h"
 
 using namespace lemon;
 using namespace netxpert::data;
@@ -78,10 +87,20 @@ namespace netxpert {
             /* end of LEMON friendly interface */
 
             /* Contraction Hierarchies */
-            void ContractGraph();
-            void ExportContractedNetwork(std::ostream& os);
-            void ImportContractedNetwork(std::istream& is);
+            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            void LoadNet_CH(CHInterface<DefaultPriority>* _chm,
+//                            graph_ch_t* _chg,
+                            netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>* _chCostMap,
+//                            filtered_graph_t::NodeMap<graph_ch_t::Node>* _nm);
+                            netxpert::data::graph_t::NodeMap<netxpert::data::graph_ch_t::Node>* _nm,
+                            netxpert::data::graph_ch_t::NodeMap<netxpert::data::graph_t::Node>* _cnm);
+//                            netxpert::data::graph_ch_t::ArcMap<netxpert::data::graph_t::Arc>* _am);
             void SolveSPT_CH();
+            const std::vector<netxpert::data::arc_t> GetPath_CH();
+            const netxpert::data::cost_t GetDist_CH();
+            bool Reached_CH();
+            #endif
+            /* end of Contraction Hierarchies */
 
             //void PrintResult();
 
@@ -115,6 +134,17 @@ namespace netxpert {
             netxpert::data::node_t orig;
             netxpert::data::node_t dest;
             //std::vector<netxpert::data::node_t> nodes;
+
+            //Contraction Hierarchies
+            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            bool hasContractionHierarchies = false;
+            graph_ch_t* chg;
+            CHInterface<DefaultPriority>* chManager;
+            netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>* chCostMap;
+            netxpert::data::graph_t::NodeMap<graph_ch_t::Node>* chNodeRefMap;
+//            netxpert::data::graph_ch_t::ArcMap<graph_t::Arc>* chArcRefMap;
+            netxpert::data::graph_ch_t::NodeMap<graph_t::Node>* chNodeCrossRefMap;
+            #endif
 
             //Static graph
             /*lemon::Dijkstra<StaticDigraph, StaticDigraph::ArcMap<cost_t>>* dijk;

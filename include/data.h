@@ -12,15 +12,13 @@
 #include <cereal/archives/json.hpp>
 #include <cereal/types/unordered_map.hpp>
 #include <cereal/types/vector.hpp>
-
-
 //#include <boost/bimap.hpp>
 
 //Dictionary<Tuple<uint32_t, uint32_t>, Tuple<string, double, double>> internalArcData;
 //typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::ArcData> internalArcData
 
 #include <lemon/smart_graph.h>
-#include <lemon/concepts/path.h>
+#include <lemon/list_graph.h>
 #include <lemon/adaptors.h>
 
 namespace netxpert {
@@ -35,6 +33,7 @@ namespace netxpert {
 
 
     typedef lemon::SmartDigraph graph_t;
+    typedef lemon::ListDigraph graph_ch_t;
     typedef lemon::FilterArcs<netxpert::data::graph_t,
                               netxpert::data::graph_t::ArcMap<bool>> filtered_graph_t;
     typedef graph_t::Node node_t;

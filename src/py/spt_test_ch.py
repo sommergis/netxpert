@@ -1,13 +1,9 @@
-# MST Tests
+#!/usr/bin/python2.7
+# SPT Tests
 
 import sys, datetime, os
-
-if 'linux' in sys.platform:
-    sys.path.append('/usr/local/lib')
-    sys.path.append('/usr/local/lib/netxpert')
-
-if 'win' in sys.platform:
-    pass
+sys.path.append('/usr/local/lib')
+sys.path.append('/usr/local/lib/netxpert')
 
 parallelization = True  # True | False
 # must be done before module import of pynetxpert
@@ -44,7 +40,7 @@ def read_config(path_to_cnfg):
     cnfg.CostColumnName = config_json["CostColumnName"].encode('ascii', 'ignore')
     cnfg.CapColumnName = config_json["CapColumnName"].encode('ascii', 'ignore')
     cnfg.OnewayColumnName = config_json["OnewayColumnName"].encode('ascii', 'ignore')
-    cnfg.IsDirected = True #config_json["IsDirected"]
+    cnfg.IsDirected = config_json["IsDirected"]
     cnfg.LogLevel = config_json["LogLevel"]
     cnfg.LogFileFullPath = config_json["LogFileFullPath"].encode('ascii', 'ignore')
     cnfg.SpatiaLiteHome = config_json["SpatiaLiteHome"].encode('ascii', 'ignore')
@@ -56,7 +52,8 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
-    cnfg.LogLevel = 5
+    cnfg.SPTHeapCard = 2
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -70,62 +67,127 @@ def read_config(path_to_cnfg):
 
     return cnfg, cmap
 
-def test_mst(cnfg, cmap):
+
+def test_contraction(cnfg, cmap):
 
     atblname = cnfg.ArcsTableName
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
 
-    solver = netx.MinimumSpanningTree(cnfg)
-    solver.Solve(net)
+    net.ComputeContraction(100)
+    net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-export")
+    #net.ImportContractedNetwork(cnfg.ArcsTableName + "-ch")
 
-    optimum = solver.GetOptimum()
-    #print len(solver.GetMinimumSpanningTree())
-    del net, solver
+    x = 703444
+    y = 5364720
+    supply = 0
 
-    return optimum
-    #return solver.GetOptimum())
+    withCap = False
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+                                   cmap, withCap)
 
-def test_mst_load_nodes(cnfg, cmap):
+    x = 703342
+    y = 5364710
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+                                  cmap, withCap)
+
+
+
+def test_spt_add_nodes_1_1_ch(cnfg, cmap):
 
     atblname = cnfg.ArcsTableName
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
-    ntblname = cnfg.NodesTableName
-    nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname, cnfg.NodesGeomColumnName, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
 
-    solver = netx.MinimumSpanningTree(cnfg)
+    #net.ComputeContraction(95)
+    #net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-export")
+    net.ImportContractedNetwork(cnfg.ArcsTableName + "-ch-export")
+
+    # freising west
+    #x = 696169 #696742
+    #y = 5364026
+    # bayern nw
+    x = 514920
+    y = 5537949
+
+    # deutschland nw
+    #x = 322449
+    #y = 5722914
+    supply = 0
+
+    withCap = False
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+                                    cmap, withCap)
+
+    #x = 703342
+    #y = 5364710
+    # freising ost
+    x = 703338
+    y = 5364600
+
+    # deutschland suedost
+    #x = 746433
+    #y = 5298931
+
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+                                    cmap, withCap)
+
+    #net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-loadnodes-export")
+
+#    net.ComputeContraction(100)
+#    net.ExportContractedNetwork(cnfg.ArcsTableName + "-loadnodes-ch-export")
+
+    #net.ImportContractedNetwork(cnfg.ArcsTableName + "-ch-export")
+
+    #print(startID)
+    solver = netx.ShortestPathTree(cnfg)
+    solver.SetOrigin(startID)
+
+    dests = netx.Nodes()
+    dests.append(endID)
+    solver.SetDestinations(dests)
 
     solver.Solve(net)
 
     optimum = solver.GetOptimum()
+
+    solver.SaveResults(cnfg.ArcsTableName + "_ch_20170915", cmap)
+
     del net, solver
 
     return optimum
-    #return solver.GetOptimum()
 
 if __name__ == "__main__":
 
     print(netx.Version())
 
     if 'linux' in sys.platform:
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_Big.json"
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_small.json"
+        print 'Running test on Linux..'
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        # TEST OK
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_small.json"
+        # TEST OK
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+        # TEST OK
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
+        # TEST results not exact - precision oder arc ids?
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_5_points_4.json"
+        # TEST OK
 
     if 'win' in sys.platform:
-        path_to_cnfg = "MSTCnfg_small.json"
+        print 'Running test on Windows..'
+        #path_to_cnfg = "ODMatrixCnfg_Big.json"
+        path_to_cnfg = "SPTCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
     if 'linux' in sys.platform:
-        print 'Running test on Linux..'
         cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
         cnfg.SpatiaLiteCoreName = './libspatialite'
 
     if 'win' in sys.platform:
-        print 'Running test on Windows..'
         cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'
         cnfg.SpatiaLiteCoreName = 'spatialite430'
 
@@ -134,54 +196,24 @@ if __name__ == "__main__":
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
 
-    alg_dict = {
-        0: "",
-        1: "",
-        2: "Kruskal_LEMON"
-        }
-
-    active_tests =  ["mst",
-                     "mst | load nodes"
+    active_tests =  ["ch only",
+                     "1-1 | add nodes",
+                     "1-n | add nodes",
+                     "1-n | load nodes",
+                     "1-all | add nodes"
                     ]
+    active_tests = active_tests[1:2]
 
-    active_tests = active_tests[:1]
+    if "ch only" in active_tests:
+        print("Testing Contraction..")
+        starttime = datetime.datetime.now()
+        test_contraction(cnfg, cmap)
+        stoptime = datetime.datetime.now()
+        print(("Duration: {0}".format(stoptime - starttime)))
 
-    if "mst" in active_tests:
-        for i in range(2, 3):
-            cnfg.MstAlgorithm = i
-            print(("Testing MST with Algorithm {0}..".format(alg_dict[i])))
-            starttime = datetime.datetime.now()
-            result = test_mst(cnfg, cmap)
-            stoptime = datetime.datetime.now()
-            print(("Duration: {0}".format(stoptime - starttime)))
-            #print(result)
-            if "Big" in path_to_cnfg:
-                if str(result) != str(10816901.7965):
-                    print("test failed!")
-                else:
-                    print("test succeeded.")
-            if "small" in path_to_cnfg:
-                if str(result) != str(28596.3859159):
-                    print("test failed!")
-                else:
-                    print("test succeeded.")
-
-    if "mst | load nodes" in active_tests:
-        for i in range(2, 3):
-            cnfg.MstAlgorithm = i
-            print(("Testing MST (load nodes) with Algorithm {0}..".format(alg_dict[i])))
-            starttime = datetime.datetime.now()
-            result = test_mst_load_nodes(cnfg, cmap)
-            stoptime = datetime.datetime.now()
-            print(("Duration: {0}".format(stoptime - starttime)))
-            #print(result)
-            if "Big" in path_to_cnfg:
-                if str(result) != str(10816901.7965):
-                    print("test failed!")
-                else:
-                    print("test succeeded.")
-            if "small" in path_to_cnfg:
-                if str(result) != str(28596.3859159):
-                    print("test failed!")
-                else:
-                    print("test succeeded.")
+    if "1-1 | add nodes" in active_tests:
+        print("Testing SPT 1-1 with imported Contraction..")
+        starttime = datetime.datetime.now()
+        test_spt_add_nodes_1_1_ch(cnfg, cmap)
+        stoptime = datetime.datetime.now()
+        print(("Duration: {0}".format(stoptime - starttime)))

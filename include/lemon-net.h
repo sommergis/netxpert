@@ -9,28 +9,35 @@
 #include <memory>
 #include <algorithm>
 
-#include <lemon/smart_graph.h>
-#include <lemon/maps.h>
+//#include <lemon/smart_graph.h>
+//#include <lemon/list_graph.h>
+//#include <lemon/maps.h>
+//#include <lemon/core.h>
+//#include <lemon/adaptors.h>
+#include "lemon/time_measure.h"
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #include "CHInterface.h"
+    #include "CH/DefaultPriority.h"
+#endif // ENABLE_CONTRACTION_HIERARCHIES
 
 #include "geos/geom/CoordinateSequenceFactory.h"
 #include "geos/geom/GeometryFactory.h"
 
 #include "geos/linearref/LengthIndexedLine.h"
 #include "geos/linearref/ExtractLineByLocation.h"
-#include "geos/linearref/LengthIndexOfPoint.h"
-#include "geos/linearref/LocationIndexOfLine.h"
 #include "geos/linearref/LocationIndexedLine.h"
 #include "geos/linearref/LengthLocationMap.h"
+#include "geos/linearref/LinearLocation.h"
+
 #include "geos/io/WKTReader.h"
 #include "geos/opLinemerge.h"
 #include "geos/opDistance.h"
 
-#include "utils.h"
 #include "data.h"
 #include "dbhelper.h"
 #include "fgdbwriter.h"
 #include "slitewriter.h"
-
 
 namespace netxpert {
 
@@ -223,6 +230,16 @@ namespace netxpert {
                 return this->nodeSupplyMap.get();
             };
 
+            netxpert::data::graph_t::NodeMap<std::string>*
+             GetNodeMap() {
+                return this->nodeMap.get();
+            };
+
+            const std::unordered_map<std::string, netxpert::data::node_t>
+             GetNodeIDMap() {
+                return this->nodeIDMap;
+            };
+
             void
              SetNodeData(const std::string& nodeID, const netxpert::data::node_t& node);
 
@@ -317,6 +334,50 @@ namespace netxpert {
 
             void
              ExportToDIMACS(const std::string& path);
+
+//            -->Region Contraction Hierarchies
+
+            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            void
+             ComputeContraction(float contractionPercent);
+
+            void
+             ExportContractedNetwork(const std::string graphName);
+
+            void
+             ImportContractedNetwork(const std::string graphName);
+
+            bool
+             GetHasContractionHierarchies() {
+              return this->hasContractionHierarchies;
+             };
+
+            CHInterface<DefaultPriority>*
+             GetCHManager() {
+              return this->chManager.get();
+            };
+
+            netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>*
+             GetCostMap_CH() {
+              return this->chCostMap.get();
+            };
+
+            netxpert::data::graph_t::NodeMap<netxpert::data::graph_ch_t::Node>*
+             GetNodeMap_CH() {
+              return this->chNodeRefMap.get();
+            }
+
+//            netxpert::data::graph_ch_t::ArcMap<netxpert::data::graph_t::Arc>*
+//             GetArcMap_CH() {
+//              return this->chArcRefMap.get();
+//            }
+
+            netxpert::data::graph_ch_t::NodeMap<netxpert::data::graph_t::Node>*
+             GetNodeCrossRefMap_CH() {
+              return this->chNodeCrossRefMap.get();
+            }
+            //|-->Region Contration Hierarchies
+            #endif
 
             //-->Region MinCostFlow functions
 
@@ -466,7 +527,13 @@ namespace netxpert {
 
             //--|Region MinCostFlow functions
 
+            //-->Region Contraction Hierarchies
+            void
+             fillNodeIDMap();
 
+            void
+             fillNodeMap();
+            //|-->Region Contraction Hierarchies
 
 
             //-->Region data members
@@ -486,7 +553,17 @@ namespace netxpert {
             std::unique_ptr<netxpert::data::ArcDataMap<netxpert::data::graph_t,
                                            netxpert::data::arc_t,
                                            netxpert::data::ArcData> > arcDataMap;
-
+            //Contraction Hierarchies
+            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            bool hasContractionHierarchies = false;
+            std::unique_ptr<netxpert::data::graph_ch_t> chg;
+            std::unique_ptr<netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>> chCostMap;
+            std::unique_ptr<netxpert::data::graph_t::NodeMap<netxpert::data::graph_ch_t::Node>> chNodeRefMap;
+            //internal CH node ID, external node ID from input graph
+            std::map<std::string, int> chNodeIDRefMap;
+            std::unique_ptr<CHInterface<DefaultPriority>> chManager;
+            std::unique_ptr<netxpert::data::graph_ch_t::NodeMap<netxpert::data::graph_t::Node>> chNodeCrossRefMap;
+            #endif
             //TEST
             // Changes
 

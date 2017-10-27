@@ -1414,14 +1414,15 @@ bool DBHELPER::performInitialCommand()
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName,@spatiaLiteEntryPoint);";
         SQLite::Statement query(db, strSQL);
         query.bind("@spatiaLiteCoreName", spatiaLiteCoreName);
-		query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
+        query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
         query.executeStep();
         db.disableExtensions(); */
-		//spatialite > 4.2.0 : mod_spatialite should be used - not spatialite.dll | libspatialite.so
-		//new way
-		#ifdef _WIN32
-		db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
-		#else
+        //spatialite > 4.2.0 : mod_spatialite should be used - not spatialite.dll | libspatialite.so
+        //new way
+        #ifdef _WIN32
+        //on some QGIS Versions entry point is called "spatialite_init_ex" vs "sqlite3_modspatialite_init"
+        db.loadExtension(spatiaLiteCoreName.c_str(), "spatialite_init_ex");
+        #else
         db.loadExtension(spatiaLiteCoreName.c_str(), NULL);
         #endif
         UTILS::SetCurrentDir(pathBefore);

@@ -56,7 +56,7 @@
 	<ctype.h>
 	<math.h>
 
-1499348542 /home/hahne/dev/netxpert1_0/include/config.h
+1506974629 /home/hahne/dev/netxpert1_0/include/config.h
 	<stdint.h>
 	<string>
 	<stdexcept>
@@ -267,11 +267,10 @@
 	"imstree.h"
 	<lemon/kruskal.h>
 
-1497902861 /home/hahne/dev/netxpert1_0/include/core/imstree.h
+1500403574 /home/hahne/dev/netxpert1_0/include/core/imstree.h
 	<memory>
 	<vector>
 	"lemon/concepts/path.h"
-	"lemon/adaptors.h"
 	"lemon-net.h"
 
 1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/concepts/path.h
@@ -343,7 +342,7 @@
 
 1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/tolerance.h
 
-1499367470 /home/hahne/dev/netxpert1_0/include/lemon-net.h
+1506970935 /home/hahne/dev/netxpert1_0/include/lemon-net.h
 	<cmath>
 	<unordered_map>
 	<vector>
@@ -351,20 +350,19 @@
 	<string>
 	<memory>
 	<algorithm>
-	<lemon/smart_graph.h>
-	<lemon/maps.h>
+	"lemon/time_measure.h"
+	"CHInterface.h"
+	"CH/DefaultPriority.h"
 	"geos/geom/CoordinateSequenceFactory.h"
 	"geos/geom/GeometryFactory.h"
 	"geos/linearref/LengthIndexedLine.h"
 	"geos/linearref/ExtractLineByLocation.h"
-	"geos/linearref/LengthIndexOfPoint.h"
-	"geos/linearref/LocationIndexOfLine.h"
 	"geos/linearref/LocationIndexedLine.h"
 	"geos/linearref/LengthLocationMap.h"
+	"geos/linearref/LinearLocation.h"
 	"geos/io/WKTReader.h"
 	"geos/opLinemerge.h"
 	"geos/opDistance.h"
-	"utils.h"
 	"data.h"
 	"dbhelper.h"
 	"fgdbwriter.h"
@@ -731,7 +729,7 @@
 	<cereal/cereal.hpp>
 	<unordered_map>
 
-1499371880 /home/hahne/dev/netxpert1_0/include/data.h
+1507061646 /home/hahne/dev/netxpert1_0/include/data.h
 	<stdint.h>
 	"geos/geom/Coordinate.h"
 	"geos/geom/Geometry.h"
@@ -744,7 +742,7 @@
 	<cereal/types/unordered_map.hpp>
 	<cereal/types/vector.hpp>
 	<lemon/smart_graph.h>
-	<lemon/concepts/path.h>
+	<lemon/list_graph.h>
 	<lemon/adaptors.h>
 
 1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geom/LineString.h
@@ -760,10 +758,9 @@
 	<memory>
 	<geos/inline.h>
 
-1496258792 /home/hahne/dev/netxpert1_0/include/dbhelper.h
+1507410870 /home/hahne/dev/netxpert1_0/include/dbhelper.h
 	<string>
 	<typeinfo>
-	"utils.h"
 	"data.h"
 	"logger.h"
 	"SQLiteCpp/Database.h"
@@ -837,13 +834,12 @@
 	<geos/geom/PrecisionModel.h>
 	<cassert>
 
-1494276413 /home/hahne/dev/netxpert1_0/include/fgdbwriter.h
+1506969808 /home/hahne/dev/netxpert1_0/include/fgdbwriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
 	<fstream>
 	"FileGDB_API/include/FileGDBAPI.h"
-	"utils.h"
 	<algorithm>
 
 1483786451 /home/hahne/dev/netxpert1_0/include/dbwriter.h
@@ -893,8 +889,7 @@
 	<string>
 	"FileGDBCore.h"
 
-1494276434 /home/hahne/dev/netxpert1_0/include/slitewriter.h
-	"utils.h"
+1500403314 /home/hahne/dev/netxpert1_0/include/slitewriter.h
 	<string>
 	"dbwriter.h"
 	"logger.h"
@@ -921,7 +916,7 @@
 1498854028 source:/home/hahne/dev/netxpert1_0/src/core/nslem.cpp
 	"nslem.h"
 
-1498477374 /home/hahne/dev/netxpert1_0/include/core/nslem.h
+1500403610 /home/hahne/dev/netxpert1_0/include/core/nslem.h
 	"imcflow.h"
 	"lemon/smart_graph.h"
 	"lemon/network_simplex.h"
@@ -929,12 +924,11 @@
 	<stdio.h>
 	<limits.h>
 
-1498477419 /home/hahne/dev/netxpert1_0/include/core/imcflow.h
+1500403578 /home/hahne/dev/netxpert1_0/include/core/imcflow.h
 	<stdint.h>
 	<memory>
 	<vector>
 	"lemon/concepts/path.h"
-	"lemon/adaptors.h"
 	"lemon-net.h"
 
 1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/network_simplex.h
@@ -947,17 +941,23 @@
 1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/math.h
 	<cmath>
 
-1498336266 source:/home/hahne/dev/netxpert1_0/src/core/sptlem.cpp
+1506970935 source:/home/hahne/dev/netxpert1_0/src/core/sptlem.cpp
 	"sptlem.h"
 
-1499437928 /home/hahne/dev/netxpert1_0/include/core/sptlem.h
-	"lemon/smart_graph.h"
-	"lemon/dijkstra.h"
-	"bijkstra.h"
+1506970935 /home/hahne/dev/netxpert1_0/include/core/sptlem.h
 	<stdio.h>
 	<limits.h>
 	<string.h>
 	<vector>
+	<iostream>
+	"lemon/smart_graph.h"
+	"lemon/dijkstra.h"
+	"lemon/random.h"
+	"lemon/list_graph.h"
+	"lemon/time_measure.h"
+	"bijkstra.h"
+	"CHInterface.h"
+	"CH/DefaultPriority.h"
 	"lemon/quad_heap.h"
 	"lemon/dheap.h"
 	"lemon/fib_heap.h"
@@ -997,6 +997,34 @@
 	<lemon/core.h>
 	<lemon/concepts/path.h>
 
+1459377863 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/random.h
+	<algorithm>
+	<iterator>
+	<vector>
+	<limits>
+	<fstream>
+	<lemon/math.h>
+	<lemon/dim2.h>
+	<sys/time.h>
+	<ctime>
+	<sys/types.h>
+	<unistd.h>
+	<lemon/bits/windows.h>
+
+1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/dim2.h
+	<iostream>
+	<algorithm>
+
+1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/time_measure.h
+	<lemon/bits/windows.h>
+	<unistd.h>
+	<sys/times.h>
+	<sys/time.h>
+	<string>
+	<fstream>
+	<iostream>
+	<lemon/math.h>
+
 1493371040 /home/hahne/dev/lemon-contrib/lemon-astar/src/bijkstra.h
 	<limits>
 	<lemon/list_graph.h>
@@ -1006,6 +1034,73 @@
 	<lemon/error.h>
 	<lemon/maps.h>
 	<lemon/path.h>
+
+1505596031 /home/hahne/dev/lemon-contrib/ch-lemon/src/CHInterface.h
+	<lemon/list_graph.h>
+	<lemon/smart_graph.h>
+	<lemon/core.h>
+	"CH/CHData.h"
+	"CH/Preprocess.h"
+	"CH/CHSearch.h"
+	"CH/PathReconstruct.h"
+	<iomanip>
+
+1499706185 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/CHData.h
+	<lemon/list_graph.h>
+	<lemon/smart_graph.h>
+	<vector>
+	<limits.h>
+
+1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/static_graph.h
+	<lemon/core.h>
+	<lemon/bits/graph_extender.h>
+
+1505124810 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Preprocess.h
+	<vector>
+	<lemon/core.h>
+	<lemon/list_graph.h>
+	<lemon/static_graph.h>
+	<lemon/adaptors.h>
+	"Utils/ContractDijkstra.h"
+	"CHData.h"
+	"omp.h"
+
+1487364083 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Utils/ContractDijkstra.h
+	<lemon/list_graph.h>
+	"CHDijkstra.h"
+
+1505128073 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Utils/CHDijkstra.h
+	<stack>
+	<lemon/bin_heap.h>
+
+1505127666 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/CHSearch.h
+	<lemon/smart_graph.h>
+	<vector>
+	"Utils/SearchDijkstra.h"
+
+1505130064 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Utils/SearchDijkstra.h
+	<lemon/smart_graph.h>
+	"CHDijkstra.h"
+
+1501436864 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/PathReconstruct.h
+	<vector>
+	<lemon/list_graph.h>
+	<lemon/smart_graph.h>
+
+1505076869 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/DefaultPriority.h
+	<lemon/core.h>
+	<vector>
+	<lemon/list_graph.h>
+	"Utils/EdgeDiffDijkstra.h"
+	"CHData.h"
+	"Priority.h"
+
+1505124649 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Utils/EdgeDiffDijkstra.h
+	<lemon/list_graph.h>
+	"CHDijkstra.h"
+
+1487364083 /home/hahne/dev/lemon-contrib/ch-lemon/src/CH/Priority.h
+	<lemon/list_graph.h>
 
 1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/quad_heap.h
 	<vector>
@@ -1023,21 +1118,20 @@
 	<functional>
 	<lemon/math.h>
 
-1497902461 /home/hahne/dev/netxpert1_0/include/core/isptree.h
+1500403583 /home/hahne/dev/netxpert1_0/include/core/isptree.h
 	<memory>
 	<vector>
 	"lemon/concepts/path.h"
-	"lemon/adaptors.h"
 	"lemon-net.h"
 
-1499288316 source:/home/hahne/dev/netxpert1_0/src/dbhelper.cpp
+1509043206 source:/home/hahne/dev/netxpert1_0/src/dbhelper.cpp
 	"dbhelper.h"
 	<stdexcept>
 
 1485017327 source:/home/hahne/dev/netxpert1_0/src/fgdbwriter.cpp
 	"fgdbwriter.h"
 
-1499372113 source:/home/hahne/dev/netxpert1_0/src/lemon-net.cpp
+1507061629 source:/home/hahne/dev/netxpert1_0/src/lemon-net.cpp
 	"lemon-net.h"
 
 1483786451 source:/home/hahne/dev/netxpert1_0/src/logger.cpp
@@ -1047,7 +1141,7 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1485017328 source:/home/hahne/dev/netxpert1_0/src/networkbuilder.cpp
+1500404598 source:/home/hahne/dev/netxpert1_0/src/networkbuilder.cpp
 	"networkbuilder.h"
 
 1494276443 /home/hahne/dev/netxpert1_0/include/networkbuilder.h
@@ -1152,7 +1246,7 @@
 1483786451 /home/hahne/dev/netxpert1_0/libs/geos-3.4.2/include/geos/geomgraph/GeometryGraph.inl
 	<geos/geomgraph/GeometryGraph.h>
 
-1498680101 source:/home/hahne/dev/netxpert1_0/src/py/pynetxpert.i
+1506976434 source:/home/hahne/dev/netxpert1_0/src/py/pynetxpert.i
 	"stdint.h"
 	"lemon-net.h"
 	"dbhelper.h"
@@ -1170,9 +1264,8 @@
 	"transp_simple.h"
 	"netbuilder_simple.h"
 
-1498296796 /home/hahne/dev/netxpert1_0/include/solver/isolver.h
+1500403471 /home/hahne/dev/netxpert1_0/include/solver/isolver.h
 	<string>
-	"network.h"
 	"lemon-net.h"
 
 1490126632 /home/hahne/dev/netxpert1_0/include/network.h
@@ -1197,30 +1290,27 @@
 	<cmath>
 	<lemon/smart_graph.h>
 
-1499437629 /home/hahne/dev/netxpert1_0/include/solver/sptree.h
+1500403543 /home/hahne/dev/netxpert1_0/include/solver/sptree.h
 	"isolver.h"
 	"isptree.h"
 	"sptlem.h"
 	"data.h"
 	"lemon-net.h"
-	<lemon/adaptors.h>
 
-1498855040 /home/hahne/dev/netxpert1_0/include/solver/odmatrix.h
+1500403536 /home/hahne/dev/netxpert1_0/include/solver/odmatrix.h
 	"isolver.h"
 	"isptree.h"
 	"sptlem.h"
 	"data.h"
 	"lemon-net.h"
-	<lemon/adaptors.h>
 	<omp.h>
 
-1498030799 /home/hahne/dev/netxpert1_0/include/solver/mstree.h
+1500403497 /home/hahne/dev/netxpert1_0/include/solver/mstree.h
 	"isolver.h"
 	"imstree.h"
 	"mstlem.h"
 	"data.h"
 	"lemon-net.h"
-	<lemon/adaptors.h>
 
 1498298331 /home/hahne/dev/netxpert1_0/include/solver/isolines.h
 	"isolver.h"
@@ -1310,38 +1400,35 @@
 1485017327 source:/home/hahne/dev/netxpert1_0/src/slitewriter.cpp
 	"slitewriter.h"
 
-1498334974 source:/home/hahne/dev/netxpert1_0/src/solver/isolines.cpp
+1507660837 source:/home/hahne/dev/netxpert1_0/src/solver/isolines.cpp
 	"isolines.h"
 
-1499368340 source:/home/hahne/dev/netxpert1_0/src/solver/mcflow.cpp
+1500404879 source:/home/hahne/dev/netxpert1_0/src/solver/mcflow.cpp
 	"mcflow.h"
 
 1498293442 source:/home/hahne/dev/netxpert1_0/src/solver/mstree.cpp
 	"mstree.h"
 
-1499343430 source:/home/hahne/dev/netxpert1_0/src/solver/odmatrix.cpp
+1506451836 source:/home/hahne/dev/netxpert1_0/src/solver/odmatrix.cpp
 	"odmatrix.h"
 
-1498294098 source:/home/hahne/dev/netxpert1_0/src/solver/sptree.cpp
-	"sptree.h"
+1500404942 source:/home/hahne/dev/netxpert1_0/src/solver/transportation.cpp
+	"transportation.h"
 
-1498664347 source:/home/hahne/dev/netxpert1_0/src/test.cpp
+1506970935 source:/home/hahne/dev/netxpert1_0/src/test.cpp
 	"test.h"
 
-1498664384 /home/hahne/dev/netxpert1_0/include/test.h
+1506970935 /home/hahne/dev/netxpert1_0/include/test.h
 	<iostream>
-	"logger.h"
 	"fgdbwriter.h"
 	"slitewriter.h"
 	<fstream>
 	"geos/io/WKTReader.h"
 	"geos/io/StringTokenizer.h"
 	"data.h"
-	"utils.h"
 	"lemon-net.h"
 	"dbhelper.h"
 	"sptree.h"
-	"network.h"
 	"odmatrix_simple.h"
 	"mstree_simple.h"
 	"sptree_simple.h"
@@ -1353,17 +1440,9 @@
 	<geos/export.h>
 	<string>
 
-1483786451 source:/home/hahne/dev/netxpert1_0/src/utils.cpp
+1506970385 source:/home/hahne/dev/netxpert1_0/src/utils.cpp
 	"utils.h"
 
-1499368164 source:/home/hahne/dev/netxpert1_0/src/solver/transportation.cpp
-	"transportation.h"
-
-1404744024 /home/hahne/dev/netxpert1_0/libs/lemon-1.3.1/lemon/dimacs.h
-	<iostream>
-	<string>
-	<vector>
-	<limits>
-	<lemon/maps.h>
-	<lemon/error.h>
+1506970935 source:/home/hahne/dev/netxpert1_0/src/solver/sptree.cpp
+	"sptree.h"
 
