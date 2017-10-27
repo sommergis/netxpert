@@ -90,10 +90,12 @@ using namespace netxpert::io;
 
 void
  InternalNet::PrintGraph() {
-    for (graph_t::ArcIt it(*this->g); it != lemon::INVALID; ++it)
+     using namespace lemon;
+
+    for (graph_t::ArcIt it(*this->g); it != INVALID; ++it)
         std::cout << this->g->id(this->g->source(it)) << "->" << this->g->id(this->g->target(it)) << " co: " << (*this->costMap)[it] << " ca: " << (*this->capMap)[it] << std::endl ;
 
-    for (graph_t::NodeIt it(*this->g); it != lemon::INVALID; ++it)
+    for (graph_t::NodeIt it(*this->g); it != INVALID; ++it)
         std::cout << this->g->id(it) << " s:" << (*this->nodeSupplyMap)[it] << std::endl ;
 
 //    std::cout << std::endl;
@@ -134,6 +136,165 @@ void
     outfile.close();
 
 }
+
+
+//--> Region Contraction Hierarchies
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+void
+ InternalNet::ComputeContraction(float contractionPercent) {
+
+  using namespace netxpert::data;
+
+  this->hasContractionHierarchies = false;
+
+  this->chg           = std::unique_ptr<graph_ch_t>( new graph_ch_t() );
+  //copy graph from smart graph to listgraph
+  this->chCostMap     = std::unique_ptr<graph_ch_t::ArcMap<cost_t>> ( new graph_ch_t::ArcMap<cost_t> (*this->chg));
+  this->chNodeRefMap  = std::unique_ptr<graph_t::NodeMap<graph_ch_t::Node>> (new graph_t::NodeMap<graph_ch_t::Node> (*this->g));
+//  this->chArcRefMap   = std::unique_ptr<graph_ch_t::ArcMap<graph_t::Arc>> (new graph_ch_t::ArcMap<graph_t::Arc> (*this->chg));
+  this->chNodeCrossRefMap = std::unique_ptr<graph_ch_t::NodeMap<graph_t::Node>> (new graph_ch_t::NodeMap<graph_t::Node> (*this->chg));
+
+  DigraphCopy<graph_t, graph_ch_t> cg(*this->g, *this->chg);
+      cg.nodeRef(*this->chNodeRefMap);
+      cg.arcMap(*this->costMap, *this->chCostMap);
+//      cg.arcCrossRef(*this->chArcRefMap);
+      cg.nodeCrossRef(*this->chNodeCrossRefMap);
+      cg.run();
+
+  //create CH Interface
+  this->chManager = std::unique_ptr<CHInterface<DefaultPriority>> (new CHInterface<DefaultPriority> (*this->chg, *this->chCostMap));
+
+  //contract nodes
+  this->chManager->createCH(contractionPercent);
+
+  this->hasContractionHierarchies = true;
+}
+
+void
+ InternalNet::fillNodeIDMap() {
+
+  using namespace netxpert::data;
+  //Fill id map
+  graph_t::NodeIt iter(*this->g);
+  for (; iter != INVALID; ++iter) {
+    auto chNode     = (*this->chNodeRefMap)[iter];
+    auto origNodeID = (*this->nodeMap)[iter];
+    this->chNodeIDRefMap.insert( std::make_pair(origNodeID, this->chg->id(chNode) ));
+  }
+}
+
+void
+ InternalNet::ExportContractedNetwork(const std::string graphName){
+
+  std::ofstream gs  (graphName + ".gr", std::ofstream::out);
+  std::ofstream nos (graphName + "-nodeorder.gr", std::ofstream::out);
+  std::ofstream nms (graphName + "-nodemap.gr", std::ofstream::out);
+
+  fillNodeIDMap();
+  //export contracted network
+  this->chManager->exportDimacs(gs, nos, nms, this->chNodeIDRefMap);
+
+  /*LOGGER::LogDebug("exporting arc ref map..");
+  //export arc map
+  std::ofstream ams (graphName + "-arcmap.gr", std::ofstream::out);
+
+	ams << "c CH arc ref map " << std::endl;
+	ams << "c Orig arc(from,to) CH arc(from,to) " << std::endl;
+
+	size_t s = lemon::countArcs(*this->chg);
+
+	ams << "p " <<  s  << std::endl;
+
+	int origArcID, chArcID = -1;
+
+	for (graph_ch_t::ArcIt e(*this->chg); e != INVALID; ++e) {
+    auto origArc = (*this->chArcRefMap)[e];
+
+    if (origArc == INVALID || !this->g->valid(origArc))
+      origArcID = -1;
+    else
+      origArcID = this->g->id(origArc);
+
+    chArcID  = this->chg->id(e) +1;
+
+		ams << "a " << origArcID << " "  << chArcID << std::endl;
+	}*/
+
+}
+
+void
+ InternalNet::ImportContractedNetwork(const std::string graphName){
+
+  LOGGER::LogDebug("Importing Contraction Hierarchies of "+ graphName + "..");
+  using namespace netxpert::data;
+
+  this->hasContractionHierarchies = false;
+
+  this->chg       = std::unique_ptr<graph_ch_t> (new graph_ch_t());
+  this->chCostMap = std::unique_ptr<graph_ch_t::ArcMap<cost_t>> (new graph_ch_t::ArcMap<cost_t>(*this->chg));
+  this->chManager = std::unique_ptr<CHInterface<DefaultPriority>> (new CHInterface<DefaultPriority> (*this->chg, *this->chCostMap));
+  //TEST
+  this->chNodeCrossRefMap = std::unique_ptr<graph_ch_t::NodeMap<graph_t::Node>> (new graph_ch_t::NodeMap<graph_t::Node> ((*this->chg), INVALID));
+
+  // chNodeRefMap<origNode,chNode>
+  this->chNodeIDRefMap = this->chManager->importDimacs(graphName);
+
+  for (const auto& kv : this->chNodeIDRefMap) {
+    auto chNode = this->chg->nodeFromId(kv.second);
+    auto node = this->GetNodeFromOrigID(kv.first);
+
+    (*this->chNodeCrossRefMap)[chNode] = node;
+  }
+
+  /*LOGGER::LogDebug("importing arc ref map..");
+  //import arc map
+  std::ifstream is (graphName + "-arcmap.gr", std::ifstream::in);
+
+  char c;
+  int origArcID, chArcID = -1;
+  std::string str;
+
+  while (is >> c) {
+    if (c == 'c') {
+      getline(is, str);
+      continue;
+    }
+    if (c == 'a') {
+      is >> origArcID >> chArcID;
+      getline(is, str);
+//      std::cout << origArcID << " " << chArcID << std::endl;
+//      std::cout << this->chg->valid(this->chg->arcFromId(chArcID-1)) << std::endl;
+//      std::cout << this->g->valid(this->g->arcFromId(origArcID-1)) << std::endl;
+      if (origArcID > 0 && chArcID > 0)
+        (*this->chArcRefMap)[this->chg->arcFromId(chArcID-1)] = this->g->arcFromId(origArcID-1);
+      continue;
+    }
+  }*/
+
+  fillNodeMap();
+
+  this->hasContractionHierarchies = true;
+
+  LOGGER::LogDebug("CH - countNodes of graph: " + to_string( lemon::countNodes(*this->chg) ));
+  LOGGER::LogDebug("CH - countArcs of graph: " + to_string( lemon::countArcs(*this->chg)  ));
+
+  LOGGER::LogDebug("Done!");
+}
+
+void
+ InternalNet::fillNodeMap() {
+
+  using namespace netxpert::data;
+  this->chNodeRefMap = std::unique_ptr<graph_t::NodeMap<graph_ch_t::Node>>(new graph_t::NodeMap<graph_ch_t::Node> (*this->g));
+  //populate chNodeRefMap
+  for(auto& kv: this->chNodeIDRefMap) {
+    auto origNode = this->nodeIDMap.at(kv.first);
+    auto chNode   = this->chg->nodeFromId(kv.second);
+    (*this->chNodeRefMap)[origNode] = chNode;
+  }
+}
+//|--> Endregion Contraction Hierarchies
+#endif
 
 /** @brief (one liner)
 *
@@ -239,8 +400,8 @@ const std::unordered_set<std::string>
 const netxpert::data::arc_t
  InternalNet::GetArcFromNodes(const netxpert::data::node_t& source,
                               const netxpert::data::node_t& target) {
-
-    return lemon::findArc(*this->g, source, target, lemon::INVALID);
+    using namespace lemon;
+    return lemon::findArc(*this->g, source, target, INVALID);
 }
 
 /** @brief (one liner)
@@ -252,7 +413,7 @@ const node_t
 
 //    LOGGER::LogDebug("entering GetNodeFromOrigID()..");
 
-    netxpert::data::node_t node;
+    netxpert::data::node_t node = lemon::INVALID;
 
     try {
         node = this->nodeIDMap.at(nodeID);
@@ -285,11 +446,18 @@ const netxpert::data::node_t
 }
 const netxpert::data::node_t
  InternalNet::GetSourceNode(const netxpert::data::arc_t& arc) {
-    return this->g->source(arc);
+    if (this->g->valid(arc))
+      return this->g->source(arc);
+    else
+      return lemon::INVALID;
 }
+
 const netxpert::data::node_t
  InternalNet::GetTargetNode(const netxpert::data::arc_t& arc) {
-    return this->g->target(arc);
+    if (this->g->valid(arc))
+      return this->g->target(arc);
+    else
+      return lemon::INVALID;
 }
 
 /** @brief (one liner)
@@ -421,6 +589,7 @@ const uint32_t
                       SQLite::Statement& closestArcQry, const bool withCapacity,
                       const AddedNodeType startOrEnd) {
 
+    std::cout << "entering AddNode().. "<< std::endl;
     using namespace std;
     using namespace geos::geom;
 
@@ -577,6 +746,8 @@ const node_t
                                  const geos::geom::Coordinate& point,
                                  const AddedNodeType startOrEnd) {
 
+    std::cout << "entering insertNewNode().. "<< std::endl;
+
     using namespace std;
     using namespace geos::geom;
 
@@ -647,6 +818,47 @@ const node_t
         //enable the new arcs
         (*this->arcFilterMap)[newArc1] = true;
         (*this->arcFilterMap)[newArc2] = true;
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+        if (this->hasContractionHierarchies) {
+
+          std::cout << "hasContractionHierarchies.. "<< std::endl;
+          //add changes also to CH graph & maps
+          auto newNodeCH      = this->chg->addNode();
+
+          //add new regular graph node to refMap
+          (*this->chNodeRefMap)[newNode] = newNodeCH;
+          (*this->chNodeCrossRefMap)[newNodeCH] = newNode;
+
+          //get the correct nodes from the refNodesMap of the contracted graph
+          auto origFromNodeCH = (*this->chNodeRefMap)[origFromNode];
+          auto origToNodeCH   = (*this->chNodeRefMap)[origToNode];
+
+          //add new arcs to CH graph also
+          auto newArc1CH = this->chg->addArc(origFromNodeCH, newNodeCH);
+          auto newArc2CH = this->chg->addArc(newNodeCH, origToNodeCH);
+
+          //add arcs also to chArcRefMap for lookup on CH paths
+//          (*this->chArcRefMap)[newArc1CH] = newArc1;
+//          (*this->chArcRefMap)[newArc2CH] = newArc2;
+
+          //no saving of new arcs in this->newArcsMap
+
+          (*this->chCostMap)[newArc1CH] = newArc1Cost;
+          (*this->chCostMap)[newArc2CH] = newArc2Cost;
+
+          //no cap maps - spt respects no caps
+
+          //find ch arc to remove
+          auto chArc = lemon::findArc(*this->chg, origFromNodeCH, origToNodeCH);
+
+          //insert the new node into CH structures
+          auto r1 = INVALID;
+          auto r2 = INVALID;
+          auto r3 = INVALID;
+          this->chManager->addNodeToCH(newNodeCH, newArc1CH, newArc2CH, newArc1Cost, newArc2Cost, chArc, r1, r2, r3);
+        }
+#endif
     }
     else {
 
@@ -666,7 +878,7 @@ const node_t
 //                   //", orig: " << GetOrigNodeID(g->source(newArc1)) << "->" << GetOrigNodeID(g->target(newArc1))<<
 //                   std::endl;
         //std::cout << "seg1 ID# " << this->g->id(newArc1) << std::endl;
-         auto revNewArc1 = this->g->addArc(origToNode, newNode );
+        auto revNewArc1 = this->g->addArc(origToNode, newNode );
 //        std::cout << "revNewArc1 "<<this->g->id(revNewArc1)<< ", " << g->id(g->source(revNewArc1)) << "->" << g->id(g->target(revNewArc1)) <<
 //                   //", orig: " << GetOrigNodeID(g->source(revNewArc1)) << "->" << GetOrigNodeID(g->target(revNewArc1))<<
 //                   std::endl;
@@ -722,6 +934,62 @@ const node_t
         (*this->arcFilterMap)[newArc2] = true;
         (*this->arcFilterMap)[revNewArc1] = true;
         (*this->arcFilterMap)[revNewArc2] = true;
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+        if (this->hasContractionHierarchies) {
+          std::cout << "hasContractionHierarchies.. "<< std::endl;
+          //add changes also to CH graph & maps
+          auto newNodeCH      = this->chg->addNode();
+
+          //add new regular graph node to refMap
+          (*this->chNodeRefMap)[newNode] = newNodeCH;
+          (*this->chNodeCrossRefMap)[newNodeCH] = newNode;
+
+          //get the correct nodes from the refNodesMap of the contracted graph
+          auto origFromNodeCH = (*this->chNodeRefMap)[origFromNode];
+          auto origToNodeCH   = (*this->chNodeRefMap)[origToNode];
+
+          ///TEST
+//          auto testArc1CH = lemon::findArc(*this->chg, newNodeCH, origToNodeCH);
+//          if (testArc1CH != INVALID)
+//            this->chManager->printShortCuts(testArc1CH);
+
+          //add new arcs to CH graph also
+          auto newArc1CH    = this->chg->addArc(newNodeCH, origToNodeCH);
+          ///TEST
+//          this->chManager->printShortCuts(newArc1CH);
+
+          auto revNewArc1CH = this->chg->addArc(origToNodeCH, newNodeCH);
+          auto newArc2CH    = this->chg->addArc(origFromNodeCH, newNodeCH);
+          auto revNewArc2CH = this->chg->addArc(newNodeCH, origFromNodeCH);
+
+//          std::cout << "newArc1CH" << std::endl;
+//          std::cout << this->chg->id(this->chg->source(newArc1CH)) << "->"
+//          << this->chg->id(this->chg->target(newArc1CH)) <<std::endl;
+
+          //add arcs also to chArcRefMap for lookup on CH paths
+//          (*this->chArcRefMap)[newArc1CH]     = newArc1;
+//          (*this->chArcRefMap)[revNewArc1CH]  = revNewArc1;
+//          (*this->chArcRefMap)[newArc2CH]     = newArc2;
+//          (*this->chArcRefMap)[revNewArc2CH]  = revNewArc2;
+
+          //no saving of new arcs in this->newArcsMap
+          (*this->chCostMap)[newArc1CH]     = newArc1Cost;
+          (*this->chCostMap)[newArc2CH]     = newArc2Cost;
+          (*this->chCostMap)[revNewArc1CH]  = newArc1Cost;
+          (*this->chCostMap)[revNewArc2CH]  = newArc2Cost;
+
+          //no cap maps - spt respects no caps
+
+          //find ch arc to remove
+          auto chArc = lemon::findArc(*this->chg, origFromNodeCH, origToNodeCH);
+          auto revChArc = lemon::findArc(*this->chg, origToNodeCH, origFromNodeCH);
+
+          //insert the new node into CH structures
+          this->chManager->addNodeToCH(newNodeCH, newArc1CH, newArc2CH, newArc1Cost, newArc2Cost, chArc, revNewArc1CH, revNewArc2CH, revChArc);
+
+        }
+#endif
     }
     switch (startOrEnd)
     {
@@ -822,20 +1090,34 @@ const uint32_t
     using namespace std;
     using namespace geos::geom;
 
-    //check extNodeID if already present in nodeIDMap
-    if (this->nodeIDMap.count(extNodeID) != 0) {
-        LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
-        extNodeID = extNodeID + "@netXpert";
+    try {
+
+      //check extNodeID if already present in nodeIDMap
+      if (this->nodeIDMap.count(extNodeID) != 0) {
+          LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
+          extNodeID = extNodeID + "@netXpert";
+      }
+
+      NewNode n { extNodeID, Coordinate {x, y}, supply};
+
+      const string arcsTableName  = NETXPERT_CNFG.ArcsTableName;
+      const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
+
+      auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                              cmap, ArcIDColumnDataType::Number, withCapacity);
+      return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::StartArc);
     }
-
-    NewNode n { extNodeID, Coordinate {x, y}, supply};
-
-    const string arcsTableName  = NETXPERT_CNFG.ArcsTableName;
-    const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
-
-    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
-                                            cmap, ArcIDColumnDataType::Number, withCapacity);
-    return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::StartArc);
+    catch (const std::runtime_error& ex) {
+      LOGGER::LogError("RuntimeError in AddStartNode()!");
+      LOGGER::LogError(ex.what() );
+    }
+    catch (const std::exception& ex) {
+      LOGGER::LogError("Exception in AddStartNode()!");
+      LOGGER::LogError(ex.what() );
+    }
+    catch (...) {
+      LOGGER::LogError("Unknown Error in AddStartNode() - maybe a memory error!");
+    }
 }
 
 const uint32_t
@@ -846,20 +1128,33 @@ const uint32_t
     using namespace std;
     using namespace geos::geom;
 
-    //check extNodeID if already present in nodeIDMap
-    if (this->nodeIDMap.count(extNodeID) != 0) {
-        LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
-        extNodeID = extNodeID + "@netXpert";
+    try  {
+      //check extNodeID if already present in nodeIDMap
+      if (this->nodeIDMap.count(extNodeID) != 0) {
+          LOGGER::LogWarning("External Node ID "+ extNodeID + " already present! Renaming..");
+          extNodeID = extNodeID + "@netXpert";
+      }
+
+      NewNode n { extNodeID, Coordinate {x, y}, supply};
+
+      const string arcsTableName  = NETXPERT_CNFG.ArcsTableName;
+      const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
+
+      auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
+                                              cmap, ArcIDColumnDataType::Number, withCapacity);
+      return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::EndArc);
     }
-
-    NewNode n { extNodeID, Coordinate {x, y}, supply};
-
-    const string arcsTableName  = NETXPERT_CNFG.ArcsTableName;
-    const string geomColumnName = NETXPERT_CNFG.ArcsGeomColumnName;
-
-    auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
-                                            cmap, ArcIDColumnDataType::Number, withCapacity);
-    return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::EndArc);
+    catch (const std::runtime_error& ex) {
+      LOGGER::LogError("RuntimeError in AddEndNode()!");
+      LOGGER::LogError(ex.what() );
+    }
+    catch (const std::exception& ex) {
+      LOGGER::LogError("Exception in AddEndNode()!");
+      LOGGER::LogError(ex.what() );
+    }
+    catch (...) {
+      LOGGER::LogError("Unknown Error in AddEndNode() - maybe a memory error!");
+    }
 }
 
 std::vector< std::pair<uint32_t, std::string> >
@@ -893,7 +1188,7 @@ std::vector< std::pair<uint32_t, std::string> >
             }
             catch (exception& ex)
             {
-                LOGGER::LogError("Exception raised at LoadStartNodes()!");
+                LOGGER::LogError("Error in LoadStartNodes()!");
                 LOGGER::LogError(ex.what());
             }
         }
@@ -932,7 +1227,7 @@ std::vector< std::pair<uint32_t, std::string> >
             }
             catch (exception& ex)
             {
-                LOGGER::LogError("Exception raised at LoadEndNodes()!");
+                LOGGER::LogError("Error in LoadEndNodes()!");
                 LOGGER::LogError(ex.what());
             }
             //break;
@@ -1065,11 +1360,11 @@ std::vector<geos::geom::Geometry*>
         for (const auto& arc : this->newArcsMap) {
             auto key = arc.first;
             auto val = arc.second;
-            bool found = false;
+//            bool found = false;
 
             if (val.nodeType == AddedNodeType::StartArc) {
                 if ( std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end() ) {
-                    found = true;
+//                    found = true;
                     auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
                     routeParts.push_back(clonedGeom.get());
 //                    std::cout << clonedGeom->getLength() << std::endl;
@@ -1090,12 +1385,12 @@ std::vector<geos::geom::Geometry*>
         for (const auto& arc : this->newArcsMap) {
             auto key = arc.first;
             auto val = arc.second;
-            bool found = false;
+//            bool found = false;
 
             if (val.nodeType == AddedNodeType::EndArc) {
 
                 if ( std::find(routeNodeArcRep.begin(), routeNodeArcRep.end(), key) != routeNodeArcRep.end() ) {
-                    found = true;
+//                    found = true;
                     auto clonedGeom = val.arcGeom;//val.arcGeom.clone();
                     routeParts.push_back(clonedGeom.get());
 //                    std::cout << clonedGeom->getLength() << std::endl;
@@ -2095,8 +2390,8 @@ void
         // String -> so content of nodeID fields could be string, int or double
         string externalStartNode = arc.extFromNode;
         string externalEndNode = arc.extToNode;
-        auto cost = arc.cost;
-        auto capacity = arc.capacity;
+//        auto cost = arc.cost;
+//        auto capacity = arc.capacity;
         string oneway = arc.oneway;
 
         node_t internalStartNode;

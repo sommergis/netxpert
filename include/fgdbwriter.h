@@ -6,7 +6,6 @@
 #include "logger.h"
 #include <fstream>
 #include "FileGDB_API/include/FileGDBAPI.h"
-#include "utils.h"
 #include <algorithm>
 
 namespace netxpert {

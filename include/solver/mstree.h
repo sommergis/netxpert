@@ -6,7 +6,7 @@
 #include "mstlem.h"
 #include "data.h"
 #include "lemon-net.h"
-#include <lemon/adaptors.h>
+//#include <lemon/adaptors.h>
 
 namespace netxpert {
 

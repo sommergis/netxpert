@@ -35,9 +35,9 @@ int main(int argc, char** argv)
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TestFGDBWriter.json";
-        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
-        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
-        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_small.json";
+        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
+//        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
+//        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/NetworkBuilder_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_small.json";
     }
@@ -129,6 +129,10 @@ int main(int argc, char** argv)
 //            break;
 
         case TESTCASE::ShortestPathTreeCOM:
+            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            netxpert::test::TestSPTCH(cnfg);
+            break;
+            #endif
             netxpert::test::TestSPT(cnfg);
             break;
         case TESTCASE::ODMatrixCOM:

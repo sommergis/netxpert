@@ -165,7 +165,7 @@ void
 
     // Add nodes data only, if reached through ODMatrix Solver
     InputNodes nodes;
-    auto* supplyMap = net.GetSupplyMap();
+//    auto* supplyMap = net.GetSupplyMap();
     auto nodesIter = net.GetNodesIter();
 
     for (; nodesIter != lemon::INVALID; ++nodesIter) {
@@ -365,7 +365,7 @@ std::vector<ExtDistributionArc>
         auto costPerPath = path.second;
         auto flow = val.flow;
         //TODO: get capacity per arc
-        auto cap = -1;
+//        auto cap = -1;
 
         string orig;
         string dest;
@@ -474,7 +474,7 @@ void
 					#pragma omp single nowait
 					{
 						auto kv = *it;
-						ODPair key = kv.first;
+//						ODPair key = kv.first;
 						DistributionArc value = kv.second;
 						auto route = value.path.first;
 						std::unordered_set<std::string> arcIDlist;

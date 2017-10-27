@@ -894,26 +894,21 @@ void netxpert::test::TestMST(Config& cnfg)
         LOGGER::LogError(ex.what());
     }
 }*/
-/*
-void netxpert::test::TestSPT(Config& cnfg)
-{
-    try
-    {
+
+#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+void netxpert::test::TestSPTCH(Config& cnfg) {
+    try {
         //1. Config
-        if (!DBHELPER::IsInitialized)
-        {
+        if (!DBHELPER::IsInitialized){
             DBHELPER::Initialize(cnfg);
         }
 
-        try
-        {
-            if (!LOGGER::IsInitialized)
-            {
+        try {
+            if (!LOGGER::IsInitialized) {
                 LOGGER::Initialize(cnfg);
             }
         }
-        catch (exception& ex)
-        {
+        catch (exception& ex) {
             cout << "Error creating log file: " + cnfg.LogFileFullPath << endl;
             cout << ex.what() << endl;
         }
@@ -928,7 +923,7 @@ void netxpert::test::TestSPT(Config& cnfg)
         string nodesTableName = cnfg.NodesTableName;
         string nodesGeomColName = cnfg.NodesGeomColumnName;
 
-        string resultTableName = cnfg.ArcsTableName + "_spt";
+        string resultTableName = cnfg.ArcsTableName + "_spt_ch";
         bool autoCleanNetwork = cnfg.CleanNetwork;
 
         ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
@@ -946,11 +941,14 @@ void netxpert::test::TestSPT(Config& cnfg)
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, cnfg.NodesGeomColumnName, cmap);
 
         LOGGER::LogInfo("Done!");
-        Network net (arcsTable, cmap, cnfg);
 
         LOGGER::LogInfo("Converting Data into internal network..");
-        net.ConvertInputNetwork(autoCleanNetwork);
+        InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
+
+        //CH
+        net.ComputeContraction(100);
+//        net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-export");
 
         LOGGER::LogInfo("Loading Start nodes..");
         vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
@@ -965,17 +963,21 @@ void netxpert::test::TestSPT(Config& cnfg)
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
+        //CH
+        net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-loadnodes-export");
+
         // Solver
         ShortestPathTree spt(cnfg);
 
         spt.SetOrigin(startNodes.at(0).first);
         vector<uint32_t> dests = {};// newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
 
-        if (!cnfg.SPTAllDests)
-        {
-            for (auto d : endNodes)
-                dests.push_back(d.first);
-        }
+//        if (!cnfg.SPTAllDests) {
+//            for (auto d : endNodes)
+//                dests.push_back(d.first);
+//        }
+        // only 1-1 search for CH
+        dests.push_back(endNodes.at(0).first);
         spt.SetDestinations( dests );
 
         spt.Solve(net);
@@ -985,73 +987,73 @@ void netxpert::test::TestSPT(Config& cnfg)
 
         auto kvSPS = spt.GetShortestPaths();
 
-        unique_ptr<DBWriter> writer;
-        switch (cnfg.ResultDBType)
-        {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-            }
-                break;
-        }
-        writer->OpenNewTransaction();
-        writer->CreateNetXpertDB();
-        writer->CreateSolverResultTable(resultTableName, true);
-        writer->CommitCurrentTransaction();
-        LOGGER::LogDebug("Writing Geometries..");
-        writer->OpenNewTransaction();
-        int counter = 0;
-        for (auto kv : kvSPS)
-        {
-            counter += 1;
-            string arcIDs = "";
-            ODPair key = kv.first;
-            CompressedPath value = kv.second;
-            vector<uint32_t> ends = value.first;
-            double costPerPath = value.second;
-
-            auto route = spt.UncompressRoute(key.origin, ends);
-
-            vector<string> arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
-
-            if (arcIDlist.size() > 0)
-            {
-                for (string& id : arcIDlist)
-                    arcIDs += id += ",";
-                arcIDs.pop_back(); //trim last comma
-            }
-            string orig;
-            string dest;
-            try{
-                orig = net.GetOriginalStartOrEndNodeID(key.origin);
-            }
-            catch (exception& ex) {
-                orig = net.GetOriginalNodeID(key.origin);
-            }
-            try{
-                dest = net.GetOriginalStartOrEndNodeID(key.dest);
-            }
-            catch (exception& ex) {
-                dest = net.GetOriginalNodeID(key.dest);
-            }
-            net.ProcessResultArcs(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
-        }
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
+//        unique_ptr<DBWriter> writer;
+//        switch (cnfg.ResultDBType)
+//        {
+//            case RESULT_DB_TYPE::SpatiaLiteDB:
+//            {
+//                writer = unique_ptr<DBWriter> (new SpatiaLiteWriter(cnfg)) ;
+//            }
+//                break;
+//            case RESULT_DB_TYPE::ESRI_FileGDB:
+//            {
+//                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+//            }
+//                break;
+//        }
+//        writer->OpenNewTransaction();
+//        writer->CreateNetXpertDB();
+//        writer->CreateSolverResultTable(resultTableName, true);
+//        writer->CommitCurrentTransaction();
+//        LOGGER::LogDebug("Writing Geometries..");
+//        writer->OpenNewTransaction();
+//        int counter = 0;
+//        for (auto kv : kvSPS)
+//        {
+//            counter += 1;
+//            string arcIDs = "";
+//            ODPair key = kv.first;
+//            CompressedPath value = kv.second;
+//            vector<uint32_t> ends = value.first;
+//            double costPerPath = value.second;
+//
+//            auto route = spt.UncompressRoute(key.origin, ends);
+//
+//            vector<string> arcIDlist = net.GetOriginalArcIDs(route, cnfg.IsDirected);
+//
+//            if (arcIDlist.size() > 0)
+//            {
+//                for (string& id : arcIDlist)
+//                    arcIDs += id += ",";
+//                arcIDs.pop_back(); //trim last comma
+//            }
+//            string orig;
+//            string dest;
+//            try{
+//                orig = net.GetOriginalStartOrEndNodeID(key.origin);
+//            }
+//            catch (exception& ex) {
+//                orig = net.GetOriginalNodeID(key.origin);
+//            }
+//            try{
+//                dest = net.GetOriginalStartOrEndNodeID(key.dest);
+//            }
+//            catch (exception& ex) {
+//                dest = net.GetOriginalNodeID(key.dest);
+//            }
+//            net.ProcessResultArcs(orig, dest, costPerPath, -1, -1, arcIDs, route, resultTableName, *writer);
+//        }
+//        writer->CommitCurrentTransaction();
+//        writer->CloseConnection();
+//        LOGGER::LogDebug("Done!");
     }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("TestSPT: Unexpected Error!");
+    catch (exception& ex) {
+        LOGGER::LogError("TestSPTCH: Unexpected Error!");
         LOGGER::LogError(ex.what());
     }
 }
-*/
+
+#endif // ENABLE_CONTRACTION_HIERARCHIES
 
 /*
 void netxpert::test::TestODMatrix(Config& cnfg)

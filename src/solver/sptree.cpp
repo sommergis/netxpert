@@ -214,65 +214,147 @@ void
     LOGGER::LogDebug("Nodes: "+ to_string(net.GetNodeCount() ));
     LOGGER::LogDebug("Solving..");
 
-    //Read the network
-    auto sg = convertInternalNetworkToSolverData(net);
-    //auto af = net.GetArcFilterMap();
-
-    //check arc filter
-    /*assert( lemon::countArcs(sg) > 0);
-    for (lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>::ArcIt it( sg ); it != lemon::INVALID; ++it) {
-        cout << (*af)[it] << endl;
-    }*/
-
-    spt->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
-
     netxpert::data::cost_t totalCost = 0;
 
-    spt->SetOrigin(orig);
+    //Read the network
+    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    bool chSearch = net.GetHasContractionHierarchies();
+    #endif
+//    if (!chSearch) {
+      auto sg = convertInternalNetworkToSolverData(net);
 
-////    LOGGER::LogDebug("Calculating routes from " + net.GetOrigNodeID(orig) + " to " +
-////                            net.GetOrigNodeID(dest) );
-    LOGGER::LogDebug("Calculating routes from " + to_string(net.GetNodeID(orig)) + " to " +
-                            to_string(net.GetNodeID(dest)) );
+      //check arc filter
+      /*assert( lemon::countArcs(sg) > 0);
+      for (lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>::ArcIt it( sg ); it != lemon::INVALID; ++it) {
+          cout << (*af)[it] << endl;
+      }*/
 
-    spt->SetDest(dest);
-    LOGGER::LogDebug("Starting to solve SPT..");
+      spt->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
 
-    //germany s-t
-    //1,66 sec Bijkstra -O3
-    //2,1 sec Dijkstra  -O3
-    //1,65 sec Bijkstra -O2
-    //2,2 sec Dijkstra  -O2
-    bool bidirectional = false;
-    if (this->NETXPERT_CNFG.SptAlgorithm == netxpert::cnfg::SPTAlgorithm::Bijkstra_2Heap_LEMON)
-        bidirectional = true;
-    else
-        bidirectional == false;
+      orig = net.GetNodeFromID(net.GetNodeID(orig));
+      dest = net.GetNodeFromID(net.GetNodeID(dest));
 
-    spt->SolveSPT(-1, bidirectional);
-    LOGGER::LogDebug("SPT solved!");
+      spt->SetOrigin(orig);
+
+      LOGGER::LogDebug("Calculating routes from " + net.GetOrigNodeID(orig) + " to " +
+                              net.GetOrigNodeID(dest) );
+
+      spt->SetDest(dest);
+      LOGGER::LogDebug("Starting to solve SPT..");
+
+      //germany s-t
+      //1,66 sec Bijkstra -O3
+      //2,1 sec Dijkstra  -O3
+      //1,65 sec Bijkstra -O2
+      //2,2 sec Dijkstra  -O2
+      bool bidirectional = false;
+      if (this->NETXPERT_CNFG.SptAlgorithm == netxpert::cnfg::SPTAlgorithm::Bijkstra_2Heap_LEMON)
+          bidirectional = true;
+
+      spt->SolveSPT(-1, bidirectional);
+      LOGGER::LogDebug("SPT solved!");
+      auto sptPath = spt->GetPath(dest);
+
+//      for (auto& a : sptPath) {
+//        std::cout << net.GetNodeID(net.GetSourceNode(a)) << "->" << net.GetNodeID(net.GetTargetNode(a))  << " at "<< net.GetArcCost(a)<< std::endl;
+//      }
+
+      shortestPaths.insert( make_pair( ODPair {orig, dest},
+                            make_pair( sptPath, totalCost)) );
+      reachedDests.push_back(dest);
+
+      optimum = totalCost;
+
+//    }
+//    else { //CH search
+
+    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+      if (chSearch) {
+
+        auto* spt_ch = dynamic_cast<SPT_LEM*>(spt.get());
+
+    //      spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetArcMap_CH());
+        spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetNodeCrossRefMap_CH());
+
+        spt_ch->SetOrigin(orig);
+
+        LOGGER::LogDebug("Calculating routes from " + net.GetOrigNodeID(orig) + " to " +
+                                net.GetOrigNodeID(dest) );
+        spt_ch->SetDest(dest);
+
+
+        LOGGER::LogDebug("Starting to solve SPT with CH..");
+
+
+        spt_ch->SolveSPT_CH();
+
+        LOGGER::LogDebug("SPT CH solved!");
+
+        const auto chPath = spt_ch->GetPath_CH();
+
+    //      for (auto& b : chPath) {
+    //        std::cout << net.GetNodeID(net.GetSourceNode(b)) << "->" << net.GetNodeID(net.GetTargetNode(b)) << " at "<< net.GetArcCost(b)<< std::endl;
+    //      }
+
+        auto chTotalCost = spt_ch->GetDist_CH();
+
+        //clear first
+        shortestPaths.clear();
+
+        shortestPaths.insert( make_pair( ODPair {orig, dest},
+                              make_pair( chPath, chTotalCost)) );
+        reachedDests.clear();
+
+        reachedDests.push_back(dest);
+
+        optimum = chTotalCost;
+      }
+    #endif
+
+    //experimental CH
+//    LOGGER::LogDebug("Contraction of network..");
+//    auto* ch = dynamic_cast<SPT_LEM*>(spt.get());
+//    std::string gName = "test";
+//    float contractionPercent = 97;
+//    ch->ComputeContraction(contractionPercent);
+//    LOGGER::LogDebug("Done!");
+//
+//    LOGGER::LogDebug("Export of contracted network..");
+//    ch->ExportContractedNetwork(gName, this->net->GetNodeMap());
+//    LOGGER::LogDebug("Done!");
+//
+//    LOGGER::LogDebug("Import of contracted network..");
+//    ch->ImportContractedNetwork(gName, this->net->GetNodeIDMap());
+//    LOGGER::LogDebug("Done!");
+//
+//    LOGGER::LogDebug("Starting to solve SPT with CH..");
+//    ch->SolveSPT_CH();
+//    LOGGER::LogDebug("SPT CH solved!");
+//    auto chPath = ch->GetPath_CH();
 
     // Direction is irrelevant - the solver deals with the direction.
     // Thus it's not necessary to pay attention at this when building the route
     // out of the predecessors.
-    reachedDests.clear();
-    shortestPaths.clear();
 
-    if (orig != dest && spt->Reached(dest)) {
 
-        totalCost = spt->GetDist(dest);
-        const auto path = spt->GetPath(dest);
-
-        //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
-        // bei sps auch die Vektoren geleert.
-        shortestPaths.insert( make_pair( ODPair {orig, dest},
-                              make_pair( path, totalCost)) );
-        reachedDests.push_back(dest);
-    }
-	if (!spt->Reached(dest)) {
-	    LOGGER::LogError("Destination "+ net.GetOrigNodeID(dest) +" unreachable!");
-	}
-    optimum = totalCost;
+//    reachedDests.clear();
+//    shortestPaths.clear();
+//
+//    if (orig != dest && spt->Reached(dest)) {
+//
+//        totalCost = spt->GetDist(dest);
+//        const auto path = spt->GetPath(dest);
+//
+//        //Neuer vector muss sein, wegen clear() Methode weiter unten - sonst werden
+//        // bei sps auch die Vektoren geleert.
+//        shortestPaths.insert( make_pair( ODPair {orig, dest},
+//                              make_pair( path, totalCost)) );
+//        reachedDests.push_back(dest);
+//    }
+//	if (!spt->Reached(dest)) {
+//	    LOGGER::LogError("Destination "+ net.GetOrigNodeID(dest) +" unreachable!");
+//	}
+//    optimum = totalCost;
 }
 
 /**
@@ -319,7 +401,7 @@ void
     LOGGER::LogDebug("Dests: "+ to_string(dests.size()));
     LOGGER::LogDebug("Solving..");
 
-    //Read the network
+    //Filter arcs out and read the network
     auto sg = convertInternalNetworkToSolverData(net);
     spt->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
 
@@ -521,7 +603,7 @@ void ShortestPathTree::SaveResults(const std::string& resultTableName,
 					#pragma omp single nowait
 					{
 						auto kv = *it;
-						ODPair key = kv.first;
+//						ODPair key = kv.first;
 						CompressedPath value = kv.second;
 						/* TODO resolve pred path to arcids */
 						/* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
@@ -620,7 +702,7 @@ lemon::Path<netxpert::data::graph_t>
     }
     return startsNends;
 }
-*/
+
 bool internalArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
                             std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
     return a.first.fromNode > b.first.fromNode;
@@ -629,7 +711,7 @@ bool internalArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcDa
 bool sortedArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
                             std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
     return  (a.first == b.first) ;
-}
+}*/
 
 
 lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>

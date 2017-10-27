@@ -2,7 +2,7 @@
 #define ISOLVER_H
 
 #include <string>
-#include "network.h"
+//#include "network.h"
 #include "lemon-net.h"
 
 namespace netxpert {

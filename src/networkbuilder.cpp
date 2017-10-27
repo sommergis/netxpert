@@ -161,7 +161,7 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const Colum
                 if (counter % 2500 == 0)
                     LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-                uint32_t key = it->first;
+//                uint32_t key = it->first;
 
                 NetworkBuilderResultArc value = it->second;
 

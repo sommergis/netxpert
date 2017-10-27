@@ -24,6 +24,17 @@ def test_data():
                                              ]
   return odmatrix, nodeSupply
 
+def load_test_data():
+    f = open("tpt_test.json", "r")
+    data = f.read()
+    f.close()
+
+    import json
+    json_data = json.loads(data)
+    print json_data
+
+    return json_data["input"]["odmatrix"], json_data["input"]["supply"]
+
 def convert_test_data(_odmatrix, _supply):
 
   odm = netx.ExtSPTArcs()
@@ -31,18 +42,19 @@ def convert_test_data(_odmatrix, _supply):
 
   for item in _odmatrix:
     o = netx.ExtSPTreeArc()
-    #print item
-    o.extArcID = item["arcid"]
+    print item
+    print str(item["arcid"])
+    o.extArcID = str(item["arcid"])
     e = netx.ExternalArc()
-    e.extFromNode = item["fromNode"]
-    e.extToNode = item["toNode"]
+    e.extFromNode = str(item["fromNode"])
+    e.extToNode = str(item["toNode"])
     o.extArc = e
     o.cost = item["cost"]
     odm.append(o)
 
   for item in _supply:
     n = netx.ExtNodeSupply()
-    n.extNodeID = item["nodeid"]
+    n.extNodeID = str(item["nodeid"])
     n.supply = item["supply"]
     supply.append(n)
 
@@ -126,7 +138,12 @@ def check_result(json_result):
 
 if __name__ == '__main__':
     print(netx.Version())
-    o, s = test_data()
+    o, s = load_test_data()
+
+    print o
+    print s
+
+    #o, s = test_data()
 
     # test supply > demand
     #s[0]["supply"] = 7
