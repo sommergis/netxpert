@@ -1,4 +1,17 @@
-#!/usr/bin/python2.7
+#
+# This file is a part of netxpert.
+#
+# Copyright (C) 2013-2017
+# Johannes Sommer, Christopher Koller
+#
+# Permission to use, modify and distribute this software is granted
+# provided that this copyright notice appears in all copies. For
+# precise terms see the accompanying LICENSE file.
+#
+# This software is provided "AS IS" with no warranty of any kind,
+# express or implied, and with no claim as to its suitability for any
+# purpose.
+#
 # SPT Tests
 
 import sys, datetime, os
@@ -384,7 +397,7 @@ if __name__ == "__main__":
                     print("expected: " + str(224.269976681))
                 else:
                     print("test succeeded.")
-          
+
 
     if "1-n | load nodes" in active_tests:
         #for i in range(1, 7):
