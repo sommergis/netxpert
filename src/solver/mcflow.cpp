@@ -110,8 +110,8 @@ void
                 {
                 auto arcFlow = *it;
                 auto arc = arcFlow.intArc;
-                double cost = arcFlow.cost;
-                double flow = arcFlow.flow;
+//                double cost = arcFlow.cost;
+//                double flow = arcFlow.flow;
                 //only one arc
                 auto arcIDlist = this->net->GetOrigArcIDs(std::vector<arc_t>{arc});
                 std::unordered_set<string>::const_iterator it;

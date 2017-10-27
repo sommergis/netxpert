@@ -13,14 +13,13 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-std=c++11" />
-					<Add option="-m64" />
+					<Add option="-Wredundant-decls" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-std=c++14" />
 					<Add option="-g" />
 					<Add directory="../bin/Debug" />
 				</Compiler>
 				<Linker>
-					<Add option="-m64" />
 					<Add library="netxpert" />
 					<Add directory="/home/hahne/dev/netxpert1_0/bin/Debug" />
 				</Linker>
@@ -31,9 +30,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-march=corei7-avx" />
 					<Add option="-fexpensive-optimizations" />
-					<Add option="-O3" />
+					<Add option="-O2" />
 					<Add option="-Wall" />
 					<Add option="-std=c++14" />
 					<Add option="-m64" />
@@ -47,22 +45,29 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wfatal-errors" />
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
+			<Add option="-m64" />
 			<Add option="-fexceptions" />
 			<Add option="-fPIC" />
 			<Add option="-fopenmp" />
+			<Add option="-Wno-unknown-pragmas" />
+			<Add option="-Wno-deprecated" />
+			<Add option="-Wno-effc++" />
+			<Add directory="../libs/lemon-1.3.1" />
+			<Add directory="../libs/geos-3.4.2/include" />
 			<Add directory="../libs" />
 			<Add directory="../include" />
 			<Add directory="/usr/include/python2.7" />
 			<Add directory="../include/core" />
 			<Add directory="../include/solver" />
-			<Add directory="../libs/geos-3.4.2/include" />
-			<Add directory="../libs/lemon-1.3.1" />
 			<Add directory="../include/simple" />
 			<Add directory="/home/hahne/dev/lemon-contrib/lemon-astar/src" />
+			<Add directory="/home/hahne/dev/lemon-contrib/ch-lemon/src" />
 		</Compiler>
 		<Linker>
+			<Add option="-m64" />
 			<Add option="-fopenmp" />
 			<Add library="FileGDBAPI" />
 			<Add library="fgdbunixrtl" />

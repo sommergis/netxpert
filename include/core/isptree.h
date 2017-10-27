@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include "lemon/concepts/path.h"
-#include "lemon/adaptors.h"
+//#include "lemon/adaptors.h"
 #include "lemon-net.h"
 
 namespace netxpert {

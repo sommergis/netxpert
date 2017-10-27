@@ -4,7 +4,7 @@
 #include <string>
 //determination of type
 #include <typeinfo>
-#include "utils.h"
+//#include "utils.h"
 #include "data.h"
 #include "logger.h"
 #include "SQLiteCpp/Database.h"
@@ -62,6 +62,13 @@ namespace netxpert {
 
             static std::vector<std::unique_ptr<geos::geom::Geometry>> GetBarrierGeometriesFromDB(const std::string& barrierTableName,
                                                                        const std::string& barrierGeomColName);
+
+            static std::unique_ptr<geos::geom::MultiPoint> GetArcVertexGeometriesByBufferFromDB(const std::string& tableName,
+                                                                           const std::string& geomColumnName,
+                                                                           const netxpert::data::ArcIDColumnDataType arcIDColDataType,
+                                                                           const std::string& arcIDColName,
+                                                                           const double bufferVal,
+                                                                           const geos::geom::Coordinate& p);
 
             //UNUSED -->
             static std::unique_ptr<SQLite::Statement>

@@ -226,9 +226,9 @@ void
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
                 }
                 else
-				{
+                {
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
+                }
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::IsolinesSolver, true);
@@ -239,7 +239,7 @@ void
                 qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::IsolinesSolver));
                 //}
             }
-                break;
+            break;
             case RESULT_DB_TYPE::ESRI_FileGDB:
             {
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
@@ -248,7 +248,7 @@ void
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::IsolinesSolver, true);
                 writer->CommitCurrentTransaction();
             }
-                break;
+            break;
         }
 
         LOGGER::LogDebug("Writing Geometries..");
@@ -271,7 +271,7 @@ void
 					#pragma omp single nowait
 					{
 						auto kv = *it;
-						ODPair key = kv.first;
+//						ODPair key = kv.first;
 						CompressedPath value = kv.second;
 						/* resolve pred path to arcids */
 						/* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
@@ -339,7 +339,7 @@ void
             }
 
             string orig = this->net->GetOrigNodeID(key.origin);
-            std::cout << "orig " << orig << std::endl;
+//            std::cout << "orig " << orig << std::endl;
 
             this->net->ProcessIsoResultArcsMem(orig, costPerPath, arcIDs, path,
                                                resultTableName, *writer, *qry, this->cutOffs);

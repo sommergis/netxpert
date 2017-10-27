@@ -1,8 +1,14 @@
+#!/usr/bin/python2.7
 # SPT Tests
 
 import sys, datetime, os
-sys.path.append('/usr/local/lib')
-sys.path.append('/usr/local/lib/netxpert')
+
+if 'linux' in sys.platform:
+    sys.path.append('/usr/local/lib')
+    sys.path.append('/usr/local/lib/netxpert')
+
+if 'win' in sys.platform:
+    pass
 
 parallelization = True  # True | False
 # must be done before module import of pynetxpert
@@ -52,7 +58,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Treshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = 1
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -242,16 +248,68 @@ def test_spt_load_nodes_1_n(cnfg, cmap):
     return optimum
     #return solver.GetOptimum()
 
+def test_spt_add_nodes_1_1_germany_s_t_ch(cnfg, cmap):
+
+    atblname = cnfg.ArcsTableName
+    arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+    net = netx.Network(arcsTable, cmap, cnfg)
+
+    net.ComputeContraction(100)
+
+    solver = netx.ShortestPathTree(cnfg)
+
+    x = 322449
+    y = 5722914
+    supply = 0
+
+    withCap = False
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+                                    cmap, withCap)
+
+    x = 746433
+    y = 5298931
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+                                    cmap, withCap)
+
+    solver.SetOrigin(startID)
+
+    dests = netx.Nodes()
+    dests.append(endID)
+    solver.SetDestinations(dests)
+
+    solver.Solve(net)
+    optimum = solver.GetOptimum()
+    del net, solver
+
+    return optimum
+
+
 if __name__ == "__main__":
+
     print(netx.Version())
-    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
-    path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
+
+    if 'linux' in sys.platform:
+        print 'Running test on Linux..'
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
+
+    if 'win' in sys.platform:
+        print 'Running test on Windows..'
+        #path_to_cnfg = "ODMatrixCnfg_Big.json"
+        path_to_cnfg = "SPTCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-    cnfg.SpatiaLiteCoreName = './libspatialite'
+    if 'linux' in sys.platform:
+        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
+        cnfg.SpatiaLiteCoreName = './libspatialite'
+
+    if 'win' in sys.platform:
+        cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'
+        cnfg.SpatiaLiteCoreName = 'spatialite430'
+
 
     print cnfg.SpatiaLiteHome
 
@@ -274,8 +332,8 @@ if __name__ == "__main__":
                      "1-all | add nodes"
                     ]
 
-    active_tests = active_tests[0:4]
-    #active_tests = active_tests[:1]
+    #active_tests = active_tests[0:4]
+    active_tests = active_tests[:1]
 
     if "1-1 | add nodes" in active_tests:
         for i in range(4, 6):
