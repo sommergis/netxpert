@@ -271,6 +271,8 @@ void
       LOGGER::LogDebug("SPT solved!");
       auto sptPath = spt->GetPath(dest);
 
+      totalCost = spt->GetDist(dest);
+
 //      for (auto& a : sptPath) {
 //        std::cout << net.GetNodeID(net.GetSourceNode(a)) << "->" << net.GetNodeID(net.GetTargetNode(a))  << " at "<< net.GetArcCost(a)<< std::endl;
 //      }

@@ -1,4 +1,3 @@
-#ifndef IMINSPANTREE_H
 /*
  * This file is a part of netxpert.
  *
@@ -15,6 +14,7 @@
  *
  */
 
+#ifndef IMINSPANTREE_H
 #define IMINSPANTREE_H
 
 #include <memory>

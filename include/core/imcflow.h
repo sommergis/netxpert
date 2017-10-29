@@ -1,6 +1,3 @@
-#ifndef IMINCOSTFLOW_H
-#define IMINCOSTFLOW_H
-
 /*
  * This file is a part of netxpert.
  *
@@ -16,6 +13,9 @@
  * purpose.
  *
  */
+
+#ifndef IMINCOSTFLOW_H
+#define IMINCOSTFLOW_H
 
 #include <stdint.h>
 #include <memory>
