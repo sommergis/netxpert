@@ -1307,6 +1307,122 @@ std::vector<std::unique_ptr<geos::geom::Geometry>>
     }
 }
 
+
+
+std::unique_ptr<geos::geom::MultiPoint> DBHELPER::GetArcVertexGeometriesByBufferFromDB(const std::string& tableName,
+                                                              const std::string& geomColumnName,
+                                                              const ArcIDColumnDataType arcIDColDataType,
+                                                              const std::string& arcIDColumnName,
+                                                              const double bufferVal,
+                                                              const geos::geom::Coordinate& p)
+{
+    using namespace netxpert::data;
+    string eliminatedArcIDs = "";
+    string sqlStr = "";
+
+    try
+    {
+        if (!isConnected) {
+            connect(NETXPERT_CNFG.LoadDBIntoMemory);
+        }
+
+        switch (arcIDColDataType)
+        {
+            case ArcIDColumnDataType::Std_String:
+                for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += ",'" + elem + "'";
+                }
+                break;
+            default: //double or int
+                for (const extarcid_t& elem: DBHELPER::EliminatedArcs) {
+//                    eliminatedArcIDs += ",'" + std::to_string(elem) + "'";
+                    eliminatedArcIDs += "," + elem;
+                }
+                break;
+        }
+        //trim comma on first
+        if (eliminatedArcIDs.length() > 0)
+            eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
+
+        //ST_COLLECT müsste ok sein, weil der Multilinestring ja später sowieso per LineMerger mit den
+        // anderen Teilen zusammengeführt wird. Schneller ist ST_Collect ggü. ST_union.
+        //ODM_Big: 7:30 zu 8:30 min
+
+        // all vertices of line geometries
+//        sqlStr = "SELECT AsBinary(CastToMultiPoint(ST_Collect(ST_DissolvePoints(" + geomColumnName + "))))"+
+//                 " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+//                      " ST_Intersects("+ geomColumnName +", ST_Buffer(MakePoint(@XCoord,@YCoord),@Buffer))";
+
+        // only label points ~ mid points of line geometries
+        sqlStr = "SELECT AsBinary(CastToMultiPoint(ST_Collect(ST_PointOnSurface(" + geomColumnName + "))))"+
+                 " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+                      " ST_Intersects("+ geomColumnName +", ST_Buffer(MakePoint(@XCoord,@YCoord),@Buffer))";
+
+        // start, end and label (=mid) points of line geometries
+//        sqlStr = "SELECT AsBinary(CastToMultiPoint(ST_Collect(ST_Collect(ST_Collect(ST_StartPoint(" + geomColumnName + "), ST_PointOnSurface("+geomColumnName+")), ST_Endpoint("
+//                                                                                          +geomColumnName+")))))"+
+//                 " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
+//                      " ST_Intersects("+ geomColumnName +", ST_Buffer(MakePoint(@XCoord,@YCoord),@Buffer))";
+
+        cout << sqlStr << endl;
+        //LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+//        sqlStr = "SELECT 1";
+
+        cout << "preparing db.." << endl;
+        SQLite::Database& db = *connPtr;
+
+        cout << "preparing qry.." << endl;
+
+        SQLite::Statement qry (db, sqlStr);
+
+        qry.bind("@XCoord", p.x);
+        qry.bind("@YCoord", p.y);
+        qry.bind("@Buffer", bufferVal);
+
+        cout << "qry prepared()" << endl;
+
+        string sql = qry.getQuery();
+        string s1 = UTILS::ReplaceAll(sql, "@XCoord", to_string(p.x));
+        s1 = UTILS::ReplaceAll(s1,"@YCoord", to_string(p.y));
+        s1 = UTILS::ReplaceAll(s1,"@Buffer", to_string(bufferVal));
+        cout << s1 << endl;
+
+        unique_ptr<MultiPoint> aGeomPtr;
+        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+        stringstream is(ios_base::binary|ios_base::in|ios_base::out);
+
+        cout << "pre excecuteStep()" << endl;
+        qry.executeStep(); //one row query -> no while necessary
+
+        cout << "excecuteStep()" << endl;
+        SQLite::Column col = qry.getColumn(0);
+        cout << "getColumn()" << endl;
+        if (!col.isNull())
+        {
+            const void* pVoid = col.getBlob();
+            const int sizeOfwkb = col.getBytes();
+
+            const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
+
+            for (int i = 0; i < sizeOfwkb; i++)
+                is << bytes[i];
+
+            aGeomPtr = unique_ptr<MultiPoint>( dynamic_cast<MultiPoint*>( wkbReader.read(is) ) );
+            cout << "after wkbReader()" << endl;
+        }
+
+        return aGeomPtr;
+
+    }
+    catch (exception& ex)
+    {
+        LOGGER::LogError( "GetArcVertexGeometriesByBufferFromDB() - Error getting arc vertex geometries!" );
+        LOGGER::LogError( ex.what() );
+        return nullptr;
+    }
+}
+
 std::unique_ptr<SQLite::Statement> DBHELPER::PrepareIsPointOnArcQuery(string tableName, string arcIDColumnName,
                                         string geomColumnName, ArcIDColumnDataType arcIDColDataType )
 {
