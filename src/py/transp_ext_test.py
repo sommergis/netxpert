@@ -42,8 +42,8 @@ def convert_test_data(_odmatrix, _supply):
 
   for item in _odmatrix:
     o = netx.ExtSPTreeArc()
-    print item
-    print str(item["arcid"])
+    #print item
+    #print str(item["arcid"])
     o.extArcID = str(item["arcid"])
     e = netx.ExternalArc()
     e.extFromNode = str(item["fromNode"])

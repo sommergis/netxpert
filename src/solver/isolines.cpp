@@ -59,6 +59,47 @@ void
     {
         //set the size for the heap to m/n (arcs/nodes) if -1
         checkSPTHeapCard(arcCount, nodeCount);
+
+
+////       - Buffer mit Radius = max(treshold) für jeden Punkt
+//        std::unordered_map<netxpert::data::ExtNodeID, double> buffers;
+//        for (auto kv : this->cutOffs) {
+//          auto m = this->cutOffs.at(kv.first);
+//          double maxVal = *std::max_element(m.begin(), m.end());
+//          buffers.insert(make_pair(kv.first, maxVal));
+//        }
+////       - Selektiere alle Kanten in diesem Radius
+//        for (auto kv : buffers) {
+//          const geos::geom::Coordinate p = net.GetStartOrEndNodeGeometry(kv.first);
+////       - Wandle alle selektierten Kanten zu Punkten um, Abstand (Linienlänge/10 wenn Treshold > Linienlänge, ansonsten Treshold/10)
+////        (Evtl. reichen schon alle Start-, End-, und Mittelpunkte des Netzwerks)
+//          std::unique_ptr<geos::geom::MultiPoint> geoms = DBHELPER::GetArcVertexGeometriesByBufferFromDB(NETXPERT_CNFG.ArcsTableName,
+//                                                            NETXPERT_CNFG.ArcsGeomColumnName,
+//                                                            ArcIDColumnDataType::Number,
+//                                                            NETXPERT_CNFG.ArcIDColumnName,
+//                                                            buffers.at(kv.first), p);
+//
+////       - Nimm diese Punkte und breche damit die Kanten auf (LoadEndNodes())
+//          for (size_t n = 0; n < geoms->getNumPoints(); n++) {
+//
+//            const geos::geom::Geometry* g = geoms->getGeometryN(n);
+//            const geos::geom::Point* p = dynamic_cast<const geos::geom::Point*>(g);
+//
+//            ColumnMap cmap {
+//              NETXPERT_CNFG.ArcIDColumnName,
+//              NETXPERT_CNFG.FromNodeColumnName,
+//              NETXPERT_CNFG.ToNodeColumnName,
+//              NETXPERT_CNFG.CostColumnName,
+//              NETXPERT_CNFG.CapColumnName,
+//              NETXPERT_CNFG.OnewayColumnName,
+//              NETXPERT_CNFG.NodeIDColumnName,
+//              NETXPERT_CNFG.NodeSupplyColumnName
+//            };
+//
+//            const uint32_t i = net.AddEndNode("iso_" + to_string(n), p->getX(), p->getY(), 0, NETXPERT_CNFG.Treshold, cmap, false);
+//          }
+//
+//        }
         solve(net, this->originNodes, isDirected);
     }
 }
