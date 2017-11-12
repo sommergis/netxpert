@@ -1,0 +1,174 @@
+\hypertarget{structnetxpert_1_1cnfg_1_1Config}{}\section{netxpert\+:\+:cnfg\+:\+:Config Struct Reference}
+\label{structnetxpert_1_1cnfg_1_1Config}\index{netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}}
+
+
+Storage for the configuration of Net\+Xpert.  
+
+
+
+
+{\ttfamily \#include $<$config.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \hyperlink{structnetxpert_1_1cnfg_1_1Config_a69a9e3cd168b240c34cfb544c614ebbc}{serialize} (Archive \&ar)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_abfbfd2126c7d8e675f1c786cf7a1004a}{Net\+X\+D\+B\+Path}\hypertarget{structnetxpert_1_1cnfg_1_1Config_abfbfd2126c7d8e675f1c786cf7a1004a}{}\label{structnetxpert_1_1cnfg_1_1Config_abfbfd2126c7d8e675f1c786cf7a1004a}
+
+\begin{DoxyCompactList}\small\item\em Path for the input database. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a11f88b978f21663025714bff816cfe86}{Result\+D\+B\+Path}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a11f88b978f21663025714bff816cfe86}{}\label{structnetxpert_1_1cnfg_1_1Config_a11f88b978f21663025714bff816cfe86}
+
+\begin{DoxyCompactList}\small\item\em Path for the result database. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5}{netxpert\+::cnfg\+::\+R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE} \hyperlink{structnetxpert_1_1cnfg_1_1Config_a088abe76a5f5b531b7294122b1a63542}{Result\+D\+B\+Type}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a088abe76a5f5b531b7294122b1a63542}{}\label{structnetxpert_1_1cnfg_1_1Config_a088abe76a5f5b531b7294122b1a63542}
+
+\begin{DoxyCompactList}\small\item\em Type of the result database type. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a365d31191baf6a1bc7b700e949c1ac05}{Result\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a365d31191baf6a1bc7b700e949c1ac05}{}\label{structnetxpert_1_1cnfg_1_1Config_a365d31191baf6a1bc7b700e949c1ac05}
+
+\begin{DoxyCompactList}\small\item\em Name of the result table. \end{DoxyCompactList}\item 
+bool \hyperlink{structnetxpert_1_1cnfg_1_1Config_a899d7ea93cedfb52addfd6ba9dc23ef8}{S\+P\+T\+All\+Dests}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a899d7ea93cedfb52addfd6ba9dc23ef8}{}\label{structnetxpert_1_1cnfg_1_1Config_a899d7ea93cedfb52addfd6ba9dc23ef8}
+
+\begin{DoxyCompactList}\small\item\em If true, then all shortest paths from the given start point to all reachable destinations in the network will be computed in the shortest path solver. \end{DoxyCompactList}\item 
+int \hyperlink{structnetxpert_1_1cnfg_1_1Config_a41afc9fb4f15155eec2f8c30eaae5500}{S\+P\+T\+Heap\+Card}
+\begin{DoxyCompactList}\small\item\em Ariety for the heap structure in shortest path algorithms if supported. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}{netxpert\+::cnfg\+::\+S\+P\+T\+Algorithm} \hyperlink{structnetxpert_1_1cnfg_1_1Config_a207a8bc8efda8c4c67a256a13ed54e05}{Spt\+Algorithm}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a207a8bc8efda8c4c67a256a13ed54e05}{}\label{structnetxpert_1_1cnfg_1_1Config_a207a8bc8efda8c4c67a256a13ed54e05}
+
+\begin{DoxyCompactList}\small\item\em Shortest path algorithm to use. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9}{netxpert\+::cnfg\+::\+M\+C\+F\+Algorithm} \hyperlink{structnetxpert_1_1cnfg_1_1Config_af33b0b153b4682b2cff31be437acd0c1}{Mcf\+Algorithm}\hypertarget{structnetxpert_1_1cnfg_1_1Config_af33b0b153b4682b2cff31be437acd0c1}{}\label{structnetxpert_1_1cnfg_1_1Config_af33b0b153b4682b2cff31be437acd0c1}
+
+\begin{DoxyCompactList}\small\item\em Minimum cost flow algorithm to use. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799}{netxpert\+::cnfg\+::\+M\+S\+T\+Algorithm} \hyperlink{structnetxpert_1_1cnfg_1_1Config_a7d4b58830190d9c7d79b23a61625bd44}{Mst\+Algorithm}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a7d4b58830190d9c7d79b23a61625bd44}{}\label{structnetxpert_1_1cnfg_1_1Config_a7d4b58830190d9c7d79b23a61625bd44}
+
+\begin{DoxyCompactList}\small\item\em Minimum spanning tree algorithm to use. \end{DoxyCompactList}\item 
+bool \hyperlink{structnetxpert_1_1cnfg_1_1Config_a732e585e5f3cf8e04c7b230fd0b9aaf5}{Is\+Directed}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a732e585e5f3cf8e04c7b230fd0b9aaf5}{}\label{structnetxpert_1_1cnfg_1_1Config_a732e585e5f3cf8e04c7b230fd0b9aaf5}
+
+\begin{DoxyCompactList}\small\item\em Network is directed or bidirectional. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a123bb51f96e9136786cda1256b6ba68b}{Arcs\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a123bb51f96e9136786cda1256b6ba68b}{}\label{structnetxpert_1_1cnfg_1_1Config_a123bb51f96e9136786cda1256b6ba68b}
+
+\begin{DoxyCompactList}\small\item\em Name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_aad2f1620e6f0724d682e8b789a3e5f84}{Arcs\+Geom\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_aad2f1620e6f0724d682e8b789a3e5f84}{}\label{structnetxpert_1_1cnfg_1_1Config_aad2f1620e6f0724d682e8b789a3e5f84}
+
+\begin{DoxyCompactList}\small\item\em Geometry column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a9c2df9c1f47014aef22ebd85e227907c}{Arc\+I\+D\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a9c2df9c1f47014aef22ebd85e227907c}{}\label{structnetxpert_1_1cnfg_1_1Config_a9c2df9c1f47014aef22ebd85e227907c}
+
+\begin{DoxyCompactList}\small\item\em ID column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a7751fdb84c5fb76f8af07dba25768357}{From\+Node\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a7751fdb84c5fb76f8af07dba25768357}{}\label{structnetxpert_1_1cnfg_1_1Config_a7751fdb84c5fb76f8af07dba25768357}
+
+\begin{DoxyCompactList}\small\item\em From node column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_af5ab8e729eafee4eb059a251343d68f8}{To\+Node\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_af5ab8e729eafee4eb059a251343d68f8}{}\label{structnetxpert_1_1cnfg_1_1Config_af5ab8e729eafee4eb059a251343d68f8}
+
+\begin{DoxyCompactList}\small\item\em To node column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_ac7b02cb4adb2b72140f73ab97f76fad8}{Cost\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_ac7b02cb4adb2b72140f73ab97f76fad8}{}\label{structnetxpert_1_1cnfg_1_1Config_ac7b02cb4adb2b72140f73ab97f76fad8}
+
+\begin{DoxyCompactList}\small\item\em Cost column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a2587718329c1c79ac894c48793202e4f}{Cap\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a2587718329c1c79ac894c48793202e4f}{}\label{structnetxpert_1_1cnfg_1_1Config_a2587718329c1c79ac894c48793202e4f}
+
+\begin{DoxyCompactList}\small\item\em Capacity column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a89556dbbbadcfbd6055346a4ad77e353}{Oneway\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a89556dbbbadcfbd6055346a4ad77e353}{}\label{structnetxpert_1_1cnfg_1_1Config_a89556dbbbadcfbd6055346a4ad77e353}
+
+\begin{DoxyCompactList}\small\item\em Oneway column name of the input arcs table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a3bc097716fc6afe10d3c96b35edeb83a}{Nodes\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a3bc097716fc6afe10d3c96b35edeb83a}{}\label{structnetxpert_1_1cnfg_1_1Config_a3bc097716fc6afe10d3c96b35edeb83a}
+
+\begin{DoxyCompactList}\small\item\em Name of the input nodes table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a9c7263b8431c13be4187e4451baae541}{Nodes\+Geom\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a9c7263b8431c13be4187e4451baae541}{}\label{structnetxpert_1_1cnfg_1_1Config_a9c7263b8431c13be4187e4451baae541}
+
+\begin{DoxyCompactList}\small\item\em Geometry column name of the input nodes table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a1faa14bece3cacb0366586674ce177e7}{Node\+I\+D\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a1faa14bece3cacb0366586674ce177e7}{}\label{structnetxpert_1_1cnfg_1_1Config_a1faa14bece3cacb0366586674ce177e7}
+
+\begin{DoxyCompactList}\small\item\em ID column name of the input nodes table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a27ffb6532db544982eda53d2b3aad656}{Node\+Supply\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a27ffb6532db544982eda53d2b3aad656}{}\label{structnetxpert_1_1cnfg_1_1Config_a27ffb6532db544982eda53d2b3aad656}
+
+\begin{DoxyCompactList}\small\item\em Supply column name of the input nodes table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_aa30fa621c656cc1fb53dc7f32a122426}{Barrier\+Poly\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_aa30fa621c656cc1fb53dc7f32a122426}{}\label{structnetxpert_1_1cnfg_1_1Config_aa30fa621c656cc1fb53dc7f32a122426}
+
+\begin{DoxyCompactList}\small\item\em Name of the barrier polygon table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_ad4dcf3083176c2c7dfdde577cef9b5d9}{Barrier\+Poly\+Geom\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_ad4dcf3083176c2c7dfdde577cef9b5d9}{}\label{structnetxpert_1_1cnfg_1_1Config_ad4dcf3083176c2c7dfdde577cef9b5d9}
+
+\begin{DoxyCompactList}\small\item\em Geometry column name of the barrier polygon table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_aa352c00d9f5796d2ff964b1982f5f35d}{Barrier\+Line\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_aa352c00d9f5796d2ff964b1982f5f35d}{}\label{structnetxpert_1_1cnfg_1_1Config_aa352c00d9f5796d2ff964b1982f5f35d}
+
+\begin{DoxyCompactList}\small\item\em Name of the barrier line table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a53c92c5975dbb9b861f87838021c360e}{Barrier\+Line\+Geom\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a53c92c5975dbb9b861f87838021c360e}{}\label{structnetxpert_1_1cnfg_1_1Config_a53c92c5975dbb9b861f87838021c360e}
+
+\begin{DoxyCompactList}\small\item\em Geometry column name of the barrier line table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a344e11f497239a95bb1cf7f94542dcbc}{Barrier\+Point\+Table\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a344e11f497239a95bb1cf7f94542dcbc}{}\label{structnetxpert_1_1cnfg_1_1Config_a344e11f497239a95bb1cf7f94542dcbc}
+
+\begin{DoxyCompactList}\small\item\em Name of the barrier point table. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_ad4ab91f16c00fba3b04c76ba770e80e1}{Barrier\+Point\+Geom\+Column\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_ad4ab91f16c00fba3b04c76ba770e80e1}{}\label{structnetxpert_1_1cnfg_1_1Config_ad4ab91f16c00fba3b04c76ba770e80e1}
+
+\begin{DoxyCompactList}\small\item\em Geometry column name of the barrier point table. \end{DoxyCompactList}\item 
+int \hyperlink{structnetxpert_1_1cnfg_1_1Config_aee1dee4ec74c14f60bbb87c3c267255f}{Treshold}\hypertarget{structnetxpert_1_1cnfg_1_1Config_aee1dee4ec74c14f60bbb87c3c267255f}{}\label{structnetxpert_1_1cnfg_1_1Config_aee1dee4ec74c14f60bbb87c3c267255f}
+
+\begin{DoxyCompactList}\small\item\em Treshold for distance search\+: closest arc of network to given point; (Snapping tolerance) \end{DoxyCompactList}\item 
+bool \hyperlink{structnetxpert_1_1cnfg_1_1Config_a415b76b1b41d24dc3b4cf11b9021f366}{Use\+Spatial\+Index}
+\item 
+bool \hyperlink{structnetxpert_1_1cnfg_1_1Config_ac94abe7cd836323220db9e8f7ac674df}{Load\+D\+B\+Into\+Memory}
+\item 
+int \hyperlink{structnetxpert_1_1cnfg_1_1Config_a56651fcf68e1afe6d0a9b042301508ed}{Number\+Of\+Tests}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a56651fcf68e1afe6d0a9b042301508ed}{}\label{structnetxpert_1_1cnfg_1_1Config_a56651fcf68e1afe6d0a9b042301508ed}
+
+\begin{DoxyCompactList}\small\item\em Number of tests to run. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a30e9c138aaee454b4b9f178a5d9fec0a}{Spatia\+Lite\+Home}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a30e9c138aaee454b4b9f178a5d9fec0a}{}\label{structnetxpert_1_1cnfg_1_1Config_a30e9c138aaee454b4b9f178a5d9fec0a}
+
+\begin{DoxyCompactList}\small\item\em Path to the directory of the Spatia\+Lite library. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a4df2574cae792012d65db17eaf3d0a22}{Spatia\+Lite\+Core\+Name}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a4df2574cae792012d65db17eaf3d0a22}{}\label{structnetxpert_1_1cnfg_1_1Config_a4df2574cae792012d65db17eaf3d0a22}
+
+\begin{DoxyCompactList}\small\item\em Name of the Spatia\+Lite library (without file extension) \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}{netxpert\+::cnfg\+::\+G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG} \hyperlink{structnetxpert_1_1cnfg_1_1Config_abad7200444a8c97b59bc6978a7abeae6}{Geometry\+Handling}\hypertarget{structnetxpert_1_1cnfg_1_1Config_abad7200444a8c97b59bc6978a7abeae6}{}\label{structnetxpert_1_1cnfg_1_1Config_abad7200444a8c97b59bc6978a7abeae6}
+
+\begin{DoxyCompactList}\small\item\em Geometry handling (no geometry, straight lines, real geometry). \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_ae473d83baf6d2ee9328c66364eefc8df}{netxpert\+::cnfg\+::\+T\+E\+S\+T\+C\+A\+SE} \hyperlink{structnetxpert_1_1cnfg_1_1Config_a73f9299fb8e35e1f4a9946f37dc3d17c}{Test\+Case}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a73f9299fb8e35e1f4a9946f37dc3d17c}{}\label{structnetxpert_1_1cnfg_1_1Config_a73f9299fb8e35e1f4a9946f37dc3d17c}
+
+\begin{DoxyCompactList}\small\item\em Test case to run. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696}{netxpert\+::cnfg\+::\+L\+O\+G\+\_\+\+L\+E\+V\+EL} \hyperlink{structnetxpert_1_1cnfg_1_1Config_a41d9e5a7901723efc1afb53384a42826}{Log\+Level}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a41d9e5a7901723efc1afb53384a42826}{}\label{structnetxpert_1_1cnfg_1_1Config_a41d9e5a7901723efc1afb53384a42826}
+
+\begin{DoxyCompactList}\small\item\em Application log level. \end{DoxyCompactList}\item 
+bool \hyperlink{structnetxpert_1_1cnfg_1_1Config_aef1cbd3c83c99e7cb677594ef154fa3f}{Clean\+Network}\hypertarget{structnetxpert_1_1cnfg_1_1Config_aef1cbd3c83c99e7cb677594ef154fa3f}{}\label{structnetxpert_1_1cnfg_1_1Config_aef1cbd3c83c99e7cb677594ef154fa3f}
+
+\begin{DoxyCompactList}\small\item\em Clean input network on load. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{structnetxpert_1_1cnfg_1_1Config_a32bdb3e794544e30465de6224a9f92bb}{Log\+File\+Full\+Path}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a32bdb3e794544e30465de6224a9f92bb}{}\label{structnetxpert_1_1cnfg_1_1Config_a32bdb3e794544e30465de6224a9f92bb}
+
+\begin{DoxyCompactList}\small\item\em Path to log file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Storage for the configuration of Net\+Xpert. 
+
+\subsection{Member Function Documentation}
+\index{netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}!serialize@{serialize}}
+\index{serialize@{serialize}!netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}}
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar)}{serialize(Archive &ar)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void netxpert\+::cnfg\+::\+Config\+::serialize (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a69a9e3cd168b240c34cfb544c614ebbc}{}\label{structnetxpert_1_1cnfg_1_1Config_a69a9e3cd168b240c34cfb544c614ebbc}
+Serialize struct members to json 
+
+\subsection{Member Data Documentation}
+\index{netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}!Load\+D\+B\+Into\+Memory@{Load\+D\+B\+Into\+Memory}}
+\index{Load\+D\+B\+Into\+Memory@{Load\+D\+B\+Into\+Memory}!netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}}
+\subsubsection[{\texorpdfstring{Load\+D\+B\+Into\+Memory}{LoadDBIntoMemory}}]{\setlength{\rightskip}{0pt plus 5cm}bool netxpert\+::cnfg\+::\+Config\+::\+Load\+D\+B\+Into\+Memory}\hypertarget{structnetxpert_1_1cnfg_1_1Config_ac94abe7cd836323220db9e8f7ac674df}{}\label{structnetxpert_1_1cnfg_1_1Config_ac94abe7cd836323220db9e8f7ac674df}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]Load input database into memory. \end{DoxyRefDesc}
+\index{netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}!S\+P\+T\+Heap\+Card@{S\+P\+T\+Heap\+Card}}
+\index{S\+P\+T\+Heap\+Card@{S\+P\+T\+Heap\+Card}!netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}}
+\subsubsection[{\texorpdfstring{S\+P\+T\+Heap\+Card}{SPTHeapCard}}]{\setlength{\rightskip}{0pt plus 5cm}int netxpert\+::cnfg\+::\+Config\+::\+S\+P\+T\+Heap\+Card}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a41afc9fb4f15155eec2f8c30eaae5500}{}\label{structnetxpert_1_1cnfg_1_1Config_a41afc9fb4f15155eec2f8c30eaae5500}
+
+
+Ariety for the heap structure in shortest path algorithms if supported. 
+
+\begin{DoxyWarning}{Warning}
+Unsed at the moment! 
+\end{DoxyWarning}
+\index{netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}!Use\+Spatial\+Index@{Use\+Spatial\+Index}}
+\index{Use\+Spatial\+Index@{Use\+Spatial\+Index}!netxpert\+::cnfg\+::\+Config@{netxpert\+::cnfg\+::\+Config}}
+\subsubsection[{\texorpdfstring{Use\+Spatial\+Index}{UseSpatialIndex}}]{\setlength{\rightskip}{0pt plus 5cm}bool netxpert\+::cnfg\+::\+Config\+::\+Use\+Spatial\+Index}\hypertarget{structnetxpert_1_1cnfg_1_1Config_a415b76b1b41d24dc3b4cf11b9021f366}{}\label{structnetxpert_1_1cnfg_1_1Config_a415b76b1b41d24dc3b4cf11b9021f366}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]Use spatial index or not in input database. Default\+: true \end{DoxyRefDesc}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/config.\+h\end{DoxyCompactItemize}

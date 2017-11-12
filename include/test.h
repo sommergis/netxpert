@@ -49,7 +49,7 @@
 namespace netxpert
 {
     /**
-    * \Static Test functions for NetXpert
+    * \brief Test functions for netXpert
     **/
     namespace test
     {

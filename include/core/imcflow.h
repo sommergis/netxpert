@@ -20,14 +20,15 @@
 #include <stdint.h>
 #include <memory>
 #include <vector>
-#include "lemon/concepts/path.h"
-//#include "lemon/adaptors.h"
 #include "lemon-net.h"
 
 namespace netxpert {
+    /**
+    * \brief Core solvers of netXpert
+    **/
     namespace core {
     /**
-    * \Class Abstract Class (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.
+    * \brief Abstract Class (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.
     */
     class IMinCostFlow
     {

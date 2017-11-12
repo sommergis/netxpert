@@ -24,7 +24,7 @@ namespace netxpert {
 
     //TODO: check for inheritance of ODMatrix Solver
     /**
-    * \Class Solver for the Transportation Problem
+    * \brief Solver for the Transportation Problem
     */
     class Transportation : public netxpert::MinCostFlow
     {

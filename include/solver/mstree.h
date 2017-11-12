@@ -22,12 +22,11 @@
 #include "mstlem.h"
 #include "data.h"
 #include "lemon-net.h"
-//#include <lemon/adaptors.h>
 
 namespace netxpert {
 
     /**
-    * \Class Solver for the Minimum Spanning Tree Problem
+    * \brief Solver for the Minimum Spanning Tree Problem
     */
     class MinimumSpanningTree : public netxpert::ISolver
     {

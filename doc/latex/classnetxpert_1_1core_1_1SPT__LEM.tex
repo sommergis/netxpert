@@ -1,0 +1,85 @@
+\hypertarget{classnetxpert_1_1core_1_1SPT__LEM}{}\section{netxpert\+:\+:core\+:\+:S\+P\+T\+\_\+\+L\+EM Class Reference}
+\label{classnetxpert_1_1core_1_1SPT__LEM}\index{netxpert\+::core\+::\+S\+P\+T\+\_\+\+L\+EM@{netxpert\+::core\+::\+S\+P\+T\+\_\+\+L\+EM}}
+
+
+Core Solver for the Shortest Path Tree Problem with binary Heap structure as default heap and Dijkstra\textquotesingle{}s algorithm of L\+E\+M\+ON.  
+
+
+
+
+{\ttfamily \#include $<$sptlem.\+h$>$}
+
+
+
+Inheritance diagram for netxpert\+:\+:core\+:\+:S\+P\+T\+\_\+\+L\+EM\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classnetxpert_1_1core_1_1SPT__LEM__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for netxpert\+:\+:core\+:\+:S\+P\+T\+\_\+\+L\+EM\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classnetxpert_1_1core_1_1SPT__LEM__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries S\+P\+T\+\_\+\+L\+EM} (bool Drctd=true)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_ae8e11d1fcea636622f3c5d00e4642906}{}\label{classnetxpert_1_1core_1_1SPT__LEM_ae8e11d1fcea636622f3c5d00e4642906}
+
+\item 
+{\bfseries S\+P\+T\+\_\+\+L\+EM} (\hyperlink{classnetxpert_1_1core_1_1SPT__LEM}{S\+P\+T\+\_\+\+L\+EM} const \&)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a1b1e3f1f5e6fb2a475395df5de1c8f7f}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a1b1e3f1f5e6fb2a475395df5de1c8f7f}
+
+\item 
+void {\bfseries Load\+Net} (const uint32\+\_\+t nmax, const uint32\+\_\+t mmax, netxpert\+::data\+::filtered\+\_\+graph\+\_\+t $\ast$sg, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$cm)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a8fb936136e0c7e6c9f9e5eea9c7acba0}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a8fb936136e0c7e6c9f9e5eea9c7acba0}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Arc\+Count} ()\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_acb011f54ba18bc9c5e2709129137fd72}{}\label{classnetxpert_1_1core_1_1SPT__LEM_acb011f54ba18bc9c5e2709129137fd72}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Node\+Count} ()\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a15b68704ba3c584b3fbd66b283e54556}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a15b68704ba3c584b3fbd66b283e54556}
+
+\item 
+void {\bfseries Solve\+S\+PT} (netxpert\+::data\+::cost\+\_\+t treshold=-\/1, bool bidirectional=true)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a0baaa3bca3fbc8fcaeb97497735b0d93}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a0baaa3bca3fbc8fcaeb97497735b0d93}
+
+\item 
+void {\bfseries Set\+Origin} (netxpert\+::data\+::node\+\_\+t \+\_\+origin)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_aacd93e8aa563539216b60b43c19871cc}{}\label{classnetxpert_1_1core_1_1SPT__LEM_aacd93e8aa563539216b60b43c19871cc}
+
+\item 
+void {\bfseries Set\+Dest} (netxpert\+::data\+::node\+\_\+t \+\_\+dest)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a94de1da6ae4cc62cfb92d08b9f005912}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a94de1da6ae4cc62cfb92d08b9f005912}
+
+\item 
+bool {\bfseries Reached} (netxpert\+::data\+::node\+\_\+t \+\_\+node)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a13157e4e557cb7c8a4491855af49350b}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a13157e4e557cb7c8a4491855af49350b}
+
+\item 
+const std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ {\bfseries Get\+Predecessors} (netxpert\+::data\+::node\+\_\+t \+\_\+dest)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a86a2fd01219e9050743a704e932b1705}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a86a2fd01219e9050743a704e932b1705}
+
+\item 
+const std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ {\bfseries Get\+Path} (netxpert\+::data\+::node\+\_\+t \+\_\+dest)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a716f3ddb0319ce581c903020d14a59db}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a716f3ddb0319ce581c903020d14a59db}
+
+\item 
+const netxpert\+::data\+::cost\+\_\+t {\bfseries Get\+Dist} (netxpert\+::data\+::node\+\_\+t \+\_\+dest)\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a5b090847e90271c3dbc8215e37f642a7}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a5b090847e90271c3dbc8215e37f642a7}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bfseries nmax}\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a8ded380546a1da7734d9ce23010a1cd9}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a8ded380546a1da7734d9ce23010a1cd9}
+
+\item 
+uint32\+\_\+t {\bfseries mmax}\hypertarget{classnetxpert_1_1core_1_1SPT__LEM_a6ea75eb48f7f45bd19c4d126099e5dd9}{}\label{classnetxpert_1_1core_1_1SPT__LEM_a6ea75eb48f7f45bd19c4d126099e5dd9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Core Solver for the Shortest Path Tree Problem with binary Heap structure as default heap and Dijkstra\textquotesingle{}s algorithm of L\+E\+M\+ON. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/core/sptlem.\+h\end{DoxyCompactItemize}

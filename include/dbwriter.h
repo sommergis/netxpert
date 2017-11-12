@@ -24,10 +24,12 @@
 #include "geos/geom/CoordinateSequence.h"
 
 namespace netxpert {
-
+    /**
+    * \brief Input/Output of netXpert
+    **/
     namespace io {
     /**
-    * \Abstract Abstract Class (Interface) for the output DB
+    * \brief Abstract Class (Interface) for the output DB
     **/
     class DBWriter
     {

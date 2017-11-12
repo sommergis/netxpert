@@ -730,6 +730,7 @@ const uint32_t
                 break;
             }
         }
+        //future: return id of closest toNode (if start), fromNode (if end)
         return this->g->id(resultNode);
     }
     else {

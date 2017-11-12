@@ -23,12 +23,11 @@
 //#include "sptbgl.h"
 #include "data.h"
 #include "lemon-net.h"
-//#include <lemon/adaptors.h>
 
 namespace netxpert {
 
     /**
-    * \Class Solver for the Shortest Path Tree Problem
+    * \brief Solver for the Shortest Path Tree Problem
     */
     class ShortestPathTree : public netxpert::ISolver
     {
@@ -76,7 +75,8 @@ namespace netxpert {
             const double GetOptimum() const;
 
             void SaveResults(const std::string& resultTableName,
-                             const netxpert::data::ColumnMap& cmap) const;
+                             const netxpert::data::ColumnMap& cmap,
+                             const std::string& format = "database") const;
 
         private:
             //raw pointer ok, no dynamic allocation (new())

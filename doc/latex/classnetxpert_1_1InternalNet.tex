@@ -1,0 +1,176 @@
+\hypertarget{classnetxpert_1_1InternalNet}{}\section{netxpert\+:\+:Internal\+Net Class Reference}
+\label{classnetxpert_1_1InternalNet}\index{netxpert\+::\+Internal\+Net@{netxpert\+::\+Internal\+Net}}
+
+
+The internal Network representation.  
+
+
+
+
+{\ttfamily \#include $<$lemon-\/net.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnetxpert_1_1InternalNet_ade299cebc75fa88cc5a6df932ebbe896}{Internal\+Net} (const netxpert\+::data\+::\+Input\+Arcs \&arcs\+Tbl, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&\+\_\+map=\hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map}(), const \hyperlink{structnetxpert_1_1cnfg_1_1Config}{netxpert\+::cnfg\+::\+Config} \&cnfg=\hyperlink{structnetxpert_1_1cnfg_1_1Config}{netxpert\+::cnfg\+::\+Config}(), const netxpert\+::data\+::\+Input\+Nodes \&nodes\+Tbl=netxpert\+::data\+::\+Input\+Nodes(), const bool auto\+Clean=true, const std\+::map$<$ std\+::string, netxpert\+::data\+::\+Int\+Node\+ID $>$ \&ext\+Int\+Node\+Map=std\+::map$<$ std\+::string, netxpert\+::data\+::\+Int\+Node\+ID $>$())
+\item 
+\hyperlink{classnetxpert_1_1InternalNet_a2f4b653540c70d6be7d5b7097b78bc2c}{$\sim$\+Internal\+Net} ()\hypertarget{classnetxpert_1_1InternalNet_a2f4b653540c70d6be7d5b7097b78bc2c}{}\label{classnetxpert_1_1InternalNet_a2f4b653540c70d6be7d5b7097b78bc2c}
+
+\begin{DoxyCompactList}\small\item\em Deconstructor. \end{DoxyCompactList}\item 
+const netxpert\+::data\+::arc\+\_\+t {\bfseries Get\+Arc\+From\+ID} (const netxpert\+::data\+::intarcid\+\_\+t arc\+ID)\hypertarget{classnetxpert_1_1InternalNet_a115ab61c1fbfc9302c8c1316f7edee88}{}\label{classnetxpert_1_1InternalNet_a115ab61c1fbfc9302c8c1316f7edee88}
+
+\item 
+const netxpert\+::data\+::arc\+\_\+t {\bfseries Get\+Arc\+From\+Orig\+ID} (const netxpert\+::data\+::extarcid\+\_\+t arc\+ID)\hypertarget{classnetxpert_1_1InternalNet_aa5ac2ea0cb99043a7794de05aa8dd73c}{}\label{classnetxpert_1_1InternalNet_aa5ac2ea0cb99043a7794de05aa8dd73c}
+
+\item 
+const netxpert\+::data\+::intarcid\+\_\+t {\bfseries Get\+Arc\+ID} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_a9ce19233f535b871c896c04508a7f1cc}{}\label{classnetxpert_1_1InternalNet_a9ce19233f535b871c896c04508a7f1cc}
+
+\item 
+const \hyperlink{structnetxpert_1_1data_1_1ArcData}{netxpert\+::data\+::\+Arc\+Data} {\bfseries Get\+Arc\+Data} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_adcf5e8f339b55f53e3ee1463310addf4}{}\label{classnetxpert_1_1InternalNet_adcf5e8f339b55f53e3ee1463310addf4}
+
+\item 
+void {\bfseries Set\+Arc\+Data} (const netxpert\+::data\+::arc\+\_\+t \&arc, const \hyperlink{structnetxpert_1_1data_1_1ArcData}{netxpert\+::data\+::\+Arc\+Data} \&arc\+Data)\hypertarget{classnetxpert_1_1InternalNet_a80d3e9b08052c51b453950b6a3f8426a}{}\label{classnetxpert_1_1InternalNet_a80d3e9b08052c51b453950b6a3f8426a}
+
+\item 
+const netxpert\+::data\+::cost\+\_\+t {\bfseries Get\+Arc\+Cost} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_a993c97d71c173378190624650fe98d7d}{}\label{classnetxpert_1_1InternalNet_a993c97d71c173378190624650fe98d7d}
+
+\item 
+const netxpert\+::data\+::capacity\+\_\+t {\bfseries Get\+Arc\+Capacity} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_a2bb02620417c4cd6888f24d9e2d210d2}{}\label{classnetxpert_1_1InternalNet_a2bb02620417c4cd6888f24d9e2d210d2}
+
+\item 
+const std\+::unordered\+\_\+set$<$ std\+::string $>$ {\bfseries Get\+Orig\+Arc\+I\+Ds} (const std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ \&path)\hypertarget{classnetxpert_1_1InternalNet_aed560db8ae49a08ab624a699b0d2e1bc}{}\label{classnetxpert_1_1InternalNet_aed560db8ae49a08ab624a699b0d2e1bc}
+
+\item 
+const netxpert\+::data\+::arc\+\_\+t {\bfseries Get\+Arc\+From\+Nodes} (const netxpert\+::data\+::node\+\_\+t \&source, const netxpert\+::data\+::node\+\_\+t \&target)\hypertarget{classnetxpert_1_1InternalNet_aef0c2e3455e1710b27c864271a6d46d5}{}\label{classnetxpert_1_1InternalNet_aef0c2e3455e1710b27c864271a6d46d5}
+
+\item 
+const netxpert\+::data\+::node\+\_\+t {\bfseries Get\+Node\+From\+Orig\+ID} (const std\+::string node\+ID)\hypertarget{classnetxpert_1_1InternalNet_a05884dc72ebd5e768f7dd1c296811360}{}\label{classnetxpert_1_1InternalNet_a05884dc72ebd5e768f7dd1c296811360}
+
+\item 
+const std\+::string {\bfseries Get\+Orig\+Node\+ID} (const netxpert\+::data\+::node\+\_\+t \&node)\hypertarget{classnetxpert_1_1InternalNet_a7289c17bde0c31a1856069db1eaf392a}{}\label{classnetxpert_1_1InternalNet_a7289c17bde0c31a1856069db1eaf392a}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Node\+ID} (const netxpert\+::data\+::node\+\_\+t \&node)\hypertarget{classnetxpert_1_1InternalNet_a016dca35f3551596e8dcee9af4810091}{}\label{classnetxpert_1_1InternalNet_a016dca35f3551596e8dcee9af4810091}
+
+\item 
+const netxpert\+::data\+::node\+\_\+t {\bfseries Get\+Node\+From\+ID} (const uint32\+\_\+t node\+ID)\hypertarget{classnetxpert_1_1InternalNet_a18be0ed9fc7136a58cbb9c3255470a50}{}\label{classnetxpert_1_1InternalNet_a18be0ed9fc7136a58cbb9c3255470a50}
+
+\item 
+const netxpert\+::data\+::supply\+\_\+t {\bfseries Get\+Node\+Supply} (const netxpert\+::data\+::node\+\_\+t \&node)\hypertarget{classnetxpert_1_1InternalNet_a2e4c7863165a03f9a630417b1266b5b6}{}\label{classnetxpert_1_1InternalNet_a2e4c7863165a03f9a630417b1266b5b6}
+
+\item 
+const netxpert\+::data\+::graph\+\_\+t\+::\+Node\+It {\bfseries Get\+Nodes\+Iter} ()\hypertarget{classnetxpert_1_1InternalNet_ae25db254fd5fc5396ab1004880a3d834}{}\label{classnetxpert_1_1InternalNet_ae25db254fd5fc5396ab1004880a3d834}
+
+\item 
+const netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+It {\bfseries Get\+Arcs\+Iter} ()\hypertarget{classnetxpert_1_1InternalNet_a7db1dd34c730eaf24ff90cf0c92f0ff6}{}\label{classnetxpert_1_1InternalNet_a7db1dd34c730eaf24ff90cf0c92f0ff6}
+
+\item 
+const netxpert\+::data\+::node\+\_\+t {\bfseries Get\+Source\+Node} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_adb82b20b3ca95c20a1c2b8ef3ca76a29}{}\label{classnetxpert_1_1InternalNet_adb82b20b3ca95c20a1c2b8ef3ca76a29}
+
+\item 
+const netxpert\+::data\+::node\+\_\+t {\bfseries Get\+Target\+Node} (const netxpert\+::data\+::arc\+\_\+t \&arc)\hypertarget{classnetxpert_1_1InternalNet_a618cfe702e2f447cda78dd4384979e23}{}\label{classnetxpert_1_1InternalNet_a618cfe702e2f447cda78dd4384979e23}
+
+\item 
+const geos\+::geom\+::\+Coordinate {\bfseries Get\+Start\+Or\+End\+Node\+Geometry} (const netxpert\+::data\+::\+Ext\+Node\+ID node)\hypertarget{classnetxpert_1_1InternalNet_ab0223b625c6a03a4e7dfaee4f6efa609}{}\label{classnetxpert_1_1InternalNet_ab0223b625c6a03a4e7dfaee4f6efa609}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Node\+Count} ()\hypertarget{classnetxpert_1_1InternalNet_a8c6cc549cc2bb8596e0ca9090cbdfdd4}{}\label{classnetxpert_1_1InternalNet_a8c6cc549cc2bb8596e0ca9090cbdfdd4}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Arc\+Count} ()\hypertarget{classnetxpert_1_1InternalNet_aeef27800e7f0bda9ef518d8e4273fea7}{}\label{classnetxpert_1_1InternalNet_aeef27800e7f0bda9ef518d8e4273fea7}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t $\ast$ {\bfseries Get\+Graph} ()\hypertarget{classnetxpert_1_1InternalNet_a67d06885a857c73c755a562ec6389ba5}{}\label{classnetxpert_1_1InternalNet_a67d06885a857c73c755a562ec6389ba5}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$ {\bfseries Get\+Cost\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_a4630bcae97db4d4f14969c27df504f3f}{}\label{classnetxpert_1_1InternalNet_a4630bcae97db4d4f14969c27df504f3f}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$ {\bfseries Get\+Cap\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_af70f905904597c8ff70e74c743406234}{}\label{classnetxpert_1_1InternalNet_af70f905904597c8ff70e74c743406234}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ bool $>$ $\ast$ {\bfseries Get\+Arc\+Filter\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_a20e628e1ff1dc6b576ab94df4681995d}{}\label{classnetxpert_1_1InternalNet_a20e628e1ff1dc6b576ab94df4681995d}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Node\+Map$<$ netxpert\+::data\+::supply\+\_\+t $>$ $\ast$ {\bfseries Get\+Supply\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_aeb4a4e90f15e1006ada43f23ee84803c}{}\label{classnetxpert_1_1InternalNet_aeb4a4e90f15e1006ada43f23ee84803c}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Node\+Map$<$ std\+::string $>$ $\ast$ {\bfseries Get\+Node\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_a851f427a0c49e53dd5348e06e45b1dfe}{}\label{classnetxpert_1_1InternalNet_a851f427a0c49e53dd5348e06e45b1dfe}
+
+\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, netxpert\+::data\+::node\+\_\+t $>$ {\bfseries Get\+Node\+I\+D\+Map} ()\hypertarget{classnetxpert_1_1InternalNet_a28a038378a7fda3a71cd336d7f907a8d}{}\label{classnetxpert_1_1InternalNet_a28a038378a7fda3a71cd336d7f907a8d}
+
+\item 
+void {\bfseries Set\+Node\+Data} (const std\+::string \&node\+ID, const netxpert\+::data\+::node\+\_\+t \&node)\hypertarget{classnetxpert_1_1InternalNet_aebd32a385c7273c478786becb9a86b95}{}\label{classnetxpert_1_1InternalNet_aebd32a385c7273c478786becb9a86b95}
+
+\item 
+const uint32\+\_\+t {\bfseries Add\+Node} (const \hyperlink{structnetxpert_1_1data_1_1NewNode}{netxpert\+::data\+::\+New\+Node} \&new\+Node, const int treshold, S\+Q\+Lite\+::\+Statement \&closest\+Arc\+Qry, const bool with\+Capacity, const \hyperlink{namespacenetxpert_1_1data_addf98eb51735356977db0de627cc38c1}{netxpert\+::data\+::\+Added\+Node\+Type} start\+Or\+End)\hypertarget{classnetxpert_1_1InternalNet_a4aa66e236aef1b675de6f9aa68c7fbc3}{}\label{classnetxpert_1_1InternalNet_a4aa66e236aef1b675de6f9aa68c7fbc3}
+
+\item 
+const uint32\+\_\+t \hyperlink{classnetxpert_1_1InternalNet_aae481644d03b116b8011b02f35f62a0f}{Add\+Start\+Node} (std\+::string ext\+Node\+ID, double x, double y, netxpert\+::data\+::supply\+\_\+t supply, int treshold, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&cmap, bool with\+Capacity)\hypertarget{classnetxpert_1_1InternalNet_aae481644d03b116b8011b02f35f62a0f}{}\label{classnetxpert_1_1InternalNet_aae481644d03b116b8011b02f35f62a0f}
+
+\begin{DoxyCompactList}\small\item\em Simple Method for adding start nodes. \end{DoxyCompactList}\item 
+const uint32\+\_\+t \hyperlink{classnetxpert_1_1InternalNet_adc91c6dd6bb51f0261ba3ff1e62f0b57}{Add\+End\+Node} (std\+::string ext\+Node\+ID, double x, double y, netxpert\+::data\+::supply\+\_\+t supply, int treshold, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&cmap, bool with\+Capacity)\hypertarget{classnetxpert_1_1InternalNet_adc91c6dd6bb51f0261ba3ff1e62f0b57}{}\label{classnetxpert_1_1InternalNet_adc91c6dd6bb51f0261ba3ff1e62f0b57}
+
+\begin{DoxyCompactList}\small\item\em Simple Method for adding end nodes. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ uint32\+\_\+t, std\+::string $>$ $>$ \hyperlink{classnetxpert_1_1InternalNet_afc56b61890606de9ea83acdad408db39}{Load\+Start\+Nodes} (std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1NewNode}{netxpert\+::data\+::\+New\+Node} $>$ new\+Nodes, const int treshold, const std\+::string arcs\+Table\+Name, const std\+::string geom\+Column\+Name, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&cmap, const bool with\+Capacity)\hypertarget{classnetxpert_1_1InternalNet_afc56b61890606de9ea83acdad408db39}{}\label{classnetxpert_1_1InternalNet_afc56b61890606de9ea83acdad408db39}
+
+\begin{DoxyCompactList}\small\item\em Simple Method for adding multiple start nodes. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ uint32\+\_\+t, std\+::string $>$ $>$ \hyperlink{classnetxpert_1_1InternalNet_a0b6b10e311bdf4495af093fcc68690ad}{Load\+End\+Nodes} (std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1NewNode}{netxpert\+::data\+::\+New\+Node} $>$ new\+Nodes, const int treshold, const std\+::string arcs\+Table\+Name, const std\+::string geom\+Column\+Name, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&cmap, const bool with\+Capacity)\hypertarget{classnetxpert_1_1InternalNet_a0b6b10e311bdf4495af093fcc68690ad}{}\label{classnetxpert_1_1InternalNet_a0b6b10e311bdf4495af093fcc68690ad}
+
+\begin{DoxyCompactList}\small\item\em Simple Method for adding multiple end nodes. \end{DoxyCompactList}\item 
+void {\bfseries Reset} ()\hypertarget{classnetxpert_1_1InternalNet_aa2dccfb48a31d718181d96518c3532e2}{}\label{classnetxpert_1_1InternalNet_aa2dccfb48a31d718181d96518c3532e2}
+
+\item 
+void \hyperlink{classnetxpert_1_1InternalNet_a4b62c28e5ec1b756cde5851f62be8498}{Process\+S\+P\+T\+Result\+Arcs\+Mem} (const std\+::string \&orig, const std\+::string \&dest, const netxpert\+::data\+::cost\+\_\+t cost, const std\+::string \&arc\+I\+Ds, const std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ \&route\+Node\+Arc\+Rep, const std\+::string \&result\+Table\+Name, \hyperlink{classnetxpert_1_1io_1_1DBWriter}{netxpert\+::io\+::\+D\+B\+Writer} \&writer, S\+Q\+Lite\+::\+Statement \&qry)\hypertarget{classnetxpert_1_1InternalNet_a4b62c28e5ec1b756cde5851f62be8498}{}\label{classnetxpert_1_1InternalNet_a4b62c28e5ec1b756cde5851f62be8498}
+
+\begin{DoxyCompactList}\small\item\em Main method for processing and saving result arcs (preloading geometry into memory) Solver\+: S\+PT, O\+DM. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_aaad9b38faf38aeb62d266499d2204ea0}{Process\+Result\+Arcs} (const std\+::string \&arc\+I\+Ds, const std\+::string \&result\+Table\+Name)\hypertarget{classnetxpert_1_1InternalNet_aaad9b38faf38aeb62d266499d2204ea0}{}\label{classnetxpert_1_1InternalNet_aaad9b38faf38aeb62d266499d2204ea0}
+
+\begin{DoxyCompactList}\small\item\em Method for processing and saving a subset of original arcs as results Solver\+: M\+ST. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_ae39fff10981cd5f5da5541a44f515fe1}{Process\+Iso\+Result\+Arcs\+Mem} (const std\+::string \&orig, const netxpert\+::data\+::cost\+\_\+t cost, const std\+::string \&arc\+I\+Ds, const std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ \&route\+Node\+Arc\+Rep, const std\+::string \&result\+Table\+Name, \hyperlink{classnetxpert_1_1io_1_1DBWriter}{netxpert\+::io\+::\+D\+B\+Writer} \&writer, S\+Q\+Lite\+::\+Statement \&qry, const std\+::unordered\+\_\+map$<$ netxpert\+::data\+::\+Ext\+Node\+ID, std\+::vector$<$ double $>$ $>$ cut\+Offs)\hypertarget{classnetxpert_1_1InternalNet_ae39fff10981cd5f5da5541a44f515fe1}{}\label{classnetxpert_1_1InternalNet_ae39fff10981cd5f5da5541a44f515fe1}
+
+\begin{DoxyCompactList}\small\item\em Main method for processing and saving result arcs (preloading geometry into memory) Solver\+: \hyperlink{classnetxpert_1_1Isolines}{Isolines}. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_ab5def53f2b21f3867029b40d5f876b31}{Process\+M\+C\+F\+Result\+Arcs\+Mem} (const std\+::string \&orig, const std\+::string \&dest, const netxpert\+::data\+::cost\+\_\+t cost, const netxpert\+::data\+::capacity\+\_\+t capacity, const netxpert\+::data\+::flow\+\_\+t flow, const std\+::string \&arc\+I\+Ds, std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ \&route\+Node\+Arc\+Rep, const std\+::string \&result\+Table\+Name, \hyperlink{classnetxpert_1_1io_1_1DBWriter}{netxpert\+::io\+::\+D\+B\+Writer} \&writer, S\+Q\+Lite\+::\+Statement \&qry)\hypertarget{classnetxpert_1_1InternalNet_ab5def53f2b21f3867029b40d5f876b31}{}\label{classnetxpert_1_1InternalNet_ab5def53f2b21f3867029b40d5f876b31}
+
+\begin{DoxyCompactList}\small\item\em Main method for processing and saving result arcs (preloading geometry into memory) Solver\+: M\+CF, T\+Ps. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_a24aca09a6eb6ad32aed2a2be21bf6b1a}{Print\+Graph} ()\hypertarget{classnetxpert_1_1InternalNet_a24aca09a6eb6ad32aed2a2be21bf6b1a}{}\label{classnetxpert_1_1InternalNet_a24aca09a6eb6ad32aed2a2be21bf6b1a}
+
+\begin{DoxyCompactList}\small\item\em prints the graph in simple form. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_a31e36780528b9138a5a294b86fb65666}{Export\+To\+D\+I\+M\+A\+CS} (const std\+::string \&path)\hypertarget{classnetxpert_1_1InternalNet_a31e36780528b9138a5a294b86fb65666}{}\label{classnetxpert_1_1InternalNet_a31e36780528b9138a5a294b86fb65666}
+
+\begin{DoxyCompactList}\small\item\em exports the graph into D\+I\+M\+A\+CS format. \end{DoxyCompactList}\item 
+\hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbd}{netxpert\+::data\+::\+Min\+Cost\+Flow\+Instance\+Type} \hyperlink{classnetxpert_1_1InternalNet_a6f1e8b2605cfdaba41f5c30794228ff3}{Get\+Min\+Cost\+Flow\+Instance\+Type} ()\hypertarget{classnetxpert_1_1InternalNet_a6f1e8b2605cfdaba41f5c30794228ff3}{}\label{classnetxpert_1_1InternalNet_a6f1e8b2605cfdaba41f5c30794228ff3}
+
+\begin{DoxyCompactList}\small\item\em Gets contraction hierarchy node map. \end{DoxyCompactList}\item 
+void \hyperlink{classnetxpert_1_1InternalNet_ab34466537d05108f22413a427f37e8b1}{Transform\+Unbalanced\+M\+CF} (\hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbd}{netxpert\+::data\+::\+Min\+Cost\+Flow\+Instance\+Type} mcf\+Instance\+Type)\hypertarget{classnetxpert_1_1InternalNet_ab34466537d05108f22413a427f37e8b1}{}\label{classnetxpert_1_1InternalNet_ab34466537d05108f22413a427f37e8b1}
+
+\begin{DoxyCompactList}\small\item\em Transforms an unbalanced M\+C\+FP through dummy nodes. Goal is a balanced distribution of supply and demand. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The internal Network representation. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{netxpert\+::\+Internal\+Net@{netxpert\+::\+Internal\+Net}!Internal\+Net@{Internal\+Net}}
+\index{Internal\+Net@{Internal\+Net}!netxpert\+::\+Internal\+Net@{netxpert\+::\+Internal\+Net}}
+\subsubsection[{\texorpdfstring{Internal\+Net(const netxpert\+::data\+::\+Input\+Arcs \&arcs\+Tbl, const netxpert\+::data\+::\+Column\+Map \&\+\_\+map=netxpert\+::data\+::\+Column\+Map(), const netxpert\+::cnfg\+::\+Config \&cnfg=netxpert\+::cnfg\+::\+Config(), const netxpert\+::data\+::\+Input\+Nodes \&nodes\+Tbl=netxpert\+::data\+::\+Input\+Nodes(), const bool auto\+Clean=true, const std\+::map$<$ std\+::string, netxpert\+::data\+::\+Int\+Node\+I\+D $>$ \&ext\+Int\+Node\+Map=std\+::map$<$ std\+::string, netxpert\+::data\+::\+Int\+Node\+I\+D $>$())}{InternalNet(const netxpert::data::InputArcs &arcsTbl, const netxpert::data::ColumnMap &_map=netxpert::data::ColumnMap(), const netxpert::cnfg::Config &cnfg=netxpert::cnfg::Config(), const netxpert::data::InputNodes &nodesTbl=netxpert::data::InputNodes(), const bool autoClean=true, const std::map< std::string, netxpert::data::IntNodeID > &extIntNodeMap=std::map< std::string, netxpert::data::IntNodeID >())}}]{\setlength{\rightskip}{0pt plus 5cm}netxpert\+::\+Internal\+Net\+::\+Internal\+Net (
+\begin{DoxyParamCaption}
+\item[{const netxpert\+::data\+::\+Input\+Arcs \&}]{arcs\+Tbl, }
+\item[{const {\bf netxpert\+::data\+::\+Column\+Map} \&}]{\+\_\+map = {\ttfamily {\bf netxpert\+::data\+::\+Column\+Map}()}, }
+\item[{const {\bf netxpert\+::cnfg\+::\+Config} \&}]{cnfg = {\ttfamily {\bf netxpert\+::cnfg\+::\+Config}()}, }
+\item[{const netxpert\+::data\+::\+Input\+Nodes \&}]{nodes\+Tbl = {\ttfamily netxpert\+:\+:data\+:\+:InputNodes()}, }
+\item[{const bool}]{auto\+Clean = {\ttfamily true}, }
+\item[{const std\+::map$<$ std\+::string, netxpert\+::data\+::\+Int\+Node\+ID $>$ \&}]{ext\+Int\+Node\+Map = {\ttfamily std\+:\+:map$<$~std\+:\+:string,~netxpert\+:\+:data\+:\+:IntNodeID~$>$()}}
+\end{DoxyParamCaption}
+)}\hypertarget{classnetxpert_1_1InternalNet_ade299cebc75fa88cc5a6df932ebbe896}{}\label{classnetxpert_1_1InternalNet_ade299cebc75fa88cc5a6df932ebbe896}
+Constructor. 
+\begin{DoxyParams}{Parameters}
+{\em arcs\+Tbl} & represents arcs read from a database. This is mandatory. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/lemon-\/net.\+h\end{DoxyCompactItemize}

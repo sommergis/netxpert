@@ -140,10 +140,10 @@ void
         switch (algorithm)
         {
             case MSTAlgorithm::Kruskal_LEMON:
-                mst = unique_ptr<IMinSpanTree>(new MST_LEMON());
+                mst = unique_ptr<IMinSpanTree>(new MST_LEM());
                 break;
             default:
-                mst = unique_ptr<IMinSpanTree>(new MST_LEMON());
+                mst = unique_ptr<IMinSpanTree>(new MST_LEM());
                 break;
         }
     }

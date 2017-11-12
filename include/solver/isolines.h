@@ -25,7 +25,9 @@
 namespace netxpert {
 
     /**
-    * \Class Solver for calculating Isolines (= bands of accessible areas in a network)
+    * \brief Solver for calculating Isolines, i.e. bands of accessible areas in a network.
+    *
+    * \warning Experimental!
     *
     * Concept: solve the 1 - all SPT problem and cut off the routes at the defined cut off values;
     *          do this for all origins.

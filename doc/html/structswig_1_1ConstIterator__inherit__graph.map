@@ -1,0 +1,11 @@
+<map id="swig::ConstIterator" name="swig::ConstIterator">
+<area shape="rect" id="node2" href="$classswig_1_1ConstIterator__T.html" title="swig::ConstIterator\l_T\&lt; OutConstIterator \&gt;" alt="" coords="187,71,345,112"/>
+<area shape="rect" id="node5" href="$structswig_1_1Iterator.html" title="swig::Iterator" alt="" coords="217,137,315,163"/>
+<area shape="rect" id="node3" href="$classswig_1_1ConstIteratorClosed__T.html" title="swig::ConstIteratorClosed\l_T\&lt; OutConstIterator \&gt;" alt="" coords="411,5,586,47"/>
+<area shape="rect" id="node4" href="$classswig_1_1ConstIteratorOpen__T.html" title="swig::ConstIteratorOpen\l_T\&lt; OutConstIterator \&gt;" alt="" coords="417,71,581,112"/>
+<area shape="rect" id="node6" href="$classswig_1_1Iterator__T.html" title="swig::Iterator_T\&lt; InOutIterator \&gt;" alt="" coords="393,137,604,163"/>
+<area shape="rect" id="node7" href="$classswig_1_1IteratorClosed__T.html" title="swig::IteratorClosed\l_T\&lt; InOutIterator \&gt;" alt="" coords="665,21,804,63"/>
+<area shape="rect" id="node8" href="$classswig_1_1IteratorClosed__T_3_01InOutIterator_00_01bool_00_01FromOper_00_01AsvalOper_01_4.html" title="swig::IteratorClosed\l_T\&lt; InOutIterator, bool,\l FromOper, AsvalOper \&gt;" alt="" coords="652,86,817,142"/>
+<area shape="rect" id="node9" href="$classswig_1_1IteratorOpen__T.html" title="swig::IteratorOpen\l_T\&lt; InOutIterator \&gt;" alt="" coords="667,165,802,207"/>
+<area shape="rect" id="node10" href="$classswig_1_1IteratorOpen__T_3_01InOutIterator_00_01bool_00_01FromOper_00_01AsvalOper_01_4.html" title="swig::IteratorOpen\l_T\&lt; InOutIterator, bool,\l FromOper, AsvalOper \&gt;" alt="" coords="652,230,817,286"/>
+</map>

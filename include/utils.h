@@ -49,6 +49,9 @@
 #endif
 
 namespace netxpert {
+    /**
+    * \brief Utility functions for netXpert
+    **/
     namespace utils {
 
     template<typename TimeT = std::chrono::microseconds,
@@ -69,7 +72,7 @@ namespace netxpert {
     };
 
     /**
-    * \Static Static Class that provides utility functions
+    *  Static Class that provides utility functions
     **/
     class UTILS
     {

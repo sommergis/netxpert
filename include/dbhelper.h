@@ -31,10 +31,12 @@
 #include "geos/geom/PrecisionModel.h"
 
 namespace netxpert {
-
+    /**
+    * \brief Input/Output of netXpert
+    **/
     namespace io {
     /**
-    * \Static Static Class that controls the SpatiaLite DB processing access
+    * \brief Static Class that controls the SpatiaLite DB processing access
     **/
     class DBHELPER
     {
@@ -44,19 +46,22 @@ namespace netxpert {
             static void Initialize(const netxpert::cnfg::Config& cnfg);
             static void CommitCurrentTransaction();
             static void OpenNewTransaction();
-            static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(const std::string& tableName,
-                                        const std::string& geomColumnName, const netxpert::data::ColumnMap& cmap,
-                                        const netxpert::data::ArcIDColumnDataType arcIDColDataType,
-                                        const bool withCapacity);
-            static netxpert::data::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
-                                                                          const int treshold, SQLite::Statement& qry,
-                                                                          const bool withCapacity);
+
             static netxpert::data::InputArcs LoadNetworkFromDB(const std::string& _tableName,
                                                                const netxpert::data::ColumnMap& _map);
             static netxpert::data::NetworkBuilderInputArcs LoadNetworkToBuildFromDB(const std::string& _tableName,
                                                                                     const netxpert::data::ColumnMap& _map);
             static std::vector<netxpert::data::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
                                                                   const netxpert::data::ColumnMap& _map);
+
+            static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(const std::string& tableName,
+                                        const std::string& geomColumnName, const netxpert::data::ColumnMap& cmap,
+                                        const netxpert::data::ArcIDColumnDataType arcIDColDataType,
+                                        const bool withCapacity);
+
+            static netxpert::data::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
+                                                                          const int treshold, SQLite::Statement& qry,
+                                                                          const bool withCapacity);
 
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometryFromDB(const std::string& tableName,
                                                              const std::string& arcIDColumnName,

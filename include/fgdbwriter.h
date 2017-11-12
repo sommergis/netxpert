@@ -25,10 +25,12 @@
 #include <algorithm>
 
 namespace netxpert {
-
+    /**
+    * \brief Input/Output of netXpert
+    **/
     namespace io {
     /**
-    * \Class Writes the result of NetXpert into a ESRI FileGeodatabase
+    * \brief Writes the result of NetXpert into a ESRI FileGeodatabase
     **/
     class FGDBWriter : public netxpert::io::DBWriter
     {

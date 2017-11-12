@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <string>
 #include <limits.h> //UNIT_MAX
-//#include "lemon/min_cost_arborescence.h"
 #include "imstree.h"
 #include <lemon/kruskal.h>
 
@@ -28,17 +27,20 @@ using namespace lemon;
 using namespace netxpert::data;
 
 namespace netxpert {
+    /**
+    * \brief Core solvers of netXpert
+    **/
     namespace core {
     /**
-    *  \Class Core Solver for the Minimum Spanning Tree Problem
+    *  \brief Core Solver for the Minimum Spanning Tree Problem with LEMON.
     */
-    class MST_LEMON : public netxpert::core::IMinSpanTree
+    class MST_LEM : public netxpert::core::IMinSpanTree
     {
         public:
 
-            MST_LEMON();
-            MST_LEMON (MST_LEMON const &) {} //copy constrcutor
-            ~MST_LEMON(); //deconstructor
+            MST_LEM();
+            MST_LEM (MST_LEM const &) {} //copy constrcutor
+            ~MST_LEM(); //deconstructor
 
             /* LEMON friendly interface */
             void LoadNet(const uint32_t nmax,  const uint32_t mmax,

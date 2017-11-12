@@ -1,0 +1,8 @@
+<map id="netxpert::ISolver" name="netxpert::ISolver">
+<area shape="rect" id="node2" href="$classnetxpert_1_1Isolines.html" title="Solver for calculating Isolines, i.e. bands of accessible areas in a network. " alt="" coords="216,5,339,32"/>
+<area shape="rect" id="node3" href="$classnetxpert_1_1MinCostFlow.html" title="Solver for the Minimum Cost Flow Problem. " alt="" coords="200,56,355,83"/>
+<area shape="rect" id="node5" href="$classnetxpert_1_1MinimumSpanningTree.html" title="Solver for the Minimum Spanning Tree Problem. " alt="" coords="172,107,383,133"/>
+<area shape="rect" id="node6" href="$classnetxpert_1_1OriginDestinationMatrix.html" title="Solver for computing an Origin Destination Matrix. " alt="" coords="189,158,366,199"/>
+<area shape="rect" id="node7" href="$classnetxpert_1_1ShortestPathTree.html" title="Solver for the Shortest Path Tree Problem. " alt="" coords="188,224,367,251"/>
+<area shape="rect" id="node4" href="$classnetxpert_1_1Transportation.html" title="Solver for the Transportation Problem. " alt="" coords="431,56,591,83"/>
+</map>

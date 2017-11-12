@@ -1,0 +1,58 @@
+\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow}{}\section{netxpert\+:\+:core\+:\+:I\+Min\+Cost\+Flow Class Reference}
+\label{classnetxpert_1_1core_1_1IMinCostFlow}\index{netxpert\+::core\+::\+I\+Min\+Cost\+Flow@{netxpert\+::core\+::\+I\+Min\+Cost\+Flow}}
+
+
+Abstract \hyperlink{classClass}{Class} (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.  
+
+
+
+
+{\ttfamily \#include $<$imcflow.\+h$>$}
+
+
+
+Inheritance diagram for netxpert\+:\+:core\+:\+:I\+Min\+Cost\+Flow\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classnetxpert_1_1core_1_1IMinCostFlow__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries Load\+Net} (const uint32\+\_\+t nmax, const uint32\+\_\+t mmax, lemon\+::\+Filter\+Arcs$<$ netxpert\+::data\+::graph\+\_\+t, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ bool $>$$>$ $\ast$sg, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$\+\_\+cost\+Map, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::capacity\+\_\+t $>$ $\ast$\+\_\+cap\+Map, netxpert\+::data\+::graph\+\_\+t\+::\+Node\+Map$<$ netxpert\+::data\+::supply\+\_\+t $>$ $\ast$\+\_\+supply\+Map)=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_afe4ac0e1320c36cbccbb6c97e0c05765}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_afe4ac0e1320c36cbccbb6c97e0c05765}
+
+\item 
+virtual const uint32\+\_\+t {\bfseries Get\+Arc\+Count} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_afc43c05d492c96e3795c844636ff3a6a}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_afc43c05d492c96e3795c844636ff3a6a}
+
+\item 
+virtual const uint32\+\_\+t {\bfseries Get\+Node\+Count} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a0d09f6b1be2a843c3dd8da0377cd43ba}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a0d09f6b1be2a843c3dd8da0377cd43ba}
+
+\item 
+virtual void {\bfseries Solve\+M\+CF} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a4730faf5a646cb01130a3dd36e3205ba}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a4730faf5a646cb01130a3dd36e3205ba}
+
+\item 
+virtual const double {\bfseries Get\+Optimum} () const =0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a2828271d5ac69c015f431cd5793ab661}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a2828271d5ac69c015f431cd5793ab661}
+
+\item 
+virtual std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ {\bfseries Get\+M\+C\+F\+Arcs} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a664df6422560419a23e49c5948e4ace4}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a664df6422560419a23e49c5948e4ace4}
+
+\item 
+virtual netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::flow\+\_\+t $>$ $\ast$ {\bfseries Get\+M\+C\+F\+Flow} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_ac1303e3c31a2f4e2ec11e6ddc1ee0a30}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_ac1303e3c31a2f4e2ec11e6ddc1ee0a30}
+
+\item 
+virtual netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$ {\bfseries Get\+M\+C\+F\+Cost} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a1262b923b11fc3b240c2e61f1e2e7f07}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a1262b923b11fc3b240c2e61f1e2e7f07}
+
+\item 
+virtual const int {\bfseries Get\+M\+C\+F\+Status} ()=0\hypertarget{classnetxpert_1_1core_1_1IMinCostFlow_a71466b0a2c494afb015197a103ec0dcc}{}\label{classnetxpert_1_1core_1_1IMinCostFlow_a71466b0a2c494afb015197a103ec0dcc}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract \hyperlink{classClass}{Class} (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/core/imcflow.\+h\end{DoxyCompactItemize}

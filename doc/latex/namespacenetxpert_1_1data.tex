@@ -1,0 +1,298 @@
+\hypertarget{namespacenetxpert_1_1data}{}\section{netxpert\+:\+:data Namespace Reference}
+\label{namespacenetxpert_1_1data}\index{netxpert\+::data@{netxpert\+::data}}
+
+
+Data structures for net\+Xpert.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1AddedPoint}{Added\+Point}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Node\+ID,coord$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ArcData}{Arc\+Data}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Arc\+ID,cost,capacity$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ArcData2}{Arc\+Data2}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ArcDataAndFlow}{Arc\+Data\+And\+Flow}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$old\+Arc\+ID,cost,capacity,flow$>$ \end{DoxyCompactList}\item 
+class \hyperlink{classnetxpert_1_1data_1_1ArcDataMap}{Arc\+Data\+Map}
+\begin{DoxyCompactList}\small\item\em Combined structure of graph attribtues as L\+E\+M\+ON Reference Map. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{Column\+Map}
+\begin{DoxyCompactList}\small\item\em Stores the column names of the input data. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1DistributionArc}{Distribution\+Arc}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$Compressed\+Path,flow$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1DuplicateArcData}{Duplicate\+Arc\+Data}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Arc\+ID,cost,capacity$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtClosestArcAndPoint}{Ext\+Closest\+Arc\+And\+Point}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtDistributionArc}{Ext\+Distribution\+Arc}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Arc\+ID,ext\+Arc,cost,flow$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExternalArc}{External\+Arc}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing external nodes tuple $<$from\+Node,to\+Node$>$ as simple type variant. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtNodeSupply}{Ext\+Node\+Supply}
+\begin{DoxyCompactList}\small\item\em Data type for storing external node supply $<$ext\+Node\+ID,supply$>$ as simple type variant. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtODPair}{Ext\+O\+D\+Pair}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing \hyperlink{structnetxpert_1_1data_1_1ExtODPair}{Ext\+O\+D\+Pair} tuple $<$origin,dest$>$ as simple type variant. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtSPTreeArc}{Ext\+S\+P\+Tree\+Arc}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing external arc of S\+P\+Tree/\+O\+D\+Matrix $<$ext\+From\+Node,ext\+To\+Node,cost$>$ as simple type variant. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ExtTransportationData}{Ext\+Transportation\+Data}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1FlowCost}{Flow\+Cost}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$from\+Node,to\+Node,flow,cost$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1InputArc}{Input\+Arc}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Arc\+ID,ext\+From\+Node,ext\+To\+Node,cost,capacity,oneway$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1InputNode}{Input\+Node}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Node\+ID,node\+Supply$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1InternalArc}{Internal\+Arc}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing nodes tuple $<$from\+Node,to\+Node$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1IntNetSplittedArc}{Int\+Net\+Splitted\+Arc}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing $<$arc,cost,capacity,segment\+Geoms$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1IntNetSplittedArc2}{Int\+Net\+Splitted\+Arc2}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1MSTResult}{M\+S\+T\+Result}
+\begin{DoxyCompactList}\small\item\em Data type for storing the result of the M\+ST Solver in J\+S\+O\+N-\/\+Format. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1NetworkBuilderInputArc}{Network\+Builder\+Input\+Arc}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1NetworkBuilderResultArc}{Network\+Builder\+Result\+Arc}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1NewArc}{New\+Arc}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$arc\+Geom,node\+Type,cost,capacity$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1NewNode}{New\+Node}
+\begin{DoxyCompactList}\small\item\em Data type for storing new nodes data $<$ext\+Node\+ID,coord,supply$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1NodeSupply}{Node\+Supply}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$ext\+Node\+ID,supply$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1ODPair}{O\+D\+Pair}
+\begin{DoxyCompactList}\small\item\em Custom data type for storing lemon \hyperlink{structnetxpert_1_1data_1_1ODPair}{O\+D\+Pair} tuple $<$origin,dest$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1SplittedArc}{Splitted\+Arc}
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$from\+Node,to\+Node,arc\+Geom,cost,capacity$>$ \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1SPTResult}{S\+P\+T\+Result}
+\begin{DoxyCompactList}\small\item\em Data type for storing the result of the S\+PT Solver in J\+S\+O\+N-\/\+Format. \end{DoxyCompactList}\item 
+struct \hyperlink{structnetxpert_1_1data_1_1SwappedOldArc}{Swapped\+Old\+Arc}
+\item 
+struct \hyperlink{structnetxpert_1_1data_1_1TransportationResult}{Transportation\+Result}
+\begin{DoxyCompactList}\small\item\em Data type for storing the result of the Transpotation Solver in J\+S\+O\+N-\/\+Format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef lemon\+::\+Smart\+Digraph {\bfseries graph\+\_\+t}\hypertarget{namespacenetxpert_1_1data_aa74c1b36e4f5f4fd195591738c30f39c}{}\label{namespacenetxpert_1_1data_aa74c1b36e4f5f4fd195591738c30f39c}
+
+\item 
+typedef lemon\+::\+List\+Digraph {\bfseries graph\+\_\+ch\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a1087f975e9ca83a0027de2ba61d3958f}{}\label{namespacenetxpert_1_1data_a1087f975e9ca83a0027de2ba61d3958f}
+
+\item 
+typedef lemon\+::\+Filter\+Arcs$<$ netxpert\+::data\+::graph\+\_\+t, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ bool $>$ $>$ {\bfseries filtered\+\_\+graph\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a8a616cc117257c9aa18f93a4d6ef1485}{}\label{namespacenetxpert_1_1data_a8a616cc117257c9aa18f93a4d6ef1485}
+
+\item 
+typedef graph\+\_\+t\+::\+Node {\bfseries node\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a113013b587fbe23cbc530d01e33e98fe}{}\label{namespacenetxpert_1_1data_a113013b587fbe23cbc530d01e33e98fe}
+
+\item 
+typedef graph\+\_\+t\+::\+Arc {\bfseries arc\+\_\+t}\hypertarget{namespacenetxpert_1_1data_afda0f45b9f9fb9e9e363af1e4d8296b4}{}\label{namespacenetxpert_1_1data_afda0f45b9f9fb9e9e363af1e4d8296b4}
+
+\item 
+typedef double {\bfseries cost\+\_\+t}\hypertarget{namespacenetxpert_1_1data_ab85a54a37567ae71b3d92429a8fe80a9}{}\label{namespacenetxpert_1_1data_ab85a54a37567ae71b3d92429a8fe80a9}
+
+\item 
+typedef double {\bfseries flow\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a77604d32c0b7a84e773566e7ad8a8638}{}\label{namespacenetxpert_1_1data_a77604d32c0b7a84e773566e7ad8a8638}
+
+\item 
+typedef double {\bfseries capacity\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a05ecea9f371a72b3f2284c54337792fd}{}\label{namespacenetxpert_1_1data_a05ecea9f371a72b3f2284c54337792fd}
+
+\item 
+typedef double {\bfseries supply\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a6749d55daca0e36cf8f54343d1eea856}{}\label{namespacenetxpert_1_1data_a6749d55daca0e36cf8f54343d1eea856}
+
+\item 
+typedef uint32\+\_\+t {\bfseries intarcid\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a0b5290d93ce5350d603f546702c6683a}{}\label{namespacenetxpert_1_1data_a0b5290d93ce5350d603f546702c6683a}
+
+\item 
+typedef std\+::string {\bfseries extarcid\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a03f3f6333be4cd56b752fa5515e258ac}{}\label{namespacenetxpert_1_1data_a03f3f6333be4cd56b752fa5515e258ac}
+
+\item 
+typedef std\+::string {\bfseries Ext\+Arc\+ID}\hypertarget{namespacenetxpert_1_1data_a9e271a126af4583b08053f3ae9a3aa6f}{}\label{namespacenetxpert_1_1data_a9e271a126af4583b08053f3ae9a3aa6f}
+
+\item 
+typedef std\+::string {\bfseries Ext\+Node\+ID}\hypertarget{namespacenetxpert_1_1data_a1a5ff22f21f584b92c13d01a538207de}{}\label{namespacenetxpert_1_1data_a1a5ff22f21f584b92c13d01a538207de}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1ExtSPTreeArc}{netxpert\+::data\+::\+Ext\+S\+P\+Tree\+Arc} $>$ {\bfseries Ext\+S\+P\+T\+Arcs}\hypertarget{namespacenetxpert_1_1data_ae278e484c43ca214e75359296aae987d}{}\label{namespacenetxpert_1_1data_ae278e484c43ca214e75359296aae987d}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1ExtNodeSupply}{netxpert\+::data\+::\+Ext\+Node\+Supply} $>$ {\bfseries Ext\+Node\+Supplies}\hypertarget{namespacenetxpert_1_1data_aeaebc87bf812a39d680030d34cc3cec2}{}\label{namespacenetxpert_1_1data_aeaebc87bf812a39d680030d34cc3cec2}
+
+\item 
+typedef std\+::pair$<$ std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$, netxpert\+::data\+::cost\+\_\+t $>$ \hyperlink{namespacenetxpert_1_1data_a82e488b55f222a9759d73e24f6087033}{Compressed\+Path}\hypertarget{namespacenetxpert_1_1data_a82e488b55f222a9759d73e24f6087033}{}\label{namespacenetxpert_1_1data_a82e488b55f222a9759d73e24f6087033}
+
+\begin{DoxyCompactList}\small\item\em Data type for storing tuple $<$Compressed\+Path,cost$>$ \end{DoxyCompactList}\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1ExtDistributionArc}{netxpert\+::data\+::\+Ext\+Distribution\+Arc} $>$ {\bfseries Ext\+Distribution}\hypertarget{namespacenetxpert_1_1data_a8058bc5e9730ee9f445cd6680a4fcddd}{}\label{namespacenetxpert_1_1data_a8058bc5e9730ee9f445cd6680a4fcddd}
+
+\item 
+typedef uint32\+\_\+t {\bfseries Int\+Node\+ID}\hypertarget{namespacenetxpert_1_1data_a36fb32c557292b103d2bf46bbc2cd882}{}\label{namespacenetxpert_1_1data_a36fb32c557292b103d2bf46bbc2cd882}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ \hyperlink{structnetxpert_1_1data_1_1InternalArc}{netxpert\+::data\+::\+Internal\+Arc}, \hyperlink{structnetxpert_1_1data_1_1ArcData}{netxpert\+::data\+::\+Arc\+Data} $>$ {\bfseries Arcs}\hypertarget{namespacenetxpert_1_1data_a6307cf3ae511c5de2391b46f928e66cd}{}\label{namespacenetxpert_1_1data_a6307cf3ae511c5de2391b46f928e66cd}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ netxpert\+::data\+::\+Int\+Node\+ID, \hyperlink{structnetxpert_1_1data_1_1AddedPoint}{netxpert\+::data\+::\+Added\+Point} $>$ {\bfseries Added\+Points}\hypertarget{namespacenetxpert_1_1data_add459e1853d5e9567a809f92c6e874ec}{}\label{namespacenetxpert_1_1data_add459e1853d5e9567a809f92c6e874ec}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ netxpert\+::data\+::\+Int\+Node\+ID, \hyperlink{structnetxpert_1_1data_1_1NodeSupply}{netxpert\+::data\+::\+Node\+Supply} $>$ {\bfseries Node\+Supplies}\hypertarget{namespacenetxpert_1_1data_a5936ebac3d50af64fa570da25db0dbdd}{}\label{namespacenetxpert_1_1data_a5936ebac3d50af64fa570da25db0dbdd}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ \hyperlink{structnetxpert_1_1data_1_1InternalArc}{netxpert\+::data\+::\+Internal\+Arc}, \hyperlink{structnetxpert_1_1data_1_1NewArc}{netxpert\+::data\+::\+New\+Arc} $>$ {\bfseries New\+Arcs}\hypertarget{namespacenetxpert_1_1data_abc88bcfe1a3101fbf6ba909f54ab458e}{}\label{namespacenetxpert_1_1data_abc88bcfe1a3101fbf6ba909f54ab458e}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1NewNode}{netxpert\+::data\+::\+New\+Node} $>$ {\bfseries New\+Nodes}\hypertarget{namespacenetxpert_1_1data_a6c710e3aa7252a045619ab5bc807d60e}{}\label{namespacenetxpert_1_1data_a6c710e3aa7252a045619ab5bc807d60e}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ std\+::string, \hyperlink{structnetxpert_1_1data_1_1SwappedOldArc}{netxpert\+::data\+::\+Swapped\+Old\+Arc} $>$ {\bfseries Swapped\+Old\+Arcs}\hypertarget{namespacenetxpert_1_1data_a1feaf68ed3b4085f21c66e549e4b97ae}{}\label{namespacenetxpert_1_1data_a1feaf68ed3b4085f21c66e549e4b97ae}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1InputArc}{netxpert\+::data\+::\+Input\+Arc} $>$ {\bfseries Input\+Arcs}\hypertarget{namespacenetxpert_1_1data_a622e9894c04df58e343def1d46f8a3b0}{}\label{namespacenetxpert_1_1data_a622e9894c04df58e343def1d46f8a3b0}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1InputNode}{netxpert\+::data\+::\+Input\+Node} $>$ {\bfseries Input\+Nodes}\hypertarget{namespacenetxpert_1_1data_a94f8201b53f3f360d76cb382c10d4aaa}{}\label{namespacenetxpert_1_1data_a94f8201b53f3f360d76cb382c10d4aaa}
+
+\item 
+typedef std\+::vector$<$ \hyperlink{structnetxpert_1_1data_1_1NetworkBuilderInputArc}{netxpert\+::data\+::\+Network\+Builder\+Input\+Arc} $>$ {\bfseries Network\+Builder\+Input\+Arcs}\hypertarget{namespacenetxpert_1_1data_a4ce65cc733f5a4f03be3d5bc641e7803}{}\label{namespacenetxpert_1_1data_a4ce65cc733f5a4f03be3d5bc641e7803}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \hyperlink{structnetxpert_1_1data_1_1NetworkBuilderResultArc}{netxpert\+::data\+::\+Network\+Builder\+Result\+Arc} $>$ {\bfseries Network\+Builder\+Result\+Arcs}\hypertarget{namespacenetxpert_1_1data_a3d430c470458654a6c8b6300f20745d1}{}\label{namespacenetxpert_1_1data_a3d430c470458654a6c8b6300f20745d1}
+
+\item 
+typedef std\+::unordered\+\_\+map$<$ std\+::unique\+\_\+ptr$<$ geos\+::geom\+::\+Point $>$, netxpert\+::data\+::\+Int\+Node\+ID $>$ {\bfseries Network\+Builder\+Result\+Nodes}\hypertarget{namespacenetxpert_1_1data_a9aee1a4198675b12b95219f98e651e9c}{}\label{namespacenetxpert_1_1data_a9aee1a4198675b12b95219f98e651e9c}
+
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Arc\+State} \+: int32\+\_\+t \{ {\bfseries original} = 0, 
+{\bfseries original\+And\+Split} = 1, 
+{\bfseries added} = 2, 
+{\bfseries added\+And\+Split} = 3
+ \}\hypertarget{namespacenetxpert_1_1data_abe820d2337ded6846999a252086882f6}{}\label{namespacenetxpert_1_1data_abe820d2337ded6846999a252086882f6}
+
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_a923ee7cb7eab8b9dbfd62fb6d26f51cb}{Net\+Xpert\+Solver} \+: int16\+\_\+t \{ \\*
+{\bfseries Undefined\+Net\+Xpert\+Solver} = -\/1, 
+{\bfseries Shortest\+Path\+Tree\+Solver} = 0, 
+{\bfseries O\+D\+Matrix\+Solver} = 1, 
+{\bfseries Transportation\+Solver} = 2, 
+\\*
+{\bfseries Min\+Cost\+Flow\+Solver} = 3, 
+{\bfseries Min\+Spanning\+Tree\+Solver} = 4, 
+{\bfseries Transshipment\+Solver} = 5, 
+{\bfseries Network\+Builder\+Result} = 6, 
+\\*
+{\bfseries Isolines\+Solver} = 7
+ \}\hypertarget{namespacenetxpert_1_1data_a923ee7cb7eab8b9dbfd62fb6d26f51cb}{}\label{namespacenetxpert_1_1data_a923ee7cb7eab8b9dbfd62fb6d26f51cb}
+\begin{DoxyCompactList}\small\item\em Enum that reflects the type of the net\+Xpert Solver. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_a7f0e5c814a8a55ea94f348b10826e206}{Arc\+I\+D\+Column\+Data\+Type} \+: int16\+\_\+t \{ {\bfseries Number} = 0, 
+{\bfseries Std\+\_\+\+String} = 1
+ \}\hypertarget{namespacenetxpert_1_1data_a7f0e5c814a8a55ea94f348b10826e206}{}\label{namespacenetxpert_1_1data_a7f0e5c814a8a55ea94f348b10826e206}
+\begin{DoxyCompactList}\small\item\em Enum that reflects the type of the Arc\+ID Column in the netxpert database. Used for building the correct sql statements (e.\+g. S\+QL IN Clauses)\+: text or numbers (double or int). \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_addf98eb51735356977db0de627cc38c1}{Added\+Node\+Type} \+: int16\+\_\+t \{ {\bfseries Undefined\+Added\+Node\+Type} = 0, 
+{\bfseries Start\+Arc} = 1, 
+{\bfseries End\+Arc} = 2
+ \}\hypertarget{namespacenetxpert_1_1data_addf98eb51735356977db0de627cc38c1}{}\label{namespacenetxpert_1_1data_addf98eb51735356977db0de627cc38c1}
+\begin{DoxyCompactList}\small\item\em Enum that reflects the type of the node that was added to break an edge of the network. Needed for building the total geometry of the route, if the network has been broken up through additional start or end nodes. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbd}{Min\+Cost\+Flow\+Instance\+Type} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0e13c6ec2b78ca3b8e8377ea89b53c2b}{M\+C\+F\+Undefined} = 0, 
+\hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0b605b19396fc3ed4d1f23b75bcc5a9e}{M\+C\+F\+Balanced} = 1, 
+\hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda6826139a98d9671cff8ae7e98a9cef49}{M\+C\+F\+Extrasupply} = 2, 
+\hyperlink{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbdab4655410af0f398a0ba3d4cdf84bd270}{M\+C\+F\+Extrademand} = 3
+ \}\begin{DoxyCompactList}\small\item\em Enum that reflects the type of the Minimum Cost Flow instance. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346c}{M\+C\+F\+Solver\+Status} \+: int16\+\_\+t \{ \\*
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca733cc2da2224ce6ccb9163cd7be0e748}{M\+C\+F\+Un\+Solved} = -\/1, 
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca3cf3f94c6f56c9b7ec5c54c580d77bc3}{M\+C\+F\+OK} = 0, 
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346caef7ee1a8cde55750ba03126a7dc34f96}{M\+C\+F\+Stopped} = 1, 
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca78702b165ad82de50f63cf00498d17ed}{M\+C\+F\+Unfeasible} = 2, 
+\\*
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346cac92d71e95a9b3d967e1175e1165e2190}{M\+C\+F\+Unbounded} = 3, 
+\hyperlink{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca2943143373d2c1ff4e0384d6d9635084}{M\+C\+F\+Error} = 4
+ \}\begin{DoxyCompactList}\small\item\em Enum that reflects the status of the Minimum Cost Flow solver. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5}{Start\+Or\+End\+Location\+Of\+Line} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a77cbb3dd6ac4c5ba718e73763a9406ae}{Intermediate} = 0, 
+\hyperlink{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a5f001d7b240951c70e11685adaa5f458}{Start} = 1, 
+\hyperlink{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a463bd491ceec98a2b97103aba2ab179c}{End} = 2
+ \}\begin{DoxyCompactList}\small\item\em Enum that reflects the location of a given point on a line. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \hyperlink{namespacenetxpert_1_1data_a5b545bbb8b198a5e0c3b913ede53aa6d}{D\+O\+U\+B\+L\+E\+\_\+\+I\+N\+F\+I\+N\+I\+TY} = 999999\hypertarget{namespacenetxpert_1_1data_a5b545bbb8b198a5e0c3b913ede53aa6d}{}\label{namespacenetxpert_1_1data_a5b545bbb8b198a5e0c3b913ede53aa6d}
+
+\begin{DoxyCompactList}\small\item\em Value that shall be used instead of Infinity for arc values (e.\+g. capacity). \end{DoxyCompactList}\item 
+const double {\bfseries D\+O\+U\+B\+L\+E\+\_\+\+N\+U\+LL} = -\/1\hypertarget{namespacenetxpert_1_1data_ae8ab708d7724a2b816135a527e26629a}{}\label{namespacenetxpert_1_1data_ae8ab708d7724a2b816135a527e26629a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Data structures for net\+Xpert. 
+
+\subsection{Enumeration Type Documentation}
+\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Solver\+Status@{M\+C\+F\+Solver\+Status}}
+\index{M\+C\+F\+Solver\+Status@{M\+C\+F\+Solver\+Status}!netxpert\+::data@{netxpert\+::data}}
+\subsubsection[{\texorpdfstring{M\+C\+F\+Solver\+Status}{MCFSolverStatus}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::data\+::\+M\+C\+F\+Solver\+Status} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346c}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346c}
+
+
+Enum that reflects the status of the Minimum Cost Flow solver. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{M\+C\+F\+Un\+Solved@{M\+C\+F\+Un\+Solved}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Un\+Solved@{M\+C\+F\+Un\+Solved}}\item[{\em 
+M\+C\+F\+Un\+Solved\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca733cc2da2224ce6ccb9163cd7be0e748}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca733cc2da2224ce6ccb9163cd7be0e748}
+}]no solution available \index{M\+C\+F\+OK@{M\+C\+F\+OK}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+OK@{M\+C\+F\+OK}}\item[{\em 
+M\+C\+F\+OK\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca3cf3f94c6f56c9b7ec5c54c580d77bc3}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca3cf3f94c6f56c9b7ec5c54c580d77bc3}
+}]optimal solution found \index{M\+C\+F\+Stopped@{M\+C\+F\+Stopped}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Stopped@{M\+C\+F\+Stopped}}\item[{\em 
+M\+C\+F\+Stopped\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346caef7ee1a8cde55750ba03126a7dc34f96}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346caef7ee1a8cde55750ba03126a7dc34f96}
+}]optimization stopped \index{M\+C\+F\+Unfeasible@{M\+C\+F\+Unfeasible}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Unfeasible@{M\+C\+F\+Unfeasible}}\item[{\em 
+M\+C\+F\+Unfeasible\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca78702b165ad82de50f63cf00498d17ed}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca78702b165ad82de50f63cf00498d17ed}
+}]problem is unfeasible \index{M\+C\+F\+Unbounded@{M\+C\+F\+Unbounded}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Unbounded@{M\+C\+F\+Unbounded}}\item[{\em 
+M\+C\+F\+Unbounded\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346cac92d71e95a9b3d967e1175e1165e2190}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346cac92d71e95a9b3d967e1175e1165e2190}
+}]problem is unbounded \index{M\+C\+F\+Error@{M\+C\+F\+Error}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Error@{M\+C\+F\+Error}}\item[{\em 
+M\+C\+F\+Error\hypertarget{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca2943143373d2c1ff4e0384d6d9635084}{}\label{namespacenetxpert_1_1data_a0ea30f651c6cc7e7a6edd5a5cbe6346ca2943143373d2c1ff4e0384d6d9635084}
+}]error in the solver \end{description}
+\end{Desc}
+\index{netxpert\+::data@{netxpert\+::data}!Min\+Cost\+Flow\+Instance\+Type@{Min\+Cost\+Flow\+Instance\+Type}}
+\index{Min\+Cost\+Flow\+Instance\+Type@{Min\+Cost\+Flow\+Instance\+Type}!netxpert\+::data@{netxpert\+::data}}
+\subsubsection[{\texorpdfstring{Min\+Cost\+Flow\+Instance\+Type}{MinCostFlowInstanceType}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::data\+::\+Min\+Cost\+Flow\+Instance\+Type} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbd}{}\label{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbd}
+
+
+Enum that reflects the type of the Minimum Cost Flow instance. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{M\+C\+F\+Undefined@{M\+C\+F\+Undefined}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Undefined@{M\+C\+F\+Undefined}}\item[{\em 
+M\+C\+F\+Undefined\hypertarget{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0e13c6ec2b78ca3b8e8377ea89b53c2b}{}\label{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0e13c6ec2b78ca3b8e8377ea89b53c2b}
+}]undefined M\+CF problem type \index{M\+C\+F\+Balanced@{M\+C\+F\+Balanced}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Balanced@{M\+C\+F\+Balanced}}\item[{\em 
+M\+C\+F\+Balanced\hypertarget{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0b605b19396fc3ed4d1f23b75bcc5a9e}{}\label{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda0b605b19396fc3ed4d1f23b75bcc5a9e}
+}]balanced M\+CF problem \index{M\+C\+F\+Extrasupply@{M\+C\+F\+Extrasupply}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Extrasupply@{M\+C\+F\+Extrasupply}}\item[{\em 
+M\+C\+F\+Extrasupply\hypertarget{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda6826139a98d9671cff8ae7e98a9cef49}{}\label{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbda6826139a98d9671cff8ae7e98a9cef49}
+}]M\+CF problem with more supply than demand. \index{M\+C\+F\+Extrademand@{M\+C\+F\+Extrademand}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!M\+C\+F\+Extrademand@{M\+C\+F\+Extrademand}}\item[{\em 
+M\+C\+F\+Extrademand\hypertarget{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbdab4655410af0f398a0ba3d4cdf84bd270}{}\label{namespacenetxpert_1_1data_a9504ea932b3debceb4ba7f6831e80bbdab4655410af0f398a0ba3d4cdf84bd270}
+}]M\+CF problem with more demand than supply. \end{description}
+\end{Desc}
+\index{netxpert\+::data@{netxpert\+::data}!Start\+Or\+End\+Location\+Of\+Line@{Start\+Or\+End\+Location\+Of\+Line}}
+\index{Start\+Or\+End\+Location\+Of\+Line@{Start\+Or\+End\+Location\+Of\+Line}!netxpert\+::data@{netxpert\+::data}}
+\subsubsection[{\texorpdfstring{Start\+Or\+End\+Location\+Of\+Line}{StartOrEndLocationOfLine}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::data\+::\+Start\+Or\+End\+Location\+Of\+Line} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5}{}\label{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5}
+
+
+Enum that reflects the location of a given point on a line. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Intermediate@{Intermediate}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!Intermediate@{Intermediate}}\item[{\em 
+Intermediate\hypertarget{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a77cbb3dd6ac4c5ba718e73763a9406ae}{}\label{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a77cbb3dd6ac4c5ba718e73763a9406ae}
+}]points location is somewhere between the start and end point of the line \index{Start@{Start}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!Start@{Start}}\item[{\em 
+Start\hypertarget{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a5f001d7b240951c70e11685adaa5f458}{}\label{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a5f001d7b240951c70e11685adaa5f458}
+}]point is identical to the start point of the line \index{End@{End}!netxpert\+::data@{netxpert\+::data}}\index{netxpert\+::data@{netxpert\+::data}!End@{End}}\item[{\em 
+End\hypertarget{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a463bd491ceec98a2b97103aba2ab179c}{}\label{namespacenetxpert_1_1data_ad00da8a39753bf6c4a99669e8fe4c6b5a463bd491ceec98a2b97103aba2ab179c}
+}]point is identical to the end point of the line \end{description}
+\end{Desc}

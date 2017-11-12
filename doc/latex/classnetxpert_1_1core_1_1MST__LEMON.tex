@@ -1,0 +1,86 @@
+\hypertarget{classnetxpert_1_1core_1_1MST__LEMON}{}\section{netxpert\+:\+:core\+:\+:M\+S\+T\+\_\+\+L\+E\+M\+ON Class Reference}
+\label{classnetxpert_1_1core_1_1MST__LEMON}\index{netxpert\+::core\+::\+M\+S\+T\+\_\+\+L\+E\+M\+ON@{netxpert\+::core\+::\+M\+S\+T\+\_\+\+L\+E\+M\+ON}}
+
+
+Core Solver for the Minimum Spanning Tree Problem.  
+
+
+
+
+{\ttfamily \#include $<$mstlem.\+h$>$}
+
+
+
+Inheritance diagram for netxpert\+:\+:core\+:\+:M\+S\+T\+\_\+\+L\+E\+M\+ON\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classnetxpert_1_1core_1_1MST__LEMON__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for netxpert\+:\+:core\+:\+:M\+S\+T\+\_\+\+L\+E\+M\+ON\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classnetxpert_1_1core_1_1MST__LEMON__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries M\+S\+T\+\_\+\+L\+E\+M\+ON} (\hyperlink{classnetxpert_1_1core_1_1MST__LEMON}{M\+S\+T\+\_\+\+L\+E\+M\+ON} const \&)\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_ac2080ff498479ad27ef116fbf30d3f54}{}\label{classnetxpert_1_1core_1_1MST__LEMON_ac2080ff498479ad27ef116fbf30d3f54}
+
+\item 
+void {\bfseries Load\+Net} (const uint32\+\_\+t nmax, const uint32\+\_\+t mmax, lemon\+::\+Filter\+Arcs$<$ netxpert\+::data\+::graph\+\_\+t, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ bool $>$$>$ $\ast$sg, netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ netxpert\+::data\+::cost\+\_\+t $>$ $\ast$cm)\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a448fcf32a87f7b50cd1fc98de6203455}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a448fcf32a87f7b50cd1fc98de6203455}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Arc\+Count} ()\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_abab7f45f5f852e3c50055b80d8af3414}{}\label{classnetxpert_1_1core_1_1MST__LEMON_abab7f45f5f852e3c50055b80d8af3414}
+
+\item 
+const uint32\+\_\+t {\bfseries Get\+Node\+Count} ()\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a59e9be23d8510793b923215e04550331}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a59e9be23d8510793b923215e04550331}
+
+\item 
+void {\bfseries Solve\+M\+ST} ()\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a87b03ee759c07889d67a0a9e7217c9db}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a87b03ee759c07889d67a0a9e7217c9db}
+
+\item 
+const double {\bfseries Get\+Optimum} () const \hypertarget{classnetxpert_1_1core_1_1MST__LEMON_acbd6542af3507ef86026da35dd0b5c6d}{}\label{classnetxpert_1_1core_1_1MST__LEMON_acbd6542af3507ef86026da35dd0b5c6d}
+
+\item 
+std\+::vector$<$ netxpert\+::data\+::arc\+\_\+t $>$ {\bfseries Get\+M\+ST} ()\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_ae67321433134e8d75c394bc8c73d3610}{}\label{classnetxpert_1_1core_1_1MST__LEMON_ae67321433134e8d75c394bc8c73d3610}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t {\bfseries nmax}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_af744d50412381bf3ea0db8c31f423bef}{}\label{classnetxpert_1_1core_1_1MST__LEMON_af744d50412381bf3ea0db8c31f423bef}
+
+\item 
+uint32\+\_\+t {\bfseries mmax}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a127b7968693376541d8f7c3bc194c3d1}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a127b7968693376541d8f7c3bc194c3d1}
+
+\item 
+netxpert\+::data\+::filtered\+\_\+graph\+\_\+t $\ast$ {\bfseries g}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_afe3845d96f722f393d33c7ee875de21e}{}\label{classnetxpert_1_1core_1_1MST__LEMON_afe3845d96f722f393d33c7ee875de21e}
+
+\item 
+netxpert\+::data\+::filtered\+\_\+graph\+\_\+t\+::\+Arc\+Map$<$ bool $>$ $\ast$ {\bfseries arc\+Bool\+Map}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_ad6c530c49c1aa798e50146db2e16e40a}{}\label{classnetxpert_1_1core_1_1MST__LEMON_ad6c530c49c1aa798e50146db2e16e40a}
+
+\item 
+netxpert\+::data\+::graph\+\_\+t\+::\+Arc\+Map$<$ cost\+\_\+t $>$ $\ast$ {\bfseries cost\+Map}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_ab727986bed0ab1d30f4b0ea5ed0ce46d}{}\label{classnetxpert_1_1core_1_1MST__LEMON_ab727986bed0ab1d30f4b0ea5ed0ce46d}
+
+\item 
+double {\bfseries total\+Cost}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a36d5dd51e3318bf197afa794038556ef}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a36d5dd51e3318bf197afa794038556ef}
+
+\item 
+std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ {\bfseries nodes}\hypertarget{classnetxpert_1_1core_1_1MST__LEMON_a782ecb13ad3260cbeb46f98cf2d77faa}{}\label{classnetxpert_1_1core_1_1MST__LEMON_a782ecb13ad3260cbeb46f98cf2d77faa}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Core Solver for the Minimum Spanning Tree Problem. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/core/mstlem.\+h\item 
+/home/hahne/dev/netxpert1\+\_\+0/src/core/mstlem.\+cpp\end{DoxyCompactItemize}
