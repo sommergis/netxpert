@@ -30,19 +30,19 @@
 #include <cereal/types/vector.hpp>
 //#include <boost/bimap.hpp>
 
-//Dictionary<Tuple<uint32_t, uint32_t>, Tuple<string, double, double>> internalArcData;
-//typedef std::unordered_map<netxpert::data::InternalArc, netxpert::data::ArcData> internalArcData
-
 #include <lemon/smart_graph.h>
 #include <lemon/list_graph.h>
 #include <lemon/adaptors.h>
 
 namespace netxpert {
 
+    /**
+    * \brief Data structures for netXpert
+    **/
     namespace data {
 
     /**
-    * \const Value that shall be used instead of Infinity for arc values (e.g. capacity).
+    * \brief Value that shall be used instead of Infinity for arc values (e.g. capacity).
     **/
     const double DOUBLE_INFINITY = 999999;
     const double DOUBLE_NULL = -1;
@@ -64,7 +64,7 @@ namespace netxpert {
 
 
     /**
-    * \Custom data type for storing <arc,cost,capacity,segmentGeoms>
+    * \brief Custom data type for storing <arc,cost,capacity,segmentGeoms>
     **/
     template<typename arc_t>
     struct IntNetSplittedArc
@@ -95,8 +95,7 @@ namespace netxpert {
     };
 
     /**
-    * \Enum
-    * Enum that reflects the type of the netXpert Solver
+    * \brief Enum that reflects the type of the netXpert Solver
     **/
     enum NetXpertSolver : int16_t {
         UndefinedNetXpertSolver = -1,
@@ -111,8 +110,7 @@ namespace netxpert {
     };
 
     /**
-    * \Enum
-    * Enum that reflects the type of the ArcID Column in the netxpert database. Used for building
+    * \brief Enum that reflects the type of the ArcID Column in the netxpert database. Used for building
     * the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).
     **/
     enum ArcIDColumnDataType : int16_t {
@@ -120,8 +118,7 @@ namespace netxpert {
         Std_String = 1
     };
     /**
-    * \Enum
-    * Enum that reflects the type of the node that was added to break an edge of the network.
+    * \brief Enum that reflects the type of the node that was added to break an edge of the network.
     * Needed for building the total geometry of the route, if the network has been broken up through
     * additional start or end nodes.
     **/
@@ -131,8 +128,7 @@ namespace netxpert {
         EndArc = 2
     };
     /**
-    * \Enum
-    * Enum that reflects the type of the Minimum Cost Flow instance.
+    * \brief Enum that reflects the type of the Minimum Cost Flow instance.
     **/
     enum MinCostFlowInstanceType : int16_t {
         MCFUndefined = 0,     ///< undefined MCF problem type
@@ -142,8 +138,7 @@ namespace netxpert {
     };
 
     /**
-    * \Enum
-    * Enum that reflects the status of the Minimum Cost Flow solver.
+    * \brief Enum that reflects the status of the Minimum Cost Flow solver.
     **/
     enum MCFSolverStatus : int16_t {
        MCFUnSolved = -1 ,     ///< no solution available
@@ -155,8 +150,7 @@ namespace netxpert {
     };
 
     /**
-    * \Enum
-    * Enum that reflects the location of a given point on a line.
+    * \brief Enum that reflects the location of a given point on a line.
     **/
     enum StartOrEndLocationOfLine : int16_t {
         Intermediate = 0,     ///< points location is somewhere between the start and end point of the line
@@ -179,7 +173,7 @@ namespace netxpert {
     };
 
     /**
-    * \Custom data type for storing external nodes tuple <fromNode,toNode>
+    * \brief Custom data type for storing external nodes tuple <fromNode,toNode> as simple type variant
     **/
     struct ExternalArc
     {
@@ -194,7 +188,7 @@ namespace netxpert {
     };
 
     /**
-    *\Custom data type for storing external node supply <extNodeID,supply>
+    *\brief Data type for storing external node supply <extNodeID,supply> as simple type variant
     **/
     struct ExtNodeSupply
     {
@@ -210,7 +204,7 @@ namespace netxpert {
     };
 
     /**
-    * \Custom data type for storing external arc of SPTree/ODMatrix <extFromNode,extToNode,cost>
+    * \brief Custom data type for storing external arc of SPTree/ODMatrix <extFromNode,extToNode,cost> as simple type variant
     **/
     struct ExtSPTreeArc
     {
@@ -266,7 +260,7 @@ namespace netxpert {
     };
 
     /**
-    * \Custom data type for storing nodes tuple <fromNode,toNode>
+    * \brief Custom data type for storing nodes tuple <fromNode,toNode>
     **/
     struct InternalArc
     {
@@ -279,10 +273,12 @@ namespace netxpert {
       }
     };
 
+    /*
     /**
-    * \Custom data type for storing ODPair tuple <origin,dest>
+    * \brief Custom data type for storing ODPair tuple <origin,dest>
     **/
-    /*struct ODPair
+    /*
+    struct ODPair
     {
         uint32_t origin;
         uint32_t dest;
@@ -299,8 +295,29 @@ namespace netxpert {
         }
     };*/
 
+
     /**
-    * \Custom data type for storing lemon ODPair tuple <origin,dest>
+    * \brief Custom data type for storing ExtODPair tuple <origin,dest> as simple type variant
+    **/
+    struct ExtODPair
+    {
+        uint32_t origin;
+        uint32_t dest;
+
+        bool operator==(const ExtODPair& p2) const {
+          const ExtODPair& p1=(*this);
+          return p1.origin == p2.origin && p1.dest == p2.dest;
+        }
+        template<class Archive>
+        void serialize( Archive & ar )
+        {
+            ar( cereal::make_nvp("origin",origin),
+                cereal::make_nvp("destination",dest) );
+        }
+    };
+
+    /**
+    * \brief Custom data type for storing lemon ODPair tuple <origin,dest>
     **/
     struct ODPair
     {
@@ -314,21 +331,14 @@ namespace netxpert {
         bool operator<(const ODPair& p2) const {
           //CRITICAL for correct use of ODPair Class in std::map!
 
-          //this will lead to out_of_range-exceptions!
-          //bool ret = (this->origin < p2.origin) || (this->dest < p2.dest);
-
-          //bool ret = (( this->origin < p2.origin) && (this->dest < p2.dest) ) ; //6 Dist on transp med 2 baysf
-          //bool ret = (( this->origin < p2.origin) && (p2.dest < this->dest) ) ; //1 Dist on transp med 2 baysf
-          //bool ret = (( this->origin < p2.origin) ) ;                           //22 Dist on transp med 2 baysf
-
           // order first by origin and then by dest!
           if ( this->origin != p2.origin )
             return (this->origin < p2.origin );
           else
-            return (this->dest < p2.dest );                                      //177 Dist on transp med 2 baysf
+            return (this->dest < p2.dest );
 
         }
-
+        // will not work in archives
         /*template<class Archive>
         void serialize( Archive & ar )
         {
@@ -336,8 +346,9 @@ namespace netxpert {
                 cereal::make_nvp("destination",dest) );
         }*/
     };
+
     /**
-    * \Custom data type for storing tuple <extArcID,cost,capacity>
+    * \brief Data type for storing tuple <extArcID,cost,capacity>
     **/
     struct DuplicateArcData
     {
@@ -345,7 +356,7 @@ namespace netxpert {
         cost_t      cost;
     };
     /**
-    * \Custom data type for storing tuple <extArcID,cost,capacity>
+    * \brief Data type for storing tuple <extArcID,cost,capacity>
     **/
     struct ArcData
     {
@@ -353,7 +364,6 @@ namespace netxpert {
         cost_t      cost;
         capacity_t  capacity;
     };
-
     struct ArcData2
     {
         uint32_t    extArcID;
@@ -361,7 +371,7 @@ namespace netxpert {
         capacity_t  capacity;
     };
     /**
-    * \Custom data type for storing tuple <oldArcID,cost,capacity,flow>
+    * \brief Data type for storing tuple <oldArcID,cost,capacity,flow>
     **/
     struct ArcDataAndFlow
     {
@@ -371,7 +381,7 @@ namespace netxpert {
         flow_t      flow;
     };
     /**
-    * \Custom data type for storing tuple <fromNode,toNode,flow,cost>
+    * \brief Data type for storing tuple <fromNode,toNode,flow,cost>
     **/
     struct FlowCost
     {
@@ -380,21 +390,18 @@ namespace netxpert {
         cost_t       cost;
     };
 
-    /**
-    * \Custom data type for storing tuple <CompressedPath,cost>
-    **/
+    ///\brief Data type for storing tuple <CompressedPath,cost>
     /*typedef std::pair<std::vector<uint32_t>,double> CompressedPath;*/
     typedef std::pair<std::vector<netxpert::data::arc_t>, netxpert::data::cost_t> CompressedPath;
-    /**
-    * \Custom data type for storing tuple <CompressedPath,flow>
-    **/
+
+    ///\brief Data type for storing tuple <CompressedPath,flow>
     struct DistributionArc
     {
         CompressedPath  path;
         flow_t          flow;
     };
 
-
+    ///\brief Data type for storing tuple <extArcID,extArc,cost,flow>
     struct ExtDistributionArc
     {
         netxpert::data::ExtArcID    arcid;
@@ -415,9 +422,7 @@ namespace netxpert {
 
     typedef std::vector<netxpert::data::ExtDistributionArc> ExtDistribution;
 
-    /**
-    * \Custom data type for storing the result of the Transpotation Solver in JSON-Format.
-    **/
+    ///\brief Data type for storing the result of the Transpotation Solver in JSON-Format.
     struct TransportationResult
     {
         cost_t optimum;
@@ -431,9 +436,7 @@ namespace netxpert {
         }
     };
 
-    /**
-    * \Custom data type for storing the result of the MST Solver in JSON-Format.
-    **/
+    ///\brief Data type for storing the result of the MST Solver in JSON-Format.
     struct MSTResult
     {
         cost_t optimum;
@@ -447,9 +450,7 @@ namespace netxpert {
         }
     };
 
-    /**
-    * \Custom data type for storing the result of the SPT Solver in JSON-Format.
-    **/
+    ///\brief Data type for storing the result of the SPT Solver in JSON-Format.
     struct SPTResult
     {
         cost_t optimum;
@@ -463,26 +464,20 @@ namespace netxpert {
         }
     };
 
-    /**
-    * \Custom data type for storing tuple <extNodeID,coord>
-    **/
+    ///\brief Data type for storing tuple <extNodeID,coord>
     struct AddedPoint
     {
         std::string             extNodeID;
         geos::geom::Coordinate  coord;
     };
-    /**
-    * \Custom data type for storing tuple <extNodeID,supply>
-    **/
+    ///\brief Data type for storing tuple <extNodeID,supply>
     struct NodeSupply
     {
         std::string extNodeID;
         supply_t    supply;
     };
 
-    /**
-    * \Custom data type for storing new nodes data <extNodeID,<coord, supply>
-    **/
+    ///\brief Data type for storing new nodes data <extNodeID,coord,supply>
     struct NewNode
     {
         std::string             extNodeID;
@@ -493,9 +488,7 @@ namespace netxpert {
 //    #include "dbhelper.h"
 //    using netxpert::io::DBHELPER::GEO_FACTORY;
 
-    /**
-    * \Custom data type for storing tuple <arcGeom,nodeType,cost,capacity>
-    **/
+    ///\brief Data type for storing tuple <arcGeom,nodeType,cost,capacity>
     struct NewArc
     {
         NewArc(geos::geom::LineString& _arcGeom, netxpert::data::AddedNodeType _nodeType, cost_t _cost, capacity_t _capacity ) {
@@ -520,9 +513,7 @@ namespace netxpert {
         capacity_t                  capacity;
     };
 
-    /**
-    * \Custom data type for storing tuple <fromNode,toNode,arcGeom,cost,capacity>
-    **/
+    ///\brief Data type for storing tuple <fromNode,toNode,arcGeom,cost,capacity>
     struct SplittedArc
     {
         netxpert::data::InternalArc                  ftNode;
@@ -531,6 +522,7 @@ namespace netxpert {
         std::shared_ptr<geos::geom::MultiLineString> arcGeom;
     };
 
+    ///\brief Data type for storing tuple <extArcID,extFromNode,extToNode,cost,capacity,oneway>
     struct InputArc
     {
         std::string extArcID;
@@ -541,22 +533,24 @@ namespace netxpert {
         std::string oneway;
     };
 
+    ///\brief Data type for storing tuple <extNodeID,nodeSupply>
     struct InputNode
     {
         std::string extNodeID;
         supply_t    nodeSupply;
     };
 
+    ///\brief Stores the column names of the input data
     struct ColumnMap
     {
-        std::string arcIDColName;
-        std::string fromColName;
-        std::string toColName;
-        std::string costColName;
-        std::string capColName;
-        std::string onewayColName;
-        std::string nodeIDColName;
-        std::string supplyColName;
+        std::string arcIDColName;   //!< ID column name of the arcs
+        std::string fromColName;    //!< From node column Name of the arcs
+        std::string toColName;      //!< To node column Name of the arcs
+        std::string costColName;    //!< Cost column Name of the arcs
+        std::string capColName;     //!< Capacity node column Name of the arcs
+        std::string onewayColName;  //!< Oneway column Name of the arcs
+        std::string nodeIDColName;  //!< ID column name of the nodes
+        std::string supplyColName;  //!< Supply column name of the nodes
     };
 
     typedef uint32_t IntNodeID;
@@ -625,8 +619,8 @@ namespace std
 {
 
     /**
-    * \Extension for custom key type InternalArc specifying how to hash; serves as key in
-    * \unordered map.
+    * \class Extension for custom key type InternalArc specifying how to hash; serves as key in
+    * unordered map.
     **/
     template <>
     class hash<netxpert::data::InternalArc>
@@ -640,7 +634,7 @@ namespace std
     };
 
     /**
-    * \Equal_to operator for custom key type InternalArc in unordered map.
+    * \class equal_to operator for custom key type InternalArc in unordered map.
     **/
     template <>
     class equal_to<netxpert::data::InternalArc>
@@ -653,8 +647,8 @@ namespace std
     };
 
     /**
-    * \Extension for custom key type ODPair specifying how to hash; serves as key in
-    * \unordered map.
+    * \class Extension for custom key type ODPair specifying how to hash; serves as key in
+    * unordered map.
     **/
     /*template <>
     class hash<netxpert::data::ODPair>
@@ -668,7 +662,7 @@ namespace std
     };*/
 
     /**
-    * \Equal_to operator for custom key type ODPair in unordered map.
+    * \class equal_to operator for custom key type ODPair in unordered map.
     **/
     /*template <>
     class equal_to<netxpert::data::ODPair>

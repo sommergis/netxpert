@@ -24,6 +24,9 @@
 #include "sptree.h"
 
 namespace netxpert {
+  /**
+  * \brief Simple variants of all netXpert solvers
+  **/
  namespace simple {
 
     class ShortestPathTree

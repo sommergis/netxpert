@@ -1,0 +1,62 @@
+\hypertarget{classnetxpert_1_1utils_1_1UTILS}{}\section{netxpert\+:\+:utils\+:\+:U\+T\+I\+LS Class Reference}
+\label{classnetxpert_1_1utils_1_1UTILS}\index{netxpert\+::utils\+::\+U\+T\+I\+LS@{netxpert\+::utils\+::\+U\+T\+I\+LS}}
+
+
+{\ttfamily \#include $<$utils.\+h$>$}
+
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool {\bfseries Path\+Exists} (const std\+::string \&path)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a3ec5804a79dca438bcc2eba9724a1cee}{}\label{classnetxpert_1_1utils_1_1UTILS_a3ec5804a79dca438bcc2eba9724a1cee}
+
+\item 
+static bool {\bfseries File\+Exists} (const std\+::string \&path)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a143eeceead6be450b106f5b1f7f21323}{}\label{classnetxpert_1_1utils_1_1UTILS_a143eeceead6be450b106f5b1f7f21323}
+
+\item 
+static std\+::string {\bfseries Get\+Current\+Dir} ()\hypertarget{classnetxpert_1_1utils_1_1UTILS_a820571660f5778938e6a6763f338bb13}{}\label{classnetxpert_1_1utils_1_1UTILS_a820571660f5778938e6a6763f338bb13}
+
+\item 
+static bool {\bfseries Set\+Current\+Dir} (const std\+::string \&path)\hypertarget{classnetxpert_1_1utils_1_1UTILS_ac2f7d62ac547561bd266f70f59b31711}{}\label{classnetxpert_1_1utils_1_1UTILS_ac2f7d62ac547561bd266f70f59b31711}
+
+\item 
+static std\+::string {\bfseries Get\+Directory\+Name} (std\+::string \&\+\_\+file\+Path)\hypertarget{classnetxpert_1_1utils_1_1UTILS_ae3d6a8e0da3d811b2c2c715b36420b67}{}\label{classnetxpert_1_1utils_1_1UTILS_ae3d6a8e0da3d811b2c2c715b36420b67}
+
+\item 
+static std\+::string {\bfseries Get\+File\+Name\+Without\+Extension} (std\+::string \&\+\_\+file\+Path)\hypertarget{classnetxpert_1_1utils_1_1UTILS_ae95928fe63cac5d7c15b8b47d40e3633}{}\label{classnetxpert_1_1utils_1_1UTILS_ae95928fe63cac5d7c15b8b47d40e3633}
+
+\item 
+static std\+::vector$<$ std\+::string $>$ \& {\bfseries Split} (const std\+::string \&s, char delim, std\+::vector$<$ std\+::string $>$ \&elems)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a6de9d330b1ba37ee4f00d1229bd3f2b1}{}\label{classnetxpert_1_1utils_1_1UTILS_a6de9d330b1ba37ee4f00d1229bd3f2b1}
+
+\item 
+static std\+::vector$<$ std\+::string $>$ {\bfseries Split} (const std\+::string \&s, char delim)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a0024bea6b90e82c85e436ca366ab54c6}{}\label{classnetxpert_1_1utils_1_1UTILS_a0024bea6b90e82c85e436ca366ab54c6}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\static T {\bfseries Deserialize\+J\+S\+O\+Nto\+Object} (std\+::string \+\_\+json\+String)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a48e234571d9187affb93de9fd137bec4}{}\label{classnetxpert_1_1utils_1_1UTILS_a48e234571d9187affb93de9fd137bec4}
+
+\item 
+{\footnotesize template$<$typename T $>$ }\\static std\+::string {\bfseries Serialize\+Object\+To\+J\+S\+ON} (T \+\_\+in\+Data, std\+::string \+\_\+root\+Node\+Name=\char`\"{}input\char`\"{})\hypertarget{classnetxpert_1_1utils_1_1UTILS_a9b8ad3ed8655cc589d935d6a2f8b524a}{}\label{classnetxpert_1_1utils_1_1UTILS_a9b8ad3ed8655cc589d935d6a2f8b524a}
+
+\item 
+static std\+::wstring {\bfseries convert\+String\+To\+W\+String} (const std\+::string \&s)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a8be364101776edd0371a6d1ac2990266}{}\label{classnetxpert_1_1utils_1_1UTILS_a8be364101776edd0371a6d1ac2990266}
+
+\item 
+static std\+::string {\bfseries convert\+W\+String\+To\+String} (const std\+::wstring \&ws)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a7d704cac4e1cc8e025a1cf7f730d0f34}{}\label{classnetxpert_1_1utils_1_1UTILS_a7d704cac4e1cc8e025a1cf7f730d0f34}
+
+\item 
+static std\+::string {\bfseries Replace} (std\+::string \&str, const std\+::string \&from, const std\+::string \&to)\hypertarget{classnetxpert_1_1utils_1_1UTILS_ac027e782541fb700dd1bf8aa7c9283bd}{}\label{classnetxpert_1_1utils_1_1UTILS_ac027e782541fb700dd1bf8aa7c9283bd}
+
+\item 
+static std\+::string {\bfseries Replace\+All} (std\+::string \&str, const std\+::string \&from, const std\+::string \&to)\hypertarget{classnetxpert_1_1utils_1_1UTILS_ad13853eb638c1d33afbb7bcfee7a857b}{}\label{classnetxpert_1_1utils_1_1UTILS_ad13853eb638c1d33afbb7bcfee7a857b}
+
+\item 
+static bool {\bfseries Is\+Equal} (const std\+::string \&a, const std\+::string \&b)\hypertarget{classnetxpert_1_1utils_1_1UTILS_a72a08ffc285bfbccdcbb182b48ebb4f4}{}\label{classnetxpert_1_1utils_1_1UTILS_a72a08ffc285bfbccdcbb182b48ebb4f4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Static \hyperlink{classClass}{Class} that provides utility functions 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/utils.\+h\end{DoxyCompactItemize}

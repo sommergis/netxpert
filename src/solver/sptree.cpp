@@ -236,7 +236,7 @@ void
     #if (defined ENABLE_CONTRACTION_HIERARCHIES)
     bool chSearch = net.GetHasContractionHierarchies();
     #endif
-//    if (!chSearch) {
+    if (!chSearch) {
       auto sg = convertInternalNetworkToSolverData(net);
 
       //check arc filter
@@ -283,50 +283,53 @@ void
 
       optimum = totalCost;
 
-//    }
+    }
 //    else { //CH search
 
     #if (defined ENABLE_CONTRACTION_HIERARCHIES)
-      if (chSearch) {
+    if (chSearch) {
 
-        auto* spt_ch = dynamic_cast<SPT_LEM*>(spt.get());
+      auto sg = convertInternalNetworkToSolverData(net);
 
-    //      spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetArcMap_CH());
-        spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetNodeCrossRefMap_CH());
+      spt->LoadNet(net.GetNodeCount(), net.GetArcCount(), &sg, net.GetCostMap());
 
-        spt_ch->SetOrigin(orig);
+      auto* spt_ch = dynamic_cast<SPT_LEM*>(spt.get());
 
-        LOGGER::LogDebug("Calculating routes from " + net.GetOrigNodeID(orig) + " to " +
-                                net.GetOrigNodeID(dest) );
-        spt_ch->SetDest(dest);
+  //      spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetArcMap_CH());
+      spt_ch->LoadNet_CH(net.GetCHManager(), net.GetCostMap_CH(), net.GetNodeMap_CH(), net.GetNodeCrossRefMap_CH());
+
+      spt_ch->SetOrigin(orig);
+
+      LOGGER::LogDebug("Calculating routes from " + net.GetOrigNodeID(orig) + " to " +
+                              net.GetOrigNodeID(dest) );
+      spt_ch->SetDest(dest);
 
 
-        LOGGER::LogDebug("Starting to solve SPT with CH..");
+      LOGGER::LogDebug("Starting to solve SPT with CH..");
 
+      spt_ch->SolveSPT_CH();
 
-        spt_ch->SolveSPT_CH();
+      LOGGER::LogDebug("SPT CH solved!");
 
-        LOGGER::LogDebug("SPT CH solved!");
-
-        const auto chPath = spt_ch->GetPath_CH();
+      const auto chPath = spt_ch->GetPath_CH();
 
     //      for (auto& b : chPath) {
     //        std::cout << net.GetNodeID(net.GetSourceNode(b)) << "->" << net.GetNodeID(net.GetTargetNode(b)) << " at "<< net.GetArcCost(b)<< std::endl;
     //      }
 
-        auto chTotalCost = spt_ch->GetDist_CH();
+      auto chTotalCost = spt_ch->GetDist_CH();
 
-        //clear first
-        shortestPaths.clear();
+      //clear first
+      shortestPaths.clear();
 
-        shortestPaths.insert( make_pair( ODPair {orig, dest},
-                              make_pair( chPath, chTotalCost)) );
-        reachedDests.clear();
+      shortestPaths.insert( make_pair( ODPair {orig, dest},
+                            make_pair( chPath, chTotalCost)) );
+      reachedDests.clear();
 
-        reachedDests.push_back(dest);
+      reachedDests.push_back(dest);
 
-        optimum = chTotalCost;
-      }
+      optimum = chTotalCost;
+    }
     #endif
 
     //experimental CH
@@ -549,7 +552,7 @@ vector<uint32_t>
 
 map<ODPair, CompressedPath>
  ShortestPathTree::GetShortestPaths() const {
-    return this->shortestPaths;
+  return this->shortestPaths;
 }
 
 inline const double
@@ -558,56 +561,57 @@ inline const double
 }
 
 void ShortestPathTree::SaveResults(const std::string& resultTableName,
-                                   const ColumnMap& cmap) const
-{
-    try
+                                   const ColumnMap& cmap,
+                                   const std::string& format) const {
+  try
+  {
+    Config cnfg = this->NETXPERT_CNFG;
+    unique_ptr<DBWriter> writer;
+    unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+
+    switch (cnfg.ResultDBType)
     {
-        Config cnfg = this->NETXPERT_CNFG;
-        unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-
-        switch (cnfg.ResultDBType)
+      case RESULT_DB_TYPE::SpatiaLiteDB:
+      {
+        if (cnfg.ResultDBPath == cnfg.NetXDBPath)
         {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
-                {
-                    //Override result DB Path with original netXpert DB path
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
-                }
-                else
-				{
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
-                writer->CreateNetXpertDB(); //create before preparing query
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
-                writer->CommitCurrentTransaction();
-                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {*/
-                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::ShortestPathTreeSolver));
-                //}
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-                writer->CreateNetXpertDB();
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
-                writer->CommitCurrentTransaction();
-            }
-                break;
+            //Override result DB Path with original netXpert DB path
+            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
         }
-
-        LOGGER::LogDebug("Writing Geometries..");
+        else
+        {
+          writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+        }
+        writer->CreateNetXpertDB(); //create before preparing query
         writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
+        writer->CommitCurrentTransaction();
+        /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+        {*/
+        auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+        qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::ShortestPathTreeSolver));
+        //}
+      }
+      break;
 
-        //Processing and Saving Results are handled within net.ProcessResultArcs()
-        std::string arcIDs = "";
-        std::unordered_set<string> totalArcIDs;
-        std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath
+      case RESULT_DB_TYPE::ESRI_FileGDB:
+      {
+          writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+          writer->CreateNetXpertDB();
+          writer->OpenNewTransaction();
+          writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
+          writer->CommitCurrentTransaction();
+      }
+      break;
+    }
+
+    LOGGER::LogDebug("Writing Geometries..");
+    writer->OpenNewTransaction();
+
+    //Processing and Saving Results are handled within net.ProcessResultArcs()
+    std::string arcIDs = "";
+    std::unordered_set<string> totalArcIDs;
+    std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath
 
 		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
 		{
@@ -653,84 +657,58 @@ void ShortestPathTree::SaveResults(const std::string& resultTableName,
 			}
 			LOGGER::LogDebug("Done!");
 		}
-        int counter = 0;
+
+    int counter = 0;
 
 		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
-        {
+    {
 
-        for (it = this->shortestPaths.begin(); it != this->shortestPaths.end(); ++it)
-        {
-            #pragma omp single nowait
-            {
-            auto kv = *it;
+    for (it = this->shortestPaths.begin(); it != this->shortestPaths.end(); ++it)
+    {
+      #pragma omp single nowait
+      {
+      auto kv = *it;
 
-            counter += 1;
-            if (counter % 2500 == 0)
-                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+      counter += 1;
+      if (counter % 2500 == 0)
+          LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-            string arcIDs = "";
-            ODPair key = kv.first;
-            CompressedPath value = kv.second;
-            /* resolve pred path to arcids */
-            /* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
-            auto path = value.first;
-            std::unordered_set<std::string> arcIDlist = this->net->GetOrigArcIDs(path);
-            double costPerPath = value.second;
+      string arcIDs = "";
+      ODPair key = kv.first;
+      CompressedPath value = kv.second;
+      /* resolve pred path to arcids */
+      /* ArcLookup vs AllArcLookup vs saving the path of the route, not only the preds ?*/
+      auto path = value.first;
+      std::unordered_set<std::string> arcIDlist = this->net->GetOrigArcIDs(path);
+      double costPerPath = value.second;
 
-            if (arcIDlist.size() > 0)
-            {
-                for (string id : arcIDlist) {
-                    arcIDs += id += ",";
-                }
-                arcIDs.pop_back(); //trim last comma
-            }
-
-            string orig = this->net->GetOrigNodeID(key.origin);
-            string dest = this->net->GetOrigNodeID(key.dest);
-
-            this->net->ProcessSPTResultArcsMem(orig, dest, costPerPath, arcIDs, path, resultTableName, *writer, *qry);
-            }//omp single
+      if (arcIDlist.size() > 0)
+      {
+        for (string id : arcIDlist) {
+            arcIDs += id += ",";
         }
-        }//omp paralell
-        LOGGER::LogDebug("Committing..");
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
+        arcIDs.pop_back(); //trim last comma
+      }
+
+      string orig = this->net->GetOrigNodeID(key.origin);
+      string dest = this->net->GetOrigNodeID(key.dest);
+
+      this->net->ProcessSPTResultArcsMem(orig, dest, costPerPath, arcIDs, path, resultTableName, *writer, *qry);
+      }//omp single
+
+      }
+      }//omp paralell
+      LOGGER::LogDebug("Committing..");
+      writer->CommitCurrentTransaction();
+      writer->CloseConnection();
+      LOGGER::LogDebug("Done!");
     }
     catch (exception& ex)
     {
-        LOGGER::LogError("ShortestPaths::SaveResults() - Unexpected Error!");
-        LOGGER::LogError(ex.what());
+      LOGGER::LogError("ShortestPaths::SaveResults() - Unexpected Error!");
+      LOGGER::LogError(ex.what());
     }
 }
-
-/*
-lemon::Path<netxpert::data::graph_t>
- ShortestPathTree::UncompressRoute(netxpert::data::node_t orig,
-                                   std::vector<netxpert::data::node_t>& ends) {
-
-    using namespace std;
-    vector<InternalArc> startsNends;
-    for (int i = 0; i < ends.size(); i++)
-    {
-        if (i != ends.size() - 1)
-            startsNends.push_back( InternalArc { ends[i + 1], ends[i] } );
-        else
-            startsNends.push_back( InternalArc {  orig, ends[i] } );
-    }
-    return startsNends;
-}
-
-bool internalArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
-                            std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
-    return a.first.fromNode > b.first.fromNode;
-}
-
-bool sortedArcComp(std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> a,
-                            std::pair<netxpert::data::InternalArc,netxpert::data::ArcData> b) {
-    return  (a.first == b.first) ;
-}*/
-
 
 lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
  ShortestPathTree::convertInternalNetworkToSolverData(InternalNet& net

@@ -24,7 +24,10 @@
 #include "sptree.h"
 
 namespace netxpert {
- namespace simple {
+  /**
+  * \brief Simple variants of all netXpert solvers
+  **/
+  namespace simple {
 
     class Isolines
     {

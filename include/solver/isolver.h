@@ -18,12 +18,11 @@
 #define ISOLVER_H
 
 #include <string>
-//#include "network.h"
 #include "lemon-net.h"
 
 namespace netxpert {
     /**
-    * \Abstract Abstract Class (Interface) for all Solvers
+    * \brief Abstract Class (Interface) for all Solvers
     **/
     class ISolver
     {

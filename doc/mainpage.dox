@@ -1,0 +1,34 @@
+/**
+\mainpage netXpert++
+
+netXpert++ is a library for solving network analysis problems on spatial networks written in C++ 11. 
+The main goals of the library are performance and simplicity of the API.
+
+
+\b Solver:
+- shortest path solver (1-1, 1-n, 1-all)
+- origin destination matrix (no geometry, straight lines, real geometries)
+- transportation solver
+- minimum cost flow solver
+- minimum spanning tree
+
+\b Features:
+- respects barrier geometries
+- respects oneway arcs
+- database backed
+- Bindings for Python, C# through SWIG
+
+\b Performance:
+- use of highly efficient graph analysis algorithms and data structures (LEMON, future Boost Graph Library)
+- multiprocessing where reasonable with OpenMP
+
+\b Dependencies:
+- cereal 
+- FileGDBAPI 1.4 
+- GEOS 3.4.2
+- LEMON 1.3.1
+- SpatiaLite 4.3.0
+- SQliteCPP 1.3.0
+- SQLite Amalgamation 3.9.2
+- Boost 1.57
+*/

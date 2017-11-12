@@ -1,0 +1,4 @@
+<map id="netxpert::MinCostFlow" name="netxpert::MinCostFlow">
+<area shape="rect" id="node2" href="$classnetxpert_1_1ISolver.html" title="Abstract Class (Interface) for all Solvers. " alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node3" href="$structnetxpert_1_1cnfg_1_1Config.html" title="Storage for the configuration of NetXpert. " alt="" coords="148,5,296,32"/>
+</map>

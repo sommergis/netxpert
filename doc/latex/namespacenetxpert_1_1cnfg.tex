@@ -1,0 +1,194 @@
+\hypertarget{namespacenetxpert_1_1cnfg}{}\section{netxpert\+:\+:cnfg Namespace Reference}
+\label{namespacenetxpert_1_1cnfg}\index{netxpert\+::cnfg@{netxpert\+::cnfg}}
+
+
+\hyperlink{structnetxpert_1_1cnfg_1_1Config}{Config} structures for net\+Xpert.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structnetxpert_1_1cnfg_1_1Config}{Config}
+\begin{DoxyCompactList}\small\item\em Storage for the configuration of Net\+Xpert. \end{DoxyCompactList}\item 
+class \hyperlink{classnetxpert_1_1cnfg_1_1ConfigReader}{Config\+Reader}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}{G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89af3fbb8ce1cd136e1fa5bc3645ec6c4d9}{No\+Geometry} = 0, 
+\hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a275f920bcb17d14a1c719ff82804cc96}{Straight\+Lines} = 1, 
+\hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a76d3f1e484baac8836d480cec7faaf96}{Real\+Geometry} = 2
+ \}\begin{DoxyCompactList}\small\item\em Geometry Handling. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_ae473d83baf6d2ee9328c66364eefc8df}{T\+E\+S\+T\+C\+A\+SE} \+: int16\+\_\+t \{ \\*
+{\bfseries Test\+Network\+Builder} = 0, 
+{\bfseries Shortest\+Path\+Tree\+C\+OM} = 1, 
+{\bfseries O\+D\+Matrix\+C\+OM} = 2, 
+{\bfseries Transportation\+C\+OM} = 3, 
+\\*
+{\bfseries M\+S\+T\+C\+OM} = 4, 
+{\bfseries Isolines\+C\+OM} = 5, 
+{\bfseries Dump\+Internal\+Arcs\+To\+DB} = 6, 
+{\bfseries Network\+Convert} = 7, 
+\\*
+{\bfseries Test\+File\+G\+D\+B\+Writer} = 8, 
+{\bfseries Test\+Spatia\+Lite\+Writer} = 9, 
+{\bfseries Test\+Add\+Nodes} = 10, 
+{\bfseries Test\+Create\+Route\+Geometries} = 11, 
+\\*
+{\bfseries M\+C\+F\+C\+OM} = 12, 
+{\bfseries Transportation\+C\+O\+M\+Ext} = 13, 
+{\bfseries O\+D\+Matrix\+C\+O\+M2} = 14
+ \}\hypertarget{namespacenetxpert_1_1cnfg_ae473d83baf6d2ee9328c66364eefc8df}{}\label{namespacenetxpert_1_1cnfg_ae473d83baf6d2ee9328c66364eefc8df}
+\begin{DoxyCompactList}\small\item\em Test\+Cases, that can be started per entry \char`\"{}\+Test\+Case\char`\"{} in Config file. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5}{R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5a26c69a0027fcd7eeb815ce199810bbc3}{Spatia\+Lite\+DB} = 0, 
+\hyperlink{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5abb81749ad734681252e6b2c9f91c38df}{E\+S\+R\+I\+\_\+\+File\+G\+DB} = 1
+ \}\begin{DoxyCompactList}\small\item\em Type of the output DB in which the solver result is been written. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696}{L\+O\+G\+\_\+\+L\+E\+V\+EL} \+: int16\+\_\+t \{ \\*
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696aac903eea1288f6c6d924709a6ff8c0db}{Log\+All} = -\/1, 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a54720310e386ec5372d39d8db44e796c}{Log\+Debug} = 0, 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a8e9194abfb9d1ae1c84527e87f5d3a88}{Log\+Info} = 1, 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a3863429b4247f90b80b9500ee0279143}{Log\+Warning} = 2, 
+\\*
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a1470b9b468fec87067ef98ca3bb529c6}{Log\+Error} = 3, 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a42271ecb20211ef7991c7b55ba044621}{Log\+Fatal} = 4, 
+\hyperlink{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696acbe066a644e3fc003480708dd18ccc7d}{Log\+Quiet} = 5
+ \}\begin{DoxyCompactList}\small\item\em Type of the Log Level. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}{S\+P\+T\+Algorithm} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55dad102d02d5d9fe173a6436a5387c89302}{Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON} = 4, 
+\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daa3460b7835997b44d4dabfa0f1a59999}{Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON} = 5, 
+\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daae8350a27b1b5c3b8c370026fe9d1f7e}{Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST} = 6, 
+\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55da3b784ff83aaa97f8a687cc765b042d48}{O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap} = 7
+ \}\begin{DoxyCompactList}\small\item\em Type of the Shortest Path Tree algorithms. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9}{M\+C\+F\+Algorithm} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9a59fa53b7ea6109479c807547ca718146}{Network\+Simplex\+\_\+\+L\+E\+M\+ON} = 1
+ \}\begin{DoxyCompactList}\small\item\em Type of the Minimum Cost Flow algorithms. \end{DoxyCompactList}
+\item 
+enum \hyperlink{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799}{M\+S\+T\+Algorithm} \+: int16\+\_\+t \{ \hyperlink{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799a548b8f5561ba6b0c0e77d67665e37c5a}{Kruskal\+\_\+\+L\+E\+M\+ON} = 2
+ \}\begin{DoxyCompactList}\small\item\em Type of the Minimum Spanning Tree algorithms. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{namespacenetxpert_1_1cnfg_ada3b53a68cdf167895c961fba11694aa}{L\+O\+C\+A\+L\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS} = std\+::floor(omp\+\_\+get\+\_\+max\+\_\+threads() $\ast$ 0.\+8)\hypertarget{namespacenetxpert_1_1cnfg_ada3b53a68cdf167895c961fba11694aa}{}\label{namespacenetxpert_1_1cnfg_ada3b53a68cdf167895c961fba11694aa}
+
+\begin{DoxyCompactList}\small\item\em 80\% of available C\+PU Power (=number of threads) is used (can be overridden by setting environment variable O\+M\+P\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS to a higher value) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{structnetxpert_1_1cnfg_1_1Config}{Config} structures for net\+Xpert. 
+
+\subsection{Enumeration Type Documentation}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG@{G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG}}
+\index{G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG@{G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG}{GEOMETRY_HANDLING}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}{}\label{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}
+
+
+Geometry Handling. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{No\+Geometry@{No\+Geometry}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!No\+Geometry@{No\+Geometry}}\item[{\em 
+No\+Geometry\hypertarget{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89af3fbb8ce1cd136e1fa5bc3645ec6c4d9}{}\label{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89af3fbb8ce1cd136e1fa5bc3645ec6c4d9}
+}]Output will be attribute tables only -\/ no geometries. \index{Straight\+Lines@{Straight\+Lines}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Straight\+Lines@{Straight\+Lines}}\item[{\em 
+Straight\+Lines\hypertarget{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a275f920bcb17d14a1c719ff82804cc96}{}\label{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a275f920bcb17d14a1c719ff82804cc96}
+}]Output will be straight lines (\char`\"{}as the crow flies\char`\"{}) from start to end points. \index{Real\+Geometry@{Real\+Geometry}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Real\+Geometry@{Real\+Geometry}}\item[{\em 
+Real\+Geometry\hypertarget{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a76d3f1e484baac8836d480cec7faaf96}{}\label{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89a76d3f1e484baac8836d480cec7faaf96}
+}]Output will be line geometries. \end{description}
+\end{Desc}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!L\+O\+G\+\_\+\+L\+E\+V\+EL@{L\+O\+G\+\_\+\+L\+E\+V\+EL}}
+\index{L\+O\+G\+\_\+\+L\+E\+V\+EL@{L\+O\+G\+\_\+\+L\+E\+V\+EL}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{L\+O\+G\+\_\+\+L\+E\+V\+EL}{LOG_LEVEL}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+L\+O\+G\+\_\+\+L\+E\+V\+EL} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696}
+
+
+Type of the Log Level. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Log\+All@{Log\+All}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+All@{Log\+All}}\item[{\em 
+Log\+All\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696aac903eea1288f6c6d924709a6ff8c0db}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696aac903eea1288f6c6d924709a6ff8c0db}
+}]Any message will be logged, also debugging infos. \index{Log\+Debug@{Log\+Debug}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Debug@{Log\+Debug}}\item[{\em 
+Log\+Debug\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a54720310e386ec5372d39d8db44e796c}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a54720310e386ec5372d39d8db44e796c}
+}]Any message from fatal errors to debug messages will be logged. \index{Log\+Info@{Log\+Info}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Info@{Log\+Info}}\item[{\em 
+Log\+Info\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a8e9194abfb9d1ae1c84527e87f5d3a88}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a8e9194abfb9d1ae1c84527e87f5d3a88}
+}]Any message from fatal errors to info messages will be logged. \index{Log\+Warning@{Log\+Warning}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Warning@{Log\+Warning}}\item[{\em 
+Log\+Warning\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a3863429b4247f90b80b9500ee0279143}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a3863429b4247f90b80b9500ee0279143}
+}]Any message from fatal errors to warning messages will be logged. \index{Log\+Error@{Log\+Error}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Error@{Log\+Error}}\item[{\em 
+Log\+Error\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a1470b9b468fec87067ef98ca3bb529c6}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a1470b9b468fec87067ef98ca3bb529c6}
+}]Any message from fatal errors to info messages will be logged. \index{Log\+Fatal@{Log\+Fatal}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Fatal@{Log\+Fatal}}\item[{\em 
+Log\+Fatal\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a42271ecb20211ef7991c7b55ba044621}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696a42271ecb20211ef7991c7b55ba044621}
+}]Only fatal errors will be logged. \index{Log\+Quiet@{Log\+Quiet}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Log\+Quiet@{Log\+Quiet}}\item[{\em 
+Log\+Quiet\hypertarget{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696acbe066a644e3fc003480708dd18ccc7d}{}\label{namespacenetxpert_1_1cnfg_ac9cb46108300f2d88ac15f7460ca0696acbe066a644e3fc003480708dd18ccc7d}
+}]No logging at all. \end{description}
+\end{Desc}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!M\+C\+F\+Algorithm@{M\+C\+F\+Algorithm}}
+\index{M\+C\+F\+Algorithm@{M\+C\+F\+Algorithm}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{M\+C\+F\+Algorithm}{MCFAlgorithm}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+M\+C\+F\+Algorithm} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9}{}\label{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9}
+
+
+Type of the Minimum Cost Flow algorithms. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Network\+Simplex\+\_\+\+L\+E\+M\+ON@{Network\+Simplex\+\_\+\+L\+E\+M\+ON}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Network\+Simplex\+\_\+\+L\+E\+M\+ON@{Network\+Simplex\+\_\+\+L\+E\+M\+ON}}\item[{\em 
+Network\+Simplex\+\_\+\+L\+E\+M\+ON\hypertarget{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9a59fa53b7ea6109479c807547ca718146}{}\label{namespacenetxpert_1_1cnfg_aae922390a89b0c9af1bc2532428c5ef9a59fa53b7ea6109479c807547ca718146}
+}]Network\+Simplex algorithm of L\+E\+M\+ON. \end{description}
+\end{Desc}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!M\+S\+T\+Algorithm@{M\+S\+T\+Algorithm}}
+\index{M\+S\+T\+Algorithm@{M\+S\+T\+Algorithm}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{M\+S\+T\+Algorithm}{MSTAlgorithm}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+M\+S\+T\+Algorithm} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799}{}\label{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799}
+
+
+Type of the Minimum Spanning Tree algorithms. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Kruskal\+\_\+\+L\+E\+M\+ON@{Kruskal\+\_\+\+L\+E\+M\+ON}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Kruskal\+\_\+\+L\+E\+M\+ON@{Kruskal\+\_\+\+L\+E\+M\+ON}}\item[{\em 
+Kruskal\+\_\+\+L\+E\+M\+ON\hypertarget{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799a548b8f5561ba6b0c0e77d67665e37c5a}{}\label{namespacenetxpert_1_1cnfg_ab77ff30f2da32945dbb19bdf6199f799a548b8f5561ba6b0c0e77d67665e37c5a}
+}]Kruskal\textquotesingle{}s Minimum Spanning Tree algorithm of L\+E\+M\+ON. \end{description}
+\end{Desc}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE@{R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE}}
+\index{R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE@{R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE}{RESULT_DB_TYPE}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+R\+E\+S\+U\+L\+T\+\_\+\+D\+B\+\_\+\+T\+Y\+PE} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5}{}\label{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5}
+
+
+Type of the output DB in which the solver result is been written. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Spatia\+Lite\+DB@{Spatia\+Lite\+DB}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Spatia\+Lite\+DB@{Spatia\+Lite\+DB}}\item[{\em 
+Spatia\+Lite\+DB\hypertarget{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5a26c69a0027fcd7eeb815ce199810bbc3}{}\label{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5a26c69a0027fcd7eeb815ce199810bbc3}
+}]Spatia\+Lite Format $>$ 4.\+3.\+0. \index{E\+S\+R\+I\+\_\+\+File\+G\+DB@{E\+S\+R\+I\+\_\+\+File\+G\+DB}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!E\+S\+R\+I\+\_\+\+File\+G\+DB@{E\+S\+R\+I\+\_\+\+File\+G\+DB}}\item[{\em 
+E\+S\+R\+I\+\_\+\+File\+G\+DB\hypertarget{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5abb81749ad734681252e6b2c9f91c38df}{}\label{namespacenetxpert_1_1cnfg_a235b32f52360f5f331279b34e85064a5abb81749ad734681252e6b2c9f91c38df}
+}]E\+S\+RI File Geodatabase with File\+G\+DB A\+PI 1.\+4. \end{description}
+\end{Desc}
+\index{netxpert\+::cnfg@{netxpert\+::cnfg}!S\+P\+T\+Algorithm@{S\+P\+T\+Algorithm}}
+\index{S\+P\+T\+Algorithm@{S\+P\+T\+Algorithm}!netxpert\+::cnfg@{netxpert\+::cnfg}}
+\subsubsection[{\texorpdfstring{S\+P\+T\+Algorithm}{SPTAlgorithm}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf netxpert\+::cnfg\+::\+S\+P\+T\+Algorithm} \+: int16\+\_\+t}\hypertarget{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}{}\label{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}
+
+
+Type of the Shortest Path Tree algorithms. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON@{Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON@{Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON}}\item[{\em 
+Dijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON\hypertarget{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55dad102d02d5d9fe173a6436a5387c89302}{}\label{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55dad102d02d5d9fe173a6436a5387c89302}
+}]Dijkstra of L\+E\+M\+ON with binary heap. \index{Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON@{Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON@{Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON}}\item[{\em 
+Bijkstra\+\_\+2\+Heap\+\_\+\+L\+E\+M\+ON\hypertarget{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daa3460b7835997b44d4dabfa0f1a59999}{}\label{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daa3460b7835997b44d4dabfa0f1a59999}
+}]Bidirectional Dijkstra of L\+E\+M\+ON with binary heap. \index{Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST@{Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST@{Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST}}\item[{\em 
+Dijkstra\+\_\+dheap\+\_\+\+B\+O\+O\+ST\hypertarget{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daae8350a27b1b5c3b8c370026fe9d1f7e}{}\label{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55daae8350a27b1b5c3b8c370026fe9d1f7e}
+}]Dijkstra of Boost Graph Library with d-\/ary heap. \index{O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap@{O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap}!netxpert\+::cnfg@{netxpert\+::cnfg}}\index{netxpert\+::cnfg@{netxpert\+::cnfg}!O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap@{O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap}}\item[{\em 
+O\+D\+M\+\_\+\+L\+E\+M\+\_\+2\+Heap\hypertarget{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55da3b784ff83aaa97f8a687cc765b042d48}{}\label{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55da3b784ff83aaa97f8a687cc765b042d48}
+}]\begin{DoxyWarning}{Warning}
+\+: was just an experiment! 
+\end{DoxyWarning}
+\end{description}
+\end{Desc}
