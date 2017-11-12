@@ -28,9 +28,12 @@ using namespace lemon;
 using namespace netxpert::data;
 
 namespace netxpert {
+    /**
+    * \brief Core solvers of netXpert
+    **/
     namespace core {
     /**
-    *  \Class Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON.
+    *  \brief Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON.
     */
     class NS_LEM : public netxpert::core::IMinCostFlow
     {

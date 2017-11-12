@@ -23,13 +23,12 @@
 //#include "sptbgl.h"
 #include "data.h"
 #include "lemon-net.h"
-//#include <lemon/adaptors.h>
-
 #include <omp.h>
+
 namespace netxpert {
 
     /**
-    * \Class Solver for computing an Origin Destination Matrix
+    * \brief Solver for computing an Origin Destination Matrix
     */
     class OriginDestinationMatrix : public netxpert::ISolver
     {

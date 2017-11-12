@@ -22,10 +22,12 @@
 #include "utils.h"
 
 namespace netxpert {
-    namespace utils {
-
     /**
-    * \Static Class for logging
+    * \brief Utitlity functions
+    **/
+    namespace utils {
+    /**
+    * \brief Logger class
     **/
     class LOGGER
     {

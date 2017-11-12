@@ -28,14 +28,20 @@
 
 namespace netxpert {
 
+    /**
+    * \brief Current version of netXpert
+    **/
     static const std::string Version() {
         return "0.9.8";
     };
 
+    /**
+    * \brief Config structures for netXpert
+    **/
     namespace cnfg {
 
     /**
-    * 80% of available CPU Power (=number of threads) is used
+    * \brief 80% of available CPU Power (=number of threads) is used
     * (can be overridden by setting environment variable
     *  OMP_NUM_THREADS to a higher value)
     */
@@ -52,16 +58,16 @@ namespace netxpert {
 	//#endif // OMP_H
 
     /**
-    * \Enum Geometry Handling.
+    * \brief Geometry Handling.
     **/
     enum GEOMETRY_HANDLING : int16_t {
-        NoGeometry = 0,
-        StraightLines = 1,
-        RealGeometry = 2
+        NoGeometry = 0,    //!< Output will be attribute tables only - no geometries.
+        StraightLines = 1, //!< Output will be straight lines ("as the crow flies") from start to end points.
+        RealGeometry = 2   //!< Output will be line geometries.
     };
 
     /**
-    * \Enum TestCases, that can be started per entry "TestCase" in Config file.
+    * \brief TestCases, that can be started per entry "TestCase" in Config file.
     **/
     enum TESTCASE : int16_t {
         TestNetworkBuilder = 0,
@@ -82,93 +88,93 @@ namespace netxpert {
     };
 
     /**
-    * \Enum Type of the output DB in which the solver result is been written.
+    * \brief Type of the output DB in which the solver result is been written.
     **/
     enum RESULT_DB_TYPE : int16_t {
-        SpatiaLiteDB = 0,
-        ESRI_FileGDB = 1
+        SpatiaLiteDB = 0, //!< SpatiaLite Format > 4.3.0.
+        ESRI_FileGDB = 1  //!< ESRI File Geodatabase with FileGDB API 1.4.
     };
 
     /**
-    * \Enum Type of the Log Level.
+    * \brief Type of the Log Level.
     **/
     enum LOG_LEVEL : int16_t {
-       LogAll = -1,
-       LogDebug = 0,
-       LogInfo = 1,
-       LogWarning = 2,
-       LogError = 3,
-       LogFatal = 4,
-       LogQuiet = 5
+       LogAll = -1,   //!< Any message will be logged, also debugging infos.
+       LogDebug = 0,  //!< Any message from fatal errors to debug messages will be logged.
+       LogInfo = 1,   //!< Any message from fatal errors to info messages will be logged.
+       LogWarning = 2,//!< Any message from fatal errors to warning messages will be logged.
+       LogError = 3,  //!< Any message from fatal errors to info messages will be logged.
+       LogFatal = 4,  //!< Only fatal errors will be logged.
+       LogQuiet = 5   //!< No logging at all.
     };
     /**
-    * \Enum Type of the Shortest Path Tree algorithms.
+    * \brief Type of the Shortest Path Tree algorithms.
     **/
     enum SPTAlgorithm : int16_t {
-        Dijkstra_2Heap_LEMON = 4,
-        Bijkstra_2Heap_LEMON = 5,   //EXPERIMENTAL
-        Dijkstra_dheap_BOOST = 6,   //EXPERIMENTAL
-        ODM_LEM_2Heap = 7           //EXPERIMENTAL
+        Dijkstra_2Heap_LEMON = 4, //!< Dijkstra of LEMON with binary heap
+        Bijkstra_2Heap_LEMON = 5, //!< Bidirectional Dijkstra of LEMON with binary heap
+        Dijkstra_dheap_BOOST = 6, //!< Dijkstra of Boost Graph Library with d-ary heap
+        ODM_LEM_2Heap = 7         //!< \warning: was just an experiment!
     };
     /**
-    * \Enum Type of the Minimum Cost Flow algorithms.
+    * \brief Type of the Minimum Cost Flow algorithms.
     **/
     enum MCFAlgorithm : int16_t {
-        NetworkSimplex_LEMON = 1
+        NetworkSimplex_LEMON = 1  //!< NetworkSimplex algorithm of LEMON
     };
     /**
-    * \Enum Type of the Minimum Spanning Tree algorithms.
+    * \brief Type of the Minimum Spanning Tree algorithms.
     **/
     enum MSTAlgorithm : int16_t {
         //Kruskal_QuickGraph = 0, //.NET!
         //Prim_QuickGraph = 1,    //.NET!
-        Kruskal_LEMON = 2
+        Kruskal_LEMON = 2 //!< Kruskal's Minimum Spanning Tree algorithm of LEMON.
     };
 
     /**
-    * \Class Storage for the configuration of NetXpert
+    * \brief Storage for the configuration of NetXpert
     **/
     struct Config
     {
-        std::string NetXDBPath; //!< Member variable "netxDBPath"
-        std::string ResultDBPath; //!< Member variable "resultDBPath"
-        netxpert::cnfg::RESULT_DB_TYPE ResultDBType;//!< Member variable "resultDBType"
-        std::string ResultTableName; //!< Member variable "resultTableName"
-        bool SPTAllDests;//!< Member variable "sptAllDests"
-        int SPTHeapCard; //!< Member variable "sptHeapCard"
-        netxpert::cnfg::SPTAlgorithm SptAlgorithm; //!< Member variable "sptAlgorithm"
-        netxpert::cnfg::MCFAlgorithm McfAlgorithm; //!< Member variable "mcfAlgorithm"
-        netxpert::cnfg::MSTAlgorithm MstAlgorithm; //!< Member variable "mstAlgorithm"
-        bool IsDirected; //!< Member variable "isDirected"
-        std::string ArcsTableName; //!< Member variable "arcsTableName"
-        std::string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
-        std::string ArcIDColumnName; //!< Member variable "arcIDColumnName"
-        std::string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
-        std::string ToNodeColumnName; //!< Member variable "toNodeColumnName"
-        std::string CostColumnName; //!< Member variable "costColumnName"
-        std::string CapColumnName; //!< Member variable "capColumnName"
-        std::string OnewayColumnName;//!< Member variable "onewayColumnName"
-        std::string NodesTableName; //!< Member variable "nodesTableName"
-        std::string NodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
-        std::string NodeIDColumnName;//!< Member variable "nodeIDColumnName"
-        std::string NodeSupplyColumnName;//!< Member variable "nodeSupplyColumnName"
-        std::string BarrierPolyTableName;//!< Member variable "barrierPolyTableName"
-        std::string BarrierPolyGeomColumnName;//!< Member variable "barrierPolyGeomColumnName"
-        std::string BarrierLineTableName;//!< Member variable "barrierLineTableName"
-        std::string BarrierLineGeomColumnName;//!< Member variable "barrierLineGeomColumnName"
-        std::string BarrierPointTableName;//!< Member variable "barrierPointTableName"
-        std::string BarrierPointGeomColumnName;//!< Member variable "barrierPointGeomColumnName"
-        int Treshold; //!< Member variable "treshold" for distance search: closest edge of network to given point
-        bool UseSpatialIndex;//!< Member variable "useSpatialIndex"
-        bool LoadDBIntoMemory;//!< Member variable "loadDBIntoMemory"
-        int NumberOfTests;//!< Member variable "numberOfTests"
-        std::string SpatiaLiteHome;//!< Member variable "spatiaLiteHome"
-        std::string SpatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
-        netxpert::cnfg::GEOMETRY_HANDLING GeometryHandling;//!< Member variable "geometryHandling"
-        netxpert::cnfg::TESTCASE TestCase;//!< Member variable "testCase"
-        netxpert::cnfg::LOG_LEVEL LogLevel;
-        bool CleanNetwork;//!< Member variable "cleanNetwork"
-        std::string LogFileFullPath;
+        std::string NetXDBPath; //!< Path for the input database
+        std::string ResultDBPath; //!< Path for the result database
+        netxpert::cnfg::RESULT_DB_TYPE ResultDBType;//!< Type of the result database type
+        std::string ResultTableName; //!< Name of the result table
+        bool SPTAllDests;//!< If true, then all shortest paths from the given start point to all reachable destinations in the network will be computed in the shortest path solver
+        int SPTHeapCard; //!< Ariety for the heap structure in shortest path algorithms if supported. \warning Unsed at the moment!
+        netxpert::cnfg::SPTAlgorithm SptAlgorithm; //!< Shortest path algorithm to use
+        netxpert::cnfg::MCFAlgorithm McfAlgorithm; //!< Minimum cost flow algorithm to use
+        netxpert::cnfg::MSTAlgorithm MstAlgorithm; //!< Minimum spanning tree algorithm to use
+        bool IsDirected; //!< Network is directed or bidirectional
+        std::string ArcsTableName; //!< Name of the input arcs table
+        std::string ArcsGeomColumnName; //!< Geometry column name of the input arcs table
+        std::string ArcIDColumnName; //!< ID column name of the input arcs table
+        std::string FromNodeColumnName; //!< From node column name of the input arcs table
+        std::string ToNodeColumnName; //!< To node column name of the input arcs table
+        std::string CostColumnName; //!<  Cost column name of the input arcs table
+        std::string CapColumnName; //!<  Capacity column name of the input arcs table
+        std::string OnewayColumnName;//!< Oneway column name of the input arcs table
+        std::string NodesTableName; //!< Name of the input nodes table
+        std::string NodesGeomColumnName; //!< Geometry column name of the input nodes table
+        std::string NodeIDColumnName;//!< ID column name of the input nodes table
+        std::string NodeSupplyColumnName;//!< Supply column name of the input nodes table
+        std::string BarrierPolyTableName;//!< Name of the barrier polygon table
+        std::string BarrierPolyGeomColumnName;//!< Geometry column name of the barrier polygon table
+        std::string BarrierLineTableName;//!< Name of the barrier line table
+        std::string BarrierLineGeomColumnName;//!< Geometry column name of the barrier line table
+        std::string BarrierPointTableName;//!< Name of the barrier point table
+        std::string BarrierPointGeomColumnName;//!< Geometry column name of the barrier point table
+        int Treshold; //!< Treshold for distance search: closest arc of network to given point; (Snapping tolerance)
+        bool UseSpatialIndex;//!< \deprecated Use spatial index or not in input database. Default: true
+        bool LoadDBIntoMemory;//!< \deprecated Load input database into memory.
+        int NumberOfTests;//!< Number of tests to run
+        std::string SpatiaLiteHome;//!< Path to the directory of the SpatiaLite library
+        std::string SpatiaLiteCoreName;//!< Name of the SpatiaLite library (without file extension)
+        netxpert::cnfg::GEOMETRY_HANDLING GeometryHandling;//!< Geometry handling (no geometry, straight lines, real geometry).
+        netxpert::cnfg::TESTCASE TestCase;//!< Test case to run
+        netxpert::cnfg::LOG_LEVEL LogLevel;//!< Application log level.
+        bool CleanNetwork;//!< Clean input network on load.
+        std::string LogFileFullPath; //!< Path to log file.
 
         /**
         * Serialize struct members to json
@@ -220,7 +226,7 @@ namespace netxpert {
 
 
     /**
-    * \Class Class reads a configuration file for NetXpert
+    * \class Class reads a configuration file for NetXpert
     **/
     class ConfigReader
     {

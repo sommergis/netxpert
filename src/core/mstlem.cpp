@@ -18,25 +18,25 @@
 
 using namespace netxpert::core;
 
-MST_LEMON::MST_LEMON() {
+MST_LEM::MST_LEM() {
     //ctor
 }
 
-MST_LEMON::~MST_LEMON() {
+MST_LEM::~MST_LEM() {
 	//TEST first
     if (this->arcBoolMap)
         delete arcBoolMap;
 }
 
 void
-MST_LEMON::SolveMST() {
+MST_LEM::SolveMST() {
 	this->arcBoolMap = new netxpert::data::filtered_graph_t::ArcMap<bool>(*this->g);
 
 	this->totalCost = lemon::kruskal(*this->g, *this->costMap, *this->arcBoolMap);
 }
 
 void
-MST_LEMON::LoadNet(const uint32_t nmax,  const uint32_t mmax,
+MST_LEM::LoadNet(const uint32_t nmax,  const uint32_t mmax,
                       lemon::FilterArcs<netxpert::data::graph_t,
                                               netxpert::data::graph_t::ArcMap<bool>>* sg,
                       netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm) {
@@ -51,17 +51,17 @@ MST_LEMON::LoadNet(const uint32_t nmax,  const uint32_t mmax,
 }
 
 const uint32_t
- MST_LEMON::GetArcCount() {
+ MST_LEM::GetArcCount() {
     return lemon::countArcs(*this->g);
 }
 
 const uint32_t
- MST_LEMON::GetNodeCount() {
+ MST_LEM::GetNodeCount() {
     return lemon::countNodes(*this->g);
 }
 
 std::vector<netxpert::data::arc_t>
-MST_LEMON::GetMST () {
+MST_LEM::GetMST () {
 
 	//query arcBoolMap for getting the min span tree
 	std::vector<netxpert::data::arc_t> result;
@@ -76,7 +76,7 @@ MST_LEMON::GetMST () {
 }
 
 inline const double
-MST_LEMON::GetOptimum() const {
+MST_LEM::GetOptimum() const {
 	return this->totalCost;
 }
 

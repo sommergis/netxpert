@@ -52,8 +52,14 @@ using namespace lemon;
 using namespace netxpert::data;
 
 namespace netxpert {
+    /**
+    * \brief Core solvers of netXpert
+    **/
     namespace core {
 
+    /**
+    * \brief Modeling Infinity for the given type T.
+    **/
     template <typename T>
     class Inf {
     public:
@@ -65,7 +71,7 @@ namespace netxpert {
     //using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
 
     /**
-    *  \Class Core Solver for the Shortest Path Tree Problem
+    *  \brief Core Solver for the Shortest Path Tree Problem
     *   with binary Heap structure as default heap and
     *   Dijkstra's algorithm of LEMON.
     */

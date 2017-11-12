@@ -178,11 +178,11 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
         # TEST OK
         #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_small.json"
         # TEST OK
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
         # TEST OK
         #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
         # TEST results not exact - precision oder arc ids?
@@ -230,3 +230,5 @@ if __name__ == "__main__":
         test_spt_add_nodes_1_1_ch(cnfg, cmap)
         stoptime = datetime.datetime.now()
         print(("Duration: {0}".format(stoptime - starttime)))
+
+    sys.exit(0)

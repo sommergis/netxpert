@@ -1,0 +1,166 @@
+\hypertarget{classnetxpert_1_1OriginDestinationMatrix}{}\section{netxpert\+:\+:Origin\+Destination\+Matrix Class Reference}
+\label{classnetxpert_1_1OriginDestinationMatrix}\index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+
+
+Solver for computing an Origin Destination Matrix.  
+
+
+
+
+{\ttfamily \#include $<$odmatrix.\+h$>$}
+
+
+
+Inheritance diagram for netxpert\+:\+:Origin\+Destination\+Matrix\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classnetxpert_1_1OriginDestinationMatrix__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for netxpert\+:\+:Origin\+Destination\+Matrix\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classnetxpert_1_1OriginDestinationMatrix__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classnetxpert_1_1OriginDestinationMatrix_a2ffcb9a8e1698ac09145d5ab08cfb8f4}{Origin\+Destination\+Matrix} (\hyperlink{structnetxpert_1_1cnfg_1_1Config}{netxpert\+::cnfg\+::\+Config} \&cnfg)
+\item 
+\hyperlink{classnetxpert_1_1OriginDestinationMatrix_ae2337bd32fe54db9027a0ae5612bf247}{$\sim$\+Origin\+Destination\+Matrix} ()
+\item 
+void {\bfseries Solve} (std\+::string net)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a6021a419ef2db34a079e508b79b94656}{}\label{classnetxpert_1_1OriginDestinationMatrix_a6021a419ef2db34a079e508b79b94656}
+
+\item 
+void {\bfseries Solve} (\hyperlink{classnetxpert_1_1InternalNet}{netxpert\+::\+Internal\+Net} \&net)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a78f9ae34b0a3caa0711fd4806ce2cad7}{}\label{classnetxpert_1_1OriginDestinationMatrix_a78f9ae34b0a3caa0711fd4806ce2cad7}
+
+\item 
+\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}{netxpert\+::cnfg\+::\+S\+P\+T\+Algorithm} {\bfseries Get\+Algorithm} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a1ce368d57c55f63a8a3d8a956246f51c}{}\label{classnetxpert_1_1OriginDestinationMatrix_a1ce368d57c55f63a8a3d8a956246f51c}
+
+\item 
+void {\bfseries Set\+Algorithm} (\hyperlink{namespacenetxpert_1_1cnfg_a6ff755ed7f76e0049e3eeeed86c9b55d}{netxpert\+::cnfg\+::\+S\+P\+T\+Algorithm} mst\+Algorithm)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a97634a566c9cb0f4d16f09460695dca5}{}\label{classnetxpert_1_1OriginDestinationMatrix_a97634a566c9cb0f4d16f09460695dca5}
+
+\item 
+int {\bfseries Get\+S\+P\+T\+Heap\+Card} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a9a74ba346eb886f6364cf8ee49fc999b}{}\label{classnetxpert_1_1OriginDestinationMatrix_a9a74ba346eb886f6364cf8ee49fc999b}
+
+\item 
+void {\bfseries Set\+S\+P\+T\+Heap\+Card} (int heap\+Card)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a3eccac28a93415efcde47fb7c5864513}{}\label{classnetxpert_1_1OriginDestinationMatrix_a3eccac28a93415efcde47fb7c5864513}
+
+\item 
+\hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}{netxpert\+::cnfg\+::\+G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG} {\bfseries Get\+Geometry\+Handling} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a4c13924e741f428b858126b4cee8fc5c}{}\label{classnetxpert_1_1OriginDestinationMatrix_a4c13924e741f428b858126b4cee8fc5c}
+
+\item 
+void {\bfseries Set\+Geometry\+Handling} (\hyperlink{namespacenetxpert_1_1cnfg_a1514d3ae51414bf0bcd8d1fe8e868b89}{netxpert\+::cnfg\+::\+G\+E\+O\+M\+E\+T\+R\+Y\+\_\+\+H\+A\+N\+D\+L\+I\+NG} geom\+Handling)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a429a93b66e57d7a1c1a4d621b4676162}{}\label{classnetxpert_1_1OriginDestinationMatrix_a429a93b66e57d7a1c1a4d621b4676162}
+
+\item 
+void {\bfseries Set\+Origins} (std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ \&origs)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_ae799703ff303d31e2c26b4bced78ac43}{}\label{classnetxpert_1_1OriginDestinationMatrix_ae799703ff303d31e2c26b4bced78ac43}
+
+\item 
+void \hyperlink{classnetxpert_1_1OriginDestinationMatrix_af6235667a08d4fca3b1d88cbb4fec513}{Set\+Origins} (const std\+::vector$<$ uint32\+\_\+t $>$ \&origs)
+\item 
+void {\bfseries Set\+Origins} (std\+::vector$<$ std\+::pair$<$ netxpert\+::data\+::node\+\_\+t, std\+::string $>$$>$ \&origs)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a6842884d4c037bfaf21f892c4bc49f39}{}\label{classnetxpert_1_1OriginDestinationMatrix_a6842884d4c037bfaf21f892c4bc49f39}
+
+\item 
+std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ {\bfseries Get\+Origins} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a070086cd6c9dfd56c6d647bdb4d1f044}{}\label{classnetxpert_1_1OriginDestinationMatrix_a070086cd6c9dfd56c6d647bdb4d1f044}
+
+\item 
+std\+::vector$<$ uint32\+\_\+t $>$ \hyperlink{classnetxpert_1_1OriginDestinationMatrix_ad18ee15d95918031e6e69af7cced7be8}{Get\+Origin\+I\+Ds} () const 
+\item 
+void {\bfseries Set\+Destinations} (std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ \&dests)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a85be24fc41f55f43c371e531ea9c3814}{}\label{classnetxpert_1_1OriginDestinationMatrix_a85be24fc41f55f43c371e531ea9c3814}
+
+\item 
+void \hyperlink{classnetxpert_1_1OriginDestinationMatrix_ac0ae25a4fd186aeee1ce7c1b50538a62}{Set\+Destinations} (const std\+::vector$<$ uint32\+\_\+t $>$ \&dests)
+\item 
+void {\bfseries Set\+Destinations} (std\+::vector$<$ std\+::pair$<$ netxpert\+::data\+::node\+\_\+t, std\+::string $>$$>$ \&dests)\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a05b29c743df9d1d9002d682e47c791ba}{}\label{classnetxpert_1_1OriginDestinationMatrix_a05b29c743df9d1d9002d682e47c791ba}
+
+\item 
+std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ {\bfseries Get\+Destinations} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_aee97b176bc22b67dc3381af2a858be74}{}\label{classnetxpert_1_1OriginDestinationMatrix_aee97b176bc22b67dc3381af2a858be74}
+
+\item 
+std\+::vector$<$ uint32\+\_\+t $>$ \hyperlink{classnetxpert_1_1OriginDestinationMatrix_a92652a2389da24d35f6f1233a1298f91}{Get\+Destination\+I\+Ds} () const 
+\item 
+std\+::vector$<$ netxpert\+::data\+::node\+\_\+t $>$ {\bfseries Get\+Reached\+Dests} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_abdcfabcf36cc23240bd13ed0a021704d}{}\label{classnetxpert_1_1OriginDestinationMatrix_abdcfabcf36cc23240bd13ed0a021704d}
+
+\item 
+std\+::vector$<$ uint32\+\_\+t $>$ \hyperlink{classnetxpert_1_1OriginDestinationMatrix_ad7850510d0b31ae9b9d80e795be83756}{Get\+Reached\+Dest\+I\+Ds} () const 
+\item 
+std\+::map$<$ \hyperlink{structnetxpert_1_1data_1_1ODPair}{netxpert\+::data\+::\+O\+D\+Pair}, \hyperlink{namespacenetxpert_1_1data_a82e488b55f222a9759d73e24f6087033}{netxpert\+::data\+::\+Compressed\+Path} $>$ {\bfseries Get\+Shortest\+Paths} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a0685f3a1113698381631ab37b71fa0ba}{}\label{classnetxpert_1_1OriginDestinationMatrix_a0685f3a1113698381631ab37b71fa0ba}
+
+\item 
+std\+::map$<$ \hyperlink{structnetxpert_1_1data_1_1ODPair}{netxpert\+::data\+::\+O\+D\+Pair}, netxpert\+::data\+::cost\+\_\+t $>$ {\bfseries Get\+O\+D\+Matrix} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a7fa514c840cda5d6e8c076b15dc807e6}{}\label{classnetxpert_1_1OriginDestinationMatrix_a7fa514c840cda5d6e8c076b15dc807e6}
+
+\item 
+const double {\bfseries Get\+Optimum} () const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a0d02226f1246cc54aca03dbdfddabb62}{}\label{classnetxpert_1_1OriginDestinationMatrix_a0d02226f1246cc54aca03dbdfddabb62}
+
+\item 
+void {\bfseries Save\+Results} (const std\+::string \&result\+Table\+Name, const \hyperlink{structnetxpert_1_1data_1_1ColumnMap}{netxpert\+::data\+::\+Column\+Map} \&cmap) const \hypertarget{classnetxpert_1_1OriginDestinationMatrix_a2dccec6e7af7d844d38e9ab3f8f151b9}{}\label{classnetxpert_1_1OriginDestinationMatrix_a2dccec6e7af7d844d38e9ab3f8f151b9}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Solver for computing an Origin Destination Matrix. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Origin\+Destination\+Matrix@{Origin\+Destination\+Matrix}}
+\index{Origin\+Destination\+Matrix@{Origin\+Destination\+Matrix}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Origin\+Destination\+Matrix(netxpert\+::cnfg\+::\+Config \&cnfg)}{OriginDestinationMatrix(netxpert::cnfg::Config &cnfg)}}]{\setlength{\rightskip}{0pt plus 5cm}netxpert\+::\+Origin\+Destination\+Matrix\+::\+Origin\+Destination\+Matrix (
+\begin{DoxyParamCaption}
+\item[{{\bf netxpert\+::cnfg\+::\+Config} \&}]{cnfg}
+\end{DoxyParamCaption}
+)}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a2ffcb9a8e1698ac09145d5ab08cfb8f4}{}\label{classnetxpert_1_1OriginDestinationMatrix_a2ffcb9a8e1698ac09145d5ab08cfb8f4}
+Default constructor \index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!````~Origin\+Destination\+Matrix@{$\sim$\+Origin\+Destination\+Matrix}}
+\index{````~Origin\+Destination\+Matrix@{$\sim$\+Origin\+Destination\+Matrix}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{$\sim$\+Origin\+Destination\+Matrix()}{~OriginDestinationMatrix()}}]{\setlength{\rightskip}{0pt plus 5cm}netxpert\+::\+Origin\+Destination\+Matrix\+::$\sim$\+Origin\+Destination\+Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_ae2337bd32fe54db9027a0ae5612bf247}{}\label{classnetxpert_1_1OriginDestinationMatrix_ae2337bd32fe54db9027a0ae5612bf247}
+Default destructor 
+
+\subsection{Member Function Documentation}
+\index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Get\+Destination\+I\+Ds@{Get\+Destination\+I\+Ds}}
+\index{Get\+Destination\+I\+Ds@{Get\+Destination\+I\+Ds}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Get\+Destination\+I\+Ds() const }{GetDestinationIDs() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$uint32\+\_\+t$>$ netxpert\+::\+Origin\+Destination\+Matrix\+::\+Get\+Destination\+I\+Ds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_a92652a2389da24d35f6f1233a1298f91}{}\label{classnetxpert_1_1OriginDestinationMatrix_a92652a2389da24d35f6f1233a1298f91}
+Simple Wrapper for S\+W\+IG \index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Get\+Origin\+I\+Ds@{Get\+Origin\+I\+Ds}}
+\index{Get\+Origin\+I\+Ds@{Get\+Origin\+I\+Ds}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Get\+Origin\+I\+Ds() const }{GetOriginIDs() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$uint32\+\_\+t$>$ netxpert\+::\+Origin\+Destination\+Matrix\+::\+Get\+Origin\+I\+Ds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_ad18ee15d95918031e6e69af7cced7be8}{}\label{classnetxpert_1_1OriginDestinationMatrix_ad18ee15d95918031e6e69af7cced7be8}
+Simple Wrapper for S\+W\+IG \index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Get\+Reached\+Dest\+I\+Ds@{Get\+Reached\+Dest\+I\+Ds}}
+\index{Get\+Reached\+Dest\+I\+Ds@{Get\+Reached\+Dest\+I\+Ds}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Get\+Reached\+Dest\+I\+Ds() const }{GetReachedDestIDs() const }}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$uint32\+\_\+t$>$ netxpert\+::\+Origin\+Destination\+Matrix\+::\+Get\+Reached\+Dest\+I\+Ds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_ad7850510d0b31ae9b9d80e795be83756}{}\label{classnetxpert_1_1OriginDestinationMatrix_ad7850510d0b31ae9b9d80e795be83756}
+Simple Wrapper for S\+W\+IG \index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Set\+Destinations@{Set\+Destinations}}
+\index{Set\+Destinations@{Set\+Destinations}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Set\+Destinations(const std\+::vector$<$ uint32\+\_\+t $>$ \&dests)}{SetDestinations(const std::vector< uint32_t > &dests)}}]{\setlength{\rightskip}{0pt plus 5cm}void netxpert\+::\+Origin\+Destination\+Matrix\+::\+Set\+Destinations (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ uint32\+\_\+t $>$ \&}]{dests}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_ac0ae25a4fd186aeee1ce7c1b50538a62}{}\label{classnetxpert_1_1OriginDestinationMatrix_ac0ae25a4fd186aeee1ce7c1b50538a62}
+Simple Wrapper for S\+W\+IG \index{netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}!Set\+Origins@{Set\+Origins}}
+\index{Set\+Origins@{Set\+Origins}!netxpert\+::\+Origin\+Destination\+Matrix@{netxpert\+::\+Origin\+Destination\+Matrix}}
+\subsubsection[{\texorpdfstring{Set\+Origins(const std\+::vector$<$ uint32\+\_\+t $>$ \&origs)}{SetOrigins(const std::vector< uint32_t > &origs)}}]{\setlength{\rightskip}{0pt plus 5cm}void netxpert\+::\+Origin\+Destination\+Matrix\+::\+Set\+Origins (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ uint32\+\_\+t $>$ \&}]{origs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classnetxpert_1_1OriginDestinationMatrix_af6235667a08d4fca3b1d88cbb4fec513}{}\label{classnetxpert_1_1OriginDestinationMatrix_af6235667a08d4fca3b1d88cbb4fec513}
+Simple Wrapper for S\+W\+IG 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/hahne/dev/netxpert1\+\_\+0/include/solver/odmatrix.\+h\end{DoxyCompactItemize}

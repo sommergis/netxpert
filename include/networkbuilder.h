@@ -31,7 +31,7 @@
 
 namespace netxpert {
     /**
-    * \Class Builds a network of the given linestrings.
+    * \brief Builds a network of the given linestrings.
     * - Multipart to Single Part Linestrings
 	* - StartPoint(Linestring): FromNode, EndPoint(Linestring): ToNode
 	* - Undirected als Standard in Solver input

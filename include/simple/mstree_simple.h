@@ -24,6 +24,9 @@
 #include "mstree.h"
 
 namespace netxpert {
+  /**
+  * \brief Simple variants of all netXpert solvers
+  **/
  namespace simple {
 
     class MinimumSpanningTree

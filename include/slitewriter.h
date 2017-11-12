@@ -27,9 +27,12 @@
 
 namespace netxpert {
 
+    /**
+    * \brief Input/Output of netXpert
+    **/
     namespace io {
     /**
-    * \Class Writes the result of NetXpert into a SpatiaLite DB
+    * \brief Writes the result of NetXpert into a SpatiaLite DB
     **/
     class SpatiaLiteWriter : public netxpert::io::DBWriter
     {
@@ -98,7 +101,7 @@ namespace netxpert {
                                         const std::string& resultTableName);
 
             /**
-              \Warn DON'T Use me! Use Preloaded Geometries via Network::ProcessResultArcsMem() Methods
+              \warning DON'T Use me! Use Preloaded Geometries via Network::ProcessResultArcsMem() Methods
 
             * \Brief For saving a subset of original arcs and addintional route parts in the original netXpert DB.
             * This method performs a SELECT of the arcs (arcIDs) in the original netXpert DB and inserts them

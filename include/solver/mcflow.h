@@ -21,11 +21,9 @@
 #include "imcflow.h"
 #include "nslem.h"
 
-//using namespace std;
-
 namespace netxpert {
     /**
-    * \Class Solver for the Minimum Cost Flow Problem
+    * \brief Solver for the Minimum Cost Flow Problem
     */
     class MinCostFlow : public netxpert::ISolver
     {
