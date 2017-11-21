@@ -21,17 +21,18 @@
 #include "lemon-net.h"
 
 namespace netxpert {
-    /**
-    * \brief Abstract Class (Interface) for all Solvers
-    **/
+    ///\brief Abstract Class (Interface) for all Solvers
     class ISolver
     {
         public:
-            /** Default destructor */
+            ///\brief Default virtual destructor
             virtual ~ISolver() {}
+            ///\brief Solve method that takes the Network as text representation
+            ///\warning Has not been implemented in the C++ Version yet.
             virtual void Solve(std::string net) = 0;
-            //virtual void Solve(netxpert::Network& net) = 0;
-            virtual void Solve(netxpert::InternalNet& net)=0;
+            ///\brief Solve method that takes the Network as an object of type InternalNet
+            virtual void Solve(netxpert::data::InternalNet& net)=0;
+            ///\brief Gets the total optimum of the solver
             virtual const double GetOptimum() const=0;
     };
 }

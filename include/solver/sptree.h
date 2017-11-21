@@ -39,7 +39,7 @@ namespace netxpert {
             ~ShortestPathTree() {}
 
             void Solve(std::string net);
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm sptAlgorithm);
@@ -84,7 +84,7 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak in this case even without delete in the deconstructor
-            netxpert::InternalNet* net;
+            netxpert::data::InternalNet* net;
             bool isDirected;
             int sptHeapCard;
             double optimum;
@@ -96,28 +96,28 @@ namespace netxpert {
             netxpert::cnfg::GEOMETRY_HANDLING geometryHandling;
             netxpert::cnfg::SPTAlgorithm algorithm;
             std::unique_ptr<netxpert::core::ISPTree> spt;
-            void solve (netxpert::InternalNet& net,
+            void solve (netxpert::data::InternalNet& net,
                         netxpert::data::node_t originNode,
                         netxpert::data::node_t destinationNode,
                         bool isDirected);
-            void solve (netxpert::InternalNet& net,
+            void solve (netxpert::data::InternalNet& net,
                         netxpert::data::node_t originNode,
                         std::vector<netxpert::data::node_t> destinationNodes,
                         bool isDirected);
-            void solve (netxpert::InternalNet& net,
+            void solve (netxpert::data::InternalNet& net,
                         netxpert::data::node_t originNode,
                         bool isDirected);
-            bool validateNetworkData(netxpert::InternalNet& net,
+            bool validateNetworkData(netxpert::data::InternalNet& net,
                                      netxpert::data::node_t orig);
-            bool validateNetworkData(netxpert::InternalNet& net,
+            bool validateNetworkData(netxpert::data::InternalNet& net,
                                      netxpert::data::node_t orig,
                                      netxpert::data::node_t dest);
-            bool validateNetworkData(netxpert::InternalNet& net,
+            bool validateNetworkData(netxpert::data::InternalNet& net,
                                      netxpert::data::node_t orig,
                                      std::vector<netxpert::data::node_t>& dests);
 
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
-             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+             convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
 
             void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
             /*double buildCompressedRoute(std::vector<netxpert::data::node_t>& route, netxpert::data::node_t orig, netxpert::data::node_t dest,

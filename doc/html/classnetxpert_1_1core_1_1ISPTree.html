@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Shortest Path Tree Solvers in netxpert core.  
+<p>Pure virtual (i.e. abstract) class for all Shortest Path Tree Solvers in netxpert core.  
  <a href="classnetxpert_1_1core_1_1ISPTree.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="isptree_8h_source.html">isptree.h</a>&gt;</code></p>
@@ -113,67 +113,54 @@ Inheritance diagram for netxpert::core::ISPTree:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7b61aa12791f75c6979e15f59638cd66"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a7b61aa12791f75c6979e15f59638cd66">~ISPTree</a> ()</td></tr>
+<tr class="memitem:a7b61aa12791f75c6979e15f59638cd66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b61aa12791f75c6979e15f59638cd66"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a7b61aa12791f75c6979e15f59638cd66">~ISPTree</a> ()</td></tr>
+<tr class="memdesc:a7b61aa12791f75c6979e15f59638cd66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual Destructor. <br /></td></tr>
 <tr class="separator:a7b61aa12791f75c6979e15f59638cd66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f402198fc211009404778f75fa2d7cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f402198fc211009404778f75fa2d7cd"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadNet</b> (const uint32_t nmax, const uint32_t mmax, lemon::FilterArcs&lt; netxpert::data::graph_t, netxpert::data::graph_t::ArcMap&lt; bool &gt;&gt; *sg, netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *cm)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a0f402198fc211009404778f75fa2d7cd">LoadNet</a> (const uint32_t nmax, const uint32_t mmax, lemon::FilterArcs&lt; <a class="el" href="namespacenetxpert_1_1data.html#aa74c1b36e4f5f4fd195591738c30f39c">netxpert::data::graph_t</a>, netxpert::data::graph_t::ArcMap&lt; bool &gt;&gt; *sg, netxpert::data::graph_t::ArcMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a> &gt; *cm)=0</td></tr>
+<tr class="memdesc:a0f402198fc211009404778f75fa2d7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the network into the core solver. <br /></td></tr>
 <tr class="separator:a0f402198fc211009404778f75fa2d7cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55c963bcf6487959df59aa16cef0ea09"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55c963bcf6487959df59aa16cef0ea09"></a>
-virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcCount</b> ()=0</td></tr>
+virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a55c963bcf6487959df59aa16cef0ea09">GetArcCount</a> ()=0</td></tr>
+<tr class="memdesc:a55c963bcf6487959df59aa16cef0ea09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the count of the arcs of the internal graph. <br /></td></tr>
 <tr class="separator:a55c963bcf6487959df59aa16cef0ea09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe34ece0cc4fb8033d19cbb40b771e27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe34ece0cc4fb8033d19cbb40b771e27"></a>
-virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeCount</b> ()=0</td></tr>
+virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#abe34ece0cc4fb8033d19cbb40b771e27">GetNodeCount</a> ()=0</td></tr>
+<tr class="memdesc:abe34ece0cc4fb8033d19cbb40b771e27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the count of the nodes of the internal graph. <br /></td></tr>
 <tr class="separator:abe34ece0cc4fb8033d19cbb40b771e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2db289365cb0d26a1383cb597fd33c64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2db289365cb0d26a1383cb597fd33c64"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SolveSPT</b> (netxpert::data::cost_t treshold=-1, bool bidirectional=false)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a2db289365cb0d26a1383cb597fd33c64">SolveSPT</a> (<a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a> treshold=-1, bool bidirectional=false)=0</td></tr>
+<tr class="memdesc:a2db289365cb0d26a1383cb597fd33c64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the SPT problem. <br /></td></tr>
 <tr class="separator:a2db289365cb0d26a1383cb597fd33c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61eac5ae182237609500301be61be3fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61eac5ae182237609500301be61be3fc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetOrigin</b> (netxpert::data::node_t NewOrg)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a61eac5ae182237609500301be61be3fc">SetOrigin</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> NewOrg)=0</td></tr>
+<tr class="memdesc:a61eac5ae182237609500301be61be3fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the origin. <br /></td></tr>
 <tr class="separator:a61eac5ae182237609500301be61be3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b7b96b53e27888109e5c97d327e96fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b7b96b53e27888109e5c97d327e96fc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SetDest</b> (netxpert::data::node_t NewDst)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a6b7b96b53e27888109e5c97d327e96fc">SetDest</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> NewDst)=0</td></tr>
+<tr class="memdesc:a6b7b96b53e27888109e5c97d327e96fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the destination. <br /></td></tr>
 <tr class="separator:a6b7b96b53e27888109e5c97d327e96fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfa7078d4e790f10090d67a7f50f1b0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adfa7078d4e790f10090d67a7f50f1b0d"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>Reached</b> (netxpert::data::node_t NodeID)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#adfa7078d4e790f10090d67a7f50f1b0d">Reached</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> NodeID)=0</td></tr>
+<tr class="memdesc:adfa7078d4e790f10090d67a7f50f1b0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given node has been reached in the calculation. <br /></td></tr>
 <tr class="separator:adfa7078d4e790f10090d67a7f50f1b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7aee1d7f478bf851fd04df7484484c51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7aee1d7f478bf851fd04df7484484c51"></a>
-virtual const std::vector&lt; netxpert::data::node_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetPredecessors</b> (netxpert::data::node_t _dest)=0</td></tr>
+virtual const std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#a7aee1d7f478bf851fd04df7484484c51">GetPredecessors</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> _dest)=0</td></tr>
+<tr class="memdesc:a7aee1d7f478bf851fd04df7484484c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the predecessor nodes of the given node. <br /></td></tr>
 <tr class="separator:a7aee1d7f478bf851fd04df7484484c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3f4413acee44b24e594ae1a5444f7b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac3f4413acee44b24e594ae1a5444f7b3"></a>
-virtual const std::vector&lt; netxpert::data::arc_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetPath</b> (netxpert::data::node_t _dest)=0</td></tr>
+virtual const std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4">netxpert::data::arc_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#ac3f4413acee44b24e594ae1a5444f7b3">GetPath</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> _dest)=0</td></tr>
+<tr class="memdesc:ac3f4413acee44b24e594ae1a5444f7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the path from the given destination node to the origin. <br /></td></tr>
 <tr class="separator:ac3f4413acee44b24e594ae1a5444f7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f1456e940781da2cc414634fe584b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8f1456e940781da2cc414634fe584b8"></a>
-virtual const netxpert::data::cost_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetDist</b> (netxpert::data::node_t _dest)=0</td></tr>
+virtual const <a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1ISPTree.html#ad8f1456e940781da2cc414634fe584b8">GetDist</a> (<a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">netxpert::data::node_t</a> _dest)=0</td></tr>
+<tr class="memdesc:ad8f1456e940781da2cc414634fe584b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the distance from the origin node to the given destination node. <br /></td></tr>
 <tr class="separator:ad8f1456e940781da2cc414634fe584b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Shortest Path Tree Solvers in netxpert core. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a7b61aa12791f75c6979e15f59638cd66"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual netxpert::core::ISPTree::~ISPTree </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Default destructor </p>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Pure virtual (i.e. abstract) class for all Shortest Path Tree Solvers in netxpert core. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/core/<a class="el" href="isptree_8h_source.html">isptree.h</a></li>
 </ul>
 </div><!-- contents -->

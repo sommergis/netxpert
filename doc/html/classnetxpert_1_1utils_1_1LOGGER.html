@@ -99,7 +99,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Logger class.  
+<p>Logger with various Loglevels.  
  <a href="classnetxpert_1_1utils_1_1LOGGER.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="logger_8h_source.html">logger.h</a>&gt;</code></p>
@@ -107,35 +107,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad122b92cee3035750ea187afc31d13d8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad122b92cee3035750ea187afc31d13d8"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> (const <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#ad122b92cee3035750ea187afc31d13d8">Initialize</a> (const <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+<tr class="memdesc:ad122b92cee3035750ea187afc31d13d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the Logger. <br /></td></tr>
 <tr class="separator:ad122b92cee3035750ea187afc31d13d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9150ff82d540dbdd39f90e8f4690ba6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9150ff82d540dbdd39f90e8f4690ba6"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LogDebug</b> (std::string logMsg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#aa9150ff82d540dbdd39f90e8f4690ba6">LogDebug</a> (std::string logMsg)</td></tr>
+<tr class="memdesc:aa9150ff82d540dbdd39f90e8f4690ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a debug message. <br /></td></tr>
 <tr class="separator:aa9150ff82d540dbdd39f90e8f4690ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e480b4dc6a33bca4e6a732e018841a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e480b4dc6a33bca4e6a732e018841a9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LogInfo</b> (std::string logMsg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#a1e480b4dc6a33bca4e6a732e018841a9">LogInfo</a> (std::string logMsg)</td></tr>
+<tr class="memdesc:a1e480b4dc6a33bca4e6a732e018841a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a info message. <br /></td></tr>
 <tr class="separator:a1e480b4dc6a33bca4e6a732e018841a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a184af8779965d8663ca84b4f7e4ba3e9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a184af8779965d8663ca84b4f7e4ba3e9"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LogWarning</b> (std::string logMsg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#a184af8779965d8663ca84b4f7e4ba3e9">LogWarning</a> (std::string logMsg)</td></tr>
+<tr class="memdesc:a184af8779965d8663ca84b4f7e4ba3e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a warning message. <br /></td></tr>
 <tr class="separator:a184af8779965d8663ca84b4f7e4ba3e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af336fd2d432bf26747590f3a3a5a92c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af336fd2d432bf26747590f3a3a5a92c3"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LogError</b> (std::string logMsg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#af336fd2d432bf26747590f3a3a5a92c3">LogError</a> (std::string logMsg)</td></tr>
+<tr class="memdesc:af336fd2d432bf26747590f3a3a5a92c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a error message. <br /></td></tr>
 <tr class="separator:af336fd2d432bf26747590f3a3a5a92c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea1f7109666d88ce88e7612494ee59f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea1f7109666d88ce88e7612494ee59f1"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LogFatal</b> (std::string logMsg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#aea1f7109666d88ce88e7612494ee59f1">LogFatal</a> (std::string logMsg)</td></tr>
+<tr class="memdesc:aea1f7109666d88ce88e7612494ee59f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a fatal error message. <br /></td></tr>
 <tr class="separator:aea1f7109666d88ce88e7612494ee59f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a7577f62a660b9897d686cdfe88ae441d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7577f62a660b9897d686cdfe88ae441d"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInitialized</b></td></tr>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#a7577f62a660b9897d686cdfe88ae441d">IsInitialized</a></td></tr>
+<tr class="memdesc:a7577f62a660b9897d686cdfe88ae441d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if the Logger has been already initialized. <br /></td></tr>
 <tr class="separator:a7577f62a660b9897d686cdfe88ae441d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8235454671e8ef5030e271479a01e0f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8235454671e8ef5030e271479a01e0f7"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>FullLogFileName</b></td></tr>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1LOGGER.html#a8235454671e8ef5030e271479a01e0f7">FullLogFileName</a></td></tr>
+<tr class="memdesc:a8235454671e8ef5030e271479a01e0f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the full path to the logfile. <br /></td></tr>
 <tr class="separator:a8235454671e8ef5030e271479a01e0f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logger class. </p>
+<div class="textblock"><p>Logger with various Loglevels. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Log messages in multithreading shall be sequential in std::cout not random </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/<a class="el" href="logger_8h_source.html">logger.h</a></li>
 </ul>

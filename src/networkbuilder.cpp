@@ -120,12 +120,12 @@ void NetworkBuilder::SaveResults(const std::string& resultTableName, const Colum
 {
     try
     {
-        Config cnfg = this->NETXPERT_CNFG;
+      Config cnfg = this->NETXPERT_CNFG;
 
-        std::unique_ptr<DBWriter> writer;
-		std::unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-		switch (cnfg.ResultDBType)
-		{
+      std::unique_ptr<DBWriter> writer;
+      std::unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+      switch (cnfg.ResultDBType)
+      {
 			case RESULT_DB_TYPE::SpatiaLiteDB:
 			{
 				if (cnfg.ResultDBPath == cnfg.NetXDBPath)

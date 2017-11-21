@@ -39,7 +39,7 @@ namespace netxpert {
             Isolines(netxpert::cnfg::Config& cnfg);
             virtual ~Isolines() {}
             void Solve(std::string net);
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
@@ -80,7 +80,7 @@ namespace netxpert {
             std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
 
         private:
-            netxpert::InternalNet* net; //raw pointer ok, no dynamic allocation (new())
+            netxpert::data::InternalNet* net; //raw pointer ok, no dynamic allocation (new())
             bool isDirected;
             int sptHeapCard;
             double optimum;
@@ -90,11 +90,11 @@ namespace netxpert {
             netxpert::cnfg::GEOMETRY_HANDLING geometryHandling;
             netxpert::cnfg::SPTAlgorithm algorithm;
             std::unique_ptr<netxpert::core::ISPTree> spt;
-            void solve (netxpert::InternalNet& net, std::vector<netxpert::data::node_t> originNodes, bool isDirected);
-            bool validateNetworkData(netxpert::InternalNet& net, std::vector<netxpert::data::node_t>& origs);
+            void solve (netxpert::data::InternalNet& net, std::vector<netxpert::data::node_t> originNodes, bool isDirected);
+            bool validateNetworkData(netxpert::data::InternalNet& net, std::vector<netxpert::data::node_t>& origs);
 
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
-             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+             convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
 
             void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
 

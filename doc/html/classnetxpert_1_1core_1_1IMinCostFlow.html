@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core.  
+<p>Pure virtual (i.e. abstract) class for all Minimum Cost Flow Problem Solvers in netxpert core.  
  <a href="classnetxpert_1_1core_1_1IMinCostFlow.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="imcflow_8h_source.html">imcflow.h</a>&gt;</code></p>
@@ -113,36 +113,49 @@ Inheritance diagram for netxpert::core::IMinCostFlow:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aa18de2c723b383a7a671d5032334012a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa18de2c723b383a7a671d5032334012a"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#aa18de2c723b383a7a671d5032334012a">~IMinCostFlow</a> ()</td></tr>
+<tr class="memdesc:aa18de2c723b383a7a671d5032334012a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual Destructor. <br /></td></tr>
+<tr class="separator:aa18de2c723b383a7a671d5032334012a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe4ac0e1320c36cbccbb6c97e0c05765"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe4ac0e1320c36cbccbb6c97e0c05765"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadNet</b> (const uint32_t nmax, const uint32_t mmax, lemon::FilterArcs&lt; netxpert::data::graph_t, netxpert::data::graph_t::ArcMap&lt; bool &gt;&gt; *sg, netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *_costMap, netxpert::data::graph_t::ArcMap&lt; netxpert::data::capacity_t &gt; *_capMap, netxpert::data::graph_t::NodeMap&lt; netxpert::data::supply_t &gt; *_supplyMap)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#afe4ac0e1320c36cbccbb6c97e0c05765">LoadNet</a> (const uint32_t nmax, const uint32_t mmax, lemon::FilterArcs&lt; <a class="el" href="namespacenetxpert_1_1data.html#aa74c1b36e4f5f4fd195591738c30f39c">netxpert::data::graph_t</a>, netxpert::data::graph_t::ArcMap&lt; bool &gt;&gt; *sg, netxpert::data::graph_t::ArcMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a> &gt; *_costMap, netxpert::data::graph_t::ArcMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#a05ecea9f371a72b3f2284c54337792fd">netxpert::data::capacity_t</a> &gt; *_capMap, netxpert::data::graph_t::NodeMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#a6749d55daca0e36cf8f54343d1eea856">netxpert::data::supply_t</a> &gt; *_supplyMap)=0</td></tr>
+<tr class="memdesc:afe4ac0e1320c36cbccbb6c97e0c05765"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the network into the core solver. <br /></td></tr>
 <tr class="separator:afe4ac0e1320c36cbccbb6c97e0c05765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc43c05d492c96e3795c844636ff3a6a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc43c05d492c96e3795c844636ff3a6a"></a>
-virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcCount</b> ()=0</td></tr>
+virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#afc43c05d492c96e3795c844636ff3a6a">GetArcCount</a> ()=0</td></tr>
+<tr class="memdesc:afc43c05d492c96e3795c844636ff3a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the count of the arcs of the internal graph. <br /></td></tr>
 <tr class="separator:afc43c05d492c96e3795c844636ff3a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d09f6b1be2a843c3dd8da0377cd43ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d09f6b1be2a843c3dd8da0377cd43ba"></a>
-virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeCount</b> ()=0</td></tr>
+virtual const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a0d09f6b1be2a843c3dd8da0377cd43ba">GetNodeCount</a> ()=0</td></tr>
+<tr class="memdesc:a0d09f6b1be2a843c3dd8da0377cd43ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the count of the nodes of the internal graph. <br /></td></tr>
 <tr class="separator:a0d09f6b1be2a843c3dd8da0377cd43ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4730faf5a646cb01130a3dd36e3205ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4730faf5a646cb01130a3dd36e3205ba"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>SolveMCF</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a4730faf5a646cb01130a3dd36e3205ba">SolveMCF</a> ()=0</td></tr>
+<tr class="memdesc:a4730faf5a646cb01130a3dd36e3205ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves the MCF problem. <br /></td></tr>
 <tr class="separator:a4730faf5a646cb01130a3dd36e3205ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2828271d5ac69c015f431cd5793ab661"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2828271d5ac69c015f431cd5793ab661"></a>
-virtual const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const =0</td></tr>
+virtual const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a2828271d5ac69c015f431cd5793ab661">GetOptimum</a> () const =0</td></tr>
+<tr class="memdesc:a2828271d5ac69c015f431cd5793ab661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall optimum of the problem. <br /></td></tr>
 <tr class="separator:a2828271d5ac69c015f431cd5793ab661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a664df6422560419a23e49c5948e4ace4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a664df6422560419a23e49c5948e4ace4"></a>
-virtual std::vector&lt; netxpert::data::arc_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMCFArcs</b> ()=0</td></tr>
+virtual std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4">netxpert::data::arc_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a664df6422560419a23e49c5948e4ace4">GetMCFArcs</a> ()=0</td></tr>
+<tr class="memdesc:a664df6422560419a23e49c5948e4ace4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the result set of arcs. <br /></td></tr>
 <tr class="separator:a664df6422560419a23e49c5948e4ace4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1303e3c31a2f4e2ec11e6ddc1ee0a30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1303e3c31a2f4e2ec11e6ddc1ee0a30"></a>
-virtual netxpert::data::graph_t::ArcMap&lt; netxpert::data::flow_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMCFFlow</b> ()=0</td></tr>
+virtual netxpert::data::graph_t::ArcMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#a77604d32c0b7a84e773566e7ad8a8638">netxpert::data::flow_t</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#ac1303e3c31a2f4e2ec11e6ddc1ee0a30">GetMCFFlow</a> ()=0</td></tr>
+<tr class="memdesc:ac1303e3c31a2f4e2ec11e6ddc1ee0a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a arc map with the resulting flow for each arc. <br /></td></tr>
 <tr class="separator:ac1303e3c31a2f4e2ec11e6ddc1ee0a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1262b923b11fc3b240c2e61f1e2e7f07"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1262b923b11fc3b240c2e61f1e2e7f07"></a>
-virtual netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetMCFCost</b> ()=0</td></tr>
+virtual netxpert::data::graph_t::ArcMap&lt; <a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a1262b923b11fc3b240c2e61f1e2e7f07">GetMCFCost</a> ()=0</td></tr>
+<tr class="memdesc:a1262b923b11fc3b240c2e61f1e2e7f07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a arc map with the resulting cost for each arc. <br /></td></tr>
 <tr class="separator:a1262b923b11fc3b240c2e61f1e2e7f07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71466b0a2c494afb015197a103ec0dcc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71466b0a2c494afb015197a103ec0dcc"></a>
-virtual const int&#160;</td><td class="memItemRight" valign="bottom"><b>GetMCFStatus</b> ()=0</td></tr>
+virtual const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.html#a71466b0a2c494afb015197a103ec0dcc">GetMCFStatus</a> ()=0</td></tr>
+<tr class="memdesc:a71466b0a2c494afb015197a103ec0dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the status of the internal MCF solver. <br /></td></tr>
 <tr class="separator:a71466b0a2c494afb015197a103ec0dcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Minimum Cost Flow Problem Solvers in netxpert core. </p>
+<div class="textblock"><p>Pure virtual (i.e. abstract) class for all Minimum Cost Flow Problem Solvers in netxpert core. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/core/<a class="el" href="imcflow_8h_source.html">imcflow.h</a></li>
 </ul>

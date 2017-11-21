@@ -41,7 +41,7 @@ void
 }
 
 void
- ShortestPathTree::Solve(netxpert::InternalNet& net) {
+ ShortestPathTree::Solve(netxpert::data::InternalNet& net) {
 
     LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 

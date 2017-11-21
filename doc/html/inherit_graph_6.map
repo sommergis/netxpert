@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classnetxpert_1_1cnfg_1_1ConfigReader.html" title="netxpert::cnfg::ConfigReader" alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node1" href="$classnetxpert_1_1core_1_1IMinCostFlow.html" title="Pure virtual (i.e. abstract) class for all Minimum Cost Flow Problem Solvers in netxpert core..." alt="" coords="5,5,196,32"/>
+<area shape="rect" id="node2" href="$classnetxpert_1_1core_1_1NS__LEM.html" title="Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON..." alt="" coords="244,5,407,32"/>
 </map>

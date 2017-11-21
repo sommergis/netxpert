@@ -91,97 +91,203 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classnetxpert_1_1io_1_1DBHELPER-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">netxpert::io::DBHELPER Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Static <a class="el" href="classClass.html">Class</a> that controls the SpatiaLite DB processing access.  
+<p>Static class that controls the SpatiaLite DB processing access.  
  <a href="classnetxpert_1_1io_1_1DBHELPER.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="dbhelper_8h_source.html">dbhelper.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad8232b19a0ba72130ddbe6df373c930f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8232b19a0ba72130ddbe6df373c930f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ad8232b19a0ba72130ddbe6df373c930f">~DBHELPER</a> ()</td></tr>
+<tr class="memdesc:ad8232b19a0ba72130ddbe6df373c930f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
+<tr class="separator:ad8232b19a0ba72130ddbe6df373c930f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a091b1da6ebcbb415f633383ce9f3732e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a091b1da6ebcbb415f633383ce9f3732e"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>Initialize</b> (const <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a091b1da6ebcbb415f633383ce9f3732e">Initialize</a> (const <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+<tr class="memdesc:a091b1da6ebcbb415f633383ce9f3732e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the static <a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html" title="Static class that controls the SpatiaLite DB processing access. ">DBHELPER</a> and also the GEO_FACTORY and the Precision Model for all geometries. <br /></td></tr>
 <tr class="separator:a091b1da6ebcbb415f633383ce9f3732e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6f26d9cd75b7425606193cd94cd8ce0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6f26d9cd75b7425606193cd94cd8ce0"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>CommitCurrentTransaction</b> ()</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ac6f26d9cd75b7425606193cd94cd8ce0">CommitCurrentTransaction</a> ()</td></tr>
+<tr class="memdesc:ac6f26d9cd75b7425606193cd94cd8ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits the current transaction. <br /></td></tr>
 <tr class="separator:ac6f26d9cd75b7425606193cd94cd8ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0f5e0871bfe5ccf43eacc467ba1d1e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0f5e0871bfe5ccf43eacc467ba1d1e5"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>OpenNewTransaction</b> ()</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ab0f5e0871bfe5ccf43eacc467ba1d1e5">OpenNewTransaction</a> ()</td></tr>
+<tr class="memdesc:ab0f5e0871bfe5ccf43eacc467ba1d1e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a new database transaction. <br /></td></tr>
 <tr class="separator:ab0f5e0871bfe5ccf43eacc467ba1d1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adea7317655d98165addf32ca98246e55"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adea7317655d98165addf32ca98246e55"></a>
-static netxpert::data::InputArcs&#160;</td><td class="memItemRight" valign="bottom"><b>LoadNetworkFromDB</b> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+static netxpert::data::InputArcs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#adea7317655d98165addf32ca98246e55">LoadNetworkFromDB</a> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+<tr class="memdesc:adea7317655d98165addf32ca98246e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads arcs that form a network from the database. <br /></td></tr>
 <tr class="separator:adea7317655d98165addf32ca98246e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2938be0a57e275a376ddad51ea0561f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae2938be0a57e275a376ddad51ea0561f"></a>
-static netxpert::data::NetworkBuilderInputArcs&#160;</td><td class="memItemRight" valign="bottom"><b>LoadNetworkToBuildFromDB</b> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+static netxpert::data::NetworkBuilderInputArcs&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ae2938be0a57e275a376ddad51ea0561f">LoadNetworkToBuildFromDB</a> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+<tr class="memdesc:ae2938be0a57e275a376ddad51ea0561f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads arcs that shall be built (from and to nodes will be calculated) from the database. <br /></td></tr>
 <tr class="separator:ae2938be0a57e275a376ddad51ea0561f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81a4919efc4dc8d35bb2ba47ae55da25"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81a4919efc4dc8d35bb2ba47ae55da25"></a>
-static std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>LoadNodesFromDB</b> (const std::string &amp;_tableName, const std::string &amp;geomColName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+static std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a81a4919efc4dc8d35bb2ba47ae55da25">LoadNodesFromDB</a> (const std::string &amp;_tableName, const std::string &amp;geomColName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map)</td></tr>
+<tr class="memdesc:a81a4919efc4dc8d35bb2ba47ae55da25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all nodes from the database. <br /></td></tr>
 <tr class="separator:a81a4919efc4dc8d35bb2ba47ae55da25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afeea6c99ff55007ab5079c75c39bd4c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afeea6c99ff55007ab5079c75c39bd4c6"></a>
-static std::unique_ptr&lt; SQLite::Statement &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PrepareGetClosestArcQuery</b> (const std::string &amp;tableName, const std::string &amp;geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const bool withCapacity)</td></tr>
+static std::unique_ptr&lt; SQLite::Statement &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#afeea6c99ff55007ab5079c75c39bd4c6">PrepareGetClosestArcQuery</a> (const std::string &amp;tableName, const std::string &amp;geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const bool withCapacity)</td></tr>
+<tr class="memdesc:afeea6c99ff55007ab5079c75c39bd4c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares query for GetClosestArcQuery() <br /></td></tr>
 <tr class="separator:afeea6c99ff55007ab5079c75c39bd4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae842b4ce30eee6ec2c85444844318994"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae842b4ce30eee6ec2c85444844318994"></a>
-static <a class="el" href="structnetxpert_1_1data_1_1ExtClosestArcAndPoint.html">netxpert::data::ExtClosestArcAndPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetClosestArcFromPoint</b> (const geos::geom::Coordinate &amp;coord, const int treshold, SQLite::Statement &amp;qry, const bool withCapacity)</td></tr>
+static <a class="el" href="structnetxpert_1_1data_1_1ExtClosestArcAndPoint.html">netxpert::data::ExtClosestArcAndPoint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ae842b4ce30eee6ec2c85444844318994">GetClosestArcFromPoint</a> (const geos::geom::Coordinate &amp;coord, const int treshold, SQLite::Statement &amp;qry, const bool withCapacity)</td></tr>
+<tr class="memdesc:ae842b4ce30eee6ec2c85444844318994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets closest arc to given coordinate within the given treshold. <br /></td></tr>
 <tr class="separator:ae842b4ce30eee6ec2c85444844318994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af44cf45d7c4ee81a3e4037901efeb43f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af44cf45d7c4ee81a3e4037901efeb43f"></a>
-static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcGeometryFromDB</b> (const std::string &amp;tableName, const std::string &amp;arcIDColumnName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const netxpert::data::extarcid_t &amp;arcID)</td></tr>
+static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#af44cf45d7c4ee81a3e4037901efeb43f">GetArcGeometryFromDB</a> (const std::string &amp;tableName, const std::string &amp;arcIDColumnName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const <a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">netxpert::data::extarcid_t</a> &amp;arcID)</td></tr>
+<tr class="memdesc:af44cf45d7c4ee81a3e4037901efeb43f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets single arc geometry from database per ID. <br /></td></tr>
 <tr class="separator:af44cf45d7c4ee81a3e4037901efeb43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e91daf8cd224e722ea58a522c5043e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e91daf8cd224e722ea58a522c5043e2"></a>
-static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcGeometriesFromDB</b> (const std::string &amp;tableName, const std::string &amp;arcIDColumnName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const std::string &amp;arcIDs)</td></tr>
+static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a1e91daf8cd224e722ea58a522c5043e2">GetArcGeometriesFromDB</a> (const std::string &amp;tableName, const std::string &amp;arcIDColumnName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const std::string &amp;arcIDs)</td></tr>
+<tr class="memdesc:a1e91daf8cd224e722ea58a522c5043e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc geometries from database per IDs. <br /></td></tr>
 <tr class="separator:a1e91daf8cd224e722ea58a522c5043e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdfafd0732ca51ce231422b5372541d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdfafd0732ca51ce231422b5372541d4"></a>
-static std::unordered_set&lt; netxpert::data::extarcid_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetIntersectingArcs</b> (const std::string &amp;barrierTableName, const std::string &amp;barrierGeomColName, const std::string &amp;arcsTableName, const std::string &amp;arcIDColName, const std::string &amp;arcGeomColName)</td></tr>
+static std::unordered_set&lt; <a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">netxpert::data::extarcid_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#afdfafd0732ca51ce231422b5372541d4">GetIntersectingArcs</a> (const std::string &amp;barrierTableName, const std::string &amp;barrierGeomColName, const std::string &amp;arcsTableName, const std::string &amp;arcIDColName, const std::string &amp;arcGeomColName)</td></tr>
+<tr class="memdesc:afdfafd0732ca51ce231422b5372541d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc geometries that intersect with barrier geometries from database. <br /></td></tr>
 <tr class="separator:afdfafd0732ca51ce231422b5372541d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03a39530e7e86cfa58a0c7d69bd95b7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03a39530e7e86cfa58a0c7d69bd95b7a"></a>
-static std::vector&lt; std::unique_ptr&lt; geos::geom::Geometry &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetBarrierGeometriesFromDB</b> (const std::string &amp;barrierTableName, const std::string &amp;barrierGeomColName)</td></tr>
+static std::vector&lt; std::unique_ptr&lt; geos::geom::Geometry &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a03a39530e7e86cfa58a0c7d69bd95b7a">GetBarrierGeometriesFromDB</a> (const std::string &amp;barrierTableName, const std::string &amp;barrierGeomColName)</td></tr>
+<tr class="memdesc:a03a39530e7e86cfa58a0c7d69bd95b7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets barrier geometries from database. <br /></td></tr>
 <tr class="separator:a03a39530e7e86cfa58a0c7d69bd95b7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5fea985543faa266073b9584c9c2993"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5fea985543faa266073b9584c9c2993"></a>
-static std::unique_ptr&lt; geos::geom::MultiPoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcVertexGeometriesByBufferFromDB</b> (const std::string &amp;tableName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const std::string &amp;arcIDColName, const double bufferVal, const geos::geom::Coordinate &amp;p)</td></tr>
+<tr class="memitem:af5fea985543faa266073b9584c9c2993"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; geos::geom::MultiPoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#af5fea985543faa266073b9584c9c2993">GetArcVertexGeometriesByBufferFromDB</a> (const std::string &amp;tableName, const std::string &amp;geomColumnName, const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType, const std::string &amp;arcIDColName, const double bufferVal, const geos::geom::Coordinate &amp;p)</td></tr>
 <tr class="separator:af5fea985543faa266073b9584c9c2993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d49d1a45cc7317b42426f7b49f59ff0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d49d1a45cc7317b42426f7b49f59ff0"></a>
-static std::unique_ptr&lt; SQLite::Statement &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PrepareIsPointOnArcQuery</b> (std::string tableName, std::string arcIDColumnName, std::string geomColumnName, <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> arcIDColDataType)</td></tr>
-<tr class="separator:a9d49d1a45cc7317b42426f7b49f59ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae71296535a5fd34865b8b53e9db35180"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae71296535a5fd34865b8b53e9db35180"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsPointOnArc</b> (geos::geom::Coordinate coords, std::string extArcID, std::shared_ptr&lt; SQLite::Statement &gt; qry)</td></tr>
-<tr class="separator:ae71296535a5fd34865b8b53e9db35180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef956790dbe373a5c140e923493e5cd2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef956790dbe373a5c140e923493e5cd2"></a>
-static double&#160;</td><td class="memItemRight" valign="bottom"><b>GetPositionOfClosestPoint</b> (std::string arcsGeomColumnName, std::string arcsTableName, geos::geom::Coordinate coord, std::string extArcID, SQLite::Statement &amp;posOfClosestPointQry)</td></tr>
-<tr class="separator:aef956790dbe373a5c140e923493e5cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77b192e35cfe5a7291859622583f906b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77b192e35cfe5a7291859622583f906b"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>CloseConnection</b> ()</td></tr>
+<tr class="memitem:a77b192e35cfe5a7291859622583f906b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a77b192e35cfe5a7291859622583f906b">CloseConnection</a> ()</td></tr>
+<tr class="memdesc:a77b192e35cfe5a7291859622583f906b"><td class="mdescLeft">&#160;</td><td class="mdescRight">*/  <a href="#a77b192e35cfe5a7291859622583f906b">More...</a><br /></td></tr>
 <tr class="separator:a77b192e35cfe5a7291859622583f906b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45895a557a20d42912aba39db006de59"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a45895a557a20d42912aba39db006de59"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadGeometryToMem</b> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map, const std::string &amp;geomColumnName)</td></tr>
-<tr class="separator:a45895a557a20d42912aba39db006de59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a990cf25e6b12bd828e6221f5fcba8d73"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a990cf25e6b12bd828e6221f5fcba8d73"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>LoadGeometryToMem</b> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map, const std::string &amp;geomColumnName, const std::string &amp;arcIDs)</td></tr>
+static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a990cf25e6b12bd828e6221f5fcba8d73">LoadGeometryToMem</a> (const std::string &amp;_tableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map, const std::string &amp;geomColumnName, const std::string &amp;arcIDs)</td></tr>
+<tr class="memdesc:a990cf25e6b12bd828e6221f5fcba8d73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the key value memory store, that speeds up queries for geometries. <br /></td></tr>
 <tr class="separator:a990cf25e6b12bd828e6221f5fcba8d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a785fdc3b270c78a1e5c5fbeda553182f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a785fdc3b270c78a1e5c5fbeda553182f"></a>
-static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcGeometriesFromMem</b> (const std::string &amp;arcIDs)</td></tr>
+static std::unique_ptr&lt; geos::geom::MultiLineString &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a785fdc3b270c78a1e5c5fbeda553182f">GetArcGeometriesFromMem</a> (const std::string &amp;arcIDs)</td></tr>
+<tr class="memdesc:a785fdc3b270c78a1e5c5fbeda553182f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the geometries from the key value memory store. <br /></td></tr>
 <tr class="separator:a785fdc3b270c78a1e5c5fbeda553182f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a7484e6b69665374f10a7b6e384dd9723"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7484e6b69665374f10a7b6e384dd9723"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsInitialized</b></td></tr>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a7484e6b69665374f10a7b6e384dd9723">IsInitialized</a></td></tr>
+<tr class="memdesc:a7484e6b69665374f10a7b6e384dd9723"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicated if <a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html" title="Static class that controls the SpatiaLite DB processing access. ">DBHELPER</a> has been already initialized. <br /></td></tr>
 <tr class="separator:a7484e6b69665374f10a7b6e384dd9723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1689cbaa3e6f7742b9c461fb5631a6b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1689cbaa3e6f7742b9c461fb5631a6b8"></a>
-static std::unordered_set&lt; netxpert::data::extarcid_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>EliminatedArcs</b></td></tr>
+static std::unordered_set&lt; <a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">netxpert::data::extarcid_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a1689cbaa3e6f7742b9c461fb5631a6b8">EliminatedArcs</a></td></tr>
+<tr class="memdesc:a1689cbaa3e6f7742b9c461fb5631a6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the elmininated arcs, that shall be excluded from the databse queries. <br /></td></tr>
 <tr class="separator:a1689cbaa3e6f7742b9c461fb5631a6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bd8c8262a68576ac7d185539c23d6d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bd8c8262a68576ac7d185539c23d6d0"></a>
-static std::shared_ptr&lt; geos::geom::GeometryFactory &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GEO_FACTORY</b></td></tr>
+static std::shared_ptr&lt; geos::geom::GeometryFactory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#a5bd8c8262a68576ac7d185539c23d6d0">GEO_FACTORY</a></td></tr>
+<tr class="memdesc:a5bd8c8262a68576ac7d185539c23d6d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Geometry Factory for GEOS. A precision model is set in the initialization of <a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html" title="Static class that controls the SpatiaLite DB processing access. ">DBHELPER</a>. Used for WKBReader and every geometry creation in netxpert library. <br /></td></tr>
 <tr class="separator:a5bd8c8262a68576ac7d185539c23d6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac0bf53cc8a592b097b2ca935f6a9c1dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0bf53cc8a592b097b2ca935f6a9c1dc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBHELPER.html#ac0bf53cc8a592b097b2ca935f6a9c1dc">DBHELPER</a> ()</td></tr>
+<tr class="memdesc:ac0bf53cc8a592b097b2ca935f6a9c1dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Constructor is protected because it is a static class. <br /></td></tr>
+<tr class="separator:ac0bf53cc8a592b097b2ca935f6a9c1dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Static <a class="el" href="classClass.html">Class</a> that controls the SpatiaLite DB processing access. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<div class="textblock"><p>Static class that controls the SpatiaLite DB processing access. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a77b192e35cfe5a7291859622583f906b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void netxpert::io::DBHELPER::CloseConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>*/ </p>
+<p>Closes the database connection </p>
+
+</div>
+</div>
+<a class="anchor" id="af5fea985543faa266073b9584c9c2993"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::unique_ptr&lt;geos::geom::MultiPoint&gt; netxpert::io::DBHELPER::GetArcVertexGeometriesByBufferFromDB </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>geomColumnName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a>&#160;</td>
+          <td class="paramname"><em>arcIDColDataType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>arcIDColName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>bufferVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const geos::geom::Coordinate &amp;&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section warning"><dt>Warning</dt><dd>untested </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/<a class="el" href="dbhelper_8h_source.html">dbhelper.h</a></li>
 </ul>
 </div><!-- contents -->

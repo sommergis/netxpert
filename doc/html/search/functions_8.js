@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['printgraph',['PrintGraph',['../classnetxpert_1_1InternalNet.html#a24aca09a6eb6ad32aed2a2be21bf6b1a',1,'netxpert::InternalNet']]],
-  ['processisoresultarcsmem',['ProcessIsoResultArcsMem',['../classnetxpert_1_1InternalNet.html#ae39fff10981cd5f5da5541a44f515fe1',1,'netxpert::InternalNet']]],
-  ['processmcfresultarcsmem',['ProcessMCFResultArcsMem',['../classnetxpert_1_1InternalNet.html#ab5def53f2b21f3867029b40d5f876b31',1,'netxpert::InternalNet']]],
-  ['processresultarcs',['ProcessResultArcs',['../classnetxpert_1_1InternalNet.html#aaad9b38faf38aeb62d266499d2204ea0',1,'netxpert::InternalNet']]],
-  ['processsptresultarcsmem',['ProcessSPTResultArcsMem',['../classnetxpert_1_1InternalNet.html#a4b62c28e5ec1b756cde5851f62be8498',1,'netxpert::InternalNet']]]
+  ['mergeandsaveresultarcs',['MergeAndSaveResultArcs',['../classnetxpert_1_1io_1_1SpatiaLiteWriter.html#adeb9fd254a0dbbb576047fbae8475044',1,'netxpert::io::SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string &amp;costColumnName, const std::string &amp;geomColumnName, const std::string arcIDColumnName, const std::string &amp;arcTableName, const std::string &amp;arcIDs, const std::string &amp;resultTableName)'],['../classnetxpert_1_1io_1_1SpatiaLiteWriter.html#a66c389507a4c5d979431c1a6e57e76f5',1,'netxpert::io::SpatiaLiteWriter::MergeAndSaveResultArcs(const std::string &amp;orig, const std::string &amp;dest, const double cost, const double capacity, const double flow, const std::string &amp;geomColumnName, const std::string &amp;arcIDColumnName, const std::string &amp;arcTableName, const std::string &amp;arcIDs, const geos::geom::MultiLineString &amp;mLine, const std::string &amp;resultTableName)']]],
+  ['minimumspanningtree',['MinimumSpanningTree',['../classnetxpert_1_1MinimumSpanningTree.html#a7d1cd0fc061bd8b056f4317eabdcdc0a',1,'netxpert::MinimumSpanningTree']]],
+  ['mst_5flem',['MST_LEM',['../classnetxpert_1_1core_1_1MST__LEM.html#aff365de87b9125f6f2cb70e51928e764',1,'netxpert::core::MST_LEM::MST_LEM()'],['../classnetxpert_1_1core_1_1MST__LEM.html#abdd5584b9ac0cfbf68ea3053fab84875',1,'netxpert::core::MST_LEM::MST_LEM(MST_LEM const &amp;)']]]
 ];

@@ -106,116 +106,142 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ade299cebc75fa88cc5a6df932ebbe896"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#ade299cebc75fa88cc5a6df932ebbe896">InternalNet</a> (const netxpert::data::InputArcs &amp;arcsTbl, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;_map=<a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a>(), const <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg=<a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a>(), const netxpert::data::InputNodes &amp;nodesTbl=netxpert::data::InputNodes(), const bool autoClean=true, const std::map&lt; std::string, netxpert::data::IntNodeID &gt; &amp;extIntNodeMap=std::map&lt; std::string, netxpert::data::IntNodeID &gt;())</td></tr>
+<tr class="memdesc:ade299cebc75fa88cc5a6df932ebbe896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor with default values.  <a href="#ade299cebc75fa88cc5a6df932ebbe896">More...</a><br /></td></tr>
 <tr class="separator:ade299cebc75fa88cc5a6df932ebbe896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4b653540c70d6be7d5b7097b78bc2c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f4b653540c70d6be7d5b7097b78bc2c"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a2f4b653540c70d6be7d5b7097b78bc2c">~InternalNet</a> ()</td></tr>
 <tr class="memdesc:a2f4b653540c70d6be7d5b7097b78bc2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deconstructor. <br /></td></tr>
 <tr class="separator:a2f4b653540c70d6be7d5b7097b78bc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a115ab61c1fbfc9302c8c1316f7edee88"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a115ab61c1fbfc9302c8c1316f7edee88"></a>
-const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcFromID</b> (const netxpert::data::intarcid_t arcID)</td></tr>
+const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a115ab61c1fbfc9302c8c1316f7edee88">GetArcFromID</a> (const netxpert::data::intarcid_t arcID)</td></tr>
+<tr class="memdesc:a115ab61c1fbfc9302c8c1316f7edee88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc from internal ID. <br /></td></tr>
 <tr class="separator:a115ab61c1fbfc9302c8c1316f7edee88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5ac2ea0cb99043a7794de05aa8dd73c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5ac2ea0cb99043a7794de05aa8dd73c"></a>
-const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcFromOrigID</b> (const netxpert::data::extarcid_t arcID)</td></tr>
+const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aa5ac2ea0cb99043a7794de05aa8dd73c">GetArcFromOrigID</a> (const netxpert::data::extarcid_t arcID)</td></tr>
+<tr class="memdesc:aa5ac2ea0cb99043a7794de05aa8dd73c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc from original ID. <br /></td></tr>
 <tr class="separator:aa5ac2ea0cb99043a7794de05aa8dd73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ce19233f535b871c896c04508a7f1cc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ce19233f535b871c896c04508a7f1cc"></a>
-const netxpert::data::intarcid_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcID</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const netxpert::data::intarcid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a9ce19233f535b871c896c04508a7f1cc">GetArcID</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:a9ce19233f535b871c896c04508a7f1cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets internal arc ID by passing an internal arc. <br /></td></tr>
 <tr class="separator:a9ce19233f535b871c896c04508a7f1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf5e8f339b55f53e3ee1463310addf4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcf5e8f339b55f53e3ee1463310addf4"></a>
-const <a class="el" href="structnetxpert_1_1data_1_1ArcData.html">netxpert::data::ArcData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcData</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const <a class="el" href="structnetxpert_1_1data_1_1ArcData.html">netxpert::data::ArcData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#adcf5e8f339b55f53e3ee1463310addf4">GetArcData</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:adcf5e8f339b55f53e3ee1463310addf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the relevant arc data object by passing an internal arc. <br /></td></tr>
 <tr class="separator:adcf5e8f339b55f53e3ee1463310addf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80d3e9b08052c51b453950b6a3f8426a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80d3e9b08052c51b453950b6a3f8426a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetArcData</b> (const netxpert::data::arc_t &amp;arc, const <a class="el" href="structnetxpert_1_1data_1_1ArcData.html">netxpert::data::ArcData</a> &amp;arcData)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a80d3e9b08052c51b453950b6a3f8426a">SetArcData</a> (const netxpert::data::arc_t &amp;arc, const <a class="el" href="structnetxpert_1_1data_1_1ArcData.html">netxpert::data::ArcData</a> &amp;arcData)</td></tr>
+<tr class="memdesc:a80d3e9b08052c51b453950b6a3f8426a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign arc data to given internal arc. <br /></td></tr>
 <tr class="separator:a80d3e9b08052c51b453950b6a3f8426a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a993c97d71c173378190624650fe98d7d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a993c97d71c173378190624650fe98d7d"></a>
-const netxpert::data::cost_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcCost</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const netxpert::data::cost_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a993c97d71c173378190624650fe98d7d">GetArcCost</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:a993c97d71c173378190624650fe98d7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc cost by passing internal arc. <br /></td></tr>
 <tr class="separator:a993c97d71c173378190624650fe98d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bb02620417c4cd6888f24d9e2d210d2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2bb02620417c4cd6888f24d9e2d210d2"></a>
-const netxpert::data::capacity_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcCapacity</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const netxpert::data::capacity_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a2bb02620417c4cd6888f24d9e2d210d2">GetArcCapacity</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:a2bb02620417c4cd6888f24d9e2d210d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arc capacity by passing internal arc. <br /></td></tr>
 <tr class="separator:a2bb02620417c4cd6888f24d9e2d210d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed560db8ae49a08ab624a699b0d2e1bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed560db8ae49a08ab624a699b0d2e1bc"></a>
-const std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetOrigArcIDs</b> (const std::vector&lt; netxpert::data::arc_t &gt; &amp;path)</td></tr>
+const std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aed560db8ae49a08ab624a699b0d2e1bc">GetOrigArcIDs</a> (const std::vector&lt; netxpert::data::arc_t &gt; &amp;path)</td></tr>
+<tr class="memdesc:aed560db8ae49a08ab624a699b0d2e1bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a set of unordered original arc IDs by passing a vector of internal arcs. <br /></td></tr>
 <tr class="separator:aed560db8ae49a08ab624a699b0d2e1bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef0c2e3455e1710b27c864271a6d46d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef0c2e3455e1710b27c864271a6d46d5"></a>
-const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcFromNodes</b> (const netxpert::data::node_t &amp;source, const netxpert::data::node_t &amp;target)</td></tr>
+const netxpert::data::arc_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aef0c2e3455e1710b27c864271a6d46d5">GetArcFromNodes</a> (const netxpert::data::node_t &amp;source, const netxpert::data::node_t &amp;target)</td></tr>
+<tr class="memdesc:aef0c2e3455e1710b27c864271a6d46d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets internal arc by passing a source and target node. <br /></td></tr>
 <tr class="separator:aef0c2e3455e1710b27c864271a6d46d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05884dc72ebd5e768f7dd1c296811360"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05884dc72ebd5e768f7dd1c296811360"></a>
-const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeFromOrigID</b> (const std::string nodeID)</td></tr>
+const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a05884dc72ebd5e768f7dd1c296811360">GetNodeFromOrigID</a> (const std::string nodeID)</td></tr>
+<tr class="memdesc:a05884dc72ebd5e768f7dd1c296811360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets internal node by passing an original node ID. <br /></td></tr>
 <tr class="separator:a05884dc72ebd5e768f7dd1c296811360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7289c17bde0c31a1856069db1eaf392a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7289c17bde0c31a1856069db1eaf392a"></a>
-const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetOrigNodeID</b> (const netxpert::data::node_t &amp;node)</td></tr>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a7289c17bde0c31a1856069db1eaf392a">GetOrigNodeID</a> (const netxpert::data::node_t &amp;node)</td></tr>
+<tr class="memdesc:a7289c17bde0c31a1856069db1eaf392a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets original node ID by passing internal node. <br /></td></tr>
 <tr class="separator:a7289c17bde0c31a1856069db1eaf392a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016dca35f3551596e8dcee9af4810091"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a016dca35f3551596e8dcee9af4810091"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeID</b> (const netxpert::data::node_t &amp;node)</td></tr>
+const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a016dca35f3551596e8dcee9af4810091">GetNodeID</a> (const netxpert::data::node_t &amp;node)</td></tr>
+<tr class="memdesc:a016dca35f3551596e8dcee9af4810091"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets internal node ID cost by passing internal node. <br /></td></tr>
 <tr class="separator:a016dca35f3551596e8dcee9af4810091"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18be0ed9fc7136a58cbb9c3255470a50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18be0ed9fc7136a58cbb9c3255470a50"></a>
-const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeFromID</b> (const uint32_t nodeID)</td></tr>
+const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a18be0ed9fc7136a58cbb9c3255470a50">GetNodeFromID</a> (const uint32_t nodeID)</td></tr>
+<tr class="memdesc:a18be0ed9fc7136a58cbb9c3255470a50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets internal node by passing internal node ID. <br /></td></tr>
 <tr class="separator:a18be0ed9fc7136a58cbb9c3255470a50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e4c7863165a03f9a630417b1266b5b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e4c7863165a03f9a630417b1266b5b6"></a>
-const netxpert::data::supply_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeSupply</b> (const netxpert::data::node_t &amp;node)</td></tr>
+const netxpert::data::supply_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a2e4c7863165a03f9a630417b1266b5b6">GetNodeSupply</a> (const netxpert::data::node_t &amp;node)</td></tr>
+<tr class="memdesc:a2e4c7863165a03f9a630417b1266b5b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets node supply by passing internal node. <br /></td></tr>
 <tr class="separator:a2e4c7863165a03f9a630417b1266b5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae25db254fd5fc5396ab1004880a3d834"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae25db254fd5fc5396ab1004880a3d834"></a>
-const netxpert::data::graph_t::NodeIt&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodesIter</b> ()</td></tr>
+const netxpert::data::graph_t::NodeIt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#ae25db254fd5fc5396ab1004880a3d834">GetNodesIter</a> ()</td></tr>
+<tr class="memdesc:ae25db254fd5fc5396ab1004880a3d834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets nodes iterator on internal graph. <br /></td></tr>
 <tr class="separator:ae25db254fd5fc5396ab1004880a3d834"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7db1dd34c730eaf24ff90cf0c92f0ff6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7db1dd34c730eaf24ff90cf0c92f0ff6"></a>
-const netxpert::data::graph_t::ArcIt&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcsIter</b> ()</td></tr>
+const netxpert::data::graph_t::ArcIt&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a7db1dd34c730eaf24ff90cf0c92f0ff6">GetArcsIter</a> ()</td></tr>
+<tr class="memdesc:a7db1dd34c730eaf24ff90cf0c92f0ff6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets arcs iterator on internal graph. <br /></td></tr>
 <tr class="separator:a7db1dd34c730eaf24ff90cf0c92f0ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb82b20b3ca95c20a1c2b8ef3ca76a29"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb82b20b3ca95c20a1c2b8ef3ca76a29"></a>
-const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetSourceNode</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#adb82b20b3ca95c20a1c2b8ef3ca76a29">GetSourceNode</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:adb82b20b3ca95c20a1c2b8ef3ca76a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets source node by passing an internal node. <br /></td></tr>
 <tr class="separator:adb82b20b3ca95c20a1c2b8ef3ca76a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a618cfe702e2f447cda78dd4384979e23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a618cfe702e2f447cda78dd4384979e23"></a>
-const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetTargetNode</b> (const netxpert::data::arc_t &amp;arc)</td></tr>
+const netxpert::data::node_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a618cfe702e2f447cda78dd4384979e23">GetTargetNode</a> (const netxpert::data::arc_t &amp;arc)</td></tr>
+<tr class="memdesc:a618cfe702e2f447cda78dd4384979e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets target node by passing an internal node. <br /></td></tr>
 <tr class="separator:a618cfe702e2f447cda78dd4384979e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0223b625c6a03a4e7dfaee4f6efa609"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab0223b625c6a03a4e7dfaee4f6efa609"></a>
-const geos::geom::Coordinate&#160;</td><td class="memItemRight" valign="bottom"><b>GetStartOrEndNodeGeometry</b> (const netxpert::data::ExtNodeID node)</td></tr>
+const geos::geom::Coordinate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#ab0223b625c6a03a4e7dfaee4f6efa609">GetStartOrEndNodeGeometry</a> (const netxpert::data::ExtNodeID node)</td></tr>
+<tr class="memdesc:ab0223b625c6a03a4e7dfaee4f6efa609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets coordinate of node by passing an original node ID. <br /></td></tr>
 <tr class="separator:ab0223b625c6a03a4e7dfaee4f6efa609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c6cc549cc2bb8596e0ca9090cbdfdd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c6cc549cc2bb8596e0ca9090cbdfdd4"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeCount</b> ()</td></tr>
+const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a8c6cc549cc2bb8596e0ca9090cbdfdd4">GetNodeCount</a> ()</td></tr>
+<tr class="memdesc:a8c6cc549cc2bb8596e0ca9090cbdfdd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets count of all nodes in the internal graph. <br /></td></tr>
 <tr class="separator:a8c6cc549cc2bb8596e0ca9090cbdfdd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeef27800e7f0bda9ef518d8e4273fea7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeef27800e7f0bda9ef518d8e4273fea7"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcCount</b> ()</td></tr>
+const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aeef27800e7f0bda9ef518d8e4273fea7">GetArcCount</a> ()</td></tr>
+<tr class="memdesc:aeef27800e7f0bda9ef518d8e4273fea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets count of all arcs in the internal graph. <br /></td></tr>
 <tr class="separator:aeef27800e7f0bda9ef518d8e4273fea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67d06885a857c73c755a562ec6389ba5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67d06885a857c73c755a562ec6389ba5"></a>
-netxpert::data::graph_t *&#160;</td><td class="memItemRight" valign="bottom"><b>GetGraph</b> ()</td></tr>
+netxpert::data::graph_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a67d06885a857c73c755a562ec6389ba5">GetGraph</a> ()</td></tr>
+<tr class="memdesc:a67d06885a857c73c755a562ec6389ba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a pointer to the internal graph. <br /></td></tr>
 <tr class="separator:a67d06885a857c73c755a562ec6389ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4630bcae97db4d4f14969c27df504f3f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4630bcae97db4d4f14969c27df504f3f"></a>
-netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetCostMap</b> ()</td></tr>
+netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a4630bcae97db4d4f14969c27df504f3f">GetCostMap</a> ()</td></tr>
+<tr class="memdesc:a4630bcae97db4d4f14969c27df504f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the internal arc cost map. <br /></td></tr>
 <tr class="separator:a4630bcae97db4d4f14969c27df504f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af70f905904597c8ff70e74c743406234"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af70f905904597c8ff70e74c743406234"></a>
-netxpert::data::graph_t::ArcMap&lt; netxpert::data::cost_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetCapMap</b> ()</td></tr>
-<tr class="separator:af70f905904597c8ff70e74c743406234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0751f8e0e54eb04f944a26b3d70e3f78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0751f8e0e54eb04f944a26b3d70e3f78"></a>
+netxpert::data::graph_t::ArcMap&lt; netxpert::data::capacity_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a0751f8e0e54eb04f944a26b3d70e3f78">GetCapMap</a> ()</td></tr>
+<tr class="memdesc:a0751f8e0e54eb04f944a26b3d70e3f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a pointer to the internal arc capacity map. <br /></td></tr>
+<tr class="separator:a0751f8e0e54eb04f944a26b3d70e3f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e628e1ff1dc6b576ab94df4681995d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20e628e1ff1dc6b576ab94df4681995d"></a>
-netxpert::data::graph_t::ArcMap&lt; bool &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetArcFilterMap</b> ()</td></tr>
+netxpert::data::graph_t::ArcMap&lt; bool &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a20e628e1ff1dc6b576ab94df4681995d">GetArcFilterMap</a> ()</td></tr>
+<tr class="memdesc:a20e628e1ff1dc6b576ab94df4681995d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a pointer to the internal arc filter map. <br /></td></tr>
 <tr class="separator:a20e628e1ff1dc6b576ab94df4681995d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb4a4e90f15e1006ada43f23ee84803c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb4a4e90f15e1006ada43f23ee84803c"></a>
-netxpert::data::graph_t::NodeMap&lt; netxpert::data::supply_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetSupplyMap</b> ()</td></tr>
+netxpert::data::graph_t::NodeMap&lt; netxpert::data::supply_t &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aeb4a4e90f15e1006ada43f23ee84803c">GetSupplyMap</a> ()</td></tr>
+<tr class="memdesc:aeb4a4e90f15e1006ada43f23ee84803c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a pointer to the internal node supply map. <br /></td></tr>
 <tr class="separator:aeb4a4e90f15e1006ada43f23ee84803c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a851f427a0c49e53dd5348e06e45b1dfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a851f427a0c49e53dd5348e06e45b1dfe"></a>
-netxpert::data::graph_t::NodeMap&lt; std::string &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeMap</b> ()</td></tr>
+netxpert::data::graph_t::NodeMap&lt; std::string &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a851f427a0c49e53dd5348e06e45b1dfe">GetNodeMap</a> ()</td></tr>
+<tr class="memdesc:a851f427a0c49e53dd5348e06e45b1dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a pointer to the internal node map (internal nodes: original node ID) <br /></td></tr>
 <tr class="separator:a851f427a0c49e53dd5348e06e45b1dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28a038378a7fda3a71cd336d7f907a8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a28a038378a7fda3a71cd336d7f907a8d"></a>
-const std::unordered_map&lt; std::string, netxpert::data::node_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetNodeIDMap</b> ()</td></tr>
+const std::unordered_map&lt; std::string, netxpert::data::node_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a28a038378a7fda3a71cd336d7f907a8d">GetNodeIDMap</a> ()</td></tr>
+<tr class="memdesc:a28a038378a7fda3a71cd336d7f907a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a map of original node IDs to internal nodes. <br /></td></tr>
 <tr class="separator:a28a038378a7fda3a71cd336d7f907a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebd32a385c7273c478786becb9a86b95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aebd32a385c7273c478786becb9a86b95"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetNodeData</b> (const std::string &amp;nodeID, const netxpert::data::node_t &amp;node)</td></tr>
-<tr class="separator:aebd32a385c7273c478786becb9a86b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4aa66e236aef1b675de6f9aa68c7fbc3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aa66e236aef1b675de6f9aa68c7fbc3"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>AddNode</b> (const <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &amp;newNode, const int treshold, SQLite::Statement &amp;closestArcQry, const bool withCapacity, const <a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">netxpert::data::AddedNodeType</a> startOrEnd)</td></tr>
+<tr class="memitem:a0d330f1cdac06525c950bbb91ac67cd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d330f1cdac06525c950bbb91ac67cd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a0d330f1cdac06525c950bbb91ac67cd4">RegisterNodeID</a> (const std::string &amp;nodeID, const netxpert::data::node_t &amp;node)</td></tr>
+<tr class="memdesc:a0d330f1cdac06525c950bbb91ac67cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers the original node ID to the internal node. <br /></td></tr>
+<tr class="separator:a0d330f1cdac06525c950bbb91ac67cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa66e236aef1b675de6f9aa68c7fbc3"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a4aa66e236aef1b675de6f9aa68c7fbc3">AddNode</a> (const <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &amp;newNode, const int treshold, SQLite::Statement &amp;closestArcQry, const bool withCapacity, const <a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">netxpert::data::AddedNodeType</a> startOrEnd)</td></tr>
+<tr class="memdesc:a4aa66e236aef1b675de6f9aa68c7fbc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new node in the network (internal -&gt; private??)  <a href="#a4aa66e236aef1b675de6f9aa68c7fbc3">More...</a><br /></td></tr>
 <tr class="separator:a4aa66e236aef1b675de6f9aa68c7fbc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae481644d03b116b8011b02f35f62a0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae481644d03b116b8011b02f35f62a0f"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aae481644d03b116b8011b02f35f62a0f">AddStartNode</a> (std::string extNodeID, double x, double y, netxpert::data::supply_t supply, int treshold, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, bool withCapacity)</td></tr>
-<tr class="memdesc:aae481644d03b116b8011b02f35f62a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding start nodes. <br /></td></tr>
+<tr class="memitem:aae481644d03b116b8011b02f35f62a0f"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#aae481644d03b116b8011b02f35f62a0f">AddStartNode</a> (std::string extNodeID, double x, double y, netxpert::data::supply_t supply, int treshold, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, bool withCapacity)</td></tr>
+<tr class="memdesc:aae481644d03b116b8011b02f35f62a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for adding start nodes.  <a href="#aae481644d03b116b8011b02f35f62a0f">More...</a><br /></td></tr>
 <tr class="separator:aae481644d03b116b8011b02f35f62a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc91c6dd6bb51f0261ba3ff1e62f0b57"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc91c6dd6bb51f0261ba3ff1e62f0b57"></a>
-const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#adc91c6dd6bb51f0261ba3ff1e62f0b57">AddEndNode</a> (std::string extNodeID, double x, double y, netxpert::data::supply_t supply, int treshold, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, bool withCapacity)</td></tr>
-<tr class="memdesc:adc91c6dd6bb51f0261ba3ff1e62f0b57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding end nodes. <br /></td></tr>
+<tr class="memitem:adc91c6dd6bb51f0261ba3ff1e62f0b57"><td class="memItemLeft" align="right" valign="top">const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#adc91c6dd6bb51f0261ba3ff1e62f0b57">AddEndNode</a> (std::string extNodeID, double x, double y, netxpert::data::supply_t supply, int treshold, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, bool withCapacity)</td></tr>
+<tr class="memdesc:adc91c6dd6bb51f0261ba3ff1e62f0b57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method for adding end nodes.  <a href="#adc91c6dd6bb51f0261ba3ff1e62f0b57">More...</a><br /></td></tr>
 <tr class="separator:adc91c6dd6bb51f0261ba3ff1e62f0b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc56b61890606de9ea83acdad408db39"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc56b61890606de9ea83acdad408db39"></a>
-std::vector&lt; std::pair&lt; uint32_t, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#afc56b61890606de9ea83acdad408db39">LoadStartNodes</a> (std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt; newNodes, const int treshold, const std::string arcsTableName, const std::string geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const bool withCapacity)</td></tr>
-<tr class="memdesc:afc56b61890606de9ea83acdad408db39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding multiple start nodes. <br /></td></tr>
+<tr class="memitem:afc56b61890606de9ea83acdad408db39"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; uint32_t, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#afc56b61890606de9ea83acdad408db39">LoadStartNodes</a> (std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt; newNodes, const int treshold, const std::string arcsTableName, const std::string geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const bool withCapacity)</td></tr>
+<tr class="memdesc:afc56b61890606de9ea83acdad408db39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding multiple start nodes.  <a href="#afc56b61890606de9ea83acdad408db39">More...</a><br /></td></tr>
 <tr class="separator:afc56b61890606de9ea83acdad408db39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b6b10e311bdf4495af093fcc68690ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b6b10e311bdf4495af093fcc68690ad"></a>
-std::vector&lt; std::pair&lt; uint32_t, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a0b6b10e311bdf4495af093fcc68690ad">LoadEndNodes</a> (std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt; newNodes, const int treshold, const std::string arcsTableName, const std::string geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const bool withCapacity)</td></tr>
-<tr class="memdesc:a0b6b10e311bdf4495af093fcc68690ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding multiple end nodes. <br /></td></tr>
+<tr class="memitem:a0b6b10e311bdf4495af093fcc68690ad"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; uint32_t, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1InternalNet.html#a0b6b10e311bdf4495af093fcc68690ad">LoadEndNodes</a> (std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt; newNodes, const int treshold, const std::string arcsTableName, const std::string geomColumnName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap, const bool withCapacity)</td></tr>
+<tr class="memdesc:a0b6b10e311bdf4495af093fcc68690ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple Method for adding multiple end nodes.  <a href="#a0b6b10e311bdf4495af093fcc68690ad">More...</a><br /></td></tr>
 <tr class="separator:a0b6b10e311bdf4495af093fcc68690ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2dccfb48a31d718181d96518c3532e2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2dccfb48a31d718181d96518c3532e2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Reset</b> ()</td></tr>
@@ -303,12 +329,298 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Constructor. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Constructor with default values. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">arcsTbl</td><td>represents arcs read from a database. This is mandatory. </td></tr>
+    <tr><td class="paramname">arcsTbl</td><td>represents arcs read from a database (mandatory). </td></tr>
+    <tr><td class="paramname">_map</td><td>column names </td></tr>
+    <tr><td class="paramname">cnfg</td><td>Config for netxpert </td></tr>
+    <tr><td class="paramname">nodesTbl</td><td>represents nodes read from a database. These nodes will be used for split up arcs if necessary (optional). </td></tr>
+    <tr><td class="paramname">autoClean</td><td>clean the network on reading </td></tr>
+    <tr><td class="paramname">extIntNodeMap</td><td>represents a mapping between external node IDs and internal node IDs. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="adc91c6dd6bb51f0261ba3ff1e62f0b57"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t netxpert::InternalNet::AddEndNode </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>extNodeID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">netxpert::data::supply_t&#160;</td>
+          <td class="paramname"><em>supply</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>treshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>withCapacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for adding end nodes. </p>
+<dl class="section return"><dt>Returns</dt><dd>internal node ID </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4aa66e236aef1b675de6f9aa68c7fbc3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t netxpert::InternalNet::AddNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>newNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>treshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">SQLite::Statement &amp;&#160;</td>
+          <td class="paramname"><em>closestArcQry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>withCapacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">netxpert::data::AddedNodeType</a>&#160;</td>
+          <td class="paramname"><em>startOrEnd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds a new node in the network (internal -&gt; private??) </p>
+<ul>
+<li>fetch the nearest arc and the closest point on the arc to the new node (via Spatialite): arcID, arc geometry and closest point geometry</li>
+<li>has the arc already been split by a new node?</li>
+<li>if yes: fetch the geometry from the internal already split arcs</li>
+<li>check for location of node on line: isPointOnLine, position of closestPoint (in memory with geos)</li>
+<li>split arc geometrically and insert new node in internal graph <dl class="section return"><dt>Returns</dt><dd>internal node ID </dd></dl>
+</li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="aae481644d03b116b8011b02f35f62a0f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint32_t netxpert::InternalNet::AddStartNode </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>extNodeID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">netxpert::data::supply_t&#160;</td>
+          <td class="paramname"><em>supply</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>treshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>withCapacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Method for adding start nodes. </p>
+<dl class="section return"><dt>Returns</dt><dd>internal node ID </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0b6b10e311bdf4495af093fcc68690ad"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt;uint32_t, std::string&gt; &gt; netxpert::InternalNet::LoadEndNodes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>newNodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>treshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>arcsTableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>geomColumnName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>withCapacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simple Method for adding multiple end nodes. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector of pairs with internal node ID and the original node ID </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afc56b61890606de9ea83acdad408db39"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt;uint32_t, std::string&gt; &gt; netxpert::InternalNet::LoadStartNodes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1NewNode.html">netxpert::data::NewNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>newNodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>treshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>arcsTableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>geomColumnName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;&#160;</td>
+          <td class="paramname"><em>cmap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>withCapacity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simple Method for adding multiple start nodes. </p>
+<dl class="section return"><dt>Returns</dt><dd>A vector of pairs with internal node ID and the original node ID </dd></dl>
 
 </div>
 </div>

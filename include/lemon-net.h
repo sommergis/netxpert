@@ -124,16 +124,20 @@ namespace netxpert {
        };
     }
 
+    namespace data {
     /**\brief The internal Network representation.
     **/
     class InternalNet
     {
       public:
-        /// Constructor.
-        ///\param arcsTbl represents arcs read from a database.
-        /// This is mandatory.
-        /*///\param nodesTbl represents nodes read from a database.
-        /// These nodes will be used for split up arcs if necessary. \c nodesTbl is optional.*/
+        ///\brief Constructor with default values
+        ///\param arcsTbl: represents arcs read from a database (mandatory).
+        ///\param _map: column names
+        ///\param cnfg: Config for netxpert
+        ///\param nodesTbl: represents nodes read from a database.
+        /// These nodes will be used for split up arcs if necessary (optional).
+        ///\param autoClean: clean the network on reading
+        ///\param extIntNodeMap: represents a mapping between external node IDs and internal node IDs.
         InternalNet(const netxpert::data::InputArcs& arcsTbl,
                     const netxpert::data::ColumnMap& _map = netxpert::data::ColumnMap(),
                     const netxpert::cnfg::Config& cnfg = netxpert::cnfg::Config(),
@@ -141,84 +145,107 @@ namespace netxpert {
                     const bool autoClean = true,
                     const std::map<std::string, netxpert::data::IntNodeID>& extIntNodeMap = std::map<std::string, netxpert::data::IntNodeID>() );
 
-        /// Deconstructor.
+        /// Empty Destructor.
         ~InternalNet() {}
 
         //-->Region Getters
 
         /* Access Arcs of internal network */
+        ///\brief Gets arc from internal ID
         const netxpert::data::arc_t
          GetArcFromID(const netxpert::data::intarcid_t arcID);
 
+        ///\brief Gets arc from original ID
         const netxpert::data::arc_t
          GetArcFromOrigID(const netxpert::data::extarcid_t arcID);
 
+        ///\brief Gets internal arc ID by passing an internal arc
         const netxpert::data::intarcid_t
          GetArcID(const netxpert::data::arc_t& arc);
 
+        ///\brief Gets the relevant arc data object by passing an internal arc
         const netxpert::data::ArcData
         //netxpert::data::ArcData2
          GetArcData(const netxpert::data::arc_t& arc);
 
+        ///\brief Assign arc data to given internal arc
         void
          SetArcData(const netxpert::data::arc_t& arc,
                     const netxpert::data::ArcData& arcData);
 
+        ///\brief Gets arc cost by passing internal arc
         const netxpert::data::cost_t
          GetArcCost(const netxpert::data::arc_t& arc);
 
+        ///\brief Gets arc capacity by passing internal arc
         const netxpert::data::capacity_t
          GetArcCapacity(const netxpert::data::arc_t& arc);
 
+        ///\brief Gets a set of unordered original arc IDs by passing a vector of internal arcs
         const std::unordered_set<std::string>
          GetOrigArcIDs(const std::vector<netxpert::data::arc_t>& path);
 
+        ///\brief Gets internal arc by passing a source and target node
         const netxpert::data::arc_t
          GetArcFromNodes(const netxpert::data::node_t& source,
                          const netxpert::data::node_t& target);
 
         /* Access Nodes of internal network */
+        ///\brief Gets internal node by passing an original node ID
         const netxpert::data::node_t
          GetNodeFromOrigID(const std::string nodeID);
 
+        ///\brief Gets original node ID by passing internal node
         const std::string
          GetOrigNodeID(const netxpert::data::node_t& node);
 
+        ///\brief Gets internal node ID cost by passing internal node
         const uint32_t
          GetNodeID(const netxpert::data::node_t& node);
 
+        ///\brief Gets internal node by passing internal node ID
         const netxpert::data::node_t
          GetNodeFromID(const uint32_t nodeID);
 
+        ///\brief Gets node supply by passing internal node
         const netxpert::data::supply_t
          GetNodeSupply(const netxpert::data::node_t& node);
 
+        ///\brief Gets nodes iterator on internal graph
         const netxpert::data::graph_t::NodeIt
          GetNodesIter();
 
+        ///\brief Gets arcs iterator on internal graph
         const netxpert::data::graph_t::ArcIt
          GetArcsIter();
 
+        ///\brief Gets source node by passing an internal node
         const netxpert::data::node_t
          GetSourceNode(const netxpert::data::arc_t& arc);
 
+        ///\brief Gets target node by passing an internal node
         const netxpert::data::node_t
          GetTargetNode(const netxpert::data::arc_t& arc);
 
+        ///\brief Gets coordinate of node by passing an original node ID
         const geos::geom::Coordinate
          GetStartOrEndNodeGeometry(const netxpert::data::ExtNodeID node);
 
+        ///\brief Gets count of all nodes in the internal graph
         const uint32_t
          GetNodeCount();
 
+        ///\brief Gets count of all arcs in the internal graph
         const uint32_t
          GetArcCount();
 
+        ///\brief Gets a pointer to the internal graph
         netxpert::data::graph_t*
          GetGraph() {
             return this->g.get();
          };
 
+        ///\brief Get a pointer to the internal arc cost map
         netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>*
          GetCostMap() {
             return this->costMap.get();
@@ -226,38 +253,52 @@ namespace netxpert {
 //                this->arcDataMap->fillCostMap(cm);
          };
 
-        netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>*
+        ///\brief Gets a pointer to the internal arc capacity map
+        netxpert::data::graph_t::ArcMap<netxpert::data::capacity_t>*
          GetCapMap() {
             return this->capMap.get();
          };
 
+        ///\brief Gets a pointer to the internal arc filter map
         netxpert::data::graph_t::ArcMap<bool>*
          GetArcFilterMap() {
             return this->arcFilterMap.get();
          };
 
+        ///\brief Gets a pointer to the internal node supply map
         netxpert::data::graph_t::NodeMap<netxpert::data::supply_t>*
          GetSupplyMap() {
             return this->nodeSupplyMap.get();
         };
 
+        ///\brief Gets a pointer to the internal node map (internal nodes: original node ID)
         netxpert::data::graph_t::NodeMap<std::string>*
          GetNodeMap() {
             return this->nodeMap.get();
         };
 
+        ///\brief Gets a map of original node IDs to internal nodes
         const std::unordered_map<std::string, netxpert::data::node_t>
          GetNodeIDMap() {
             return this->nodeIDMap;
         };
 
+        ///\brief Registers the original node ID to the internal node
         void
-         SetNodeData(const std::string& nodeID, const netxpert::data::node_t& node);
+         RegisterNodeID(const std::string& nodeID, const netxpert::data::node_t& node);
 
         //--|Region Getters
 
         //-->Region Add Points
 
+        ///\brief Adds a new node in the network (internal -> private??)
+        ///
+        ///- fetch the nearest arc and the closest point on the arc to the new node (via Spatialite): arcID, arc geometry and closest point geometry
+        ///- has the arc already been split by a new node?
+        ///- if yes: fetch the geometry from the internal already split arcs
+        ///- check for location of node on line: isPointOnLine, position of closestPoint (in memory with geos)
+        ///- split arc geometrically and insert new node in internal graph
+        ///\return internal node ID
         const uint32_t
          AddNode(const netxpert::data::NewNode& newNode,
                                    const int treshold,
@@ -265,7 +306,8 @@ namespace netxpert {
                                    const bool withCapacity,
                                    const netxpert::data::AddedNodeType startOrEnd);
 
-        ///\brief Simple Method for adding start nodes
+        ///\brief Method for adding start nodes
+        ///\return internal node ID
         const uint32_t
          AddStartNode(std::string extNodeID,
                                   double x, double y, netxpert::data::supply_t supply,
@@ -273,7 +315,8 @@ namespace netxpert {
                                   const netxpert::data::ColumnMap& cmap,
                                   bool withCapacity);
 
-        ///\brief Simple Method for adding end nodes
+        ///\brief Method for adding end nodes
+        ///\return internal node ID
         const uint32_t
          AddEndNode(std::string extNodeID,
                                 double x, double y, netxpert::data::supply_t supply,
@@ -282,12 +325,14 @@ namespace netxpert {
                                 bool withCapacity);
 
         ///\brief Simple Method for adding multiple start nodes
+        ///\return A vector of pairs with internal node ID and the original node ID
         std::vector< std::pair<uint32_t, std::string> >
          LoadStartNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
                         const std::string arcsTableName, const std::string geomColumnName,
                         const netxpert::data::ColumnMap& cmap, const bool withCapacity);
 
         ///\brief Simple Method for adding multiple end nodes
+        ///\return A vector of pairs with internal node ID and the original node ID
         std::vector< std::pair<uint32_t, std::string> >
          LoadEndNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
                       const std::string arcsTableName, const std::string geomColumnName,
@@ -616,6 +661,7 @@ namespace netxpert {
       //--|Region data members
       //
     };
+    }//namespace data
 }
 
 #endif // LEMONNET_H

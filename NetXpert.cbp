@@ -74,6 +74,8 @@
 			<Add directory="libs/SQLiteCpp" />
 			<Add directory="../1_libs/FileGDB_API-64gcc51/lib" />
 		</Linker>
+		<Unit filename="doc/mainpage.dox" />
+		<Unit filename="doc/tutorial.dox" />
 		<Unit filename="include/config.h" />
 		<Unit filename="include/core/imcflow.h" />
 		<Unit filename="include/core/imstree.h" />
@@ -142,14 +144,6 @@
 		<Unit filename="src/fgdbwriter.cpp" />
 		<Unit filename="src/lemon-net.cpp" />
 		<Unit filename="src/logger.cpp" />
-		<Unit filename="src/main.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
-		<Unit filename="src/network.cpp">
-			<Option compile="0" />
-			<Option link="0" />
-		</Unit>
 		<Unit filename="src/networkbuilder.cpp" />
 		<Unit filename="src/py/mcf_test.py" />
 		<Unit filename="src/py/mst_test.py" />
@@ -181,6 +175,15 @@
 			<code_completion />
 			<debugger />
 			<envvars />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

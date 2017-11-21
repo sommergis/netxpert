@@ -771,7 +771,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../include ../src mainpage.dox
+INPUT                  = ../include ../src mainpage.dox tutorial.dox
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -796,7 +796,7 @@ INPUT_ENCODING         = UTF-8
 # *.m, *.markdown, *.md, *.mm, *.dox, *.py, *.pyw, *.f90, *.f, *.for, *.tcl,
 # *.vhd, *.vhdl, *.ucf, *.qsf, *.as and *.js.
 
-FILE_PATTERNS          = *.h
+FILE_PATTERNS          = *.h *.dox
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1604,7 +1604,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = YES
+GENERATE_LATEX         = NO
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
@@ -1791,7 +1791,7 @@ RTF_OUTPUT             = rtf
 # The default value is: NO.
 # This tag requires that the tag GENERATE_RTF is set to YES.
 
-COMPACT_RTF            = NO
+COMPACT_RTF            = YES
 
 # If the RTF_HYPERLINKS tag is set to YES, the RTF that is generated will
 # contain hyperlink fields. The RTF file will contain links (just like the HTML
@@ -1803,7 +1803,7 @@ COMPACT_RTF            = NO
 # The default value is: NO.
 # This tag requires that the tag GENERATE_RTF is set to YES.
 
-RTF_HYPERLINKS         = NO
+RTF_HYPERLINKS         = YES
 
 # Load stylesheet definitions from file. Syntax is similar to doxygen's config
 # file, i.e. a series of assignments. You only have to provide replacements,

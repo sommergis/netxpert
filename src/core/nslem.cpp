@@ -20,11 +20,6 @@ using namespace std;
 using namespace lemon;
 using namespace netxpert::core;
 
-NS_LEM::NS_LEM()
-{
-
-}
-
 void
  NS_LEM::SolveMCF() {
 

@@ -121,7 +121,7 @@ void
 }
 
 void
- MinimumSpanningTree::Solve(netxpert::InternalNet& net) {
+ MinimumSpanningTree::Solve(netxpert::data::InternalNet& net) {
     this->net = &net;
     solve(net);
 }
@@ -132,7 +132,7 @@ std::vector<netxpert::data::arc_t>
 }
 
 void
- MinimumSpanningTree::solve (netxpert::InternalNet& net) {
+ MinimumSpanningTree::solve (netxpert::data::InternalNet& net) {
 
     vector<netxpert::data::arc_t> result;
 
@@ -209,7 +209,7 @@ lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>
 }
 
 bool
- MinimumSpanningTree::validateNetworkData(netxpert::InternalNet& net) {
+ MinimumSpanningTree::validateNetworkData(netxpert::data::InternalNet& net) {
     bool valid = false;
 
 

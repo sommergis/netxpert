@@ -36,31 +36,24 @@
 
 namespace netxpert {
 
-    /**
-    * \brief Data structures for netXpert
-    **/
     namespace data {
 
-    /**
-    * \brief Value that shall be used instead of Infinity for arc values (e.g. capacity).
-    **/
-    const double DOUBLE_INFINITY = 999999;
-    const double DOUBLE_NULL = -1;
+    const double DOUBLE_INFINITY = 999999;  //!< \brief constant value that shall be used instead of Infinity for arc values (e.g. capacity).
+    const double DOUBLE_NULL = -1; //!< \brief constant value that represents NULL for double values
 
-
-    typedef lemon::SmartDigraph graph_t;
-    typedef lemon::ListDigraph graph_ch_t;
+    typedef lemon::SmartDigraph graph_t;  //!< \brief type of the regular internal graph
+    typedef lemon::ListDigraph graph_ch_t;  //!< \brief type of the contraction hierarchy graph
     typedef lemon::FilterArcs<netxpert::data::graph_t,
-                              netxpert::data::graph_t::ArcMap<bool>> filtered_graph_t;
-    typedef graph_t::Node node_t;
-    typedef graph_t::Arc arc_t;
-    typedef double cost_t;
-    typedef double flow_t;
-    typedef double capacity_t;
-    typedef double supply_t;
-    typedef uint32_t  intarcid_t;
+                              netxpert::data::graph_t::ArcMap<bool>> filtered_graph_t;  //!< \brief type of the filtered internal graph
+    typedef graph_t::Node node_t;  //!< \brief node type of internal graph
+    typedef graph_t::Arc arc_t;  //!< \brief arc type of internal graph
+    typedef double cost_t;  //!< \brief cost type of internal graph
+    typedef double flow_t;  //!< \brief flow type of internal graph (how much is actually transported over the arc)
+    typedef double capacity_t;  //!< \brief capacity type of internal graph (how much can be transported at maximum over the arc)
+    typedef double supply_t;  //!< \brief supply type
+    typedef uint32_t  intarcid_t;  //!< \brief internal arc ID
     //typedef uint32_t  extarcid_t; // does not work for MCF-Solver ('dummy'!)
-    typedef std::string  extarcid_t; // necessary for MCF-Solver ('dummy'!)
+    typedef std::string  extarcid_t; //!< \brief original arc ID - string type is necessary for MCF-Solver ('dummy'!)
 
 
     /**
@@ -98,15 +91,15 @@ namespace netxpert {
     * \brief Enum that reflects the type of the netXpert Solver
     **/
     enum NetXpertSolver : int16_t {
-        UndefinedNetXpertSolver = -1,
-        ShortestPathTreeSolver = 0,
-        ODMatrixSolver = 1,
-        TransportationSolver = 2,
-        MinCostFlowSolver = 3,
-        MinSpanningTreeSolver = 4,
-        TransshipmentSolver = 5,
-        NetworkBuilderResult = 6,
-        IsolinesSolver = 7
+        UndefinedNetXpertSolver = -1, //!< \brief Solver type is undefined
+        ShortestPathTreeSolver = 0,   //!< \brief Shortest Path solver type
+        ODMatrixSolver = 1,           //!< \brief ODMatrix solver type
+        TransportationSolver = 2,     //!< \brief Transportation solver type
+        MinCostFlowSolver = 3,        //!< \brief Minimum Cost Flow solver type
+        MinSpanningTreeSolver = 4,    //!< \brief Minimum Spanning Tree solver type
+        TransshipmentSolver = 5,      //!< \brief Transshipment solver type
+        NetworkBuilderResult = 6,     //!< \brief NetworkBuilder solver type
+        IsolinesSolver = 7            //!< \brief Isolines solver type \warning experimental!
     };
 
     /**
@@ -114,48 +107,48 @@ namespace netxpert {
     * the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).
     **/
     enum ArcIDColumnDataType : int16_t {
-        Number = 0, //double or int
-        Std_String = 1
+        Number = 0,     //!< \brief double or integer type
+        Std_String = 1  //!< \brief string type
     };
     /**
-    * \brief Enum that reflects the type of the node that was added to break an edge of the network.
+    * \brief Enum that reflects the type of the node that was added to break an arc of the network.
     * Needed for building the total geometry of the route, if the network has been broken up through
     * additional start or end nodes.
     **/
     enum AddedNodeType : int16_t {
-        UndefinedAddedNodeType = 0,
-        StartArc = 1,
-        EndArc = 2
+        UndefinedAddedNodeType = 0, //!< \brief undefined added node type
+        StartArc = 1,               //!< \brief node was set as start
+        EndArc = 2                  //!< \brief node was set as end
     };
     /**
     * \brief Enum that reflects the type of the Minimum Cost Flow instance.
     **/
     enum MinCostFlowInstanceType : int16_t {
-        MCFUndefined = 0,     ///< undefined MCF problem type
-        MCFBalanced = 1,      ///< balanced MCF problem
-        MCFExtrasupply = 2,   ///< MCF problem with more supply than demand
-        MCFExtrademand = 3    ///< MCF problem with more demand than supply
+        MCFUndefined = 0,     //!< undefined MCF problem type
+        MCFBalanced = 1,      //!< balanced MCF problem
+        MCFExtrasupply = 2,   //!< MCF problem with more supply than demand
+        MCFExtrademand = 3    //!< MCF problem with more demand than supply
     };
 
     /**
     * \brief Enum that reflects the status of the Minimum Cost Flow solver.
     **/
     enum MCFSolverStatus : int16_t {
-       MCFUnSolved = -1 ,     ///< no solution available
-       MCFOK = 0 ,            ///< optimal solution found
-       MCFStopped = 1,        ///< optimization stopped
-       MCFUnfeasible = 2,     ///< problem is unfeasible
-       MCFUnbounded = 3,      ///< problem is unbounded
-       MCFError = 4           ///< error in the solver
+       MCFUnSolved = -1 ,     //!< no solution available
+       MCFOK = 0 ,            //!< optimal solution found
+       MCFStopped = 1,        //!< optimization stopped
+       MCFUnfeasible = 2,     //!< problem is unfeasible
+       MCFUnbounded = 3,      //!< problem is unbounded
+       MCFError = 4           //!< error in the solver
     };
 
     /**
     * \brief Enum that reflects the location of a given point on a line.
     **/
     enum StartOrEndLocationOfLine : int16_t {
-        Intermediate = 0,     ///< points location is somewhere between the start and end point of the line
-        Start = 1,            ///< point is identical to the start point of the line
-        End = 2               ///< point is identical to the end point of the line
+        Intermediate = 0,     //!< points location is somewhere between the start and end point of the line
+        Start = 1,            //!< point is identical to the start point of the line
+        End = 2               //!< point is identical to the end point of the line
     };
 
     typedef std::string ExtArcID;
