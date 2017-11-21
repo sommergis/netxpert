@@ -27,9 +27,7 @@ using namespace lemon;
 using namespace netxpert::data;
 
 namespace netxpert {
-    /**
-    * \brief Core solvers of netXpert
-    **/
+
     namespace core {
     /**
     *  \brief Core Solver for the Minimum Spanning Tree Problem with LEMON.
@@ -37,20 +35,28 @@ namespace netxpert {
     class MST_LEM : public netxpert::core::IMinSpanTree
     {
         public:
-
-            MST_LEM();
-            MST_LEM (MST_LEM const &) {} //copy constrcutor
-            ~MST_LEM(); //deconstructor
+            ///\brief Empty Constructor
+            MST_LEM() {}
+            ///\brief Copy Constructor
+            MST_LEM (MST_LEM const &) {}
+            ///\brief Destructor
+            ~MST_LEM();
 
             /* LEMON friendly interface */
+            ///\brief Loads the network into the core solver
             void LoadNet(const uint32_t nmax,  const uint32_t mmax,
                                     lemon::FilterArcs<netxpert::data::graph_t,
                                               netxpert::data::graph_t::ArcMap<bool>>* sg,
                                     netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm);
+            ///\brief Gets the count of the arcs of the internal graph
             const uint32_t GetArcCount();
+            ///\brief Gets the count of the nodes of the internal graph
             const uint32_t GetNodeCount();
+            ///\brief Solves the MST problem
             void SolveMST();
+            ///\brief Gets the overall optimum of the problem
             const double GetOptimum() const;
+            ///\brief Gets the result set of arcs
             std::vector<netxpert::data::arc_t> GetMST();
             /* end of LEMON friendly interface */
 

@@ -40,7 +40,7 @@ namespace netxpert {
             ~OriginDestinationMatrix() {}
 
             void Solve(std::string net);
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
@@ -107,7 +107,7 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak in this case even without delete in the deconstructor
-            netxpert::InternalNet* net;
+            netxpert::data::InternalNet* net;
             bool isDirected;
             int sptHeapCard;
             double optimum;
@@ -120,15 +120,15 @@ namespace netxpert {
             netxpert::cnfg::GEOMETRY_HANDLING geometryHandling;
             netxpert::cnfg::SPTAlgorithm algorithm;
             std::shared_ptr<netxpert::core::ISPTree> spt;
-            void solve (netxpert::InternalNet& net,
+            void solve (netxpert::data::InternalNet& net,
                         std::vector<netxpert::data::node_t>& originNodes,
                         std::vector<netxpert::data::node_t>& destinationNodes,
                         bool isDirected);
-            bool validateNetworkData(netxpert::InternalNet& net,
+            bool validateNetworkData(netxpert::data::InternalNet& net,
 				     std::vector<netxpert::data::node_t>& origs,
 				     std::vector<netxpert::data::node_t>& dests);
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
-             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+             convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
             void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
     };
 }

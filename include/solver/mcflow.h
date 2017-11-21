@@ -31,7 +31,7 @@ namespace netxpert {
             MinCostFlow(netxpert::cnfg::Config& cnfg);
             virtual ~MinCostFlow() {}
             void Solve(std::string net);
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
             bool IsDirected;
             std::vector<netxpert::data::FlowCost> GetMinCostFlow() const;
             netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
@@ -49,10 +49,10 @@ namespace netxpert {
             netxpert::cnfg::MCFAlgorithm algorithm;
             std::vector<netxpert::data::FlowCost> flowCost;
             std::shared_ptr<netxpert::core::IMinCostFlow> mcf;
-            void solve (netxpert::InternalNet& net);
-            bool validateNetworkData(netxpert::InternalNet& net);
+            void solve (netxpert::data::InternalNet& net);
+            bool validateNetworkData(netxpert::data::InternalNet& net);
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
-             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+             convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
             void getSupplyNodesTypeCount(int& srcNodeCount, int& transshipNodeCount, int& sinkNodeCount );
 
         private:
@@ -63,7 +63,7 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak int this case even without delete in the deconstructor
-            netxpert::InternalNet* net;
+            netxpert::data::InternalNet* net;
     };
 }
 #endif // MINCOSTFLOW_H

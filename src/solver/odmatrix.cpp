@@ -41,7 +41,7 @@ void
 }
 
 void
- OriginDestinationMatrix::Solve(netxpert::InternalNet& net) {
+ OriginDestinationMatrix::Solve(netxpert::data::InternalNet& net) {
 
     LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
@@ -93,7 +93,7 @@ void
 * n - n
 */
 void
- OriginDestinationMatrix::solve (netxpert::InternalNet& net, vector<netxpert::data::node_t>& origs,
+ OriginDestinationMatrix::solve (netxpert::data::InternalNet& net, vector<netxpert::data::node_t>& origs,
                                 vector<netxpert::data::node_t>& dests, bool isDirected) {
 
     if (!validateNetworkData( net, origs, dests ))
@@ -488,7 +488,7 @@ lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>
     return sg;
 }
 
-bool OriginDestinationMatrix::validateNetworkData(netxpert::InternalNet& net,
+bool OriginDestinationMatrix::validateNetworkData(netxpert::data::InternalNet& net,
                                                     vector<netxpert::data::node_t>& origs,
                                                     vector<netxpert::data::node_t>& dests)
 {

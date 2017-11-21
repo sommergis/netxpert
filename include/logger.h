@@ -22,26 +22,31 @@
 #include "utils.h"
 
 namespace netxpert {
-    /**
-    * \brief Utitlity functions
-    **/
+
     namespace utils {
-    /**
-    * \brief Logger class
-    **/
+    /// \brief Logger with various Loglevels.
+    /// \todo Log messages in multithreading shall be sequential in std::cout not random
     class LOGGER
     {
         protected:
             LOGGER() {}
         public:
             ~LOGGER() {}
+            ///\brief Initialize the Logger
             static void Initialize(const netxpert::cnfg::Config& cnfg);
+            ///\brief Logs a debug message
             static void LogDebug(std::string logMsg);
+            ///\brief Logs a info message
             static void LogInfo(std::string logMsg);
+            ///\brief Logs a warning message
             static void LogWarning(std::string logMsg);
+            ///\brief Logs a error message
             static void LogError(std::string logMsg);
+            ///\brief Logs a fatal error message
             static void LogFatal(std::string logMsg);
+            ///\brief Indicates if the Logger has been already initialized
             static bool IsInitialized;
+            ///\brief Stores the full path to the logfile
             static std::string FullLogFileName;
 
         private:

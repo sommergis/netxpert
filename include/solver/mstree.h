@@ -38,7 +38,7 @@ namespace netxpert {
             ~MinimumSpanningTree() {}
 
             void Solve(std::string net);
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::MSTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
@@ -54,15 +54,15 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak in this case even without delete in the deconstructor
-            netxpert::InternalNet* net;
+            netxpert::data::InternalNet* net;
             netxpert::cnfg::Config NETXPERT_CNFG;
             std::vector<netxpert::data::arc_t> minimumSpanTree;
             netxpert::cnfg::MSTAlgorithm algorithm;
             std::unique_ptr<netxpert::core::IMinSpanTree> mst;
-            void solve (netxpert::InternalNet& net);
-            bool validateNetworkData(netxpert::InternalNet& net);
+            void solve (netxpert::data::InternalNet& net);
+            bool validateNetworkData(netxpert::data::InternalNet& net);
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
-             convertInternalNetworkToSolverData(netxpert::InternalNet& net);
+             convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
 
     };
 }

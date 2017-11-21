@@ -52,9 +52,7 @@ using namespace lemon;
 using namespace netxpert::data;
 
 namespace netxpert {
-    /**
-    * \brief Core solvers of netXpert
-    **/
+
     namespace core {
 
     /**

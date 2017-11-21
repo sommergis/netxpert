@@ -41,7 +41,7 @@ void
 }
 
 void
- Isolines::Solve(netxpert::InternalNet& net) {
+ Isolines::Solve(netxpert::data::InternalNet& net) {
 
     LOGGER::LogInfo("Using # " + to_string(LOCAL_NUM_THREADS) + " threads.");
 
@@ -121,7 +121,7 @@ void
 /**
 * n - all
 */
-void Isolines::solve (netxpert::InternalNet& net, std::vector<netxpert::data::node_t> origs, bool isDirected)
+void Isolines::solve (netxpert::data::InternalNet& net, std::vector<netxpert::data::node_t> origs, bool isDirected)
 {
 
     if (!validateNetworkData( net, origs ))
@@ -437,7 +437,7 @@ lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>
 }
 
 bool
- Isolines::validateNetworkData(netxpert::InternalNet& net, vector<netxpert::data::node_t>& origs) {
+ Isolines::validateNetworkData(netxpert::data::InternalNet& net, vector<netxpert::data::node_t>& origs) {
     bool valid = false;
 
     //IMPORTANT Checks

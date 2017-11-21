@@ -36,54 +36,60 @@ namespace netxpert {
     **/
     namespace io {
     /**
-    * \brief Static Class that controls the SpatiaLite DB processing access
+    * \brief Static class that controls the SpatiaLite DB processing access
     **/
     class DBHELPER
     {
         protected:
-             DBHELPER(){}
+            ///\brief Empty Constructor is protected because it is a static class
+            DBHELPER(){}
         public:
+            ///\brief Initializes the static DBHELPER and also the GEO_FACTORY and the Precision Model for all geometries.
             static void Initialize(const netxpert::cnfg::Config& cnfg);
+            ///\brief Commits the current transaction
             static void CommitCurrentTransaction();
+            ///\brief Opens a new database transaction
             static void OpenNewTransaction();
-
+            ///\brief Loads arcs that form a network from the database
             static netxpert::data::InputArcs LoadNetworkFromDB(const std::string& _tableName,
                                                                const netxpert::data::ColumnMap& _map);
+            ///\brief Loads arcs that shall be built (from and to nodes will be calculated) from the database
             static netxpert::data::NetworkBuilderInputArcs LoadNetworkToBuildFromDB(const std::string& _tableName,
                                                                                     const netxpert::data::ColumnMap& _map);
+            ///\brief Loads all nodes from the database
             static std::vector<netxpert::data::NewNode> LoadNodesFromDB(const std::string& _tableName, const std::string& geomColName,
                                                                   const netxpert::data::ColumnMap& _map);
-
+            ///\brief Prepares query for GetClosestArcQuery()
             static std::unique_ptr<SQLite::Statement> PrepareGetClosestArcQuery(const std::string& tableName,
                                         const std::string& geomColumnName, const netxpert::data::ColumnMap& cmap,
                                         const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                         const bool withCapacity);
-
+            ///\brief Gets closest arc to given coordinate within the given treshold
             static netxpert::data::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
                                                                           const int treshold, SQLite::Statement& qry,
                                                                           const bool withCapacity);
-
+            ///\brief Gets single arc geometry from database per ID
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometryFromDB(const std::string& tableName,
                                                              const std::string& arcIDColumnName,
                                                              const std::string& geomColumnName,
                                                              const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                                              const netxpert::data::extarcid_t& arcID);
-
+            ///\brief Gets arc geometries from database per IDs
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromDB(const std::string& tableName,
                                                                            const std::string& arcIDColumnName,
                                                                            const std::string& geomColumnName,
                                                                            const netxpert::data::ArcIDColumnDataType arcIDColDataType,
-                                                                           const std::string& arcIDs );
-
+                                                                           const std::string& arcIDs);
+            ///\brief Gets arc geometries that intersect with barrier geometries from database
             static std::unordered_set<netxpert::data::extarcid_t> GetIntersectingArcs(const std::string& barrierTableName,
                                                                        const std::string& barrierGeomColName,
                                                                        const std::string& arcsTableName,
                                                                        const std::string& arcIDColName,
                                                                        const std::string& arcGeomColName);
-
+            ///\brief Gets barrier geometries from database
             static std::vector<std::unique_ptr<geos::geom::Geometry>> GetBarrierGeometriesFromDB(const std::string& barrierTableName,
                                                                        const std::string& barrierGeomColName);
-
+            ///\warning untested
             static std::unique_ptr<geos::geom::MultiPoint> GetArcVertexGeometriesByBufferFromDB(const std::string& tableName,
                                                                            const std::string& geomColumnName,
                                                                            const netxpert::data::ArcIDColumnDataType arcIDColDataType,
@@ -91,7 +97,7 @@ namespace netxpert {
                                                                            const double bufferVal,
                                                                            const geos::geom::Coordinate& p);
 
-            //UNUSED -->
+            /// @cond UNUSED
             static std::unique_ptr<SQLite::Statement>
             PrepareIsPointOnArcQuery(std::string tableName,
                                      std::string arcIDColumnName,
@@ -107,24 +113,29 @@ namespace netxpert {
                                                     geos::geom::Coordinate coord,
                                                     std::string extArcID,
                                                     SQLite::Statement& posOfClosestPointQry);
-            //-> //
+            ///@endcond
 
+            ///\brief Closes the database connection
             static void CloseConnection();
+            ///\brief Indicated if DBHELPER has been already initialized
             static bool IsInitialized;
+            ///\brief Stores the elmininated arcs, that shall be excluded from the databse queries
             static std::unordered_set<netxpert::data::extarcid_t> EliminatedArcs;
+            ///\brief Geometry Factory for GEOS.
+            /// A precision model is set in the initialization of DBHELPER.
+            /// Used for WKBReader and every geometry creation in netxpert library.
             static std::shared_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
 
             /* Methods for loading IDs and geometry into a map in memory for fast access to geometries.
                Much faster (factor x10) than spatialite lookup per primary key lookup of IDs
             */
-            /* Fills KV_Network */
-            static void LoadGeometryToMem(const std::string& _tableName, const netxpert::data::ColumnMap& _map,
-                                          const std::string& geomColumnName);
-            /* Fills KV_Network */
+            ///\brief Fills the key value memory store, that speeds up queries for geometries
             static void LoadGeometryToMem(const std::string& _tableName, const netxpert::data::ColumnMap& _map,
                                           const std::string& geomColumnName, const std::string& arcIDs);
+            ///\brief Get the geometries from the key value memory store
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometriesFromMem(const std::string& arcIDs);
 
+            ///\brief Destructor
             ~DBHELPER();
         private:
             static std::unordered_map<netxpert::data::extarcid_t, std::shared_ptr<geos::geom::LineString>> KV_Network;

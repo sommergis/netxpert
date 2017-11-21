@@ -293,7 +293,8 @@ void DBHELPER::OpenNewTransaction()
     }
 }
 
-void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
+void
+ DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
                                  const std::string& geomColumnName, const std::string& arcIDs)
 {
     using namespace netxpert::data;
@@ -366,63 +367,8 @@ void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap&
     }
 }
 
-void DBHELPER::LoadGeometryToMem(const std::string& _tableName, const ColumnMap& _map,
-                                 const std::string& geomColumnName)
-{
-    using namespace netxpert::data;
-
-    string sqlStr = "";
-    try
-    {
-        if (!isConnected)
-            connect(NETXPERT_CNFG.LoadDBIntoMemory);
-
-        sqlStr = "SELECT "+ _map.arcIDColName+", AsBinary(" + geomColumnName + ")"+
-                 " FROM "+_tableName;
-
-        //cout << sqlStr << endl;
-
-        SQLite::Database& db = *connPtr;
-        SQLite::Statement qry (db, sqlStr);
-
-        shared_ptr<MultiLineString> aGeomPtr;
-        WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
-        stringstream is(ios_base::binary|ios_base::in|ios_base::out);
-
-        while(qry.executeStep())
-        {
-            SQLite::Column idCol = qry.getColumn(0);
-            SQLite::Column geoCol = qry.getColumn(1);
-            extarcid_t id;
-            shared_ptr<LineString> aGeomPtr;
-
-            if (!idCol.isNull())
-            {
-                id  = idCol.getText();
-            }
-            if (!geoCol.isNull())
-            {
-                const void* pVoid = geoCol.getBlob();
-                const int sizeOfwkb = geoCol.getBytes();
-
-                const unsigned char* bytes = static_cast<const unsigned char*>(pVoid);
-
-                for (int i = 0; i < sizeOfwkb; i++)
-                    is << bytes[i];
-
-                aGeomPtr = shared_ptr<LineString>( dynamic_cast<LineString*>( wkbReader.read(is) ) );
-            }
-            DBHELPER::KV_Network.insert( make_pair(id, move(aGeomPtr)) );
-        }
-    }
-    catch (std::exception& ex)
-    {
-        LOGGER::LogError( "Error retrieving geometries!" );
-        LOGGER::LogError( ex.what() );
-    }
-}
-
-InputArcs DBHELPER::LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map)
+InputArcs
+ DBHELPER::LoadNetworkFromDB(const std::string& _tableName, const ColumnMap& _map)
 {
     InputArcs arcTbl;
     string sqlStr = "";

@@ -28,16 +28,11 @@
 
 namespace netxpert {
 
-    /**
-    * \brief Current version of netXpert
-    **/
+    ///\brief Current version of netXpert
     static const std::string Version() {
-        return "0.9.8";
+        return "0.9.8a";
     };
 
-    /**
-    * \brief Config structures for netXpert
-    **/
     namespace cnfg {
 
     /**
@@ -45,17 +40,12 @@ namespace netxpert {
     * (can be overridden by setting environment variable
     *  OMP_NUM_THREADS to a higher value)
     */
-    //#ifdef OMP_H
-	//static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
-	//#else
-	#ifdef DEBUG
-        static int LOCAL_NUM_THREADS = 1; //std::floor(omp_get_max_threads() * 0.8);
+    #ifdef DEBUG
+        static int LOCAL_NUM_THREADS = 1;
     #endif // DEBUG
     #ifndef DEBUG
         static int LOCAL_NUM_THREADS = std::floor(omp_get_max_threads() * 0.8);
-//        static int LOCAL_NUM_THREADS = 1;
     #endif
-	//#endif // OMP_H
 
     /**
     * \brief Geometry Handling.
@@ -126,8 +116,6 @@ namespace netxpert {
     * \brief Type of the Minimum Spanning Tree algorithms.
     **/
     enum MSTAlgorithm : int16_t {
-        //Kruskal_QuickGraph = 0, //.NET!
-        //Prim_QuickGraph = 1,    //.NET!
         Kruskal_LEMON = 2 //!< Kruskal's Minimum Spanning Tree algorithm of LEMON.
     };
 
@@ -176,9 +164,7 @@ namespace netxpert {
         bool CleanNetwork;//!< Clean input network on load.
         std::string LogFileFullPath; //!< Path to log file.
 
-        /**
-        * Serialize struct members to json
-        **/
+        ///\brief Serialize struct members to JSON
         template <class Archive>
         void serialize( Archive & ar ){
             ar(
@@ -225,15 +211,17 @@ namespace netxpert {
     };
 
 
-    /**
-    * \class Class reads a configuration file for NetXpert
-    **/
+    ///\brief Reads the configuration file for netXpert
     class ConfigReader
     {
         public:
+            ///\brief Constructor for ConfigReader
             ConfigReader() {}
+            ///\brief Deconstructor for ConfigReader
             ~ConfigReader() {}
+            ///\brief Gets the configuration from the given JSON string
             Config GetConfigFromJSON(std::string jsonString);
+            ///\brief Gets the configuration from the given JSON file
             void GetConfigFromJSONFile(std::string fileName, netxpert::cnfg::Config& cnfg);
     };
 } //namespace cnfg

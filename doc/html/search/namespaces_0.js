@@ -5,6 +5,7 @@ var searchData=
   ['data',['data',['../namespacenetxpert_1_1data.html',1,'netxpert']]],
   ['io',['io',['../namespacenetxpert_1_1io.html',1,'netxpert']]],
   ['simple',['simple',['../namespacenetxpert_1_1simple.html',1,'netxpert']]],
+  ['solver',['solver',['../namespacenetxpert_1_1solver.html',1,'netxpert']]],
   ['test',['test',['../namespacenetxpert_1_1test.html',1,'netxpert']]],
   ['utils',['utils',['../namespacenetxpert_1_1utils.html',1,'netxpert']]]
 ];

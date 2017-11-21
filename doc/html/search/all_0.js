@@ -2,8 +2,10 @@ var searchData=
 [
   ['addednodetype',['AddedNodeType',['../namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1',1,'netxpert::data']]],
   ['addedpoint',['AddedPoint',['../structnetxpert_1_1data_1_1AddedPoint.html',1,'netxpert::data']]],
-  ['addendnode',['AddEndNode',['../classnetxpert_1_1InternalNet.html#adc91c6dd6bb51f0261ba3ff1e62f0b57',1,'netxpert::InternalNet']]],
-  ['addstartnode',['AddStartNode',['../classnetxpert_1_1InternalNet.html#aae481644d03b116b8011b02f35f62a0f',1,'netxpert::InternalNet']]],
+  ['addendnode',['AddEndNode',['../classnetxpert_1_1data_1_1InternalNet.html#a53abe6ff6684d3de53f6b90e7231968c',1,'netxpert::data::InternalNet']]],
+  ['addnode',['AddNode',['../classnetxpert_1_1data_1_1InternalNet.html#a3ed9de3b36bb57d2bf520d162d9fbacb',1,'netxpert::data::InternalNet']]],
+  ['addstartnode',['AddStartNode',['../classnetxpert_1_1data_1_1InternalNet.html#ac7ef8e49da68f12784eac85f2abf435c',1,'netxpert::data::InternalNet']]],
+  ['arc_5ft',['arc_t',['../namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4',1,'netxpert::data']]],
   ['arcdata',['ArcData',['../structnetxpert_1_1data_1_1ArcData.html',1,'netxpert::data']]],
   ['arcdata2',['ArcData2',['../structnetxpert_1_1data_1_1ArcData2.html',1,'netxpert::data']]],
   ['arcdataandflow',['ArcDataAndFlow',['../structnetxpert_1_1data_1_1ArcDataAndFlow.html',1,'netxpert::data']]],

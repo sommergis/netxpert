@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['_7eiminspantree',['~IMinSpanTree',['../classnetxpert_1_1core_1_1IMinSpanTree.html#a6179745c4e3b91c1cc4260ff43a40a07',1,'netxpert::core::IMinSpanTree']]],
-  ['_7einternalnet',['~InternalNet',['../classnetxpert_1_1InternalNet.html#a2f4b653540c70d6be7d5b7097b78bc2c',1,'netxpert::InternalNet']]],
-  ['_7eisolver',['~ISolver',['../classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074',1,'netxpert::ISolver']]],
-  ['_7eisptree',['~ISPTree',['../classnetxpert_1_1core_1_1ISPTree.html#a7b61aa12791f75c6979e15f59638cd66',1,'netxpert::core::ISPTree']]],
-  ['_7eminimumspanningtree',['~MinimumSpanningTree',['../classnetxpert_1_1MinimumSpanningTree.html#ab3ad88e9f5a29b397de4e55f1ffb12f8',1,'netxpert::MinimumSpanningTree']]],
-  ['_7eorigindestinationmatrix',['~OriginDestinationMatrix',['../classnetxpert_1_1OriginDestinationMatrix.html#ae2337bd32fe54db9027a0ae5612bf247',1,'netxpert::OriginDestinationMatrix']]],
-  ['_7eshortestpathtree',['~ShortestPathTree',['../classnetxpert_1_1ShortestPathTree.html#a6f1ad2e2a4f8f99927eb960a4c706d34',1,'netxpert::ShortestPathTree']]]
+  ['pathexists',['PathExists',['../classnetxpert_1_1utils_1_1UTILS.html#a3ec5804a79dca438bcc2eba9724a1cee',1,'netxpert::utils::UTILS']]],
+  ['preparegetclosestarcquery',['PrepareGetClosestArcQuery',['../classnetxpert_1_1io_1_1DBHELPER.html#afeea6c99ff55007ab5079c75c39bd4c6',1,'netxpert::io::DBHELPER']]],
+  ['preparesaveresultarc',['PrepareSaveResultArc',['../classnetxpert_1_1io_1_1SpatiaLiteWriter.html#ad2805936f5c7a5791f0f9d37e340abc7',1,'netxpert::io::SpatiaLiteWriter']]],
+  ['printgraph',['PrintGraph',['../classnetxpert_1_1data_1_1InternalNet.html#a29400216e9ebf3a273a07b47fe83ca57',1,'netxpert::data::InternalNet']]],
+  ['printresult',['PrintResult',['../classnetxpert_1_1core_1_1NS__LEM.html#abf5de9e17e749ff12935439a833968da',1,'netxpert::core::NS_LEM']]],
+  ['processisoresultarcsmem',['ProcessIsoResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a2141b9e52cb51866d44e8c44c54caf86',1,'netxpert::data::InternalNet']]],
+  ['processmcfresultarcsmem',['ProcessMCFResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a78c63530c4b6c33d27e817566620fbc1',1,'netxpert::data::InternalNet']]],
+  ['processresultarcs',['ProcessResultArcs',['../classnetxpert_1_1data_1_1InternalNet.html#a9211aa027282a526efce0fadbb5b58ec',1,'netxpert::data::InternalNet']]],
+  ['processsptresultarcsmem',['ProcessSPTResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a821bdce1de06400cedd9bb759df54ddd',1,'netxpert::data::InternalNet']]]
 ];

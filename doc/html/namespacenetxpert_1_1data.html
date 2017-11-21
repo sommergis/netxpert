@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Data structures for netXpert.  
+<p>Data structures for netxpert.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -157,6 +157,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnetxpert_1_1data_1_1InternalArc.html">InternalArc</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom data type for storing nodes tuple &lt;fromNode,toNode&gt;  <a href="structnetxpert_1_1data_1_1InternalArc.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">InternalNet</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The internal Network representation.  <a href="classnetxpert_1_1data_1_1InternalNet.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structnetxpert_1_1data_1_1IntNetSplittedArc.html">IntNetSplittedArc</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom data type for storing &lt;arc,cost,capacity,segmentGeoms&gt;  <a href="structnetxpert_1_1data_1_1IntNetSplittedArc.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -196,37 +199,48 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:aa74c1b36e4f5f4fd195591738c30f39c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa74c1b36e4f5f4fd195591738c30f39c"></a>
-typedef lemon::SmartDigraph&#160;</td><td class="memItemRight" valign="bottom"><b>graph_t</b></td></tr>
+typedef lemon::SmartDigraph&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#aa74c1b36e4f5f4fd195591738c30f39c">graph_t</a></td></tr>
+<tr class="memdesc:aa74c1b36e4f5f4fd195591738c30f39c"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of the regular internal graph <br /></td></tr>
 <tr class="separator:aa74c1b36e4f5f4fd195591738c30f39c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1087f975e9ca83a0027de2ba61d3958f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1087f975e9ca83a0027de2ba61d3958f"></a>
-typedef lemon::ListDigraph&#160;</td><td class="memItemRight" valign="bottom"><b>graph_ch_t</b></td></tr>
+typedef lemon::ListDigraph&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a1087f975e9ca83a0027de2ba61d3958f">graph_ch_t</a></td></tr>
+<tr class="memdesc:a1087f975e9ca83a0027de2ba61d3958f"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of the contraction hierarchy graph <br /></td></tr>
 <tr class="separator:a1087f975e9ca83a0027de2ba61d3958f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a616cc117257c9aa18f93a4d6ef1485"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a616cc117257c9aa18f93a4d6ef1485"></a>
-typedef lemon::FilterArcs&lt; netxpert::data::graph_t, netxpert::data::graph_t::ArcMap&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>filtered_graph_t</b></td></tr>
+typedef lemon::FilterArcs&lt; <a class="el" href="namespacenetxpert_1_1data.html#aa74c1b36e4f5f4fd195591738c30f39c">netxpert::data::graph_t</a>, netxpert::data::graph_t::ArcMap&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a8a616cc117257c9aa18f93a4d6ef1485">filtered_graph_t</a></td></tr>
+<tr class="memdesc:a8a616cc117257c9aa18f93a4d6ef1485"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of the filtered internal graph <br /></td></tr>
 <tr class="separator:a8a616cc117257c9aa18f93a4d6ef1485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a113013b587fbe23cbc530d01e33e98fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a113013b587fbe23cbc530d01e33e98fe"></a>
-typedef graph_t::Node&#160;</td><td class="memItemRight" valign="bottom"><b>node_t</b></td></tr>
+typedef graph_t::Node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a113013b587fbe23cbc530d01e33e98fe">node_t</a></td></tr>
+<tr class="memdesc:a113013b587fbe23cbc530d01e33e98fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">node type of internal graph <br /></td></tr>
 <tr class="separator:a113013b587fbe23cbc530d01e33e98fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda0f45b9f9fb9e9e363af1e4d8296b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afda0f45b9f9fb9e9e363af1e4d8296b4"></a>
-typedef graph_t::Arc&#160;</td><td class="memItemRight" valign="bottom"><b>arc_t</b></td></tr>
+typedef graph_t::Arc&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4">arc_t</a></td></tr>
+<tr class="memdesc:afda0f45b9f9fb9e9e363af1e4d8296b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">arc type of internal graph <br /></td></tr>
 <tr class="separator:afda0f45b9f9fb9e9e363af1e4d8296b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85a54a37567ae71b3d92429a8fe80a9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab85a54a37567ae71b3d92429a8fe80a9"></a>
-typedef double&#160;</td><td class="memItemRight" valign="bottom"><b>cost_t</b></td></tr>
+typedef double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">cost_t</a></td></tr>
+<tr class="memdesc:ab85a54a37567ae71b3d92429a8fe80a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">cost type of internal graph <br /></td></tr>
 <tr class="separator:ab85a54a37567ae71b3d92429a8fe80a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77604d32c0b7a84e773566e7ad8a8638"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77604d32c0b7a84e773566e7ad8a8638"></a>
-typedef double&#160;</td><td class="memItemRight" valign="bottom"><b>flow_t</b></td></tr>
+typedef double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a77604d32c0b7a84e773566e7ad8a8638">flow_t</a></td></tr>
+<tr class="memdesc:a77604d32c0b7a84e773566e7ad8a8638"><td class="mdescLeft">&#160;</td><td class="mdescRight">flow type of internal graph (how much is actually transported over the arc) <br /></td></tr>
 <tr class="separator:a77604d32c0b7a84e773566e7ad8a8638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ecea9f371a72b3f2284c54337792fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05ecea9f371a72b3f2284c54337792fd"></a>
-typedef double&#160;</td><td class="memItemRight" valign="bottom"><b>capacity_t</b></td></tr>
+typedef double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a05ecea9f371a72b3f2284c54337792fd">capacity_t</a></td></tr>
+<tr class="memdesc:a05ecea9f371a72b3f2284c54337792fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">capacity type of internal graph (how much can be transported at maximum over the arc) <br /></td></tr>
 <tr class="separator:a05ecea9f371a72b3f2284c54337792fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6749d55daca0e36cf8f54343d1eea856"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6749d55daca0e36cf8f54343d1eea856"></a>
-typedef double&#160;</td><td class="memItemRight" valign="bottom"><b>supply_t</b></td></tr>
+typedef double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a6749d55daca0e36cf8f54343d1eea856">supply_t</a></td></tr>
+<tr class="memdesc:a6749d55daca0e36cf8f54343d1eea856"><td class="mdescLeft">&#160;</td><td class="mdescRight">supply type <br /></td></tr>
 <tr class="separator:a6749d55daca0e36cf8f54343d1eea856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b5290d93ce5350d603f546702c6683a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b5290d93ce5350d603f546702c6683a"></a>
-typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>intarcid_t</b></td></tr>
+typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a0b5290d93ce5350d603f546702c6683a">intarcid_t</a></td></tr>
+<tr class="memdesc:a0b5290d93ce5350d603f546702c6683a"><td class="mdescLeft">&#160;</td><td class="mdescRight">internal arc ID <br /></td></tr>
 <tr class="separator:a0b5290d93ce5350d603f546702c6683a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03f3f6333be4cd56b752fa5515e258ac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03f3f6333be4cd56b752fa5515e258ac"></a>
-typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><b>extarcid_t</b></td></tr>
+typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">extarcid_t</a></td></tr>
+<tr class="memdesc:a03f3f6333be4cd56b752fa5515e258ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">original arc ID - string type is necessary for MCF-Solver ('dummy'!) <br /></td></tr>
 <tr class="separator:a03f3f6333be4cd56b752fa5515e258ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e271a126af4583b08053f3ae9a3aa6f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e271a126af4583b08053f3ae9a3aa6f"></a>
 typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ExtArcID</b></td></tr>
@@ -241,7 +255,7 @@ typedef std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtSPTreeA
 typedef std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtNodeSupply.html">netxpert::data::ExtNodeSupply</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ExtNodeSupplies</b></td></tr>
 <tr class="separator:aeaebc87bf812a39d680030d34cc3cec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82e488b55f222a9759d73e24f6087033"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82e488b55f222a9759d73e24f6087033"></a>
-typedef std::pair&lt; std::vector&lt; netxpert::data::arc_t &gt;, netxpert::data::cost_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a82e488b55f222a9759d73e24f6087033">CompressedPath</a></td></tr>
+typedef std::pair&lt; std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4">netxpert::data::arc_t</a> &gt;, <a class="el" href="namespacenetxpert_1_1data.html#ab85a54a37567ae71b3d92429a8fe80a9">netxpert::data::cost_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a82e488b55f222a9759d73e24f6087033">CompressedPath</a></td></tr>
 <tr class="memdesc:a82e488b55f222a9759d73e24f6087033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data type for storing tuple &lt;CompressedPath,cost&gt; <br /></td></tr>
 <tr class="separator:a82e488b55f222a9759d73e24f6087033"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8058bc5e9730ee9f445cd6680a4fcddd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8058bc5e9730ee9f445cd6680a4fcddd"></a>
@@ -292,31 +306,31 @@ Enumerations</h2></td></tr>
 <b>addedAndSplit</b> = 3
  }</td></tr>
 <tr class="separator:abe820d2337ded6846999a252086882f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a923ee7cb7eab8b9dbfd62fb6d26f51cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cb"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">NetXpertSolver</a> : int16_t { <br />
-&#160;&#160;<b>UndefinedNetXpertSolver</b> = -1, 
-<b>ShortestPathTreeSolver</b> = 0, 
-<b>ODMatrixSolver</b> = 1, 
-<b>TransportationSolver</b> = 2, 
+<tr class="memitem:a923ee7cb7eab8b9dbfd62fb6d26f51cb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">NetXpertSolver</a> : int16_t { <br />
+&#160;&#160;<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbaf36e2d02ba8149c68e004ec009585e90">UndefinedNetXpertSolver</a> = -1, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba37d583d26715dedeef2a164b67ccfc2f">ShortestPathTreeSolver</a> = 0, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba5f522e78ef16aa3d2e5ff08cb309249b">ODMatrixSolver</a> = 1, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbaa7815e9debf65c38c483c32380cd163c">TransportationSolver</a> = 2, 
 <br />
-&#160;&#160;<b>MinCostFlowSolver</b> = 3, 
-<b>MinSpanningTreeSolver</b> = 4, 
-<b>TransshipmentSolver</b> = 5, 
-<b>NetworkBuilderResult</b> = 6, 
+&#160;&#160;<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbab828541a69002a0f11a10d26ce59b8ac">MinCostFlowSolver</a> = 3, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba43ffb843fae346dd18a85666d826244b">MinSpanningTreeSolver</a> = 4, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba79084c54b66b391d12bc59bc068cc5b8">TransshipmentSolver</a> = 5, 
+<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba02c36250a545ba17f86674c1221d6676">NetworkBuilderResult</a> = 6, 
 <br />
-&#160;&#160;<b>IsolinesSolver</b> = 7
+&#160;&#160;<a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba8faab5f40dbd0d640b0e2fed7546a14a">IsolinesSolver</a> = 7
 <br />
- }<tr class="memdesc:a923ee7cb7eab8b9dbfd62fb6d26f51cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the netXpert Solver. <br /></td></tr>
+ }<tr class="memdesc:a923ee7cb7eab8b9dbfd62fb6d26f51cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the netXpert Solver.  <a href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a923ee7cb7eab8b9dbfd62fb6d26f51cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f0e5c814a8a55ea94f348b10826e206"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f0e5c814a8a55ea94f348b10826e206"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">ArcIDColumnDataType</a> : int16_t { <b>Number</b> = 0, 
-<b>Std_String</b> = 1
- }<tr class="memdesc:a7f0e5c814a8a55ea94f348b10826e206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the ArcID Column in the netxpert database. Used for building the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int). <br /></td></tr>
+<tr class="memitem:a7f0e5c814a8a55ea94f348b10826e206"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">ArcIDColumnDataType</a> : int16_t { <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206a6912049154123f772933964f43f45230">Number</a> = 0, 
+<a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206a36658aff0752cfdc6c86cb24e752d120">Std_String</a> = 1
+ }<tr class="memdesc:a7f0e5c814a8a55ea94f348b10826e206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the ArcID Column in the netxpert database. Used for building the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int).  <a href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:a7f0e5c814a8a55ea94f348b10826e206"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addf98eb51735356977db0de627cc38c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="addf98eb51735356977db0de627cc38c1"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">AddedNodeType</a> : int16_t { <b>UndefinedAddedNodeType</b> = 0, 
-<b>StartArc</b> = 1, 
-<b>EndArc</b> = 2
- }<tr class="memdesc:addf98eb51735356977db0de627cc38c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the node that was added to break an edge of the network. Needed for building the total geometry of the route, if the network has been broken up through additional start or end nodes. <br /></td></tr>
+<tr class="memitem:addf98eb51735356977db0de627cc38c1"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">AddedNodeType</a> : int16_t { <a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1a9a9acf359dcefd44fa7cc3458f83a3cf">UndefinedAddedNodeType</a> = 0, 
+<a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1a49d18860c22a08a7b80757d3e9e82744">StartArc</a> = 1, 
+<a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1a5dad686d1ba5fac25181ca6cb527624f">EndArc</a> = 2
+ }<tr class="memdesc:addf98eb51735356977db0de627cc38c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum that reflects the type of the node that was added to break an arc of the network. Needed for building the total geometry of the route, if the network has been broken up through additional start or end nodes.  <a href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:addf98eb51735356977db0de627cc38c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9504ea932b3debceb4ba7f6831e80bbd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a9504ea932b3debceb4ba7f6831e80bbd">MinCostFlowInstanceType</a> : int16_t { <a class="el" href="namespacenetxpert_1_1data.html#a9504ea932b3debceb4ba7f6831e80bbda0e13c6ec2b78ca3b8e8377ea89b53c2b">MCFUndefined</a> = 0, 
@@ -349,15 +363,64 @@ Enumerations</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a5b545bbb8b198a5e0c3b913ede53aa6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b545bbb8b198a5e0c3b913ede53aa6d"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#a5b545bbb8b198a5e0c3b913ede53aa6d">DOUBLE_INFINITY</a> = 999999</td></tr>
-<tr class="memdesc:a5b545bbb8b198a5e0c3b913ede53aa6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value that shall be used instead of Infinity for arc values (e.g. capacity). <br /></td></tr>
+<tr class="memdesc:a5b545bbb8b198a5e0c3b913ede53aa6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant value that shall be used instead of Infinity for arc values (e.g. capacity). <br /></td></tr>
 <tr class="separator:a5b545bbb8b198a5e0c3b913ede53aa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8ab708d7724a2b816135a527e26629a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8ab708d7724a2b816135a527e26629a"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>DOUBLE_NULL</b> = -1</td></tr>
+const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenetxpert_1_1data.html#ae8ab708d7724a2b816135a527e26629a">DOUBLE_NULL</a> = -1</td></tr>
+<tr class="memdesc:ae8ab708d7724a2b816135a527e26629a"><td class="mdescLeft">&#160;</td><td class="mdescRight">constant value that represents NULL for double values <br /></td></tr>
 <tr class="separator:ae8ab708d7724a2b816135a527e26629a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Data structures for netXpert. </p>
+<div class="textblock"><p>Data structures for netxpert. </p>
+<p>This namespace contains all data structures for netxpert. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="data_8h_source.html">data.h</a> </dd></dl>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a class="anchor" id="addf98eb51735356977db0de627cc38c1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacenetxpert_1_1data.html#addf98eb51735356977db0de627cc38c1">netxpert::data::AddedNodeType</a> : int16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum that reflects the type of the node that was added to break an arc of the network. Needed for building the total geometry of the route, if the network has been broken up through additional start or end nodes. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="addf98eb51735356977db0de627cc38c1a9a9acf359dcefd44fa7cc3458f83a3cf"></a>UndefinedAddedNodeType&#160;</td><td class="fielddoc">
+<p>undefined added node type </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="addf98eb51735356977db0de627cc38c1a49d18860c22a08a7b80757d3e9e82744"></a>StartArc&#160;</td><td class="fielddoc">
+<p>node was set as start </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="addf98eb51735356977db0de627cc38c1a5dad686d1ba5fac25181ca6cb527624f"></a>EndArc&#160;</td><td class="fielddoc">
+<p>node was set as end </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a class="anchor" id="a7f0e5c814a8a55ea94f348b10826e206"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206">netxpert::data::ArcIDColumnDataType</a> : int16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum that reflects the type of the ArcID Column in the netxpert database. Used for building the correct sql statements (e.g. SQL IN Clauses): text or numbers (double or int). </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a7f0e5c814a8a55ea94f348b10826e206a6912049154123f772933964f43f45230"></a>Number&#160;</td><td class="fielddoc">
+<p>double or integer type </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a7f0e5c814a8a55ea94f348b10826e206a36658aff0752cfdc6c86cb24e752d120"></a>Std_String&#160;</td><td class="fielddoc">
+<p>string type </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a class="anchor" id="a0ea30f651c6cc7e7a6edd5a5cbe6346c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -415,6 +478,50 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>DOUBLE_NULL</
 </td></tr>
 <tr><td class="fieldname"><a class="anchor" id="a9504ea932b3debceb4ba7f6831e80bbdab4655410af0f398a0ba3d4cdf84bd270"></a>MCFExtrademand&#160;</td><td class="fielddoc">
 <p>MCF problem with more demand than supply. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">netxpert::data::NetXpertSolver</a> : int16_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enum that reflects the type of the netXpert Solver. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cbaf36e2d02ba8149c68e004ec009585e90"></a>UndefinedNetXpertSolver&#160;</td><td class="fielddoc">
+<p>Solver type is undefined. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba37d583d26715dedeef2a164b67ccfc2f"></a>ShortestPathTreeSolver&#160;</td><td class="fielddoc">
+<p>Shortest Path solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba5f522e78ef16aa3d2e5ff08cb309249b"></a>ODMatrixSolver&#160;</td><td class="fielddoc">
+<p>ODMatrix solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cbaa7815e9debf65c38c483c32380cd163c"></a>TransportationSolver&#160;</td><td class="fielddoc">
+<p><a class="el" href="classnetxpert_1_1Transportation.html" title="Solver for the Transportation Problem. ">Transportation</a> solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cbab828541a69002a0f11a10d26ce59b8ac"></a>MinCostFlowSolver&#160;</td><td class="fielddoc">
+<p>Minimum Cost Flow solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba43ffb843fae346dd18a85666d826244b"></a>MinSpanningTreeSolver&#160;</td><td class="fielddoc">
+<p>Minimum Spanning Tree solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba79084c54b66b391d12bc59bc068cc5b8"></a>TransshipmentSolver&#160;</td><td class="fielddoc">
+<p>Transshipment solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba02c36250a545ba17f86674c1221d6676"></a>NetworkBuilderResult&#160;</td><td class="fielddoc">
+<p><a class="el" href="classnetxpert_1_1NetworkBuilder.html" title="Builds a network from a set of linestrings. ">NetworkBuilder</a> solver type. </p>
+</td></tr>
+<tr><td class="fieldname"><a class="anchor" id="a923ee7cb7eab8b9dbfd62fb6d26f51cba8faab5f40dbd0d640b0e2fed7546a14a"></a>IsolinesSolver&#160;</td><td class="fielddoc">
+<p><a class="el" href="classnetxpert_1_1Isolines.html" title="Solver for calculating Isolines, i.e. bands of accessible areas in a network. ">Isolines</a> solver type. </p>
+<dl class="section warning"><dt>Warning</dt><dd>experimental! </dd></dl>
 </td></tr>
 </table>
 

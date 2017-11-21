@@ -38,7 +38,7 @@ void
  MinCostFlow::Solve(std::string net){}
 
 void
- MinCostFlow::Solve(netxpert::InternalNet& net) {
+ MinCostFlow::Solve(netxpert::data::InternalNet& net) {
     //TODO: Check for leaks
     this->net = &net;
 
@@ -233,7 +233,7 @@ std::vector<FlowCost>
 
 //private
 void
- MinCostFlow::solve (netxpert::InternalNet& net) {
+ MinCostFlow::solve (netxpert::data::InternalNet& net) {
 
     vector<FlowCost> result;
     auto* costMap = net.GetCostMap();
@@ -322,7 +322,7 @@ void
 
 
 bool
- MinCostFlow::validateNetworkData(netxpert::InternalNet& net) {
+ MinCostFlow::validateNetworkData(netxpert::data::InternalNet& net) {
     bool valid = false;
 
     /*auto nodesIter = this->net->GetNodesIter();
@@ -347,7 +347,7 @@ bool
 }
 
 lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
- MinCostFlow::convertInternalNetworkToSolverData(netxpert::InternalNet& net) {
+ MinCostFlow::convertInternalNetworkToSolverData(netxpert::data::InternalNet& net) {
 
     using namespace netxpert::data;
     LOGGER::LogInfo("#Arcs internal graph: " +to_string(lemon::countArcs(*net.GetGraph())));

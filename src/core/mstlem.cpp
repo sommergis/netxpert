@@ -18,10 +18,6 @@
 
 using namespace netxpert::core;
 
-MST_LEM::MST_LEM() {
-    //ctor
-}
-
 MST_LEM::~MST_LEM() {
 	//TEST first
     if (this->arcBoolMap)

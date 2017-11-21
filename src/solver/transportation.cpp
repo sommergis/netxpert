@@ -132,7 +132,7 @@ void
 }
 
 void
- Transportation::Solve(netxpert::InternalNet& net) {
+ Transportation::Solve(netxpert::data::InternalNet& net) {
 
     this->net = &net;
 
@@ -422,7 +422,7 @@ void
     this->extNodeSupply = _nodeSupply;
 }
 
- netxpert::InternalNet* Transportation::GetNetwork() {
+ netxpert::data::InternalNet* Transportation::GetNetwork() {
     return this->net;
 }
 

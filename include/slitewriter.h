@@ -27,58 +27,62 @@
 
 namespace netxpert {
 
-    /**
-    * \brief Input/Output of netXpert
-    **/
     namespace io {
     /**
-    * \brief Writes the result of NetXpert into a SpatiaLite DB
+    * \brief Writes the result of netxpert into a SpatiaLite DB
     **/
     class SpatiaLiteWriter : public netxpert::io::DBWriter
     {
         public:
+            ///\brief Constructor
             SpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
+            ///\brief Constructor with path to the database
             SpatiaLiteWriter(netxpert::cnfg::Config& cnfg, std::string dbPath);
+            ///\brief Destructor
             ~SpatiaLiteWriter();
+            ///\brief Commit the current transaction
             void CommitCurrentTransaction();
+            ///\brief Creates the netxpert result database
             void CreateNetXpertDB();
+            ///\brief Creates the solver result table. If the table exists it will not be overwritten.
             void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType);
+            ///\brief Creates the solver result table, but drops the table first if it exists
             void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst);
+            ///\brief Opens a new transaction
             void OpenNewTransaction();
 
-
+            ///\brief Prepare SaveResultArc() in database
             std::unique_ptr<SQLite::Statement> PrepareSaveResultArc(const std::string& _tableName,
                                                                     const netxpert::data::NetXpertSolver solverType);
 
             /**
-            * \Brief For saving the result arc in the netXpert result DB
+            * \brief For saving the result arc in the netXpert result DB
             * This method simply saves the data of a result arc into the netXpert result DB.
-            * All result arc data is processed before calling this method.
-            */
-            //MCF, TP
+            * All result arc data is processed before
+            * calling this method.
+            * Save single MCFP/TP result arc
+            **/
             void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
                                const double capacity, const double flow, const geos::geom::MultiLineString& route,
                                const std::string& _tableName, SQLite::Statement& query);
-            //SPT, ODM
+            ///\brief Save single SPT/ODM result arc
             void SaveResultArc(const std::string& orig, const std::string& dest, const double cost,
                                      const geos::geom::MultiLineString& route,
                                      const std::string& _tableName, SQLite::Statement& query);
-            //Isolines
+            ///\brief Save single Isolines result arc
             void SaveResultArc(const std::string& orig, const double cost,
                                      const double cutoff,
                                      const geos::geom::MultiLineString& route,
                                      const std::string& _tableName, SQLite::Statement& query);
-            //MST
+            ///\brief Save single MST result arc
             void SaveResultArc(const std::string& extArcID, const double cost,
                                      const geos::geom::MultiLineString& route,
                                      const std::string& _tableName, SQLite::Statement& query);
 
-            /**
-            * \Brief For saving the result arc of a built network into the netXpert result DB
-            */
+            ///\brief For saving the result arc of a built network into the netXpert result DB
             void SaveNetworkBuilderArc(const std::string& extArcID, const uint32_t fromNode,
                                        const uint32_t toNode, const double cost,
                                        const double capacity, const std::string& oneway,
@@ -89,7 +93,7 @@ namespace netxpert {
             std::unique_ptr<SQLite::Statement> PrepareMergeAndSaveResultArcs(std::string arcTableName);
 
             /**
-            * \Brief For saving a subset of original arcs in the original netXpert DB.
+            * \brief For saving a subset of original arcs in the original netXpert DB.
             * This method performs a SELECT of the arcs (arcIDs) in the original netXpert DB and inserts them
             * in a new table (data processing within the DB).
             * Obviously this is faster and memory friendlier than reading the arcs into memory first and
@@ -103,7 +107,7 @@ namespace netxpert {
             /**
               \warning DON'T Use me! Use Preloaded Geometries via Network::ProcessResultArcsMem() Methods
 
-            * \Brief For saving a subset of original arcs and addintional route parts in the original netXpert DB.
+            * \brief For saving a subset of original arcs and addintional route parts in the original netXpert DB.
             * This method performs a SELECT of the arcs (arcIDs) in the original netXpert DB and inserts them
             * in a new table (data processing within the DB).
             * Obviously this is faster and memory friendlier than reading the arcs into memory first and
@@ -115,7 +119,7 @@ namespace netxpert {
                                         const std::string& arcTableName, const std::string& arcIDs,
                                         const geos::geom::MultiLineString& mLine,
                                         const std::string& resultTableName);
-
+            ///\brief Closes SpatiaLite connection
             void CloseConnection();
             //string ConnStr;
         private:

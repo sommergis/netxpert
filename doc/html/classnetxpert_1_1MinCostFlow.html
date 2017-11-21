@@ -129,12 +129,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac130d7426b4d84a02373e51454fdc63f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac130d7426b4d84a02373e51454fdc63f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>MinCostFlow</b> (<a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
 <tr class="separator:ac130d7426b4d84a02373e51454fdc63f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a818d05c0b2b1e517e65b7670c3e3ad75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a818d05c0b2b1e517e65b7670c3e3ad75"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (std::string net)</td></tr>
+<tr class="memitem:a818d05c0b2b1e517e65b7670c3e3ad75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinCostFlow.html#a818d05c0b2b1e517e65b7670c3e3ad75">Solve</a> (std::string net)</td></tr>
+<tr class="memdesc:a818d05c0b2b1e517e65b7670c3e3ad75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve method that takes the Network as text representation.  <a href="#a818d05c0b2b1e517e65b7670c3e3ad75">More...</a><br /></td></tr>
 <tr class="separator:a818d05c0b2b1e517e65b7670c3e3ad75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62aeea837ffdb2c659a0ac741d64137b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62aeea837ffdb2c659a0ac741d64137b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (<a class="el" href="classnetxpert_1_1InternalNet.html">netxpert::InternalNet</a> &amp;net)</td></tr>
-<tr class="separator:a62aeea837ffdb2c659a0ac741d64137b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d14a35ced1ebf4f75e2bae695396544"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d14a35ced1ebf4f75e2bae695396544"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinCostFlow.html#a3d14a35ced1ebf4f75e2bae695396544">Solve</a> (<a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> &amp;net)</td></tr>
+<tr class="memdesc:a3d14a35ced1ebf4f75e2bae695396544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve method that takes the Network as an object of type InternalNet. <br /></td></tr>
+<tr class="separator:a3d14a35ced1ebf4f75e2bae695396544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a245a11fd055d104bade19bc44ca415d5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a245a11fd055d104bade19bc44ca415d5"></a>
 std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1FlowCost.html">netxpert::data::FlowCost</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinCostFlow</b> () const </td></tr>
 <tr class="separator:a245a11fd055d104bade19bc44ca415d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,13 +149,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetAlgorithm</b> (<a 
 <a class="el" href="namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346c">netxpert::data::MCFSolverStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetSolverStatus</b> () const </td></tr>
 <tr class="separator:ab87f6c58a8173823296fcb3529947495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4201f39d97364c9b0766b2c4f6415b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4201f39d97364c9b0766b2c4f6415b0"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const </td></tr>
+const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinCostFlow.html#ab4201f39d97364c9b0766b2c4f6415b0">GetOptimum</a> () const </td></tr>
+<tr class="memdesc:ab4201f39d97364c9b0766b2c4f6415b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total optimum of the solver. <br /></td></tr>
 <tr class="separator:ab4201f39d97364c9b0766b2c4f6415b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f0f6280d112e40d2215dcba35022ef5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f0f6280d112e40d2215dcba35022ef5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveResults</b> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap) const </td></tr>
 <tr class="separator:a8f0f6280d112e40d2215dcba35022ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classnetxpert_1_1ISolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classnetxpert_1_1ISolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classnetxpert_1_1ISolver.html">netxpert::ISolver</a></td></tr>
-<tr class="memitem:adb78f899fbaec49ffd6df5bfd0528074 inherit pub_methods_classnetxpert_1_1ISolver"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074">~ISolver</a> ()</td></tr>
+<tr class="memitem:adb78f899fbaec49ffd6df5bfd0528074 inherit pub_methods_classnetxpert_1_1ISolver"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb78f899fbaec49ffd6df5bfd0528074"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074">~ISolver</a> ()</td></tr>
+<tr class="memdesc:adb78f899fbaec49ffd6df5bfd0528074 inherit pub_methods_classnetxpert_1_1ISolver"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default virtual destructor. <br /></td></tr>
 <tr class="separator:adb78f899fbaec49ffd6df5bfd0528074 inherit pub_methods_classnetxpert_1_1ISolver"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -165,15 +169,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsDirected</b></td></
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa488ec0d0eb1b492bae093ae3cec7040"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa488ec0d0eb1b492bae093ae3cec7040"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>solve</b> (<a class="el" href="classnetxpert_1_1InternalNet.html">netxpert::InternalNet</a> &amp;net)</td></tr>
-<tr class="separator:aa488ec0d0eb1b492bae093ae3cec7040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30d7985e7f5149476c3442146204f709"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a30d7985e7f5149476c3442146204f709"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>validateNetworkData</b> (<a class="el" href="classnetxpert_1_1InternalNet.html">netxpert::InternalNet</a> &amp;net)</td></tr>
-<tr class="separator:a30d7985e7f5149476c3442146204f709"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87acb5c57d7c13dc4ce87751bd112d30"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87acb5c57d7c13dc4ce87751bd112d30"></a>
-lemon::FilterArcs&lt; netxpert::data::graph_t, netxpert::data::graph_t::ArcMap&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>convertInternalNetworkToSolverData</b> (<a class="el" href="classnetxpert_1_1InternalNet.html">netxpert::InternalNet</a> &amp;net)</td></tr>
-<tr class="separator:a87acb5c57d7c13dc4ce87751bd112d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af237b54c3118d25b2f6a50964aa2db17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af237b54c3118d25b2f6a50964aa2db17"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>solve</b> (<a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> &amp;net)</td></tr>
+<tr class="separator:af237b54c3118d25b2f6a50964aa2db17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afece87afa28e25d71e2404737a00b9ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afece87afa28e25d71e2404737a00b9ee"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>validateNetworkData</b> (<a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> &amp;net)</td></tr>
+<tr class="separator:afece87afa28e25d71e2404737a00b9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68528b0bad593264b373a3d169de1c91"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a68528b0bad593264b373a3d169de1c91"></a>
+lemon::FilterArcs&lt; <a class="el" href="namespacenetxpert_1_1data.html#aa74c1b36e4f5f4fd195591738c30f39c">netxpert::data::graph_t</a>, netxpert::data::graph_t::ArcMap&lt; bool &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>convertInternalNetworkToSolverData</b> (<a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> &amp;net)</td></tr>
+<tr class="separator:a68528b0bad593264b373a3d169de1c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af43ab101328511e444adac86b25076f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af43ab101328511e444adac86b25076f6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>getSupplyNodesTypeCount</b> (int &amp;srcNodeCount, int &amp;transshipNodeCount, int &amp;sinkNodeCount)</td></tr>
 <tr class="separator:af43ab101328511e444adac86b25076f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +205,37 @@ std::shared_ptr&lt; <a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.ht
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver for the Minimum Cost Flow Problem. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a818d05c0b2b1e517e65b7670c3e3ad75"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void netxpert::MinCostFlow::Solve </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>net</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Solve method that takes the Network as text representation. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Has not been implemented in the C++ Version yet. </dd></dl>
+
+<p>Implements <a class="el" href="classnetxpert_1_1ISolver.html#a7b7b8a1f684b832f33bab453020b1b4d">netxpert::ISolver</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/solver/<a class="el" href="mcflow_8h_source.html">mcflow.h</a></li>
 </ul>
 </div><!-- contents -->
