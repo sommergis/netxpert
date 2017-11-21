@@ -128,7 +128,7 @@ void netxpert::test::LemonNetworkConvert(Config& cnfg)
         arcsTable = DBHELPER::LoadNetworkFromDB(arcsTableName, cmap);
         nodesTable = DBHELPER::LoadNodesFromDB(nodesTableName, nodesGeomColName, cmap);
         LOGGER::LogInfo("Converting Data into internal network..");
-        netxpert::InternalNet net (arcsTable, cmap, cnfg);
+        netxpert::data::InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
         // converting to internalNetwork is already done in ctor
         //net.ConvertInputNetwork(autoCleanNetwork);

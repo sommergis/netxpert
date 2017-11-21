@@ -9,5 +9,7 @@ var searchData=
   ['mcfunbounded',['MCFUnbounded',['../namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346cac92d71e95a9b3d967e1175e1165e2190',1,'netxpert::data']]],
   ['mcfundefined',['MCFUndefined',['../namespacenetxpert_1_1data.html#a9504ea932b3debceb4ba7f6831e80bbda0e13c6ec2b78ca3b8e8377ea89b53c2b',1,'netxpert::data']]],
   ['mcfunfeasible',['MCFUnfeasible',['../namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346ca78702b165ad82de50f63cf00498d17ed',1,'netxpert::data']]],
-  ['mcfunsolved',['MCFUnSolved',['../namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346ca733cc2da2224ce6ccb9163cd7be0e748',1,'netxpert::data']]]
+  ['mcfunsolved',['MCFUnSolved',['../namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346ca733cc2da2224ce6ccb9163cd7be0e748',1,'netxpert::data']]],
+  ['mincostflowsolver',['MinCostFlowSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbab828541a69002a0f11a10d26ce59b8ac',1,'netxpert::data']]],
+  ['minspanningtreesolver',['MinSpanningTreeSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba43ffb843fae346dd18a85666d826244b',1,'netxpert::data']]]
 ];

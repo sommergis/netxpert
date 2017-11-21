@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Solvers.  
+<p>Abstract Class (Interface) for all Solvers.  
  <a href="classnetxpert_1_1ISolver.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="isolver_8h_source.html">isolver.h</a>&gt;</code></p>
@@ -118,22 +118,26 @@ Inheritance diagram for netxpert::ISolver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adb78f899fbaec49ffd6df5bfd0528074"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074">~ISolver</a> ()</td></tr>
+<tr class="memitem:adb78f899fbaec49ffd6df5bfd0528074"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb78f899fbaec49ffd6df5bfd0528074"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074">~ISolver</a> ()</td></tr>
+<tr class="memdesc:adb78f899fbaec49ffd6df5bfd0528074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default virtual destructor. <br /></td></tr>
 <tr class="separator:adb78f899fbaec49ffd6df5bfd0528074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b7b8a1f684b832f33bab453020b1b4d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7b7b8a1f684b832f33bab453020b1b4d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (std::string net)=0</td></tr>
+<tr class="memitem:a7b7b8a1f684b832f33bab453020b1b4d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#a7b7b8a1f684b832f33bab453020b1b4d">Solve</a> (std::string net)=0</td></tr>
+<tr class="memdesc:a7b7b8a1f684b832f33bab453020b1b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve method that takes the Network as text representation.  <a href="#a7b7b8a1f684b832f33bab453020b1b4d">More...</a><br /></td></tr>
 <tr class="separator:a7b7b8a1f684b832f33bab453020b1b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa10dfba4e9fa72426ce15c925cd9176"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaa10dfba4e9fa72426ce15c925cd9176"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> (<a class="el" href="classnetxpert_1_1InternalNet.html">netxpert::InternalNet</a> &amp;net)=0</td></tr>
-<tr class="separator:aaa10dfba4e9fa72426ce15c925cd9176"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaa18c26bf487b4e54a0a48176ac9ac6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abaa18c26bf487b4e54a0a48176ac9ac6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#abaa18c26bf487b4e54a0a48176ac9ac6">Solve</a> (<a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> &amp;net)=0</td></tr>
+<tr class="memdesc:abaa18c26bf487b4e54a0a48176ac9ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve method that takes the Network as an object of type InternalNet. <br /></td></tr>
+<tr class="separator:abaa18c26bf487b4e54a0a48176ac9ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a234f67574e3402388046b224497c9c1e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a234f67574e3402388046b224497c9c1e"></a>
-virtual const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const =0</td></tr>
+virtual const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#a234f67574e3402388046b224497c9c1e">GetOptimum</a> () const =0</td></tr>
+<tr class="memdesc:a234f67574e3402388046b224497c9c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total optimum of the solver. <br /></td></tr>
 <tr class="separator:a234f67574e3402388046b224497c9c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for all Solvers. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="adb78f899fbaec49ffd6df5bfd0528074"></a>
+<div class="textblock"><p>Abstract Class (Interface) for all Solvers. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a7b7b8a1f684b832f33bab453020b1b4d"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -141,19 +145,24 @@ virtual const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOp
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual netxpert::ISolver::~ISolver </td>
+          <td class="memname">virtual void netxpert::ISolver::Solve </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>net</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Default destructor </p>
+
+<p>Solve method that takes the Network as text representation. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Has not been implemented in the C++ Version yet. </dd></dl>
+
+<p>Implemented in <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a6021a419ef2db34a079e508b79b94656">netxpert::OriginDestinationMatrix</a>, <a class="el" href="classnetxpert_1_1Isolines.html#ad39fb089dddaa857f16f2a9e1b24ea99">netxpert::Isolines</a>, <a class="el" href="classnetxpert_1_1ShortestPathTree.html#a9d051b476c6e16c8382f00c6fd41443c">netxpert::ShortestPathTree</a>, <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#ae7ae3fa3b3be489c9d4de521a93b5afe">netxpert::MinimumSpanningTree</a>, and <a class="el" href="classnetxpert_1_1MinCostFlow.html#a818d05c0b2b1e517e65b7670c3e3ad75">netxpert::MinCostFlow</a>.</p>
 
 </div>
 </div>

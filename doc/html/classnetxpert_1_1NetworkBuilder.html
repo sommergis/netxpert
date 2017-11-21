@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Builds a network of the given linestrings.  
+<p>Builds a network from a set of linestrings.  
  <a href="classnetxpert_1_1NetworkBuilder.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="networkbuilder_8h_source.html">networkbuilder.h</a>&gt;</code></p>
@@ -106,25 +106,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a13d5e72464e3f89262ebcd895afffbfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13d5e72464e3f89262ebcd895afffbfe"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NetworkBuilder</b> (<a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1NetworkBuilder.html#a13d5e72464e3f89262ebcd895afffbfe">NetworkBuilder</a> (<a class="el" href="structnetxpert_1_1cnfg_1_1Config.html">netxpert::cnfg::Config</a> &amp;cnfg)</td></tr>
+<tr class="memdesc:a13d5e72464e3f89262ebcd895afffbfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
 <tr class="separator:a13d5e72464e3f89262ebcd895afffbfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93d6712d03984b638c0d9ddad6ca76b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93d6712d03984b638c0d9ddad6ca76b0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1NetworkBuilder.html#a93d6712d03984b638c0d9ddad6ca76b0">~NetworkBuilder</a> ()</td></tr>
+<tr class="memdesc:a93d6712d03984b638c0d9ddad6ca76b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty Destructor. <br /></td></tr>
+<tr class="separator:a93d6712d03984b638c0d9ddad6ca76b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70a8c45f04b0ad7acedd93881ac4a72f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1NetworkBuilder.html#a70a8c45f04b0ad7acedd93881ac4a72f">LoadData</a> ()</td></tr>
+<tr class="memdesc:a70a8c45f04b0ad7acedd93881ac4a72f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the arc data into a Graph.  <a href="#a70a8c45f04b0ad7acedd93881ac4a72f">More...</a><br /></td></tr>
 <tr class="separator:a70a8c45f04b0ad7acedd93881ac4a72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f13e74431743fd769b820e6c369a210"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f13e74431743fd769b820e6c369a210"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SaveResults</b> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap) const </td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1NetworkBuilder.html#a6f13e74431743fd769b820e6c369a210">SaveResults</a> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap) const </td></tr>
+<tr class="memdesc:a6f13e74431743fd769b820e6c369a210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the built network. <br /></td></tr>
 <tr class="separator:a6f13e74431743fd769b820e6c369a210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb4830f91f3bdf24925b4524bd7adc3f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb4830f91f3bdf24925b4524bd7adc3f"></a>
-std::unordered_map&lt; uint32_t, <a class="el" href="structnetxpert_1_1data_1_1NetworkBuilderResultArc.html">netxpert::data::NetworkBuilderResultArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetBuiltNetwork</b> ()</td></tr>
+std::unordered_map&lt; uint32_t, <a class="el" href="structnetxpert_1_1data_1_1NetworkBuilderResultArc.html">netxpert::data::NetworkBuilderResultArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1NetworkBuilder.html#aeb4830f91f3bdf24925b4524bd7adc3f">GetBuiltNetwork</a> ()</td></tr>
+<tr class="memdesc:aeb4830f91f3bdf24925b4524bd7adc3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the built network. <br /></td></tr>
 <tr class="separator:aeb4830f91f3bdf24925b4524bd7adc3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Builds a network of the given linestrings. </p>
-<ul>
-<li>Multipart to Single Part Linestrings</li>
+<div class="textblock"><p>Builds a network from a set of linestrings. </p>
+<p><b>Concept</b> <br />
+ Builds a network from the given linestrings in such a way that the geometry of the lines is parsed and the start points of a line form the fromNode and the end point of a line the toNode of the internal graph. </p><ul>
+<li>Converts multi part to single part linestrings </li>
+<li>Undirected as default for network builder input</li>
 </ul>
-<p>StartPoint(Linestring): FromNode, EndPoint(Linestring): ToNode</p><ul>
-<li>Undirected als Standard in Solver input &ndash;&gt; Pro (compared to planarization): no loss of attribute information on the edges of the graph &ndash;&gt; Con (compared to planarization): much more (useless) egdes and nodes in the resulting graph &ndash;&gt; IN: lines &ndash;&gt; OUT: edges in network structure with FromNode and ToNode and all input attributes </li>
+<p><b>Pro</b> (compared to planarization): </p><ul>
+<li>no loss of attribute information on the edges of the graph </li>
+<li>more performance compared to union all linestrings (=noding)</li>
 </ul>
+<p><b>Con</b> (compared to planarization): </p><ul>
+<li>much more (useless) egdes and nodes in the resulting graph if the input graph is not clean (crap in - crap out..)</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>arcs in network structure with fromNode and toNode and all input attributes </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a70a8c45f04b0ad7acedd93881ac4a72f"></a>
 <div class="memitem">
@@ -138,10 +153,10 @@ std::unordered_map&lt; uint32_t, <a class="el" href="structnetxpert_1_1data_1_1N
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Loads the Edge Data into a Graph. Caution:</p><ul>
-<li>There is no check for planarity of the input!</li>
-<li>Multilinestrings that cannot be merged as a Linestring will throw an exception </li>
-</ul>
+
+<p>Loads the arc data into a Graph. </p>
+<p>There is no check for planarity of the input!<br />
+ Multilinestrings that cannot be merged as a simple Linestring will cause an error message </p>
 
 </div>
 </div>

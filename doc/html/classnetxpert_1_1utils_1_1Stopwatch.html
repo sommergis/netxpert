@@ -97,19 +97,64 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">netxpert::utils::Stopwatch&lt; TimeT, ClockT, DurationT &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A simple stopwatch.  
+ <a href="classnetxpert_1_1utils_1_1Stopwatch.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="utils_8h_source.html">utils.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8cfab9ec00082a6c1fb077eb127742bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8cfab9ec00082a6c1fb077eb127742bd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#a8cfab9ec00082a6c1fb077eb127742bd">Stopwatch</a> ()</td></tr>
+<tr class="memdesc:a8cfab9ec00082a6c1fb077eb127742bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor Calls <a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#aae232eaac691cd36eac325fed4df9fe0" title="starts timer of the stopwatch ">start()</a> method on initialization. <br /></td></tr>
+<tr class="separator:a8cfab9ec00082a6c1fb077eb127742bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae232eaac691cd36eac325fed4df9fe0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aae232eaac691cd36eac325fed4df9fe0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#aae232eaac691cd36eac325fed4df9fe0">start</a> ()</td></tr>
+<tr class="memdesc:aae232eaac691cd36eac325fed4df9fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">starts timer of the stopwatch <br /></td></tr>
 <tr class="separator:aae232eaac691cd36eac325fed4df9fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cd4be178b032591a5763b892777f126"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3cd4be178b032591a5763b892777f126"></a>
-DurationT&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
+<tr class="memitem:a3cd4be178b032591a5763b892777f126"><td class="memItemLeft" align="right" valign="top">DurationT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#a3cd4be178b032591a5763b892777f126">stop</a> ()</td></tr>
+<tr class="memdesc:a3cd4be178b032591a5763b892777f126"><td class="mdescLeft">&#160;</td><td class="mdescRight">stops the timer of the stopwatch Calls <a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#ae7b8d9c8d437571277decfe68e9a5aac" title="Gets the elapsed amount of time since the start() method was called. ">elapsed()</a> method  <a href="#a3cd4be178b032591a5763b892777f126">More...</a><br /></td></tr>
 <tr class="separator:a3cd4be178b032591a5763b892777f126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7b8d9c8d437571277decfe68e9a5aac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7b8d9c8d437571277decfe68e9a5aac"></a>
-DurationT&#160;</td><td class="memItemRight" valign="bottom"><b>elapsed</b> ()</td></tr>
+DurationT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#ae7b8d9c8d437571277decfe68e9a5aac">elapsed</a> ()</td></tr>
+<tr class="memdesc:ae7b8d9c8d437571277decfe68e9a5aac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the elapsed amount of time since the <a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#aae232eaac691cd36eac325fed4df9fe0" title="starts timer of the stopwatch ">start()</a> method was called. <br /></td></tr>
 <tr class="separator:ae7b8d9c8d437571277decfe68e9a5aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename TimeT = std::chrono::microseconds, typename ClockT = std::chrono::high_resolution_clock, typename DurationT = double&gt;<br />
+class netxpert::utils::Stopwatch&lt; TimeT, ClockT, DurationT &gt;</h3>
+
+<p>A simple stopwatch. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a3cd4be178b032591a5763b892777f126"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TimeT  = std::chrono::microseconds, typename ClockT  = std::chrono::high_resolution_clock, typename DurationT  = double&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DurationT <a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html">netxpert::utils::Stopwatch</a>&lt; TimeT, ClockT, DurationT &gt;::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>stops the timer of the stopwatch Calls <a class="el" href="classnetxpert_1_1utils_1_1Stopwatch.html#ae7b8d9c8d437571277decfe68e9a5aac" title="Gets the elapsed amount of time since the start() method was called. ">elapsed()</a> method </p>
+<dl class="section return"><dt>Returns</dt><dd>elapsed time </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/<a class="el" href="utils_8h_source.html">utils.h</a></li>
 </ul>

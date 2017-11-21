@@ -48,9 +48,6 @@
 
 namespace netxpert
 {
-    /**
-    * \brief Test functions for netXpert
-    **/
     namespace test
     {
 //        void NetworkConvert(netxpert::cnfg::Config& cnfg);

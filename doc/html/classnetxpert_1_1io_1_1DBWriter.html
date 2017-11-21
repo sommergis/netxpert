@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for the output DB.  
+<p>Pure virtual (i.e. abstract) class for the output DB.  
  <a href="classnetxpert_1_1io_1_1DBWriter.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="dbwriter_8h_source.html">dbwriter.h</a>&gt;</code></p>
@@ -108,33 +108,43 @@ Inheritance diagram for netxpert::io::DBWriter:</div>
 <div class="center"><img src="classnetxpert_1_1io_1_1DBWriter__inherit__graph.png" border="0" usemap="#netxpert_1_1io_1_1DBWriter_inherit__map" alt="Inheritance graph"/></div>
 <map name="netxpert_1_1io_1_1DBWriter_inherit__map" id="netxpert_1_1io_1_1DBWriter_inherit__map">
 <area shape="rect" id="node2" href="classnetxpert_1_1io_1_1FGDBWriter.html" title="Writes the result of NetXpert into a ESRI FileGeodatabase. " alt="" coords="5,87,172,114"/>
-<area shape="rect" id="node3" href="classnetxpert_1_1io_1_1SpatiaLiteWriter.html" title="Writes the result of NetXpert into a SpatiaLite DB. " alt="" coords="196,80,349,121"/>
+<area shape="rect" id="node3" href="classnetxpert_1_1io_1_1SpatiaLiteWriter.html" title="Writes the result of netxpert into a SpatiaLite DB. " alt="" coords="196,80,349,121"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a712f0e3c28eeaf3b34191977bab811dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a712f0e3c28eeaf3b34191977bab811dd"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#a712f0e3c28eeaf3b34191977bab811dd">~DBWriter</a> ()</td></tr>
+<tr class="memdesc:a712f0e3c28eeaf3b34191977bab811dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual empty Destructor. <br /></td></tr>
+<tr class="separator:a712f0e3c28eeaf3b34191977bab811dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6cbde221c9cb281fc564ec5947e4a89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6cbde221c9cb281fc564ec5947e4a89"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CommitCurrentTransaction</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#aa6cbde221c9cb281fc564ec5947e4a89">CommitCurrentTransaction</a> ()=0</td></tr>
+<tr class="memdesc:aa6cbde221c9cb281fc564ec5947e4a89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Commits the current transaction. <br /></td></tr>
 <tr class="separator:aa6cbde221c9cb281fc564ec5947e4a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aed2a197051fa97b389c9adf7bb5c3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9aed2a197051fa97b389c9adf7bb5c3b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CreateNetXpertDB</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#a9aed2a197051fa97b389c9adf7bb5c3b">CreateNetXpertDB</a> ()=0</td></tr>
+<tr class="memdesc:a9aed2a197051fa97b389c9adf7bb5c3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the netxpert result database. <br /></td></tr>
 <tr class="separator:a9aed2a197051fa97b389c9adf7bb5c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a605512371218841f9cfcfcd3d9badeb0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a605512371218841f9cfcfcd3d9badeb0"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CreateSolverResultTable</b> (const std::string &amp;_tableName, const <a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">netxpert::data::NetXpertSolver</a> solverType)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#a605512371218841f9cfcfcd3d9badeb0">CreateSolverResultTable</a> (const std::string &amp;_tableName, const <a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">netxpert::data::NetXpertSolver</a> solverType)=0</td></tr>
+<tr class="memdesc:a605512371218841f9cfcfcd3d9badeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the solver result table. If the table exists it will not be overwritten. <br /></td></tr>
 <tr class="separator:a605512371218841f9cfcfcd3d9badeb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35dd9c00f0621302fcf9e8fe4810e6ea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35dd9c00f0621302fcf9e8fe4810e6ea"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CreateSolverResultTable</b> (const std::string &amp;_tableName, const <a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">netxpert::data::NetXpertSolver</a> solverType, const bool dropFirst)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#a35dd9c00f0621302fcf9e8fe4810e6ea">CreateSolverResultTable</a> (const std::string &amp;_tableName, const <a class="el" href="namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cb">netxpert::data::NetXpertSolver</a> solverType, const bool dropFirst)=0</td></tr>
+<tr class="memdesc:a35dd9c00f0621302fcf9e8fe4810e6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the solver result table, but drops the table first if it exists. <br /></td></tr>
 <tr class="separator:a35dd9c00f0621302fcf9e8fe4810e6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c30c6e65624efc60019ca619b1a5822"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c30c6e65624efc60019ca619b1a5822"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>OpenNewTransaction</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#a6c30c6e65624efc60019ca619b1a5822">OpenNewTransaction</a> ()=0</td></tr>
+<tr class="memdesc:a6c30c6e65624efc60019ca619b1a5822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a new transaction. <br /></td></tr>
 <tr class="separator:a6c30c6e65624efc60019ca619b1a5822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af660494aa22a5ef6106aed7c8262f336"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af660494aa22a5ef6106aed7c8262f336"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>CloseConnection</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1io_1_1DBWriter.html#af660494aa22a5ef6106aed7c8262f336">CloseConnection</a> ()=0</td></tr>
+<tr class="memdesc:af660494aa22a5ef6106aed7c8262f336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes database connection. <br /></td></tr>
 <tr class="separator:af660494aa22a5ef6106aed7c8262f336"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Abstract <a class="el" href="classClass.html">Class</a> (Interface) for the output DB. </p>
+<div class="textblock"><p>Pure virtual (i.e. abstract) class for the output DB. </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/<a class="el" href="dbwriter_8h_source.html">dbwriter.h</a></li>
 </ul>

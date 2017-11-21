@@ -31,31 +31,43 @@
 
 namespace netxpert {
     /**
-    * \brief Builds a network of the given linestrings.
-    * - Multipart to Single Part Linestrings
-	* - StartPoint(Linestring): FromNode, EndPoint(Linestring): ToNode
-	* - Undirected als Standard in Solver input
-	* --> Pro (compared to planarization): no loss of attribute information on the edges of the graph
-	* --> Con (compared to planarization): much more (useless) egdes and nodes in the resulting graph
-    * --> IN: lines
-    * --> OUT: edges in network structure with FromNode and ToNode and all input attributes
+    * \brief Builds a network from a set of linestrings
+    *
+    * \b Concept <br>
+    * Builds a network from the given linestrings in such a way that the geometry of the lines is parsed
+    * and the start points of a line form the fromNode and the end point of a line
+    * the toNode of the internal graph.
+    * \li Converts multi part to single part linestrings
+    * \li Undirected as default for network builder input
+	  *
+	  * \b Pro (compared to planarization):
+	  * \li no loss of attribute information on the edges of the graph
+	  * \li more performance compared to union all linestrings (=noding)
+	  *
+    * \b Con (compared to planarization):
+    * \li much more (useless) egdes and nodes in the resulting graph if the input graph is not clean (crap in - crap out..)
+    *
+    * \return arcs in network structure with fromNode and toNode and all input attributes
     **/
     class NetworkBuilder
     {
         public:
-
+            ///\brief Constructor
             NetworkBuilder(netxpert::cnfg::Config& cnfg);
 
-            ~NetworkBuilder()  {};
+            ///\brief Empty Destructor
+            ~NetworkBuilder() {};
 
             /**
-            * Loads the Edge Data into a Graph.
-            * Caution:
-            *     - There is no check for planarity of the input!
-            *     - Multilinestrings that cannot be merged as a Linestring will throw an exception
+            * \brief Loads the arc data into a Graph.
+            *
+            * There is no check for planarity of the input!<br>
+            * Multilinestrings that cannot be merged as a simple Linestring will cause an error message
             **/
             void LoadData();
+            ///\brief Saves the built network
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
+            ///\brief Gets the built network
             std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
 
         private:

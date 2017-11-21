@@ -79,7 +79,7 @@ namespace netxpert {
             void SetExtODMatrix(std::vector<netxpert::data::ExtSPTreeArc> _extODMatrix);
             //void SetExtODMatrix(string _extODMatrixJSON);
 
-            netxpert::InternalNet* GetNetwork();
+            netxpert::data::InternalNet* GetNetwork();
 
             //std::vector<ExtNodeSupply> GetNodeSupply() const;
             void SetExtNodeSupply(std::vector<netxpert::data::ExtNodeSupply> _nodeSupply);
@@ -104,7 +104,7 @@ namespace netxpert {
             *  Solves the Transportation Problem with the given network and all origin and destination nodes.
             *  Uses the NetXpert OriginDestinationMatrix Solver internally.
             */
-            void Solve(netxpert::InternalNet& net);
+            void Solve(netxpert::data::InternalNet& net);
 
         private:
             //raw pointer ok, no dynamic allocation (new())
@@ -112,7 +112,7 @@ namespace netxpert {
             //shall be assigned to the class member this->net
             //with smart pointers there are double frees on clean up -> memory errors
             //raw pointers will not leak int this case even without delete in the deconstructor
-            netxpert::InternalNet* net;
+            netxpert::data::InternalNet* net;
 
             std::vector<netxpert::data::node_t> destinationNodes;
             std::vector<netxpert::data::node_t> originNodes;

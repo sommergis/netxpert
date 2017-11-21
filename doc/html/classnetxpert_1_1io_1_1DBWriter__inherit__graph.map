@@ -1,4 +1,4 @@
 <map id="netxpert::io::DBWriter" name="netxpert::io::DBWriter">
 <area shape="rect" id="node2" href="$classnetxpert_1_1io_1_1FGDBWriter.html" title="Writes the result of NetXpert into a ESRI FileGeodatabase. " alt="" coords="5,87,172,114"/>
-<area shape="rect" id="node3" href="$classnetxpert_1_1io_1_1SpatiaLiteWriter.html" title="Writes the result of NetXpert into a SpatiaLite DB. " alt="" coords="196,80,349,121"/>
+<area shape="rect" id="node3" href="$classnetxpert_1_1io_1_1SpatiaLiteWriter.html" title="Writes the result of netxpert into a SpatiaLite DB. " alt="" coords="196,80,349,121"/>
 </map>

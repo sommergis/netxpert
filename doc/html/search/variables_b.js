@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['resultdbpath',['ResultDBPath',['../structnetxpert_1_1cnfg_1_1Config.html#a11f88b978f21663025714bff816cfe86',1,'netxpert::cnfg::Config']]],
-  ['resultdbtype',['ResultDBType',['../structnetxpert_1_1cnfg_1_1Config.html#a088abe76a5f5b531b7294122b1a63542',1,'netxpert::cnfg::Config']]],
-  ['resulttablename',['ResultTableName',['../structnetxpert_1_1cnfg_1_1Config.html#a365d31191baf6a1bc7b700e949c1ac05',1,'netxpert::cnfg::Config']]]
+  ['onewaycolname',['onewayColName',['../structnetxpert_1_1data_1_1ColumnMap.html#a46b8b3dbb48282803f1e8b0f53122ecd',1,'netxpert::data::ColumnMap']]],
+  ['onewaycolumnname',['OnewayColumnName',['../structnetxpert_1_1cnfg_1_1Config.html#a89556dbbbadcfbd6055346a4ad77e353',1,'netxpert::cnfg::Config']]]
 ];

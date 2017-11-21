@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['loaddbintomemory',['LoadDBIntoMemory',['../structnetxpert_1_1cnfg_1_1Config.html#ac94abe7cd836323220db9e8f7ac674df',1,'netxpert::cnfg::Config']]],
-  ['local_5fnum_5fthreads',['LOCAL_NUM_THREADS',['../namespacenetxpert_1_1cnfg.html#ada3b53a68cdf167895c961fba11694aa',1,'netxpert::cnfg']]],
-  ['logfilefullpath',['LogFileFullPath',['../structnetxpert_1_1cnfg_1_1Config.html#a32bdb3e794544e30465de6224a9f92bb',1,'netxpert::cnfg::Config']]],
-  ['loglevel',['LogLevel',['../structnetxpert_1_1cnfg_1_1Config.html#a41d9e5a7901723efc1afb53384a42826',1,'netxpert::cnfg::Config']]]
+  ['isdirected',['IsDirected',['../structnetxpert_1_1cnfg_1_1Config.html#a732e585e5f3cf8e04c7b230fd0b9aaf5',1,'netxpert::cnfg::Config']]],
+  ['isinitialized',['IsInitialized',['../classnetxpert_1_1io_1_1DBHELPER.html#a7484e6b69665374f10a7b6e384dd9723',1,'netxpert::io::DBHELPER::IsInitialized()'],['../classnetxpert_1_1utils_1_1LOGGER.html#a7577f62a660b9897d686cdfe88ae441d',1,'netxpert::utils::LOGGER::IsInitialized()']]]
 ];

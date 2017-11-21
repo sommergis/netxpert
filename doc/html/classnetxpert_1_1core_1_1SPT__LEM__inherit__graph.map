@@ -1,3 +1,3 @@
 <map id="netxpert::core::SPT_LEM" name="netxpert::core::SPT_LEM">
-<area shape="rect" id="node2" href="$classnetxpert_1_1core_1_1ISPTree.html" title="Abstract Class (Interface) for all Shortest Path Tree Solvers in netxpert core. " alt="" coords="11,5,170,32"/>
+<area shape="rect" id="node2" href="$classnetxpert_1_1core_1_1ISPTree.html" title="Pure virtual (i.e. abstract) class for all Shortest Path Tree Solvers in netxpert core..." alt="" coords="11,5,170,32"/>
 </map>

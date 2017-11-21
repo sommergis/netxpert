@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['testcase',['TestCase',['../structnetxpert_1_1cnfg_1_1Config.html#a73f9299fb8e35e1f4a9946f37dc3d17c',1,'netxpert::cnfg::Config']]],
-  ['tocolname',['toColName',['../structnetxpert_1_1data_1_1ColumnMap.html#aae1750eea68bc1f4a7da4d61a6ef9849',1,'netxpert::data::ColumnMap']]],
-  ['tonodecolumnname',['ToNodeColumnName',['../structnetxpert_1_1cnfg_1_1Config.html#af5ab8e729eafee4eb059a251343d68f8',1,'netxpert::cnfg::Config']]],
-  ['treshold',['Treshold',['../structnetxpert_1_1cnfg_1_1Config.html#aee1dee4ec74c14f60bbb87c3c267255f',1,'netxpert::cnfg::Config']]]
+  ['spatialitecorename',['SpatiaLiteCoreName',['../structnetxpert_1_1cnfg_1_1Config.html#a4df2574cae792012d65db17eaf3d0a22',1,'netxpert::cnfg::Config']]],
+  ['spatialitehome',['SpatiaLiteHome',['../structnetxpert_1_1cnfg_1_1Config.html#a30e9c138aaee454b4b9f178a5d9fec0a',1,'netxpert::cnfg::Config']]],
+  ['sptalgorithm',['SptAlgorithm',['../structnetxpert_1_1cnfg_1_1Config.html#a207a8bc8efda8c4c67a256a13ed54e05',1,'netxpert::cnfg::Config']]],
+  ['sptalldests',['SPTAllDests',['../structnetxpert_1_1cnfg_1_1Config.html#a899d7ea93cedfb52addfd6ba9dc23ef8',1,'netxpert::cnfg::Config']]],
+  ['sptheapcard',['SPTHeapCard',['../structnetxpert_1_1cnfg_1_1Config.html#a41afc9fb4f15155eec2f8c30eaae5500',1,'netxpert::cnfg::Config']]],
+  ['supplycolname',['supplyColName',['../structnetxpert_1_1data_1_1ColumnMap.html#af914fcd7bd73d3f4b678d26d5ac8b586',1,'netxpert::data::ColumnMap']]]
 ];

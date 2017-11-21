@@ -47,11 +47,11 @@ int main(int argc, char** argv)
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/ODMatrixCnfg_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_1_points_1_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_4_points_4.json";
-        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json";
+        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTreeCnfg_small_1.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TestFGDBWriter.json";
-        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
+        //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/NetworkBuilder_small.json";

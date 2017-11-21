@@ -389,7 +389,7 @@ void
 }
 
 void
- InternalNet::SetNodeData(const std::string& nodeID, const netxpert::data::node_t& node) {
+ InternalNet::RegisterNodeID(const std::string& nodeID, const netxpert::data::node_t& node) {
 
     this->nodeIDMap.insert( std::make_pair(nodeID, node) );
     (*this->nodeMap)[node] = nodeID;
@@ -664,7 +664,7 @@ const uint32_t
                     //add nodeSupply
                     (*this->nodeSupplyMap)[resultNode] = nodeSupply;
                     //set extNodeID really?
-                    this->SetNodeData(extNodeID, resultNode);
+                    this->RegisterNodeID(extNodeID, resultNode);
                 }
                 else
                     std::cout << "Node From ID " << extFromNode << " not found in nodeIDMap!"<< std::endl;
@@ -696,7 +696,7 @@ const uint32_t
                     //add nodeSupply
                     (*this->nodeSupplyMap)[resultNode] = nodeSupply;
                     //set extNodeID really?
-                    this->SetNodeData(extNodeID, resultNode);
+                    this->RegisterNodeID(extNodeID, resultNode);
                 }
 //                else
 //                    std::cout << "Node To ID " << extToNode << " not found in nodeIDMap!"<< std::endl;
@@ -722,7 +722,7 @@ const uint32_t
                 (*this->nodeSupplyMap)[resultNode] = nodeSupply;
 //                std::cout << "extNodeID: " << extNodeID << std::endl;
 //                this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
-                this->SetNodeData(extNodeID, resultNode);
+                this->RegisterNodeID(extNodeID, resultNode);
 
                 //arc changes
                 (*this->arcChangesMap)[splittedLine.arc] = ArcState::originalAndSplit;
@@ -744,7 +744,7 @@ const uint32_t
         //add nodeSupply
         (*this->nodeSupplyMap)[resultNode] = nodeSupply;
 //        this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
-        this->SetNodeData(extNodeID, resultNode);
+        this->RegisterNodeID(extNodeID, resultNode);
 
         //arc changes
         (*this->arcChangesMap)[splittedLine.arc] = ArcState::addedAndSplit;
@@ -2497,7 +2497,7 @@ void
         node_t lemNode = this->g->addNode();
 //        (*this->nodeMap)[lemNode] = *it;
 //        this->nodeIDMap.insert( make_pair(*it, lemNode) );
-        this->SetNodeData(*it, lemNode);
+        this->RegisterNodeID(*it, lemNode);
     }
 
     // We have to care for the nodes and their supply values also if they are present
@@ -2725,7 +2725,7 @@ void
         this->SetArcData(arc, arcData);
     }
     // add dummy node
-    this->SetNodeData("dummy", newNode);
+    this->RegisterNodeID("dummy", newNode);
     (*this->nodeSupplyMap)[newNode] = diff;
     LOGGER::LogDebug("Inserted dummy node (" + std::to_string(this->g->id(newNode)) + ") with supply of "+ std::to_string(diff) );
 }

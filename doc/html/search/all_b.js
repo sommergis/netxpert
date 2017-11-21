@@ -16,10 +16,13 @@ var searchData=
   ['mincostflow',['MinCostFlow',['../classnetxpert_1_1MinCostFlow.html',1,'netxpert']]],
   ['mincostflow',['MinCostFlow',['../classnetxpert_1_1simple_1_1MinCostFlow.html',1,'netxpert::simple']]],
   ['mincostflowinstancetype',['MinCostFlowInstanceType',['../namespacenetxpert_1_1data.html#a9504ea932b3debceb4ba7f6831e80bbd',1,'netxpert::data']]],
+  ['mincostflowsolver',['MinCostFlowSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbab828541a69002a0f11a10d26ce59b8ac',1,'netxpert::data']]],
+  ['minimumspanningtree',['MinimumSpanningTree',['../classnetxpert_1_1MinimumSpanningTree.html',1,'netxpert']]],
   ['minimumspanningtree',['MinimumSpanningTree',['../classnetxpert_1_1MinimumSpanningTree.html#a7d1cd0fc061bd8b056f4317eabdcdc0a',1,'netxpert::MinimumSpanningTree']]],
   ['minimumspanningtree',['MinimumSpanningTree',['../classnetxpert_1_1simple_1_1MinimumSpanningTree.html',1,'netxpert::simple']]],
-  ['minimumspanningtree',['MinimumSpanningTree',['../classnetxpert_1_1MinimumSpanningTree.html',1,'netxpert']]],
+  ['minspanningtreesolver',['MinSpanningTreeSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba43ffb843fae346dd18a85666d826244b',1,'netxpert::data']]],
   ['mst_5flem',['MST_LEM',['../classnetxpert_1_1core_1_1MST__LEM.html',1,'netxpert::core']]],
+  ['mst_5flem',['MST_LEM',['../classnetxpert_1_1core_1_1MST__LEM.html#aff365de87b9125f6f2cb70e51928e764',1,'netxpert::core::MST_LEM::MST_LEM()'],['../classnetxpert_1_1core_1_1MST__LEM.html#abdd5584b9ac0cfbf68ea3053fab84875',1,'netxpert::core::MST_LEM::MST_LEM(MST_LEM const &amp;)']]],
   ['mstalgorithm',['MstAlgorithm',['../structnetxpert_1_1cnfg_1_1Config.html#a7d4b58830190d9c7d79b23a61625bd44',1,'netxpert::cnfg::Config::MstAlgorithm()'],['../namespacenetxpert_1_1cnfg.html#ab77ff30f2da32945dbb19bdf6199f799',1,'netxpert::cnfg::MSTAlgorithm()']]],
   ['mstresult',['MSTResult',['../structnetxpert_1_1data_1_1MSTResult.html',1,'netxpert::data']]]
 ];

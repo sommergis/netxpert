@@ -6,7 +6,7 @@ var searchData=
   ['inputarc',['InputArc',['../structnetxpert_1_1data_1_1InputArc.html',1,'netxpert::data']]],
   ['inputnode',['InputNode',['../structnetxpert_1_1data_1_1InputNode.html',1,'netxpert::data']]],
   ['internalarc',['InternalArc',['../structnetxpert_1_1data_1_1InternalArc.html',1,'netxpert::data']]],
-  ['internalnet',['InternalNet',['../classnetxpert_1_1InternalNet.html',1,'netxpert']]],
+  ['internalnet',['InternalNet',['../classnetxpert_1_1data_1_1InternalNet.html',1,'netxpert::data']]],
   ['intnetsplittedarc',['IntNetSplittedArc',['../structnetxpert_1_1data_1_1IntNetSplittedArc.html',1,'netxpert::data']]],
   ['intnetsplittedarc2',['IntNetSplittedArc2',['../structnetxpert_1_1data_1_1IntNetSplittedArc2.html',1,'netxpert::data']]],
   ['isolines',['Isolines',['../classnetxpert_1_1Isolines.html',1,'netxpert']]],

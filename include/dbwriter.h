@@ -24,34 +24,30 @@
 #include "geos/geom/CoordinateSequence.h"
 
 namespace netxpert {
-    /**
-    * \brief Input/Output of netXpert
-    **/
+
     namespace io {
     /**
-    * \brief Abstract Class (Interface) for the output DB
+    * \brief Pure virtual (i.e. abstract) class for the output DB
     **/
     class DBWriter
     {
         public:
+            ///\brief Virtual empty Destructor
             virtual ~DBWriter(){}
-            // virtual Rückgabetyp nameDerFunktion(Variable1, Variable2, VariableN) = 0;
-            // mit dem "= 0" zwingt man den Programmierer die Methode zu implementieren!!!
-            // Sonst gibt es Fehler beim Kompilieren...
+            ///\brief Commits the current transaction
             virtual void CommitCurrentTransaction() = 0;
+            ///\brief Creates the netxpert result database
             virtual void CreateNetXpertDB() = 0;
+            ///\brief Creates the solver result table. If the table exists it will not be overwritten.
             virtual void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType) = 0;
+            ///\brief Creates the solver result table, but drops the table first if it exists
             virtual void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType,
                                                  const bool dropFirst) = 0;
+            ///\brief Opens a new transaction
             virtual void OpenNewTransaction() = 0;
-            /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::MultiLineString& route, string _tableName,
-                                    bool truncateBeforeInsert) = 0;*/
-            /*virtual void SaveSolveQueryToDB(string orig, string dest, double cost, double capacity, double flow,
-                                    geos::geom::MultiLineString route, string _tableName,
-                                    bool truncateBeforeInsert, SQLiteCommand cmd) = 0;*/
+            ///\brief Closes database connection
             virtual void CloseConnection() = 0;
     };
 } //namespace io
