@@ -115,6 +115,8 @@ def test_spt_add_nodes_1_1(cnfg, cmap):
 
     solver.Solve(net)
     optimum = solver.GetOptimum()
+
+    print (solver.GetResultsAsJSON())
     del net, solver
 
     return optimum
@@ -296,6 +298,7 @@ def test_spt_add_nodes_1_1_germany_s_t_ch(cnfg, cmap):
     del net, solver
 
     return optimum
+
 
 
 if __name__ == "__main__":
