@@ -82,7 +82,9 @@ namespace netxpert {
     **/
     enum RESULT_DB_TYPE : int16_t {
         SpatiaLiteDB = 0, //!< SpatiaLite Format > 4.3.0.
-        ESRI_FileGDB = 1  //!< ESRI File Geodatabase with FileGDB API 1.4.
+        ESRI_FileGDB = 1, //!< ESRI File Geodatabase with FileGDB API 1.4.
+        JSON = 2,         //!< JSON
+        GooglePolyLine = 3//!< Google Compressed Binary Polyline encoding
     };
 
     /**
