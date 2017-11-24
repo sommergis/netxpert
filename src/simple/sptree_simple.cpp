@@ -130,6 +130,9 @@ int netxpert::simple::ShortestPathTree::Solve()
 
         spt.SaveResults(resultTableName, cmap);
 
+        //test
+        std::cout << spt.GetResultsAsJSON() << std::endl;
+
         return 0; // OK
     }
     catch (exception& ex)
@@ -150,8 +153,8 @@ netxpert::simple::ShortestPathTree::GetOptimum() const {
 std::string netxpert::simple::ShortestPathTree::GetShortestPathsAsJSON()
 {
     std::string result;
-    /*if (this->solver)
-        result = this->solver->GetShortestPathsAsJSON();*/
+    if (this->solver)
+        result = this->solver->GetResultsAsJSON();
     return result;
 }
 std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::ShortestPathTree::GetShortestPaths()
