@@ -1571,76 +1571,73 @@ void
     using namespace netxpert::io;
     using namespace netxpert::utils;
 
-    switch (NETXPERT_CNFG.ResultDBType) {
-        case RESULT_DB_TYPE::JSON: {
-            //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
-            //MultilineString could also contain only one Linestring
-            std::unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
-            std::unique_ptr<MultiLineString> mLineDB;
-            //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
+    LOGGER::LogDebug("entering saveSPTResultsMemS()..");
 
-            //load geometry from db
-            //TODO: 0,5 bis 1 sec pro Ladevorgang
-            //Stopwatch<> sw;
-            //sw.start();
-            if (arcIDs.size() > 0) {
-                mLineDB = std::move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
-            }
-            //sw.stop();
-            //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
-            //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - merge");
-            //merge routeParts with original arcs
-            //sw.start();
-            LineMerger lm;
-            if (! (mLine->isEmpty()) )
-                lm.add(mLine.get());
+    //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
+    //MultilineString could also contain only one Linestring
+    std::unique_ptr<MultiLineString> mLine ( DBHELPER::GEO_FACTORY->createMultiLineString( routeParts ));
+    std::unique_ptr<MultiLineString> mLineDB;
+    //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
 
-            if (mLineDB)
-                lm.add(mLineDB.get());
+    //load geometry from db
+    //TODO: 0,5 bis 1 sec pro Ladevorgang
+    //Stopwatch<> sw;
+    //sw.start();
+    if (arcIDs.size() > 0) {
+        mLineDB = std::move( DBHELPER::GetArcGeometriesFromMem(arcIDs) );
+    }
+    //sw.stop();
+    //LOGGER::LogDebug("DBHELPER::TEST_GetArcGeometriesFromRAM() took " + to_string(sw.elapsed()/1000)+" ms");
+    //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - merge");
+    //merge routeParts with original arcs
+    //sw.start();
+    LineMerger lm;
+    if (! (mLine->isEmpty()) )
+        lm.add(mLine.get());
 
-            std::unique_ptr< std::vector<LineString *> > mls ( lm.getMergedLineStrings() );
-            std::vector<Geometry*> mls2;
-            for (auto& l : *mls) {
-                //if (!l->isEmpty())
-                mls2.push_back(dynamic_cast<Geometry*>(l));
-            }
+    if (mLineDB)
+        lm.add(mLineDB.get());
 
-            std::unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
+    std::unique_ptr< std::vector<LineString *> > mls ( lm.getMergedLineStrings() );
+    std::vector<Geometry*> mls2;
+    for (auto& l : *mls) {
+        //if (!l->isEmpty())
+        mls2.push_back(dynamic_cast<Geometry*>(l));
+    }
 
-            //data to JSON
-            const std::vector<Coordinate>* coords = route->getCoordinates()->toVector();
+    std::unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
 
-            std::stringstream coordStr;
-            int counter = 0;
-            for (auto& c : *coords) {
-              counter += 1;
-              coordStr << "("
-              << std::fixed << setprecision(3) << c.x << " "
-              << std::fixed << setprecision(3) << c.y << ")";
+    //data to JSON
+    const std::vector<Coordinate>* coords = route->getCoordinates()->toVector();
 
-              if (counter < coords->size())
-                coordStr << ",";
-            }
+    std::stringstream coordStr;
+    int counter = 0;
+    for (auto& c : *coords) {
+      counter += 1;
+      coordStr << "("
+      << std::fixed << setprecision(3) << c.x << " "
+      << std::fixed << setprecision(3) << c.y << ")";
 
-            /**
-            {"orig" : orig, "dest" : dest, "cost" : cost, "route" : coordinateList }
-            **/
-            std::ostringstream row;
-            row << "{ \"orig\" : \""
-                << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-                << ", \"route\" : \"" << "[" << coordStr.str() << "]" << "\"} " << endl;
+      if (counter < coords->size())
+        coordStr << ",";
+    }
 
-            //sw.stop();
-            //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
-            //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - save to DB");
-            //sw.start();
-            #pragma omp critical
-            {
-            //save merged route geometry to stream
-            outStream << row.str() << endl;
-            }
-        }
-        break;
+    /**
+    {"orig" : orig, "dest" : dest, "cost" : cost, "route" : coordinateList }
+    **/
+    std::stringstream row;
+    row << "{ \"orig\" : \""
+        << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
+        << ", \"route\" : \"" << "[" << coordStr.str() << "]" << "\"} " << endl;
+
+    //sw.stop();
+    //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
+    //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - save to DB");
+    //sw.start();
+    #pragma omp critical
+    {
+    //save merged route geometry to stream
+    outStream << row.str() << endl;
     }
 }
 

@@ -71,13 +71,13 @@ namespace netxpert {
             std::vector<netxpert::data::node_t> GetReachedDests() const;
             std::vector<uint32_t> GetReachedDestIDs() const;
             std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
-
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
             ///\brief Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB or JSON).
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap);
             ///\brief Gets the SPT results as JSON String
-            const std::string GetResultsAsJSON() const;
+            const std::string GetResultsAsJSON();
 
         private:
             //raw pointer ok, no dynamic allocation (new())
