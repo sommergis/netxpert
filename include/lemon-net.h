@@ -25,6 +25,8 @@
 #include <memory>
 #include <algorithm>
 
+#include <iomanip> // setprecision for string output on decimal values
+
 #include "lemon/time_measure.h"
 
 #if (defined ENABLE_CONTRACTION_HIERARCHIES)
@@ -343,7 +345,8 @@ namespace netxpert {
         //--|Region Add Points
 
         //-->Region Save Results
-        /**\brief Main method for processing and saving result arcs (preloading geometry into memory)
+        /**\brief Main method for processing and saving result arcs (preloading geometry into memory).
+            Writes results to a database (SpatiaLite or ESRI File Geodatabase).
             Solver: SPT, ODM */
         void
          ProcessSPTResultArcsMem(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
@@ -351,6 +354,13 @@ namespace netxpert {
                                      const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                     );
+        /**\brief Main method for processing and saving result arcs (preloading geometry into memory).
+            Writes results to a stringstream (GeoJSON or Polyline).
+            Solver: SPT, ODM */
+        void
+         ProcessSPTResultArcsMemS(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
+                                       const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
+                                       std::ostringstream& output);
         /**\brief Method for processing and saving a subset of original arcs as results
             Solver: MST */
         void
@@ -538,6 +548,10 @@ namespace netxpert {
                                       const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
                                       const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                       SQLite::Statement& qry );
+      void
+       saveSPTResultsMemS(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,
+                                const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                std::ostringstream& outfile);
 
       //Isolines
       void saveIsoResultsMem(const std::string orig, const netxpert::data::cost_t cost,

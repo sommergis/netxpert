@@ -73,10 +73,11 @@ namespace netxpert {
             std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
 
             const double GetOptimum() const;
-
+            ///\brief Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB or JSON).
             void SaveResults(const std::string& resultTableName,
-                             const netxpert::data::ColumnMap& cmap,
-                             const std::string& format = "database") const;
+                             const netxpert::data::ColumnMap& cmap);
+            ///\brief Gets the SPT results as JSON String
+            const std::string GetResultsAsJSON() const;
 
         private:
             //raw pointer ok, no dynamic allocation (new())
@@ -120,6 +121,10 @@ namespace netxpert {
              convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
 
             void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
+
+            std::string
+             processTotalArcIDs();
+
             /*double buildCompressedRoute(std::vector<netxpert::data::node_t>& route, netxpert::data::node_t orig, netxpert::data::node_t dest,
                                             std::unordered_map<netxpert::data::node_t, netxpert::data::node_t>& arcPredescessors);
 

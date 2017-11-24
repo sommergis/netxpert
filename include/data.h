@@ -197,13 +197,14 @@ namespace netxpert {
     };
 
     /**
-    * \brief Custom data type for storing external arc of SPTree/ODMatrix <extFromNode,extToNode,cost> as simple type variant
+    * \brief Custom data type for storing external arc of SPTree/ODMatrix <extFromNode,extToNode,cost,route> as simple type variant
     **/
     struct ExtSPTreeArc
     {
         netxpert::data::ExtArcID    extArcID;
         netxpert::data::ExternalArc extArc;
         cost_t                      cost;
+        std::string                 route;
 
         template<class Archive>
         void serialize( Archive & ar )
@@ -211,7 +212,8 @@ namespace netxpert {
             ar( cereal::make_nvp("arcid", extArcID),
                 cereal::make_nvp("fromNode",extArc.extFromNode),
                 cereal::make_nvp("toNode",extArc.extToNode),
-                cereal::make_nvp("cost",cost) );
+                cereal::make_nvp("cost",cost),
+                cereal::make_nvp("route", route) );
         }
     };
 
