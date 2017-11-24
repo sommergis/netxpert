@@ -561,13 +561,34 @@ inline const double
 }
 
 const std::string
- ShortestPathTree::GetResultsAsJSON() const {
+ ShortestPathTree::GetResultsAsJSON() {
 
+  LOGGER::LogDebug("Entering GetResultsAsJSON()..");
   std::ostringstream outStream;
   //header for json
   outStream << "{ \"result\" : [ " << endl;
 
+  //Processing and Saving Results are handled within net.ProcessResultArcs()
   std::map<ODPair, CompressedPath>::const_iterator it; //const_iterator wegen Zugriff auf this->shortestPath
+
+  if (NETXPERT_CNFG.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+  {
+//    //check if already loaded to mem through SaveResults()
+//    if (DBHELPER::KV_Network.size() < 1) {
+       std::string arcIDs = processTotalArcIDs();
+
+      LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+      ColumnMap cmap { NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.FromNodeColumnName, NETXPERT_CNFG.ToNodeColumnName,
+                      NETXPERT_CNFG.CostColumnName, NETXPERT_CNFG.CapColumnName, NETXPERT_CNFG.OnewayColumnName};
+
+      if (arcIDs.size() > 0) {
+        DBHELPER::LoadGeometryToMem(NETXPERT_CNFG.ArcsTableName, cmap, NETXPERT_CNFG.ArcsGeomColumnName, arcIDs);
+      }
+      LOGGER::LogDebug("Done!");
+//    }
+  }
+
   int counter = 0;
 
   #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
@@ -578,8 +599,8 @@ const std::string
     #pragma omp single nowait
     {
     auto kv = *it;
-
     counter += 1;
+    LOGGER::LogDebug("shortestPaths: "+to_string(counter));
     if (counter % 2500 == 0)
         LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
@@ -603,12 +624,9 @@ const std::string
     string dest = this->net->GetOrigNodeID(key.dest);
 
     this->net->ProcessSPTResultArcsMemS(orig, dest, costPerPath, arcIDsPerPath, path, outStream);
-    //write string stream to file stream
-//    outfile << outStream.str();
+
     if (counter < this->shortestPaths.size())
       outStream << ",";
-    //reset stream
-//    outStream.str(std::string());
 
     } //omp single nowait
   }
@@ -801,7 +819,7 @@ void
         LOGGER::LogDebug("Done!");
       }
       if (cnfg.ResultDBType == RESULT_DB_TYPE::JSON) {
-        LOGGER::LogDebug("Committing..");
+        LOGGER::LogDebug("Writing to disk..");
         outfile << " ] }" << endl;
         outfile.flush();
         outfile.close();
