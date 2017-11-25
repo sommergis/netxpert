@@ -780,6 +780,7 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
                     " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
                     " AND ROWID IN"+
                     " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
+                       " AND f_geometry_column = '" + geomColName + "'" + //fix for multi column geometry with spatial index
                        " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
@@ -793,6 +794,7 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
                     " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
                     " AND ROWID IN"+
                     " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
+                       " AND f_geometry_column = '" + geomColName + "'" + //fix for multi column geometry with spatial index
                        " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
@@ -844,12 +846,14 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
+        #ifdef DEBUG
         string qryStr = qry.getQuery();
         string s1 = UTILS::ReplaceAll(qryStr, "@XCoord", to_string(x));
         s1 = UTILS::ReplaceAll(s1,"@YCoord", to_string(y));
         s1 = UTILS::ReplaceAll(s1,"@Treshold", to_string(treshold));
 
-        //LOGGER::LogDebug(s1);
+        LOGGER::LogDebug(s1);
+        #endif
 
         while (qry.executeStep())
         {
@@ -1151,6 +1155,7 @@ std::unordered_set<netxpert::data::extarcid_t>
                  " WHERE ST_Intersects(a."+arcGeomColName+",b."+barrierGeomColName+") = 1"+
                  " AND a.ROWID IN "+
                  " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+arcsTableName +"' "+
+                 " AND f_geometry_column = '" + arcGeomColName + "'" + //fix for multi column geometry with spatial index
                  " AND search_frame = b."+barrierGeomColName+")";
 
         SQLite::Database& db = *connPtr;
