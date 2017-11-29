@@ -468,7 +468,7 @@ void
     optimum = totalCost;
 }
 
-SPTAlgorithm
+const SPTAlgorithm
  ShortestPathTree::GetAlgorithm() const
 {
     return this->algorithm;
@@ -479,7 +479,7 @@ void
     this->algorithm = sptAlgorithm;
 }
 
-GEOMETRY_HANDLING
+const GEOMETRY_HANDLING
  ShortestPathTree::GetGeometryHandling() const {
     return this->geometryHandling;
 }
@@ -488,7 +488,7 @@ void
     this->geometryHandling = geomHandling;
 }
 
-int
+const int
  ShortestPathTree::GetSPTHeapCard() const {
     return this->sptHeapCard;
 }

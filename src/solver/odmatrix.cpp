@@ -213,7 +213,7 @@ void
     }//omp parallel
 }
 
-SPTAlgorithm
+const SPTAlgorithm
  OriginDestinationMatrix::GetAlgorithm() const {
     return this->algorithm;
 }
@@ -223,7 +223,7 @@ void
     this->algorithm = sptAlgorithm;
 }
 
-GEOMETRY_HANDLING
+const GEOMETRY_HANDLING
  OriginDestinationMatrix::GetGeometryHandling() const {
     return this->geometryHandling;
 }
@@ -233,7 +233,7 @@ void
     this->geometryHandling = geomHandling;
 }
 
-int
+const int
  OriginDestinationMatrix::GetSPTHeapCard() const {
     return this->sptHeapCard;
 }

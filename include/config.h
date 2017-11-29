@@ -30,7 +30,11 @@ namespace netxpert {
 
     ///\brief Current version of netXpert
     static const std::string Version() {
-        return "0.9.8a";
+    #if (defined NETX_WEB)
+      return "0.9.8a - web";
+    #else
+      return "0.9.8a";
+    #endif // NETX_WEB
     };
 
     namespace cnfg {
