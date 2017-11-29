@@ -303,7 +303,7 @@ namespace netxpert {
         ///\return internal node ID
         const uint32_t
          AddNode(const netxpert::data::NewNode& newNode,
-                                   const int treshold,
+                                   const int threshold,
                                    SQLite::Statement& closestArcQry,
                                    const bool withCapacity,
                                    const netxpert::data::AddedNodeType startOrEnd);
@@ -313,7 +313,7 @@ namespace netxpert {
         const uint32_t
          AddStartNode(std::string extNodeID,
                                   double x, double y, netxpert::data::supply_t supply,
-                                  int treshold,
+                                  int threshold,
                                   const netxpert::data::ColumnMap& cmap,
                                   bool withCapacity);
 
@@ -322,21 +322,21 @@ namespace netxpert {
         const uint32_t
          AddEndNode(std::string extNodeID,
                                 double x, double y, netxpert::data::supply_t supply,
-                                int treshold,
+                                int threshold,
                                 const netxpert::data::ColumnMap& cmap,
                                 bool withCapacity);
 
         ///\brief Simple Method for adding multiple start nodes
         ///\return A vector of pairs with internal node ID and the original node ID
         std::vector< std::pair<uint32_t, std::string> >
-         LoadStartNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
+         LoadStartNodes(std::vector<netxpert::data::NewNode> newNodes, const int threshold,
                         const std::string arcsTableName, const std::string geomColumnName,
                         const netxpert::data::ColumnMap& cmap, const bool withCapacity);
 
         ///\brief Simple Method for adding multiple end nodes
         ///\return A vector of pairs with internal node ID and the original node ID
         std::vector< std::pair<uint32_t, std::string> >
-         LoadEndNodes(std::vector<netxpert::data::NewNode> newNodes, const int treshold,
+         LoadEndNodes(std::vector<netxpert::data::NewNode> newNodes, const int threshold,
                       const std::string arcsTableName, const std::string geomColumnName,
                       const netxpert::data::ColumnMap& cmap, const bool withCapacity);
         void
@@ -509,13 +509,13 @@ namespace netxpert {
                                       const geos::geom::LineString& segmentGeom);
 
       const netxpert::data::IntNetSplittedArc<netxpert::data::arc_t>
-       getSplittedClosestOrigArcToPoint(const geos::geom::Coordinate coord, const int treshold,
+       getSplittedClosestOrigArcToPoint(const geos::geom::Coordinate coord, const int threshold,
                                         const std::pair<netxpert::data::ExternalArc,netxpert::data::ArcData>& arcData,
                                         const geos::geom::Geometry& arc);
 
       const netxpert::data::IntNetSplittedArc<netxpert::data::arc_t>
        getSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
-                                        const int treshold);
+                                        const int threshold);
 
 //            std::shared_ptr<geos::geom::MultiLineString>
       std::pair<std::shared_ptr<geos::geom::Geometry>, std::shared_ptr<geos::geom::Geometry>>
@@ -656,7 +656,7 @@ namespace netxpert {
       std::map<netxpert::data::node_t, netxpert::data::AddedPoint> addedEndPoints;
       /// stores the external arc ids that were eliminated in the network
       std::unordered_set<netxpert::data::extarcid_t> eliminatedArcs;
-      /// stores the information wether to use arcs or not in the solver
+      /// stores the information whether to use arcs or not in the solver
       /// will be computed from the all other maps for arcs change
       std::unique_ptr<netxpert::data::graph_t::ArcMap<bool>> arcFilterMap;
 

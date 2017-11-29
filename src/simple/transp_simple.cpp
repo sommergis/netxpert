@@ -91,10 +91,10 @@ int netxpert::simple::Transportation::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");

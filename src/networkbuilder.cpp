@@ -27,25 +27,22 @@ using namespace netxpert::utils;
 
 NetworkBuilder::NetworkBuilder(Config& cnfg)
 {
-    //FIXED = 0 Kommastellen
-    //FLOATING_SINGLE = 6 Kommastellen
-    //FLOATING = 16 Kommastellen
-    // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
-    // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
-    // muss.
-    // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
-    // (nur die Kanten, die aufgebrochen werden)
-
+  //FIXED = 0 Kommastellen
+  //FLOATING_SINGLE = 6 Kommastellen
+  //FLOATING = 16 Kommastellen
+  // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
+  // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
+  // muss.
 	unique_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
 	GEO_FACTORY = unique_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
 
-    NETXPERT_CNFG = cnfg;
+  NETXPERT_CNFG = cnfg;
 
-    if (!DBHELPER::IsInitialized)
-        DBHELPER::Initialize(NETXPERT_CNFG);
+  if (!DBHELPER::IsInitialized)
+      DBHELPER::Initialize(NETXPERT_CNFG);
 }
 
 void NetworkBuilder::LoadData()

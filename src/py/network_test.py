@@ -55,10 +55,10 @@ def read_config(path_to_cnfg):
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
     cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
-    cnfg.Treshold = config_json["Treshold"]
+    cnfg.Threshold = config_json["Threshold"]
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
-    cnfg.Treshold = 2500
+    cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
     cnfg.LogLevel = 5
 
@@ -87,13 +87,13 @@ def test_add_nodes(cnfg, cmap):
     y = 5364720
     supply = 1
     withCap = False
-    newNodeID = net.AddStartNode('1', x, y, supply, cnfg.Treshold, cmap, withCap)
+    newNodeID = net.AddStartNode('1', x, y, supply, cnfg.Threshold, cmap, withCap)
     print(("Original Node ID of {0}: {1}".format(newNodeID,
                                             net.GetOriginalNodeID(newNodeID))))
     x = 703342
     y = 5364710
     supply = -1
-    newNodeID = net.AddStartNode('2', x, y, supply, cnfg.Treshold, cmap, withCap)
+    newNodeID = net.AddStartNode('2', x, y, supply, cnfg.Threshold, cmap, withCap)
     print(("Original Node ID of {0}: {1}".format(newNodeID,
                                             net.GetOriginalNodeID(newNodeID))))
 
@@ -132,8 +132,8 @@ def test_load_nodes_2(cnfg, cmap):
     net = netx.Network(arcsTable, cmap, cnfg)
     net.ConvertInputNetwork(cnfg.CleanNetwork)
 
-    startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
-    endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     del net
 

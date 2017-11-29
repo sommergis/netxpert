@@ -94,14 +94,14 @@ int netxpert::simple::ShortestPathTree::Solve()
 //        net.PrintGraph();
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 //        net.PrintGraph();
 
         vector<pair<uint32_t, string>> endNodes;
         if (!cnfg.SPTAllDests) {
             LOGGER::LogInfo("Loading End nodes..");
-            endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+            endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         }
 //        net.PrintGraph();

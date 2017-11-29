@@ -66,10 +66,10 @@ def read_config(path_to_cnfg):
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
     cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
-    cnfg.Treshold = config_json["Treshold"]
+    cnfg.Threshold = config_json["Threshold"]
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
-    cnfg.Treshold = 2500
+    cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
     cnfg.LogLevel = -1
 
@@ -99,12 +99,12 @@ def test_spt_add_nodes_1_1(cnfg, cmap):
     supply = 0
 
     withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     x = 703342
     y = 5364710
-    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     solver.SetOrigin(startID)
@@ -137,12 +137,12 @@ def test_spt_add_nodes_1_1_germany_s_t(cnfg, cmap):
     supply = 0
 
     withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     x = 746433
     y = 5298931
-    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     solver.SetOrigin(startID)
@@ -171,23 +171,23 @@ def test_spt_add_nodes_1_n(cnfg, cmap):
     y = 5364720
     supply = 0
     withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     destIDs = []
     x = 703342
     y = 5364710
-    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     x = 703332
     y = 5364720
-    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     x = 703434
     y = 5364650
-    destIDs.append(net.AddEndNode('end3', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end3', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     solver.SetOrigin(startID)
@@ -221,7 +221,7 @@ def test_spt_add_nodes_1_all(cnfg, cmap):
     y = 5364720
     supply = 0
     withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     solver.SetOrigin(startID)
@@ -244,8 +244,8 @@ def test_spt_load_nodes_1_n(cnfg, cmap):
     net = netx.Network(arcsTable, cmap, cnfg)
 
     #type is ODNodes
-    startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
-    endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     solver = netx.ShortestPathTree(cnfg)
 
@@ -279,12 +279,12 @@ def test_spt_add_nodes_1_1_germany_s_t_ch(cnfg, cmap):
     supply = 0
 
     withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Treshold,
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     x = 746433
     y = 5298931
-    endID = net.AddEndNode('end', x, y, supply, cnfg.Treshold,
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
                                     cmap, withCap)
 
     solver.SetOrigin(startID)

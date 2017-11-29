@@ -601,7 +601,7 @@ const uint32_t
 //4. isPointOnLine, position of closestPoint (Start / End ) alles in Memory (egal ob aufgebrochene Kante oder vorhandene Kante)
 //5. Splitte Kante
 const uint32_t
- InternalNet::AddNode(const netxpert::data::NewNode& newNode, const int treshold,
+ InternalNet::AddNode(const netxpert::data::NewNode& newNode, const int threshold,
                       SQLite::Statement& closestArcQry, const bool withCapacity,
                       const AddedNodeType startOrEnd) {
 
@@ -617,7 +617,7 @@ const uint32_t
 
     //1. Suche die nächste Line und den nächsten Punkt auf der Linie zum temporaeren Punkt
     ExtClosestArcAndPoint closestArcAndPoint = DBHELPER::GetClosestArcFromPoint(point,
-            treshold, closestArcQry, withCapacity);
+            threshold, closestArcQry, withCapacity);
 
     // kann noch auf leeren string gesetzt werden, wenn Kante bereits aufgebrochen wurde
     string extArcID          = closestArcAndPoint.extArcID;
@@ -714,7 +714,7 @@ const uint32_t
                 ArcData val  {extArcID, cost, capacity};
                 pair<ExternalArc,ArcData> arcData = make_pair(ftPair, val);
 
-                auto splittedLine = getSplittedClosestOrigArcToPoint(point, treshold, arcData, closestArc);
+                auto splittedLine = getSplittedClosestOrigArcToPoint(point, threshold, arcData, closestArc);
 
                 //insertNewNode will be called always in undirected mode
                 resultNode = insertNewNode(true, splittedLine, extArcID, extNodeID, point, startOrEnd);
@@ -738,7 +738,7 @@ const uint32_t
     else {
         LOGGER::LogDebug("searching in newly added arcs..");
         //search in newly added arcs
-        auto splittedLine = getSplittedClosestNewArcToPoint(point, treshold);
+        auto splittedLine = getSplittedClosestNewArcToPoint(point, threshold);
 
         //insertNewNode will be called always in undirected mode!
         resultNode = insertNewNode(true, splittedLine, "", extNodeID, point, startOrEnd);
@@ -1104,7 +1104,7 @@ void
 const uint32_t
  InternalNet::AddStartNode(std::string extNodeID,
                             double x, double y, netxpert::data::supply_t supply,
-                            int treshold, const ColumnMap& cmap, bool withCapacity) {
+                            int threshold, const ColumnMap& cmap, bool withCapacity) {
 
     using namespace std;
     using namespace geos::geom;
@@ -1124,7 +1124,7 @@ const uint32_t
 
       auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
                                               cmap, ArcIDColumnDataType::Number, withCapacity);
-      return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::StartArc);
+      return AddNode(n, threshold, *qry, withCapacity, AddedNodeType::StartArc);
     }
     catch (const std::runtime_error& ex) {
       LOGGER::LogError("RuntimeError in AddStartNode()!");
@@ -1142,7 +1142,7 @@ const uint32_t
 const uint32_t
  InternalNet::AddEndNode(std::string extNodeID,
                           double x, double y, netxpert::data::supply_t supply,
-                          int treshold, const ColumnMap& cmap, bool withCapacity) {
+                          int threshold, const ColumnMap& cmap, bool withCapacity) {
 
     using namespace std;
     using namespace geos::geom;
@@ -1161,7 +1161,7 @@ const uint32_t
 
       auto qry = DBHELPER::PrepareGetClosestArcQuery(arcsTableName, geomColumnName,
                                               cmap, ArcIDColumnDataType::Number, withCapacity);
-      return AddNode(n, treshold, *qry, withCapacity, AddedNodeType::EndArc);
+      return AddNode(n, threshold, *qry, withCapacity, AddedNodeType::EndArc);
     }
     catch (const std::runtime_error& ex) {
       LOGGER::LogError("RuntimeError in AddEndNode()!");
@@ -1177,7 +1177,7 @@ const uint32_t
 }
 
 std::vector< std::pair<uint32_t, std::string> >
- InternalNet::LoadStartNodes(std::vector<NewNode> newNodes, const int treshold,
+ InternalNet::LoadStartNodes(std::vector<NewNode> newNodes, const int threshold,
                              const std::string arcsTableName, const std::string geomColumnName,
                              const ColumnMap& cmap, const bool withCapacity) {
 
@@ -1201,7 +1201,7 @@ std::vector< std::pair<uint32_t, std::string> >
 
             try
             {
-                auto newStartNodeID = AddNode(startNode, treshold, *qry, withCapacity, AddedNodeType::StartArc);
+                auto newStartNodeID = AddNode(startNode, threshold, *qry, withCapacity, AddedNodeType::StartArc);
                 startNodes.push_back( make_pair(newStartNodeID, startNode.extNodeID ) );
                 LOGGER::LogDebug("New Start Node ID " + to_string(newStartNodeID)  + " - " + startNode.extNodeID);
             }
@@ -1216,7 +1216,7 @@ std::vector< std::pair<uint32_t, std::string> >
 }
 
 std::vector< std::pair<uint32_t, std::string> >
- InternalNet::LoadEndNodes(std::vector<NewNode> newNodes, const int treshold,
+ InternalNet::LoadEndNodes(std::vector<NewNode> newNodes, const int threshold,
                            const std::string arcsTableName, const std::string geomColumnName,
                            const ColumnMap& cmap, const bool withCapacity) {
 
@@ -1240,7 +1240,7 @@ std::vector< std::pair<uint32_t, std::string> >
 
             try
             {
-                auto newEndNodeID = AddNode(endNode, treshold, *qry, withCapacity, AddedNodeType::EndArc);
+                auto newEndNodeID = AddNode(endNode, threshold, *qry, withCapacity, AddedNodeType::EndArc);
                 endNodes.push_back( make_pair(newEndNodeID, endNode.extNodeID ) );
                 LOGGER::LogDebug("New End Node ID " + to_string(newEndNodeID) + " - " + endNode.extNodeID);
             }
@@ -1273,6 +1273,10 @@ void
         }
         else { //original arc
           (*this->arcFilterMap)[arc] = true;
+          //revArc
+          auto revArc = GetArcFromNodes(this->g->target(arc), this->g->source(arc));
+          if (revArc != lemon::INVALID)
+            (*this->arcFilterMap)[revArc] = true;
         }
     }
     //this->origArcsMap->clear();
@@ -2122,7 +2126,7 @@ inline const T
 
 
 const netxpert::data::IntNetSplittedArc<arc_t>
- InternalNet::getSplittedClosestOrigArcToPoint(const geos::geom::Coordinate coord, const int treshold,
+ InternalNet::getSplittedClosestOrigArcToPoint(const geos::geom::Coordinate coord, const int threshold,
                                               const std::pair<ExternalArc,ArcData>& arcData,
                                               const geos::geom::Geometry& arcGeom) {
 
@@ -2152,7 +2156,7 @@ const netxpert::data::IntNetSplittedArc<arc_t>
 
 const netxpert::data::IntNetSplittedArc<arc_t>
  InternalNet::getSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
-                                              const int treshold) {
+                                              const int threshold) {
 
     using namespace std;
     using namespace geos::geom;
@@ -2163,14 +2167,14 @@ const netxpert::data::IntNetSplittedArc<arc_t>
         //GeometryFactory gFac;
         shared_ptr<const Point> p ( DBHELPER::GEO_FACTORY->createPoint(coord) );
         shared_ptr<const Geometry> gPtr ( dynamic_pointer_cast<const Geometry>(p) );
-        shared_ptr<const Geometry> buf ( gPtr->buffer(treshold) );
+        shared_ptr<const Geometry> buf ( gPtr->buffer(threshold) );
         //must not defined as smart_pointer!
         const Envelope* bufEnv = buf->getEnvelopeInternal();
 
         map<double, pair<graph_t::Arc, NewArc> > distanceTbl;
 
         /*// search in spatial index for relevant geometry
-        // with buffer around point (treshold)*/
+        // with buffer around point (threshold)*/
 
         //1. Generate Distance Table
         for ( auto nArc : this->newArcsMap )

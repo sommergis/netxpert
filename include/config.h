@@ -158,7 +158,7 @@ namespace netxpert {
         std::string BarrierLineGeomColumnName;//!< Geometry column name of the barrier line table
         std::string BarrierPointTableName;//!< Name of the barrier point table
         std::string BarrierPointGeomColumnName;//!< Geometry column name of the barrier point table
-        int Treshold; //!< Treshold for distance search: closest arc of network to given point; (Snapping tolerance)
+        int Threshold; //!< Threshold for distance search: closest arc of network to given point; (Snapping tolerance)
         bool UseSpatialIndex;//!< \deprecated Use spatial index or not in input database. Default: true
         bool LoadDBIntoMemory;//!< \deprecated Load input database into memory.
         int NumberOfTests;//!< Number of tests to run
@@ -201,7 +201,7 @@ namespace netxpert {
                 CEREAL_NVP(BarrierLineGeomColumnName),
                 CEREAL_NVP(BarrierPointTableName),
                 CEREAL_NVP(BarrierPointGeomColumnName),
-                CEREAL_NVP(Treshold),
+                CEREAL_NVP(Threshold),
                 CEREAL_NVP(UseSpatialIndex),
                 CEREAL_NVP(CleanNetwork),
                 CEREAL_NVP(LoadDBIntoMemory),
