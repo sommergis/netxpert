@@ -104,9 +104,9 @@ namespace netxpert {
             ///\brief Gets the count of the nodes of the internal graph
             const uint32_t GetNodeCount();
             ///\brief Solves the SPT Problem
-            ///\param treshold: if that distance value has been exceeded, the Dijkstra search will stop
+            ///\param threshold: if that distance value has been exceeded, the Dijkstra search will stop
             ///\param bidirectional: use bidirectional dijkstra search or not
-            void SolveSPT(netxpert::data::cost_t treshold = -1, bool bidirectional = true);
+            void SolveSPT(netxpert::data::cost_t threshold = -1, bool bidirectional = true);
             ///\brief Sets the origin for the spt search
             void SetOrigin( netxpert::data::node_t _origin );
             ///\brief Sets the destionation node for the spt search

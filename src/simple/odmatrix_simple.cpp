@@ -89,10 +89,10 @@ int netxpert::simple::OriginDestinationMatrix::Solve()
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
@@ -196,10 +196,10 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        std::vector<std::pair<uint32_t, std::string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();

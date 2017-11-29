@@ -66,10 +66,10 @@ def read_config(path_to_cnfg):
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
     cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
-    cnfg.Treshold = config_json["Treshold"]
+    cnfg.Threshold = config_json["Threshold"]
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
-    cnfg.Treshold = 2500
+    cnfg.Threshold = 2500
     cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
@@ -96,26 +96,26 @@ def test_mcf(cnfg, cmap):
     y = 5352540
     supply = 10
     withCap = True
-    startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Treshold,
+    startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
     x = 701360
     y = 5352530
     supply = 10
-    startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Treshold,
+    startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
     destIDs = []
     x = 699022
     y = 5355445
     supply = -5
-    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Threshold,
                                   cmap, withCap))
 
     x = 702237
     y = 5358572
     supply = -3
-    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Threshold,
                                   cmap, withCap))
 
 
@@ -138,8 +138,8 @@ def test_tp_load_nodes(cnfg, cmap):
 
     net = netx.Network(arcsTable, cmap, cnfg)
 
-    startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
-    endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     solver = netx.MinCostFlow(cnfg)
 

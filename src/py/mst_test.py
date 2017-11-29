@@ -67,10 +67,10 @@ def read_config(path_to_cnfg):
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
     cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
-    cnfg.Treshold = config_json["Treshold"]
+    cnfg.Threshold = config_json["Threshold"]
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
-    cnfg.Treshold = 2500
+    cnfg.Threshold = 2500
     cnfg.LogLevel = 5
 
     cmap = netx.ColumnMap()

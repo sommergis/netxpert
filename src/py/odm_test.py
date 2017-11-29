@@ -67,10 +67,10 @@ def read_config(path_to_cnfg):
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
     cnfg.ResultDBPath = config_json["ResultDBPath"].encode('ascii', 'ignore')
-    cnfg.Treshold = config_json["Treshold"]
+    cnfg.Threshold = config_json["Threshold"]
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
-    cnfg.Treshold = 2500
+    cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
     cnfg.LogLevel = 5
 
@@ -101,23 +101,23 @@ def test_odm_add_nodes(cnfg, cmap):
     supply = 0
 
     withCap = False
-    startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Treshold,
+    startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     x = 703434
     y = 5364710
-    startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Treshold,
+    startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     destIDs = []
     x = 703342
     y = 5364710
-    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end1', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     x = 703332
     y = 5364720
-    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Treshold,
+    destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Threshold,
                                     cmap, withCap))
 
     starts = netx.Nodes()
@@ -150,8 +150,8 @@ def test_odm_load_nodes(cnfg, cmap):
     net = netx.Network(arcsTable, cmap, cnfg)
 
     #type is ODNodes
-    startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
-    endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
+    endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     solver = netx.OriginDestinationMatrix(cnfg)
 

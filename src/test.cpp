@@ -364,7 +364,7 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 //        geos::geom::Coordinate coord = {703444, 5364720};
 //        //LOGGER::LogDebug(to_string(coord.x) + " " + to_string(coord.y) );
 //
-//        /*ExtClosestArcAndPoint result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Treshold, *qry, withCapacity);
+//        /*ExtClosestArcAndPoint result = DBHELPER::GetClosestArcFromPoint(coord, cnfg.Threshold, *qry, withCapacity);
 //
 //        LOGGER::LogDebug("Closest Arc ID: " + result.extArcID);
 //        LOGGER::LogDebug("Closest Point X: " + to_string(result.closestPoint.x));
@@ -379,7 +379,7 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 //        auto p = make_pair(key, arcData);
 //
 //        const Geometry& arc = *result.arcGeom;
-//        SplittedArc sArc = net.GetSplittedClosestOldArcToPoint(coord, cnfg.Treshold, p, arc);
+//        SplittedArc sArc = net.GetSplittedClosestOldArcToPoint(coord, cnfg.Threshold, p, arc);
 //
 //        stringstream ss;
 //        ss << "Splitted Closest New Arc is: " << endl
@@ -395,31 +395,31 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 //        NewNode startNode {extNodeID, coord, supply};
 //        NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
 //
-//        uint32_t newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
+//        uint32_t newEndNodeID = net.AddEndNode(startNode, cnfg.Threshold, *qry, false);
 //        cout << "New End Node ID: " << newEndNodeID << endl;
 //
-//        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
+//        newEndNodeID = net.AddEndNode(endNode, cnfg.Threshold, *qry, false);
 //        cout << "New End Node ID: " << newEndNodeID << endl;
 //
-//        uint32_t newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
+//        uint32_t newStartNodeID = net.AddStartNode(startNode, cnfg.Threshold, *qry, false);
 //        cout << "New Start Node ID: " << newStartNodeID << endl;
 //
-//        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
+//        newStartNodeID = net.AddStartNode(endNode, cnfg.Threshold, *qry, false);
 //        cout << "New Start Node ID: " << newStartNodeID << endl;
 //
 //        cout << "Reset of Network.." << endl;
 //        net.Reset();
 //
-//        newEndNodeID = net.AddEndNode(startNode, cnfg.Treshold, *qry, false);
+//        newEndNodeID = net.AddEndNode(startNode, cnfg.Threshold, *qry, false);
 //        cout << "New End Node ID: " << newEndNodeID << endl;
 //
-//        newEndNodeID = net.AddEndNode(endNode, cnfg.Treshold, *qry, false);
+//        newEndNodeID = net.AddEndNode(endNode, cnfg.Threshold, *qry, false);
 //        cout << "New End Node ID: " << newEndNodeID << endl;
 //
-//        newStartNodeID = net.AddStartNode(startNode, cnfg.Treshold, *qry, false);
+//        newStartNodeID = net.AddStartNode(startNode, cnfg.Threshold, *qry, false);
 //        cout << "New Start Node ID: " << newStartNodeID << endl;
 //
-//        newStartNodeID = net.AddStartNode(endNode, cnfg.Treshold, *qry, false);
+//        newStartNodeID = net.AddStartNode(endNode, cnfg.Threshold, *qry, false);
 //        cout << "New Start Node ID: " << newStartNodeID << endl;
 //        //delete qry;
 //
@@ -716,10 +716,10 @@ void netxpert::test::TestMCF(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
@@ -967,12 +967,12 @@ void netxpert::test::TestSPTCH(Config& cnfg) {
 //        net.ExportContractedNetwork(cnfg.ArcsTableName + "-ch-export");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         vector<pair<uint32_t, string>> endNodes;
         if (!cnfg.SPTAllDests) {
             LOGGER::LogInfo("Loading End nodes..");
-            endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+            endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         }
 
@@ -1130,10 +1130,10 @@ void netxpert::test::TestODMatrix(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         DBHELPER::CommitCurrentTransaction();
@@ -1298,10 +1298,10 @@ void netxpert::test::TestTransportation(Config& cnfg)
         LOGGER::LogInfo("Done!");
 
         LOGGER::LogInfo("Loading Start nodes..");
-        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
         LOGGER::LogInfo("Loading End nodes..");
-        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Treshold, arcsTableName,
+        vector<pair<uint32_t, string>> endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, arcsTableName,
                                                                         cnfg.ArcsGeomColumnName, cmap, withCapacity);
 
         LOGGER::LogInfo("Done!");
