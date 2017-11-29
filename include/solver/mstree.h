@@ -31,20 +31,25 @@ namespace netxpert {
     class MinimumSpanningTree : public netxpert::ISolver
     {
         public:
-            /** Default constructor */
+            ///\brief Constructor
             MinimumSpanningTree(netxpert::cnfg::Config& cnfg);
-
-            /** Default destructor */
+            ///\brief Empty destructor
             ~MinimumSpanningTree() {}
-
+            ///\brief Computes the minimum spanning tree problem
+            ///\warning Not implemented! Should be removed.
             void Solve(std::string net);
+            ///\brief Computes the minimum spanning tree problem on the given network.
             void Solve(netxpert::data::InternalNet& net);
-
-            netxpert::cnfg::MSTAlgorithm GetAlgorithm() const;
+            ///\brief Gets the type of mst algorithm used in the solver
+            const netxpert::cnfg::MSTAlgorithm GetAlgorithm() const;
+            ///\brief Sets the type of mst algorithm used in the solver
             void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
-
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
+            ///\brief Gets all the arcs of the network that form one minimum spanning tree
             std::vector<netxpert::data::arc_t> GetMinimumSpanningTree() const;
+            ///\brief Saves the results of the mst solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
+            ///\todo Implement JSON RESULT_DB_TYPE
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap) const;
 

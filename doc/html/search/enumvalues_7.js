@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['networkbuilderresult',['NetworkBuilderResult',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba02c36250a545ba17f86674c1221d6676',1,'netxpert::data']]],
-  ['networksimplex_5flemon',['NetworkSimplex_LEMON',['../namespacenetxpert_1_1cnfg.html#aae922390a89b0c9af1bc2532428c5ef9a59fa53b7ea6109479c807547ca718146',1,'netxpert::cnfg']]],
-  ['nogeometry',['NoGeometry',['../namespacenetxpert_1_1cnfg.html#a1514d3ae51414bf0bcd8d1fe8e868b89af3fbb8ce1cd136e1fa5bc3645ec6c4d9',1,'netxpert::cnfg']]],
-  ['number',['Number',['../namespacenetxpert_1_1data.html#a7f0e5c814a8a55ea94f348b10826e206a6912049154123f772933964f43f45230',1,'netxpert::data']]]
+  ['logall',['LogAll',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696aac903eea1288f6c6d924709a6ff8c0db',1,'netxpert::cnfg']]],
+  ['logdebug',['LogDebug',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696a54720310e386ec5372d39d8db44e796c',1,'netxpert::cnfg']]],
+  ['logerror',['LogError',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696a1470b9b468fec87067ef98ca3bb529c6',1,'netxpert::cnfg']]],
+  ['logfatal',['LogFatal',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696a42271ecb20211ef7991c7b55ba044621',1,'netxpert::cnfg']]],
+  ['loginfo',['LogInfo',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696a8e9194abfb9d1ae1c84527e87f5d3a88',1,'netxpert::cnfg']]],
+  ['logquiet',['LogQuiet',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696acbe066a644e3fc003480708dd18ccc7d',1,'netxpert::cnfg']]],
+  ['logwarning',['LogWarning',['../namespacenetxpert_1_1cnfg.html#ac9cb46108300f2d88ac15f7460ca0696a3863429b4247f90b80b9500ee0279143',1,'netxpert::cnfg']]]
 ];

@@ -148,7 +148,11 @@ void DBHELPER::optimizeSQLiteCon()
     SQLite::Statement cmd1(db, sqlStr);
     cmd1.executeStep();
 
-    sqlStr = "PRAGMA locking_mode=NORMAL"; //default NORMAL
+    #if (defined NETX_WEB)
+    sqlStr = "PRAGMA locking_mode=EXCLUSIVE"; //default NORMAL - EXCLUSIVE should speed up!
+    #else
+    sqlStr = "PRAGMA locking_mode=NORMAL"; //default NORMAL - EXCLUSIVE should speed up!
+    #endif
     SQLite::Statement cmd2(db, sqlStr);
     cmd2.executeStep();
 
@@ -156,16 +160,26 @@ void DBHELPER::optimizeSQLiteCon()
     SQLite::Statement cmd3(db, sqlStr);
     cmd3.executeStep();
 
-    sqlStr = "PRAGMA synchronous=NORMAL"; //default: DELETE
+    #if (defined NETX_WEB)
+    sqlStr = "PRAGMA synchronous=OFF"; //default: DELETE - NORMAL: desktop - OFF for web server?
+    #else
+    sqlStr = "PRAGMA synchronous=NORMAL"
+    #endif
     SQLite::Statement cmd4(db, sqlStr);
     cmd4.executeStep();
+
+    #if (defined NETX_WEB)
+    sqlStr = "PRAGMA query_only=1"; //default: 0 for desktop - 1 for the web
+    SQLite::Statement cmd5(db, sqlStr);
+    cmd3.executeStep();
+    #endif
 }
 void DBHELPER::connect(bool inMemory )
 {
     try
     {
         string sqlStr = "";
-        if (NETXPERT_CNFG.LoadDBIntoMemory)
+        if (inMemory)
         {
             LOGGER::LogInfo("Loading database into memory..");
             // Create empty memory db
@@ -801,10 +815,13 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
 
         SQLite::Database& db = *connPtr;
         unique_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
+
+        #ifdef DEBUG
         LOGGER::LogDebug(db.getFilename());
         LOGGER::LogDebug("Table exists: " + to_string( db.tableExists(NETXPERT_CNFG.ArcsTableName) ) );
         //std::shared_ptr<SQLite::Statement> qryPtr (new SQLite::Statement(db, sqlStr));
         LOGGER::LogDebug("Successfully prepared query.");
+        #endif
         return qryPtr;
     }
     catch (std::exception& ex)
@@ -851,6 +868,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
         string s1 = UTILS::ReplaceAll(qryStr, "@XCoord", to_string(x));
         s1 = UTILS::ReplaceAll(s1,"@YCoord", to_string(y));
         s1 = UTILS::ReplaceAll(s1,"@Treshold", to_string(treshold));
+        s1 = UTILS::ReplaceAll(s1,"@Tolerance", to_string(tolerance));
 
         LOGGER::LogDebug(s1);
         #endif

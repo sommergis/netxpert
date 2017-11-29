@@ -211,7 +211,7 @@ void
     }
 }
 
-MCFAlgorithm
+const MCFAlgorithm
  MinCostFlow::GetAlgorithm() const {
     return algorithm;
 }

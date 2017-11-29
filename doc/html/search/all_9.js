@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kruskal_5flemon',['Kruskal_LEMON',['../namespacenetxpert_1_1cnfg.html#ab77ff30f2da32945dbb19bdf6199f799a548b8f5561ba6b0c0e77d67665e37c5a',1,'netxpert::cnfg']]]
+  ['json',['JSON',['../namespacenetxpert_1_1cnfg.html#a235b32f52360f5f331279b34e85064a5a37813f670de9bbc298e38a5b8d632a89',1,'netxpert::cnfg']]]
 ];

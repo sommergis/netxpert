@@ -118,7 +118,7 @@ namespace netxpert {
          const cost_t getCost(const Key& e) const {
           return this->data[e].cost;
          }
-          /// gets the cost for given arc
+          /// gets the capacity for given arc
          const capacity_t getCap(const Key& e) const {
           return this->data[e].capacity;
          }
