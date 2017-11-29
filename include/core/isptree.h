@@ -44,7 +44,7 @@ namespace netxpert {
             ///\brief Gets the count of the nodes of the internal graph
             virtual const uint32_t GetNodeCount()=0;
             ///\brief Solves the SPT problem
-            virtual void SolveSPT(netxpert::data::cost_t treshold = -1, bool bidirectional = false )=0;
+            virtual void SolveSPT(netxpert::data::cost_t threshold = -1, bool bidirectional = false )=0;
             ///\brief Sets the origin
             virtual void SetOrigin( netxpert::data::node_t NewOrg )=0;
             ///\brief Solves the destination

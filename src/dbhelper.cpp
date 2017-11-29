@@ -58,15 +58,14 @@ DBHELPER::~DBHELPER()
 
 void DBHELPER::Initialize(const Config& cnfg)
 {
-    //FIXED = 0 Kommastellen
-    //FLOATING_SINGLE = 6 Kommastellen
-    //FLOATING = 16 Kommastellen
-    // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
-    // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
-    // muss.
-    // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
-    // (nur die Kanten, die aufgebrochen werden)
-    // --> Zusammengefügt werden die Kanten (Route) ja in der DB bei Spatialite (FGDB?).
+  //FIXED = 0 Kommastellen
+  //FLOATING_SINGLE = 6 Kommastellen
+  //FLOATING = 16 Kommastellen
+  // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
+  // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
+  // muss.
+  // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
+  // (nur die Kanten, die aufgebrochen werden)
 
 	std::shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
@@ -74,8 +73,8 @@ void DBHELPER::Initialize(const Config& cnfg)
 	// and a SRID of -1 (undefined).
 	DBHELPER::GEO_FACTORY = std::shared_ptr<geos::geom::GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
 
-    DBHELPER::NETXPERT_CNFG = cnfg;
-    IsInitialized = true;
+  DBHELPER::NETXPERT_CNFG = cnfg;
+  IsInitialized = true;
 }
 
 /*void DBHELPER::connect( )
@@ -163,7 +162,7 @@ void DBHELPER::optimizeSQLiteCon()
     #if (defined NETX_WEB)
     sqlStr = "PRAGMA synchronous=OFF"; //default: DELETE - NORMAL: desktop - OFF for web server?
     #else
-    sqlStr = "PRAGMA synchronous=NORMAL"
+    sqlStr = "PRAGMA synchronous=NORMAL";
     #endif
     SQLite::Statement cmd4(db, sqlStr);
     cmd4.executeStep();
@@ -791,11 +790,11 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
                     ") as a_geometry, AsBinary(ST_ClosestPoint("
                     +geomColName+", ST_Translate(MakePoint(@XCoord, @YCoord),@Tolerance,@Tolerance,0))) as p_geometry"+
                     " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
-                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
+                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Threshold"+
                     " AND ROWID IN"+
                     " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
                        " AND f_geometry_column = '" + geomColName + "'" + //fix for multi column geometry with spatial index
-                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
+                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Threshold))"+
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
         else
@@ -805,11 +804,11 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
                     ") as a_geometry, AsBinary(ST_ClosestPoint("
                     +geomColName+", ST_Translate(MakePoint(@XCoord, @YCoord),@Tolerance,@Tolerance,0))) as p_geometry"+
                     " FROM "+tableName + " WHERE "+cmap.arcIDColName +" NOT IN ("+eliminatedArcIDs+")"+
-                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Treshold"+
+                    " AND ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) < @Threshold"+
                     " AND ROWID IN"+
                     " (SELECT ROWID FROM SpatialIndex WHERE f_table_name = '"+tableName+"'"+
                        " AND f_geometry_column = '" + geomColName + "'" + //fix for multi column geometry with spatial index
-                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Treshold))"+
+                       " AND search_frame = BuildCircleMbr(@XCoord, @YCoord, @Threshold))"+
                     " ORDER BY ST_Distance("+geomColName+", MakePoint(@XCoord, @YCoord)) LIMIT 1";
         }
 
@@ -833,7 +832,7 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
 }
 
 ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
-                                                       const int treshold, SQLite::Statement& qry,
+                                                       const int threshold, SQLite::Statement& qry,
                                                        const bool withCapacity)
 {
     string closestArcID;
@@ -857,7 +856,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
         // Bind values to the parameters of the SQL query
         qry.bind("@XCoord", x);
         qry.bind("@YCoord", y);
-        qry.bind("@Treshold", treshold);
+        qry.bind("@Threshold", threshold);
         qry.bind("@Tolerance", tolerance);
 
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
@@ -867,7 +866,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
         string qryStr = qry.getQuery();
         string s1 = UTILS::ReplaceAll(qryStr, "@XCoord", to_string(x));
         s1 = UTILS::ReplaceAll(s1,"@YCoord", to_string(y));
-        s1 = UTILS::ReplaceAll(s1,"@Treshold", to_string(treshold));
+        s1 = UTILS::ReplaceAll(s1,"@Threshold", to_string(threshold));
         s1 = UTILS::ReplaceAll(s1,"@Tolerance", to_string(tolerance));
 
         LOGGER::LogDebug(s1);

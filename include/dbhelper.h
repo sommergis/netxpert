@@ -64,9 +64,9 @@ namespace netxpert {
                                         const std::string& geomColumnName, const netxpert::data::ColumnMap& cmap,
                                         const netxpert::data::ArcIDColumnDataType arcIDColDataType,
                                         const bool withCapacity);
-            ///\brief Gets closest arc to given coordinate within the given treshold
+            ///\brief Gets closest arc to given coordinate within the given threshold
             static netxpert::data::ExtClosestArcAndPoint GetClosestArcFromPoint(const geos::geom::Coordinate& coord,
-                                                                          const int treshold, SQLite::Statement& qry,
+                                                                          const int threshold, SQLite::Statement& qry,
                                                                           const bool withCapacity);
             ///\brief Gets single arc geometry from database per ID
             static std::unique_ptr<geos::geom::MultiLineString> GetArcGeometryFromDB(const std::string& tableName,

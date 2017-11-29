@@ -29,7 +29,7 @@ SPT_LEM::SPT_LEM(bool Drctd)
 }
 
 /*void
- SPT_LEM::SolveSPT(netxpert::data::cost_t treshold){
+ SPT_LEM::SolveSPT(netxpert::data::cost_t threshold){
 
     using namespace netxpert::data;
 
@@ -46,10 +46,10 @@ SPT_LEM::SPT_LEM(bool Drctd)
 
     auto currentNode = this->dijk->nextNode();
 
-    if (treshold > 0) {
+    if (threshold > 0) {
         while (currentNode != INVALID &&
                 !this->dijk->emptyQueue() &&
-                this->dijk->dist(currentNode) <= treshold ) {
+                this->dijk->dist(currentNode) <= threshold ) {
             this->dijk->processNextNode();
             currentNode = this->dijk->nextNode();
         }
@@ -64,7 +64,7 @@ SPT_LEM::SPT_LEM(bool Drctd)
 }*/
 
 void
- SPT_LEM::SolveSPT(netxpert::data::cost_t treshold, bool bidirectional){
+ SPT_LEM::SolveSPT(netxpert::data::cost_t threshold, bool bidirectional){
 
     this->bidirectional = bidirectional;
 
@@ -86,10 +86,10 @@ void
 
         /*auto currentNode = this->bijk->nextNode();
 
-        if (treshold > 0) {
+        if (threshold > 0) {
             while (currentNode != INVALID &&
                     !this->bijk->emptyQueue() &&
-                    this->bijk->dist(currentNode) <= treshold
+                    this->bijk->dist(currentNode) <= threshold
                     && !this->bijk->processed(this->dest)
                     ) {
                 this->bijk->processNextNode();
@@ -119,12 +119,12 @@ void
         auto currentNode = this->dijk->nextNode();
 
         //only if search distance is defined
-        if (treshold > 0) {
+        if (threshold > 0) {
             //s-t search
             if (!this->allDests) {
                 while (currentNode != INVALID &&
                         !this->dijk->emptyQueue() &&
-                        this->dijk->dist(currentNode) <= treshold
+                        this->dijk->dist(currentNode) <= threshold
                         && !this->dijk->processed(dest) //search only until dest is reached; -30 secs on 2 Mio arcs
                          ) {
                     this->dijk->processNextNode();
@@ -135,7 +135,7 @@ void
             else {
                 while (currentNode != INVALID &&
                         !this->dijk->emptyQueue() &&
-                        this->dijk->dist(currentNode) <= treshold
+                        this->dijk->dist(currentNode) <= threshold
                          ) {
                     this->dijk->processNextNode();
                     currentNode = this->dijk->nextNode();
