@@ -28,16 +28,29 @@ namespace netxpert {
     class MinCostFlow : public netxpert::ISolver
     {
         public:
+            ///\brief Constructor
             MinCostFlow(netxpert::cnfg::Config& cnfg);
+            ///\brief Virtual Empty destructor
             virtual ~MinCostFlow() {}
+            ///\brief Computes the minimum cost flow problem
+            ///\warning Not implemented! Should be removed.
             void Solve(std::string net);
+            ///\brief Computes the minimum cost flow problem on the given network.
             void Solve(netxpert::data::InternalNet& net);
+            ///\todo Implement Getter/Setter for property
             bool IsDirected;
+            ///\brief Gets the arcs with flow and cost of the result of the minimum cost flow solver
             std::vector<netxpert::data::FlowCost> GetMinCostFlow() const;
-            netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
+            ///\brief Gets the type of mcf algorithm used in the solver
+            const netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
+            ///\brief Sets the type of mcf algorithm to use in the solver
             void SetAlgorithm(netxpert::cnfg::MCFAlgorithm mcfAlgorithm);
-            netxpert::data::MCFSolverStatus GetSolverStatus() const;
+            ///\brief Gets the status of the mcf solver
+            const netxpert::data::MCFSolverStatus GetSolverStatus() const;
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
+            ///\brief Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
+            ///\todo Implement JSON RESULT_DB_TYPE
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap) const;
 

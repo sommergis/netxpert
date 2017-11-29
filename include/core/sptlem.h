@@ -85,29 +85,48 @@ namespace netxpert {
         typedef lemon::Bijkstra<filtered_graph_t, graph_t::ArcMap<cost_t>> bijkstra_t;
 
         public:
+            ///\brief Constructor
+            ///\param Drctd: directed network (default) or unidirectional network (=doubled arcs)
             SPT_LEM(bool Drctd = true);
-            SPT_LEM (SPT_LEM const &) {} //copy constrcutor
-            ~SPT_LEM(); //deconstructor
-
+            ///\brief Empty Copy Constructor
+            SPT_LEM (SPT_LEM const &) {}
+            ///\brief Destructor
+            ~SPT_LEM();
             /* LEMON friendly interface */
+            ///\brief Loads the network into the core solver
             void LoadNet(const uint32_t nmax,  const uint32_t mmax,
                       //const lemon::FilterArcs<const netxpert::data::graph_t, const netxpert::data::graph_t::ArcMap<bool>>& sg,
                       //const netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>& cm);
                       netxpert::data::filtered_graph_t* sg,
                       netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>* cm);
+            ///\brief Gets the count of the arcs of the internal graph
             const uint32_t GetArcCount();
+            ///\brief Gets the count of the nodes of the internal graph
             const uint32_t GetNodeCount();
+            ///\brief Solves the SPT Problem
+            ///\param treshold: if that distance value has been exceeded, the Dijkstra search will stop
+            ///\param bidirectional: use bidirectional dijkstra search or not
             void SolveSPT(netxpert::data::cost_t treshold = -1, bool bidirectional = true);
+            ///\brief Sets the origin for the spt search
             void SetOrigin( netxpert::data::node_t _origin );
+            ///\brief Sets the destionation node for the spt search
             void SetDest( netxpert::data::node_t _dest );
+            ///\brief Tells if the given node has been reached from the origin node in the spt search
+            ///\return true if reached, false if not reachable from the origin
             bool Reached( netxpert::data::node_t _node );
+            ///\brief Gets all predecessor nodes from the destination node to the origin node
+            ///\return the reverse path with nodes from destination to origin if found in the spt solver
             const std::vector<netxpert::data::node_t> GetPredecessors(netxpert::data::node_t _dest);
+            ///\brief Gets the path represented as arcs from origin node to the destination node for the spt search
             const std::vector<netxpert::data::arc_t> GetPath(netxpert::data::node_t _dest);
+            ///\brief Gets the distance from the origin node to the given destination node
             const netxpert::data::cost_t GetDist(netxpert::data::node_t _dest);
             /* end of LEMON friendly interface */
 
             /* Contraction Hierarchies */
             #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            ///\brief Loads the contracted network into the core solver
+            /// for use in contracted networks
             void LoadNet_CH(CHInterface<DefaultPriority>* _chm,
 //                            graph_ch_t* _chg,
                             netxpert::data::graph_ch_t::ArcMap<netxpert::data::cost_t>* _chCostMap,
@@ -115,9 +134,18 @@ namespace netxpert {
                             netxpert::data::graph_t::NodeMap<netxpert::data::graph_ch_t::Node>* _nm,
                             netxpert::data::graph_ch_t::NodeMap<netxpert::data::graph_t::Node>* _cnm);
 //                            netxpert::data::graph_ch_t::ArcMap<netxpert::data::graph_t::Arc>* _am);
+            ///\brief Solves the SPT Problem with contraction hierarchies
+            ///\warning for use in contracted networks
             void SolveSPT_CH();
+            ///\brief Gets the path represented as arcs from origin node to the destination node for the spt search,
+            ///\warning for use in contracted networks
             const std::vector<netxpert::data::arc_t> GetPath_CH();
+            ///\brief Gets the distance from the origin node to the given destination node
+            ///\warning for use in contracted networks
             const netxpert::data::cost_t GetDist_CH();
+            ///\brief Tells if the given node has been reached from the origin node in the spt search
+            ///\return true if reached, false if not reachable from the origin
+            ///\warning for use in contracted networks
             bool Reached_CH();
             #endif
             /* end of Contraction Hierarchies */

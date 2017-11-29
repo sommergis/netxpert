@@ -8,5 +8,6 @@ var searchData=
   ['processisoresultarcsmem',['ProcessIsoResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a2141b9e52cb51866d44e8c44c54caf86',1,'netxpert::data::InternalNet']]],
   ['processmcfresultarcsmem',['ProcessMCFResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a78c63530c4b6c33d27e817566620fbc1',1,'netxpert::data::InternalNet']]],
   ['processresultarcs',['ProcessResultArcs',['../classnetxpert_1_1data_1_1InternalNet.html#a9211aa027282a526efce0fadbb5b58ec',1,'netxpert::data::InternalNet']]],
-  ['processsptresultarcsmem',['ProcessSPTResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a821bdce1de06400cedd9bb759df54ddd',1,'netxpert::data::InternalNet']]]
+  ['processsptresultarcsmem',['ProcessSPTResultArcsMem',['../classnetxpert_1_1data_1_1InternalNet.html#a821bdce1de06400cedd9bb759df54ddd',1,'netxpert::data::InternalNet']]],
+  ['processsptresultarcsmems',['ProcessSPTResultArcsMemS',['../classnetxpert_1_1data_1_1InternalNet.html#a7c995df29b2518104999e6edc6fb0ee4',1,'netxpert::data::InternalNet']]]
 ];

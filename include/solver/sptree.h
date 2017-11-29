@@ -32,44 +32,60 @@ namespace netxpert {
     class ShortestPathTree : public netxpert::ISolver
     {
         public:
-            /** Default constructor */
+            ///\brief Constructor
             ShortestPathTree(netxpert::cnfg::Config& cnfg);
-
-            /** Default destructor */
+            ///\brief Empty destructor
             ~ShortestPathTree() {}
-
+            ///\brief Computes the shortest path problem
+            ///\warning Not implemented! Should be removed.
             void Solve(std::string net);
+            ///\brief Computes the shortest path problem on the given network.
+            ///
+            /// At least an origin has to be set with \ref SetOrigin() prior calling this method.
+            /// Normally the destinations should be set with \ref SetDestinations().
             void Solve(netxpert::data::InternalNet& net);
-
-            netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
+            ///\brief Gets the type of spt algorithm used in the solver
+            const netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
+            ///\brief Sets the type of spt algorithm to use in the solver
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm sptAlgorithm);
-
-            int GetSPTHeapCard() const;
+            ///\brief Gets the heap ariety of the spt solver
+            const int GetSPTHeapCard() const;
+            ///\brief Sets the heap ariety for the spt solver
+            ///\deprecated Unclear if supported in the future
             void SetSPTHeapCard(int heapCard);
-
-            netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
+            ///\brief Gets the handling of the geometry output
+            const netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
+            ///\brief Sets the handling of the geometry output
             void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
-
+            ///\brief Gets the origin node
             const netxpert::data::node_t GetOrigin() const;
-            /** Simple Wrapper for SWIG **/
+            ///\brief Gets the internal ID of the origin node
+            /// Simple Wrapper for SWIG
             const uint32_t GetOriginID() const {
                 return this->net->GetNodeID(this->originNode);
             };
+            ///\brief Sets the origin node
             void SetOrigin(const netxpert::data::node_t orig);
-            /** Simple Wrapper for SWIG **/
+            ///\brief Sets the origin node per ID
+            /// Simple Wrapper for SWIG
             void SetOrigin(const uint32_t orig) {
                 this->SetOrigin(this->net->GetNodeFromID(orig));
             };
-
+            ///\brief Gets the destination nodes
             std::vector<netxpert::data::node_t> GetDestinations() const;
-            /** Simple Wrapper for SWIG **/
+            ///\brief Gets the internal IDs of all destination nodes
+            /// Simple Wrapper for SWIG
             std::vector<uint32_t> GetDestinationIDs() const;
+            ///\brief Sets the destination nodes
             void SetDestinations(const std::vector<netxpert::data::node_t>& dests);
-            /** Simple Wrapper for SWIG **/
+            ///\brief Sets the destination nodes per IDs
+            /// Simple Wrapper for SWIG
             void SetDestinations(const std::vector<uint32_t>& dests);
-
+            ///\brief Gets the internal node objects of all reached nodes
             std::vector<netxpert::data::node_t> GetReachedDests() const;
+            ///\brief Gets the internal node IDs of all reached nodes
             std::vector<uint32_t> GetReachedDestIDs() const;
+            ///\brief Gets all shortest paths of the spt solver
             std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;

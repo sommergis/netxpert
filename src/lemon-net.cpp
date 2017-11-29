@@ -605,7 +605,9 @@ const uint32_t
                       SQLite::Statement& closestArcQry, const bool withCapacity,
                       const AddedNodeType startOrEnd) {
 
+    #ifdef DEBUG
     std::cout << "entering AddNode().. "<< std::endl;
+    #endif
     using namespace std;
     using namespace geos::geom;
 
@@ -1258,16 +1260,30 @@ std::vector< std::pair<uint32_t, std::string> >
 void
  InternalNet::Reset() {
 
-    //Reset network by
+    LOGGER::LogInfo("Resetting network..");
+    //Reset network by resetting the filtered orig arcs (and their reversed ones)
 
     //reset new arcs, arcChanges, remove addedNodes
-    /*for (auto kv : (*this->newArcsMap) ) {
-        auto arc = kv.first;
-        (*this->arcChangesMap)[arc] = netxpert::data::ArcState::;
+//    for (auto kv : (*this->arcChangesMap) ) {
+    auto iter = GetArcsIter();
+    for (; iter != INVALID; ++iter) {
+        auto arc = iter;
+        if ( (*this->arcChangesMap)[arc] != netxpert::data::ArcState::original) {
+          (*this->arcChangesMap)[arc] = netxpert::data::ArcState::original;
+        }
+        else { //original arc
+          (*this->arcFilterMap)[arc] = true;
+        }
+    }
+    //this->origArcsMap->clear();
+    this->newArcsMap.clear();
+    this->newNodesMap.clear();
 
-    }*/
+    this->addedStartPoints.clear();
+    this->addedEndPoints.clear();
+    this->eliminatedArcs.clear();
 
-
+    LOGGER::LogInfo("Done!");
  }
 //--|Region Add Nodes
 
@@ -1571,7 +1587,9 @@ void
     using namespace netxpert::io;
     using namespace netxpert::utils;
 
+    #if DEBUG
     LOGGER::LogDebug("entering saveSPTResultsMemS()..");
+    #endif
 
     //put all geometries in routeParts into one (perhaps disconnected) Multilinestring
     //MultilineString could also contain only one Linestring
@@ -1614,9 +1632,9 @@ void
     int counter = 0;
     for (auto& c : *coords) {
       counter += 1;
-      coordStr << "("
-      << std::fixed << setprecision(3) << c.x << " "
-      << std::fixed << setprecision(3) << c.y << ")";
+      coordStr << "["
+      << std::fixed << setprecision(0) << c.x << ","
+      << std::fixed << setprecision(0) << c.y << "]";
 
       if (counter < coords->size())
         coordStr << ",";
@@ -1628,7 +1646,7 @@ void
     std::stringstream row;
     row << "{ \"orig\" : \""
         << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-        << ", \"route\" : \"" << "[" << coordStr.str() << "]" << "\"} " << endl;
+        << ", \"route\" : " << "[" << coordStr.str() << "]" << "} " << endl;
 
     //sw.stop();
     //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");

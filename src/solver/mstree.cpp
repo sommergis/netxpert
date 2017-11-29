@@ -32,7 +32,7 @@ MinimumSpanningTree::MinimumSpanningTree(Config& cnfg)
     this->NETXPERT_CNFG = cnfg;
 }
 
-MSTAlgorithm
+const MSTAlgorithm
  MinimumSpanningTree::GetAlgorithm() const {
     return algorithm;
 }
