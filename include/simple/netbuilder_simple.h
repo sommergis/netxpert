@@ -24,11 +24,14 @@
 #include "networkbuilder.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
-
+  /**
+  * \brief Simple Interface of the Network Builder
+  *
+  * \li Initialization with a JSON Config in Constructor
+  * \li call of Build() method (saves the results to the ResultDB given in the config JSON)
+  * \li optional: GetBuiltNetworkAsJSON() returns the network as JSON string
+  **/
 	class NetworkBuilder
 	{
 		public:

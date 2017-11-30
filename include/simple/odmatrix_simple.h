@@ -24,11 +24,15 @@
 #include "odmatrix.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
-
+    /**
+    * \brief Simple Interface of the OriginDestination Matrix Solver
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetODMatrixAsJSON() returns the origin destination matrix as JSON string
+    **/
     class OriginDestinationMatrix
     {
         public:

@@ -144,7 +144,8 @@ int netxpert::simple::Transportation::Solve()
         return 1; //Not OK
     }
 }
-double netxpert::simple::Transportation::GetOptimum()
+const double
+ netxpert::simple::Transportation::GetOptimum() const
 {
     double result = 0;
     if (this->solver)

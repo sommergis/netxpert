@@ -26,7 +26,8 @@ netxpert::simple::Isolines::Isolines(std::string jsonCnfg)
     this->NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>(jsonCnfg);
 }
 
-double netxpert::simple::Isolines::GetOptimum()
+const double
+ netxpert::simple::Isolines::GetOptimum() const
 {
     return this->optimum;
 }

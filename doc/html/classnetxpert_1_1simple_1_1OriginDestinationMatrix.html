@@ -97,6 +97,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">netxpert::simple::OriginDestinationMatrix Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple Interface of the OriginDestination Matrix Solver.  
+ <a href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="odmatrix__simple_8h_source.html">odmatrix_simple.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -119,7 +124,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetODMatrixAsJ
 std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtSPTreeArc.html">netxpert::data::ExtSPTreeArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetODMatrix</b> ()</td></tr>
 <tr class="separator:adca164a4061f90ba3d534ae0fda98afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple Interface of the OriginDestination Matrix Solver. </p>
+<ul>
+<li>Initialization with a JSON Config in Constructor </li>
+<li>call of Solve() method (saves the results to the ResultDB given in the config JSON) </li>
+<li>optional: GetOptimum() returns the overall optimum </li>
+<li>optional: GetODMatrixAsJSON() returns the origin destination matrix as JSON string </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/simple/<a class="el" href="odmatrix__simple_8h_source.html">odmatrix_simple.h</a></li>
 </ul>
 </div><!-- contents -->

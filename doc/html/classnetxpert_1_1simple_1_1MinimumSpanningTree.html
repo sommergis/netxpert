@@ -97,6 +97,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">netxpert::simple::MinimumSpanningTree Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1MinimumSpanningTree.html" title="Simple Interface of the MinimumSpanningTree Solver. ">MinimumSpanningTree</a> Solver.  
+ <a href="classnetxpert_1_1simple_1_1MinimumSpanningTree.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="mstree__simple_8h_source.html">mstree_simple.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abc9cd18efebd7c7fe5e449849f92530f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc9cd18efebd7c7fe5e449849f92530f"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> ()</td></tr>
 <tr class="separator:abc9cd18efebd7c7fe5e449849f92530f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27eb0c623199876d1fdace2c8f32e88b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27eb0c623199876d1fdace2c8f32e88b"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> ()</td></tr>
-<tr class="separator:a27eb0c623199876d1fdace2c8f32e88b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0eb7d84d520a521c379bbb6e9d10c8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b0eb7d84d520a521c379bbb6e9d10c8"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const </td></tr>
+<tr class="separator:a0b0eb7d84d520a521c379bbb6e9d10c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8200c69b26e1910f2c22ea3842027242"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8200c69b26e1910f2c22ea3842027242"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumSpanningTreeAsJSON</b> ()</td></tr>
 <tr class="separator:a8200c69b26e1910f2c22ea3842027242"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,7 +121,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumSpan
 std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExternalArc.html">netxpert::data::ExternalArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumSpanningTree</b> ()</td></tr>
 <tr class="separator:ad43de6f61435414777307a685b1ad46b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1MinimumSpanningTree.html" title="Simple Interface of the MinimumSpanningTree Solver. ">MinimumSpanningTree</a> Solver. </p>
+<ul>
+<li>Initialization with a JSON Config in Constructor </li>
+<li>call of Solve() method (saves the results to the ResultDB given in the config JSON) </li>
+<li>optional: GetOptimum() returns the overall optimum </li>
+<li>optional: GetMinimumSpanningTreeAsJSON() returns the minimum spanning tree as JSON string </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/simple/<a class="el" href="mstree__simple_8h_source.html">mstree_simple.h</a></li>
 </ul>
 </div><!-- contents -->
