@@ -24,11 +24,16 @@
 #include "sptree.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
 
+    /**
+    * \brief Simple Interface of the ShortestPathTree Solver
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetShortestPathsAsJSON() returns the shortest path(s) as JSON string
+    **/
     class ShortestPathTree
     {
         public:

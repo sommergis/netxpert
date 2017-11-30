@@ -127,7 +127,8 @@ int netxpert::simple::MinCostFlow::Solve()
     }
 }
 
-double netxpert::simple::MinCostFlow::GetOptimum()
+const double
+ netxpert::simple::MinCostFlow::GetOptimum() const
 {
     double result = 0;
     if (this->solver)

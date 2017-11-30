@@ -106,7 +106,8 @@ int netxpert::simple::MinimumSpanningTree::Solve()
         return 1; //Not OK
     }
 }
-double netxpert::simple::MinimumSpanningTree::GetOptimum()
+const double
+ netxpert::simple::MinimumSpanningTree::GetOptimum() const
 {
     double result = 0;
     if (this->solver)
@@ -114,7 +115,8 @@ double netxpert::simple::MinimumSpanningTree::GetOptimum()
     return result;
 }
 
-std::string netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTreeAsJSON()
+std::string
+ netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTreeAsJSON()
 {
     std::string result;
     /*if (this->solver)

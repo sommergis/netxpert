@@ -97,6 +97,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">netxpert::simple::Transportation Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html" title="Simple Interface of the Transportation Solver. ">Transportation</a> Solver.  
+ <a href="classnetxpert_1_1simple_1_1Transportation.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="transp__simple_8h_source.html">transp_simple.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6483918f2f94c48cf3157fdcf8656f0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6483918f2f94c48cf3157fdcf8656f0a"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> ()</td></tr>
 <tr class="separator:a6483918f2f94c48cf3157fdcf8656f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26f54056cff8ffdc19caa832354cde82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26f54056cff8ffdc19caa832354cde82"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> ()</td></tr>
-<tr class="separator:a26f54056cff8ffdc19caa832354cde82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3d4680fdaeafb025a3b1f731293300"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a3d4680fdaeafb025a3b1f731293300"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const </td></tr>
+<tr class="separator:a3a3d4680fdaeafb025a3b1f731293300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ab271a28fbff93c6a95ed2a0442f619"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ab271a28fbff93c6a95ed2a0442f619"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetDistributionAsJSON</b> ()</td></tr>
 <tr class="separator:a8ab271a28fbff93c6a95ed2a0442f619"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,7 +121,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetDistributio
 std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtDistributionArc.html">netxpert::data::ExtDistributionArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetDistribution</b> ()</td></tr>
 <tr class="separator:a03d1928b72bfab6ddc9514c23888a6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html" title="Simple Interface of the Transportation Solver. ">Transportation</a> Solver. </p>
+<ul>
+<li>Initialization with a JSON Config in Constructor </li>
+<li>call of Solve() method (saves the results to the ResultDB given in the config JSON) </li>
+<li>optional: GetOptimum() returns the overall optimum </li>
+<li>optional: GetDistributionAsJSON() returns the optimized distribution as JSON string </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/simple/<a class="el" href="transp__simple_8h_source.html">transp_simple.h</a></li>
 </ul>
 </div><!-- contents -->

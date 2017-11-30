@@ -24,18 +24,23 @@
 #include "transportation.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
 
+   /**
+    * \brief Simple Interface of the Transportation Solver
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetDistributionAsJSON() returns the optimized distribution as JSON string
+    **/
     class Transportation
     {
         public:
             Transportation(std::string jsonCnfg);
             virtual ~Transportation() {}
             int Solve();
-            double GetOptimum();
+            const double GetOptimum() const;
             std::string GetDistributionAsJSON();
             std::vector<netxpert::data::ExtDistributionArc> GetDistribution();
         private:
