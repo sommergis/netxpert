@@ -97,6 +97,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">netxpert::simple::MinCostFlow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1MinCostFlow.html" title="Simple Interface of the MinCostFlow Solver. ">MinCostFlow</a> Solver.  
+ <a href="classnetxpert_1_1simple_1_1MinCostFlow.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="mcfp__simple_8h_source.html">mcfp_simple.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -106,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9dc858a93393ef31b2c91b81a0d820f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9dc858a93393ef31b2c91b81a0d820f9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Solve</b> ()</td></tr>
 <tr class="separator:a9dc858a93393ef31b2c91b81a0d820f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc572dba96f07653eb3ca0d84256b401"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc572dba96f07653eb3ca0d84256b401"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> ()</td></tr>
-<tr class="separator:acc572dba96f07653eb3ca0d84256b401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5852c98145863d1e6992c34a32d9107"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5852c98145863d1e6992c34a32d9107"></a>
+const double&#160;</td><td class="memItemRight" valign="bottom"><b>GetOptimum</b> () const </td></tr>
+<tr class="separator:ac5852c98145863d1e6992c34a32d9107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02be05d9010997ea763351921baef1fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02be05d9010997ea763351921baef1fd"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumCostFlowAsJSON</b> ()</td></tr>
 <tr class="separator:a02be05d9010997ea763351921baef1fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,7 +121,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumCost
 std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1FlowCost.html">netxpert::data::FlowCost</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetMinimumCostFlow</b> ()</td></tr>
 <tr class="separator:a8281df731a9a267ad58104fed3f6fa82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1MinCostFlow.html" title="Simple Interface of the MinCostFlow Solver. ">MinCostFlow</a> Solver. </p>
+<ul>
+<li>Initialization with a JSON Config in Constructor </li>
+<li>call of Solve() method (saves the results to the ResultDB given in the config JSON) </li>
+<li>optional: GetOptimum() returns the overall optimum </li>
+<li>optional: GetMinimumCostFlowAsJSON() returns the minimum cost flow as JSON string </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/simple/<a class="el" href="mcfp__simple_8h_source.html">mcfp_simple.h</a></li>
 </ul>
 </div><!-- contents -->

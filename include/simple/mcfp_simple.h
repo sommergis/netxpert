@@ -24,18 +24,22 @@
 #include "mcflow.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
-
+    /**
+    * \brief Simple Interface of the MinCostFlow Solver
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetMinimumCostFlowAsJSON() returns the minimum cost flow as JSON string
+    **/
     class MinCostFlow
     {
         public:
             MinCostFlow(std::string jsonCnfg);
             virtual ~MinCostFlow() {}
             int Solve();
-            double GetOptimum();
+            const double GetOptimum() const;
             std::string GetMinimumCostFlowAsJSON();
             std::vector<netxpert::data::FlowCost> GetMinimumCostFlow();
 

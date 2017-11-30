@@ -24,11 +24,17 @@
 #include "sptree.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
   namespace simple {
-
+    /**
+    * \brief Simple Interface of the Isolines Solver
+    * \warning EXPERIMENTAL!
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON
+    * \li call SetCutOffs() to set the distance cut off values
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetShortestPathsAsJSON() returns the shortest paths as JSON string
+    **/
     class Isolines
     {
         public:
@@ -37,7 +43,7 @@ namespace netxpert {
             int Solve();
             void SetCutOffs(std::string cutOffsAsJSON);
             void SetCutOffs(std::unordered_map<netxpert::data::ExtNodeID, double> cutOffs);
-            double GetOptimum();
+            const double GetOptimum() const;
             std::string GetShortestPathsAsJSON();
             std::vector<netxpert::data::ExtSPTreeArc> GetShortestPaths();
 

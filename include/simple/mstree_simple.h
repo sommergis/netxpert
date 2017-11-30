@@ -24,18 +24,22 @@
 #include "mstree.h"
 
 namespace netxpert {
-  /**
-  * \brief Simple variants of all netXpert solvers
-  **/
  namespace simple {
-
+    /**
+    * \brief Simple Interface of the MinimumSpanningTree Solver
+    *
+    * \li Initialization with a JSON Config in Constructor
+    * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
+    * \li optional: GetOptimum() returns the overall optimum
+    * \li optional: GetMinimumSpanningTreeAsJSON() returns the minimum spanning tree as JSON string
+    **/
     class MinimumSpanningTree
     {
         public:
             MinimumSpanningTree(std::string jsonCnfg);
             virtual ~MinimumSpanningTree() {}
             int Solve();
-            double GetOptimum();
+            const double GetOptimum() const;
             std::string GetMinimumSpanningTreeAsJSON();
             std::vector<netxpert::data::ExternalArc> GetMinimumSpanningTree();
         private:
