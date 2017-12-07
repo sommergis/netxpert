@@ -104,11 +104,17 @@ namespace netxpert {
             template<typename T>
             static T DeserializeJSONtoObject(std::string _jsonString)
             {
+              try {
                 std::stringstream ss (_jsonString);
                 cereal::JSONInputArchive archive ( ss );
                 T outData;
                 archive( outData );
                 return outData;
+              }
+              catch (cereal::RapidJSONException& ex) {
+                std::cout << "Error reading config!" << std::endl;
+                std::terminate();
+              }
             }
             ///\brief Serializes an object of type T to JSON string
             template<typename T>

@@ -26,7 +26,7 @@
 namespace netxpert {
  namespace simple {
   /**
-  * \brief Simple Interface of the Network Builder
+  * \brief Simple Interface of the NetworkBuilder
   *
   * \li Initialization with a JSON Config in Constructor
   * \li call of Build() method (saves the results to the ResultDB given in the config JSON)

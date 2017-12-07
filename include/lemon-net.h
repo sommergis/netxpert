@@ -355,7 +355,7 @@ namespace netxpert {
                                      SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                     );
         /**\brief Main method for processing and saving result arcs (preloading geometry into memory).
-            Writes results to a stringstream (GeoJSON or Polyline).
+            Writes results to a stringstream (JSON).
             Solver: SPT, ODM */
         void
          ProcessSPTResultArcsMemS(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
@@ -541,7 +541,13 @@ namespace netxpert {
       //-->Region Save Results
 
       std::vector<geos::geom::Geometry*>
-          addRoutePartGeoms(const std::vector<netxpert::data::arc_t>& routeNodeArcRep);
+       addRoutePartGeoms(const std::vector<netxpert::data::arc_t>& routeNodeArcRep);
+
+      std::unique_ptr<geos::geom::LineString>
+       getStraightLine(const std::string& orig, const std::string& dest);
+
+      std::string
+       convertRouteToCoordList(std::unique_ptr<geos::geom::MultiLineString>& route);
 
       void
        saveSPTResultsMem(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,

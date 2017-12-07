@@ -28,7 +28,18 @@ namespace netxpert {
 
     /**
     * \brief Solver for the Shortest Path Tree Problem
-    */
+    *
+    * \li Initialization with a netxpert::cnfg::Config object in Constructor
+    * \li call of SetOrigin() method
+    * \li optional: call of SetDestinations() method defines 1-n destinations
+    *    (if no destination is set with this method, the whole shortest path tree is computed from the origin)
+    * \li call of \ref Solve( \ref netxpert::data::InternalNet ) method for the computation; the network must be constructed prior to this step
+    * \li optional: GetOptimum() for getting the overall optimum
+    * \li optional: GetShortestPaths() for getting the actual result of the SPT computation
+    * \li optional: SaveResults() or alternate GetResultsAsJSON()
+    *
+    * all other setters and getters can be used for overriding the configuration from the constructor
+    **/
     class ShortestPathTree : public netxpert::ISolver
     {
         public:

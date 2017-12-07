@@ -224,7 +224,17 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver for computing an Origin Destination Matrix. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Check for duplicate code -&gt; SPT Solver - Inheritance? </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>Check for duplicate code -&gt; SPT Solver - Inheritance?</dd></dl>
+<ul>
+<li>Initialization with a <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html" title="Storage for the configuration of NetXpert. ">netxpert::cnfg::Config</a> object in Constructor </li>
+<li>call of <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#ae799703ff303d31e2c26b4bced78ac43" title="Sets the origin nodes. ">SetOrigins()</a> method defines 1-n origins (must be at least 1 origin) </li>
+<li>call of <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a85be24fc41f55f43c371e531ea9c3814" title="Sets the destination nodes. ">SetDestinations()</a> method defines 1-n destinations (must be at least 1 origin) </li>
+<li>call of <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a6021a419ef2db34a079e508b79b94656">Solve</a>( <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> ) method for the computation; the network must be constructed prior to this step </li>
+<li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a0d02226f1246cc54aca03dbdfddabb62" title="Gets the overall optimum of the solver. ">GetOptimum()</a> for getting the overall optimum </li>
+<li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a7fa514c840cda5d6e8c076b15dc807e6" title="Gets the origin destination matrix of the odm solver. ">GetODMatrix()</a> for getting the actual result of the ODM computation </li>
+<li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a2dccec6e7af7d844d38e9ab3f8f151b9" title="Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). ">SaveResults()</a></li>
+</ul>
+<p>all other setters and getters can be used for overriding the configuration from the constructor </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a2dccec6e7af7d844d38e9ab3f8f151b9"></a>
 <div class="memitem">

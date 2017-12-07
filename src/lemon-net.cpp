@@ -1293,6 +1293,22 @@ void
 
 //-->Region Save Results
 
+std::unique_ptr<geos::geom::LineString>
+ InternalNet::getStraightLine(const std::string& orig, const std::string& dest) {
+
+    //get geometry as straight lines from orig to dest
+    auto origGeom = GetStartOrEndNodeGeometry(orig);
+    auto destGeom = GetStartOrEndNodeGeometry(dest);
+    auto coordFactory = DBHELPER::GEO_FACTORY->getCoordinateSequenceFactory();
+    //cast to size_t with zero coordinates, otherwise there are 0.0 0.0 coords in sequence factory!
+    auto coordSeq = coordFactory->create(static_cast<size_t>(0), static_cast<size_t>(2)) ; //0 coordinates, 2 dimensions
+    coordSeq->add(origGeom);
+    coordSeq->add(destGeom);
+    unique_ptr<geos::geom::LineString> line ( DBHELPER::GEO_FACTORY->createLineString(coordSeq));
+
+    return line;
+ }
+
 void
  InternalNet::ProcessSPTResultArcsMem(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
                                       const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
@@ -1300,20 +1316,70 @@ void
                                       SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                      ){
     using namespace netxpert::cnfg;
+    using namespace geos::geom;
     std::vector<geos::geom::Geometry*> routeParts;
+    //for straight lines or no geometry
+    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling) {
         case GEOMETRY_HANDLING::RealGeometry: {
-            routeParts = addRoutePartGeoms(routeNodeArcRep);
-
+          routeParts = addRoutePartGeoms(routeNodeArcRep);
 //            std::cout << "Route from "<< orig << " to " << dest << std::endl;
 //            for (auto a : routeNodeArcRep)
 ////                std::cout << this->g->id(this->g->source(a)) << "->" << this->g->id(this->g->target(a)) << " , ";
 //                std::cout << GetOrigNodeID(this->g->source(a)) << "->" << GetOrigNodeID(this->g->target(a)) << " , ";
 //
 //            std::cout << std::endl;
+          saveSPTResultsMem(orig, dest, cost, arcIDs, routeParts, resultTableName, writer, qry);
+        }
+        break;
 
-            saveSPTResultsMem(orig, dest, cost, arcIDs, routeParts, resultTableName, writer, qry);
+        case GEOMETRY_HANDLING::StraightLines: {
+
+          unique_ptr<LineString> line = getStraightLine(orig, dest);
+          Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
+          mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+
+          switch (NETXPERT_CNFG.ResultDBType) {
+            case RESULT_DB_TYPE::SpatiaLiteDB: {
+              #pragma omp critical
+              {
+              auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+              sldb.SaveResultArc(orig, dest, cost, *mLine, resultTableName, qry);
+              }
+            }
+            break;
+            case RESULT_DB_TYPE::ESRI_FileGDB: {
+              #pragma omp critical
+              {
+              auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+              fgdb.SaveResultArc(orig, dest, cost, *mLine, resultTableName);
+              }
+            }
+            break;
+          }
+        }
+        break;
+
+        case GEOMETRY_HANDLING::NoGeometry: {
+          switch (NETXPERT_CNFG.ResultDBType) {
+            case RESULT_DB_TYPE::SpatiaLiteDB: {
+              #pragma omp critical
+              {
+              auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+              sldb.SaveResultArc(orig, dest, cost, *mLine, resultTableName, qry);
+              }
+            }
+            break;
+            case RESULT_DB_TYPE::ESRI_FileGDB: {
+              #pragma omp critical
+              {
+              auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+              fgdb.SaveResultArc(orig, dest, cost, *mLine, resultTableName);
+              }
+            }
+            break;
+          }
         }
         break;
     }
@@ -1325,13 +1391,59 @@ void
                                        const std::string& arcIDs, const std::vector<netxpert::data::arc_t>& routeNodeArcRep,
                                        std::ostringstream& output) {
     using namespace netxpert::cnfg;
+    using namespace geos::geom;
+
     std::vector<geos::geom::Geometry*> routeParts;
+    //for straight lines or no geometry
+    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling) {
         case GEOMETRY_HANDLING::RealGeometry: {
-            routeParts = addRoutePartGeoms(routeNodeArcRep);
+          routeParts = addRoutePartGeoms(routeNodeArcRep);
 
-            saveSPTResultsMemS(orig, dest, cost, arcIDs, routeParts, output);
+          saveSPTResultsMemS(orig, dest, cost, arcIDs, routeParts, output);
+        }
+        break;
+
+        case GEOMETRY_HANDLING::StraightLines: {
+
+          unique_ptr<LineString> line = getStraightLine(orig, dest);
+          Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
+          mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+
+          std::string coordStr = convertRouteToCoordList(mLine);
+          /**
+          {"orig" : orig, "dest" : dest, "cost" : cost, "route" : coordinateList }
+          **/
+          std::stringstream row;
+          row << "{ \"orig\" : \""
+              << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
+              << ", \"route\" : " << coordStr << "} " << endl;
+
+          #pragma omp critical
+          {
+          //save merged route geometry to stream
+          output << row.str() << endl;
+          }
+        }
+        break;
+
+        case GEOMETRY_HANDLING::NoGeometry: {
+
+          std::string coordStr = convertRouteToCoordList(mLine);
+          /**
+          {"orig" : orig, "dest" : dest, "cost" : cost, "route" : coordinateList }
+          **/
+          std::stringstream row;
+          row << "{ \"orig\" : \""
+              << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
+              << ", \"route\" : " << coordStr << "} " << endl;
+
+          #pragma omp critical
+          {
+          //save merged route geometry to stream
+          output << row.str() << endl;
+          }
         }
         break;
     }
@@ -1343,13 +1455,12 @@ void
 void
  InternalNet::ProcessResultArcs(/*const std::string& orig, const std::string& dest,
                                 const double cost, const double capacity, const double flow,*/
-                                const std::string& arcIDs, const std::string& resultTableName)
-{
+                                const std::string& arcIDs, const std::string& resultTableName) {
     saveResults(arcIDs, resultTableName);
 }
 
 //With Geometry Handling and prepared insert query
-//TODO: Geometry_Handling
+//TODO: Geometry_Handling - not really!
 //Isolines
 void
  InternalNet::ProcessIsoResultArcsMem(const std::string& orig, const netxpert::data::cost_t cost,
@@ -1380,19 +1491,70 @@ void
                                       const std::string& arcIDs, std::vector<netxpert::data::arc_t>& routeNodeArcRep,
                                       const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                       SQLite::Statement& qry //can be null in case of ESRI FileGDB
-
                                   )
 {
 
     using namespace netxpert::cnfg;
+    using namespace geos::geom;
+
     std::vector<geos::geom::Geometry*> routeParts;
+    //for straight lines or no geometry
+    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling)
     {
-        case GEOMETRY_HANDLING::RealGeometry:
-        {
-            routeParts = addRoutePartGeoms(routeNodeArcRep);
-            saveMCFResultsMem(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer, qry);
+        case GEOMETRY_HANDLING::RealGeometry: {
+          routeParts = addRoutePartGeoms(routeNodeArcRep);
+          saveMCFResultsMem(orig, dest, cost, capacity, flow, arcIDs, routeParts, resultTableName, writer, qry);
+        }
+        break;
+
+        case GEOMETRY_HANDLING::StraightLines: {
+
+          unique_ptr<LineString> line = getStraightLine(orig, dest);
+          Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
+          mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+
+          switch (NETXPERT_CNFG.ResultDBType) {
+            case RESULT_DB_TYPE::SpatiaLiteDB: {
+              #pragma omp critical
+              {
+              auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+              sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mLine, resultTableName, qry);
+              }
+            }
+            break;
+            case RESULT_DB_TYPE::ESRI_FileGDB: {
+              #pragma omp critical
+              {
+              auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+              fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *mLine, resultTableName);
+              }
+            }
+            break;
+          }
+        }
+        break;
+
+        case GEOMETRY_HANDLING::NoGeometry: {
+          switch (NETXPERT_CNFG.ResultDBType) {
+            case RESULT_DB_TYPE::SpatiaLiteDB: {
+              #pragma omp critical
+              {
+              auto& sldb = dynamic_cast<SpatiaLiteWriter&>(writer);
+              sldb.SaveResultArc(orig, dest, cost, capacity, flow, *mLine, resultTableName, qry);
+              }
+            }
+            break;
+            case RESULT_DB_TYPE::ESRI_FileGDB: {
+              #pragma omp critical
+              {
+              auto& fgdb = dynamic_cast<FGDBWriter&>(writer);
+              fgdb.SaveResultArc(orig, dest, cost, capacity, flow, *mLine, resultTableName);
+              }
+            }
+            break;
+          }
         }
         break;
     }
@@ -1580,6 +1742,27 @@ void
     //cout << "nexpert::Network - saved" <<endl;
 }
 
+std::string
+ InternalNet::convertRouteToCoordList(std::unique_ptr<geos::geom::MultiLineString>& route) {
+
+    //data to JSON
+    const std::vector<geos::geom::Coordinate>* coords = route->getCoordinates()->toVector();
+
+    std::stringstream coordStr;
+    int counter = 0;
+    for (auto& c : *coords) {
+      counter += 1;
+      coordStr << "["
+      << std::fixed << setprecision(0) << c.x << ","
+      << std::fixed << setprecision(0) << c.y << "]";
+
+      if (counter < coords->size())
+        coordStr << ",";
+    }
+
+    return "[" + coordStr.str() += "]";
+}
+
 void
  InternalNet::saveSPTResultsMemS(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,
                                 const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
@@ -1629,20 +1812,7 @@ void
 
     std::unique_ptr<MultiLineString> route (DBHELPER::GEO_FACTORY->createMultiLineString( mls2 ) );
 
-    //data to JSON
-    const std::vector<Coordinate>* coords = route->getCoordinates()->toVector();
-
-    std::stringstream coordStr;
-    int counter = 0;
-    for (auto& c : *coords) {
-      counter += 1;
-      coordStr << "["
-      << std::fixed << setprecision(0) << c.x << ","
-      << std::fixed << setprecision(0) << c.y << "]";
-
-      if (counter < coords->size())
-        coordStr << ",";
-    }
+    std::string coordStr = convertRouteToCoordList(route);
 
     /**
     {"orig" : orig, "dest" : dest, "cost" : cost, "route" : coordinateList }
@@ -1650,7 +1820,7 @@ void
     std::stringstream row;
     row << "{ \"orig\" : \""
         << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-        << ", \"route\" : " << "[" << coordStr.str() << "]" << "} " << endl;
+        << ", \"route\" : " << coordStr << "} " << endl;
 
     //sw.stop();
     //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");

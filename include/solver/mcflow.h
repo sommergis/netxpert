@@ -24,6 +24,15 @@
 namespace netxpert {
     /**
     * \brief Solver for the Minimum Cost Flow Problem
+    *
+    * \li Initialization with a netxpert::data::InternalNet object in Constructor
+    * \li call of \ref Solve( \ref netxpert::data::InternalNet ) method for the computation; the network must be constructed prior to this step
+    * \li optional: GetSolverStatus() for getting the status of the solver \sa netxpert::data::MCFSolverStatus
+    * \li optional: GetOptimum() for getting the overall optimum
+    * \li optional: GetMinCostFlow() for getting the actual result of the MCF computation
+    * \li optional: SaveResults()
+    *
+    * all other setters and getters can be used for overriding the configuration from the constructor
     */
     class MinCostFlow : public netxpert::ISolver
     {
