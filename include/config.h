@@ -25,6 +25,7 @@
 #include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
 #include <omp.h>
+#include "data.h"
 
 namespace netxpert {
 
@@ -229,6 +230,14 @@ namespace netxpert {
             Config GetConfigFromJSON(std::string jsonString);
             ///\brief Gets the configuration from the given JSON file
             void GetConfigFromJSONFile(std::string fileName, netxpert::cnfg::Config& cnfg);
+            ///\brief Gets the column map from config
+            netxpert::data::ColumnMap GetColumnMap(netxpert::cnfg::Config& cnfg)
+            {
+              netxpert::data::ColumnMap cmap { cnfg.ArcIDColumnName, cnfg.FromNodeColumnName, cnfg.ToNodeColumnName,
+                        cnfg.CostColumnName, cnfg.CapColumnName, cnfg.OnewayColumnName,
+                        cnfg.NodeIDColumnName, cnfg.NodeSupplyColumnName };
+              return cmap;
+            }
     };
 } //namespace cnfg
 } //namespace netxpert

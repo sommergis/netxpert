@@ -23,6 +23,7 @@ var searchData=
   ['getcap',['getCap',['../classnetxpert_1_1data_1_1ArcDataMap.html#ad61cc93ecab71a5628b5f4669a658d9c',1,'netxpert::data::ArcDataMap']]],
   ['getcapmap',['GetCapMap',['../classnetxpert_1_1data_1_1InternalNet.html#a4d85c85ae6f1d97b51ca55dfbcb63338',1,'netxpert::data::InternalNet']]],
   ['getclosestarcfrompoint',['GetClosestArcFromPoint',['../classnetxpert_1_1io_1_1DBHELPER.html#a945a129567d3ae3318d824ded84bba76',1,'netxpert::io::DBHELPER']]],
+  ['getcolumnmap',['GetColumnMap',['../classnetxpert_1_1cnfg_1_1ConfigReader.html#a7b50086c6b96005baa4b1384113cbdab',1,'netxpert::cnfg::ConfigReader']]],
   ['getconfigfromjson',['GetConfigFromJSON',['../classnetxpert_1_1cnfg_1_1ConfigReader.html#adb5756de4a36b951ef31e40f6ead49bc',1,'netxpert::cnfg::ConfigReader']]],
   ['getconfigfromjsonfile',['GetConfigFromJSONFile',['../classnetxpert_1_1cnfg_1_1ConfigReader.html#a3752b114bf9de7624eab789c37acdc0f',1,'netxpert::cnfg::ConfigReader']]],
   ['getcost',['getCost',['../classnetxpert_1_1data_1_1ArcDataMap.html#ab38aa26b69f85d1c03afd8f8ec996328',1,'netxpert::data::ArcDataMap']]],

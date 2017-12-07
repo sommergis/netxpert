@@ -213,6 +213,16 @@ std::shared_ptr&lt; <a class="el" href="classnetxpert_1_1core_1_1IMinCostFlow.ht
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver for the Minimum Cost Flow Problem. </p>
+<ul>
+<li>Initialization with a <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html" title="The internal Network representation. ">netxpert::data::InternalNet</a> object in Constructor </li>
+<li>call of <a class="el" href="classnetxpert_1_1MinCostFlow.html#a818d05c0b2b1e517e65b7670c3e3ad75">Solve</a>( <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> ) method for the computation; the network must be constructed prior to this step </li>
+<li>optional: <a class="el" href="classnetxpert_1_1MinCostFlow.html#a15d3b69a3a3e33f7662ac8268e40bc63" title="Gets the status of the mcf solver. ">GetSolverStatus()</a> for getting the status of the solver <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacenetxpert_1_1data.html#a0ea30f651c6cc7e7a6edd5a5cbe6346c" title="Enum that reflects the status of the Minimum Cost Flow solver. ">netxpert::data::MCFSolverStatus</a> </dd></dl>
+</li>
+<li>optional: <a class="el" href="classnetxpert_1_1MinCostFlow.html#ab4201f39d97364c9b0766b2c4f6415b0" title="Gets the overall optimum of the solver. ">GetOptimum()</a> for getting the overall optimum </li>
+<li>optional: <a class="el" href="classnetxpert_1_1MinCostFlow.html#a245a11fd055d104bade19bc44ca415d5" title="Gets the arcs with flow and cost of the result of the minimum cost flow solver. ">GetMinCostFlow()</a> for getting the actual result of the MCF computation </li>
+<li>optional: <a class="el" href="classnetxpert_1_1MinCostFlow.html#a8f0f6280d112e40d2215dcba35022ef5" title="Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). ">SaveResults()</a></li>
+</ul>
+<p>all other setters and getters can be used for overriding the configuration from the constructor </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a8f0f6280d112e40d2215dcba35022ef5"></a>
 <div class="memitem">

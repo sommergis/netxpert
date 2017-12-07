@@ -31,6 +31,7 @@ namespace netxpert {
     *
     * Concept: solve the 1 - all SPT problem and cut off the routes at the defined cut off values;
     *          do this for all origins.
+    * \sa netxpert::ShortestPathTree
     *
     */
     class Isolines : public netxpert::ISolver

@@ -33,7 +33,7 @@ namespace netxpert {
     * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
     * \li optional: GetOptimum() returns the overall optimum
     * \li optional: GetShortestPathsAsJSON() returns the shortest path(s) as JSON string
-    **/
+    */
     class ShortestPathTree
     {
         public:

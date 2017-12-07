@@ -222,6 +222,16 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver for the Shortest Path Tree Problem. </p>
+<ul>
+<li>Initialization with a <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html" title="Storage for the configuration of NetXpert. ">netxpert::cnfg::Config</a> object in Constructor </li>
+<li>call of <a class="el" href="classnetxpert_1_1ShortestPathTree.html#ab15a0c08e48a18ae0f9005ecc6b06f2e" title="Sets the origin node. ">SetOrigin()</a> method </li>
+<li>optional: call of <a class="el" href="classnetxpert_1_1ShortestPathTree.html#ade834f898cdb04271bf5a03761da5c29" title="Sets the destination nodes. ">SetDestinations()</a> method defines 1-n destinations (if no destination is set with this method, the whole shortest path tree is computed from the origin) </li>
+<li>call of <a class="el" href="classnetxpert_1_1ShortestPathTree.html#a9d051b476c6e16c8382f00c6fd41443c">Solve</a>( <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> ) method for the computation; the network must be constructed prior to this step </li>
+<li>optional: <a class="el" href="classnetxpert_1_1ShortestPathTree.html#a3907e625165ffa6492f8815099edc379" title="Gets the overall optimum of the solver. ">GetOptimum()</a> for getting the overall optimum </li>
+<li>optional: <a class="el" href="classnetxpert_1_1ShortestPathTree.html#a12d052cbd1d363f93671aae69ac506a6" title="Gets all shortest paths of the spt solver. ">GetShortestPaths()</a> for getting the actual result of the SPT computation </li>
+<li>optional: <a class="el" href="classnetxpert_1_1ShortestPathTree.html#af1acc9627aed3a63b5a989095651b108" title="Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB or JSON). ">SaveResults()</a> or alternate <a class="el" href="classnetxpert_1_1ShortestPathTree.html#a9c0aa45fe7382730068a4f9e9d8426b4" title="Gets the SPT results as JSON String. ">GetResultsAsJSON()</a></li>
+</ul>
+<p>all other setters and getters can be used for overriding the configuration from the constructor </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a7d0f7d46f546d67c4d14f561935f4d45"></a>
 <div class="memitem">
