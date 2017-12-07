@@ -85,7 +85,7 @@ def read_config(path_to_cnfg):
 
     return cnfg, cmap
 
-def test_spt_add_nodes_1_1(cnfg, cmap):
+def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
 
     atblname = cnfg.ArcsTableName
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
@@ -117,6 +117,9 @@ def test_spt_add_nodes_1_1(cnfg, cmap):
     optimum = solver.GetOptimum()
 
     print (solver.GetResultsAsJSON())
+
+    if save:
+        solver.SaveResults(cnfg.ArcsTableName + "_20171207_spt", cmap)
     del net, solver
 
     return optimum
@@ -327,7 +330,10 @@ if __name__ == "__main__":
         cnfg.SpatiaLiteCoreName = 'spatialite430'
 
 
+    cnfg.GeometryHandling = 0
+
     print cnfg.SpatiaLiteHome
+    #print cnfg.GeometryHandling
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -345,12 +351,21 @@ if __name__ == "__main__":
     active_tests =  ["1-1 | add nodes",
                      "1-n | add nodes",
                      "1-n | load nodes",
-                     "1-all | add nodes"
-                    ]
+                     "1-all | add nodes",
+                     "1-1 | add nodes | save"
+                     ]
 
     #active_tests = active_tests[0:4]
-    active_tests = active_tests[:1]
+    active_tests = active_tests[4:5]
 
+    if "1-1 | add nodes | save" in active_tests:
+        cnfg.SptAlgorithm = 4
+        print(("Testing SPT (1-1 | add nodes | save ) with Algorithm {0}..".format(alg_dict[4])))
+        starttime = datetime.datetime.now()
+        result = test_spt_add_nodes_1_1(cnfg, cmap, save=True)
+        stoptime = datetime.datetime.now()
+        print(("Duration: {0}".format(stoptime - starttime)))
+        print(result)
     if "1-1 | add nodes" in active_tests:
         for i in range(4, 6):
             cnfg.SptAlgorithm = i
@@ -426,8 +441,6 @@ if __name__ == "__main__":
                     print("test succeeded.")
 
     if "1-all | add nodes" in active_tests:
-        # Dijkstra_dheap_BOOST fails
-        #for i in range(1, 7):
         for i in range(4, 6):
             cnfg.SptAlgorithm = i
             print(("Testing SPT (1-all | add nodes) with Algorithm {0}..".format(alg_dict[i])))

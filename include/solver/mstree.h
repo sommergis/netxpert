@@ -27,6 +27,14 @@ namespace netxpert {
 
     /**
     * \brief Solver for the Minimum Spanning Tree Problem
+    *
+    * \li Initialization with a netxpert::data::InternalNet object in Constructor
+    * \li call of \ref Solve( \ref netxpert::data::InternalNet ) method for the computation; the network must be constructed prior to this step
+    * \li optional: GetOptimum() for getting the overall optimum
+    * \li optional: GetMinimumSpanningTree() for getting the actual result of the MST computation
+    * \li optional: SaveResults()
+    *
+    * all other setters and getters can be used for overriding the configuration from the constructor
     */
     class MinimumSpanningTree : public netxpert::ISolver
     {

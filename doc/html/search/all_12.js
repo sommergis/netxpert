@@ -12,5 +12,5 @@ var searchData=
   ['transportationresult',['TransportationResult',['../structnetxpert_1_1data_1_1TransportationResult.html',1,'netxpert::data']]],
   ['transportationsolver',['TransportationSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbaa7815e9debf65c38c483c32380cd163c',1,'netxpert::data']]],
   ['transshipmentsolver',['TransshipmentSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba79084c54b66b391d12bc59bc068cc5b8',1,'netxpert::data']]],
-  ['tutorial',['Tutorial',['../tutorial.html',1,'']]]
+  ['tutorial_20python_20bindings',['Tutorial Python bindings',['../tutorial.html',1,'']]]
 ];

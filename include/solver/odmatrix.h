@@ -29,7 +29,18 @@ namespace netxpert {
 
     /**
     * \brief Solver for computing an Origin Destination Matrix
+    *
     * \todo Check for duplicate code -> SPT Solver - Inheritance?
+    *
+    * \li Initialization with a netxpert::cnfg::Config object in Constructor
+    * \li call of SetOrigins() method defines 1-n origins (must be at least 1 origin)
+    * \li call of SetDestinations() method defines 1-n destinations (must be at least 1 origin)
+    * \li call of \ref Solve( \ref netxpert::data::InternalNet ) method for the computation; the network must be constructed prior to this step
+    * \li optional: GetOptimum() for getting the overall optimum
+    * \li optional: GetODMatrix() for getting the actual result of the ODM computation
+    * \li optional: SaveResults()
+    *
+    * all other setters and getters can be used for overriding the configuration from the constructor
     */
     class OriginDestinationMatrix : public netxpert::ISolver
     {

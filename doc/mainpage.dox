@@ -1,7 +1,7 @@
 /**
  * \mainpage netxpert++
  *
- * netxpert++ is a library for solving network analysis problems in geographic information systems written in C++ 11.
+ * netxpert++ is a library for solving network analysis problems in geographic information systems written in C++ 11.<br>
  * The main goals of the library are to provide high performance and a simple API.
  *
  * \authors Johannes Sommer, Christopher Koller
@@ -33,8 +33,13 @@
  * \li bindings for Python, C# through SWIG
  *
  * \b Performance:
- * \li use of highly efficient graph analysis algorithms and data structures (LEMON, future Boost Graph Library)
- * \li multiprocessing where reasonable through OpenMP
+ * \li use of highly efficient (in terms of memory usage and computation time) graph analysis algorithms and <br> data structures (LEMON, in future Boost Graph Library)
+ * \li parallelism where applicable through OpenMP
+ *
+ * \p See also
+ * \li http://stegua.github.io/blog/2012/09/19/dijkstra
+ * \li http://blog.sommer-forst.de/2016/10/28/solving-the-shortest-path-problem-5-benchmarks
+ *
  *
  * \b Dependencies:
  * \li cereal
@@ -47,7 +52,7 @@
  * \li Boost 1.57
  *
  * \b Process
- * <img src="..\img\ablauf.png" width="50%" height="50%">
+ * <img src="..\img\netxpert_process.png">
  */
 
 

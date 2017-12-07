@@ -26,7 +26,7 @@
 namespace netxpert {
  namespace simple {
     /**
-    * \brief Simple Interface of the OriginDestination Matrix Solver
+    * \brief Simple Interface of the OriginDestinationMatrix Solver
     *
     * \li Initialization with a JSON Config in Constructor
     * \li call of Solve() method (saves the results to the ResultDB given in the config JSON)
