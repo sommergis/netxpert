@@ -84,6 +84,39 @@ using namespace geos::geom;
 //    }
 //}
 
+namespace netxpert {
+  namespace test {
+    static void
+     loadNodes(netxpert::data::InternalNet& net,
+                 std::string arcsGeomColumnName,
+                 std::string arcsTableName,
+                 netxpert::data::ColumnMap& cmap)   {
+
+      std::string nodeID = "1";
+      LOGGER::LogInfo("Querying NodeID "+ nodeID + "..");
+      auto node = net.GetNodeFromOrigID(nodeID);
+      auto supply = net.GetNodeSupply(node);
+      //LOGGER::LogInfo("Supply: " + to_string(supply));
+
+      LOGGER::LogInfo("Original node ID of 1: " + net.GetOrigNodeID(node) );
+
+      LOGGER::LogDebug("Testing LoadStart/EndNodes..");
+      geos::geom::Coordinate coord = {703444, 5364720};
+      string extNodeID = "1";
+      //double supply = 5.0;
+      NewNode startNode {extNodeID, coord, supply};
+      NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
+
+      auto startNodes = vector<NewNode> {startNode};
+      auto endNodes   = vector<NewNode> {endNode};
+
+      auto starts = net.LoadStartNodes(startNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+
+      auto ends = net.LoadEndNodes(endNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
+    }
+  } //namespace test
+} //namespace netxpert
+
 void netxpert::test::LemonNetworkConvert(Config& cnfg)
 {
     try
@@ -130,44 +163,16 @@ void netxpert::test::LemonNetworkConvert(Config& cnfg)
         LOGGER::LogInfo("Converting Data into internal network..");
         netxpert::data::InternalNet net (arcsTable, cmap, cnfg);
         LOGGER::LogInfo("Done!");
-        // converting to internalNetwork is already done in ctor
-        //net.ConvertInputNetwork(autoCleanNetwork);
 
-        /*uint32_t arcID = 1;
-        LOGGER::LogInfo("Querying ArcID " + to_string(arcID) + "..");
-        auto arc = lemon_net.GetArcFromID(arcID);
-        LOGGER::LogInfo("Cost of Arc: "+ to_string(lemon_net.GetArcCost(arc)));
-        LOGGER::LogInfo("Capacity of Arc" + to_string(lemon_net.GetArcCapacity(arc)));
-        netxpert::data::ArcData arcData = lemon_net.GetArcData(arc);
-        LOGGER::LogInfo("ID of Arc: " + arcData.extArcID);
-        LOGGER::LogInfo("Cost of Arc: " + to_string(arcData.cost));
-        LOGGER::LogInfo("Capacity of Arc " + to_string(arcData.capacity));*/
-
-        std::string nodeID = "1";
-        LOGGER::LogInfo("Querying NodeID "+ nodeID + "..");
-        auto node = net.GetNodeFromOrigID(nodeID);
-        auto supply = net.GetNodeSupply(node);
-        //LOGGER::LogInfo("Supply: " + to_string(supply));
-
-        LOGGER::LogInfo("Original node ID of 1: " + net.GetOrigNodeID(node) );
-
-        LOGGER::LogDebug("Testing LoadStart/EndNodes..");
-        geos::geom::Coordinate coord = {703444, 5364720};
-        string extNodeID = "1";
-        //double supply = 5.0;
-        NewNode startNode {extNodeID, coord, supply};
-        NewNode endNode {extNodeID, geos::geom::Coordinate {703342, 5364710}, supply};
-
-        auto startNodes = vector<NewNode> {startNode};
-        auto endNodes   = vector<NewNode> {endNode};
-
-        auto starts = net.LoadStartNodes(startNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
-
-        auto ends = net.LoadEndNodes(endNodes, 500, arcsTableName, arcsGeomColumnName, cmap, false);
-
+        loadNodes(net, arcsGeomColumnName, arcsTableName, cmap);
         LOGGER::LogDebug("Done!");
-        /*cout << "Reset of Network.." << endl;
-        net.Reset();*/
+
+        LOGGER::LogDebug("Reset of Network..");
+        net.Reset();
+        LOGGER::LogDebug("Done!");
+
+        loadNodes(net, arcsGeomColumnName, arcsTableName, cmap);
+        LOGGER::LogDebug("Done!");
 
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
@@ -179,9 +184,10 @@ void netxpert::test::LemonNetworkConvert(Config& cnfg)
     }
 }
 
+
 void netxpert::test::TestNetworkBuilder(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::NetworkBuilder simpleSolver(s);
 	simpleSolver.Build();
@@ -435,7 +441,7 @@ void netxpert::test::TestSpatiaLiteWriter(Config& cnfg)
 
 void netxpert::test::TestMST(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::MinimumSpanningTree simpleSolver(s);
 	simpleSolver.Solve();
@@ -443,7 +449,7 @@ void netxpert::test::TestMST(Config& cnfg)
 
 void netxpert::test::TestSPT(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::ShortestPathTree simpleSolver(s);
 	simpleSolver.Solve();
@@ -451,7 +457,7 @@ void netxpert::test::TestSPT(Config& cnfg)
 
 void netxpert::test::TestODMatrix(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::OriginDestinationMatrix simpleSolver(s);
 	simpleSolver.Solve(true);
@@ -467,7 +473,7 @@ void netxpert::test::TestODMatrix(Config& cnfg)
 //
 void netxpert::test::TestTransportation(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::Transportation simpleSolver(s);
 	simpleSolver.Solve();
@@ -475,7 +481,7 @@ void netxpert::test::TestTransportation(Config& cnfg)
 
 void netxpert::test::TestMCF(Config& cnfg)
 {
-	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "c") + "}";
+	string s = UTILS::SerializeObjectToJSON<Config>(cnfg, "config") + "}";
 	cout << s << endl;
 	netxpert::simple::MinCostFlow simpleSolver(s);
 	simpleSolver.Solve();

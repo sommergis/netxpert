@@ -128,10 +128,10 @@ int netxpert::simple::ShortestPathTree::Solve()
         LOGGER::LogInfo("Optimum: " + to_string(spt.GetOptimum()));
         LOGGER::LogInfo("Count of ShortestPaths: " +to_string( spt.GetShortestPaths().size() ) );
 
-//        spt.SaveResults(resultTableName, cmap);
+        spt.SaveResults(resultTableName, cmap);
 
         //test
-        std::cout << spt.GetResultsAsJSON() << std::endl;
+//        std::cout << spt.GetResultsAsJSON() << std::endl;
 
         return 0; // OK
     }

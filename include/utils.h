@@ -118,7 +118,7 @@ namespace netxpert {
             }
             ///\brief Serializes an object of type T to JSON string
             template<typename T>
-            static std::string SerializeObjectToJSON(T _inData, std::string _rootNodeName="input")
+            static std::string SerializeObjectToJSON(T _inData, std::string _rootNodeName="root")
             {
                 std::stringstream ss;
                 cereal::JSONOutputArchive archive ( ss );
