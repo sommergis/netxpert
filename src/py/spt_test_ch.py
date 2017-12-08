@@ -35,8 +35,8 @@ def read_config(path_to_cnfg):
     content = f.read()
     f.close()
 
-    #c is root
-    config_json = json.loads(content)['c']
+    #config is root
+    config_json = json.loads(content)['config']
 
     cnfg = netx.Config()
     cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')

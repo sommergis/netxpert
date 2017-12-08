@@ -79,8 +79,8 @@ int main(int argc, char** argv)
     }
     try
     {
-//        LOGGER::LogInfo("Testing Lemon Network..");
-//        netxpert::test::LemonNetworkConvert(cnfg);
+        LOGGER::LogInfo("Testing Lemon Network..");
+        netxpert::test::LemonNetworkConvert(cnfg);
 
 //        LOGGER::LogInfo("Testing Network..");
 //        netxpert::test::NetworkConvert(cnfg);

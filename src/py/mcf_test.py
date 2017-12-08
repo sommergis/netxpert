@@ -41,8 +41,8 @@ def read_config(path_to_cnfg):
     content = f.read()
     f.close()
 
-    #c is root
-    config_json = json.loads(content)['c']
+    #config is root
+    config_json = json.loads(content)['config']
 
     cnfg = netx.Config()
     cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')
@@ -95,14 +95,14 @@ def test_mcf(cnfg, cmap):
     startIDs = []
     x = 702370
     y = 5352540
-    supply = 10
+    supply = 5
     withCap = True
     startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
     x = 701360
     y = 5352530
-    supply = 10
+    supply = 5
     startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
@@ -206,7 +206,7 @@ if __name__ == "__main__":
                 else:
                     print("test succeeded.")
             if "small" in path_to_cnfg:
-                if str(result) != str(16.0):
+                if str(result) != str(27.4702320011):
                     print("test failed!")
                 else:
                     print("test succeeded.")

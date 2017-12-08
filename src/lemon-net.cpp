@@ -312,10 +312,6 @@ void
 //|--> Endregion Contraction Hierarchies
 #endif
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
 const arc_t
  InternalNet::GetArcFromID(const netxpert::data::intarcid_t arcID) {
     //auto arc = this->arcIDMap.at(arcID);
@@ -330,10 +326,6 @@ const arc_t
     return arc;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
 const netxpert::data::intarcid_t
  InternalNet::GetArcID(const arc_t& arc) {
     //auto result = (*this->extArcIDMap)[arc];
@@ -341,10 +333,7 @@ const netxpert::data::intarcid_t
     return result;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const cost_t
  InternalNet::GetArcCapacity(const arc_t& arc) {
     auto result = (*this->capMap)[arc];
@@ -352,10 +341,7 @@ const cost_t
     return result;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const cost_t
  InternalNet::GetArcCost(const arc_t& arc) {
     auto result = (*this->costMap)[arc];
@@ -363,10 +349,7 @@ const cost_t
     return result;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const netxpert::data::ArcData
 //netxpert::data::ArcData2
  InternalNet::GetArcData(const arc_t& arc) {
@@ -420,10 +403,7 @@ const netxpert::data::arc_t
     return lemon::findArc(*this->g, source, target, INVALID);
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const node_t
  InternalNet::GetNodeFromOrigID(const std::string nodeID) {
 
@@ -476,10 +456,7 @@ const netxpert::data::node_t
       return lemon::INVALID;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const std::string
  InternalNet::GetOrigNodeID(const node_t& node) {
 
@@ -507,22 +484,10 @@ const std::string
         throw std::runtime_error("Orig node id of internal node id " + std::to_string( this->GetNodeID(node) ) + " could not be looked up!");
     }
 
-
-    //std::cout << "GetOrigNodeID() " << this->g->id(node)<< std::endl;
-    //cout << "(*this->nodeMap)[lemNode] " << (*this->nodeMap)[lemNode] << endl;
-    //std::cout << "GetOrigNodeID() " << nodeID << std::endl;
-
-    /*for (graph_t::NodeIt it(*this->g); it != lemon::INVALID; ++it ){
-        std::cout << this->g->id(it) << " " <<
-                     (*this->nodeMap)[it] << std::endl;
-    }*/
     return nodeID;
 }
 
-/** @brief (one liner)
-*
-* (documentation goes here)
-*/
+
 const netxpert::data::supply_t
  InternalNet::GetNodeSupply(const node_t& node) {
 
@@ -549,15 +514,6 @@ const geos::geom::Coordinate
 
     auto node = this->GetNodeFromOrigID(nodeID);
 //    std::cout << "GetStartOrEndNodeGeometry()" << std::endl;
-
-    /*for (auto kv : nodeIDMap){
-        auto key = kv.first;
-        node = nodeIDMap.at(key);
-        std::cout << "node id: "<< key << std::endl;
-        if (addedStartPoints.count(node) != 0) {
-            std::cout << "node id: "<< key << "coord: " << addedStartPoints.at(node).coord.toString() << std::endl;
-        }
-    }*/
 //    std::cout << "ext node id: " << nodeID << " int node id: " << this->g->id(node) << std::endl;
 //    std::cout << "point " << addedStartPoints.at(node).coord.toString() << std::endl;
     try
@@ -1261,26 +1217,50 @@ void
  InternalNet::Reset() {
 
     LOGGER::LogInfo("Resetting network..");
+
     //Reset network by resetting the filtered orig arcs (and their reversed ones)
 
     //reset new arcs, arcChanges, remove addedNodes
 //    for (auto kv : (*this->arcChangesMap) ) {
     auto iter = GetArcsIter();
+    int arcChangesCnt = 0;
+    int arcFilterOrigCnt = 0;
+    //iterator gets also the reversed arcs if present!
     for (; iter != INVALID; ++iter) {
         auto arc = iter;
+        // first the original arcs
+        if ( (*this->arcChangesMap)[arc] == netxpert::data::ArcState::original) {
+          (*this->arcFilterMap)[arc] = true;
+          arcFilterOrigCnt += 1;
+        }
+        // then the splitted ones
         if ( (*this->arcChangesMap)[arc] != netxpert::data::ArcState::original) {
           (*this->arcChangesMap)[arc] = netxpert::data::ArcState::original;
-        }
-        else { //original arc
-          (*this->arcFilterMap)[arc] = true;
-          //revArc
-          auto revArc = GetArcFromNodes(this->g->target(arc), this->g->source(arc));
-          if (revArc != lemon::INVALID)
-            (*this->arcFilterMap)[revArc] = true;
+          arcChangesCnt += 1;
         }
     }
-    //this->origArcsMap->clear();
-    this->newArcsMap.clear();
+
+    //"delete" new arcs (=splitted) through arc filter
+    int counter = 0;
+    // map has also the reversed arcs if present!
+    for (auto& kv : this->newArcsMap) {
+      auto arc = kv.first;
+      (*this->arcFilterMap)[arc] = false;
+      counter += 1;
+
+      //clear new nodes in nodeIDmap
+//      auto srcNodeID = (*this->nodeMap)[this->g->source(arc)];
+//      auto tgtNodeID = (*this->nodeMap)[this->g->target(arc)];
+      //this->nodeIDMap.erase(srcNodeID);
+      //this->nodeIDMap.erase(tgtNodeID);
+    }
+
+    LOGGER::LogDebug("arcFilterOrigCnt reset # "+ to_string(arcFilterOrigCnt));
+    LOGGER::LogDebug("arcChangesCnt reset # "+ to_string(arcChangesCnt));
+    LOGGER::LogDebug("newArcs reset # "+ to_string(counter));
+
+    // don't clear the newArcsMap!
+    //this->newArcsMap.clear();
     this->newNodesMap.clear();
 
     this->addedStartPoints.clear();

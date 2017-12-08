@@ -23,7 +23,7 @@ if 'linux' in sys.platform:
 if 'win' in sys.platform:
     pass
 
-parallelization = True  # True | False
+parallelization = False  # True | False
 # must be done before module import of pynetxpert
 if parallelization:
     import multiprocessing as mp
@@ -40,8 +40,8 @@ def read_config(path_to_cnfg):
     content = f.read()
     f.close()
 
-    #c is root
-    config_json = json.loads(content)['c']
+    #config is root
+    config_json = json.loads(content)['config']
 
     cnfg = netx.Config()
     cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')
@@ -91,36 +91,44 @@ def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-
     solver = netx.ShortestPathTree(cnfg)
 
-    x = 703444
-    y = 5364720
-    supply = 0
+    for i in range(1,100):
 
-    withCap = False
-    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
-                                    cmap, withCap)
+      x = 703444
+      y = 5364720
+      supply = 0
 
-    x = 703342
-    y = 5364710
-    endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
-                                    cmap, withCap)
+      withCap = False
+      startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
+                                      cmap, withCap)
 
-    solver.SetOrigin(startID)
+      x = 703342 +i
+      y = 5364710 +i
+      endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
+                                      cmap, withCap)
 
-    dests = netx.Nodes()
-    dests.append(endID)
-    solver.SetDestinations(dests)
+      solver.SetOrigin(startID)
 
-    solver.Solve(net)
-    optimum = solver.GetOptimum()
+      dests = netx.Nodes()
+      dests.append(endID)
+      solver.SetDestinations(dests)
 
-    print (solver.GetResultsAsJSON())
+      solver.Solve(net)
+      optimum = solver.GetOptimum()
 
-    if save:
-        solver.SaveResults(cnfg.ArcsTableName + "_20171207_spt", cmap)
-    del net, solver
+      #print (solver.GetResultsAsJSON())
+
+      #if save:
+      #    solver.SaveResults(cnfg.ArcsTableName + "_20171207_spt", cmap)
+
+      print "arcs #" + str(net.GetArcCount())
+      print "nodes #" + str(net.GetNodeCount())
+
+      net.Reset()
+      #del net
+
+      print optimum
 
     return optimum
     #return solver.GetOptimum()
@@ -330,10 +338,11 @@ if __name__ == "__main__":
         cnfg.SpatiaLiteCoreName = 'spatialite430'
 
 
-    cnfg.GeometryHandling = 0
+    cnfg.GeometryHandling = 2
 
     print cnfg.SpatiaLiteHome
     #print cnfg.GeometryHandling
+    #cnfg.LogLevel = 5
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -361,11 +370,15 @@ if __name__ == "__main__":
     if "1-1 | add nodes | save" in active_tests:
         cnfg.SptAlgorithm = 4
         print(("Testing SPT (1-1 | add nodes | save ) with Algorithm {0}..".format(alg_dict[4])))
+
         starttime = datetime.datetime.now()
         result = test_spt_add_nodes_1_1(cnfg, cmap, save=True)
         stoptime = datetime.datetime.now()
         print(("Duration: {0}".format(stoptime - starttime)))
         print(result)
+
+        sys.exit(0)
+
     if "1-1 | add nodes" in active_tests:
         for i in range(4, 6):
             cnfg.SptAlgorithm = i
