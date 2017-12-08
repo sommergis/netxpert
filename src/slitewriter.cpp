@@ -184,6 +184,9 @@ void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName, const N
 
 void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType, bool dropFirst)
 {
+    if (_tableName.size() == 0)
+      throw std::runtime_error("ResultTableName is empty!");
+
     try
     {
         if (!isConnected)

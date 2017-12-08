@@ -40,8 +40,8 @@ def read_config(path_to_cnfg):
     content = f.read()
     f.close()
 
-    #c is root
-    config_json = json.loads(content)['c']
+    #config is root
+    config_json = json.loads(content)['config']
 
     cnfg = netx.Config()
     cnfg.ArcsGeomColumnName = config_json["ArcsGeomColumnName"].encode('ascii', 'ignore')
@@ -84,7 +84,7 @@ def read_config(path_to_cnfg):
 
     return cnfg, cmap
 
-def test_mcf(cnfg, cmap):
+def test_tpt(cnfg, cmap):
 
     atblname = cnfg.ArcsTableName
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
@@ -94,14 +94,14 @@ def test_mcf(cnfg, cmap):
     startIDs = []
     x = 702370
     y = 5352540
-    supply = 10
+    supply = 5
     withCap = True
     startIDs.append(net.AddStartNode('start1', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
     x = 701360
     y = 5352530
-    supply = 10
+    supply = 5
     startIDs.append(net.AddStartNode('start2', x, y, supply, cnfg.Threshold,
                                      cmap, withCap))
 
@@ -118,8 +118,19 @@ def test_mcf(cnfg, cmap):
     destIDs.append(net.AddEndNode('end2', x, y, supply, cnfg.Threshold,
                                   cmap, withCap))
 
+    starts = netx.Nodes()
+    dests = netx.Nodes()
 
-    solver = netx.MinCostFlow(cnfg)
+    for s in startIDs:
+        starts.append(s)
+    for d in destIDs:
+        dests.append(d)
+
+    solver = netx.Transportation(cnfg)
+
+    solver.SetOrigins(starts)
+    solver.SetDestinations(dests)
+
     solver.Solve(net)
 
     optimum = solver.GetOptimum()
@@ -128,7 +139,7 @@ def test_mcf(cnfg, cmap):
     return optimum
     #return solver.GetOptimum())
 
-def test_tp_load_nodes(cnfg, cmap):
+def test_tpt_load_nodes(cnfg, cmap):
 
     atblname = cnfg.ArcsTableName
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
@@ -141,7 +152,19 @@ def test_tp_load_nodes(cnfg, cmap):
     startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
     endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
-    solver = netx.MinCostFlow(cnfg)
+    solver = netx.Transportation(cnfg)
+
+    starts = netx.Nodes()
+    dests = netx.Nodes()
+
+    for s in startNodes:
+        starts.append(s[0])
+    for d in endNodes:
+        dests.append(d[0])
+
+
+    solver.SetOrigins(starts)
+    solver.SetDestinations(dests)
 
     solver.Solve(net)
 
@@ -157,7 +180,7 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Debug/TransCnfg_small.json"
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json"
         #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/TransCnfg_med_2_baysf.json"
         #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/TransCnfg_med_baysf.json"
 
@@ -199,14 +222,14 @@ if __name__ == "__main__":
                      "tp | load nodes"
                     ]
 
-    active_tests = active_tests[:1]
+    active_tests = active_tests[:2]
 
-    if "mcf | add nodes" in active_tests:
+    if "tp | add nodes" in active_tests:
         for i in range(1, 2):
             cnfg.McfAlgorithm = i
-            print(("Testing MCF with Algorithm {0}..".format(alg_dict[i])))
+            print(("Testing TPT with MCF Algorithm {0}..".format(mcf_alg_dict[i])))
             starttime = datetime.datetime.now()
-            result = test_mcf(cnfg, cmap)
+            result = test_tpt(cnfg, cmap)
             stoptime = datetime.datetime.now()
             print(("Duration: {0}".format(stoptime - starttime)))
             print(result)
@@ -216,17 +239,17 @@ if __name__ == "__main__":
                 else:
                     print("test succeeded.")
             if "small" in path_to_cnfg:
-                if str(result) != str(16.0):
+                if str(result) != str(20.4702320011):
                     print("test failed!")
                 else:
                     print("test succeeded.")
 
-    if "mcf | load nodes" in active_tests:
+    if "tp | load nodes" in active_tests:
         for i in range(1, 2):
             cnfg.McfAlgorithm = i
-            print(("Testing MCF (load nodes) with Algorithm {0}..".format(alg_dict[i])))
+            print(("Testing TPT (load nodes) with MCF Algorithm {0}..".format(mcf_alg_dict[i])))
             starttime = datetime.datetime.now()
-            result = test_mcf_load_nodes(cnfg, cmap)
+            result = test_tpt_load_nodes(cnfg, cmap)
             stoptime = datetime.datetime.now()
             print(("Duration: {0}".format(stoptime - starttime)))
             print(result)
