@@ -53,12 +53,12 @@ void
                       netxpert::data::graph_t::ArcMap<netxpert::data::capacity_t>* _capMap,
                       netxpert::data::graph_t::NodeMap<supply_t>* _supplyMap)
 {
-    using namespace lemon;
-    using namespace netxpert::data;
+  using namespace lemon;
+  using namespace netxpert::data;
 
-    this->g             = _sg;
-    this->costMap       = _costMap;
-    this->capacityMap   = _capMap;
+  this->g             = _sg;
+  this->costMap       = _costMap;
+  this->capacityMap   = _capMap;
 	this->supplyMap     = _supplyMap;
     //output (must be filtered_graph_t)
 	this->flowMap = new netxpert::data::filtered_graph_t::ArcMap<flow_t>(*this->g);
