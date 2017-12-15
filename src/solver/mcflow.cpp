@@ -80,9 +80,9 @@ void
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
                 }
                 else
-				{
+                {
                     writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
+                }
                 writer->CreateNetXpertDB(); //create before preparing query
                 writer->OpenNewTransaction();
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
@@ -93,7 +93,7 @@ void
                 qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::MinCostFlowSolver));
                 //}
             }
-                break;
+            break;
             case RESULT_DB_TYPE::ESRI_FileGDB:
             {
                 writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
@@ -102,7 +102,7 @@ void
                 writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
                 writer->CommitCurrentTransaction();
             }
-                break;
+            break;
         }
 
         LOGGER::LogDebug("Writing Geometries..");
@@ -159,50 +159,50 @@ void
 			LOGGER::LogDebug("Done!");
 		}
 
-        int counter = 0;
+    int counter = 0;
 		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
-        {
-        for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
-        {
-            #pragma omp single nowait
-            {
-            auto arcFlow = *it;
+    {
+      for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+      {
+          #pragma omp single nowait
+          {
+          auto arcFlow = *it;
 
-            counter += 1;
-            if (counter % 2500 == 0)
-                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+          counter += 1;
+          if (counter % 2500 == 0)
+              LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-            std::string arcIDs  = "";
-            auto arc            = arcFlow.intArc;
-            cost_t cost         = arcFlow.cost;
-            flow_t flow         = arcFlow.flow;
-            capacity_t cap      = -1;
+          std::string arcIDs  = "";
+          auto arc            = arcFlow.intArc;
+          cost_t cost         = arcFlow.cost;
+          flow_t flow         = arcFlow.flow;
+          capacity_t cap      = -1;
 
-            //works only on non-splitted arcs - the rest of the route parts will
-            //be added through InternalNet::addRouteGeomParts()
-            const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
+          //works only on non-splitted arcs - the rest of the route parts will
+          //be added through InternalNet::addRouteGeomParts()
+          const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
 
-            arcIDs  = arcData.extArcID;
-            cap     = arcData.capacity;
+          arcIDs  = arcData.extArcID;
+          cap     = arcData.capacity;
 
-            string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
-            string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
+          string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
+          string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
 
-            std::vector<netxpert::data::arc_t> arcs {arc};
+          std::vector<netxpert::data::arc_t> arcs {arc};
 
-            if (orig != "dummy" && dest != "dummy")
-                this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs,
-                                                        arcs,
-                                                        resultTableName, *writer, *qry);
-            else
-                LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
-                                                to_string(cap) + ", flow: " +to_string(flow));
-            }//omp single
-        }
-        }//omp paralell
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
+          if (orig != "dummy" && dest != "dummy")
+              this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs,
+                                                      arcs,
+                                                      resultTableName, *writer, *qry);
+          else
+              LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
+                                              to_string(cap) + ", flow: " +to_string(flow));
+          }//omp single
+      }
+      }//omp paralell
+      writer->CommitCurrentTransaction();
+      writer->CloseConnection();
+      LOGGER::LogDebug("Done!");
     }
     catch (exception& ex)
     {

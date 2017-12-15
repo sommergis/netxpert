@@ -93,7 +93,7 @@ def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
     net = netx.Network(arcsTable, cmap, cnfg)
     solver = netx.ShortestPathTree(cnfg)
 
-    for i in range(1,100):
+    for i in range(1,2):
 
       x = 703444
       y = 5364720
@@ -110,7 +110,7 @@ def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
 
       solver.SetOrigin(startID)
 
-      dests = netx.Nodes()
+      dests = []
       dests.append(endID)
       solver.SetDestinations(dests)
 
@@ -158,7 +158,7 @@ def test_spt_add_nodes_1_1_germany_s_t(cnfg, cmap):
 
     solver.SetOrigin(startID)
 
-    dests = netx.Nodes()
+    dests = []
     dests.append(endID)
     solver.SetDestinations(dests)
 
@@ -203,11 +203,7 @@ def test_spt_add_nodes_1_n(cnfg, cmap):
 
     solver.SetOrigin(startID)
 
-    dests = netx.Nodes()
-    for d in destIDs:
-        dests.append(d)
-
-    solver.SetDestinations(dests)
+    solver.SetDestinations(destIDs)
 
     solver.Solve(net)
     optimum = solver.GetOptimum()
@@ -300,7 +296,7 @@ def test_spt_add_nodes_1_1_germany_s_t_ch(cnfg, cmap):
 
     solver.SetOrigin(startID)
 
-    dests = netx.Nodes()
+    dests = []
     dests.append(endID)
     solver.SetDestinations(dests)
 

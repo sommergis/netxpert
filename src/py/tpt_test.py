@@ -133,6 +133,8 @@ def test_tpt(cnfg, cmap):
 
     solver.Solve(net)
 
+    #solver.SaveResults("tpt_test_20171215", cmap)
+
     optimum = solver.GetOptimum()
     del net, solver
 
