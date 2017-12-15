@@ -124,6 +124,9 @@ def test_mcf(cnfg, cmap):
     solver.Solve(net)
 
     optimum = solver.GetOptimum()
+
+    #solver.SaveResults("mcf_test_20171215", cmap)
+
     del net, solver
 
     return optimum

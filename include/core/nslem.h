@@ -32,6 +32,7 @@ namespace netxpert {
     namespace core {
     /**
     *  \brief Core Solver for the Minimum Cost Flow Problem with the Network Simplex algorithm of LEMON.
+    *  \todo Check for input data types; At the moment only integer values are safe in the MCF algorithms in LEMON!
     */
     class NS_LEM : public netxpert::core::IMinCostFlow
     {

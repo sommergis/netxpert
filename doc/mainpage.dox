@@ -11,19 +11,19 @@
  * \par \b License
  * This Project is licensed through the GNU Lesser Public License v2.
  *
- *
+ * \sa \ref overview
+ * \sa \ref building
  * \sa \ref intro
+ * \sa \ref solvers
  *
- * \sa \ref tutorial
- *
- * \page intro Introduction
+ * \page overview Overview
  *
  * \tableofcontents
  *
- * \section intro Introduction
+ * \section s_overview Overview
  *
- * The goal of netxpert is to prove that network analysis performance and functionality can be
- * done better than in existing GIS packages.<br>
+ * The goal of netxpert is to prove that network analysis on big datasets can be
+ * improved regarding performance and functionality compared to existing GIS packages.<br>
  *
  * \subsection solver Solver
  * \li shortest path solver (1-1, 1-n, 1-all)
@@ -41,6 +41,7 @@
  * \subsection performance Performance
  * \li use of highly efficient (in terms of memory usage and computation time) graph analysis algorithms and <br> data structures (LEMON, in future Boost Graph Library)
  * \li parallelism where applicable through OpenMP
+ * \li database access is optimized where possible (prepared statements, SQLite database optimizations)
  *
  * \p See also
  * \li http://stegua.github.io/blog/2012/09/19/dijkstra
@@ -59,6 +60,11 @@
  *
  * \subsection process Process
  * <img src="..\img\netxpert_process.png">
+ *
+ *
+ * \page building Compiling from source
+ *
+ *
  */
 
 
