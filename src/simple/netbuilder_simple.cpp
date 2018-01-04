@@ -26,7 +26,8 @@ netxpert::simple::NetworkBuilder::NetworkBuilder(std::string jsonCnfg)
 	NETXPERT_CNFG = UTILS::DeserializeJSONtoObject<Config>(jsonCnfg);
 }
 
-std::string netxpert::simple::NetworkBuilder::GetBuiltNetworkAsJSON()
+std::string
+ netxpert::simple::NetworkBuilder::GetBuiltNetworkAsJSON()
 {
 	std::string result;
 
@@ -100,7 +101,7 @@ int netxpert::simple::NetworkBuilder::Build()
 }
 
 std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc>
-netxpert::simple::NetworkBuilder::GetBuiltNetwork()
+ netxpert::simple::NetworkBuilder::GetBuiltNetwork()
 {
 	std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> result;
 

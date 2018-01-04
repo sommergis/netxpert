@@ -153,7 +153,8 @@ const double
     return result;
 }
 
-std::string netxpert::simple::Transportation::GetDistributionAsJSON()
+std::string
+ netxpert::simple::Transportation::GetDistributionAsJSON()
 {
     std::string result;
     if (this->solver)
@@ -161,7 +162,8 @@ std::string netxpert::simple::Transportation::GetDistributionAsJSON()
     return result;
 }
 
-std::vector<netxpert::data::ExtDistributionArc> netxpert::simple::Transportation::GetDistribution()
+std::vector<netxpert::data::ExtDistributionArc>
+ netxpert::simple::Transportation::GetDistribution()
 {
     std::vector<netxpert::data::ExtDistributionArc> result;
     if (this->solver)

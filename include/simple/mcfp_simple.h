@@ -36,11 +36,21 @@ namespace netxpert {
     class MinCostFlow
     {
         public:
+            ///\brief Constructor
             MinCostFlow(std::string jsonCnfg);
+            ///\brief Virtual Empty destructor
             virtual ~MinCostFlow() {}
+            /**
+            * \brief Computes the minimum cost flow problem on the given network and saves the result.
+            * \returns 0 if successful, 1 if unsuccessful
+            */
             int Solve();
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
+            ///\brief Gets the arcs with flow and cost of the result of the minimum cost flow solver as JSON string.
+            ///\todo implement me
             std::string GetMinimumCostFlowAsJSON();
+            ///\brief Gets the arcs with flow and cost of the result of the minimum cost flow solver.
             std::vector<netxpert::data::FlowCost> GetMinimumCostFlow();
 
         private:

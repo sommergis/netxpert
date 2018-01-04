@@ -711,8 +711,6 @@ const uint32_t
     }
 }
 
-
-
 const node_t
  InternalNet::insertNewNode(bool isDirected,
                                  netxpert::data::IntNetSplittedArc<arc_t>& splittedLine,
@@ -797,7 +795,7 @@ const node_t
 #if (defined ENABLE_CONTRACTION_HIERARCHIES)
         if (this->hasContractionHierarchies) {
 
-          std::cout << "hasContractionHierarchies.. "<< std::endl;
+          std::cout << "directed - hasContractionHierarchies.. "<< std::endl;
           //add changes also to CH graph & maps
           auto newNodeCH      = this->chg->addNode();
 
@@ -912,7 +910,7 @@ const node_t
 
 #if (defined ENABLE_CONTRACTION_HIERARCHIES)
         if (this->hasContractionHierarchies) {
-          std::cout << "hasContractionHierarchies.. "<< std::endl;
+          std::cout << "undirected - hasContractionHierarchies.. "<< std::endl;
           //add changes also to CH graph & maps
           auto newNodeCH      = this->chg->addNode();
 
@@ -931,22 +929,18 @@ const node_t
 
           //add new arcs to CH graph also
           auto newArc1CH    = this->chg->addArc(newNodeCH, origToNodeCH);
-          ///TEST
-//          this->chManager->printShortCuts(newArc1CH);
-
           auto revNewArc1CH = this->chg->addArc(origToNodeCH, newNodeCH);
           auto newArc2CH    = this->chg->addArc(origFromNodeCH, newNodeCH);
           auto revNewArc2CH = this->chg->addArc(newNodeCH, origFromNodeCH);
 
+//          auto newArc1CH    = this->chg->addArc(origToNodeCH, newNodeCH);
+//          auto revNewArc1CH = this->chg->addArc(newNodeCH, origToNodeCH);
+//          auto newArc2CH    = this->chg->addArc(newNodeCH, origFromNodeCH);
+//          auto revNewArc2CH = this->chg->addArc(origFromNodeCH, newNodeCH);
+
 //          std::cout << "newArc1CH" << std::endl;
 //          std::cout << this->chg->id(this->chg->source(newArc1CH)) << "->"
 //          << this->chg->id(this->chg->target(newArc1CH)) <<std::endl;
-
-          //add arcs also to chArcRefMap for lookup on CH paths
-//          (*this->chArcRefMap)[newArc1CH]     = newArc1;
-//          (*this->chArcRefMap)[revNewArc1CH]  = revNewArc1;
-//          (*this->chArcRefMap)[newArc2CH]     = newArc2;
-//          (*this->chArcRefMap)[revNewArc2CH]  = revNewArc2;
 
           //no saving of new arcs in this->newArcsMap
           (*this->chCostMap)[newArc1CH]     = newArc1Cost;
@@ -1266,6 +1260,11 @@ void
     this->addedStartPoints.clear();
     this->addedEndPoints.clear();
     this->eliminatedArcs.clear();
+
+    //TODO CH
+    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #endif
+
 
     LOGGER::LogInfo("Done!");
  }

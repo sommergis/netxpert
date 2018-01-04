@@ -136,14 +136,16 @@ const double
     return result;
 }
 
-std::string netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
+std::string
+ netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
 {
     std::string result;
 
     return result;
 }
 
-std::vector<netxpert::data::FlowCost> netxpert::simple::MinCostFlow::GetMinimumCostFlow()
+std::vector<netxpert::data::FlowCost>
+ netxpert::simple::MinCostFlow::GetMinimumCostFlow()
 {
     std::vector<netxpert::data::FlowCost> result;
     if (this->solver)

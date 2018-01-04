@@ -36,12 +36,28 @@ namespace netxpert {
     class OriginDestinationMatrix
     {
         public:
+            ///\brief Constructor
             OriginDestinationMatrix(std::string jsonCnfg);
+            ///\brief Virtual Empty destructor
             ~OriginDestinationMatrix() {}
+            /**
+            * \brief Computes the Origin destination matrix on the given network and saves the result.
+            * \deprecated Should be removed - ODMatrix should always be solved in parallel
+            * \returns 0 if successful, 1 if unsuccessful
+            */
             int Solve();
+            /**
+            * \brief Computes the Origin destination matrix on the given network and saves the result.
+            * \returns 0 if successful, 1 if unsuccessful
+            */
             int Solve(bool parallel);
-            double GetOptimum();
+            ///\brief Gets the overall optimum of the solver
+            const double GetOptimum() const;
+            ///\brief Gets the origin destination matrix of the odm solver as JSON string
+            ///\todo implement me
             std::string GetODMatrixAsJSON();
+            ///\brief Gets the origin destination matrix of the odm solver with original arcs
+            ///\todo implement me
             std::vector<netxpert::data::ExtSPTreeArc> GetODMatrix();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
