@@ -266,7 +266,8 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
     }
 }
 
-double netxpert::simple::OriginDestinationMatrix::GetOptimum()
+const double
+ netxpert::simple::OriginDestinationMatrix::GetOptimum() const
 {
     double result = 0;
     if (this->solver)
@@ -274,14 +275,16 @@ double netxpert::simple::OriginDestinationMatrix::GetOptimum()
     return result;
 }
 
-std::string netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON()
+std::string
+ netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON()
 {
     std::string result;
     /*if (this->solver)
         result = this->solver->GetODMatrixAsJSON();*/
     return result;
 }
-std::vector<netxpert::data::ExtSPTreeArc> netxpert::simple::OriginDestinationMatrix::GetODMatrix()
+std::vector<netxpert::data::ExtSPTreeArc>
+ netxpert::simple::OriginDestinationMatrix::GetODMatrix()
 {
     std::vector<netxpert::data::ExtSPTreeArc> result;
     /*if (this->solver)

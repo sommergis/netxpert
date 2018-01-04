@@ -37,11 +37,20 @@ namespace netxpert {
     class Transportation
     {
         public:
+            ///\brief Constructor
             Transportation(std::string jsonCnfg);
+            ///\brief virtual empty Destructor
             virtual ~Transportation() {}
+            /**
+            * \brief Computes the transportation problem and saves the result.
+            * \returns 0 if successful, 1 if unsuccessful
+            */
             int Solve();
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
+            ///\brief Gets the computed distribution of the Transportation Solver as JSON string.
             std::string GetDistributionAsJSON();
+            ///\brief Gets the computed distribution of the Transportation Solver as a vector of ExtDistributionArcs.
             std::vector<netxpert::data::ExtDistributionArc> GetDistribution();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;

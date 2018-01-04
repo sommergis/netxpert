@@ -37,11 +37,21 @@ namespace netxpert {
     class ShortestPathTree
     {
         public:
+            ///\brief Constructor
             ShortestPathTree(std::string jsonCnfg);
+            ///\brief Virtual Empty destructor
             ~ShortestPathTree() {}
+            /**
+            * \brief Computes the shortest path tree on the given network and saves the result.
+            * \returns 0 if successful, 1 if unsuccessful
+            */
             int Solve();
+            ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
+            ///\brief Gets the shortest paths of the spt solver as JSON string
             std::string GetShortestPathsAsJSON();
+            ///\brief Gets the shortest paths of the spt solver with original arcs
+            ///\todo implement me
             std::vector<netxpert::data::ExtSPTreeArc> GetShortestPaths();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;

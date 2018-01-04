@@ -36,15 +36,26 @@ namespace netxpert {
     class MinimumSpanningTree
     {
         public:
-            MinimumSpanningTree(std::string jsonCnfg);
-            virtual ~MinimumSpanningTree() {}
-            int Solve();
-            const double GetOptimum() const;
-            std::string GetMinimumSpanningTreeAsJSON();
-            std::vector<netxpert::data::ExternalArc> GetMinimumSpanningTree();
+          ///\brief Constructor
+          MinimumSpanningTree(std::string jsonCnfg);
+          ///\brief virtual empty Destructor
+          virtual ~MinimumSpanningTree() {}
+          /**
+          * \brief Computes the minimum spanning tree problem and saves the results.
+          * \returns 0 if successful, 1 if unsuccessful
+          */
+          int Solve();
+          ///\brief Gets the overall optimum of the solver
+          const double GetOptimum() const;
+          ///\brief Gets the computed minimum spanning tree as JSON string.
+          ///\todo implement me
+          std::string GetMinimumSpanningTreeAsJSON();
+          ///\brief Gets the computed minimum spanning tree as a vector of original arcs.
+          ///\todo implement me
+          std::vector<netxpert::data::ExternalArc> GetMinimumSpanningTree();
         private:
-            netxpert::cnfg::Config NETXPERT_CNFG;
-            std::unique_ptr<netxpert::MinimumSpanningTree> solver = nullptr;
+          netxpert::cnfg::Config NETXPERT_CNFG;
+          std::unique_ptr<netxpert::MinimumSpanningTree> solver = nullptr;
     };
   }
 }

@@ -8,7 +8,7 @@ var searchData=
   ['transformunbalancedmcf',['TransformUnbalancedMCF',['../classnetxpert_1_1data_1_1InternalNet.html#ac6438aa816f24740f5d0949a547ec4da',1,'netxpert::data::InternalNet']]],
   ['transportation',['Transportation',['../classnetxpert_1_1simple_1_1Transportation.html',1,'netxpert::simple']]],
   ['transportation',['Transportation',['../classnetxpert_1_1Transportation.html',1,'netxpert']]],
-  ['transportation',['Transportation',['../classnetxpert_1_1Transportation.html#ae6be3241f69bab69b2a1059178ae9fe5',1,'netxpert::Transportation']]],
+  ['transportation',['Transportation',['../classnetxpert_1_1simple_1_1Transportation.html#ad20d4fb083bca27030f954e7d38d90b6',1,'netxpert::simple::Transportation::Transportation()'],['../classnetxpert_1_1Transportation.html#ae6be3241f69bab69b2a1059178ae9fe5',1,'netxpert::Transportation::Transportation()']]],
   ['transportationresult',['TransportationResult',['../structnetxpert_1_1data_1_1TransportationResult.html',1,'netxpert::data']]],
   ['transportationsolver',['TransportationSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cbaa7815e9debf65c38c483c32380cd163c',1,'netxpert::data']]],
   ['transshipmentsolver',['TransshipmentSolver',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba79084c54b66b391d12bc59bc068cc5b8',1,'netxpert::data']]]
