@@ -35,12 +35,19 @@ namespace netxpert {
 	class NetworkBuilder
 	{
 		public:
+      ///\brief Constructor
 			NetworkBuilder(std::string jsonCnfg);
+			///\brief virtual empty Destructor
 			virtual ~NetworkBuilder() {}
-
+      /**
+      * \brief Builds & saves the network.
+      * \returns 0 if successful, 1 if unsuccessful
+      */
 			int Build();
-
+      ///\brief Gets the built network as JSON string
+      ///\todo implement me
 			std::string GetBuiltNetworkAsJSON();
+			///\brief Gets the built network
 			std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
 
 		private:

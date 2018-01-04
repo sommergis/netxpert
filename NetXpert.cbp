@@ -54,6 +54,7 @@
 			<Add option="-DSQLITECPP_ENABLE_ASSERT_HANDLER" />
 			<Add option="-DLEMON_ONLY_TEMPLATES=1" />
 			<Add option="-DENABLE_CONTRACTION_HIERARCHIES" />
+			<Add option="-DNETX_WEB" />
 			<Add directory="libs" />
 			<Add directory="/usr/include/python2.7" />
 			<Add directory="include" />
