@@ -593,7 +593,6 @@ const std::string
 
   #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
   {
-
   for (it = this->shortestPaths.begin(); it != this->shortestPaths.end(); ++it)
   {
     #pragma omp single nowait
@@ -687,7 +686,6 @@ void
   try
   {
     Config cnfg = this->NETXPERT_CNFG;
-
     unique_ptr<DBWriter> writer;
     unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
     std::ofstream outfile; // maybe unused - just for JSON or Google Polyline
@@ -699,12 +697,12 @@ void
       {
         if (cnfg.ResultDBPath == cnfg.NetXDBPath)
         {
-            //Override result DB Path with original netXpert DB path
-            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
+          //Override result DB Path with original netXpert DB path
+          writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
         }
         else
         {
-            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+          writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
         }
         writer->CreateNetXpertDB(); //create before preparing query
         writer->OpenNewTransaction();
@@ -717,17 +715,15 @@ void
         //}
       }
       break;
-
       case RESULT_DB_TYPE::ESRI_FileGDB:
       {
-          writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-          writer->CreateNetXpertDB();
-          writer->OpenNewTransaction();
-          writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
-          writer->CommitCurrentTransaction();
+        writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+        writer->CreateNetXpertDB();
+        writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::ShortestPathTreeSolver, true);
+        writer->CommitCurrentTransaction();
       }
       break;
-
       case RESULT_DB_TYPE::JSON:
       {
           //init file
@@ -737,7 +733,6 @@ void
           outfile << "{ \"result\" : [ " << endl;
       }
       break;
-
     }
     if (cnfg.ResultDBType == RESULT_DB_TYPE::ESRI_FileGDB | cnfg.ResultDBType == RESULT_DB_TYPE::SpatiaLiteDB) {
       LOGGER::LogDebug("Writing Geometries..");
@@ -809,28 +804,28 @@ void
       }
       }//omp single
 
-      }
-      }//omp paralell
+    } //for
+    }//omp paralell
 
-      if (cnfg.ResultDBType == RESULT_DB_TYPE::ESRI_FileGDB | cnfg.ResultDBType == RESULT_DB_TYPE::SpatiaLiteDB) {
-        LOGGER::LogDebug("Committing..");
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
-      }
-      if (cnfg.ResultDBType == RESULT_DB_TYPE::JSON) {
-        LOGGER::LogDebug("Writing to disk..");
-        outfile << " ] }" << endl;
-        outfile.flush();
-        outfile.close();
-        LOGGER::LogDebug("Done!");
-      }
+    if (cnfg.ResultDBType == RESULT_DB_TYPE::ESRI_FileGDB | cnfg.ResultDBType == RESULT_DB_TYPE::SpatiaLiteDB) {
+      LOGGER::LogDebug("Committing..");
+      writer->CommitCurrentTransaction();
+      writer->CloseConnection();
+      LOGGER::LogDebug("Done!");
     }
-    catch (exception& ex)
-    {
-      LOGGER::LogError("ShortestPaths::SaveResults() - Unexpected Error!");
-      LOGGER::LogError(ex.what());
+    if (cnfg.ResultDBType == RESULT_DB_TYPE::JSON) {
+      LOGGER::LogDebug("Writing to disk..");
+      outfile << " ] }" << endl;
+      outfile.flush();
+      outfile.close();
+      LOGGER::LogDebug("Done!");
     }
+  } //try
+  catch (exception& ex)
+  {
+    LOGGER::LogError("ShortestPaths::SaveResults() - Unexpected Error!");
+    LOGGER::LogError(ex.what());
+  }
 }
 
 lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>

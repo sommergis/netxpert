@@ -106,26 +106,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2de3b0d090c5a4620856410733298a00"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2de3b0d090c5a4620856410733298a00"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>NetworkBuilder</b> (std::string jsonCnfg)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#a2de3b0d090c5a4620856410733298a00">NetworkBuilder</a> (std::string jsonCnfg)</td></tr>
+<tr class="memdesc:a2de3b0d090c5a4620856410733298a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
 <tr class="separator:a2de3b0d090c5a4620856410733298a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af29aed4686e74df5aec2d7c0c5515e28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af29aed4686e74df5aec2d7c0c5515e28"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Build</b> ()</td></tr>
+<tr class="memitem:a2a2cd0017ab360f4c706321fc6b419ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a2cd0017ab360f4c706321fc6b419ad"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#a2a2cd0017ab360f4c706321fc6b419ad">~NetworkBuilder</a> ()</td></tr>
+<tr class="memdesc:a2a2cd0017ab360f4c706321fc6b419ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual empty Destructor <br /></td></tr>
+<tr class="separator:a2a2cd0017ab360f4c706321fc6b419ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af29aed4686e74df5aec2d7c0c5515e28"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#af29aed4686e74df5aec2d7c0c5515e28">Build</a> ()</td></tr>
+<tr class="memdesc:af29aed4686e74df5aec2d7c0c5515e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds &amp; saves the network.  <a href="#af29aed4686e74df5aec2d7c0c5515e28">More...</a><br /></td></tr>
 <tr class="separator:af29aed4686e74df5aec2d7c0c5515e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1450b51222cd84dbb9131b7d3876c669"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1450b51222cd84dbb9131b7d3876c669"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetBuiltNetworkAsJSON</b> ()</td></tr>
+<tr class="memitem:a1450b51222cd84dbb9131b7d3876c669"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#a1450b51222cd84dbb9131b7d3876c669">GetBuiltNetworkAsJSON</a> ()</td></tr>
+<tr class="memdesc:a1450b51222cd84dbb9131b7d3876c669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the built network as JSON string.  <a href="#a1450b51222cd84dbb9131b7d3876c669">More...</a><br /></td></tr>
 <tr class="separator:a1450b51222cd84dbb9131b7d3876c669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05c8e60e3d042ec1a3a98a1b277b283d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05c8e60e3d042ec1a3a98a1b277b283d"></a>
-std::unordered_map&lt; uint32_t, <a class="el" href="structnetxpert_1_1data_1_1NetworkBuilderResultArc.html">netxpert::data::NetworkBuilderResultArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetBuiltNetwork</b> ()</td></tr>
+std::unordered_map&lt; uint32_t, <a class="el" href="structnetxpert_1_1data_1_1NetworkBuilderResultArc.html">netxpert::data::NetworkBuilderResultArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#a05c8e60e3d042ec1a3a98a1b277b283d">GetBuiltNetwork</a> ()</td></tr>
+<tr class="memdesc:a05c8e60e3d042ec1a3a98a1b277b283d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the built network. <br /></td></tr>
 <tr class="separator:a05c8e60e3d042ec1a3a98a1b277b283d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html" title="Simple Interface of the NetworkBuilder. ">NetworkBuilder</a>. </p>
 <ul>
 <li>Initialization with a JSON Config in Constructor </li>
-<li>call of Build() method (saves the results to the ResultDB given in the config JSON) </li>
-<li>optional: GetBuiltNetworkAsJSON() returns the network as JSON string </li>
+<li>call of <a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#af29aed4686e74df5aec2d7c0c5515e28" title="Builds &amp; saves the network. ">Build()</a> method (saves the results to the ResultDB given in the config JSON) </li>
+<li>optional: <a class="el" href="classnetxpert_1_1simple_1_1NetworkBuilder.html#a1450b51222cd84dbb9131b7d3876c669" title="Gets the built network as JSON string. ">GetBuiltNetworkAsJSON()</a> returns the network as JSON string </li>
 </ul>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af29aed4686e74df5aec2d7c0c5515e28"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int netxpert::simple::NetworkBuilder::Build </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Builds &amp; saves the network. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 if successful, 1 if unsuccessful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1450b51222cd84dbb9131b7d3876c669"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string netxpert::simple::NetworkBuilder::GetBuiltNetworkAsJSON </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the built network as JSON string. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>implement me </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>/home/hahne/dev/netxpert1_0/include/simple/<a class="el" href="netbuilder__simple_8h_source.html">netbuilder_simple.h</a></li>
 </ul>
 </div><!-- contents -->

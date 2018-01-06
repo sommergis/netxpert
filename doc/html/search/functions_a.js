@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['opennewtransaction',['OpenNewTransaction',['../classnetxpert_1_1io_1_1DBHELPER.html#ab0f5e0871bfe5ccf43eacc467ba1d1e5',1,'netxpert::io::DBHELPER::OpenNewTransaction()'],['../classnetxpert_1_1io_1_1DBWriter.html#a6c30c6e65624efc60019ca619b1a5822',1,'netxpert::io::DBWriter::OpenNewTransaction()'],['../classnetxpert_1_1io_1_1FGDBWriter.html#a71bd85819e7a1ca4097cc845b03f3806',1,'netxpert::io::FGDBWriter::OpenNewTransaction()'],['../classnetxpert_1_1io_1_1SpatiaLiteWriter.html#aa469d8a214f7a3e2fbbde78480f1ceae',1,'netxpert::io::SpatiaLiteWriter::OpenNewTransaction()']]],
-  ['origindestinationmatrix',['OriginDestinationMatrix',['../classnetxpert_1_1OriginDestinationMatrix.html#a2ffcb9a8e1698ac09145d5ab08cfb8f4',1,'netxpert::OriginDestinationMatrix']]]
+  ['networkbuilder',['NetworkBuilder',['../classnetxpert_1_1NetworkBuilder.html#a13d5e72464e3f89262ebcd895afffbfe',1,'netxpert::NetworkBuilder::NetworkBuilder()'],['../classnetxpert_1_1simple_1_1NetworkBuilder.html#a2de3b0d090c5a4620856410733298a00',1,'netxpert::simple::NetworkBuilder::NetworkBuilder()']]],
+  ['ns_5flem',['NS_LEM',['../classnetxpert_1_1core_1_1NS__LEM.html#a40bd9f059fab42081af91dcf562a7bf7',1,'netxpert::core::NS_LEM::NS_LEM()'],['../classnetxpert_1_1core_1_1NS__LEM.html#a71345224f8d1595fc459f73e1cc29638',1,'netxpert::core::NS_LEM::NS_LEM(NS_LEM const &amp;)']]]
 ];

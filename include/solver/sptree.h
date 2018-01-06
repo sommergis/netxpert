@@ -103,7 +103,7 @@ namespace netxpert {
             ///\brief Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB or JSON).
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap);
-            ///\brief Gets the SPT results as JSON String
+            ///\brief Gets the SPT results as JSON String with the original from and to nodes
             const std::string GetResultsAsJSON();
 
         private:
