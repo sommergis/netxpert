@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['elapsed',['elapsed',['../classnetxpert_1_1utils_1_1Stopwatch.html#ae7b8d9c8d437571277decfe68e9a5aac',1,'netxpert::utils::Stopwatch']]],
-  ['exporttodimacs',['ExportToDIMACS',['../classnetxpert_1_1data_1_1InternalNet.html#a3565dee1c035ee66fe6d19a5a82c2fce',1,'netxpert::data::InternalNet']]]
+  ['dbhelper',['DBHELPER',['../classnetxpert_1_1io_1_1DBHELPER.html#ac0bf53cc8a592b097b2ca935f6a9c1dc',1,'netxpert::io::DBHELPER']]],
+  ['deserializejsontoobject',['DeserializeJSONtoObject',['../classnetxpert_1_1utils_1_1UTILS.html#a48e234571d9187affb93de9fd137bec4',1,'netxpert::utils::UTILS']]]
 ];

@@ -47,12 +47,11 @@ namespace netxpert {
           int Solve();
           ///\brief Gets the overall optimum of the solver
           const double GetOptimum() const;
-          ///\brief Gets the computed minimum spanning tree as JSON string.
+          ///\brief Gets the computed minimum spanning tree with original arc ids as JSON string.
           ///\todo implement me
           std::string GetMinimumSpanningTreeAsJSON();
-          ///\brief Gets the computed minimum spanning tree as a vector of original arcs.
-          ///\todo implement me
-          std::vector<netxpert::data::ExternalArc> GetMinimumSpanningTree();
+          ///\brief Gets the computed minimum spanning tree as a vector of original arc ids.
+          std::vector<std::string> GetMinimumSpanningTree();
         private:
           netxpert::cnfg::Config NETXPERT_CNFG;
           std::unique_ptr<netxpert::MinimumSpanningTree> solver = nullptr;

@@ -54,8 +54,10 @@ namespace netxpert {
             void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
-            ///\brief Gets all the arcs of the network that form one minimum spanning tree
+            ///\brief Gets all the internal arcs of the network that form one minimum spanning tree
             std::vector<netxpert::data::arc_t> GetMinimumSpanningTree() const;
+            ///\brief Gets all the original arc ids of the network that form one minimum spanning tree
+            std::unordered_set<std::string> GetOrigMinimumSpanningTree() const;
             ///\brief Saves the results of the mst solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
             ///\todo Implement JSON RESULT_DB_TYPE
             void SaveResults(const std::string& resultTableName,
