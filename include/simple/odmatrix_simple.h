@@ -53,12 +53,11 @@ namespace netxpert {
             int Solve(bool parallel);
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
-            ///\brief Gets the origin destination matrix of the odm solver as JSON string
-            ///\todo implement me
+            ///\brief Gets the origin destination matrix of the odm solver as JSON string with original from and to nodes
             std::string GetODMatrixAsJSON();
-            ///\brief Gets the origin destination matrix of the odm solver with original arcs
+            ///\brief Gets the origin destination matrix of the odm solver with original arc ids
             ///\todo implement me
-            std::vector<netxpert::data::ExtSPTreeArc> GetODMatrix();
+            std::vector<netxpert::data::extarcid_t> GetODMatrix();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::OriginDestinationMatrix> solver = nullptr;

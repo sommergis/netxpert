@@ -279,14 +279,14 @@ std::string
  netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON()
 {
     std::string result;
-    /*if (this->solver)
-        result = this->solver->GetODMatrixAsJSON();*/
+    if (this->solver)
+        result = this->solver->GetResultsAsJSON();
     return result;
 }
-std::vector<netxpert::data::ExtSPTreeArc>
+std::vector<netxpert::data::extarcid_t>
  netxpert::simple::OriginDestinationMatrix::GetODMatrix()
 {
-    std::vector<netxpert::data::ExtSPTreeArc> result;
+    std::vector<netxpert::data::extarcid_t> result;
     /*if (this->solver)
         result = this->solver->GetODMatrix();*/
     return result;

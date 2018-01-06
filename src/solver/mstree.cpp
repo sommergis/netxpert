@@ -24,9 +24,7 @@ using namespace netxpert::io;
 using namespace netxpert::core;
 using namespace netxpert::utils;
 
-MinimumSpanningTree::MinimumSpanningTree(Config& cnfg)
-{
-    //ctor
+MinimumSpanningTree::MinimumSpanningTree(Config& cnfg) {
     LOGGER::LogInfo("MinimumSpanningTree Solver instantiated");
     algorithm = cnfg.MstAlgorithm;
     this->NETXPERT_CNFG = cnfg;
@@ -128,7 +126,14 @@ void
 
 std::vector<netxpert::data::arc_t>
  MinimumSpanningTree::GetMinimumSpanningTree() const {
-    return minimumSpanTree;
+  return this->minimumSpanTree;
+}
+
+std::unordered_set<std::string>
+ MinimumSpanningTree::GetOrigMinimumSpanningTree() const {
+  //internal to original arcs
+  std::unordered_set<std::string> result = this->net->GetOrigArcIDs(this->minimumSpanTree);
+  return result;
 }
 
 void

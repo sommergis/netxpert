@@ -134,6 +134,12 @@ def test_odm_add_nodes(cnfg, cmap):
     solver.Solve(net)
 
     optimum = solver.GetOptimum()
+
+    print (solver.GetResultsAsJSON())
+
+    #if save:
+    #    solver.SaveResults(cnfg.ArcsTableName + "_20180106_odm", cmap)
+
     del net, solver
 
     return optimum

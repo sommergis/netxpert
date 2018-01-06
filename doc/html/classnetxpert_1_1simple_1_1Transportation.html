@@ -111,10 +111,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad20d4fb083bca27030f954e7d38d90b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea352d53e5f5e2a8df30dd9e3fa66b23"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aea352d53e5f5e2a8df30dd9e3fa66b23"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#aea352d53e5f5e2a8df30dd9e3fa66b23">~Transportation</a> ()</td></tr>
-<tr class="memdesc:aea352d53e5f5e2a8df30dd9e3fa66b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual Destructor <br /></td></tr>
+<tr class="memdesc:aea352d53e5f5e2a8df30dd9e3fa66b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual empty Destructor <br /></td></tr>
 <tr class="separator:aea352d53e5f5e2a8df30dd9e3fa66b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6483918f2f94c48cf3157fdcf8656f0a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a6483918f2f94c48cf3157fdcf8656f0a">Solve</a> ()</td></tr>
-<tr class="memdesc:a6483918f2f94c48cf3157fdcf8656f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the transportation problem.  <a href="#a6483918f2f94c48cf3157fdcf8656f0a">More...</a><br /></td></tr>
+<tr class="memdesc:a6483918f2f94c48cf3157fdcf8656f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the transportation problem and saves the result.  <a href="#a6483918f2f94c48cf3157fdcf8656f0a">More...</a><br /></td></tr>
 <tr class="separator:a6483918f2f94c48cf3157fdcf8656f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a3d4680fdaeafb025a3b1f731293300"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a3d4680fdaeafb025a3b1f731293300"></a>
 const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a3a3d4680fdaeafb025a3b1f731293300">GetOptimum</a> () const </td></tr>
@@ -133,7 +133,7 @@ std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtDistributionArc
 <div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html" title="Simple Interface of the Transportation Solver. ">Transportation</a> Solver. </p>
 <ul>
 <li>Initialization with a JSON Config in Constructor </li>
-<li>call of <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a6483918f2f94c48cf3157fdcf8656f0a" title="Computes the transportation problem. ">Solve()</a> method (saves the results to the ResultDB given in the config JSON) </li>
+<li>call of <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a6483918f2f94c48cf3157fdcf8656f0a" title="Computes the transportation problem and saves the result. ">Solve()</a> method (saves the results to the ResultDB given in the config JSON) </li>
 <li>optional: <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a3a3d4680fdaeafb025a3b1f731293300" title="Gets the overall optimum of the solver. ">GetOptimum()</a> returns the overall optimum </li>
 <li>optional: <a class="el" href="classnetxpert_1_1simple_1_1Transportation.html#a8ab271a28fbff93c6a95ed2a0442f619" title="Gets the computed distribution of the Transportation Solver as JSON string. ">GetDistributionAsJSON()</a> returns the optimized distribution as JSON string </li>
 </ul>
@@ -151,7 +151,7 @@ std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtDistributionArc
       </table>
 </div><div class="memdoc">
 
-<p>Computes the transportation problem. </p>
+<p>Computes the transportation problem and saves the result. </p>
 <dl class="section return"><dt>Returns</dt><dd>0 if successful, 1 if unsuccessful </dd></dl>
 
 </div>

@@ -150,6 +150,7 @@ netxpert::simple::ShortestPathTree::GetOptimum() const {
         result = this->solver->GetOptimum();
     return result;
 }
+
 std::string
  netxpert::simple::ShortestPathTree::GetShortestPathsAsJSON()
 {
@@ -158,10 +159,12 @@ std::string
         result = this->solver->GetResultsAsJSON();
     return result;
 }
-std::vector<netxpert::data::ExtSPTreeArc>
+
+std::vector<netxpert::data::extarcid_t>
  netxpert::simple::ShortestPathTree::GetShortestPaths()
 {
-    std::vector<netxpert::data::ExtSPTreeArc> result;
+    std::vector<netxpert::data::extarcid_t> result;
+    //std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> to std::vector<netxpert::data::extarcid_t>
     /*if (this->solver)
         result = this->solver->GetShortestPaths();*/
     return result;

@@ -52,7 +52,7 @@ namespace netxpert {
             std::string GetShortestPathsAsJSON();
             ///\brief Gets the shortest paths of the spt solver with original arcs
             ///\todo implement me
-            std::vector<netxpert::data::ExtSPTreeArc> GetShortestPaths();
+            std::vector<netxpert::data::extarcid_t> GetShortestPaths();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
             std::unique_ptr<netxpert::ShortestPathTree> solver = nullptr;

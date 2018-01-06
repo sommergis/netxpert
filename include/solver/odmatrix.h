@@ -125,8 +125,9 @@ namespace netxpert {
             ///\brief Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
             ///\todo Implement JSON RESULT_DB_TYPE
             void SaveResults(const std::string& resultTableName,
-                             const netxpert::data::ColumnMap& cmap) const;
-
+                             const netxpert::data::ColumnMap& cmap);
+            ///\brief Gets the ODM results as JSON String with the original from and to nodes
+            const std::string GetResultsAsJSON();
 
         private:
             //raw pointer ok, no dynamic allocation (new())
@@ -157,6 +158,7 @@ namespace netxpert {
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
              convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
             void checkSPTHeapCard(uint32_t arcCount, uint32_t nodeCount);
+            std::string processTotalArcIDs();
     };
 }
 #endif // ODMATRIX_H

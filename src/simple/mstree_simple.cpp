@@ -118,17 +118,19 @@ const double
 std::string
  netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTreeAsJSON()
 {
-    std::string result;
-    /*if (this->solver)
-        result = this->solver->GetMinimumSpanningTreeAsJSON();
-    */
-    return result;
+  std::string result;
+  if (this->solver) {
+    std::vector<std::string> tmpRes  = this->GetMinimumSpanningTree();
+    result = netxpert::utils::UTILS::SerializeObjectToJSON<std::vector<std::string>>(tmpRes, "mst");
+  }
+  return result;
 }
 
-std::vector<netxpert::data::ExternalArc> netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTree()
+std::vector<std::string>
+ netxpert::simple::MinimumSpanningTree::GetMinimumSpanningTree()
 {
-    std::vector<netxpert::data::ExternalArc> result;
-    /*if (this->solver)
-        result = this->solver->GetMinimumSpanningTree();*/
-    return result;
+  std::unordered_set<std::string> tmpRes = this->solver->GetOrigMinimumSpanningTree();
+  std::vector<std::string> result (tmpRes.begin(), tmpRes.end());
+
+  return result;
 }

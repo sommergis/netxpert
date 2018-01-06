@@ -6,7 +6,7 @@ var searchData=
   ['netxpert_2b_2b',['netxpert++',['../index.html',1,'']]],
   ['io',['io',['../namespacenetxpert_1_1io.html',1,'netxpert']]],
   ['networkbuilder',['NetworkBuilder',['../classnetxpert_1_1simple_1_1NetworkBuilder.html',1,'netxpert::simple']]],
-  ['networkbuilder',['NetworkBuilder',['../classnetxpert_1_1NetworkBuilder.html#a13d5e72464e3f89262ebcd895afffbfe',1,'netxpert::NetworkBuilder']]],
+  ['networkbuilder',['NetworkBuilder',['../classnetxpert_1_1NetworkBuilder.html#a13d5e72464e3f89262ebcd895afffbfe',1,'netxpert::NetworkBuilder::NetworkBuilder()'],['../classnetxpert_1_1simple_1_1NetworkBuilder.html#a2de3b0d090c5a4620856410733298a00',1,'netxpert::simple::NetworkBuilder::NetworkBuilder()']]],
   ['networkbuilder',['NetworkBuilder',['../classnetxpert_1_1NetworkBuilder.html',1,'netxpert']]],
   ['networkbuilderinputarc',['NetworkBuilderInputArc',['../structnetxpert_1_1data_1_1NetworkBuilderInputArc.html',1,'netxpert::data']]],
   ['networkbuilderresult',['NetworkBuilderResult',['../namespacenetxpert_1_1data.html#a923ee7cb7eab8b9dbfd62fb6d26f51cba02c36250a545ba17f86674c1221d6676',1,'netxpert::data']]],
