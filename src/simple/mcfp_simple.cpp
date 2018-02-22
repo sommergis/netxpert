@@ -140,7 +140,8 @@ std::string
  netxpert::simple::MinCostFlow::GetMinimumCostFlowAsJSON()
 {
     std::string result;
-
+    if (this->solver)
+        result = this->solver->GetResultsAsJSON();
     return result;
 }
 

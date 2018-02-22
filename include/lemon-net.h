@@ -383,6 +383,13 @@ namespace netxpert {
                                      const std::string& resultTableName, netxpert::io::DBWriter& writer,
                                      SQLite::Statement& qry //can be null in case of ESRI FileGDB
                                     );
+        /** Main method for processing and saving result arcs (preloading geometry into memory)
+            Writes results to a stringstream (JSON).
+            Solver: MCF, TPs */
+        void ProcessMCFResultArcsMemS(const std::string& orig, const std::string& dest, const netxpert::data::cost_t cost,
+                                      const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                      const std::string& arcIDs, std::vector<netxpert::data::arc_t>& routeNodeArcRep,
+                                      std::ostringstream& output);
         //--|Region Save Results
 
         ///\brief prints the graph in simple form.
@@ -572,6 +579,11 @@ namespace netxpert {
                            const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
                            const std::string& resultTableName, netxpert::io::DBWriter& writer,
                            SQLite::Statement& qry);
+
+      void saveMCFResultsMemS(const std::string orig, const std::string dest, const netxpert::data::cost_t cost,
+                                 const netxpert::data::capacity_t capacity, const netxpert::data::flow_t flow,
+                                 const std::string& arcIDs, std::vector<geos::geom::Geometry*> routeParts,
+                                 std::ostringstream& outStream);
       //MST
       void
        saveResults(const std::string& arcIDs, const std::string& resultTableName);

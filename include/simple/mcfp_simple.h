@@ -48,7 +48,6 @@ namespace netxpert {
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
             ///\brief Gets the arcs with flow and cost of the result of the minimum cost flow solver as JSON string.
-            ///\todo implement me
             std::string GetMinimumCostFlowAsJSON();
             ///\brief Gets the arcs with flow and cost of the result of the minimum cost flow solver.
             std::vector<netxpert::data::FlowCost> GetMinimumCostFlow();

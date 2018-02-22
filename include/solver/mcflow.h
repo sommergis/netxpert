@@ -58,10 +58,11 @@ namespace netxpert {
             const netxpert::data::MCFSolverStatus GetSolverStatus() const;
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
-            ///\brief Saves the results of the SPT solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
-            ///\todo Implement JSON RESULT_DB_TYPE
+            ///\brief Saves the results of the MCF solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
             void SaveResults(const std::string& resultTableName,
-                             const netxpert::data::ColumnMap& cmap) const;
+                             const netxpert::data::ColumnMap& cmap);
+            ///\brief Gets the MCF results as JSON String
+            const std::string GetResultsAsJSON();
 
         protected:
             //visible also to derived classes
@@ -76,6 +77,7 @@ namespace netxpert {
             lemon::FilterArcs<netxpert::data::graph_t, netxpert::data::graph_t::ArcMap<bool>>
              convertInternalNetworkToSolverData(netxpert::data::InternalNet& net);
             void getSupplyNodesTypeCount(int& srcNodeCount, int& transshipNodeCount, int& sinkNodeCount );
+            std::string processTotalArcIDs();
 
         private:
             //private is only visible to MCF instance - not to derived classes (like TP)

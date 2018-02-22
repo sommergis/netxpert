@@ -122,8 +122,7 @@ namespace netxpert {
             std::map<netxpert::data::ODPair, netxpert::data::cost_t> GetODMatrix() const;
             ///\brief Gets the overall optimum of the solver
             const double GetOptimum() const;
-            ///\brief Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
-            ///\todo Implement JSON RESULT_DB_TYPE
+            ///\brief Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB, or JSON).
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap);
             ///\brief Gets the ODM results as JSON String with the original from and to nodes

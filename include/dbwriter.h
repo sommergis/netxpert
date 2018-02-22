@@ -38,13 +38,10 @@ namespace netxpert {
             virtual void CommitCurrentTransaction() = 0;
             ///\brief Creates the netxpert result database
             virtual void CreateNetXpertDB() = 0;
-            ///\brief Creates the solver result table. If the table exists it will not be overwritten.
-            virtual void CreateSolverResultTable(const std::string& _tableName,
-                                                 const netxpert::data::NetXpertSolver solverType) = 0;
             ///\brief Creates the solver result table, but drops the table first if it exists
             virtual void CreateSolverResultTable(const std::string& _tableName,
                                                  const netxpert::data::NetXpertSolver solverType,
-                                                 const bool dropFirst) = 0;
+                                                 bool dropFirst = false) = 0;
             ///\brief Opens a new transaction
             virtual void OpenNewTransaction() = 0;
             ///\brief Closes database connection
