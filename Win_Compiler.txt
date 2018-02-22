@@ -1,0 +1,100 @@
+SWIG Python: 
+------------
+swig -c++ -python -o $file_dir/$file_name_wrap.cpp -outdir $file_dir $file
+im Projekt den Verweis auf das richtige .i-File setzen
+
+SWIG C#:     
+--------
+swig -c++ -csharp -o $file_dir/$file_name_wrap.cpp -outdir $file_dir -namespace NetXpert $file 
+im Projekt den Verweis auf das richtige .i-File setzen
+
+
+Windows Build
+-------------
+1. MCFClass
+--> #include <assert>
+--> #include <algorithm>
+2. UTILS
+--> File/Path Logik
+--> hier muss auch die ShLwApi.lib als zusätzliche Abhängigkeit in der IDE definiert sein (netxpert genügt - test nicht)
+
+
+
+Vorher:
+-------
+- geos_static kompilieren
+DEBUG:
+/GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Zi /Gm- /Od /Ob0 /Fd"geos-static.dir\Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Debug\"" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /GR /Gd /Oy- /MDd /Fa"Debug/" /EHsc /nologo /Fo"geos-static.dir\Debug\" /Fp"geos-static.dir\Debug\libgeos.pch" /D "NOMINMAX"
+RELEASE:
+/GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Gm- /O2 /Ob2 /Fd"geos-static.dir\Release\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Release\"" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /GR /Gd /Oy- /MD /Fa"Release/" /EHsc /nologo /Fo"geos-static.dir\Release\" /Fp"geos-static.dir\Release\libgeos.pch" /D "NOMINMAX"
+
+- boost vorkompiliert installieren (installer)
+
+- geos.dll DEBUG und RELEASE kompilieren
+
+DEBUG:
+/GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Zi /Gm- /Od /Ob0 /Fd"geos.dir\Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Debug\"" /D "GEOS_DLL_EXPORT" /D "_WINDLL" /D "_MBCS" /D "NOMINMAX" /errorReport:prompt /WX- /Zc:forScope /RTC1 /GR /Gd /Oy- /MDd /Fa"Debug/" /EHsc /nologo /Fo"geos.dir\Debug\" /Fp"geos.dir\Debug\geos.pch" 
+RELEASE:
+/GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Gm- /O2 /Ob2 /Fd"geos.dir\Release\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Release\"" /D "GEOS_DLL_EXPORT" /D "_WINDLL" /D "_MBCS" /D "NOMINMAX" /errorReport:prompt /WX- /Zc:forScope /GR /Gd /Oy- /MD /Fa"Release/" /EHsc /nologo /Fo"geos.dir\Release\" /Fp"geos.dir\Release\geos.pch" 
+
+DEBUG - Win32:
+--------------
+
+/GS /TP /analyze- /W3 /Zc:wchar_t /I"C:\dev\netxpert\include" /I"D:\dev\winboost" 
+/I"C:\dev\netxpert\libs" /I"C:\dev\netxpert\libs\geos-3.4.2\include" /ZI /Gm /Od /Fd"Debug\vc120.pdb" 
+/fp:precise /D "WIN32" /D "_DEBUG" /D "SQLITE_ENABLE_RTREE=1" /D "SQLITECPP_ENABLE_ASSERT_HANDLER" 
+/D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\" 
+/EHsc /nologo /Fo"Debug\" /Fp"Debug\NetXpert.pch" 
+
+Linker:
+/OUT:"C:\dev\netxpert\Debug\NetXpert.lib" "geos.lib" "FileGDBAPI.lib" /NOLOGO 
+/LIBPATH:"D:\dev\winboost\lib32-msvc-12.0" /LIBPATH:"C:\dev\netxpert\libs\geos-3.4.2\build\lib\Debug" 
+/LIBPATH:"C:\dev\1_libs\FileGDBAPI\lib" 
+
+Deployment:
+- msvcp120d.dll in Ausgabeverzeichnis kopieren
+- msvcr120d.dll in Ausgabeverzeichnis kopieren
+- geos.dll kompilieren und in Ausgabeverzeichnis kopieren
+- FileGDBAPI.dll in Ausgabeverzeichnis kopieren
+# SpatiaLite
+- libfreexl-1.dll
+- libgcc_s_dw2-1.dll
+- libgeos_c-1.dll
+- libgeos-3-3-1.dll
+- libgeos-3-4-0dev.dll
+- libiconv-2.dll
+- libproj-0.dll
+- libspatialite-4.dll
+- libsqlite3-0.dll
+- libstdc++-6.dll
+
+
+RELEASE - Win32:
+---------------
+
+/GS /analyze- /W3 /Zc:wchar_t /I"C:\dev\netxpert\include" /I"D:\dev\winboost" /I"C:\dev\netxpert\libs"
+/I"C:\dev\netxpert\libs\geos-3.4.2\include" /Zi /Gm- /O2 /Fd"Release\vc120.pdb" /fp:precise /D "WIN32" 
+/D "NDEBUG" /D "SQLITE_ENABLE_RTREE=1" /D "SQLITECPP_ENABLE_ASSERT_HANDLER" /D "_UNICODE" /D "UNICODE" 
+/errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\NetXpert.pch" 
+
+Linker:
+/OUT:"C:\dev\netxpert\Release\NetXpert.lib" "geos.lib" "FileGDBAPI.lib" /NOLOGO
+ /LIBPATH:"D:\dev\winboost\lib32-msvc-12.0" /LIBPATH:"C:\dev\netxpert\libs\geos-3.4.2\build\lib\Release" 
+ /LIBPATH:"C:\dev\1_libs\FileGDBAPI\lib" 
+
+ Deployment:
+- msvcp120.dll in Ausgabeverzeichnis kopieren
+- msvcr120.dll in Ausgabeverzeichnis kopieren
+- geos.dll in Ausgabeverzeichnis kopieren
+- FileGDBAPI.dll in Ausgabeverzeichnis kopieren
+# SpatiaLite
+- libfreexl-1.dll
+- libgcc_s_dw2-1.dll
+- libgeos_c-1.dll
+- libgeos-3-3-1.dll
+- libgeos-3-4-0dev.dll
+- libiconv-2.dll
+- libproj-0.dll
+- libspatialite-4.dll
+- libsqlite3-0.dll
+- libstdc++-6.dll

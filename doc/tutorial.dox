@@ -1,0 +1,578 @@
+/**
+  \page intro Introduction
+
+  \tableofcontents
+
+  \section intro_0_0 The pynetxpert module
+  The python bindings for netxpert are called "pynetxpert". The module consists of a C++ shared library that is platform specific.
+  Under Linux it has the file extension .so - under Microsoft Windows it is a .pyd-file.
+  And there is the python entry point: "pynetxpert.py", which platform independent.
+
+  \li _pynetxpert.so (Linux) or _pynetxpert.pyd (Microsoft Windows)
+  \li pynetxpert.py
+
+  The shared library _pynetxpert.so or _pynetxpert.pyd has dependencies to other libraries. <br>Under Linux you can check if all libraries
+  are found with the \c ldd command:
+
+  \code
+  $ ldd _pynetxpert.so
+
+  linux-vdso.so.1 =>  (0x00007fff45d23000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f83eab26000)
+	libpython2.7.so.1.0 => /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 (0x00007f83ea598000)
+	libFileGDBAPI.so => /usr/local/lib/netxpert/libFileGDBAPI.so (0x00007f83e92dc000)
+	libgeos-3.4.2.so => /usr/local/lib/netxpert/libgeos-3.4.2.so (0x00007f83e8f38000)
+	libstdc++.so.6 => ./libstdc++.so.6 (0x00007f83e8c34000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f83e892b000)
+	libgomp.so.1 => /usr/lib/x86_64-linux-gnu/libgomp.so.1 (0x00007f83e8709000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f83e84f3000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f83e82d6000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f83e7f0c000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f83eb26b000)
+	libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f83e7cf2000)
+	libutil.so.1 => /lib/x86_64-linux-gnu/libutil.so.1 (0x00007f83e7aef000)
+	libfgdbunixrtl.so => /usr/local/lib/netxpert/libfgdbunixrtl.so (0x00007f83e7895000)
+	librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f83e768d000)
+
+	\endcode
+
+	If any library is not found \c ldd will return "not found".
+
+	Under Windows you can check for dependent libraries with <a href="http://www.dependencywalker.com/">dependency walker</a>.
+  But here all dependent dlls (except the system dlls) should be inside the working directory of the calling library.
+
+  \subsection config_0 0 Config
+  netxpert can be configured heavily. In some use cases (the simple solvers) you just write the required information in the config file,
+  pass it to the solver and compute the results. Anything else is being handled for you.
+
+  Here is an example of a config JSON file for netxpert:
+
+  \code{.js}
+    { "config":
+      {
+      "TestCase": 1,
+      "NetXDBPath": "/home/hahne/dev/netxpert1_0/test/data/bayern_klein.sqlite",
+      "NodesTableName": "",
+      "NodesGeomColumnName" : "",
+      "NodeIDColumnName": "",
+      "NodeSupplyColumnName": "supply",
+      "ArcsTableName": "roads_net",
+      "ArcsGeomColumnName": "geometry",
+      "ArcIDColumnName": "pkuid",
+      "FromNodeColumnName": "fromNode",
+      "ToNodeColumnName": "toNode",
+      "CostColumnName": "cost",
+      "CapColumnName": "",
+      "OnewayColumnName" : "",
+      "BarrierPolyTableName" : "",
+      "BarrierPolyGeomColumnName" : "",
+      "BarrierLineTableName" : "",
+      "BarrierLineGeomColumnName" : "",
+      "BarrierPointTableName" : "",
+      "BarrierPointGeomColumnName" : "",
+      "SptAlgorithm": 6,
+      "SPTHeapCard" : 2,
+      "SPTAllDests" : false,
+      "GeometryHandling": 2,
+      "IsDirected": false,
+      "LogLevel": -1,
+      "SpatiaLiteHome": "/home/hahne/dev/netx",
+      "NumberOfTests": 1,
+      "LogFileFullPath": "./netXpert_spt_small_bgl.log",
+      "LoadDBIntoMemory": false,
+      "Threshold": 2500,
+      "SpatiaLiteCoreName": "./libspatialite",
+      "UseSpatialIndex": true,
+      "SQLiteVersion": 3,
+      "CleanNetwork": true,
+      "ResultDBType" : 0,
+      "ResultDBPath" : "/home/hahne/dev/netxpert1_0/test/data/tost.sqlite",
+      "ResultTableName" : "",
+      "MstAlgorithm" : 2,
+      "McfAlgorithm" : 0
+    }
+  }
+  \endcode
+
+  You \b must provide netxpert with a configuration. This can be done by passing a JSON string or with the creation of the config object itself
+  and setting the properties in the code.
+
+  \b Example
+  \code {.py}
+  cnfg = netx.Config()
+  cnfg.NetXDBPath = "bayern.sqlite"
+  cnfg.ArcsTableName = "spt_lines_net"
+  [...]
+  \endcode
+
+  \subsection network_1 1 Network
+  The network is stored in netxpert in a graph structure, because the solvers do their computations
+  on a node-arc representation without the geometries of a spatial network. See also
+  <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)"> Wikipedia on this topic.</a><br>
+  You can build a network with the information of a node-arc representation (and its from and to nodes) with the
+  netxpert Class \ref netxpert::NetworkBuilder in section \ref networkbuilder.
+  If you already have a dataset of line geometries that also has the fromNode and toNode structure go on reading.
+
+  Just make sure these attributes exist (you can configure the attribute names in the netxpert config):
+  \li arc primary key with an index (e.g. pk_uid)
+  \li fromNode
+  \li toNode
+  \li cost
+  \li capacity (only for Minimum Cost Flow or Transportation Solver)
+  \li oneway (optional)
+  \li geometry
+
+  So first of all we import the python module "pynetxpert".
+  Then we will need a Config and a ColumnMap object. We can use the ConfigReader-Class to serialize a JSON-File
+  to a netxpert specific config object and get the column map. The ColumnMap is just a small subset of the config file
+  with all column names stored in it.
+  Now we initialize two helper classes: the internal logger and the database helper class.
+  Finally we instantiate the network class.
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+
+  path_to_cnfg = "NetworkCnfg.json"
+
+  f = open(path_to_cnfg)
+  jsonStr = f.read()
+
+  cnfgReader = netx.ConfigReader()
+  cnfg = cnfgReader.GetConfigFromJSON(jsonStr)
+  cmap = cnfgReader.GetColumnMap(cnfg)
+
+  # get the ArcsTableName from the config json file
+  atblname = cnfg.ArcsTableName
+
+  # Init internal logger and database access
+  netx.LOGGER.Initialize(cnfg)
+  netx.DBHELPER.Initialize(cnfg)
+
+  # load the arcs into netxpert arcs structure
+  arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+  # instantiate the network object
+  net = netx.Network(arcsTable, cmap, cnfg)
+
+  \endcode
+
+  This is everything we need for loading arcs from any SpatiaLite database into the netxpert data structure.
+  Now we may add new start and end nodes and pass the network to a solver class.
+
+  \subsubsection network_1_1 1.1 Add Nodes
+
+  Normally the start and and point of a desired route is not coincident with the start or end node of an arc of the network.
+  Thus one has to add these "new" points to the network in order to compute a route regarding the new nodes.
+
+  In netxpert you have the following possibilities adding nodes:
+  \li define the name and attributes of a nodes table with geometries in the config file and call one of the simple solvers.
+  \code{.js}
+  [...]
+      "NodesTableName": "spt_points",
+      "NodesGeomColumnName" : "geometry",
+      "NodeIDColumnName": "pk_uid",
+      "NodeSupplyColumnName": "supply",
+  [...]
+  \endcode
+  \note supply values > 0 will be treated as start nodes while supply values < 0 will be treated as end nodes in ShortestPathTree
+  and OriginDestinationMatrix Solver (supply = 0 are being ignored here).
+  MinCostFlow and Transportation Solver will respect the supply values as they are.
+
+  \li methods AddStartNode() and AddEndNode() after creating an instance of the network class
+  \code{.py}
+  [...]
+  # load the arcs into netxpert arcs structure
+  arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+  # instantiate the network object
+  net = netx.Network(arcsTable, cmap, cnfg)
+
+  # coordinates must match the SRS of the line network
+  x = 703342
+  y = 5364710
+
+  # supply & capacity is relevant for Min Cost Flow or Transportation Problems only
+  supply = 0
+  withCap = False
+
+  startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
+                                  cmap, withCap)
+  x = 703444
+  y = 5364720
+
+  endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
+                                  cmap, withCap)
+  \endcode
+  \li methods LoadStartNodes() and LoadEndNodes() after loading nodes from a SpatiaLite database via DBHELPER::LoadNodesFromDB().
+  \code{.py}
+  [...]
+  # load the arcs into netxpert arcs structure
+  arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+  # load the nodes from the database also
+  nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname,
+                                              cnfg.NodesGeomColumnName,
+                                              cmap)
+  # instantiate the network object
+  net = netx.Network(arcsTable, cmap, cnfg)
+
+  # capacity is relevant for Min Cost Flow or Transportation Problems only
+  withCap = False
+
+  # load start and end nodes (= split arcs) into the network
+  # return type is ODNodes
+  startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, cnfg.ArcsTableName,
+                                  cnfg.ArcsGeomColumnName, cmap, withCap)
+  endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, cnfg.ArcsTableName,
+                                  cnfg.ArcsGeomColumnName, cmap, withCap)
+  \endcode
+  \note LoadStartNodes() and LoadEndNodes() are calling AddStartNode() and AddEndNode() internally.
+  They are implemented for convenience and perform better on adding many nodes, because the database statement
+  is prepared only once.
+
+  \li If you have the special case that the nodes are already are part of the network (the values of the ID column have
+  their counterpart in the from- and to-node columns of the line network), you can load the nodes from the database
+  and pass it to the overloaded network constructor as follows.
+  \warning The IDs of the nodes must match the from and to nodes of the arcs! The arcs won't be split!
+
+  \code{.py}
+  [...]
+  # load the arcs into netxpert arcs structure
+  arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+  # load the nodes from the database also
+  nodesTable = netx.DBHELPER.LoadNodesFromDB(ntblname,
+                                              cnfg.NodesGeomColumnName,
+                                              cmap)
+  # instantiate the network object with new argument "nodesTable"
+  net = netx.Network(arcsTable, cmap, cnfg, nodesTable)
+
+  \endcode
+
+  \subsection networkbuilder 2 NetworkBuilder
+  Let us assume that you have a network of line geometries that represent a subset of street data. You have also attribute data on the network e.g. the length and the name of each street segment.
+  If you want to analyze the dataset in a network analysis package you have to calculate the node-arc representation of the network.
+  This is what NetworkBuilder does: it reads in line geometries, gives every start and end node of the lines an ID and
+  writes this information as attribute data in two new columns: fromNode and toNode.
+  This simple approach assumes your data is properly noded. If it is not you will end up with wrong computations in the analysis.
+
+  In this example we will use the simple interface of the NetworkBuilder Class "NetworkBuilderSimple".
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "NetworkCnfg.json"
+
+  f = open(path_to_cnfg)
+  builder = netx.NetworkBuilderSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # it also will save the built network to the output table and database configured in the JSON file
+  success = builder.Build()
+
+  \endcode
+
+  Every Solver has its simple equivalent. Basically you just pass in a JSON config and tell the solver to do the work.
+  If you need more control in the certain steps you can use the regular solver classes.
+
+  Here is an example for the use of the regular NetworkBuilder class.
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  import json
+  path_to_cnfg = "NetworkCnfg.json"
+
+  f = open(path_to_cnfg)
+  jsonStr = f.read()
+
+  cnfgReader = netx.ConfigReader()
+  cnfg = cnfgReader.GetConfigFromJSON(jsonStr)
+  cmap = cnfgReader.GetColumnMap(cnfg)
+
+  \endcode
+
+  Now we initialize two helper classes: the internal logger and the database helper class.
+  Then it is time to build the network.
+
+  \code{.py}
+
+  # Init internal logger and database access
+  netx.LOGGER.Initialize(cnfg)
+  netx.DBHELPER.Initialize(cnfg)
+
+  # Init NetworkBuilder
+  builder = netx.NetworkBuilder(cnfg)
+
+  # this method loads the arcs as configured in the JSON file from the database
+  builder.LoadData()
+
+  # compute the network
+  # returns a dictionary with integer id as key and special netxpert arcs as values
+  network = builder.GetBuiltNetwork()
+
+  # save the results to the configured result database (and db type)
+  builder.SaveResults("output_table", cmap)
+
+  \endcode
+
+  \note Please note that you have to initalize the DBHELPER and the LOGGER class, if you are using the regular solvers.
+  Using the simple solvers there is no need for this (but it does not hurt either).
+
+  Continue reading for the solver functionality here: \ref solvers.
+
+  \page solvers Solvers
+
+  \tableofcontents
+
+  \section sec_solvers Solvers
+
+  \subsection spt_3 3 ShortestPathTree Problem
+  This chapter will cover how to solve a single source shortest path problems with netxpert.
+
+  \subsubsection spt_3_1 3.1 ShortestPathTreeSimple
+
+  This is the code for calling the simple shortest path tree solver.
+  As mentioned before the simple solvers are designed to be run with a little more than the JSON config file.
+  Anything will be controlled with the config file:
+  \li arcs input
+  \li nodes input (to be loaded in the arcs network)
+  \li result db path and result table name
+  \li etc.
+
+  \sa \ref config_0
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "SPTCnfg.json"
+
+  f = open(path_to_cnfg)
+  solver = netx.ShortestPathTreeSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # this also will save the result to the output table and database configured in the JSON file
+  success = solver.Solve()
+
+  \endcode
+
+  \subsubsection spt_3_2 3.2 ShortestPathTree
+
+  Now we look at the regular Class of the ShortestPathTree Solver. The process for working with all solvers follows
+  the same pattern until the point of the initialization of the network.
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  import json
+  path_to_cnfg = "SPTCnfg.json"
+
+  f = open(path_to_cnfg)
+  jsonStr = f.read()
+
+  cnfgReader = netx.ConfigReader()
+  cnfg = cnfgReader.GetConfigFromJSON(jsonStr)
+  cmap = cnfgReader.GetColumnMap(cnfg)
+
+  # Init internal logger and database access
+  netx.LOGGER.Initialize(cnfg)
+  netx.DBHELPER.Initialize(cnfg)
+
+  # Load and init network
+  atblname = cnfg.ArcsTableName
+  arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+  net = netx.Network(arcsTable, cmap, cnfg)
+
+  \endcode
+
+  Now for the ShortestPathTree solver you will normally need to add points to the network and set at least the
+  origin from which the shortest path tree will be computed.
+  At this point you can either set one or more destinations. If you do not set any destination the whole shortest path
+  will be computed from the origin to all reachable destinations in the network.
+
+  \code{.py}
+
+  ## add points
+  # coordinates must match the SRS of the line network
+  x = 703342
+  y = 5364710
+
+  # supply & capacity is relevant for Min Cost Flow or Transportation Problems only
+  supply = 0
+  withCap = False
+
+  startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
+                                  cmap, withCap)
+  x = 703444
+  y = 5364720
+
+  endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
+                                  cmap, withCap)
+
+  # Init ShortestPathTree
+  solver = netx.ShortestPathTree(cnfg)
+
+  # set origin
+  solver.SetOrigin(startID)
+
+  # set destinations
+  dests = []
+  dests.append(endID)
+  solver.SetDestinations(dests)
+
+  # solve
+  solver.Solve(net)
+
+  # get the overall optimum
+  optimum = solver.GetOptimum()
+
+  # save results
+  solver.SaveResults(cnfg.ArcsTableName + "_spt", cmap)
+
+  \endcode
+
+  \subsection odm_4 4 Origin-Destination Matrix
+
+  \subsubsection odm_4_1 4.1 Origin-Destination Matrix Simple
+
+  This is the code for calling the simple OriginDestinationMatrix solver.
+  All simple solvers are designed to be run with a little more than the JSON config file.
+  Anything will be controlled with the config file:
+  \li arcs input
+  \li nodes input (to be loaded in the arcs network)
+  \li result db path and result table name
+  \li etc.
+
+  \sa \ref config_0
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "OriginDestinationCnfg.json"
+
+  f = open(path_to_cnfg)
+  solver = netx.OriginDestinationMatrixSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # this also will save the result to the output table and database configured in the JSON file
+  success = solver.Solve()
+
+  \endcode
+
+  \subsection mcf_5 5 Minimum Cost Flow Problem
+
+  \subsubsection mcf_5_1 5.1 Minimum Cost Flow Problem Simple
+
+  This is the code for calling the simple Minimum Cost Flow solver.
+  All simple solvers are designed to be run with a little more than the JSON config file.
+  Anything will be controlled with the config file:
+  \li arcs input
+  \li nodes input (to be loaded in the arcs network)
+  \li result db path and result table name
+  \li etc.
+
+  \sa \ref config_0
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "MCFPCnfg.json"
+
+  f = open(path_to_cnfg)
+  solver = netx.MinimumCostFlowSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # this also will save the result to the output table and database configured in the JSON file
+  success = solver.Solve()
+
+  \endcode
+
+  \subsection tpt_6 6 Transportation Problem
+
+  \subsubsection tpt_6_1 6.1 Transportation Problem Simple
+
+  This is the code for calling the simple Transportation Problem solver.
+  All simple solvers are designed to be run with a little more than the JSON config file.
+  Anything will be controlled with the config file:
+  \li arcs input
+  \li nodes input (to be loaded in the arcs network)
+  \li result db path and result table name
+  \li etc.
+
+  \sa \ref config_0
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "TransportationCnfg.json"
+
+  f = open(path_to_cnfg)
+  solver = netx.TransportationSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # this also will save the result to the output table and database configured in the JSON file
+  success = solver.Solve()
+
+  \endcode
+
+  \subsection mst_7 7 Minimum Spanning Tree Problem
+
+  \subsubsection mst_7_1 7.1 Minimum Spanning Tree Problem Simple
+
+    This is the code for calling the simple Minimum Spanning Tree Problem solver.
+  All simple solvers are designed to be run with a little more than the JSON config file.
+  Anything will be controlled with the config file:
+  \li arcs input
+  \li nodes input (to be loaded in the arcs network)
+  \li result db path and result table name
+  \li etc.
+
+  \sa \ref config_0
+
+  \code{.py}
+
+  import sys
+  # add local path to the libraries of netxpert
+  sys.path.append('/usr/local/lib/netxpert')
+
+  import pynetxpert as netx
+  path_to_cnfg = "MSTCnfg.json"
+
+  f = open(path_to_cnfg)
+  solver = netx.MinimumSpanningTreeSimple(f.read())
+  # returns 0 if ok, 1 if fails
+  # this also will save the result to the output table and database configured in the JSON file
+  success = solver.Solve()
+
+  \endcode
+
+ */
