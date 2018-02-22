@@ -759,7 +759,6 @@ void
 
 		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
     {
-
     for (it = this->shortestPaths.begin(); it != this->shortestPaths.end(); ++it)
     {
       #pragma omp single nowait

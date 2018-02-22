@@ -20,7 +20,6 @@
 #include <string>
 //determination of type
 #include <typeinfo>
-//#include "utils.h"
 #include "data.h"
 #include "logger.h"
 #include "SQLiteCpp/Database.h"

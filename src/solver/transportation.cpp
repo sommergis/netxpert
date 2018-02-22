@@ -429,50 +429,50 @@ void
 void
  Transportation::SaveResults(const std::string& resultTableName, const ColumnMap& cmap) const {
 
-    try
+  try
+  {
+    Config cnfg = this->NETXPERT_CNFG;
+
+    unique_ptr<DBWriter> writer;
+    unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+
+    switch (cnfg.ResultDBType)
     {
-        Config cnfg = this->NETXPERT_CNFG;
-
-        unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
-
-        switch (cnfg.ResultDBType)
+      case RESULT_DB_TYPE::SpatiaLiteDB:
+      {
+        if (cnfg.ResultDBPath == cnfg.NetXDBPath)
         {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
-                {
-                    //Override result DB Path with original netXpert DB path
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
-                }
-                else
-				{
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-				}
-                writer->CreateNetXpertDB(); //create before preparing query
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
-                writer->CommitCurrentTransaction();
-                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {*/
-                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::TransportationSolver));
-                //}
-            }
-                break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-                writer->CreateNetXpertDB();
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
-                writer->CommitCurrentTransaction();
-            }
-                break;
+            //Override result DB Path with original netXpert DB path
+            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
         }
-
-        LOGGER::LogDebug("Writing Geometries..");
+        else
+        {
+            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+        }
+        writer->CreateNetXpertDB(); //create before preparing query
         writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
+        writer->CommitCurrentTransaction();
+        /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+        {*/
+        auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+        qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::TransportationSolver));
+        //}
+      }
+      break;
+      case RESULT_DB_TYPE::ESRI_FileGDB:
+      {
+        writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+        writer->CreateNetXpertDB();
+        writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::TransportationSolver, true);
+        writer->CommitCurrentTransaction();
+      }
+      break;
+    }
+
+    LOGGER::LogDebug("Writing Geometries..");
+    writer->OpenNewTransaction();
 
 		std::string arcIDs = "";
 		std::unordered_set<string> totalArcIDs;
@@ -518,81 +518,81 @@ void
 			if (arcIDs.size() > 0)
 			{
 				arcIDs.pop_back(); //trim last comma
-//				cout << "arcIDs: " << arcIDs << endl;
+//		  cout << "arcIDs: " << arcIDs << endl;
 				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
 			}
 			LOGGER::LogDebug("Done!");
-		}
+      }
 
-        int counter = 0;
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+      int counter = 0;
+      #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+      {
+
+      for (it = this->distribution.begin(); it != this->distribution.end(); ++it)
+      {
+        #pragma omp single nowait
         {
+        auto dist = *it;
 
-        for (it = this->distribution.begin(); it != this->distribution.end(); ++it)
+        counter += 1;
+        if (counter % 2500 == 0)
+          LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+        ODPair key = dist.first;
+        DistributionArc val = dist.second;
+
+        string arcIDs = "";
+        auto arcs = val.path.first;
+        auto cost = val.path.second;
+        auto flow = val.flow;
+        //TODO: get capacity per arc
+        auto cap = -1;
+
+        vector<ArcData> arcData;
+        for (const auto& arc : arcs)
+            arcData.push_back( this->net->GetArcData(arc) );
+
+        for (ArcData& arcD : arcData)
         {
-            #pragma omp single nowait
-            {
-            auto dist = *it;
-
-            counter += 1;
-            if (counter % 2500 == 0)
-                LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
-
-            ODPair key = dist.first;
-            DistributionArc val = dist.second;
-
-            string arcIDs = "";
-            auto arcs = val.path.first;
-            auto cost = val.path.second;
-            auto flow = val.flow;
+            if (arcD.extArcID.size() > 0)
+                arcIDs += arcD.extArcID += ",";
             //TODO: get capacity per arc
-            auto cap = -1;
-
-            vector<ArcData> arcData;
-            for (const auto& arc : arcs)
-                arcData.push_back( this->net->GetArcData(arc) );
-
-            for (ArcData& arcD : arcData)
-            {
-                if (arcD.extArcID.size() > 0)
-                    arcIDs += arcD.extArcID += ",";
-                //TODO: get capacity per arc
-                //cap = arcD.capacity;
-            }
-            if (arcIDs.size() > 0)
-                arcIDs.pop_back(); //trim last comma
-
-            string orig = "";
-            string dest = "";
-            try{
-                orig = this->net->GetOrigNodeID(key.origin);
-            }
-            catch (exception& ex){
-                    orig = to_string(this->net->GetNodeID(key.origin));
-            }
-
-            try{
-                dest = this->net->GetOrigNodeID(key.dest);
-            }
-            catch (exception& ex) {
-                dest = to_string(this->net->GetNodeID(key.dest));
-            }
-
-//            std::cout << orig<< " " << dest<< " " << cost<< " " << cap<< " " << flow<< " " << std::endl;
-//            cout << "arcIDs: " << arcIDs << endl;
-            this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
-            }//omp single
+            //cap = arcD.capacity;
         }
-        }//omp paralell
+        if (arcIDs.size() > 0)
+            arcIDs.pop_back(); //trim last comma
 
-        writer->CommitCurrentTransaction();
-        writer->CloseConnection();
-        LOGGER::LogDebug("Done!");
-    }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("Transportation::SaveResults() - Unexpected Error!");
-        LOGGER::LogError(ex.what());
-    }
+        string orig = "";
+        string dest = "";
+        try{
+            orig = this->net->GetOrigNodeID(key.origin);
+        }
+        catch (exception& ex){
+                orig = to_string(this->net->GetNodeID(key.origin));
+        }
+
+        try{
+            dest = this->net->GetOrigNodeID(key.dest);
+        }
+        catch (exception& ex) {
+            dest = to_string(this->net->GetNodeID(key.dest));
+        }
+
+  //    std::cout << orig<< " " << dest<< " " << cost<< " " << cap<< " " << flow<< " " << std::endl;
+  //    std::cout << "arcIDs: " << arcIDs << endl;
+        this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs, arcs, resultTableName, *writer, *qry);
+        }//omp single
+      } // for loop
+      }//omp paralell
+
+      writer->CommitCurrentTransaction();
+      writer->CloseConnection();
+      LOGGER::LogDebug("Done!");
+  }
+  catch (exception& ex)
+  {
+      LOGGER::LogError("Transportation::SaveResults() - Unexpected Error!");
+      LOGGER::LogError(ex.what());
+  }
 }
 

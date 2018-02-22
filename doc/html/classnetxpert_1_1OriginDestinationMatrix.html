@@ -213,9 +213,14 @@ std::map&lt; <a class="el" href="structnetxpert_1_1data_1_1ODPair.html">netxpert
 const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a0d02226f1246cc54aca03dbdfddabb62">GetOptimum</a> () const </td></tr>
 <tr class="memdesc:a0d02226f1246cc54aca03dbdfddabb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall optimum of the solver. <br /></td></tr>
 <tr class="separator:a0d02226f1246cc54aca03dbdfddabb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dccec6e7af7d844d38e9ab3f8f151b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a2dccec6e7af7d844d38e9ab3f8f151b9">SaveResults</a> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap) const </td></tr>
-<tr class="memdesc:a2dccec6e7af7d844d38e9ab3f8f151b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).  <a href="#a2dccec6e7af7d844d38e9ab3f8f151b9">More...</a><br /></td></tr>
-<tr class="separator:a2dccec6e7af7d844d38e9ab3f8f151b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb96f70fca01e21e2c978d7f05ab2235"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb96f70fca01e21e2c978d7f05ab2235"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#acb96f70fca01e21e2c978d7f05ab2235">SaveResults</a> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap)</td></tr>
+<tr class="memdesc:acb96f70fca01e21e2c978d7f05ab2235"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB, or JSON). <br /></td></tr>
+<tr class="separator:acb96f70fca01e21e2c978d7f05ab2235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a24ebebe90eac95f7ee5df5c5825e63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a24ebebe90eac95f7ee5df5c5825e63"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a9a24ebebe90eac95f7ee5df5c5825e63">GetResultsAsJSON</a> ()</td></tr>
+<tr class="memdesc:a9a24ebebe90eac95f7ee5df5c5825e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the ODM results as JSON String with the original from and to nodes. <br /></td></tr>
+<tr class="separator:a9a24ebebe90eac95f7ee5df5c5825e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classnetxpert_1_1ISolver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classnetxpert_1_1ISolver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classnetxpert_1_1ISolver.html">netxpert::ISolver</a></td></tr>
 <tr class="memitem:adb78f899fbaec49ffd6df5bfd0528074 inherit pub_methods_classnetxpert_1_1ISolver"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb78f899fbaec49ffd6df5bfd0528074"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1ISolver.html#adb78f899fbaec49ffd6df5bfd0528074">~ISolver</a> ()</td></tr>
@@ -224,7 +229,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Solver for computing an Origin Destination Matrix. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000013">Todo:</a></b></dt><dd>Check for duplicate code -&gt; SPT Solver - Inheritance?</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000010">Todo:</a></b></dt><dd>Check for duplicate code -&gt; SPT Solver - Inheritance?</dd></dl>
 <ul>
 <li>Initialization with a <a class="el" href="structnetxpert_1_1cnfg_1_1Config.html" title="Storage for the configuration of NetXpert. ">netxpert::cnfg::Config</a> object in Constructor </li>
 <li>call of <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#ae799703ff303d31e2c26b4bced78ac43" title="Sets the origin nodes. ">SetOrigins()</a> method defines 1-n origins (must be at least 1 origin) </li>
@@ -232,39 +237,10 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <li>call of <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a6021a419ef2db34a079e508b79b94656">Solve</a>( <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> ) method for the computation; the network must be constructed prior to this step </li>
 <li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a0d02226f1246cc54aca03dbdfddabb62" title="Gets the overall optimum of the solver. ">GetOptimum()</a> for getting the overall optimum </li>
 <li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a7fa514c840cda5d6e8c076b15dc807e6" title="Gets the origin destination matrix of the odm solver. ">GetODMatrix()</a> for getting the actual result of the ODM computation </li>
-<li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#a2dccec6e7af7d844d38e9ab3f8f151b9" title="Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). ">SaveResults()</a></li>
+<li>optional: <a class="el" href="classnetxpert_1_1OriginDestinationMatrix.html#acb96f70fca01e21e2c978d7f05ab2235" title="Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB, or JSON). ">SaveResults()</a></li>
 </ul>
 <p>all other setters and getters can be used for overriding the configuration from the constructor </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a2dccec6e7af7d844d38e9ab3f8f151b9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void netxpert::OriginDestinationMatrix::SaveResults </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>resultTableName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;&#160;</td>
-          <td class="paramname"><em>cmap</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000014">Todo:</a></b></dt><dd>Implement JSON RESULT_DB_TYPE </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="a05b29c743df9d1d9002d682e47c791ba"></a>
 <div class="memitem">
 <div class="memproto">

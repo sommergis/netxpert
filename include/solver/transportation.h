@@ -96,10 +96,14 @@ namespace netxpert {
             std::map<netxpert::data::ODPair, netxpert::data::DistributionArc> GetDistribution() const;
             //simplified json output
             ///\brief Gets the computed optimum and distribution of the Transportation Solver as JSON string (original IDs)
+            ///\todo check for GetResultsAsJSON() in other solvers! rename? or implement the other variant
+            /// requires a special data struct TransportationResult for serialization
             std::string GetSolverJSONResult() const;
             ///\brief Gets the computed distribution of the Transportation Solver as simple variant (original IDs)
             std::vector<netxpert::data::ExtDistributionArc> GetExtDistribution() const;
             ///\brief Gets the computed distribution of the Transportation Solver as JSON string (original IDs)
+            ///\todo check for GetResultsAsJSON() in other solvers!
+            /// requires a special data struct ExtDistributionArc for serialization
             std::string GetJSONExtDistribution() const;
             ///\brief Saves the results of the odm solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).
             ///\todo Implement JSON RESULT_DB_TYPE
