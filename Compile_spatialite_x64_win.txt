@@ -1,0 +1,97 @@
+﻿Spatialite x64 Compiling on Windows
+------------------------------------
+Download von folgenden Libs von osgeos4w-Projekt:
+-zlib
+-proj
+-geos
+-libxml2
+-freexl
+
+# VS x64 Cross Tools-CMD öffnen
+
+1. config-msvc.h anpassen
+/* Johannes Sommer 1 -> 0 (klappt leider nicht, workaround in zconf.h*/
+#define HAVE_UNISTD_H 0 
+/* Johannes Sommer Win32 -> Win64*/
+#define TARGET_CPU "Win64"
+2. zconf.h anpassen (zlib)
+/* Fix Johannes Sommer: Windows */
+#	 if defined(WIN64) || defined(_WIN32) || defined(WIN32)
+#     include <io.h>
+#    else
+#    include <unistd.h>         /* for SEEK_*, off_t, and _LFS64_LARGEFILE */
+#    endif
+/* End Fix */ 
+3. gg_extras.c anpassen (Function rint auskommentieren, da bereits im c++ standard in windows vorhanden)
+4. makefile.vc anpassen (include-Dirs und libs, clean optionen ergänzen)
+5. sqlite3.obj für x64 is vs compilieren und nach libspatialite-4.3.0\ kopieren
+6. linker-option für lib.exe und link.exe in makefile.vc anpassen: /MACHINE:X64
+7. Bei Fehlern bei link.exe /dll könnte auch x86 statt x64 der library vorliegen (check mit dumpbin /headers [name].dll | more )
+
+
+
+
+
+MinGW + MSYS
+------------
+1. libiconv: http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+
+cd libiconv-1.14
+./configure
+make
+--> Fehler 
+make install-strip
+--> Fehler, aber Dateien in /usr/local/lib
+make distclean
+./configure --disable-shared
+make
+make install-strip
+
+download libiconv.la and libcharset.la : http://www.gaia-gis.it/spatialite-2.5.0/[lib]
+then copy both files: 
+cp libiconv.la libcharset.la /usr/local/lib
+
+2. proj: http://download.osgeo.org/proj/proj-4.9.2.tar.gzcd proj-4.9.2
+./configure
+make
+make install-strip
+--> OK /usr/local/bin + lib + share
+
+3. geos: http://download.osgeo.org/geos/geos-3.5.0.tar.bz2
+./configure
+make
+make install-strip
+--> OK
+
+4. sqlite3 : http://www.sqlite.org/2015/sqlite-autoconf-3090200.tar.gz
+cd sqlite-autoconf-3090200
+export "CFLAGS=-DSQLITE_ENABLE_RTREE -DSQLITE_ENABLE_STAT3=1 -DSQLITE_ENABLE_TREE_EXPLAIN=1 -DSQLITE_ENABLE_UPDATE_DELETE_LIMIT=1 -DSQLITE_ENABLE_FTS3_PARENTHESIS=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
+./configure
+make
+make install-strip
+--> OK /usr/local/bin + lib + share
+
+/*
+5. libz: http://zlib.net/zlib128.zip
+cd zlib-1.2.8
+export "INCLUDE_PATH=/usr/local/include"
+export "LIBRARY_PATH=/usr/local/lib"
+export "BINARY_PATH=/usr/local/bin"
+make -f win32/Makefile.gcc
+make install -f win32/Makefile.gcc*/
+
+5. libxml2: ftp://xmlsoft.org/libxml2/libxml2-2.9.2.tar.gz
+cd libxml2-2.9.2
+./configure --without-python --with-zlib=/usr/local --with-lzma=/usr/local
+make
+make install-strip
+-->OK
+
+6. spatialite: http://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-4.3.0.zip
+cd libspatialite-4.3.0
+export "CFLAGS=-I/usr/local/include -DLOADABLE_EXTENSION"
+export "LDFLAGS=-L/usr/local/lib"
+export "PKG_CONFIG_PATH=/usr/local/lib/pkgconfig"
+./configure --target=mingw32 --enable-lwgeom=no --enable-libxml2=no --enable-freexl=no --enable-gcp=yes
+make
+make install-strip

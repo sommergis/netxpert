@@ -19,3 +19,8 @@ test/test.gdb$
 .*\.*~$
 .*\.log$
 .*\.sqlite$
+_bak$
+doc/html$
+doc/latex$
+.cccc$
+
