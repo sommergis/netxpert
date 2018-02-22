@@ -150,8 +150,12 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a5a8777928028df716efcabd643cf3506"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79bb14f2ccab2abcacf9bb466d1e3a1c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79bb14f2ccab2abcacf9bb466d1e3a1c"></a>
 std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#afda0f45b9f9fb9e9e363af1e4d8296b4">netxpert::data::arc_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a79bb14f2ccab2abcacf9bb466d1e3a1c">GetMinimumSpanningTree</a> () const </td></tr>
-<tr class="memdesc:a79bb14f2ccab2abcacf9bb466d1e3a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the arcs of the network that form one minimum spanning tree. <br /></td></tr>
+<tr class="memdesc:a79bb14f2ccab2abcacf9bb466d1e3a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the internal arcs of the network that form one minimum spanning tree. <br /></td></tr>
 <tr class="separator:a79bb14f2ccab2abcacf9bb466d1e3a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66897ce2ffcdb8f543745e4fe5782a0f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66897ce2ffcdb8f543745e4fe5782a0f"></a>
+std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a66897ce2ffcdb8f543745e4fe5782a0f">GetOrigMinimumSpanningTree</a> () const </td></tr>
+<tr class="memdesc:a66897ce2ffcdb8f543745e4fe5782a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the original arc ids of the network that form one minimum spanning tree. <br /></td></tr>
+<tr class="separator:a66897ce2ffcdb8f543745e4fe5782a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a958dacf0024f62a9bd46a4bef28827f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a958dacf0024f62a9bd46a4bef28827f7">SaveResults</a> (const std::string &amp;resultTableName, const <a class="el" href="structnetxpert_1_1data_1_1ColumnMap.html">netxpert::data::ColumnMap</a> &amp;cmap) const </td></tr>
 <tr class="memdesc:a958dacf0024f62a9bd46a4bef28827f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the results of the mst solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB).  <a href="#a958dacf0024f62a9bd46a4bef28827f7">More...</a><br /></td></tr>
 <tr class="separator:a958dacf0024f62a9bd46a4bef28827f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,7 +171,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <li>Initialization with a <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html" title="The internal Network representation. ">netxpert::data::InternalNet</a> object in Constructor </li>
 <li>call of <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#ae7ae3fa3b3be489c9d4de521a93b5afe">Solve</a>( <a class="el" href="classnetxpert_1_1data_1_1InternalNet.html">netxpert::data::InternalNet</a> ) method for the computation; the network must be constructed prior to this step </li>
 <li>optional: <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a5a8777928028df716efcabd643cf3506" title="Gets the overall optimum of the solver. ">GetOptimum()</a> for getting the overall optimum </li>
-<li>optional: <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a79bb14f2ccab2abcacf9bb466d1e3a1c" title="Gets all the arcs of the network that form one minimum spanning tree. ">GetMinimumSpanningTree()</a> for getting the actual result of the MST computation </li>
+<li>optional: <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a79bb14f2ccab2abcacf9bb466d1e3a1c" title="Gets all the internal arcs of the network that form one minimum spanning tree. ">GetMinimumSpanningTree()</a> for getting the actual result of the MST computation </li>
 <li>optional: <a class="el" href="classnetxpert_1_1MinimumSpanningTree.html#a958dacf0024f62a9bd46a4bef28827f7" title="Saves the results of the mst solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). ">SaveResults()</a></li>
 </ul>
 <p>all other setters and getters can be used for overriding the configuration from the constructor </p>
@@ -197,7 +201,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </div><div class="memdoc">
 
 <p>Saves the results of the mst solver with the configured RESULT_DB_TYPE (SpatiaLite, FileGDB). </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000012">Todo:</a></b></dt><dd>Implement JSON RESULT_DB_TYPE </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo:</a></b></dt><dd>Implement JSON RESULT_DB_TYPE </dd></dl>
 
 </div>
 </div>

@@ -177,10 +177,6 @@ void SpatiaLiteWriter::CreateNetXpertDB()
         LOGGER::LogError( ex.what() );
     }
 }
-void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType)
-{
-    CreateSolverResultTable(_tableName, solverType, false);
-}
 
 void SpatiaLiteWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType, bool dropFirst)
 {

@@ -136,10 +136,6 @@ void FGDBWriter::CreateNetXpertDB()
         LOGGER::LogError( ex.what() );
     }
 }
-void FGDBWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType)
-{
-    CreateSolverResultTable(_tableName, solverType, false);
-}
 
 void FGDBWriter::CreateSolverResultTable(const string& _tableName, const NetXpertSolver solverType, bool dropFirst)
 {

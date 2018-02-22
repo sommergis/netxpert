@@ -123,12 +123,13 @@ Public Member Functions</h2></td></tr>
 const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#ab4fd7bc9b0ebfb5a155047916daddd65">GetOptimum</a> () const </td></tr>
 <tr class="memdesc:ab4fd7bc9b0ebfb5a155047916daddd65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall optimum of the solver. <br /></td></tr>
 <tr class="separator:ab4fd7bc9b0ebfb5a155047916daddd65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a553d23d199377b96c16d21d286809cd8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#a553d23d199377b96c16d21d286809cd8">GetODMatrixAsJSON</a> ()</td></tr>
-<tr class="memdesc:a553d23d199377b96c16d21d286809cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the origin destination matrix of the odm solver as JSON string.  <a href="#a553d23d199377b96c16d21d286809cd8">More...</a><br /></td></tr>
+<tr class="memitem:a553d23d199377b96c16d21d286809cd8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a553d23d199377b96c16d21d286809cd8"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#a553d23d199377b96c16d21d286809cd8">GetODMatrixAsJSON</a> ()</td></tr>
+<tr class="memdesc:a553d23d199377b96c16d21d286809cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the origin destination matrix of the odm solver as JSON string with original from and to nodes. <br /></td></tr>
 <tr class="separator:a553d23d199377b96c16d21d286809cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adca164a4061f90ba3d534ae0fda98afb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structnetxpert_1_1data_1_1ExtSPTreeArc.html">netxpert::data::ExtSPTreeArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#adca164a4061f90ba3d534ae0fda98afb">GetODMatrix</a> ()</td></tr>
-<tr class="memdesc:adca164a4061f90ba3d534ae0fda98afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the origin destination matrix of the odm solver with original arcs.  <a href="#adca164a4061f90ba3d534ae0fda98afb">More...</a><br /></td></tr>
-<tr class="separator:adca164a4061f90ba3d534ae0fda98afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2beeb1fcc12b1668877b79ff7818ea9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">netxpert::data::extarcid_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#ab2beeb1fcc12b1668877b79ff7818ea9">GetODMatrix</a> ()</td></tr>
+<tr class="memdesc:ab2beeb1fcc12b1668877b79ff7818ea9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the origin destination matrix of the odm solver with original arc ids.  <a href="#ab2beeb1fcc12b1668877b79ff7818ea9">More...</a><br /></td></tr>
+<tr class="separator:ab2beeb1fcc12b1668877b79ff7818ea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Simple Interface of the <a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html" title="Simple Interface of the OriginDestinationMatrix Solver. ">OriginDestinationMatrix</a> Solver. </p>
@@ -136,15 +137,15 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <li>Initialization with a JSON Config in Constructor </li>
 <li>call of <a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#a0ae3ad35c6c2ce358634c931f1cd6c7b" title="Computes the Origin destination matrix on the given network and saves the result. ...">Solve()</a> method (saves the results to the ResultDB given in the config JSON) </li>
 <li>optional: <a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#ab4fd7bc9b0ebfb5a155047916daddd65" title="Gets the overall optimum of the solver. ">GetOptimum()</a> returns the overall optimum </li>
-<li>optional: <a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#a553d23d199377b96c16d21d286809cd8" title="Gets the origin destination matrix of the odm solver as JSON string. ">GetODMatrixAsJSON()</a> returns the origin destination matrix as JSON string </li>
+<li>optional: <a class="el" href="classnetxpert_1_1simple_1_1OriginDestinationMatrix.html#a553d23d199377b96c16d21d286809cd8" title="Gets the origin destination matrix of the odm solver as JSON string with original from and to nodes...">GetODMatrixAsJSON()</a> returns the origin destination matrix as JSON string </li>
 </ul>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="adca164a4061f90ba3d534ae0fda98afb"></a>
+<a class="anchor" id="ab2beeb1fcc12b1668877b79ff7818ea9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="structnetxpert_1_1data_1_1ExtSPTreeArc.html">netxpert::data::ExtSPTreeArc</a>&gt; netxpert::simple::OriginDestinationMatrix::GetODMatrix </td>
+          <td class="memname">std::vector&lt;<a class="el" href="namespacenetxpert_1_1data.html#a03f3f6333be4cd56b752fa5515e258ac">netxpert::data::extarcid_t</a>&gt; netxpert::simple::OriginDestinationMatrix::GetODMatrix </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -152,26 +153,8 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
       </table>
 </div><div class="memdoc">
 
-<p>Gets the origin destination matrix of the odm solver with original arcs. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000008">Todo:</a></b></dt><dd>implement me </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a553d23d199377b96c16d21d286809cd8"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string netxpert::simple::OriginDestinationMatrix::GetODMatrixAsJSON </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets the origin destination matrix of the odm solver as JSON string. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo:</a></b></dt><dd>implement me </dd></dl>
+<p>Gets the origin destination matrix of the odm solver with original arc ids. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>implement me </dd></dl>
 
 </div>
 </div>

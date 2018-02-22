@@ -61,154 +61,270 @@ void
     }
 }
 
+const std::string
+ MinCostFlow::GetResultsAsJSON() {
+
+  LOGGER::LogDebug("Entering GetResultsAsJSON()..");
+  std::ostringstream outStream;
+  //header for json
+  outStream << "{ \"result\" : [ " << endl;
+
+  //Processing and Saving Results are handled within net.ProcessResultArcs()
+  std::vector<netxpert::data::FlowCost>::const_iterator it; //const_iterator wegen Zugriff auf this->flowCost
+
+  if (NETXPERT_CNFG.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+  {
+//    //check if already loaded to mem through SaveResults()
+//    if (DBHELPER::KV_Network.size() < 1) {
+       std::string arcIDs = processTotalArcIDs();
+
+      LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+
+      ColumnMap cmap { NETXPERT_CNFG.ArcIDColumnName, NETXPERT_CNFG.FromNodeColumnName, NETXPERT_CNFG.ToNodeColumnName,
+                      NETXPERT_CNFG.CostColumnName, NETXPERT_CNFG.CapColumnName, NETXPERT_CNFG.OnewayColumnName};
+
+      if (arcIDs.size() > 0) {
+        DBHELPER::LoadGeometryToMem(NETXPERT_CNFG.ArcsTableName, cmap, NETXPERT_CNFG.ArcsGeomColumnName, arcIDs);
+      }
+      LOGGER::LogDebug("Done!");
+//    }
+  }
+
+  int counter = 0;
+
+  #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+  {
+  for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+  {
+    #pragma omp single nowait
+    {
+    auto arcFlow = *it;
+
+    counter += 1;
+    if (counter % 2500 == 0)
+        LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+
+    std::string arcIDs  = "";
+    auto arc            = arcFlow.intArc;
+    cost_t cost         = arcFlow.cost;
+    flow_t flow         = arcFlow.flow;
+    capacity_t cap      = -1;
+
+    //works only on non-splitted arcs - the rest of the route parts will
+    //be added through InternalNet::addRouteGeomParts()
+    const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
+
+    arcIDs  = arcData.extArcID;
+    cap     = arcData.capacity;
+
+    string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
+    string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
+
+    std::vector<netxpert::data::arc_t> arcs {arc};
+
+    if (orig != "dummy" && dest != "dummy")
+      this->net->ProcessMCFResultArcsMemS(orig, dest, cost, cap, flow, arcIDs,
+                                                arcs, outStream);
+    else
+      LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
+                                        to_string(cap) + ", flow: " +to_string(flow));
+
+    if (counter < this->flowCost.size())
+      outStream << ",";
+
+    } //omp single nowait
+  }
+  } //omp parallel
+
+  outStream << " ] }" << endl;
+
+  return outStream.str();
+}
+
+std::string
+ MinCostFlow::processTotalArcIDs() {
+
+  std::string arcIDs = "";
+  std::unordered_set<string> totalArcIDs;
+  std::vector<netxpert::data::FlowCost>::const_iterator it; //const_iterator wegen Zugriff auf this->flowCost
+
+  #pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
+  {
+    //populate arcIDs
+    for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+    {
+      #pragma omp single nowait
+      {
+        auto arcFlow = *it;
+        auto arc = arcFlow.intArc;
+  //    double cost = arcFlow.cost;
+  //    double flow = arcFlow.flow;
+        //only one arc
+        auto arcIDlist = this->net->GetOrigArcIDs(std::vector<arc_t>{arc});
+        std::unordered_set<string>::const_iterator it;
+        it = arcIDlist.begin();
+
+        if (arcIDlist.size() > 0)
+        {
+          std::string id = *it;
+
+          #pragma omp critical
+          {
+            if (id != "dummy")
+              totalArcIDs.insert(id);
+          }
+        }
+      }//omp single
+    }//for
+  }//omp parallel
+
+  for (std::string id : totalArcIDs) {
+    arcIDs += id += ",";
+  }
+  if (arcIDs.size() > 0)
+    arcIDs.pop_back();
+
+  return arcIDs;
+}
+
 void
  MinCostFlow::SaveResults(const std::string& resultTableName,
-                          const ColumnMap& cmap) const {
-    try
+                          const ColumnMap& cmap) {
+  try
+  {
+    Config cnfg = this->NETXPERT_CNFG;
+    unique_ptr<DBWriter> writer;
+    unique_ptr<SQLite::Statement> qry; //is null in case of ESRI FileGDB
+    std::ofstream outfile; // maybe unused - just for JSON or Google Polyline
+    std::ostringstream outStream; // maybe unused - just for JSON or Google Polyline
+
+    switch (cnfg.ResultDBType)
     {
-        Config cnfg = this->NETXPERT_CNFG;
-
-        unique_ptr<DBWriter> writer;
-        unique_ptr<SQLite::Statement> qry;
-        switch (cnfg.ResultDBType)
+      case RESULT_DB_TYPE::SpatiaLiteDB:
+      {
+        if (cnfg.ResultDBPath == cnfg.NetXDBPath)
         {
-            case RESULT_DB_TYPE::SpatiaLiteDB:
-            {
-                if (cnfg.ResultDBPath == cnfg.NetXDBPath)
-                {
-                    //Override result DB Path with original netXpert DB path
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
-                }
-                else
-                {
-                    writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
-                }
-                writer->CreateNetXpertDB(); //create before preparing query
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
-                writer->CommitCurrentTransaction();
-                /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
-                {*/
-                auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
-                qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::MinCostFlowSolver));
-                //}
-            }
-            break;
-            case RESULT_DB_TYPE::ESRI_FileGDB:
-            {
-                writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
-                writer->CreateNetXpertDB();
-                writer->OpenNewTransaction();
-                writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
-                writer->CommitCurrentTransaction();
-            }
-            break;
+            //Override result DB Path with original netXpert DB path
+            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg, cnfg.NetXDBPath));
         }
-
-        LOGGER::LogDebug("Writing Geometries..");
+        else
+        {
+            writer = unique_ptr<DBWriter>(new SpatiaLiteWriter(cnfg));
+        }
+        writer->CreateNetXpertDB(); //create before preparing query
         writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
+        writer->CommitCurrentTransaction();
+        /*if (cnfg.GeometryHandling != GEOMETRY_HANDLING::RealGeometry)
+        {*/
+        auto& sldbWriter = dynamic_cast<SpatiaLiteWriter&>(*writer);
+        qry = unique_ptr<SQLite::Statement> (sldbWriter.PrepareSaveResultArc(resultTableName, NetXpertSolver::MinCostFlowSolver));
+        //}
+      }
+      break;
+      case RESULT_DB_TYPE::ESRI_FileGDB:
+      {
+        writer = unique_ptr<DBWriter> (new FGDBWriter(cnfg)) ;
+        writer->CreateNetXpertDB();
+        writer->OpenNewTransaction();
+        writer->CreateSolverResultTable(resultTableName, NetXpertSolver::MinCostFlowSolver, true);
+        writer->CommitCurrentTransaction();
+      }
+      break;
+      case RESULT_DB_TYPE::JSON:
+      {
+        //init file
+        LOGGER::LogDebug("Writing Geometries..");
+        outfile.open(cnfg.ResultDBPath.c_str(), ios::out | ios::app);
+        //header for json
+        outfile << "{ \"result\" : [ " << endl;
+      }
+      break;
+    }
 
-        //Processing and Saving Results are handled within net.ProcessResultArcs()
-        std::string arcIDs = "";
-        std::unordered_set<string> totalArcIDs;
-        std::vector<FlowCost>::const_iterator it;
+    if (cnfg.ResultDBType == RESULT_DB_TYPE::ESRI_FileGDB | cnfg.ResultDBType == RESULT_DB_TYPE::SpatiaLiteDB) {
+      LOGGER::LogDebug("Writing Geometries..");
+      writer->OpenNewTransaction();
+    }
 
-		if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
-		{
-			LOGGER::LogDebug("Preloading relevant geometries into Memory..");
+    //Processing and Saving Results are handled within net.ProcessResultArcs()
+    std::string arcIDs = "";
+    std::vector<FlowCost>::const_iterator it;
 
-			#pragma omp parallel default(shared) private(it) num_threads(LOCAL_NUM_THREADS)
-			{
-            //populate arcIDs
-            for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
-            {
-                #pragma omp single nowait
-                {
-                auto arcFlow = *it;
-                auto arc = arcFlow.intArc;
-//                double cost = arcFlow.cost;
-//                double flow = arcFlow.flow;
-                //only one arc
-                auto arcIDlist = this->net->GetOrigArcIDs(std::vector<arc_t>{arc});
-                std::unordered_set<string>::const_iterator it;
-                it = arcIDlist.begin();
+    if (cnfg.GeometryHandling == GEOMETRY_HANDLING::RealGeometry)
+    {
+      arcIDs = processTotalArcIDs();
 
-                if (arcIDlist.size() > 0)
-                {
-                    std::string id = *it;
+      LOGGER::LogDebug("Preloading relevant geometries into Memory..");
 
-                    #pragma omp critical
-                    {
-                        if (id != "dummy")
-                            totalArcIDs.insert(id);
-                    }
-                }
-                }//omp single
-            }
-			}//omp parallel
-
-			for (string id : totalArcIDs) {
-				arcIDs += id += ",";
-            }
-
-			if (arcIDs.size() > 0)
-			{
-				arcIDs.pop_back(); //trim last comma
-				DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
-			}
-			LOGGER::LogDebug("Done!");
-		}
+      if (arcIDs.size() > 0) {
+        DBHELPER::LoadGeometryToMem(cnfg.ArcsTableName, cmap, cnfg.ArcsGeomColumnName, arcIDs);
+      }
+      LOGGER::LogDebug("Done!");
+    }
 
     int counter = 0;
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+
+    #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
     {
-      for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+    for (it = this->flowCost.begin(); it != this->flowCost.end(); ++it)
+    {
+      #pragma omp single nowait
       {
-          #pragma omp single nowait
-          {
-          auto arcFlow = *it;
+      auto arcFlow = *it;
 
-          counter += 1;
-          if (counter % 2500 == 0)
-              LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
+      counter += 1;
+      if (counter % 2500 == 0)
+          LOGGER::LogInfo("Processed #" + to_string(counter) + " geometries.");
 
-          std::string arcIDs  = "";
-          auto arc            = arcFlow.intArc;
-          cost_t cost         = arcFlow.cost;
-          flow_t flow         = arcFlow.flow;
-          capacity_t cap      = -1;
+      std::string arcIDs  = "";
+      auto arc            = arcFlow.intArc;
+      cost_t cost         = arcFlow.cost;
+      flow_t flow         = arcFlow.flow;
+      capacity_t cap      = -1;
 
-          //works only on non-splitted arcs - the rest of the route parts will
-          //be added through InternalNet::addRouteGeomParts()
-          const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
+      //works only on non-splitted arcs - the rest of the route parts will
+      //be added through InternalNet::addRouteGeomParts()
+      const netxpert::data::ArcData arcData = this->net->GetArcData(arc);
 
-          arcIDs  = arcData.extArcID;
-          cap     = arcData.capacity;
+      arcIDs  = arcData.extArcID;
+      cap     = arcData.capacity;
 
-          string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
-          string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
+      string orig = this->net->GetOrigNodeID(this->net->GetSourceNode(arc));
+      string dest = this->net->GetOrigNodeID(this->net->GetTargetNode(arc));
 
-          std::vector<netxpert::data::arc_t> arcs {arc};
+      std::vector<netxpert::data::arc_t> arcs {arc};
 
-          if (orig != "dummy" && dest != "dummy")
-              this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs,
-                                                      arcs,
-                                                      resultTableName, *writer, *qry);
-          else
-              LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
-                                              to_string(cap) + ", flow: " +to_string(flow));
-          }//omp single
-      }
-      }//omp paralell
+      if (orig != "dummy" && dest != "dummy")
+          this->net->ProcessMCFResultArcsMem(orig, dest, cost, cap, flow, arcIDs,
+                                                  arcs,
+                                                  resultTableName, *writer, *qry);
+      else
+          LOGGER::LogInfo("Dummy! orig: "+orig+", dest: "+ dest+", cost: "+to_string(cost)+ ", cap: "+
+                                          to_string(cap) + ", flow: " +to_string(flow));
+      }//omp single
+    } //for
+    }//omp paralell
+
+    if (cnfg.ResultDBType == RESULT_DB_TYPE::ESRI_FileGDB | cnfg.ResultDBType == RESULT_DB_TYPE::SpatiaLiteDB) {
+      LOGGER::LogDebug("Committing..");
       writer->CommitCurrentTransaction();
       writer->CloseConnection();
       LOGGER::LogDebug("Done!");
     }
-    catch (exception& ex)
-    {
-        LOGGER::LogError("MinCostFlow::SaveResults() - Unexpected Error!");
-        LOGGER::LogError(ex.what());
+    if (cnfg.ResultDBType == RESULT_DB_TYPE::JSON) {
+      LOGGER::LogDebug("Writing to disk..");
+      outfile << " ] }" << endl;
+      outfile.flush();
+      outfile.close();
+      LOGGER::LogDebug("Done!");
     }
+  }//try
+  catch (exception& ex)
+  {
+      LOGGER::LogError("MinCostFlow::SaveResults() - Unexpected Error!");
+      LOGGER::LogError(ex.what());
+  }
 }
 
 const MCFAlgorithm
@@ -221,7 +337,7 @@ void
     algorithm = mcfAlgorithm;
 }
 
-const double
+inline const double
  MinCostFlow::GetOptimum() const {
     return optimum;
 }
