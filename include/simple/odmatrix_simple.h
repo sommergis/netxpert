@@ -56,7 +56,7 @@ namespace netxpert {
             ///\brief Gets the origin destination matrix of the odm solver as JSON string with original from and to nodes
             std::string GetODMatrixAsJSON();
             ///\brief Gets the origin destination matrix of the odm solver with original arc ids
-            ///\todo implement me
+            ///\todo implement me; problem: resolve internal ODPair to external arcIDs
             std::vector<netxpert::data::extarcid_t> GetODMatrix();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;

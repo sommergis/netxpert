@@ -271,7 +271,8 @@ const double
 {
     double result = 0;
     if (this->solver)
-        result = this->solver->GetOptimum();
+      result = this->solver->GetOptimum();
+
     return result;
 }
 
@@ -280,14 +281,15 @@ std::string
 {
     std::string result;
     if (this->solver)
-        result = this->solver->GetResultsAsJSON();
+      result = this->solver->GetResultsAsJSON();
+
     return result;
 }
 std::vector<netxpert::data::extarcid_t>
  netxpert::simple::OriginDestinationMatrix::GetODMatrix()
 {
     std::vector<netxpert::data::extarcid_t> result;
-    /*if (this->solver)
-        result = this->solver->GetODMatrix();*/
+    //problem: resolve internal ODPair to external arcIDs
+
     return result;
 }

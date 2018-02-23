@@ -719,7 +719,7 @@ const node_t
                                  const geos::geom::Coordinate& point,
                                  const AddedNodeType startOrEnd) {
 
-    std::cout << "entering insertNewNode().. "<< std::endl;
+    //std::cout << "entering insertNewNode().. "<< std::endl;
 
     using namespace std;
     using namespace geos::geom;

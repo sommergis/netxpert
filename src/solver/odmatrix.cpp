@@ -253,14 +253,6 @@ void
     this->originNodes = origs;
 }
 
-void
- OriginDestinationMatrix::SetOrigins(vector<pair<netxpert::data::node_t, string>>& origs) {
-    vector<netxpert::data::node_t> newOrigs;
-    for (auto s : origs)
-        newOrigs.push_back(s.first);
-    this->originNodes = newOrigs;
-}
-
 vector<netxpert::data::node_t>
  OriginDestinationMatrix::GetDestinations() const {
     return this->destinationNodes;
@@ -278,14 +270,6 @@ vector<uint32_t>
 void
  OriginDestinationMatrix::SetDestinations(vector<netxpert::data::node_t>& dests) {
     this->destinationNodes = dests;
-}
-
-void
- OriginDestinationMatrix::SetDestinations(vector<pair<netxpert::data::node_t, string>>& dests) {
-    vector<netxpert::data::node_t> newDests;
-    for (auto e : dests)
-        newDests.push_back(e.first);
-    this->destinationNodes = newDests;
 }
 
 vector<netxpert::data::node_t>

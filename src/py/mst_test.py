@@ -159,7 +159,7 @@ if __name__ == "__main__":
                      "mst | load nodes"
                     ]
 
-    active_tests = active_tests[:1]
+    #active_tests = active_tests[:1]
 
     if "mst" in active_tests:
         for i in range(2, 3):
