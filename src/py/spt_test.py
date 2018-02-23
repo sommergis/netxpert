@@ -71,7 +71,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = -1
+    cnfg.LogLevel = 5
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -93,42 +93,44 @@ def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
     net = netx.Network(arcsTable, cmap, cnfg)
     solver = netx.ShortestPathTree(cnfg)
 
-    for i in range(1,2):
+    #for i in range(1,2):
 
-      x = 703444
-      y = 5364720
-      supply = 0
+    x = 703444
+    y = 5364720
+    # POINT(703444 5364720)
+    supply = 0
 
-      withCap = False
-      startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
-                                      cmap, withCap)
+    withCap = False
+    startID = net.AddStartNode('start', x, y, supply, cnfg.Threshold,
+                                    cmap, withCap)
 
-      x = 703342 +i
-      y = 5364710 +i
-      endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
-                                      cmap, withCap)
+    x = 703342 #+i
+    y = 5364710 #+i
+    # POINT(703342 5364710)
+    endID = net.AddEndNode('end', x, y, supply, cnfg.Threshold,
+                                    cmap, withCap)
 
-      solver.SetOrigin(startID)
+    solver.SetOrigin(startID)
 
-      dests = []
-      dests.append(endID)
-      solver.SetDestinations(dests)
+    dests = []
+    dests.append(endID)
+    solver.SetDestinations(dests)
 
-      solver.Solve(net)
-      optimum = solver.GetOptimum()
+    solver.Solve(net)
+    optimum = solver.GetOptimum()
 
-      #print (solver.GetResultsAsJSON())
+    #print (solver.GetResultsAsJSON())
 
-      #if save:
-      #    solver.SaveResults(cnfg.ArcsTableName + "_20171207_spt", cmap)
+    #if save:
+    #    solver.SaveResults(cnfg.ArcsTableName + "_20171207_spt", cmap)
 
-      print "arcs #" + str(net.GetArcCount())
-      print "nodes #" + str(net.GetNodeCount())
+    #print "arcs #" + str(net.GetArcCount())
+    #print "nodes #" + str(net.GetNodeCount())
 
-      net.Reset()
-      #del net
+    net.Reset()
+    #del net
 
-      print optimum
+    print optimum
 
     return optimum
     #return solver.GetOptimum()
@@ -314,8 +316,8 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
         #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
 
     if 'win' in sys.platform:
@@ -360,8 +362,8 @@ if __name__ == "__main__":
                      "1-1 | add nodes | save"
                      ]
 
-    #active_tests = active_tests[0:4]
-    active_tests = active_tests[4:5]
+    active_tests = active_tests[0:4]
+    #active_tests = active_tests[4:5]
 
     if "1-1 | add nodes | save" in active_tests:
         cnfg.SptAlgorithm = 4
@@ -372,6 +374,24 @@ if __name__ == "__main__":
         stoptime = datetime.datetime.now()
         print(("Duration: {0}".format(stoptime - starttime)))
         print(result)
+        if "Big" in path_to_cnfg:
+          if str(result) != str(18.3440133391):
+              print("test failed!")
+              print("expected: 18.3440133391")
+          else:
+              print("test succeeded.")
+        if "small" in path_to_cnfg:
+            if str(result) != str(18.3440133391):
+                print("test failed!")
+                print("expected: 18.3440133391")
+            else:
+                print("test succeeded.")
+        if "Germany" in path_to_cnfg:
+            if str(result) != str(692970.416786):
+                print("test failed!")
+                print("expected: 692970.416786")
+            else:
+                print("test succeeded.")
 
         sys.exit(0)
 
@@ -388,16 +408,19 @@ if __name__ == "__main__":
             if "Big" in path_to_cnfg:
                 if str(result) != str(18.3440133391):
                     print("test failed!")
+                    print("expected: 18.3440133391")
                 else:
                     print("test succeeded.")
             if "small" in path_to_cnfg:
                 if str(result) != str(102.0257824):
                     print("test failed!")
+                    print("expected: 102.0257824")
                 else:
                     print("test succeeded.")
             if "Germany" in path_to_cnfg:
                 if str(result) != str(692970.416786):
                     print("test failed!")
+                    print("expected: 692970.416786")
                 else:
                     print("test succeeded.")
 
@@ -413,9 +436,9 @@ if __name__ == "__main__":
             print(("Duration: {0}".format(stoptime - starttime)))
             print("optimum: {0}".format(result))
             if "Big" in path_to_cnfg:
-                if str(result) != str(18.3440133391*3):
+                if str(result) != str(55.0320400173):
                     print("test failed!")
-                    print("expected: " + str(18.3440133391))
+                    print("expected: " + str(55.0320400173))
                 else:
                     print("test succeeded.")
             if "small" in path_to_cnfg:
@@ -439,7 +462,7 @@ if __name__ == "__main__":
             if "Big" in path_to_cnfg:
                 if str(result) != str(407788.849797):
                     print("test failed!")
-                    print("expected: " + str(18.3440133391))
+                    print("expected: " + str(407788.849797))
                 else:
                     print("test succeeded.")
             if "small" in path_to_cnfg:

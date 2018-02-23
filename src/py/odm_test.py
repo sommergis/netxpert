@@ -135,7 +135,7 @@ def test_odm_add_nodes(cnfg, cmap):
 
     optimum = solver.GetOptimum()
 
-    print (solver.GetResultsAsJSON())
+    #print (solver.GetResultsAsJSON())
 
     #if save:
     #    solver.SaveResults(cnfg.ArcsTableName + "_20180106_odm", cmap)
@@ -223,7 +223,7 @@ if __name__ == "__main__":
                      "n-n | load nodes"
                     ]
 
-    active_tests = active_tests[:2]
+   # active_tests = active_tests[:2]
 
     if "2-2 | add nodes" in active_tests:
         #for i in range(4, 6):

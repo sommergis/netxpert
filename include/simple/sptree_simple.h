@@ -51,7 +51,7 @@ namespace netxpert {
             ///\brief Gets the shortest paths of the spt solver as JSON string
             std::string GetShortestPathsAsJSON();
             ///\brief Gets the shortest paths of the spt solver with original arcs
-            ///\todo implement me
+            ///\todo implement me; problem: resolve internal ODPair to external arcIDs
             std::vector<netxpert::data::extarcid_t> GetShortestPaths();
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
