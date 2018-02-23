@@ -1,5 +1,0 @@
-<map id="netxpert::Transportation" name="netxpert::Transportation">
-<area shape="rect" id="node2" href="$classnetxpert_1_1MinCostFlow.html" title="Solver for the Minimum Cost Flow Problem. " alt="" coords="66,95,221,121"/>
-<area shape="rect" id="node3" href="$classnetxpert_1_1ISolver.html" title="Abstract Class (Interface) for all Solvers. " alt="" coords="5,5,124,32"/>
-<area shape="rect" id="node4" href="$structnetxpert_1_1cnfg_1_1Config.html" title="Storage for the configuration of NetXpert. " alt="" coords="148,5,296,32"/>
-</map>

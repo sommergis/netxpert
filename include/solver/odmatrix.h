@@ -91,8 +91,6 @@ namespace netxpert {
 
                 this->SetOrigins(newOrigs);
             };
-            ///\deprecated Use unclear!
-            void SetOrigins(std::vector<std::pair<netxpert::data::node_t, std::string>>& origs);
             ///\brief Sets the destination nodes
             void SetDestinations(std::vector<netxpert::data::node_t>& dests);
             ///\brief Sets the destination nodes per IDs
@@ -104,8 +102,6 @@ namespace netxpert {
 
                 this->SetDestinations(newDests);
             };
-            ///\deprecated Use unclear!
-            void SetDestinations(std::vector<std::pair<netxpert::data::node_t, std::string>>& dests);
             ///\brief Gets the destination nodes
             std::vector<netxpert::data::node_t> GetDestinations() const;
             ///\brief Gets the internal IDs of the destination nodes

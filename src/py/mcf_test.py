@@ -71,7 +71,7 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
-    cnfg.LogLevel = -1
+    cnfg.LogLevel = 5
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -192,7 +192,7 @@ if __name__ == "__main__":
                      "mcf | load nodes"
                     ]
 
-    active_tests = active_tests[:1]
+    #active_tests = active_tests[:1]
 
     if "mcf | add nodes" in active_tests:
         for i in range(1, 2):
