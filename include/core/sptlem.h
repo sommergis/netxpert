@@ -33,7 +33,7 @@
 
 #include "bijkstra.h"
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     #include "CHInterface.h"
     #include "CH/DefaultPriority.h"
 #endif
@@ -124,7 +124,7 @@ namespace netxpert {
             /* end of LEMON friendly interface */
 
             /* Contraction Hierarchies */
-            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
             ///\brief Loads the contracted network into the core solver
             /// for use in contracted networks
             void LoadNet_CH(CHInterface<DefaultPriority>* _chm,
@@ -184,7 +184,7 @@ namespace netxpert {
             //std::vector<netxpert::data::node_t> nodes;
 
             //Contraction Hierarchies
-            #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+            #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
             bool hasContractionHierarchies = false;
             graph_ch_t* chg;
             CHInterface<DefaultPriority>* chManager;

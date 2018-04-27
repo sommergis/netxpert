@@ -317,7 +317,7 @@ const std::vector<netxpert::data::arc_t>
     return path;
 }
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
 void
  SPT_LEM::LoadNet_CH(CHInterface<DefaultPriority>* _cm,
 //                     graph_ch_t* _chg,

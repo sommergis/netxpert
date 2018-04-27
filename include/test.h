@@ -57,7 +57,7 @@ namespace netxpert
 //        void TestAddNodes(netxpert::cnfg::Config& cnfg);
         void TestMST(netxpert::cnfg::Config& cnfg);
         void TestSPT(netxpert::cnfg::Config& cnfg);
-        #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+        #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
         void TestSPTCH(netxpert::cnfg::Config& cnfg);
         #endif
         void TestODMatrix(netxpert::cnfg::Config& cnfg);

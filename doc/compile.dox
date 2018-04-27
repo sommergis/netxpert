@@ -1,0 +1,162 @@
+/**
+  \page compile Compiling from source
+
+  \tableofcontents
+
+  \section compile_0_0 Dependencies
+  The following third party libraries have to be installed in order to compile netxpert.
+
+  \li cereal
+  \li FileGDBAPI 1.4
+  \li GEOS 3.4.2
+  \li LEMON 1.3.1
+  \li SpatiaLite 4.3.0
+  \li SQliteCPP 1.3.0
+  \li SQLite Amalgamation 3.9.2
+  \li Boost 1.57
+
+  optional: modified version of lemon-contrib\ch
+
+  \section compile_0_1 Macros
+
+  The following macros have to be defined in the compiling environment in order to compile netxpert properly.
+
+  \li SQLITE_ENABLE_RTREE=1
+  \li SQLITECPP_ENABLE_ASSERT_HANDLER
+  \li LEMON_ONLY_TEMPLATES=1<br>
+  This macro is needed for DEBUG compiling (=without optimizations)
+
+  Furthermore there are special netxpert macros that enable or disable certain features in netxpert.
+
+  \li NETX_WEB<br>
+  This Macro is for compiling a version on netxpert to deploy on a web service. It will set some aggressive
+  SQLite optimzations and ensure that netxpert will run single threaded. It is more safely to run web services
+  single threaded per web service process. The embedding service framework may scale according to the work load
+  per process or per thread but internally netxpert will be single threaded.
+
+  \li NETX_ENABLE_CONTRACTION_HIERARCHIES<br>
+  Contraction hierarchies are experimental at the moment. This macro enables the compilation against the LEMON
+  contrib module CH from Daniel Gobor which has been modified.
+
+  \section compile_0_2 Compiler Flags
+
+  \subsection compile_0_2_1 Linux with GCC
+
+  Release Mode:
+  \code
+  g++ -Wfatal-errors -Wall -std=c++14 -m64 -fexceptions -fPIC -fopenmp -Wno-unknown-pragmas -Wno-deprecated -Wno-effc++ -DSQLITE_ENABLE_RTREE=1 -DSQLITECPP_ENABLE_ASSERT_HANDLER -DLEMON_ONLY_TEMPLATES=1 -DNETX_ENABLE_CONTRACTION_HIERARCHIES -DNETX_WEB -O2 -std=c++14
+	\endcode
+  Debug Mode:
+  \code
+  g++ -Wfatal-errors -Wall -std=c++14 -m64 -fexceptions -fPIC -fopenmp -Wno-unknown-pragmas -Wno-deprecated -Wno-effc++ -DSQLITE_ENABLE_RTREE=1 -DSQLITECPP_ENABLE_ASSERT_HANDLER -DLEMON_ONLY_TEMPLATES=1 -DNETX_ENABLE_CONTRACTION_HIERARCHIES -DNETX_WEB -std=c++14 -g -DDEBUG
+	\endcode
+
+	SWIG<br>
+  SWIG has to be called in the compiling chain before linking it all together to a single library.
+
+	\code
+	swig -c++ -python -o $file_dir/$file_name_wrap.cpp -outdir $file_dir $file
+	\endcode
+
+	Linker:<br>
+	The following will set the path to search for the netxpert library.
+	\code
+	-Wl,-rpath=/usr/local/lib/netxpert
+  \endcode
+
+  \subsection compile_0_2_2 Windows with VC++
+
+  <b>Prerequisites</b>
+
+  \li compile geos_static<br>
+  <b>DEBUG</b>
+  \code
+  /GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Zi /Gm- /Od /Ob0 /Fd"geos-static.dir\Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Debug\"" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /RTC1 /GR /Gd /Oy- /MDd /Fa"Debug/" /EHsc /nologo /Fo"geos-static.dir\Debug\" /Fp"geos-static.dir\Debug\libgeos.pch" /D "NOMINMAX"
+  \endcode
+  <b>RELEASE</b>
+  \code
+  /GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Gm- /O2 /Ob2 /Fd"geos-static.dir\Release\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Release\"" /D "_MBCS" /errorReport:prompt /WX- /Zc:forScope /GR /Gd /Oy- /MD /Fa"Release/" /EHsc /nologo /Fo"geos-static.dir\Release\" /Fp"geos-static.dir\Release\libgeos.pch" /D "NOMINMAX"
+  \endcode
+
+  \li install boost
+
+  \li compile geos.dll<br>
+  <b>DEBUG</b>
+  \code
+  /GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Zi /Gm- /Od /Ob0 /Fd"geos.dir\Debug\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "_DEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Debug\"" /D "GEOS_DLL_EXPORT" /D "_WINDLL" /D "_MBCS" /D "NOMINMAX" /errorReport:prompt /WX- /Zc:forScope /RTC1 /GR /Gd /Oy- /MDd /Fa"Debug/" /EHsc /nologo /Fo"geos.dir\Debug\" /Fp"geos.dir\Debug\geos.pch"
+  \endcode
+  <b>RELEASE</b>
+  \code
+  /GS /TP /analyze- /W4 /Zc:wchar_t /I"C:\dev\netxpert\libs\geos-3.4.2\include" /I"C:\dev\netxpert\libs\geos-3.4.2\build\capi" /I"C:\dev\netxpert\libs\geos-3.4.2\build\include" /Gm- /O2 /Ob2 /Fd"geos.dir\Release\vc120.pdb" /fp:precise /D "WIN32" /D "_WINDOWS" /D "NDEBUG" /D "GEOS_INLINE" /D "CMAKE_INTDIR=\"Release\"" /D "GEOS_DLL_EXPORT" /D "_WINDLL" /D "_MBCS" /D "NOMINMAX" /errorReport:prompt /WX- /Zc:forScope /GR /Gd /Oy- /MD /Fa"Release/" /EHsc /nologo /Fo"geos.dir\Release\" /Fp"geos.dir\Release\geos.pch"
+  \endcode
+
+  <h3>Compiling netxpert</h3>
+
+  <b>DEBUG - Win32</b>
+  \code
+  /GS /TP /analyze- /W3 /Zc:wchar_t /I"C:\dev\netxpert\include" /I"D:\dev\winboost"
+  /I"C:\dev\netxpert\libs" /I"C:\dev\netxpert\libs\geos-3.4.2\include" /ZI /Gm /Od /Fd"Debug\vc120.pdb"
+  /fp:precise /D "WIN32" /D "_DEBUG" /D "SQLITE_ENABLE_RTREE=1" /D "SQLITECPP_ENABLE_ASSERT_HANDLER"
+  /D "_UNICODE" /D "UNICODE" /errorReport:prompt /WX- /Zc:forScope /RTC1 /Gd /Oy- /MDd /Fa"Debug\"
+  /EHsc /nologo /Fo"Debug\" /Fp"Debug\NetXpert.pch"
+  \endcode
+
+  <b>Linker</b>
+  \code
+  /OUT:"C:\dev\netxpert\Debug\NetXpert.lib" "geos.lib" "FileGDBAPI.lib" /NOLOGO
+  /LIBPATH:"D:\dev\winboost\lib32-msvc-12.0" /LIBPATH:"C:\dev\netxpert\libs\geos-3.4.2\build\lib\Debug"
+  /LIBPATH:"C:\dev\1_libs\FileGDBAPI\lib"
+  \endcode
+
+   <b>Deployment</b><br>
+   Copy the following DLLs into the out folder containing the netxpert library.
+  \li msvcp120d.dll
+  \li msvcr120d.dll
+  \li geos.dll
+  \li FileGDBAPI.dll
+  SpatiaLite
+  \li libfreexl-1.dll
+  \li libgcc_s_dw2-1.dll
+  \li libgeos_c-1.dll
+  \li libgeos-3-3-1.dll
+  \li libgeos-3-4-0dev.dll
+  \li libiconv-2.dll
+  \li libproj-0.dll
+  \li libspatialite-4.dll
+  \li libsqlite3-0.dll
+  \li libstdc++-6.dll
+
+  <b>RELEASE - Win32</b>
+  \code
+  /GS /analyze- /W3 /Zc:wchar_t /I"C:\dev\netxpert\include" /I"D:\dev\winboost" /I"C:\dev\netxpert\libs"
+  /I"C:\dev\netxpert\libs\geos-3.4.2\include" /Zi /Gm- /O2 /Fd"Release\vc120.pdb" /fp:precise /D "WIN32"
+  /D "NDEBUG" /D "SQLITE_ENABLE_RTREE=1" /D "SQLITECPP_ENABLE_ASSERT_HANDLER" /D "_UNICODE" /D "UNICODE"
+  /errorReport:prompt /WX- /Zc:forScope /Gd /Oy- /MD /Fa"Release\" /EHsc /nologo /Fo"Release\" /Fp"Release\NetXpert.pch"
+  \endcode
+
+  <b>Linker</b>
+  \code
+  /OUT:"C:\dev\netxpert\Release\NetXpert.lib" "geos.lib" "FileGDBAPI.lib" /NOLOGO
+  /LIBPATH:"D:\dev\winboost\lib32-msvc-12.0" /LIBPATH:"C:\dev\netxpert\libs\geos-3.4.2\build\lib\Release"
+  /LIBPATH:"C:\dev\1_libs\FileGDBAPI\lib"
+  \endcode
+
+   <b>Deployment</b><br>
+   Copy the following DLLs into the out folder containing the netxpert library.
+  \li msvcp120.dll
+  \li msvcr120.dll
+  \li geos.dll
+  \li FileGDBAPI.dll
+  SpatiaLite
+  \li libfreexl-1.dll
+  \li libgcc_s_dw2-1.dll
+  \li libgeos_c-1.dll
+  \li libgeos-3-3-1.dll
+  \li libgeos-3-4-0dev.dll
+  \li libiconv-2.dll
+  \li libproj-0.dll
+  \li libspatialite-4.dll
+  \li libsqlite3-0.dll
+  \li libstdc++-6.dll
+
+**/

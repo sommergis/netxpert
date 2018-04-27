@@ -233,7 +233,7 @@ void
     netxpert::data::cost_t totalCost = 0;
 
     //Read the network
-    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     bool chSearch = net.GetHasContractionHierarchies();
     #endif
     if (!chSearch) {
@@ -286,7 +286,7 @@ void
     }
 //    else { //CH search
 
-    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     if (chSearch) {
 
       auto sg = convertInternalNetworkToSolverData(net);
