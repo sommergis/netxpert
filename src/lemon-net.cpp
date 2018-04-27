@@ -155,7 +155,7 @@ void
 
 
 //--> Region Contraction Hierarchies
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
 void
  InternalNet::ComputeContraction(float contractionPercent) {
 
@@ -792,7 +792,7 @@ const node_t
         (*this->arcFilterMap)[newArc1] = true;
         (*this->arcFilterMap)[newArc2] = true;
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
         if (this->hasContractionHierarchies) {
 
           std::cout << "directed - hasContractionHierarchies.. "<< std::endl;
@@ -908,7 +908,7 @@ const node_t
         (*this->arcFilterMap)[revNewArc1] = true;
         (*this->arcFilterMap)[revNewArc2] = true;
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
         if (this->hasContractionHierarchies) {
           std::cout << "undirected - hasContractionHierarchies.. "<< std::endl;
           //add changes also to CH graph & maps
@@ -1262,7 +1262,7 @@ void
     this->eliminatedArcs.clear();
 
     //TODO CH
-    #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+    #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     #endif
 
 
