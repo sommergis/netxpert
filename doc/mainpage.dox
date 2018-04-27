@@ -12,7 +12,7 @@
  * This Project is licensed through the GNU Lesser Public License v2.
  *
  * \sa \ref overview
- * \sa \ref building
+ * \sa \ref compile
  * \sa \ref intro
  * \sa \ref solvers
  *
@@ -61,8 +61,6 @@
  * \subsection process Process
  * <img src="..\img\netxpert_process.png">
  *
- *
- * \page building Compiling from source
  *
  *
  */

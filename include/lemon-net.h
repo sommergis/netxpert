@@ -29,10 +29,10 @@
 
 #include "lemon/time_measure.h"
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     #include "CHInterface.h"
     #include "CH/DefaultPriority.h"
-#endif // ENABLE_CONTRACTION_HIERARCHIES
+#endif // NETX_ENABLE_CONTRACTION_HIERARCHIES
 
 #include "geos/geom/CoordinateSequenceFactory.h"
 #include "geos/geom/GeometryFactory.h"
@@ -402,7 +402,7 @@ namespace netxpert {
 
 //      -->Region Contraction Hierarchies
 
-        #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+        #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
         ///\brief Computes contraction hierarchies to speed up shortest path queries
         void
          ComputeContraction(float contractionPercent);
@@ -640,7 +640,7 @@ namespace netxpert {
                                      netxpert::data::ArcData> > arcDataMap;
 
       //Contraction Hierarchies
-      #if (defined ENABLE_CONTRACTION_HIERARCHIES)
+      #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
 
       bool hasContractionHierarchies = false;
       std::unique_ptr<netxpert::data::graph_ch_t> chg;

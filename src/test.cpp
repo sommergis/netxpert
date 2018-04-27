@@ -917,7 +917,7 @@ void netxpert::test::TestMST(Config& cnfg)
     }
 }*/
 
-#if (defined ENABLE_CONTRACTION_HIERARCHIES)
+#if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
 void netxpert::test::TestSPTCH(Config& cnfg) {
     try {
         //1. Config
@@ -1075,7 +1075,7 @@ void netxpert::test::TestSPTCH(Config& cnfg) {
     }
 }
 
-#endif // ENABLE_CONTRACTION_HIERARCHIES
+#endif // NETX_ENABLE_CONTRACTION_HIERARCHIES
 
 /*
 void netxpert::test::TestODMatrix(Config& cnfg)
