@@ -12,3 +12,6 @@ Johannes Sommer, Christopher Koller
 
 ## License
 This Project is licensed through the GNU Lesser Public License v2.
+
+## Tutorial and compiling from source infos
+See the [Wiki](https://github.com/sommergis/netxpert/wiki) for more information
