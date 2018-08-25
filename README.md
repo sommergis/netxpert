@@ -5,10 +5,10 @@ The main goals of the library are to provide high performance and a simple API, 
 Thus the integration of netxpert into existing GIS packages should be easy.
 
 ## Authors
-    Johannes Sommer, Christopher Koller 
+Johannes Sommer, Christopher Koller 
 
 ## Copyright
-    2013-2018
+2013-2018
 
-##License
-    This Project is licensed through the GNU Lesser Public License v2.
+## License
+This Project is licensed through the GNU Lesser Public License v2.
