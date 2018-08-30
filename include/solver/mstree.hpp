@@ -17,11 +17,11 @@
 #ifndef MINSPANTREE_H
 #define MINSPANTREE_H
 
-#include "isolver.h"
-#include "imstree.h"
-#include "mstlem.h"
-#include "data.h"
-#include "lemon-net.h"
+#include "isolver.hpp"
+#include "imstree.hpp"
+#include "mstlem.hpp"
+#include "data.hpp"
+#include "lemon-net.hpp"
 
 namespace netxpert {
 

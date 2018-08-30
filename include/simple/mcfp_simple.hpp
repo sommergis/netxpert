@@ -17,11 +17,11 @@
 #ifndef MCFP_SIMPLE_H
 #define MCFP_SIMPLE_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "mcflow.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "mcflow.hpp"
 
 namespace netxpert {
  namespace simple {

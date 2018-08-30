@@ -1210,6 +1210,9 @@ std::vector< std::pair<uint32_t, std::string> >
 void
  InternalNet::Reset() {
 
+    using namespace lemon;
+    using namespace std;
+
     LOGGER::LogInfo("Resetting network..");
 
     //Reset network by resetting the filtered orig arcs (and their reversed ones)
@@ -1283,7 +1286,7 @@ std::unique_ptr<geos::geom::LineString>
     auto coordSeq = coordFactory->create(static_cast<size_t>(0), static_cast<size_t>(2)) ; //0 coordinates, 2 dimensions
     coordSeq->add(origGeom);
     coordSeq->add(destGeom);
-    unique_ptr<geos::geom::LineString> line ( DBHELPER::GEO_FACTORY->createLineString(coordSeq));
+    std::unique_ptr<geos::geom::LineString> line ( DBHELPER::GEO_FACTORY->createLineString(coordSeq));
 
     return line;
  }
@@ -1298,7 +1301,7 @@ void
     using namespace geos::geom;
     std::vector<geos::geom::Geometry*> routeParts;
     //for straight lines or no geometry
-    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
+    std::unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling) {
         case GEOMETRY_HANDLING::RealGeometry: {
@@ -1315,9 +1318,9 @@ void
 
         case GEOMETRY_HANDLING::StraightLines: {
 
-          unique_ptr<LineString> line = getStraightLine(orig, dest);
+          std::unique_ptr<LineString> line = getStraightLine(orig, dest);
           Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
-          mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+          mLine = std::unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( std::vector<Geometry*> {gLine} ));
 
           switch (NETXPERT_CNFG.ResultDBType) {
             case RESULT_DB_TYPE::SpatiaLiteDB: {
@@ -1374,7 +1377,7 @@ void
 
     std::vector<geos::geom::Geometry*> routeParts;
     //for straight lines or no geometry
-    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
+    std::unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling) {
       case GEOMETRY_HANDLING::RealGeometry: {
@@ -1386,9 +1389,9 @@ void
 
       case GEOMETRY_HANDLING::StraightLines: {
 
-        unique_ptr<LineString> line = getStraightLine(orig, dest);
+        std::unique_ptr<LineString> line = getStraightLine(orig, dest);
         Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
-        mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+        mLine = std::unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( std::vector<Geometry*> {gLine} ));
 
         std::string coordStr = convertRouteToCoordList(mLine);
         /**
@@ -1397,12 +1400,12 @@ void
         std::stringstream row;
         row << "{ \"orig\" : \""
             << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-            << ", \"route\" : " << coordStr << "} " << endl;
+            << ", \"route\" : " << coordStr << "} " << std::endl;
 
         #pragma omp critical
         {
         //save data to stream
-        output << row.str() << endl;
+        output << row.str() << std::endl;
         }
       }
       break;
@@ -1417,12 +1420,12 @@ void
         std::stringstream row;
         row << "{ \"orig\" : \""
             << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-            << ", \"route\" : " << coordStr << "} " << endl;
+            << ", \"route\" : " << coordStr << "} " << std::endl;
 
         #pragma omp critical
         {
         //save data to stream
-        output << row.str() << endl;
+        output << row.str() << std::endl;
         }
       }
       break;
@@ -1479,7 +1482,7 @@ void
 
     std::vector<geos::geom::Geometry*> routeParts;
     //for straight lines or no geometry
-    unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
+    std::unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
     switch (NETXPERT_CNFG.GeometryHandling)
     {
@@ -1491,9 +1494,9 @@ void
 
         case GEOMETRY_HANDLING::StraightLines: {
 
-          unique_ptr<LineString> line = getStraightLine(orig, dest);
+          std::unique_ptr<LineString> line = getStraightLine(orig, dest);
           Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
-          mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+          mLine = std::unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( std::vector<Geometry*> {gLine} ));
 
           switch (NETXPERT_CNFG.ResultDBType) {
             case RESULT_DB_TYPE::SpatiaLiteDB: {
@@ -1551,7 +1554,7 @@ void
 
   std::vector<geos::geom::Geometry*> routeParts;
   //for straight lines or no geometry
-  unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
+  std::unique_ptr<MultiLineString> mLine (DBHELPER::GEO_FACTORY->createMultiLineString());
 
   switch (NETXPERT_CNFG.GeometryHandling)
   {
@@ -1564,9 +1567,9 @@ void
 
     case GEOMETRY_HANDLING::StraightLines: {
 
-      unique_ptr<LineString> line = getStraightLine(orig, dest);
+      std::unique_ptr<LineString> line = getStraightLine(orig, dest);
       Geometry* gLine  = dynamic_cast<Geometry*> (line.get());
-      mLine = unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( vector<Geometry*> {gLine} ));
+      mLine = std::unique_ptr<MultiLineString> ( DBHELPER::GEO_FACTORY->createMultiLineString( std::vector<Geometry*> {gLine} ));
 
       std::string coordStr = convertRouteToCoordList(mLine);
       /**
@@ -1577,12 +1580,12 @@ void
           << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
           << "\", \"capacity\" : " << capacity
           << "\", \"flow\" : " << flow
-          << ", \"geom\" : " << coordStr << "} " << endl;
+          << ", \"geom\" : " << coordStr << "} " << std::endl;
 
       #pragma omp critical
       {
       //save data to stream
-      output << row.str() << endl;
+      output << row.str() << std::endl;
       }
     }
     break;
@@ -1598,12 +1601,12 @@ void
           << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
           << "\", \"capacity\" : " << capacity
           << "\", \"flow\" : " << flow
-          << ", \"geom\" : " << coordStr << "} " << endl;
+          << ", \"geom\" : " << coordStr << "} " << std::endl;
 
       #pragma omp critical
       {
       //save data to stream
-      output << row.str() << endl;
+      output << row.str() << std::endl;
       }
     }
     break;
@@ -1803,8 +1806,8 @@ std::string
     for (auto& c : *coords) {
       counter += 1;
       coordStr << "["
-      << std::fixed << setprecision(0) << c.x << ","
-      << std::fixed << setprecision(0) << c.y << "]";
+      << std::fixed << std::setprecision(0) << c.x << ","
+      << std::fixed << std::setprecision(0) << c.y << "]";
 
       if (counter < coords->size())
         coordStr << ",";
@@ -1870,7 +1873,7 @@ void
     std::stringstream row;
     row << "{ \"orig\" : \""
         << orig << "\", \"dest\" : \""<< dest << "\", \"cost\" : " << cost
-        << ", \"route\" : " << coordStr << "} " << endl;
+        << ", \"route\" : " << coordStr << "} " << std::endl;
 
     //sw.stop();
     //LOGGER::LogDebug("Merging Geometry with Geos took " + to_string(sw.elapsed())+" mcs");
@@ -1879,7 +1882,7 @@ void
     #pragma omp critical
     {
     //save merged route geometry to stream
-    outStream << row.str() << endl;
+    outStream << row.str() << std::endl;
     }
 }
 

@@ -17,11 +17,13 @@
 #ifndef NETWORKBUILDER_H
 #define NETWORKBUILDER_H
 
-#include "dbhelper.h" //includes already logger, config, data, utils
-#include "dbwriter.h"
-#include "slitewriter.h"
-#include "fgdbwriter.h"
+#include "dbhelper.hpp" //includes already logger, config, data, utils
+#include "dbwriter.hpp"
+#include "slitewriter.hpp"
+#include "fgdbwriter.hpp"
+
 #include <vector>
+
 #include "geos/io/WKBReader.h"
 #include "geos/io/WKBWriter.h"
 #include "geos/geom/Point.h"

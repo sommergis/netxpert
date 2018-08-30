@@ -17,11 +17,11 @@
 #ifndef MSTREE_SIMPLE_H
 #define MSTREE_SIMPLE_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "mstree.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "mstree.hpp"
 
 namespace netxpert {
  namespace simple {

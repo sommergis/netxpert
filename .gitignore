@@ -23,4 +23,4 @@ _bak$
 doc/html$
 doc/latex$
 .cccc$
-
+.*\.o$

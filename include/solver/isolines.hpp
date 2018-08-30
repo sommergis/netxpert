@@ -17,10 +17,10 @@
 #ifndef ISOLINES_H
 #define ISOLINES_H
 
-#include "isolver.h"
-#include "isptree.h"
-#include "sptlem.h"
-#include "data.h"
+#include "isolver.hpp"
+#include "isptree.hpp"
+#include "sptlem.hpp"
+#include "data.hpp"
 
 namespace netxpert {
 

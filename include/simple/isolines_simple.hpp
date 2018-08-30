@@ -19,7 +19,7 @@
 
 #include "data.hpp"
 #include "utils.hpp"
-#include "network.hpp"
+#include "lemon-net.hpp"
 #include "dbhelper.hpp"
 #include "sptree.hpp"
 

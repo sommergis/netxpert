@@ -17,8 +17,8 @@
 #ifndef TRANSPORTATION_H
 #define TRANSPORTATION_H
 
-#include "mcflow.h"
-#include "odmatrix.h"
+#include "mcflow.hpp"
+#include "odmatrix.hpp"
 
 namespace netxpert {
 

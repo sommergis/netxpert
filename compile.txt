@@ -15,3 +15,7 @@ Compiler Switch for DEBUG:
 Bei Linker Errors GEOS: 
 1. libgeos.lib 
 2. geos.lib hinzufügen!
+
+
+- Installation prerequisites
+# sudo apt install libboost-dev python2.7-dev swig

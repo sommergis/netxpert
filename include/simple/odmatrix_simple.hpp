@@ -17,11 +17,11 @@
 #ifndef ODMATRIX_SIMPLE_H
 #define ODMATRIX_SIMPLE_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "odmatrix.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "odmatrix.hpp"
 
 namespace netxpert {
  namespace simple {

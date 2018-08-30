@@ -17,12 +17,12 @@
 #ifndef SPTREE_H
 #define SPTREE_H
 
-#include "isolver.h"
-#include "isptree.h"
-#include "sptlem.h"
-//#include "sptbgl.h"
-#include "data.h"
-#include "lemon-net.h"
+#include "isolver.hpp"
+#include "isptree.hpp"
+#include "sptlem.hpp"
+//#include "sptbgl.hpp"
+#include "data.hpp"
+#include "lemon-net.hpp"
 
 namespace netxpert {
 

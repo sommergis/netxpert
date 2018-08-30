@@ -18,7 +18,7 @@
 #define ISOLVER_H
 
 #include <string>
-#include "lemon-net.h"
+#include "lemon-net.hpp"
 
 namespace netxpert {
     ///\brief Abstract Class (Interface) for all Solvers

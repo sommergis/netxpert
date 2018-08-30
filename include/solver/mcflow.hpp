@@ -17,9 +17,9 @@
 #ifndef MINCOSTFLOW_H
 #define MINCOSTFLOW_H
 
-#include "isolver.h"
-#include "imcflow.h"
-#include "nslem.h"
+#include "isolver.hpp"
+#include "imcflow.hpp"
+#include "nslem.hpp"
 
 namespace netxpert {
     /**

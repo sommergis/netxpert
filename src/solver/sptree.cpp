@@ -232,6 +232,7 @@ void
 
     netxpert::data::cost_t totalCost = 0;
 
+    bool chSearch = false;
     //Read the network
     #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     bool chSearch = net.GetHasContractionHierarchies();

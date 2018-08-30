@@ -1,32 +1,55 @@
+/*
+ * This file is a part of netxpert.
+ *
+ * Copyright (C) 2013-2017
+ * Johannes Sommer, Christopher Koller
+ *
+ * Permission to use, modify and distribute this software is granted
+ * provided that this copyright notice appears in all copies. For
+ * precise terms see the accompanying LICENSE file.
+ *
+ * This software is provided "AS IS" with no warranty of any kind,
+ * express or implied, and with no claim as to its suitability for any
+ * purpose.
+ *
+ */
+
 %module pynetxpert
 
+// we must define this macro here again if wanted (SWIG!)
+//#define NETX_ENABLE_CONTRACTION_HIERARCHIES
+
 %include "typemaps.i"
+/* for uint32_t type */
+%include "stdint.i"
 %include "std_string.i"
 %include "std_map.i"
 %include "std_vector.i"
 %include "std_pair.i"
 
 %{
-#include "network.h"
-#include "dbhelper.h"
-#include "isolver.h"
-#include "mstree.h"
-#include "sptree.h"
-#include "odmatrix.h"
-#include "mcflow.h"
-#include "transportation.h"
-#include "networkbuilder.h"
-#include "isolines.h"
+#include "stdint.h"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "isolver.hpp"
+#include "sptree.hpp"
+#include "odmatrix.hpp"
+#include "mstree.hpp"
+#include "isolines.hpp"
+#include "mcflow.hpp"
+#include "transportation.hpp"
 
 /* Simple Solver Interface */
 
-#include "sptree_simple.h"
-#include "odmatrix_simple.h"
-#include "mstree_simple.h"
-#include "transp_simple.h"
-#include "mcfp_simple.h"
-#include "netbuilder_simple.h"
+#include "sptree_simple.hpp"
+#include "odmatrix_simple.hpp"
+#include "mstree_simple.hpp"
+#include "mcfp_simple.hpp"
+#include "transp_simple.hpp"
+#include "netbuilder_simple.hpp"
 
+/* UTILS */
+#include "utils.hpp"
 %}
 
 namespace std
@@ -39,10 +62,11 @@ namespace std
     %template(ExtDistribution) std::vector<netxpert::data::ExtDistributionArc>;
     %template(FlowCosts) std::vector<netxpert::data::FlowCost>;
 
-    %template(Destinations) std::vector<unsigned int>;
+    /* netxpert::data::node_t does not work here */
+    %template(Nodes) std::vector<uint32_t>;
 
-    %template() std::pair<unsigned int,std::string>;
-    %template(ODNodes) std::vector< std::pair<unsigned int,std::string> >;
+    %template() std::pair<uint32_t,std::string>;
+    %template(ODNodes) std::vector< std::pair<uint32_t,std::string> >;
 
     %template() std::vector<double>;
     %template(CutOffs) std::map<std::string, std::vector<double> >;
@@ -50,16 +74,39 @@ namespace std
 
 namespace netxpert
 {
-    static const std::string Version()
-    {
-        return "0.9.3";
-    };
+    static const std::string Version();
 
     namespace data {
 
+    const double DOUBLE_INFINITY = 999999;
+    const double DOUBLE_NULL = -1;
 
-    enum MCFSolverStatus
+
+    typedef lemon::SmartDigraph graph_t;
+
+    /*typedef lemon::SmartDigraph::Node node_t;
+    typedef lemon::SmartDigraph::Arc arc_t;*/
+
+    typedef double cost_t;
+    typedef double capacity_t;
+    typedef double supply_t;
+    typedef uint32_t  intarcid_t;
+    typedef uint32_t  extarcid_t;
+
+
+    /**
+    * \Custom data type for storing tuple <Arc,arcGeom,cost,capacity>
+    **/
+    template<typename arc_t>
+    struct IntNetSplittedArc
     {
+        arc_t       arc;
+        cost_t      cost;
+        capacity_t  capacity;
+        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
+    };
+
+    enum MCFSolverStatus : int16_t {
        MCFUnSolved = -1 ,     ///< no solution available
        MCFOK = 0 ,            ///< optimal solution found
        MCFStopped = 1,        ///< optimization stopped
@@ -68,8 +115,7 @@ namespace netxpert
        MCFError = 4           ///< error in the solver
     };
 
-    enum MinCostFlowInstanceType
-    {
+    enum MinCostFlowInstanceType : int16_t {
         MCFUndefined = 0,
         MCFBalanced = 1,
         MCFExtrasupply = 2,
@@ -88,39 +134,40 @@ namespace netxpert
         std::string supplyColName;
     };
 
-    struct InputNode
-    {
-        std::string extNodeID;
-        double nodeSupply;
-    };
-
     struct InputArc
     {
         std::string extArcID;
         std::string extFromNode;
         std::string extToNode;
-        double cost;
-        double capacity;
+        cost_t      cost;
+        capacity_t  capacity;
         std::string oneway;
+    };
+
+    struct InputNode
+    {
+        std::string extNodeID;
+        supply_t    nodeSupply;
     };
 
     struct NewNode
     {
-        std::string extNodeID;
-        geos::geom::Coordinate coord;
-        double supply;
+        std::string             extNodeID;
+        geos::geom::Coordinate  coord;
+        supply_t                supply;
     };
 
     struct ODPair
     {
-        unsigned int origin;
-        unsigned int dest;
+        lemon::SmartDigraph::Node origin;
+        lemon::SmartDigraph::Node dest;
     };
 
+    /* TODO
     struct InternalArc
     {
-        unsigned int fromNode;
-        unsigned int toNode;
+        uint32_t fromNode;
+        uint32_t toNode;
     };
 
     struct FlowCost
@@ -139,19 +186,21 @@ namespace netxpert
         double capacity;
         std::string oneway;
         std::shared_ptr<geos::geom::Geometry> geom;
-    };
+    };*/
 
     typedef std::vector<netxpert::data::InputNode> InputNodes;
     typedef std::vector<netxpert::data::InputArc> InputArcs;
-    typedef std::pair<std::vector<unsigned int>,double> CompressedPath;
+    typedef std::pair<std::vector<lemon::SmartDigraph::Arc>, netxpert::data::cost_t> CompressedPath;
     typedef std::vector<netxpert::data::NewNode> NewNodes;
     typedef std::string ExtArcID;
     typedef std::string ExtNodeID;
+
     typedef std::vector<netxpert::data::ExtSPTreeArc> ExtSPTArcs;
     typedef std::vector<netxpert::data::ExtNodeSupply> ExtNodeSupplies;
     typedef std::vector<netxpert::data::ExtDistributionArc> ExtDistribution;
-    typedef std::vector<unsigned int> Destinations;
-    typedef std::vector< std::pair<unsigned int,std::string> > ODNodes;
+
+    typedef std::vector< uint32_t > Nodes;
+    typedef std::vector< std::pair<lemon::SmartDigraph::Node,std::string> > ODNodes;
 
     struct ExtNodeSupply
     {
@@ -164,6 +213,7 @@ namespace netxpert
         std::string extFromNode;
         std::string extToNode;
     };
+
     struct ExtSPTreeArc
     {
         netxpert::data::ExtArcID extArcID;
@@ -189,15 +239,13 @@ namespace netxpert
 
     namespace cnfg {
 
-    enum GEOMETRY_HANDLING
-    {
+    enum GEOMETRY_HANDLING : int16_t {
         NoGeometry = 0,
         StraightLines = 1,
         RealGeometry = 2
     };
 
-    enum TESTCASE
-    {
+    enum TESTCASE : int16_t {
         TestNetworkBuilder = 0,
         ShortestPathTreeCOM = 1,
         ODMatrixCOM = 2,
@@ -214,13 +262,14 @@ namespace netxpert
         TransportationCOMExt = 13
     };
 
-    enum RESULT_DB_TYPE
-    {
+    enum RESULT_DB_TYPE : int16_t {
         SpatiaLiteDB = 0,
-        ESRI_FileGDB = 1
+        ESRI_FileGDB = 1,
+        JSON = 2,
+        GooglePolyLine = 3
     };
 
-    enum LOG_LEVEL {
+    enum LOG_LEVEL : int16_t {
            LogAll = -1,
            LogDebug = 0,
            LogInfo = 1,
@@ -229,23 +278,17 @@ namespace netxpert
            LogFatal = 4,
            LogQuiet = 5   };
 
-    enum SPTAlgorithm {
-
-        Dijkstra_MCFClass = 0,
-        LQueue_MCFClass = 1,
-        LDeque_MCFClass = 2,
-        Dijkstra_Heap_MCFClass = 3,
+    enum SPTAlgorithm : int16_t {
         Dijkstra_2Heap_LEMON = 4,
         Bijkstra_2Heap_LEMON = 5,
         Dijkstra_dheap_BOOST = 6
     } ;
 
-    enum MCFAlgorithm {
-        NetworkSimplex_MCF = 0,
+    enum MCFAlgorithm : int16_t {
         NetworkSimplex_LEMON = 1
     } ;
 
-    enum MSTAlgorithm {
+    enum MSTAlgorithm : int16_t {
         //Kruskal_QuickGraph = 0, //.NET!
         //Prim_QuickGraph = 1,    //.NET!
         Kruskal_LEMON = 2
@@ -268,11 +311,12 @@ namespace netxpert
         bool IsDirected; //!< Member variable "isDirected"
         std::string ArcsTableName; //!< Member variable "arcsTableName"
         std::string ArcsGeomColumnName; //!< Member variable "arcsGeomColumnName"
-        std::string ArcIDColumnName; //!< Member variable "edgeIDColumnName"
+        std::string ArcIDColumnName; //!< Member variable "arcIDColumnName"
         std::string FromNodeColumnName; //!< Member variable "fromNodeColumnName"
         std::string ToNodeColumnName; //!< Member variable "toNodeColumnName"
         std::string CostColumnName; //!< Member variable "costColumnName"
         std::string CapColumnName; //!< Member variable "capColumnName"
+        std::string OnewayColumnName;//!< Member variable "onewayColumnName"
         std::string NodesTableName; //!< Member variable "nodesTableName"
         std::string NodesGeomColumnName; //!< Member variable "nodesGeomColumnName"
         std::string NodeIDColumnName;//!< Member variable "nodeIDColumnName"
@@ -283,49 +327,106 @@ namespace netxpert
         std::string BarrierLineGeomColumnName;//!< Member variable "barrierLineGeomColumnName"
         std::string BarrierPointTableName;//!< Member variable "barrierPointTableName"
         std::string BarrierPointGeomColumnName;//!< Member variable "barrierPointGeomColumnName"
-        int Treshold; //!< Member variable "treshold" for distance search: closest edge of network to given point
+        int Threshold; //!< Member variable "threshold" for distance search: closest edge of network to given point
         bool UseSpatialIndex;//!< Member variable "useSpatialIndex"
         bool LoadDBIntoMemory;//!< Member variable "loadDBIntoMemory"
         int NumberOfTests;//!< Member variable "numberOfTests"
         std::string SpatiaLiteHome;//!< Member variable "spatiaLiteHome"
         std::string SpatiaLiteCoreName;//!< Member variable "spatiaLiteCoreName"
         netxpert::cnfg::GEOMETRY_HANDLING GeometryHandling;//!< Member variable "geometryHandling"
-        std::string OnewayColumnName;//!< Member variable "onewayColumnName"
         netxpert::cnfg::TESTCASE TestCase;//!< Member variable "testCase"
-        bool CleanNetwork;//!< Member variable "cleanNetwork"
         netxpert::cnfg::LOG_LEVEL LogLevel;
+        bool CleanNetwork;//!< Member variable "cleanNetwork"
         std::string LogFileFullPath;
     };
+
+    class ConfigReader {
+      public:
+        ConfigReader() {}
+        ~ConfigReader() {}
+        netxpert::cnfg::Config GetConfigFromJSON(std::string jsonString);
+        netxpert::data::ColumnMap GetColumnMap(netxpert::cnfg::Config& cnfg);
+    };
+
     }/* namespace netxpert::cnfg */
 
-
-    class Network
+    class NetworkBuilder
     {
         public:
-            Network(netxpert::data::InputArcs arcsTbl, netxpert::data::ColumnMap _map, netxpert::cnfg::Config& cnfg);
-            Network(netxpert::data::InputArcs arcsTbl, netxpert::data::InputNodes nodesTbl,
-                    netxpert::data::ColumnMap _map, netxpert::cnfg::Config& cnfg);
-            void ConvertInputNetwork(bool autoClean);
 
-            unsigned int AddStartNode(std::string extArcID,
-                                      double x, double y, double supply,
-                                      int treshold, const netxpert::data::ColumnMap& cmap, bool withCapacity);
-            unsigned int AddEndNode(std::string extArcID,
-                                      double x, double y, double supply,
-                                      int treshold, const netxpert::data::ColumnMap& cmap, bool withCapacity);
+            NetworkBuilder(netxpert::cnfg::Config& cnfg);
 
-            std::vector< std::pair<unsigned int, std::string> > LoadStartNodes(const std::vector<netxpert::data::NewNode>& newNodes, int treshold,
-                                                            std::string arcsTableName, std::string geomColumnName,
-                                                                netxpert::data::ColumnMap& cmap, bool withCapacity);
-            std::vector< std::pair<unsigned int, std::string> > LoadEndNodes(const std::vector<netxpert::data::NewNode>& newNodes, int treshold,
-                                                            std::string arcsTableName, std::string geomColumnName,
-                                                                netxpert::data::ColumnMap& cmap, bool withCapacity);
+            ~NetworkBuilder()  {};
 
-            std::string GetOriginalNodeID(unsigned int internalNodeID);
-            std::string GetOriginalStartOrEndNodeID(unsigned int internalNodeID);
-
-            void Reset();
+            /**
+            * Loads the Edge Data into a Graph.
+            * Caution:
+            *     - There is no check for planarity of the input!
+            *     - Multilinestrings that cannot be merged as a Linestring will throw an exception
+            **/
+            void LoadData();
+            void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
+            std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
     };
+
+    namespace data {
+
+    %rename(Network) InternalNet;
+    class InternalNet
+    {
+        public:
+            InternalNet(const netxpert::data::InputArcs& arcsTbl,
+                        const netxpert::data::ColumnMap& _map = netxpert::data::ColumnMap(),
+                        const netxpert::cnfg::Config& cnfg = netxpert::cnfg::Config(),
+                        const netxpert::data::InputNodes& nodesTbl = netxpert::data::InputNodes(),
+                        const bool autoClean = true);
+
+            const uint32_t
+             AddStartNode(std::string extArcID,
+                                      double x, double y, netxpert::data::supply_t supply,
+                                      int threshold,
+                                      const netxpert::data::ColumnMap& cmap,
+                                      bool withCapacity);
+            const uint32_t
+             AddEndNode(std::string extArcID,
+                                    double x, double y, netxpert::data::supply_t supply,
+                                    int threshold,
+                                    const netxpert::data::ColumnMap& cmap,
+                                    bool withCapacity);
+
+            std::vector< std::pair<uint32_t, std::string> >
+             LoadStartNodes(std::vector<netxpert::data::NewNode> newNodes, const int threshold,
+                            const std::string arcsTableName, const std::string geomColumnName,
+                            const netxpert::data::ColumnMap& cmap, const bool withCapacity);
+
+            std::vector< std::pair<uint32_t, std::string> >
+             LoadEndNodes(std::vector<netxpert::data::NewNode> newNodes, const int threshold,
+                          const std::string arcsTableName, const std::string geomColumnName,
+                          const netxpert::data::ColumnMap& cmap, const bool withCapacity);
+            void
+             Reset();
+
+            const uint32_t
+             GetArcCount();
+
+            const uint32_t
+             GetNodeCount();
+
+           #ifdef NETX_ENABLE_CONTRACTION_HIERARCHIES
+            void
+             ExportToDIMACS(const std::string& path);
+
+            void
+             ComputeContraction(float contractionPercent);
+
+            void
+             ExportContractedNetwork(const std::string graphName);
+
+            void
+             ImportContractedNetwork(const std::string graphName);
+            #endif
+    };
+    }
 
     namespace utils {
 
@@ -364,75 +465,20 @@ namespace netxpert
         public:
             virtual ~ISolver() {}
             virtual void Solve(std::string net) = 0;
-            virtual void Solve(Network& net) = 0;
+            virtual void Solve(netxpert::data::InternalNet& net) = 0;
     };
 
-    class MinimumSpanningTree : public ISolver
+    class ShortestPathTree : public netxpert::ISolver
     {
         public:
-            MinimumSpanningTree(netxpert::cnfg::Config& cnfg);
-            virtual ~MinimumSpanningTree();
-
-            void Solve(std::string net);
-            void Solve(Network& net);
-
-            netxpert::cnfg::MSTAlgorithm GetAlgorithm();
-            void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
-
-            double GetOptimum();
-
-            void SaveResults(const std::string& resultTableName,
-                 const netxpert::data::ColumnMap& cmap) const;
-
-            std::vector<netxpert::data::InternalArc> GetMinimumSpanningTree() const;
-    };
-
-    class OriginDestinationMatrix : public ISolver
-    {
-        public:
-            OriginDestinationMatrix(netxpert::cnfg::Config& cnfg);
-            virtual ~OriginDestinationMatrix();
-
-            void Solve(std::string net);
-            void Solve(Network& net);
-
-            netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
-            void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
-
-            int GetSPTHeapCard() const;
-            void SetSPTHeapCard(int heapCard);
-
-            netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
-            void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
-
-            std::vector<unsigned int> GetOrigins() const;
-			/*SWIG will leerzeichen bei manchen spitzen Klammern */
-            void SetOrigins(std::vector< std::pair<unsigned int,std::string> >& origs);
-
-            std::vector<unsigned int> GetDestinations() const;
-			/*SWIG will leerzeichen bei manchen spitzen Klammern */
-            void SetDestinations(std::vector< std::pair<unsigned int,std::string> >& dests);
-
-            std::vector<unsigned int> GetReachedDests() const;
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
-            std::unordered_map<netxpert::data::ODPair, double> GetODMatrix() const;
-
-            double GetOptimum() const;
-
-            void SaveResults(const std::string& resultTableName,
-                 const netxpert::data::ColumnMap& cmap) const;
-
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
-    };
-
-    class ShortestPathTree : public ISolver
-    {
-        public:
+            /** Default constructor */
             ShortestPathTree(netxpert::cnfg::Config& cnfg);
-            virtual ~ShortestPathTree();
+
+            /** Default destructor */
+            virtual ~ShortestPathTree() {}
 
             void Solve(std::string net);
-            void Solve(Network& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
@@ -443,30 +489,71 @@ namespace netxpert
             netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
             void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
 
-            unsigned int GetOrigin() const;
-            void SetOrigin(unsigned int orig);
+            void SetOrigin(const uint32_t orig);
+            const uint32_t GetOriginID() const;
 
-            std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int>& dests);
+            void SetDestinations(const std::vector<uint32_t>& dests);
+            std::vector<uint32_t> GetDestinationIDs() const;
 
-            std::vector<unsigned int> GetReachedDests() const;
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+            std::vector<uint32_t> GetReachedDestIDs() const;
 
-            double GetOptimum() const;
+            std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+
+            const double GetOptimum() const;
 
             void SaveResults(const std::string& resultTableName,
-                             const netxpert::data::ColumnMap& cmap) const;
+                             const netxpert::data::ColumnMap& cmap);
 
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, std::vector<unsigned int>& ends) const;
+            const std::string GetResultsAsJSON();
     };
 
-    class Isolines : public ISolver
+    class OriginDestinationMatrix : public netxpert::ISolver
+    {
+        public:
+            /** Default constructor */
+            OriginDestinationMatrix(netxpert::cnfg::Config& cnfg);
+
+            /** Default destructor */
+            ~OriginDestinationMatrix() {}
+
+            void Solve(std::string net);
+            void Solve(netxpert::data::InternalNet& net);
+
+            netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
+
+            int GetSPTHeapCard() const;
+            void SetSPTHeapCard(int heapCard);
+
+            netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
+            void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
+
+            void SetOrigins(const std::vector<uint32_t>& origs);
+            std::vector<uint32_t> GetOriginIDs() const;
+
+            void SetDestinations(const std::vector<uint32_t>& dests);
+            std::vector<uint32_t> GetDestinationIDs() const;
+
+            std::vector<uint32_t> GetReachedDestIDs() const;
+
+            std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+            std::map<netxpert::data::ODPair, double> GetODMatrix() const;
+
+            const double GetOptimum() const;
+
+            void SaveResults(const std::string& resultTableName,
+                             const netxpert::data::ColumnMap& cmap);
+
+            const std::string GetResultsAsJSON();
+    };
+
+    class Isolines : public netxpert::ISolver
     {
         public:
             Isolines(netxpert::cnfg::Config& cnfg);
-            virtual ~Isolines();
+            virtual ~Isolines() {}
             void Solve(std::string net);
-            void Solve(Network& net);
+            void Solve(netxpert::data::InternalNet& net);
 
             netxpert::cnfg::SPTAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::SPTAlgorithm mstAlgorithm);
@@ -477,20 +564,39 @@ namespace netxpert
             netxpert::cnfg::GEOMETRY_HANDLING GetGeometryHandling() const;
             void SetGeometryHandling(netxpert::cnfg::GEOMETRY_HANDLING geomHandling);
 
-            std::vector< std::pair<unsigned int,std::string> > GetOrigins() const;
-            void SetOrigins(std::vector< std::pair<unsigned int,std::string> >& origs);
+            void SetOrigins(const std::vector<uint32_t>& origs);
+            std::vector<uint32_t> GetOriginIDs() const;
 
             std::map<netxpert::data::ExtNodeID, std::vector<double> > GetCutOffs();
-            void SetCutOffs(std::map<std::string, std::vector<double> >& cutOffs);
+            void SetCutOffs(std::map<netxpert::data::ExtNodeID, std::vector<double> >& cutOffs);
 
-            double GetOptimum() const;
+            const double GetOptimum() const;
 
             void SaveResults(const std::string& resultTableName,
                              const netxpert::data::ColumnMap& cmap) const;
 
-            std::unordered_map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+            std::map<netxpert::data::ODPair, netxpert::data::CompressedPath> GetShortestPaths() const;
+    };
 
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig, vector<unsigned int>& ends) const;
+    class MinimumSpanningTree : public netxpert::ISolver
+    {
+        public:
+            /** Default constructor */
+            MinimumSpanningTree(netxpert::cnfg::Config& cnfg);
+
+            /** Default destructor */
+            ~MinimumSpanningTree() {}
+
+            void Solve(std::string net);
+            void Solve(netxpert::data::InternalNet& net);
+
+            netxpert::cnfg::MSTAlgorithm GetAlgorithm() const;
+            void SetAlgorithm(netxpert::cnfg::MSTAlgorithm mstAlgorithm);
+
+            const double GetOptimum() const;
+            std::vector<netxpert::data::arc_t> GetMinimumSpanningTree() const;
+            void SaveResults(const std::string& resultTableName,
+                             const netxpert::data::ColumnMap& cmap) const;
     };
 
     %feature("notabstract") MinCostFlow;
@@ -499,16 +605,17 @@ namespace netxpert
         public:
             MinCostFlow(netxpert::cnfg::Config& cnfg);
             virtual ~MinCostFlow();
-            void Solve(string net);
-            void Solve(Network& net);
+            void Solve(std::string net);
+            void Solve(netxpert::data::InternalNet& net);
             bool IsDirected;
             std::vector<netxpert::data::FlowCost> GetMinCostFlow() const;
             netxpert::cnfg::MCFAlgorithm GetAlgorithm() const;
             void SetAlgorithm(netxpert::cnfg::MCFAlgorithm mcfAlgorithm);
             /*netxpert::MCFSolverStatus GetSolverStatus() const;*/
-            double GetOptimum() const;
+            const double GetOptimum() const;
             void SaveResults(const std::string& resultTableName,
-                 const netxpert::data::ColumnMap& cmap) const;
+                 const netxpert::data::ColumnMap& cmap);
+            const std::string GetResultsAsJSON();
     };
 
     %feature("notabstract") Transportation;
@@ -519,40 +626,26 @@ namespace netxpert
             virtual ~Transportation();
 
             void Solve();
-            void Solve(Network& net);
+            void Solve(netxpert::data::InternalNet& net);
 
-            std::vector<unsigned int> GetOrigins() const;
-            void SetOrigins(std::vector<unsigned int>  origs);
+            std::vector<uint32_t> GetOriginIDs() const;
+            void SetOrigins(std::vector<uint32_t>  origs);
 
-            std::vector<unsigned int> GetDestinations() const;
-            void SetDestinations(std::vector<unsigned int>& dests);
+            std::vector<uint32_t> GetDestinationIDs() const;
+            void SetDestinations(std::vector<uint32_t>& dests);
 
             void SetExtODMatrix(std::vector<netxpert::data::ExtSPTreeArc> _extODMatrix);
             void SetExtNodeSupply(std::vector<netxpert::data::ExtNodeSupply> _nodeSupply);
-
-            /*std::unordered_map<netxpert::data::ODPair, netxpert::data::DistributionArc> GetDistribution() const;*/
 
             netxpert::data::ExtDistribution GetExtDistribution() const;
             std::string GetJSONExtDistribution() const;
 
             std::string GetSolverJSONResult() const;
 
-            std::vector<netxpert::data::InternalArc> UncompressRoute(unsigned int orig,
-                                                                     std::vector<unsigned int>& ends) const;
-
             void SaveResults(const std::string& resultTableName,
                  const netxpert::data::ColumnMap& cmap) const;
     };
 
-    class NetworkBuilder
-    {
-        public:
-            NetworkBuilder(netxpert::cnfg::Config& cnfg);
-            virtual ~NetworkBuilder()  {};
-            void LoadData();
-            void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
-            std::unordered_map<unsigned int, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
-    };
 }
 
 %rename(ShortestPathTreeSimple) netxpert::simple::ShortestPathTree;
@@ -625,6 +718,24 @@ namespace netxpert::simple {
  };
 }
 
+/* Helper
+namespace netxpert {
+ namespace utils {
+
+  class UTILS
+  {
+    protected:
+      UTILS(){}
+    public:
+      template<typename T>
+      static T DeserializeJSONtoObject(std::string _jsonString);
+  };
+ }
+}
+%template(ConvertJSONtoConfig) netxpert::utils::UTILS::DeserializeJSONtoObject<netxpert::cnfg::Config>; */
+
+
+
 
 
 
@@ -645,3 +756,4 @@ namespace netxpert::simple {
        return tmp;
    }
 };
+

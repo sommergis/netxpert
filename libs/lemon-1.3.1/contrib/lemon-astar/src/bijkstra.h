@@ -287,7 +287,7 @@ namespace lemon {
     bool local_heap;
     //Indicates if _rev_heap is locally allocated (true) or not.
     bool local_rev_heap;
-    //Indicates whether the forward (false) or the reverse (true) side of the algorithm is to be run next. 
+    //Indicates whether the forward (false) or the reverse (true) side of the algorithm is to be run next.
     bool reverse_is_next;
     //Indicates whether any path has been found (true) or not.
     bool bi_path_found;
@@ -297,8 +297,8 @@ namespace lemon {
     Value shortest_dist;
     //Indicates whether the absolute whortest path has been found (true) or not.
     bool bi_dist_found;
-    
-    
+
+
     //Variables for testing
     long int forwardscannedcounter;
     long int reversescannedcounter;
@@ -310,7 +310,7 @@ namespace lemon {
     long int reversedecreasedcounter;
     long int forwardimportantcounter;
     long int reverseimportantcounter;
-    
+
     /*
     forwardscannedcounter;
     reversescannedcounter;
@@ -554,22 +554,22 @@ namespace lemon {
     ///\param length The length map used by the algorithm.
     Bijkstra(const Digraph& g, const LengthMap& length) :
       G(&g), _length(&length),
-      _pred(NULL), _rev_pred(NULL), 
+      _pred(NULL), _rev_pred(NULL),
       local_pred(false), local_rev_pred(false),
-      _dist(NULL), _rev_dist(NULL), 
+      _dist(NULL), _rev_dist(NULL),
       local_dist(false), local_rev_dist(false),
       _processed(NULL), _rev_processed(NULL),
       local_processed(false), local_rev_processed(false),
       _heap_cross_ref(NULL), _rev_heap_cross_ref(NULL),
       local_heap_cross_ref(false), local_rev_heap_cross_ref(false),
       _heap(NULL), _rev_heap(NULL),
-      local_heap(false), local_rev_heap(false), 
-      reverse_is_next(false), bi_path_found(false), 
+      local_heap(false), local_rev_heap(false),
+      reverse_is_next(false), bi_path_found(false),
       bi_dist_found(false)
-    { 
+    {
       shortest_dist = OperationTraits::zero();
       con_node_id = -1;
-      
+
       forwardscannedcounter = 0;
       reversescannedcounter = 0;
       forwardreachedcounter = 0;
@@ -624,7 +624,7 @@ namespace lemon {
       _pred = &m;
       return *this;
     }
-    
+
     ///Sets the map that stores the reverse predecessor arcs.
 
     ///Sets the map that stores the reverse predecessor arcs.
@@ -661,7 +661,7 @@ namespace lemon {
       _processed = &m;
       return *this;
     }
-    
+
     ///Sets the map that indicates which nodes are reversely processed.
 
     ///Sets the map that indicates which nodes are reversely processed.
@@ -718,7 +718,7 @@ namespace lemon {
       return *this;
     }
 
-    
+
     ///Sets the heap and the cross reference used by algorithm.
 
     ///Sets the heap and the cross reference used by algorithm.
@@ -742,7 +742,7 @@ namespace lemon {
       _heap = &hp;
       return *this;
     }
-    
+
     ///Sets the reverse heap and the reverse cross reference used by algorithm.
 
     ///Sets the reverse heap and the reverse cross reference used by algorithm.
@@ -774,7 +774,7 @@ namespace lemon {
       _processed->set(v,true);
       _dist->set(v, dst);
     }
-    
+
     void finalizeRevNodeData(Node v,Value dst)
     {
       _rev_processed->set(v,true);
@@ -788,7 +788,7 @@ namespace lemon {
     ///one of the member functions called \ref run(Node) "run()".\n
     ///If you need better control on the execution, you have to call
     ///\ref init() first, then you can add several source nodes with
-    ///\ref addSource(), and several target nodes with \ref addTarget(). 
+    ///\ref addSource(), and several target nodes with \ref addTarget().
     ///Finally the actual path computation can be
     ///performed with one of the \ref start() functions.
 
@@ -830,7 +830,7 @@ namespace lemon {
         _pred->set(s,INVALID);
       }
     }
-    
+
     ///Adds a new target node.
 
     ///Adds a new target node to the reverse priority heap.
@@ -870,7 +870,7 @@ namespace lemon {
         Node w=G->target(e);
         //nodecounter++;
         forwardreachedcounter++;
-        
+
         switch(_heap->state(w)) {
         case Heap::PRE_HEAP:
           forwardinsertedcounter++;
@@ -893,14 +893,14 @@ namespace lemon {
       }
       return v;
     }
-    
+
   private:
     void chooseDirection()
     {
       reverse_is_next = forwardinsertedcounter + 2*forwardscannedcounter + forwarddecreasedcounter > reverseinsertedcounter + 2*reversescannedcounter + reversedecreasedcounter;
       //reverse_is_next = ((forwardscannedcounter + reversescannedcounter) / 50) % 2 == 0;
     }
-    
+
   public:
     ///Processes the next node in the priority heaps bidirectionally
 
@@ -954,7 +954,7 @@ namespace lemon {
             continue;
             break;
           }
-          
+
           if (_rev_heap->state(w) == Heap::POST_HEAP) //there is a path through w
           {
                 ++forwardimportantcounter;
@@ -1012,7 +1012,7 @@ namespace lemon {
             continue;
             break;
           }
-          
+
           if (_heap->state(w) == Heap::POST_HEAP) //there is a path through w
           {
                 ++reverseimportantcounter;
@@ -1042,7 +1042,7 @@ namespace lemon {
     {
       return !_heap->empty()?_heap->top():INVALID;
     }
-    
+
     ///The next node to be processed reversely.
 
     ///Returns the next node to be processed reversely or \c INVALID if the
@@ -1057,7 +1057,7 @@ namespace lemon {
     ///Returns \c false if there are nodes to be processed
     ///in the priority heap.
     bool emptyQueue() const { return _heap->empty(); }
-    
+
     ///Returns \c false if there are nodes to be processed reversely.
 
     ///Returns \c false if there are nodes to be processed
@@ -1069,7 +1069,7 @@ namespace lemon {
     ///Returns the number of the nodes to be processed
     ///in the priority heap.
     int queueSize() const { return _heap->size(); }
-    
+
     ///Returns the number of the nodes to be processed reversely.
 
     ///Returns the number of the nodes to be processed
@@ -1108,7 +1108,7 @@ namespace lemon {
     ///Executes the algorithm until there is a bidirectionally processed node.
     ///
     ///This method runs the %Bijkstra algorithm from the root node(s)
-    ///in order to compute the shortest path to \c t. Technically, 
+    ///in order to compute the shortest path to \c t. Technically,
     ///it runs the %Dijkstra algorithm from both the root node(s)
     ///and the target node \c t.
     ///
@@ -1133,10 +1133,10 @@ namespace lemon {
       reverseimportantcounter = 0;
       bi_path_found = false;
       bi_dist_found = false;
-      
+
       shortest_dist = OperationTraits::zero();
       con_node_id = -1;
-      
+
       if (_rev_heap->empty())
       {
         while ( !_heap->empty() && _heap->top()!=t ) processNextNode();
@@ -1147,8 +1147,10 @@ namespace lemon {
       } else {
         while (!bi_path_found && !_heap->empty() && !_rev_heap->empty()) processNextNodeBi();
         if (bi_path_found)
-        { 
-          const Node* nodep = new Node(Digraph::nodeFromId(con_node_id));
+        {
+          // fix for ? LEMON 1.3? just call the method from the graph object - not from the class Digraph
+          //const Node* nodep = new Node(Digraph::nodeFromId(con_node_id));
+          const Node* nodep = new Node(G->nodeFromId(con_node_id));
           const Node* temp = nodep;
           Value finalvalue = currentDist(*nodep);
           if (G->id(*nodep) == G->id(t)) finalizeNodeData(t,finalvalue);
@@ -1166,7 +1168,7 @@ namespace lemon {
               _pred->set(v,e);
               _heap->erase(v);
             }
-            
+
           }
           delete temp;
         }
@@ -1203,7 +1205,7 @@ namespace lemon {
 
     ///This method runs the %Bijkstra algorithm from node \c s
     ///in order to compute the shortest path to each node.
-    ///Due to the lack of target node, it runs the 
+    ///Due to the lack of target node, it runs the
     ///original %Dijkstra algorithm.
     ///
     ///The algorithm computes
@@ -1265,7 +1267,7 @@ namespace lemon {
     ///\pre Either \ref run(Node) "run()" or \ref init()
     ///must be called before using this function.
     Path path(Node t) const { return Path(*G, *_pred, t); }
-    
+
     ///The shortest path from the given node.
 
     ///Returns the shortest path from the given node to the target(t).
@@ -1287,7 +1289,7 @@ namespace lemon {
     ///\pre Either \ref run(Node) "run()" or \ref init()
     ///must be called before using this function.
     Value dist(Node v) const { return (*_dist)[v]; }
-    
+
     ///The distance of the target(t) from the given node.
 
     ///Returns the distance of the target(t) from the given.
@@ -1313,13 +1315,13 @@ namespace lemon {
     ///\pre Either \ref run(Node) "run()" or \ref init()
     ///must be called before using this function.
     Arc predArc(Node v) const { return (*_pred)[v]; }
-    
+
     ///\brief Returns the 'previous arc' of the reverse shortest path tree for
     ///the given node.
     ///
     ///This function returns the 'previous arc' of the reverse shortest path
     ///tree for the node \c v, i.e. it returns the last arc of a
-    ///shortest path from a target to \c v in the reverse graph. 
+    ///shortest path from a target to \c v in the reverse graph.
     ///It is \c INVALID if \c v is not reversely reached from the target(s)
     ///or if \c v is a target.
     ///
@@ -1362,7 +1364,7 @@ namespace lemon {
     ///must be called before using this function.
     Node revPredNode(Node v) const { return (*_rev_pred)[v]==INVALID ? INVALID:
                                   G->target((*_rev_pred)[v]); }
-    
+
     ///\brief Returns a const reference to the node map that stores the
     ///distances of the nodes.
     ///
@@ -1372,11 +1374,11 @@ namespace lemon {
     ///\pre Either \ref run(Node) "run()" or \ref init()
     ///must be called before using this function.
     const DistMap &distMap() const { return *_dist;}
-    
+
     ///\brief Returns a const reference to the node map that stores the
     ///reverse distances of the nodes.
     ///
-    ///Returns a const reference to the node map that stores the 
+    ///Returns a const reference to the node map that stores the
     ///reverse distances of the nodes calculated by the algorithm.
     ///
     ///\pre Either \ref run(Node,Node) "run()" or \ref init()
@@ -1396,14 +1398,14 @@ namespace lemon {
     ///\brief Returns a const reference to the node map that stores the
     ///reverse predecessor arcs.
     ///
-    ///Returns a const reference to the node map that stores the 
-    ///reverse predecessor arcs, which form the 
+    ///Returns a const reference to the node map that stores the
+    ///reverse predecessor arcs, which form the
     ///reverse shortest path tree (forest).
     ///
     ///\pre Either \ref run(Node,Node) "run()" or \ref init()
     ///must be called before using this function.
     const PredMap &revPredMap() const { return *_rev_pred;}
-    
+
     ///Checks if the given node is reached from the root(s).
 
     ///Returns \c true if \c v is reached from the root(s).
@@ -1421,7 +1423,7 @@ namespace lemon {
     ///must be called before using this function.
     bool revReached(Node v) const { return (*_rev_heap_cross_ref)[v] !=
                                         Heap::PRE_HEAP; }
-    
+
     ///Checks if a node is processed.
 
     ///Returns \c true if \c v is processed, i.e. the shortest
@@ -1441,7 +1443,7 @@ namespace lemon {
     ///must be called before using this function.
     bool revProcessed(Node v) const { return (*_rev_heap_cross_ref)[v] ==
                                           Heap::POST_HEAP; }
-    
+
     ///The current distance of the given node from the root(s).
 
     ///Returns the current distance of the given node from the root(s).
@@ -1453,7 +1455,7 @@ namespace lemon {
     Value currentDist(Node v) const {
       return processed(v) ? (*_dist)[v] : (*_heap)[v];
     }
-    
+
     ///The current reverse distance of the given node from the target(s).
 
     ///Returns the current reverse distance of the given node from the target(s).
@@ -1465,7 +1467,7 @@ namespace lemon {
     Value currentRevDist(Node v) const {
       return revProcessed(v) ? (*_rev_dist)[v] : (*_rev_heap)[v];
     }
-    
+
     //get functions for testing
     long int getforwardscannedcounter() const { return forwardscannedcounter; }
     long int getreversescannedcounter() const { return reversescannedcounter; }
@@ -1477,13 +1479,13 @@ namespace lemon {
     long int getreversedecreasedcounter() const { return reversedecreasedcounter; }
     long int getforwardimportantcounter() const { return forwardimportantcounter; }
     long int getreverseimportantcounter() const { return reverseimportantcounter; }
-    
+
     long int getscannedcounter() const { return forwardscannedcounter + reversescannedcounter; }
     long int getreachedcounter() const { return forwardreachedcounter + reversereachedcounter; }
     long int getinsertedcounter() const { return forwardinsertedcounter + reverseinsertedcounter; }
     long int getdecreasedcounter() const { return forwarddecreasedcounter + reversedecreasedcounter; }
     long int getimportantcounter() const { return forwardimportantcounter + reverseimportantcounter; }
-    
+
     int getlength(const Node &v) const
     {
       int length = 0;

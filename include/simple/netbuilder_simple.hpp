@@ -17,11 +17,11 @@
 #ifndef NETWORKBUILDER_SIMPLE_H
 #define NETWORKBUILDER_SIMPLE_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "networkbuilder.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "networkbuilder.hpp"
 
 namespace netxpert {
  namespace simple {

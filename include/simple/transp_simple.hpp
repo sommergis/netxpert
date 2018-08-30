@@ -17,11 +17,11 @@
 #ifndef TRANSP_SIMPLE_H
 #define TRANSP_SIMPLE_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "transportation.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "transportation.hpp"
 
 namespace netxpert {
  namespace simple {
