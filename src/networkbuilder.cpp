@@ -14,7 +14,7 @@
  *
  */
 
-#include "networkbuilder.h"
+#include "networkbuilder.hpp"
 
 using namespace std;
 using namespace geos::geom;

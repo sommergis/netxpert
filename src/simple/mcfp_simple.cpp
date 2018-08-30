@@ -14,7 +14,7 @@
  *
  */
 
-#include "mcfp_simple.h"
+#include "mcfp_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

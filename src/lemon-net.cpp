@@ -14,7 +14,7 @@
  *
  */
 
-#include "lemon-net.h"
+#include "lemon-net.hpp"
 
 using namespace netxpert;
 using namespace netxpert::data;

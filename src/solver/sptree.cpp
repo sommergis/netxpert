@@ -14,7 +14,7 @@
  *
  */
 
-#include "sptree.h"
+#include "sptree.hpp"
 
 using namespace std;
 using namespace netxpert;

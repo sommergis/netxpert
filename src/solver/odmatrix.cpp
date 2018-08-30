@@ -14,7 +14,7 @@
  *
  */
 
-#include "odmatrix.h"
+#include "odmatrix.hpp"
 
 using namespace std;
 using namespace netxpert;

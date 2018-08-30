@@ -14,7 +14,7 @@
  *
  */
 
-#include "fgdbwriter.h"
+#include "fgdbwriter.hpp"
 
 using namespace std;
 using namespace FileGDBAPI;

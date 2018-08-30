@@ -14,7 +14,7 @@
  *
  */
 
-#include "slitewriter.h"
+#include "slitewriter.hpp"
 
 #ifdef SQLITECPP_ENABLE_ASSERT_HANDLER
  namespace SQLite

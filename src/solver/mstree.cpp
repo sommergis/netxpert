@@ -14,7 +14,7 @@
  *
  */
 
-#include "mstree.h"
+#include "mstree.hpp"
 
 using namespace std;
 using namespace netxpert;

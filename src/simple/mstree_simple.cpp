@@ -14,7 +14,7 @@
  *
  */
 
-#include "mstree_simple.h"
+#include "mstree_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

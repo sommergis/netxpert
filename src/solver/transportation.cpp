@@ -14,7 +14,7 @@
  *
  */
 
-#include "transportation.h"
+#include "transportation.hpp"
 
 using namespace std;
 using namespace netxpert;

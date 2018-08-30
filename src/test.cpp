@@ -14,7 +14,7 @@
  *
  */
 
-#include "test.h"
+#include "test.hpp"
 
 using namespace std;
 using namespace netxpert;

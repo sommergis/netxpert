@@ -31,7 +31,7 @@
 #include "lemon/list_graph.h"
 #include "lemon/time_measure.h"
 // LEMON contrib
-#include "contrib/bijkstra.hpp"
+#include "bijkstra.h"
 
 #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     #include "CHInterface.h"

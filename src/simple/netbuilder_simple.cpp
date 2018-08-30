@@ -14,7 +14,7 @@
  *
  */
 
-#include "netbuilder_simple.h"
+#include "netbuilder_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

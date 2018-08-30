@@ -14,7 +14,7 @@
  *
  */
 
-#include "odmatrix_simple.h"
+#include "odmatrix_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

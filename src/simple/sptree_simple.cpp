@@ -14,7 +14,7 @@
  *
  */
 
-#include "sptree_simple.h"
+#include "sptree_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

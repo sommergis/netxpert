@@ -14,7 +14,7 @@
  *
  */
 
-#include "mcflow.h"
+#include "mcflow.hpp"
 
 using namespace std;
 using namespace netxpert;

@@ -14,7 +14,7 @@
  *
  */
 
-#include "isolines_simple.h"
+#include "isolines_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

@@ -14,7 +14,7 @@
  *
  */
 
-#include "transp_simple.h"
+#include "transp_simple.hpp"
 
 using namespace netxpert::cnfg;
 using namespace netxpert::io;

@@ -14,7 +14,7 @@
  *
  */
 
-#include "dbhelper.h"
+#include "dbhelper.hpp"
 #include <stdexcept>
 
 using namespace std;

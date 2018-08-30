@@ -14,7 +14,7 @@
  *
  */
 
-#include "logger.h"
+#include "logger.hpp"
 #include <iostream>
 #include <fstream>
 #include <boost/date_time/posix_time/posix_time.hpp>

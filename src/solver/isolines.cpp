@@ -14,7 +14,7 @@
  *
  */
 
-#include "isolines.h"
+#include "isolines.hpp"
 
 using namespace std;
 using namespace netxpert;
