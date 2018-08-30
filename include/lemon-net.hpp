@@ -47,10 +47,10 @@
 #include "geos/opLinemerge.h"
 #include "geos/opDistance.h"
 
-#include "data.h"
-#include "dbhelper.h"
-#include "fgdbwriter.h"
-#include "slitewriter.h"
+#include "data.hpp"
+#include "dbhelper.hpp"
+#include "fgdbwriter.hpp"
+#include "slitewriter.hpp"
 
 namespace netxpert {
 

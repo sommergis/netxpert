@@ -19,8 +19,10 @@
 
 //#include "utils.h"
 #include <string>
-#include "dbwriter.h"
-#include "logger.h"
+
+#include "dbwriter.hpp"
+#include "logger.hpp"
+
 #include "SQLiteCpp/Database.h"
 #include "SQLiteCpp/Transaction.h"
 #include "geos/io/WKBWriter.h"

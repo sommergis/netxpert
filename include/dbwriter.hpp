@@ -18,7 +18,9 @@
 #define DBWRITER_H
 
 #include <string>
-#include "data.h"
+
+#include "data.hpp"
+
 #include "geos/geom/MultiLineString.h"
 #include "geos/geom/Geometry.h"
 #include "geos/geom/CoordinateSequence.h"

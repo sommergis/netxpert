@@ -30,15 +30,15 @@
 #include "lemon/random.h"
 #include "lemon/list_graph.h"
 #include "lemon/time_measure.h"
-
-#include "bijkstra.h"
+// LEMON contrib
+#include "contrib/bijkstra.hpp"
 
 #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
     #include "CHInterface.h"
     #include "CH/DefaultPriority.h"
 #endif
 
-//Heap
+// for different heaps
 #include "lemon/quad_heap.h"
 #include "lemon/dheap.h"
 #include "lemon/fib_heap.h"
@@ -46,7 +46,7 @@
 //Filter of Arcs
 #include "lemon/adaptors.h"
 
-#include "isptree.h"
+#include "isptree.hpp"
 
 using namespace lemon;
 using namespace netxpert::data;

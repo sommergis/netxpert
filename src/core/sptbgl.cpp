@@ -14,7 +14,7 @@
  *
  */
 
-#include "sptbgl.h"
+#include "sptbgl.hpp"
 
 using namespace boost;
 using namespace netxpert::core;

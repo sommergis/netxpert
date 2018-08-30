@@ -17,7 +17,7 @@
 #ifndef NETSIMPLEXLEM_H
 #define NETSIMPLEXLEM_H
 
-#include "imcflow.h"
+#include "imcflow.hpp"
 #include "lemon/smart_graph.h"
 #include "lemon/network_simplex.h"
 #include "lemon/adaptors.h"

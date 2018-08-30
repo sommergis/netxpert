@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <string>
 #include <limits.h> //UNIT_MAX
-#include "imstree.h"
+#include "imstree.hpp"
 #include <lemon/kruskal.h>
 
 using namespace lemon;

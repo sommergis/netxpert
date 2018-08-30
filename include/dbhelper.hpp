@@ -20,10 +20,13 @@
 #include <string>
 //determination of type
 #include <typeinfo>
-#include "data.h"
-#include "logger.h"
+
+#include "data.hpp"
+#include "logger.hpp"
+
 #include "SQLiteCpp/Database.h"
 #include "SQLiteCpp/Transaction.h"
+
 #include "geos/io/WKBReader.h"
 #include "geos/io/WKBWriter.h"
 #include "geos/geom/Point.h"

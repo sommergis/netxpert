@@ -14,7 +14,7 @@
  *
  */
 
-#include "nslem.h"
+#include "nslem.hpp"
 
 using namespace std;
 using namespace lemon;

@@ -17,11 +17,11 @@
 #ifndef ISOLINES_H
 #define ISOLINES_H
 
-#include "data.h"
-#include "utils.h"
-#include "network.h"
-#include "dbhelper.h"
-#include "sptree.h"
+#include "data.hpp"
+#include "utils.hpp"
+#include "network.hpp"
+#include "dbhelper.hpp"
+#include "sptree.hpp"
 
 namespace netxpert {
   namespace simple {

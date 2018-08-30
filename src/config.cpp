@@ -15,7 +15,7 @@
  */
 
 #include <fstream>
-#include "config.h"
+#include "config.hpp"
 
 using namespace std;
 using namespace cereal;

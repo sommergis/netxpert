@@ -18,8 +18,9 @@
 #define LOGGER_H
 
 #include <string>
-#include "config.h"
-#include "utils.h"
+
+#include "config.hpp"
+#include "utils.hpp"
 
 namespace netxpert {
 

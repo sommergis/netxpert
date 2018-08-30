@@ -14,7 +14,7 @@
  *
  */
 
-#include "sptlem.h"
+#include "sptlem.hpp"
 
 using namespace std;
 using namespace lemon;

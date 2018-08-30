@@ -25,7 +25,18 @@
 #include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
 #include <omp.h>
-#include "data.h"
+#include "data.hpp"
+
+
+// these macros should always be defined
+#define SQLITE_ENABLE_RTREE=1
+#define SQLITECPP_ENABLE_ASSERT_HANDLER
+#define LEMON_ONLY_TEMPLATES=1
+
+// optional macros
+//#define NETX_ENABLE_CONTRACTION_HIERARCHIES
+//#define NETX_WEB
+
 
 namespace netxpert {
 

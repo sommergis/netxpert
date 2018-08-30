@@ -19,7 +19,7 @@
 
 #include <memory>
 #include <vector>
-#include "lemon-net.h"
+#include "lemon-net.hpp"
 
 namespace netxpert {
 

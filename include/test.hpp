@@ -19,32 +19,24 @@
 
 #include <iostream>
 //Fix for C2146 Error on Windows (lemon/adaptors.h error!)
-//#include "logger.h"
-#include "fgdbwriter.h" //has logger, logger has utils
-#include "slitewriter.h"
+//#include "logger.hpp"
+#include "fgdbwriter.hpp" //has logger, logger has utils
+#include "slitewriter.hpp"
 #include <fstream>
 #include "geos/io/WKTReader.h"
 #include "geos/io/StringTokenizer.h"
 
-#include "data.h"
-#include "lemon-net.h"
-#include "dbhelper.h"
-#include "sptree.h"
+#include "data.hpp"
+#include "lemon-net.hpp"
+#include "dbhelper.hpp"
+#include "sptree.hpp"
 
-//#include "network.h"
-//#include "mstree.h"
-//#include "sptree.h"
-//#include "odmatrix.h"
-//#include "mcflow.h"
-//#include "transportation.h"
-//#include "networkbuilder.h"
-
-#include "odmatrix_simple.h"
-#include "mstree_simple.h"
-#include "sptree_simple.h"
-#include "transp_simple.h"
-#include "mcfp_simple.h"
-#include "netbuilder_simple.h"
+#include "odmatrix_simple.hpp"
+#include "mstree_simple.hpp"
+#include "sptree_simple.hpp"
+#include "transp_simple.hpp"
+#include "mcfp_simple.hpp"
+#include "netbuilder_simple.hpp"
 
 namespace netxpert
 {

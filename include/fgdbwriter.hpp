@@ -18,8 +18,10 @@
 #define FGDBWRITER_H
 
 #include <string>
-#include "dbwriter.h"
-#include "logger.h"
+
+#include "dbwriter.hpp"
+#include "logger.hpp"
+
 #include <fstream>
 #include "FileGDB_API/include/FileGDBAPI.h"
 #include <algorithm>
