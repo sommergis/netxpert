@@ -1,26 +1,21 @@
-bin$
-build$
-doxygen$
-obj$
-libs/FileGDB_API/samples$
-libs/FileGDB_API_32Bit/samples$
-libs/geos-3.4.2/.*\.o$
-libs/geos-3.4.2/.*\.so$
-libs/geos-3.4.2/.*\.a$
-libs/lemon-1.3.1$
-test/bin$
-test/obj$
-test/build$
-test/data$
-test/tost.gdb$
-test/test.gdb$
-.*\.orig$
-.*\.bak$
-.*\.*~$
-.*\.log$
-.*\.sqlite$
-_bak$
-doc/html$
-doc/latex$
-.cccc$
-.*\.o$
+# ignore all *.a and *.o files
+*.[oa]
+# ignore all files in bin/
+bin/*
+doxygen/*
+obj/*
+libs/FileGDB_API/samples/*
+libs/FileGDB_API_32Bit/samples/*
+test/bin/*
+test/obj/*
+test/build/*
+test/data/*
+test/tost.gdb/*
+test/test.gdb/*
+# ignore the following file endings
+*.[orig]
+*.[bak]
+*.[~]
+*.[log]
+doc/html/*
+doc/latex/*
