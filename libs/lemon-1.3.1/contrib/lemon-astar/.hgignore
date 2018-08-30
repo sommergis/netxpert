@@ -1,0 +1,17 @@
+syntax: glob
+*.obj
+*.orig
+*.rej
+*~
+*.o
+*.log
+*.lo
+*.tar.*
+*.bak
+doc/Doxyfile
+
+syntax: regexp
+(.*/)?\#[^/]*\#$
+(.*/)?\.\#[^/]*$
+^.*objs.*/.*
+^.*build.*/.*
