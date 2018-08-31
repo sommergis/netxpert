@@ -14,7 +14,6 @@
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-std=c++14" />
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="include" />
@@ -31,7 +30,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-std=c++14" />
 					<Add directory="include" />
 					<Add directory="include/core" />
 					<Add directory="include/solver" />
@@ -50,26 +48,30 @@
 			<Add option="-Wno-unknown-pragmas" />
 			<Add option="-Wno-deprecated" />
 			<Add option="-Wno-effc++" />
+			<Add option="-DSQLITE_ENABLE_RTREE=1" />
+			<Add option="-DSQLITECPP_ENABLE_ASSERT_HANDLER" />
+			<Add option="-DLEMON_ONLY_TEMPLATES=1" />
 			<Add directory="libs" />
 			<Add directory="/usr/include/python2.7" />
 			<Add directory="include" />
 			<Add directory="libs/lemon-1.3.1" />
-			<Add directory="/home/hahne/dev/lemon-contrib/ch-lemon/src" />
-			<Add directory="/home/hahne/dev/lemon-contrib/lemon-astar/src" />
-			<Add directory="libs/geos-3.4.2/include" />
-			<Add directory="libs/geos-3.4.2/include/geos" />
-			<Add directory="../1_libs/FileGDB_API-64gcc51/include" />
+			<Add directory="libs/lemon-1.3.1/contrib/ch-lemon" />
+			<Add directory="libs/lemon-1.3.1/contrib/lemon-astar/src" />
+			<Add directory="libs/geos-3.6.3/include" />
+			<Add directory="libs/geos-3.6.3/include/geos" />
+			<Add directory="libs/FileGDB_API/include" />
 		</Compiler>
 		<Linker>
 			<Add option="-m64" />
 			<Add option="-fopenmp" />
-			<Add option="-Wl,-rpath=/usr/local/lib/netxpert" />
+			<Add option="-Wl,-rpath=/usr/local/lib" />
 			<Add library="dl" />
 			<Add library="python2.7" />
 			<Add library="FileGDBAPI" />
+			<Add library="libfgdbunixrtl" />
 			<Add library="geos" />
 			<Add directory="libs/SQLiteCpp" />
-			<Add directory="../1_libs/FileGDB_API-64gcc51/lib" />
+			<Add directory="libs/FileGDB_API/lib" />
 		</Linker>
 		<Unit filename="doc/compile.dox" />
 		<Unit filename="doc/mainpage.dox" />

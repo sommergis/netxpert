@@ -3,7 +3,7 @@
 //
 
 /*
-  COPYRIGHT © 2012 ESRI
+  COPYRIGHT © 2015 ESRI
   TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
   Unpublished material - all rights reserved under the
   Copyright Laws of the United States and applicable international
@@ -24,17 +24,17 @@
 #include <string>
 
 #ifndef EXPORT_FILEGDB_API
-// if defined linux || defined __APPLE__
-// define EXT_FILEGDB_API
-// else
-//  define EXT_FILEGDB_API _declspec(dllimport)
-// endif
-//else
-// if defined linux || defined __APPLE__
+# if defined __linux__ || defined __APPLE__
+#  define EXT_FILEGDB_API
+# else
+#  define EXT_FILEGDB_API _declspec(dllimport)
+# endif
+#else
+# if defined __linux__ || defined __APPLE__
 #  define EXT_FILEGDB_API __attribute__((visibility("default")))
-// else
-//  define EXT_FILEGDB_API _declspec(dllexport)
-// endif
+# else
+#  define EXT_FILEGDB_API _declspec(dllexport)
+# endif
 #endif
 
 #include "FileGDBCore.h"

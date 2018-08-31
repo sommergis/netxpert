@@ -1666,7 +1666,7 @@
 
 1535633273 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/geos/export.h
 
-1535633273 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/geos/platform.h
+1535659200 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/geos/platform.h
 	<ieeefp.h>
 	<inttypes.h>
 	<float.h>
@@ -1803,7 +1803,7 @@
 	<lemon/bits/traits.h>
 	<lemon/assert.h>
 
-1535633273 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/geos/algorithm
+1535658622 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/geos/algorithm
 
 1404744024 /home/vagrant/dev/netxpert/libs/lemon-1.3.1/lemon/bits/enable_if.h
 
@@ -1976,7 +1976,7 @@
 	<fstream>
 	"config.hpp"
 
-1535633273 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/config.h
+1535659207 /home/vagrant/dev/netxpert/libs/geos-3.4.2/include/config.h
 
 1535640698 source:/home/vagrant/dev/netxpert/src/core/mstlem.cpp
 	"mstlem.hpp"
@@ -1984,7 +1984,7 @@
 1535640720 source:/home/vagrant/dev/netxpert/src/core/nslem.cpp
 	"nslem.hpp"
 
-1535641258 /home/vagrant/dev/netxpert/include/config.hpp
+1535662809 /home/vagrant/dev/netxpert/include/config.hpp
 	<stdint.h>
 	<string>
 	<stdexcept>
@@ -2227,7 +2227,7 @@
 	<iostream>
 	<geos/inline.h>
 
-1535640248 /home/vagrant/dev/netxpert/include/dbhelper.hpp
+1535662354 /home/vagrant/dev/netxpert/include/dbhelper.hpp
 	<string>
 	<typeinfo>
 	"data.hpp"
@@ -2323,12 +2323,12 @@
 	<geos/geom/PrecisionModel.h>
 	<cassert>
 
-1535640276 /home/vagrant/dev/netxpert/include/fgdbwriter.hpp
+1535668516 /home/vagrant/dev/netxpert/include/fgdbwriter.hpp
 	<string>
 	"dbwriter.hpp"
 	"logger.hpp"
 	<fstream>
-	"FileGDB_API/include/FileGDBAPI.h"
+	"FileGDBAPI.h"
 	<algorithm>
 
 1535640287 /home/vagrant/dev/netxpert/include/dbwriter.hpp
@@ -2338,7 +2338,7 @@
 	"geos/geom/Geometry.h"
 	"geos/geom/CoordinateSequence.h"
 
-1535633272 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/FileGDBAPI.h
+1501090707 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/FileGDBAPI.h
 	"FileGDBCore.h"
 	"GeodatabaseManagement.h"
 	"Geodatabase.h"
@@ -2347,34 +2347,34 @@
 	"Util.h"
 	"Raster.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/FileGDBCore.h
+1501090707 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/FileGDBCore.h
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/GeodatabaseManagement.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/GeodatabaseManagement.h
 	<string>
 	"FileGDBCore.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Geodatabase.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Geodatabase.h
 	<string>
 	<vector>
 	<map>
 	"FileGDBCore.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Table.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Table.h
 	<string>
 	<vector>
 	"FileGDBCore.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Row.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Row.h
 	<string>
 	<vector>
 	"FileGDBCore.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Util.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Util.h
 	<string>
 	<vector>
 	"FileGDBCore.h"
 
-1535633273 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Raster.h
+1501091168 /home/vagrant/dev/netxpert/libs/FileGDB_API/include/Raster.h
 	<string>
 	"FileGDBCore.h"
 
@@ -2525,7 +2525,7 @@
 	<vector>
 	"lemon-net.hpp"
 
-1535641397 source:/home/vagrant/dev/netxpert/src/dbhelper.cpp
+1535662446 source:/home/vagrant/dev/netxpert/src/dbhelper.cpp
 	"dbhelper.hpp"
 	<stdexcept>
 
@@ -2542,10 +2542,10 @@
 	<boost/date_time/posix_time/posix_time.hpp>
 	<boost/date_time/posix_time/posix_time_io.hpp>
 
-1535641430 source:/home/vagrant/dev/netxpert/src/networkbuilder.cpp
+1535662548 source:/home/vagrant/dev/netxpert/src/networkbuilder.cpp
 	"networkbuilder.hpp"
 
-1535653526 /home/vagrant/dev/netxpert/include/networkbuilder.hpp
+1535662504 /home/vagrant/dev/netxpert/include/networkbuilder.hpp
 	"dbhelper.hpp"
 	"dbwriter.hpp"
 	"slitewriter.hpp"
@@ -2791,4 +2791,486 @@
 
 1535651929 source:/home/vagrant/dev/netxpert/src/solver/odmatrix.cpp
 	"odmatrix.hpp"
+
+1535660164 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/config.h
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Coordinate.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/inline.h>
+	<set>
+	<stack>
+	<vector>
+	<string>
+	<limits>
+	"geos/geom/Coordinate.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/export.h
+
+1535660164 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/platform.h
+	<ieeefp.h>
+	<inttypes.h>
+	<float.h>
+	<limits>
+	<math.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/inline.h
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Coordinate.inl
+	<geos/geom/Coordinate.h>
+	<geos/platform.h>
+	<cassert>
+	<cmath>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Geometry.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/inline.h>
+	<geos/geom/Envelope.h>
+	<geos/geom/Dimension.h>
+	<geos/geom/GeometryComponentFilter.h>
+	<string>
+	<iostream>
+	<vector>
+	<memory>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Envelope.h
+	<geos/export.h>
+	<geos/inline.h>
+	<geos/geom/Coordinate.h>
+	<string>
+	<vector>
+	<memory>
+	"geos/geom/Envelope.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Envelope.inl
+	<cassert>
+	<geos/geom/Coordinate.h>
+	<geos/geom/Envelope.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Dimension.h
+	<geos/export.h>
+	<geos/inline.h>
+	"geos/geom/Envelope.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/GeometryComponentFilter.h
+	<geos/export.h>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/MultiLineString.h
+	<geos/export.h>
+	<geos/geom/GeometryCollection.h>
+	<geos/geom/Lineal.h>
+	<geos/geom/Dimension.h>
+	<string>
+	<vector>
+	<geos/inline.h>
+	"geos/geom/MultiLineString.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/GeometryCollection.h
+	<geos/export.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/Envelope.h>
+	<geos/geom/Dimension.h>
+	<geos/inline.h>
+	<string>
+	<vector>
+	<memory>
+	"geos/geom/GeometryCollection.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/GeometryCollection.inl
+	<geos/geom/GeometryCollection.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Lineal.h
+	<geos/export.h>
+	<geos/geom/Geometry.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/MultiLineString.inl
+	<geos/geom/MultiLineString.h>
+	<geos/geom/MultiPoint.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/MultiPoint.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/geom/GeometryCollection.h>
+	<geos/geom/Puntal.h>
+	<geos/geom/Dimension.h>
+	<geos/inline.h>
+	<string>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Puntal.h
+	<geos/export.h>
+	<geos/geom/Geometry.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/LineString.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/Lineal.h>
+	<geos/geom/CoordinateSequence.h>
+	<geos/geom/Envelope.h>
+	<geos/geom/Dimension.h>
+	<string>
+	<vector>
+	<memory>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/CoordinateSequence.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/inline.h>
+	<geos/geom/Coordinate.h>
+	<vector>
+	<iosfwd>
+	<memory>
+
+1535660162 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/algorithm
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/CoordinateSequenceFactory.h
+	<geos/export.h>
+	<vector>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/GeometryFactory.h
+	<geos/geom/Geometry.h>
+	<geos/geom/GeometryCollection.h>
+	<geos/geom/MultiPoint.h>
+	<geos/geom/MultiLineString.h>
+	<geos/geom/MultiPolygon.h>
+	<geos/export.h>
+	<geos/inline.h>
+	<vector>
+	<memory>
+	<cassert>
+	"geos/geom/GeometryFactory.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/MultiPolygon.h
+	<geos/export.h>
+	<string>
+	<vector>
+	<geos/platform.h>
+	<geos/geom/GeometryCollection.h>
+	<geos/geom/Polygonal.h>
+	<geos/geom/Dimension.h>
+	<geos/inline.h>
+	"geos/geom/MultiPolygon.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Polygonal.h
+	<geos/export.h>
+	<geos/geom/Geometry.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/MultiPolygon.inl
+	<geos/geom/MultiPolygon.h>
+	<geos/geom/GeometryCollection.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/GeometryFactory.inl
+	<geos/geom/GeometryFactory.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LengthIndexedLine.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LinearLocation.h
+	<string>
+	<memory>
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/LineSegment.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/LineSegment.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/inline.h>
+	<iostream>
+	<memory>
+	"geos/geom/LineSegment.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/LineSegment.inl
+	<geos/geom/LineSegment.h>
+	<geos/algorithm/CGAlgorithms.h>
+	<cassert>
+	<cmath>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/algorithm/CGAlgorithms.h
+	<geos/export.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/ExtractLineByLocation.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LocationIndexedLine.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/Lineal.h>
+	<geos/linearref/LinearLocation.h>
+	<geos/linearref/LocationIndexOfPoint.h>
+	<geos/linearref/LocationIndexOfLine.h>
+	<geos/util/IllegalArgumentException.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LocationIndexOfPoint.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LocationIndexOfLine.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/util/IllegalArgumentException.h
+	<geos/export.h>
+	<string>
+	<geos/util/GEOSException.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/util/GEOSException.h
+	<geos/export.h>
+	<stdexcept>
+	<string>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/linearref/LengthLocationMap.h
+	<geos/geom/Coordinate.h>
+	<geos/geom/Geometry.h>
+	<geos/linearref/LinearLocation.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/WKTReader.h
+	<geos/export.h>
+	<geos/geom/GeometryFactory.h>
+	<geos/geom/CoordinateSequence.h>
+	<string>
+	<geos/io/WKTReader.inl>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/WKTReader.inl
+	<geos/io/WKTReader.h>
+	<geos/geom/GeometryFactory.h>
+	<iostream>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/opLinemerge.h
+	<geos/operation/linemerge/LineMerger.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/operation/linemerge/LineMerger.h
+	<geos/export.h>
+	<geos/operation/linemerge/LineMergeGraph.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/operation/linemerge/LineMergeGraph.h
+	<geos/export.h>
+	<geos/planargraph/PlanarGraph.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/planargraph/PlanarGraph.h
+	<geos/export.h>
+	<geos/planargraph/NodeMap.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/planargraph/NodeMap.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<map>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/opDistance.h
+	<geos/operation/distance/DistanceOp.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/operation/distance/DistanceOp.h
+	<geos/export.h>
+	<geos/algorithm/PointLocator.h>
+	<vector>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/algorithm/PointLocator.h
+	<geos/export.h>
+	<geos/geom/Location.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Location.h
+	<geos/export.h>
+	<iostream>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/WKBReader.h
+	<geos/export.h>
+	<geos/geom/GeometryFactory.h>
+	<geos/io/ByteOrderDataInStream.h>
+	<iosfwd>
+	<vector>
+	<string>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/ByteOrderDataInStream.h
+	<geos/export.h>
+	<geos/inline.h>
+	<iosfwd>
+	<geos/io/ByteOrderDataInStream.inl>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/ByteOrderDataInStream.inl
+	<geos/io/ParseException.h>
+	<geos/io/ByteOrderDataInStream.h>
+	<geos/io/ByteOrderValues.h>
+	<geos/util/Machine.h>
+	<iostream>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/ParseException.h
+	<geos/export.h>
+	<geos/util/GEOSException.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/ByteOrderValues.h
+	<geos/export.h>
+	<geos/platform.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/util/Machine.h
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/WKBWriter.h
+	<geos/export.h>
+	<geos/util/Machine.h>
+	<iosfwd>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/Point.h
+	<geos/export.h>
+	<geos/platform.h>
+	<geos/geom/Geometry.h>
+	<geos/geom/Puntal.h>
+	<geos/geom/CoordinateSequence.h>
+	<geos/geom/Envelope.h>
+	<geos/geom/Dimension.h>
+	<geos/inline.h>
+	<string>
+	<vector>
+	<memory>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/PrecisionModel.h
+	<geos/export.h>
+	<geos/inline.h>
+	<string>
+	"geos/geom/PrecisionModel.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geom/PrecisionModel.inl
+	<geos/geom/PrecisionModel.h>
+	<cassert>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/GeometryGraph.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<memory>
+	<geos/geom/Coordinate.h>
+	<geos/geom/CoordinateSequence.h>
+	<geos/geomgraph/PlanarGraph.h>
+	<geos/geom/LineString.h>
+	<geos/inline.h>
+	"geos/geomgraph/GeometryGraph.inl"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/PlanarGraph.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<memory>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/PlanarGraph.h>
+	<geos/geomgraph/NodeMap.h>
+	<geos/geomgraph/DirectedEdgeStar.h>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/NodeMap.h
+	<geos/export.h>
+	<map>
+	<vector>
+	<string>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/Node.h>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/Node.h
+	<geos/export.h>
+	<geos/geomgraph/GraphComponent.h>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/EdgeEndStar.h>
+	<geos/geomgraph/EdgeEnd.h>
+	<geos/inline.h>
+	<cassert>
+	<string>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/GraphComponent.h
+	<geos/export.h>
+	<geos/inline.h>
+	<geos/geomgraph/Label.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/Label.h
+	<geos/export.h>
+	<geos/geomgraph/TopologyLocation.h>
+	<geos/inline.h>
+	<iosfwd>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/TopologyLocation.h
+	<geos/export.h>
+	<geos/inline.h>
+	<vector>
+	<string>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/EdgeEndStar.h
+	<geos/export.h>
+	<geos/geomgraph/EdgeEnd.h>
+	<geos/geom/Coordinate.h>
+	<geos/inline.h>
+	<set>
+	<string>
+	<vector>
+	<algorithm>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/EdgeEnd.h
+	<geos/export.h>
+	<geos/geom/Coordinate.h>
+	<geos/geomgraph/Label.h>
+	<geos/inline.h>
+	<string>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/DirectedEdgeStar.h
+	<geos/export.h>
+	<set>
+	<string>
+	<vector>
+	<geos/geomgraph/EdgeEndStar.h>
+	<geos/geomgraph/Label.h>
+	<geos/geom/Coordinate.h>
+	<geos/inline.h>
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/geomgraph/GeometryGraph.inl
+	<geos/geomgraph/GeometryGraph.h>
+
+1535656526 source:/home/vagrant/dev/netxpert/src/solver/sptree.cpp
+	"sptree.hpp"
+
+1535651945 source:/home/vagrant/dev/netxpert/src/solver/transportation.cpp
+	"transportation.hpp"
+
+1535641445 source:/home/vagrant/dev/netxpert/src/test.cpp
+	"test.hpp"
+
+1535639273 /home/vagrant/dev/netxpert/include/test.hpp
+	<iostream>
+	"fgdbwriter.hpp"
+	"slitewriter.hpp"
+	<fstream>
+	"geos/io/WKTReader.h"
+	"geos/io/StringTokenizer.h"
+	"data.hpp"
+	"lemon-net.hpp"
+	"dbhelper.hpp"
+	"sptree.hpp"
+	"odmatrix_simple.hpp"
+	"mstree_simple.hpp"
+	"sptree_simple.hpp"
+	"transp_simple.hpp"
+	"mcfp_simple.hpp"
+	"netbuilder_simple.hpp"
+
+1533529451 /home/vagrant/dev/netxpert/libs/geos-3.6.3/include/geos/io/StringTokenizer.h
+	<geos/export.h>
+	<string>
+
+1535641451 source:/home/vagrant/dev/netxpert/src/utils.cpp
+	"utils.hpp"
 

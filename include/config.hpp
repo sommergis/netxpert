@@ -42,9 +42,9 @@ namespace netxpert {
     ///\brief Current version of netXpert
     static const std::string Version() {
     #if (defined NETX_WEB)
-      return "0.9.8c - web";
+      return "0.9.8d - web";
     #else
-      return "0.9.8c";
+      return "0.9.8d";
     #endif // NETX_WEB
     };
 

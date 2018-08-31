@@ -126,7 +126,7 @@ namespace netxpert {
             ///\brief Geometry Factory for GEOS.
             /// A precision model is set in the initialization of DBHELPER.
             /// Used for WKBReader and every geometry creation in netxpert library.
-            static std::shared_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
+            static geos::geom::GeometryFactory::unique_ptr GEO_FACTORY;
 
             /* Methods for loading IDs and geometry into a map in memory for fast access to geometries.
                Much faster (factor x10) than spatialite lookup per primary key lookup of IDs

@@ -33,7 +33,8 @@ netxpert::cnfg::Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
 std::unordered_set<netxpert::data::extarcid_t> DBHELPER::EliminatedArcs;
-std::shared_ptr<geos::geom::GeometryFactory> DBHELPER::GEO_FACTORY;
+//std::shared_ptr<geos::geom::GeometryFactory> DBHELPER::GEO_FACTORY;
+geos::geom::GeometryFactory::unique_ptr DBHELPER::GEO_FACTORY;
 std::unordered_map<netxpert::data::extarcid_t, std::shared_ptr<geos::geom::LineString>> DBHELPER::KV_Network;
 
 
@@ -71,7 +72,9 @@ void DBHELPER::Initialize(const Config& cnfg)
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
-	DBHELPER::GEO_FACTORY = std::shared_ptr<geos::geom::GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+	//DBHELPER::GEO_FACTORY = std::shared_ptr<geos::geom::GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+	DBHELPER::GEO_FACTORY = geos::geom::GeometryFactory::create(pm.get() -1);
+
 
   DBHELPER::NETXPERT_CNFG = cnfg;
   IsInitialized = true;
@@ -1508,6 +1511,21 @@ bool DBHELPER::performInitialCommand()
         const string pathBefore = UTILS::GetCurrentDir();
         //chdir to spatiallitehome
         //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
+
+        string strSQL = "SELECT sqlite_version()";
+        SQLite::Statement query(db, strSQL);
+
+        std::string version = "";
+        while(query.executeStep())
+        {
+            SQLite::Column col = query.getColumn(0);
+            if (!col.isNull())
+            {
+                version  = col.getText();
+            }
+        }
+        LOGGER::LogDebug("(Internal) SQLite Version: " + version);
+
         UTILS::SetCurrentDir(spatiaLiteHome);
         /* Old way:
         db.enableExtensions();
@@ -1523,8 +1541,23 @@ bool DBHELPER::performInitialCommand()
         //on some QGIS Versions entry point is called "spatialite_init_ex" vs "sqlite3_modspatialite_init"
         db.loadExtension(spatiaLiteCoreName.c_str(), "spatialite_init_ex");
         #else
-        db.loadExtension(spatiaLiteCoreName.c_str(), NULL);
+        db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
         #endif
+
+        strSQL = "SELECT spatialite_version()";
+        SQLite::Statement query2(db, strSQL);
+
+        version = "";
+        while(query2.executeStep())
+        {
+            SQLite::Column col = query2.getColumn(0);
+            if (!col.isNull())
+            {
+                version  = col.getText();
+            }
+        }
+        LOGGER::LogDebug("Spatialite Version: " + version);
+
         UTILS::SetCurrentDir(pathBefore);
 
         //cout <<  boost::filesystem::current_path() << endl;

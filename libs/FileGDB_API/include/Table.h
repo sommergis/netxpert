@@ -3,7 +3,7 @@
 //
 
 /*
-  COPYRIGHT © 2012 ESRI
+  COPYRIGHT © 2015 ESRI
   TRADE SECRETS: ESRI PROPRIETARY AND CONFIDENTIAL
   Unpublished material - all rights reserved under the
   Copyright Laws of the United States and applicable international
@@ -19,29 +19,31 @@
   email: contracts@esri.com
 */
 
+/// Provides methods to work with tables, such as querying and modifying both schema and data.
+/// @file Table.h
+
 #pragma once
 
 #include <string>
 #include <vector>
 
 #ifndef EXPORT_FILEGDB_API
-// if defined linux || defined __APPLE__
-//  define EXT_FILEGDB_API
-// else
-//  define EXT_FILEGDB_API _declspec(dllimport)
-// endif
-//else
-// if defined linux || defined __APPLE__
+# if defined __linux__ || defined __APPLE__
+#  define EXT_FILEGDB_API
+# else
+#  define EXT_FILEGDB_API _declspec(dllimport)
+# endif
+#else
+# if defined __linux__ || defined __APPLE__
 #  define EXT_FILEGDB_API __attribute__((visibility("default")))
-// else
-//  define EXT_FILEGDB_API _declspec(dllexport)
-// endif
+# else
+#  define EXT_FILEGDB_API _declspec(dllexport)
+# endif
 #endif
 
 #include "FileGDBCore.h"
 
 class Datafile;
-class AutoLock;
 
 namespace FileGDBAPI
 {
@@ -107,6 +109,7 @@ public:
 
   /// Modifies a field in the table.
   /// If the XML is not UTF-8 encoded, create will fail with an error code of -2147024809 (Invalid function arguments).<br/>
+  /// Alter allows a domain to be assigned to a field. No other field properties can be changed.
   /// @param[in]    fieldDef An XML document defining the field's properties.
   /// @return       Error code indicating whether the method finished successfully.
   fgdbError AlterField(const std::string& fieldDef);
@@ -212,7 +215,7 @@ public:
   /// @return       Error code indicating whether the method finished successfully.
   fgdbError CreateRowObject(Row& row);
 
-  /// Inserts a newly-created and populated row into the table. When bulk inserting rows use LoadOnlyMode and SetWriteLock\FreeWriteLock to improve performance.
+  /// Inserts a newly-created and populated row into the table. When bulk inserting rows use LoadOnlyMode and SetWriteLock\\FreeWriteLock to improve performance.
   /// @param[in]    row The row to insert.
   /// @return       Error code indicating whether the method finished successfully.
   fgdbError Insert(Row& row);
@@ -281,7 +284,6 @@ private:
   Geodatabase*    m_pGeodatabase;
   Datafile*       m_pDatafile;
   std::wstring    m_Path;
-  AutoLock*       m_pWriteLock;
   int             m_isEditable;
 
 #pragma warning(pop)

@@ -37,7 +37,8 @@ NetworkBuilder::NetworkBuilder(Config& cnfg)
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
-	GEO_FACTORY = unique_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+	//GEO_FACTORY = unique_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
+    GEO_FACTORY = geos::geom::GeometryFactory::create(pm.get(), -1);
 
   NETXPERT_CNFG = cnfg;
 

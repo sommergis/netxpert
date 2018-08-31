@@ -80,7 +80,7 @@ namespace netxpert {
             std::unique_ptr<geos::geomgraph::GeometryGraph> geoGraph;
             void calcNodes();
             std::unique_ptr<geos::geom::LineString> mergeMultiLineString(geos::geom::Geometry& geom);
-            std::unique_ptr<geos::geom::GeometryFactory> GEO_FACTORY;
+            geos::geom::GeometryFactory::unique_ptr GEO_FACTORY;
     };
 }
 #endif // NETWORKBUILDER_H

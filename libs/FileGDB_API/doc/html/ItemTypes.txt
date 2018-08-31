@@ -1,13 +1,8 @@
 Feature Class
-Parcel Fabric
-Domain
 Relationship Class
 Raster Catalog
-Survey Dataset
-AbstractTable
 Mosaic Dataset
 Feature Dataset
-Schematic Dataset
 Terrain
 Network Dataset
 Table
@@ -15,6 +10,4 @@ Raster Dataset
 Geometric Network
 Topology
 Toolbox
-Coded Value Domain
 Representation Class
-Workspace

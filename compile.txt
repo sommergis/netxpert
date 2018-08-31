@@ -1,5 +1,5 @@
 linker & compiler option
--Wl,-rpath=/usr/local/lib/netxpert
+-Wl,-rpath=/usr/local/lib
 
 
 LINKER Error on DEBUG BUILDS without optimization
@@ -17,5 +17,15 @@ Bei Linker Errors GEOS:
 2. geos.lib hinzufügen!
 
 
+# Linux Build
 - Installation prerequisites
-# sudo apt install libboost-dev python2.7-dev swig
+# sudo apt install libboost-dev python2.7-dev swig codeblocks libsqlite3-mod-spatialite
+
+
+
+# copy libfgdbunixrtl.so and libFGDBAPI.so to /usr/local/lib
+# run sudo ldconfig
+
+# configure swig call in codeblocks
+
+

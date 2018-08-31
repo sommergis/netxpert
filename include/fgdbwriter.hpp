@@ -23,7 +23,7 @@
 #include "logger.hpp"
 
 #include <fstream>
-#include "FileGDB_API/include/FileGDBAPI.h"
+#include "FileGDBAPI.h"
 #include <algorithm>
 
 namespace netxpert {

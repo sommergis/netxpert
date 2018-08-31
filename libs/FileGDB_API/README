@@ -1,34 +1,54 @@
 Esri File Geodatabase API
-Build Date:  Oct 02, 2012
-Build Version:  1.3.0.143
-Version:  v 1.3
+Build Date:  Jul 26, 2017
+Build Version:	1.5.1.253
+Version:  v 1.5.1
 
 *******************************************************************************
-Supported Platform:
+Supported Platforms:
 *******************************************************************************
-  Linux:
-  The minimum supported platform is "Red Hat Enterprise Linux Release 5" or 
-  "SUSE Linux Enterprise Server 10". The minimum supported compiler is gcc 
-  version 3.4.6.
+  Linux
 
-  Mac:
-  An Intel-based Mac is required along with gcc 4.2.1. The minimum supported OS
-  is Snow Leopard 10.6.
+    Red Hat Enterprise Linux Server 5.7+
+    Red Hat Enterprise Linux Server 6.x
+    Red Hat Enterprise Linux Server 7.x
+
+    SUSE Linux Enterprise Server 11 SP4
+    SUSE Linux Enterprise Server 12
+
+    Ubuntu 14.04 LTS
+    Ubuntu 16.04 LTS
+
+  Mac OS X
+
+    Yosemite (10.10)
+    El Capitan (10.11)
+    Sierra (10.12)
+
+
+*******************************************************************************
+Supported Compilers:
+*******************************************************************************
+  * The minimum supported versions of gcc are version 4.1.2 on Linux and 4.2.1
+    on Mac OS X.
+  * The minimum version of clang is clang 3.7
+  * If you are using gcc 5.x and above you will need to use the
+    FileGDB API version for GCC5.
+
 
 *******************************************************************************
 Setting up your build environment:
 *******************************************************************************
   1) Ensure that your OS meets the minimum requirements.
-  
+
   2) Ensure that your version of gcc meets the minimum requirements.
        You can run 'gcc --version' to display the gcc version.
-       
+
   3) Setup your LD_LIBRARY_PATH. Note that for Mac it is DYLD_LIBRARY_PATH.
        For SH and variants (sh, bash, etc...):
-         LD_LIBRARY_PATH=<your location>/FileGDB_API/lib:$LD_LIBRARY_PATH
-         export LD_LIBRARY_PATH
+	 LD_LIBRARY_PATH=<your location>/FileGDB_API/lib:$LD_LIBRARY_PATH
+	 export LD_LIBRARY_PATH
        For CSH and variants (csh, tcsh, etc...):
-         setenv LD_LIBRARY_PATH <your location>/FileGDB_API/lib:$LD_LIBRARY_PATH
+	 setenv LD_LIBRARY_PATH <your location>/FileGDB_API/lib:$LD_LIBRARY_PATH
 
 
 *******************************************************************************
@@ -39,13 +59,13 @@ Building all samples** (see Note #1):
 
   2) Type 'make'
 
-  
+
 *******************************************************************************
 Building individual samples:
 *******************************************************************************
   1) Change directory to the sample you want to build. For example:
        cd <your location>/FileGDB_API/samples/Querying
-       
+
   2) Type 'make'
 
 
@@ -55,39 +75,63 @@ Running the samples:
   1) Change directory to the samples' bin directory after the samples are
      built.
        cd <your location>/FileGDB_API/samples/bin
-       
+
   2) Run the sample. For example:
        ./Querying
-       
+
 
 *******************************************************************************
 Notes:
 *******************************************************************************
-  1) Please note that Display is not built by default from the top-level 
-     samples Makefile. Display requires that GLUT be installed. To build the 
-     Display sample, cd to the samples/Display directory and type 'make'. 
-     Please note that some modification to the Display Makefile may be 
-     necessary to configure the build with GLUT.
-	 
-     Also note that ProcessTopology is not built by default from the top-level 
-     samples Makefile. ProcessTopology requires that libXml be installed. To 
-     build the ProcessTopology sample, cd to the samples/ProcessTopology 
-     directory and type 'make'. Please note that some modification to the 
-     ProcessTopology Makefile may be necessary to configure the build with 
+  1) Please note that Display is not built by default from the top-level
+     samples Makefile. Display requires that GLUT be installed. To build the
+     Display sample, cd to the samples/Display directory and type 'make'.
+     Please note that some modification to the Display Makefile may be
+     necessary to configure the build with GLUT:
+
+     * To build the Display sample on Linux:
+
+     a.) Install the GLUT/FreeGlut packages.
+
+	 Ubuntu
+	   # sudo apt-get install freeglut3-dev
+	 Fedora/RedHat
+	   # sudo yum install freeglut-devel
+
+     b.) Change #include <glut.h> to #include <GL/glut.h> in Display.cpp.
+
+     c.) Add -lGL -lGLU -lglut to the LIBS line in the Makefile.
+
+	 LIBS += -lFileGDBAPI -lGL -lGLU -lglut
+
+
+     * To build the Display sample on Mac OS X:
+
+     a.) The GLUT package is already installed on Mavericks and Yosemite.
+
+     b.) Change #include <glut.h> to #include <GLUT/glut.h> in Display.cpp.
+
+     c.) Add -framework OpenGL -framework GLUT to the LDFLAGS in the Makefile
+
+	 LDFLAGS += -framework OpenGL -framework GLUT
+
+	   Also note that ProcessTopology is not built by default from the top-level
+     samples Makefile. ProcessTopology requires that libXml2 be installed. To
+     build the ProcessTopology sample, cd to the samples/ProcessTopology
+     directory and type 'make'. Please note that some modification to the
+     ProcessTopology Makefile may be necessary to configure the build with
      libXml.
-	 
+
   2) The samples are intended to be run from the bin directory. If they are
-     moved to a different location they may not able to locate the data 
+     moved to a different location they may not able to locate the data
      required and may fail to run correctly.
-     
-  3) There is no multi-threading support at this time. 
-     
-  4) One of the libraries included with the FileGDB API for Unix is the "FGDB
-     Unix Runtime Library" (libfgdbunixrtl.so). That library is open source 
+
+  3) One of the libraries included with the FileGDB API for Unix is the "FGDB
+     Unix Runtime Library" (libfgdbunixrtl.so). That library is open source
      and licensed under the terms of the LGPL 2.1 license. The source code for
      the FGDB Unix Runtime Library will be available through SourceForge:
 
-        http://sourceforge.net
+	http://sourceforge.net
 
      To locate it there, simply search for "ESRI FGDB Unix Runtime". Note that
      this library is the only open source component in the current release of
@@ -95,39 +139,64 @@ Notes:
 
 *******************************************************************************
 Limitations:
-******************************************************************************* 
-     
-    * Rasters (Raster Dataset, Raster Catalog, Mosaic Datasets and Raster Attributes) are not supported.
-    * Spatial queries with the File Geodatabase API are limited to the envelope-intersects operator.
-    * Custom projections are not supported. 
-    * Vertical Datums are not supported.	
-    * File GDB SQL SELECT does not support ORDER BY or joins (NIM064472). 
-    * No support for Compressed Data File (CDF) data.
+*******************************************************************************
+
+  * Rasters (Raster Dataset, Raster Catalog, Mosaic Datasets and Raster Attributes) are not supported.
+  * Spatial queries with the File Geodatabase API are limited to the envelope-intersects operator.
+  * Vertical Datums are not supported.
+  * File GDB SQL SELECT does not support ORDER BY or joins (NIM064472).
+  * There is no multi-threading support at this time.
+  * Secure(licensed) data is not supported.
 
 *******************************************************************************
 What's New:
-******************************************************************************* 
-    * Fix the MutlipatchShapebuffer helper functions and correct multipatch documentation errors in the extended_shape_buffer_format.pdf.(NIM078028) 
-    * QueryEnvelope does not correctly calculate M and Z extent. (NIM082237)
-    * Supported GCS (Geographic Coordinate System) and PCS (Projected Coordinate System) updated to match 10.1 sp1.
-	
+*******************************************************************************
+
+	* MS Visual Studio 2015 support.
+  * FileGDB API for GCC 5.x.
+  * Added SUSE 12, Ubuntu 14.04 and Ubuntu 16.04 to the list of supported Linux platforms.
+
 *******************************************************************************
 Known Issues:
 *******************************************************************************
- 
- * Concurrent access from Windows and Unix (Linux or Mac) clients to the same 
-   File GeoDatabase can corrupt data. This combination should be avoided.
- * SQL ORDER BY and joins are not supported.
- 
+
+  * Concurrent access from Windows and Unix (Linux or Mac) clients to the same
+    File GeoDatabase can corrupt data. This combination should be avoided.
+  * SQL ORDER BY and joins are not supported.
+  * On Max OS X Mavericks and Yosemite it may be necessary to explicitly set
+    CXX=g++ or CXX=clang++ depending on your FileGDB API platform package.
+  * For users on Ubuntu 16.04 or those with gcc v5.x you may see linker errors similar to these
+    when building the samples:
+
+    . . .
+    ./Domains.o: In function `main':
+    Domains.cpp:(.text.startup+0x8e): undefined reference to `FileGDBAPI::OpenGeodatabase(std::__cxx11::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > const&, FileGDBAPI::Geodatabase&)'
+    Domains.cpp:(.text.startup+0xe7): undefined reference to `FileGDBAPI::ErrorInfo::GetErrorDescription(int, std::__cxx11::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >&)'
+    Domains.cpp:(.text.startup+0x1af): undefined reference to `FileGDBAPI::Geodatabase::DeleteDomain(std::__cxx11::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > const&)'
+    . . .
+
+    The problem is that gcc v5.x and above breaks ABI compatibility when linking against C++11 objects
+    built with older gcc versions.
+
+    There are two solutions:
+
+    1.) Use the GCC5.x version of the FileGDB API.
+
+    2.) Modify the sample's Makefile and add -D_GLIBCXX_USE_CXX11_ABI=0 to the CXXFLAGS:
+
+	include ../../include/make.include
+	CXXFLAGS+=-W -fexceptions -D_GLIBCXX_USE_CXX11_ABI=0 -D_CONSOLE ...
+
 *******************************************************************************
 Fixed Issues:
 *******************************************************************************
- 
-    NIM078028 Fix the MutlipatchShapebuffer helper functions. 
-    NIM082237 QueryEnvelope does not correctly calculate M and Z extent.
-    NIM084105 MultiPartShapeBuffer::GetMs return the wrong pointer value.
-	NIM085366 Using only a null or empty geometry results in a invalid extent.
-	
+BUG-000100781 Allow the use of the Spatial Reference ID to create the spatial reference.
+BUG-000100780 The File GDB API FdoErrorManager crashes on some platforms.
+BUG-000100782 File Geodatabase: COUNT(0) should return 0 with a WHERE clause that returns no rows (1=0)
+BUG-000100783 Remove Windows FileGDBAPI.dll's reliance on Microsoft.VC90.CRT
+BUG-000088293 FileGDB API throws -2147217395 error when executing SQL query with SQL functions.
+BUG-000097116 Table::FreeWriteLock does not clear the lock.
+
 *******************************************************************************
 Sample program expected results:
 *******************************************************************************
@@ -138,7 +207,7 @@ Domains:
 The SpeedLimit domain does not exist, no need to delete
 The RoadSurfaceType domain does not exist, no need to delete
 The SpeedLimit range domain has been created.
-The definition of the MedianType domain is: 
+The definition of the MedianType domain is:
 <Domain xsi:type='esri:CodedValueDomain' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:esri='http://www.esri.com/schemas/ArcGIS/10.0'><DomainName>MedianType</DomainName><FieldType>esriFieldTypeSmallInteger</FieldType><MergePolicy>esriMPTDefaultValue</MergePolicy><SplitPolicy>esriSPTDefaultValue</SplitPolicy><Description>Road median types.</Description><Owner></Owner><CodedValues xsi:type='esri:ArrayOfCodedValue'><CodedValue xsi:type='esri:CodedValue'><Name>None</Name><Code xsi:type='xs:short'>0</Code></CodedValue><CodedValue xsi:type='esri:CodedValue'><Name>Cement</Name><Code xsi:type='xs:short'>1</Code></CodedValue></CodedValues></Domain>
 The RoadSurfaceType coded value domain has been created.
 The RoadSurfaceType coded value domain has been Altered.
@@ -150,7 +219,7 @@ The RoadSurfaceType (CodedValue) domain has been assigned to the SurfaceType fie
 The SpeedLimit domain has been deleted.
 The RoadSurfaceType domain has been deleted.
 The SpeedLimit range domain has been created.
-The definition of the MedianType domain is: 
+The definition of the MedianType domain is:
 <Domain xsi:type='esri:CodedValueDomain' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:esri='http://www.esri.com/schemas/ArcGIS/10.0'><DomainName>MedianType</DomainName><FieldType>esriFieldTypeSmallInteger</FieldType><MergePolicy>esriMPTDefaultValue</MergePolicy><SplitPolicy>esriSPTDefaultValue</SplitPolicy><Description>Road median types.</Description><Owner></Owner><CodedValues xsi:type='esri:ArrayOfCodedValue'><CodedValue xsi:type='esri:CodedValue'><Name>None</Name><Code xsi:type='xs:short'>0</Code></CodedValue><CodedValue xsi:type='esri:CodedValue'><Name>Cement</Name><Code xsi:type='xs:short'>1</Code></CodedValue></CodedValues></Domain>
 The RoadSurfaceType coded value domain has been created.
 The RoadSurfaceType coded value domain has been Altered.
@@ -180,15 +249,36 @@ Minot	34544
 Kalispell	11917
 Williston	13131
 Port Angeles	17710
-1	Geometry	05280	Bellingham	53	Washington	5305280	city	N	-99	52179	2	
-2	Geometry	35050	Havre	30	Montana	3035050	city	N	2494	10201	1	
-3	Geometry	01990	Anacortes	53	Washington	5301990	city	N	-99	11451	1	
-4	Geometry	47560	Mount Vernon	53	Washington	5347560	city	N	-99	17647	1	
-5	Geometry	50360	Oak Harbor	53	Washington	5350360	city	N	-99	17176	1	
-6	Geometry	53380	Minot	38	North Dakota	3853380	city	N	1580	34544	2	
-7	Geometry	40075	Kalispell	30	Montana	3040075	city	N	2955	11917	1	
-8	Geometry	86220	Williston	38	North Dakota	3886220	city	N	1882	13131	1	
-9	Geometry	55365	Port Angeles	53	Washington	5355365	city	N	32	17710	1
+
+SELECT CITY_NAME, POP1990 FROM Cities WHERE CITY_NAME SIMILAR TO 'Redmond|Burien'
+
+Redmond 35800
+Burien	25089
+
+SELECT * FROM Cities WHERE TYPE = 'city' AND OBJECTID < 10
+
+1	Geometry	05280	Bellingham	53	Washington	5305280 city	N	-99	52179	2
+2	Geometry	35050	Havre	30	Montana 3035050 city	N    2494    10201   1
+3	Geometry	01990	Anacortes	53	Washington	5301990 city	N	-99	11451	1
+4	Geometry	47560	Mount Vernon	53	Washington	5347560 city	N	-99	17647	1
+5	Geometry	50360	Oak Harbor	53	Washington	5350360 city	N	-99	17176	1
+6	Geometry	53380	Minot	38	North Dakota	3853380 city	N	1580	34544	2
+7	Geometry	40075	Kalispell	30	Montana 3040075 city	N	2955	11917	1
+8	Geometry	86220	Williston	38	North Dakota	3886220 city	N	1882	13131	1
+9	Geometry	55365	Port Angeles	53	Washington	5355365 city	N	32	17710	1
+
+UPDATE CitiesNoGeo SET POP1990 = 65678 WHERE STATE_CITY = '0659962'
+
+SELECT CITY_NAME, POP1990 FROM CitiesNoGeo WHERE STATE_CITY = '0659962'
+
+Changed the population of Redlands from 60394 to 65678
+
+UPDATE CitiesNoGeo SET POP1990 = 60394 WHERE STATE_CITY = '0659962'
+
+SELECT CITY_NAME, POP1990 FROM CitiesNoGeo WHERE STATE_CITY = '0659962'
+
+Changed the population of Redlands back to 60394
+
 
 FeatureDatasets:
 *first run
@@ -229,6 +319,7 @@ Kalispell	11917	-114.318,48.1993
 Williston	13131	-103.631,48.1623
 Port Angeles	17710	-123.456,48.105
 
+
 Commerce
 Pico Rivera
 Maywood
@@ -261,7 +352,21 @@ Seal Beach
 Westminster
 Huntington Beach
 
-TableSchema:
+
+Querying compressed data...
+
+Bellingham	52179	-122.468,48.7439
+Havre	10201	-109.68,48.5438
+Anacortes	11451	-122.631,48.4922
+Mount Vernon	17647	-122.316,48.4216
+Oak Harbor	17176	-122.629,48.3079
+Minot	34544	-101.297,48.2337
+Kalispell	11917	-114.318,48.1993
+Williston	13131	-103.631,48.1623
+Port Angeles	17710	-123.456,48.105
+
+
+TableSchema\TableSchemaXML:
 
 *first run
 
@@ -462,7 +567,19 @@ Gap...
 
 Testing Line Shapes, Write
 
+xMin: 85659
+yMin: 889938
+xMax: 87661.3
+yMax: 893346
+zMin: 119.67
+zMax: 280.799
 Inserted a line with z's.
+xMin: 85659
+yMin: 889938
+xMax: 87661.3
+yMax: 893346
+zMin: 119.67
+zMax: 280.799
 
 Testing Polygon Shapes
 
