@@ -235,8 +235,8 @@ void NetworkBuilder::calcNodes()
     }
 }
 
-std::unordered_map<uint32_t, NetworkBuilderResultArc>
-NetworkBuilder::GetBuiltNetwork()
+void
+ NetworkBuilder::BuildNetwork()
 {
     using namespace geos::geom;
     LOGGER::LogDebug("Calculating nodes..");
@@ -281,6 +281,11 @@ NetworkBuilder::GetBuiltNetwork()
         }
     }
     LOGGER::LogDebug("Done!");
-    return result;
+    this->builtNetwork = result;
 }
 
+std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc>
+ NetworkBuilder::GetBuiltNetwork() {
+
+    return this->builtNetwork;
+ }

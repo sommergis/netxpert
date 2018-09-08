@@ -69,8 +69,11 @@ namespace netxpert {
             void LoadData();
             ///\brief Saves the built network
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
+            ///\brief Builds the network
+            void BuildNetwork();
             ///\brief Gets the built network
             std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
+
 
         private:
             netxpert::cnfg::Config NETXPERT_CNFG;
