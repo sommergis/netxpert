@@ -140,12 +140,29 @@ void
     int i = 1;
     for(netxpert::data::graph_t::NodeIt v(*this->g); v != INVALID; ++v) {
       nodes.set(v, i);
-      outfile << "n " << i << " " << this->GetNodeSupply(v) << std::endl;
+      //only write out sources and sinks - no transshipment nodes
+      if (this->GetNodeSupply(v) != 0) {
+        outfile << "n " << i << " " << this->GetNodeSupply(v) << std::endl;
+      }
       ++i;
     }
+    cost_t cost;
+    capacity_t cap;
+
     for(netxpert::data::graph_t::ArcIt e(*this->g); e != INVALID; ++e) {
+      // check for active and filtered arcs first
+      // and mark them "not traversible" also in DIMACS with high cost (999999) and low capacity (-1)
+      if ((*this->arcFilterMap)[e] == false) {
+        cost = DOUBLE_INFINITY;
+        cap = DOUBLE_NULL;
+      }
+      else {
+        cost = (*this->costMap)[e];
+        cap = (*this->capMap)[e];
+      }
+
       outfile << "a " << nodes[this->g->source(e)] << " " << nodes[this->g->target(e)]
-        << " 0 " << (*this->capMap)[e] << " " << (*this->costMap)[e]
+        << " 0 " << cap << " " << cost
          << std::endl;
     }
 
@@ -1222,19 +1239,25 @@ void
     auto iter = GetArcsIter();
     int arcChangesCnt = 0;
     int arcFilterOrigCnt = 0;
-    //iterator gets also the reversed arcs if present!
+
+    // Iterate over all present arcs in the graph
+    // note: iterator gets also the reversed arcs if present!
     for (; iter != INVALID; ++iter) {
         auto arc = iter;
-        // first the original arcs
-        if ( (*this->arcChangesMap)[arc] == netxpert::data::ArcState::original) {
-          (*this->arcFilterMap)[arc] = true;
-          arcFilterOrigCnt += 1;
-        }
-        // then the splitted ones
+
+        // first the splitted arcs
+        // set them back to the original state
         if ( (*this->arcChangesMap)[arc] != netxpert::data::ArcState::original) {
           (*this->arcChangesMap)[arc] = netxpert::data::ArcState::original;
           arcChangesCnt += 1;
         }
+
+        // then set all original arcs to active again
+        if ( (*this->arcChangesMap)[arc] == netxpert::data::ArcState::original) {
+          (*this->arcFilterMap)[arc] = true; //set the original arcs (unsplitted ones) again to active (true)
+          arcFilterOrigCnt += 1;
+        }
+
     }
 
     //"delete" new arcs (=splitted) through arc filter
