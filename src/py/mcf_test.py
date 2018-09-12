@@ -71,7 +71,7 @@ def read_config(path_to_cnfg):
     cnfg.GeometryHandling = config_json["GeometryHandling"]
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -161,8 +161,8 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_Big.json"
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/MCFCnfg_small.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/MCFCnfg_Big.json"
+        path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/MCFCnfg_small.json"
 
     if 'win' in sys.platform:
         print 'Running test on Windows..'
@@ -171,8 +171,8 @@ if __name__ == "__main__":
     cnfg, cmap = read_config(path_to_cnfg)
 
     if 'linux' in sys.platform:
-        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-        cnfg.SpatiaLiteCoreName = './libspatialite'
+        cnfg.SpatiaLiteHome = r"/usr/local/lib"
+        cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     if 'win' in sys.platform:
         cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'

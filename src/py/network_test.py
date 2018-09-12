@@ -50,7 +50,6 @@ def read_config(path_to_cnfg):
     cnfg.LogLevel = config_json["LogLevel"]
     cnfg.LogFileFullPath = config_json["LogFileFullPath"].encode('ascii', 'ignore')
     cnfg.SpatiaLiteHome = config_json["SpatiaLiteHome"].encode('ascii', 'ignore')
-    #cnfg.SpatiaLiteHome = r"/usr/local/lib"
     cnfg.SpatiaLiteCoreName = config_json["SpatiaLiteCoreName"].encode('ascii', 'ignore')
     cnfg.CleanNetwork = config_json["CleanNetwork"]
     cnfg.ResultDBType = config_json["ResultDBType"]
@@ -60,19 +59,28 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
     cmap.fromColName = cnfg.FromNodeColumnName
     cmap.toColName = cnfg.ToNodeColumnName
     cmap.costColName = cnfg.CostColumnName
-    #cmap.capColName = cnfg.CapColumnName
-    #cmap.onewayColName = cnfg.OnewayColumnName
+    cmap.capColName = cnfg.CapColumnName
+    cmap.onewayColName = cnfg.OnewayColumnName
     cmap.nodeIDColName = cnfg.NodeIDColumnName
     cmap.supplyColName = cnfg.NodeSupplyColumnName
 
     return cnfg, cmap
+
+def build_network(cnfg, cmap):
+
+    atblname = cnfg.ArcsTableName
+
+    builder = netx.NetworkBuilder(cnfg)
+    builder.LoadData()
+    builder.BuildNetwork()
+    builder.SaveResults(atblname+"_net", cmap)
 
 def test_add_nodes(cnfg, cmap):
 
@@ -80,22 +88,21 @@ def test_add_nodes(cnfg, cmap):
     arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
 
-    print(("Original Node ID of 1: " + net.GetOriginalNodeID(1)))
+    #print(("Original Node ID of 1: " + net.GetOriginalNodeID(1)))
     x = 703444
     y = 5364720
     supply = 1
     withCap = False
     newNodeID = net.AddStartNode('1', x, y, supply, cnfg.Threshold, cmap, withCap)
-    print(("Original Node ID of {0}: {1}".format(newNodeID,
-                                            net.GetOriginalNodeID(newNodeID))))
+    #print(("Original Node ID of {0}: {1}".format(newNodeID,
+    #                                        net.GetOriginalNodeID(newNodeID))))
     x = 703342
     y = 5364710
     supply = -1
     newNodeID = net.AddStartNode('2', x, y, supply, cnfg.Threshold, cmap, withCap)
-    print(("Original Node ID of {0}: {1}".format(newNodeID,
-                                            net.GetOriginalNodeID(newNodeID))))
+    #print(("Original Node ID of {0}: {1}".format(newNodeID,
+    #                                        net.GetOriginalNodeID(newNodeID))))
 
     del net
 
@@ -116,8 +123,8 @@ def test_load_nodes(cnfg, cmap):
         inputNode.nodeSupply = newNode.supply
         nodes.append(inputNode)
 
-    net = netx.Network(arcsTable, nodes, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
+    net = netx.Network(arcsTable, cmap, cnfg, nodes)
+
 
     del net
 
@@ -130,36 +137,83 @@ def test_load_nodes_2(cnfg, cmap):
     withCapacity = False
 
     net = netx.Network(arcsTable, cmap, cnfg)
-    net.ConvertInputNetwork(cnfg.CleanNetwork)
+
 
     startNodes = net.LoadStartNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
     endNodes = net.LoadEndNodes(nodesTable, cnfg.Threshold, atblname, cnfg.ArcsGeomColumnName, cmap, withCapacity)
 
     del net
 
+def test_add_nodes_reset(cnfg, cmap):
+
+    atblname = cnfg.ArcsTableName
+    arcsTable = netx.DBHELPER.LoadNetworkFromDB(atblname, cmap)
+
+    net = netx.Network(arcsTable, cmap, cnfg)
+
+    net.ExportToDIMACS(r"network_test_before_adding_nodes.dmx")
+
+    #print(("Original Node ID of 1: " + net.GetOriginalNodeID(1)))
+    x = 703444
+    y = 5364720
+    supply = 1
+    withCap = False
+    newNodeID = net.AddStartNode('1', x, y, supply, cnfg.Threshold, cmap, withCap)
+    #print(("Original Node ID of {0}: {1}".format(newNodeID,
+    #                                        net.GetOriginalNodeID(newNodeID))))
+    #x = 703342
+    #y = 5364710
+    #supply = -1
+    #newNodeID = net.AddStartNode('2', x, y, supply, cnfg.Threshold, cmap, withCap)
+    #print(("Original Node ID of {0}: {1}".format(newNodeID,
+    #                                        net.GetOriginalNodeID(newNodeID))))
+
+    # network_test_before_adding_nodes.dmx and network_test_after_reset.dmx should be equal!
+    net.Reset()
+
+    net.ExportToDIMACS(r"network_test_after_reset.dmx")
+
+    del net
+
 if __name__ == "__main__":
 
     print(netx.Version())
-    path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_Big.json"
-    #path_to_cnfg = r"/home/hahne/dev/netxpert/test/bin/Release/ODMatrixCnfg_small.json"
+    #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/ODMatrixCnfg_Big.json"
+    #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/ODMatrixCnfg_small.json"
+    path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/NetworkBuilder_NC.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
 
-    active_tests = ["add nodes",
+    active_tests = ["build network",
+                    "add nodes",
                     "load nodes",
                     "load start & end nodes",
                     "reset network"
                     ]
 
-    active_tests = active_tests
+    active_tests = active_tests[0]
+
+    if "build network" in active_tests:
+        print("Testing Building Network..")
+        starttime = datetime.datetime.now()
+        build_network(cnfg, cmap)
+        stoptime = datetime.datetime.now()
+        print(("Duration: {0}".format(stoptime - starttime)))
 
     if "add nodes" in active_tests:
         print("Testing Network (add nodes with XY coords)..")
         starttime = datetime.datetime.now()
         test_add_nodes(cnfg, cmap)
+        stoptime = datetime.datetime.now()
+        print(("Duration: {0}".format(stoptime - starttime)))
+
+    if "reset network" in active_tests:
+        print("Testing Network (add nodes with XY coords and reset it)..")
+        starttime = datetime.datetime.now()
+        test_add_nodes_reset(cnfg, cmap)
         stoptime = datetime.datetime.now()
         print(("Duration: {0}".format(stoptime - starttime)))
 

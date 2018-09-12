@@ -66,8 +66,8 @@ def tpsolve(odmatrix, nodeSupply):
 
   cnfg.LogLevel = -1
   cnfg.LogFileFullPath = "/var/www/apps/netxpert/netXpert.log"
-  cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-  cnfg.SpatiaLiteCoreName = './libspatialite'
+  cnfg.SpatiaLiteHome = r"/usr/local/lib"
+  cnfg.SpatiaLiteCoreName = './mod_spatialite'
   cnfg.CleanNetwork = False
   cnfg.McfAlgorithm = 1
 

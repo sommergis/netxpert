@@ -72,7 +72,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     print(netx.Version())
 
     if 'linux' in sys.platform:
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/ODMatrixCnfg_small.json"
 
     if 'win' in sys.platform:
         #path_to_cnfg = "ODMatrixCnfg_Big.json"
@@ -196,8 +196,8 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-        cnfg.SpatiaLiteCoreName = './libspatialite'
+        cnfg.SpatiaLiteHome = r"/usr/local/lib"
+        cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     if 'win' in sys.platform:
         print 'Running test on Windows..'
@@ -226,8 +226,8 @@ if __name__ == "__main__":
    # active_tests = active_tests[:2]
 
     if "2-2 | add nodes" in active_tests:
-        #for i in range(4, 6):
-            cnfg.SptAlgorithm = 4 # always regular dijkstra
+        for i in range(4, 6):
+            cnfg.SptAlgorithm = i
             print(("Testing ODM (add nodes) with Algorithm {0}..".format(alg_dict[cnfg.SptAlgorithm])))
             starttime = datetime.datetime.now()
             result = test_odm_add_nodes(cnfg, cmap)
@@ -246,8 +246,8 @@ if __name__ == "__main__":
                     print("test succeeded.")
 
     if "n-n | load nodes" in active_tests:
-        #for i in range(4, 6):
-            cnfg.SptAlgorithm = 4 # always regular dijkstra
+        for i in range(4, 6):
+            cnfg.SptAlgorithm = i
             print(("Testing ODM (load nodes) with Algorithm {0}..".format(alg_dict[cnfg.SptAlgorithm])))
             starttime = datetime.datetime.now()
             result = test_odm_load_nodes(cnfg, cmap)

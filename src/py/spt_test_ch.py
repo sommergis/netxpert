@@ -178,15 +178,15 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
+        path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/ODMatrixCnfg_Big.json"
         # TEST OK
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_small.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/ODMatrixCnfg_small.json"
         # TEST OK
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/SPTCnfg_small.json"
         # TEST OK
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/SPTCnfg_Germany_s_t.json"
         # TEST results not exact - precision oder arc ids?
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_5_points_4.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/SPTCnfg_spt_lines_5_points_4.json"
         # TEST OK
 
     if 'win' in sys.platform:
@@ -197,8 +197,8 @@ if __name__ == "__main__":
     cnfg, cmap = read_config(path_to_cnfg)
 
     if 'linux' in sys.platform:
-        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-        cnfg.SpatiaLiteCoreName = './libspatialite'
+        cnfg.SpatiaLiteHome = r"/usr/local/lib"
+        cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     if 'win' in sys.platform:
         cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'

@@ -18,7 +18,6 @@ import sys, datetime, os
 
 if 'linux' in sys.platform:
     sys.path.append('/usr/local/lib')
-    sys.path.append('/usr/local/lib/netxpert')
 
 if 'win' in sys.platform:
     pass
@@ -71,7 +70,7 @@ def read_config(path_to_cnfg):
     cnfg.UseSpatialIndex = config_json["UseSpatialIndex"]
     cnfg.Threshold = 2500
     cnfg.SPTHeapCard = 2
-    cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     cmap = netx.ColumnMap()
     cmap.arcIDColName = cnfg.ArcIDColumnName
@@ -127,10 +126,11 @@ def test_spt_add_nodes_1_1(cnfg, cmap, save=False):
     #print "arcs #" + str(net.GetArcCount())
     #print "nodes #" + str(net.GetNodeCount())
 
-    net.Reset()
-    #del net
+    #net.Reset()
 
     print optimum
+
+    #del net
 
     return optimum
     #return solver.GetOptimum()
@@ -316,20 +316,18 @@ if __name__ == "__main__":
 
     if 'linux' in sys.platform:
         print 'Running test on Linux..'
-        path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json"
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json"
-        #path_to_cnfg = r"/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_Germany_s_t.json"
+        path_to_cnfg = r"../../test/cnfg/SPTCnfg_small.json"
+        #path_to_cnfg = r"/home/vagrant/dev/netxpert/test/cnfg/SPTCnfg_Germany_s_t.json"
 
     if 'win' in sys.platform:
         print 'Running test on Windows..'
-        #path_to_cnfg = "ODMatrixCnfg_Big.json"
         path_to_cnfg = "SPTCnfg_small.json"
 
     cnfg, cmap = read_config(path_to_cnfg)
 
-    if 'linux' in sys.platform:
-        cnfg.SpatiaLiteHome = r"/home/hahne/dev/netx"
-        cnfg.SpatiaLiteCoreName = './libspatialite'
+    #if 'linux' in sys.platform:
+    #    cnfg.SpatiaLiteHome = r"/usr/local/lib"
+    #    cnfg.SpatiaLiteCoreName = './mod_spatialite'
 
     if 'win' in sys.platform:
         cnfg.SpatiaLiteHome = r'C:/Users/johannes/Desktop/netxpert_release_deploy_1_0'
@@ -340,7 +338,7 @@ if __name__ == "__main__":
 
     print cnfg.SpatiaLiteHome
     #print cnfg.GeometryHandling
-    #cnfg.LogLevel = 5
+    cnfg.LogLevel = -1
 
     netx.LOGGER.Initialize(cnfg)
     netx.DBHELPER.Initialize(cnfg)
@@ -362,12 +360,15 @@ if __name__ == "__main__":
                      "1-1 | add nodes | save"
                      ]
 
-    active_tests = active_tests[0:4]
+    active_tests = active_tests[:1]
+
+    #print(active_tests[0])
+    #sys.exit(0)
     #active_tests = active_tests[4:5]
 
     if "1-1 | add nodes | save" in active_tests:
-        cnfg.SptAlgorithm = 4
-        print(("Testing SPT (1-1 | add nodes | save ) with Algorithm {0}..".format(alg_dict[4])))
+        cnfg.SptAlgorithm = 5
+        print(("Testing SPT (1-1 | add nodes | save ) with Algorithm {0}..".format(alg_dict[cnfg.SptAlgorithm])))
 
         starttime = datetime.datetime.now()
         result = test_spt_add_nodes_1_1(cnfg, cmap, save=True)
@@ -381,9 +382,9 @@ if __name__ == "__main__":
           else:
               print("test succeeded.")
         if "small" in path_to_cnfg:
-            if str(result) != str(18.3440133391):
+            if str(result) != str(102.0257824):
                 print("test failed!")
-                print("expected: 18.3440133391")
+                print("expected: 102.0257824")
             else:
                 print("test succeeded.")
         if "Germany" in path_to_cnfg:

@@ -289,8 +289,6 @@ namespace netxpert
     } ;
 
     enum MSTAlgorithm : int16_t {
-        //Kruskal_QuickGraph = 0, //.NET!
-        //Prim_QuickGraph = 1,    //.NET!
         Kruskal_LEMON = 2
     };
 
@@ -366,9 +364,11 @@ namespace netxpert
             **/
             void LoadData();
             void SaveResults(const std::string& resultTableName, const netxpert::data::ColumnMap& cmap) const;
+            void BuildNetwork();
             std::unordered_map<uint32_t, netxpert::data::NetworkBuilderResultArc> GetBuiltNetwork();
     };
 
+    /* Not that not all of the InternalNet functionality is exposed through SWIG */
     namespace data {
 
     %rename(Network) InternalNet;
@@ -412,10 +412,10 @@ namespace netxpert
             const uint32_t
              GetNodeCount();
 
-           #ifdef NETX_ENABLE_CONTRACTION_HIERARCHIES
             void
              ExportToDIMACS(const std::string& path);
 
+            #ifdef NETX_ENABLE_CONTRACTION_HIERARCHIES
             void
              ComputeContraction(float contractionPercent);
 
