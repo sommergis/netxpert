@@ -205,58 +205,30 @@ int netxpert::simple::OriginDestinationMatrix::Solve(bool doParallel)
         DBHELPER::CommitCurrentTransaction();
         DBHELPER::CloseConnection();
 
-        /*if (this->experimentalVersion)
-        {
-            solver2 = std::unique_ptr<netxpert::OriginDestinationMatrix2> (new netxpert::OriginDestinationMatrix2(cnfg));
-            auto& odm = *solver2;
-            std::vector<uint32_t> origs = {}; //newStartNodeID, newStartNodeID2};
-            for (auto s : startNodes)
-                origs.push_back(s.first);
 
-            odm.SetOrigins( origs );
+        solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
+        auto& odm = *solver;
 
-            std::vector<uint32_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
-            for (auto e : endNodes)
-                dests.push_back(e.first);
+        std::vector<netxpert::data::node_t> origs = {}; //newStartNodeID, newStartNodeID2};
+        for (auto s : startNodes)
+            origs.push_back(net.GetNodeFromID(s.first));
 
-            odm.SetDestinations( dests );
+        odm.SetOrigins( origs );
 
-            odm.Solve(net);
+        std::vector<netxpert::data::node_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
+        for (auto e : endNodes)
+            dests.push_back(net.GetNodeFromID(e.first));
 
-            LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
-            LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
+        odm.SetDestinations( dests );
 
-            odm.SaveResults(resultTableName, cmap);
+        odm.Solve(net);
 
-            return 0; //OK
-        }
+        LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
+        LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
 
-        else
-        {*/
-            solver = std::unique_ptr<netxpert::OriginDestinationMatrix> (new netxpert::OriginDestinationMatrix(cnfg));
-            auto& odm = *solver;
+        odm.SaveResults(resultTableName, cmap);
 
-            std::vector<netxpert::data::node_t> origs = {}; //newStartNodeID, newStartNodeID2};
-            for (auto s : startNodes)
-                origs.push_back(net.GetNodeFromID(s.first));
-
-            odm.SetOrigins( origs );
-
-            std::vector<netxpert::data::node_t> dests = {}; //newEndNodeID, newEndNodeID2}; //newEndNodeID}; // {}
-            for (auto e : endNodes)
-                dests.push_back(net.GetNodeFromID(e.first));
-
-            odm.SetDestinations( dests );
-
-            odm.Solve(net);
-
-            LOGGER::LogInfo("Optimum: " + to_string(odm.GetOptimum()));
-            LOGGER::LogInfo("Count of ODMatrix: " +to_string( odm.GetODMatrix().size() ) );
-
-            odm.SaveResults(resultTableName, cmap);
-
-            return 0; //OK
-//        }
+        return 0;
     }
     catch (std::exception& ex)
     {

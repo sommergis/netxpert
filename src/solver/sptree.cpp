@@ -758,7 +758,7 @@ void
 
     int counter = 0;
 
-		#pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
+    #pragma omp parallel shared(counter) private(it) num_threads(LOCAL_NUM_THREADS)
     {
     for (it = this->shortestPaths.begin(); it != this->shortestPaths.end(); ++it)
     {

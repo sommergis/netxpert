@@ -39,6 +39,13 @@ namespace netxpert {
     namespace io {
     /**
     * \brief Static class that controls the SpatiaLite DB processing access
+
+    * Notes on precision model of the central Geometry Factory
+    *
+    * GEOS uses an internal precision model. This must fit to the model in SpatiaLite (which is also defined by GEOS internally).
+    * Because splitting of the arcs happens in the SpatiaLite DB, we must have a common precision model of the geometries.
+    * So we are tied here to FLOATING (precision of 16 floating point numbers).
+
     **/
     class DBHELPER
     {
@@ -91,7 +98,7 @@ namespace netxpert {
             ///\brief Gets barrier geometries from database
             static std::vector<std::unique_ptr<geos::geom::Geometry>> GetBarrierGeometriesFromDB(const std::string& barrierTableName,
                                                                        const std::string& barrierGeomColName);
-            ///\warning untested
+            ///\warning untested, alpha stage!
             static std::unique_ptr<geos::geom::MultiPoint> GetArcVertexGeometriesByBufferFromDB(const std::string& tableName,
                                                                            const std::string& geomColumnName,
                                                                            const netxpert::data::ArcIDColumnDataType arcIDColDataType,
@@ -144,7 +151,6 @@ namespace netxpert {
             static netxpert::cnfg::Config NETXPERT_CNFG;
             static std::unique_ptr<SQLite::Database> connPtr;
             static std::unique_ptr<SQLite::Transaction> currentTransactionPtr;
-            //static void connect();
             static void connect(bool inMemory);
             static bool isConnected;
             static bool performInitialCommand();

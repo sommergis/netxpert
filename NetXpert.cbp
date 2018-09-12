@@ -68,7 +68,6 @@
 			<Add library="dl" />
 			<Add library="python2.7" />
 			<Add library="FileGDBAPI" />
-			<Add library="libfgdbunixrtl" />
 			<Add library="geos" />
 			<Add directory="libs/SQLiteCpp" />
 			<Add directory="libs/FileGDB_API/lib" />

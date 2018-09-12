@@ -56,7 +56,7 @@ bool UTILS::FileExists(const std::string& path)
 		#endif
 		#ifdef _UNICODE
 			std::wstring path2 = convertStringToWString(path);
-			//Funktioniert nur mit UNICODE direktive
+			//Only works with UNICODE directive
 			LPCWSTR path3 = path2.c_str();
 			return PathFileExists(path3);
 		#endif

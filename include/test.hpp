@@ -18,8 +18,7 @@
 #define TEST_H
 
 #include <iostream>
-//Fix for C2146 Error on Windows (lemon/adaptors.h error!)
-//#include "logger.hpp"
+//Watch for C2146 Error on Windows (lemon/adaptors.h error!)
 #include "fgdbwriter.hpp" //has logger, logger has utils
 #include "slitewriter.hpp"
 #include <fstream>
@@ -42,19 +41,17 @@ namespace netxpert
 {
     namespace test
     {
-//        void NetworkConvert(netxpert::cnfg::Config& cnfg);
         void LemonNetworkConvert(netxpert::cnfg::Config& cnfg);
         void TestFileGDBWriter(netxpert::cnfg::Config& cnfg);
         void TestSpatiaLiteWriter(netxpert::cnfg::Config& cnfg);
-//        void TestAddNodes(netxpert::cnfg::Config& cnfg);
+        void TestAddNodes(netxpert::cnfg::Config& cnfg);
         void TestMST(netxpert::cnfg::Config& cnfg);
         void TestSPT(netxpert::cnfg::Config& cnfg);
         #if (defined NETX_ENABLE_CONTRACTION_HIERARCHIES)
         void TestSPTCH(netxpert::cnfg::Config& cnfg);
         #endif
         void TestODMatrix(netxpert::cnfg::Config& cnfg);
-//        void TestODMatrix2(netxpert::cnfg::Config& cnfg); //experimental
-//        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
+        void TestCreateRouteGeometries(netxpert::cnfg::Config& cnfg);
         void TestMCF(netxpert::cnfg::Config& cnfg);
         void TestTransportation(netxpert::cnfg::Config& cnfg);
 //        void TestTransportationExt(netxpert::cnfg::Config& cnfg);

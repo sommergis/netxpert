@@ -14,6 +14,15 @@
  *
  */
 
+// optional macros
+
+//
+//#define NETX_ENABLE_CONTRACTION_HIERARCHIES
+
+//optimized for a web service (aggressive sqlite optimizations)
+//#define NETX_WEB
+
+
 #ifndef CONFIG_H
 #define CONFIG_H
 
@@ -29,15 +38,6 @@
 
 
 namespace netxpert {
-
-    // these macros should always be defined
-    //#define SQLITE_ENABLE_RTREE=1
-    //#define SQLITECPP_ENABLE_ASSERT_HANDLER
-    //#define LEMON_ONLY_TEMPLATES=1
-
-    // optional macros
-    //#define NETX_ENABLE_CONTRACTION_HIERARCHIES
-    //#define NETX_WEB
 
     ///\brief Current version of netXpert
     static const std::string Version() {
@@ -120,8 +120,7 @@ namespace netxpert {
     enum SPTAlgorithm : int16_t {
         Dijkstra_2Heap_LEMON = 4, //!< Dijkstra of LEMON with binary heap
         Bijkstra_2Heap_LEMON = 5, //!< Bidirectional Dijkstra of LEMON with binary heap
-        Dijkstra_dheap_BOOST = 6, //!< Dijkstra of Boost Graph Library with d-ary heap
-        ODM_LEM_2Heap = 7         //!< \warning: was just an experiment!
+        Dijkstra_dheap_BOOST = 6 //!< Dijkstra of Boost Graph Library with d-ary heap
     };
     /**
     * \brief Type of the Minimum Cost Flow algorithms.

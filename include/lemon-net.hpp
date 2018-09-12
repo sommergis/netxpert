@@ -57,7 +57,7 @@ namespace netxpert {
     namespace data {
       /**
       * \brief Combined structure of graph attribtues as LEMON Reference Map.
-      * \warning Not used!
+      * \warning Not used - was an interesting experiment
       **/
       template<typename GR, typename K, typename T, typename R = T&, typename CR = const T&>
       class ArcDataMap : public lemon::concepts::ReferenceMap<K, T, R, CR>
@@ -75,7 +75,7 @@ namespace netxpert {
          graph_t::ArcMap<Value> data;
 
        public:
-          //Value und Key sind public typedefs aus der abgeleiteten Klasse
+          //Value and Key are public typedefs from the derived class
          //typedef GR graph_t;
          //typedef CO cost_t;
          //typedef CA capacity_t;
@@ -524,7 +524,6 @@ namespace netxpert {
        getSplittedClosestNewArcToPoint(const geos::geom::Coordinate& coord,
                                         const int threshold);
 
-//            std::shared_ptr<geos::geom::MultiLineString>
       std::pair<std::shared_ptr<geos::geom::Geometry>, std::shared_ptr<geos::geom::Geometry>>
        splitLine(const geos::geom::Coordinate& coord,
                  const geos::geom::Geometry& lineGeom);
@@ -627,6 +626,7 @@ namespace netxpert {
       std::unique_ptr<netxpert::data::graph_t::ArcMap<netxpert::data::extarcid_t>> extArcIDMap;
       std::unique_ptr<netxpert::data::graph_t::ArcMap<netxpert::data::cost_t>> costMap;
       std::unique_ptr<netxpert::data::graph_t::ArcMap<netxpert::data::capacity_t>> capMap;
+      // perhaps we need this once
       /*std::unique_ptr<lemon::SourceMap<graph_t> > sourceMap;
       std::unique_ptr<lemon::TargetMap<graph_t> > targetMap;*/
       std::unique_ptr<netxpert::data::graph_t::NodeMap<std::string>> nodeMap;
@@ -653,17 +653,15 @@ namespace netxpert {
 
       #endif
 
-      //TEST
       // Changes
 
-      // indicates if an arc has been split
-      //std::unique_ptr<graph_t::ArcMap<bool>> splittedArcsMap
+      // sometimes it's not possible to use std::unordered_maps (because of LEMON data types as
+      // key) --> std::maps
 
       /// stores all changes that were made to the network through the states of each arc
       std::unique_ptr<netxpert::data::graph_t::ArcMap<netxpert::data::ArcState>> arcChangesMap;
       /// stores data of original arcs that must be tracked for resetting the network
       std::map<netxpert::data::arc_t, netxpert::data::ArcData> origArcsMap;
-      //std::unique_ptr<graph_t::ArcMap<netxpert::data::NewArc>> newArcsMap;
       /// stores data of new arcs that have been added through adding a new node
       std::map<netxpert::data::arc_t, netxpert::data::NewArc> newArcsMap;
       /// stores data of new nodes that have been added to the graph

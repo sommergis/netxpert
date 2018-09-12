@@ -6,6 +6,9 @@ doxygen/*
 obj/*
 libs/FileGDB_API/samples/*
 libs/FileGDB_API_32Bit/samples/*
+libs/FileGDB_API/doc/*
+libs/geos-3.6.3/doc/*
+libs/lemon-1.3.1/doc/*
 test/bin/*
 test/obj/*
 test/build/*
@@ -13,9 +16,10 @@ test/data/*
 test/tost.gdb/*
 test/test.gdb/*
 # ignore the following file endings
-*.[orig]
-*.[bak]
-*.[~]
-*.[log]
+*.orig
+*.bak
+*.~
+*.log
+*.pyc
 doc/html/*
 doc/latex/*

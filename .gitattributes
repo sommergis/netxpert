@@ -1,2 +1,2 @@
 src/*.cpp linguist-language=C++
-include/*.h linguist-language=C++
+include/*.hpp linguist-language=C++

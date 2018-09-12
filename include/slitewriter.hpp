@@ -17,7 +17,6 @@
 #ifndef SPATIALITEWRITER_H
 #define SPATIALITEWRITER_H
 
-//#include "utils.h"
 #include <string>
 
 #include "dbwriter.hpp"

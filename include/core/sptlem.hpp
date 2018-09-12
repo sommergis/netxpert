@@ -65,6 +65,8 @@ namespace netxpert {
         operator T() { return( std::numeric_limits<T>::max() ); }
     };
 
+    // experiment for switching the heap type
+
     //typedef FibHeap<SmartDigraph::ArcMap<double>, SmartDigraph::NodeMap<double>> FibonacciHeap;
     //using DijkstraInternal = Dijkstra<SmartDigraph, SmartDigraph::ArcMap<double>>;
 
@@ -72,7 +74,25 @@ namespace netxpert {
     *  \brief Core Solver for the Shortest Path Tree Problem
     *   with binary Heap structure as default heap and
     *   Dijkstra's algorithm of LEMON.
+    *
+    *   \b Notes on the current implementation
+    *
+    *   Experiments showed, that sparse networks (as street networks are) are best processed with a 2-heap
+    *   and with the LEMON smart_graph regarding processing time and memory footprint. Furthermore adding arcs/nodes is possible
+    *   on smart_graphs. We need this for modeling the addition of new nodes (start or end nodes) in the graph.
+    *   Unfortunately removal of arcs is not possible with smart_graphs, so this implementation works with LEMON filters on arcs
+    *   in order to model removing arcs (they are flagged with false in the filter map). Filter on Arcs come with a little performance
+    *   penalty though.
+
+    *   static_graph would have been better regarding processing time, but has a bigger memory footprint than smart_graphs.
+    *   Furthermore you cannot add or remove arcs/nodes on static_graphs, so this would not be suitable for the application of adding new nodes to
+    *   the graph.
+    *
+    *   See also:
+    *   http://lemon.cs.elte.hu/pub/tutorial/a00015.html and
+    *   http://blog.sommer-forst.de/2016/10/28/solving-the-shortest-path-problem-5-benchmarks/
     */
+
     class SPT_LEM : public netxpert::core::ISPTree
     {
 //        typedef lemon::FilterArcs<netxpert::data::graph_t,
@@ -86,8 +106,8 @@ namespace netxpert {
 
         public:
             ///\brief Constructor
-            ///\param Drctd: directed network (default) or unidirectional network (=doubled arcs)
-            SPT_LEM(bool Drctd = true);
+            ///\param directed: directed network (default) or unidirectional network (=doubled arcs)
+            SPT_LEM(bool directed = true);
             ///\brief Empty Copy Constructor
             SPT_LEM (SPT_LEM const &) {}
             ///\brief Destructor

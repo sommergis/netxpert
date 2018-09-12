@@ -39,12 +39,9 @@ void LOGGER::Initialize(const Config& cnfg)
 {
     NETXPERT_CNFG = cnfg;
     string fileName = readConfig();
-    //cout << "Log File Path: " << fileName << endl;
     sPath = UTILS::GetDirectoryName(fileName);
-    //cout << sPath << endl;
 
     sFileName = UTILS::GetFileNameWithoutExtension(fileName);
-    //cout << sFileName << endl;
 
     //this variable used to create log filename format "
     //for example filename : ErrorLogYYYYMMDD
@@ -75,6 +72,7 @@ void LOGGER::Initialize(const Config& cnfg)
     ofstream outfile(FullLogFileName.c_str());
     IsInitialized = true;
 }
+
 string LOGGER::readConfig()
 {
     applicationLogLevel = NETXPERT_CNFG.LogLevel;
@@ -84,8 +82,8 @@ string LOGGER::readConfig()
         cout << "Logfile: "<< NETXPERT_CNFG.LogFileFullPath <<endl;
     }
     return NETXPERT_CNFG.LogFileFullPath;
-    //return "/home/hahne/dev/netxpert/NetXpert/bin/Debug/NetXpert.log";
 }
+
 void LOGGER::writeLog(string _logMsg, LOG_LEVEL msgLogLevel)
 {
     // appends every log msg to file

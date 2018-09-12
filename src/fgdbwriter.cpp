@@ -50,8 +50,6 @@ void FGDBWriter::connect()
 
 		wstring newPath = UTILS::convertStringToWString(NETXPERT_CNFG.ResultDBPath);
 
-        //cout << "FGDB Path: "<< NETXPERT_CNFG.ResultDBPath << endl;
-
         fgdbError hr;
         wstring errorText;
 
@@ -100,10 +98,8 @@ void FGDBWriter::CreateNetXpertDB()
 {
     try
     {
-		//NETXPERT_CNFG.ResultDBPath = "test.gdb";
 		wstring newPath = UTILS::convertStringToWString(NETXPERT_CNFG.ResultDBPath);
-        //cout << "FGDB Path: "<< newPath.c_str() << endl;
-        // TODO: muss nicht ueberschrieben werden, wenns existiert
+
         if ( UTILS::PathExists(NETXPERT_CNFG.ResultDBPath) )
         {
             //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
@@ -114,9 +110,9 @@ void FGDBWriter::CreateNetXpertDB()
 
         fgdbError hr;
         wstring errorText;
-        Geodatabase gdb; //lokal!
+        Geodatabase gdb; //local scope only!
 
-        //valgrind shows errors (conditional jumps/ uninitialized values
+        //valgrind shows errors (conditional jumps/ uninitialized values on simply creating the GDB
         if ((hr = CreateGeodatabase( newPath, gdb )) == S_OK)
         {
             LOGGER::LogInfo("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " created.");
@@ -196,7 +192,6 @@ void FGDBWriter::createTable (const string& _tableName, const NetXpertSolver sol
        resultTblDefStr.append(defLine + "\n");
     }
     defFile.close();
-    //cout << resultTblDefStr << endl;
     fgdbError hr;
     wstring errorText;
     //Replace Template name "netxpert_result" with real tablename
@@ -227,7 +222,9 @@ void FGDBWriter::openTable ( const string& _tableName)
 
     if ((hr = geodatabasePtr->OpenTable(L"\\" + newStr, *currentTblPtr) ) == S_OK)
     {
-        //LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
+        #ifdef DEBUG
+        LOGGER::LogDebug("NetXpert Result Table "+ _tableName + " opened.");
+        #endif // DEBUG
     }
     else {
         ErrorInfo::GetErrorDescription(hr, errorText);
@@ -320,6 +317,7 @@ void FGDBWriter::SaveResultArc(const std::string& orig, const std::string& dest,
             lineGeometry.GetParts(parts);
             parts[0] = 0;
             int partNumber = 0;
+
             //Valgrind: memory leaks:
             // geos::geom::CoordinateArraySequenceFactory::create(std::vector<geos::geom::Coordinate,
             // std::allocator<geos::geom::Coordinate> >*, unsigned long) const (CoordinateArraySequenceFactory.inl:35
@@ -708,7 +706,6 @@ void FGDBWriter::SaveNetworkBuilderArc(const std::string& extArcID, const uint32
             {
                 const geos::geom::Coordinate c = coords.getAt(i);
                 FileGDBAPI::Point p {c.x, c.y};
-                //Point p { x = coords->getAt(i).x, y = coords->getAt(i).y };
                 points[i] = p;
             }
             delete coordsPtr; //else there are memory leaks!

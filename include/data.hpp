@@ -52,7 +52,7 @@ namespace netxpert {
     typedef double capacity_t;  //!< \brief capacity type of internal graph (how much can be transported at maximum over the arc)
     typedef double supply_t;  //!< \brief supply type
     typedef uint32_t  intarcid_t;  //!< \brief internal arc ID
-    //typedef uint32_t  extarcid_t; // does not work for MCF-Solver ('dummy'!)
+    //typedef uint32_t  extarcid_t; // uint does not work for MCF-Solver (-> string 'dummy' is used!)
     typedef std::string  extarcid_t; //!< \brief original arc ID - string type is necessary for MCF-Solver ('dummy'!)
 
 
@@ -65,7 +65,6 @@ namespace netxpert {
         arc_t       arc;
         cost_t      cost;
         capacity_t  capacity;
-//        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
         std::pair< std::shared_ptr<geos::geom::Geometry>,
                    std::shared_ptr<geos::geom::Geometry> > segments;
     };
@@ -76,7 +75,6 @@ namespace netxpert {
         arc_t       arc;
         cost_t      cost;
         capacity_t  capacity;
-//        std::shared_ptr<geos::geom::MultiLineString> arcGeom;
         std::vector< std::shared_ptr<geos::geom::Geometry>> segments;
     };
 
@@ -480,9 +478,6 @@ namespace netxpert {
         supply_t                supply;
     };
 
-//    #include "dbhelper.h"
-//    using netxpert::io::DBHELPER::GEO_FACTORY;
-
     ///\brief Data type for storing tuple <arcGeom,nodeType,cost,capacity>
     struct NewArc
     {
@@ -494,8 +489,6 @@ namespace netxpert {
         }
 
         std::shared_ptr<geos::geom::LineString> arcGeom;
-        //geos::geom::LineString& arcGeom = ( *gf->createEmptyGeometry() );
-        //LineString* arcGeom;
         netxpert::data::AddedNodeType           nodeType;
         cost_t                                  cost;
         capacity_t                              capacity;
@@ -577,7 +570,8 @@ namespace netxpert {
         std::string              oneway;
 		//Bug in VS2013: can't move for default copy
 		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
-		//--> std::unique_ptr funktioniert nicht als data member
+		//--> std::unique_ptr does not work as member in struct
+		// so shared_ptr is used
 		std::shared_ptr<geos::geom::Geometry> geom;
     };
     typedef std::vector<netxpert::data::NetworkBuilderInputArc> NetworkBuilderInputArcs;
@@ -592,7 +586,8 @@ namespace netxpert {
         std::string                 oneway;
 		//Bug in VS2013: can't move for default copy
 		//https://connect.microsoft.com/VisualStudio/feedback/details/858243/c-cli-compiler-error-trying-to-std-move-a-std-unique-ptr-to-parameter-taken-by-value
-		//--> std::unique_ptr funktioniert nicht als data member
+		//--> std::unique_ptr does not work as member in struct
+		// so shared_ptr is used
         std::shared_ptr<geos::geom::Geometry> geom;
 
 		//explicit assignment operator due to MSVC bug in VS2013

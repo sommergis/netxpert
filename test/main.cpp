@@ -15,15 +15,15 @@
  */
 
 #include <iostream>
-#include "logger.h"
-#include "fgdbwriter.h"
-#include "slitewriter.h"
+#include "logger.hpp"
+#include "fgdbwriter.hpp"
+#include "slitewriter.hpp"
 #include <fstream>
 
-#include "data.h"
-#include "dbhelper.h"
-#include "lemon-net.h"
-#include "test.h"
+#include "data.hpp"
+#include "dbhelper.hpp"
+#include "lemon-net.hpp"
+#include "test.hpp"
 
 using namespace std;
 using namespace netxpert;
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTCnfg_spt_lines_4_points_4.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/ODMatrixCnfg_Big.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/MSTCnfg_small.json";
-        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/SPTreeCnfg_small_3.json";
+        inFile = "/home/vagrant/dev/netxpert/test/cnfg/SPTCnfg_small.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TestFGDBWriter.json";
         //inFile = "/home/hahne/dev/netxpert1_0/test/bin/Release/SPTCnfg_small.json";
 //        inFile = "/home/hahne/dev/netxpert1_0/test/bin/Debug/TranspCnfg_small.json";
@@ -66,21 +66,21 @@ int main(int argc, char** argv)
     }
     catch (std::exception& e)
     {
-        cout << "Fehler beim Config init: " << e.what() << endl;
+        cout << "Error initializing Config: " << e.what() << endl;
     }
     try
     {
         LOGGER::Initialize(cnfg);
-        LOGGER::LogInfo("Logging gestartet!");
+        LOGGER::LogInfo("Logging startet!");
     }
     catch (std::exception& e)
     {
-        cout << "Fehler beim Logger init." << e.what() << endl;
+        cout << "Error initializing Logger: " << e.what() << endl;
     }
     try
     {
-        LOGGER::LogInfo("Testing Lemon Network..");
-        netxpert::test::LemonNetworkConvert(cnfg);
+    //    LOGGER::LogInfo("Testing Lemon Network..");
+    //    netxpert::test::LemonNetworkConvert(cnfg);
 
 //        LOGGER::LogInfo("Testing Network..");
 //        netxpert::test::NetworkConvert(cnfg);

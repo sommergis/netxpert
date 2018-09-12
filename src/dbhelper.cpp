@@ -33,7 +33,6 @@ netxpert::cnfg::Config DBHELPER::NETXPERT_CNFG;
 bool DBHELPER::isConnected = false;
 bool DBHELPER::IsInitialized = false;
 std::unordered_set<netxpert::data::extarcid_t> DBHELPER::EliminatedArcs;
-//std::shared_ptr<geos::geom::GeometryFactory> DBHELPER::GEO_FACTORY;
 geos::geom::GeometryFactory::unique_ptr DBHELPER::GEO_FACTORY;
 std::unordered_map<netxpert::data::extarcid_t, std::shared_ptr<geos::geom::LineString>> DBHELPER::KV_Network;
 
@@ -59,25 +58,20 @@ DBHELPER::~DBHELPER()
 
 void DBHELPER::Initialize(const Config& cnfg)
 {
-  //FIXED = 0 Kommastellen
-  //FLOATING_SINGLE = 6 Kommastellen
-  //FLOATING = 16 Kommastellen
-  // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
-  // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
-  // muss.
-  // Performance ist zu vernachlässigen, weil ja nur geringe Mengen an Geometrien eingelesen und verarbeitet werden
-  // (nur die Kanten, die aufgebrochen werden)
-
+    /*
+    * Notes on precision model
+    *
+    * GEOS uses an internal precision model. This must fit to the model in SpatiaLite (which is also defined by GEOS internally).
+    * Because splitting of the arcs happens in the SpatiaLite DB, we must have a common precision model of the geometries.
+    * So we are tied here to FLOATING (precision of 16 floating point numbers).
+     */
 	std::shared_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
-
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
-	//DBHELPER::GEO_FACTORY = std::shared_ptr<geos::geom::GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
-	DBHELPER::GEO_FACTORY = geos::geom::GeometryFactory::create(pm.get() -1);
+	DBHELPER::GEO_FACTORY = geos::geom::GeometryFactory::create(pm.get(), -1);
 
-
-  DBHELPER::NETXPERT_CNFG = cnfg;
-  IsInitialized = true;
+    DBHELPER::NETXPERT_CNFG = cnfg;
+    IsInitialized = true;
 }
 
 /*void DBHELPER::connect( )
@@ -341,7 +335,6 @@ void
             sqlStr = "SELECT "+_map.arcIDColName +", AsBinary(CastToLineString(" + geomColumnName + "))"+
                  " FROM "+_tableName+" WHERE "+_map.arcIDColName+" IN("+ arcIDs +")";
         }
-        //cout << sqlStr << endl;
 
         SQLite::Database& db = *connPtr;
         SQLite::Statement qry (db, sqlStr);
@@ -593,7 +586,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-				//move to shared_ptr ist anscheinend ok!
+				//move to shared_ptr is ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -616,7 +609,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-				//move to shared_ptr ist anscheinend ok!
+				//move to shared_ptr is ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -639,7 +632,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-				//move to shared_ptr ist anscheinend ok!
+				//move to shared_ptr is ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -662,7 +655,7 @@ DBHELPER::LoadNetworkToBuildFromDB(const std::string& _tableName, const ColumnMa
                     is << bytes[i];
 
                 auto lGeomPtr = std::unique_ptr<Geometry>( wkbReader.read(is) );
-				//move to shared_ptr ist anscheinend ok!
+				//move to shared_ptr is ok!
                 arcTbl.push_back(NetworkBuilderInputArc {id,cost,cap,_oneway, move( lGeomPtr )});
             }
         }
@@ -699,9 +692,12 @@ std::vector<NewNode> DBHELPER::LoadNodesFromDB(const std::string& _tableName, co
                             " FROM "+ _tableName + ";";
 
         WKBReader wkbReader(*DBHELPER::GEO_FACTORY);
+
         std::stringstream is(ios_base::binary|ios_base::in|ios_base::out);
 
-        //cout << sqlStr << endl;
+    #ifdef DEBUG
+        LOGGER::LogDebug(sqlStr);
+    #endif // DEBUG
         SQLite::Statement query(db, sqlStr);
         //fetch data
         while (query.executeStep())
@@ -776,8 +772,9 @@ std::unique_ptr<SQLite::Statement> DBHELPER::PrepareGetClosestArcQuery(const std
                 break;
         }
 
-        //DEBUG
-//        std::cout << eliminatedArcIDs << std::endl;
+        #ifdef DEBUG
+        LOGGER::LogDebug("eleminated arc IDs:\n" +eliminatedArcIDs);
+        #endif // DEBUG
 
         //trim comma on first
         if (eliminatedArcIDs.length() > 0)
@@ -846,6 +843,9 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
     string extToNode;
     double cost = 0;
     double capacity = DOUBLE_INFINITY;
+    // If Point lies exactly on the line a minimal shift of the coordinates is necessary
+    // to yield the nearest arc
+    // tolerance x,y: 0.000000001;
     double tolerance = 0.000000001;
 
     try
@@ -886,7 +886,6 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
                     closestArcID = to_string(arcIDcol.getDouble());
                 if (arcIDcol.isText())
                     closestArcID = arcIDcol.getText();
-                //cout << closestArcID << endl;
             }
 
             if (!qry.getColumn(1).isNull())
@@ -897,10 +896,6 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
 
             if (!qry.getColumn(3).isNull())
                 cost = qry.getColumn(3).getDouble();
-
-            /*cout << closestArcID << endl << extFromNode << endl
-                 << extToNode << endl
-                 << cost << endl;*/
 
             int indxCount = 4;
             if (withCapacity)
@@ -923,6 +918,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
                     is << bytes[i];
 
                  aGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
+
             }
             //Closest Point geom
             SQLite::Column pGeoCol = qry.getColumn(indxCount+1);//5 without cap, 6 with cap
@@ -937,19 +933,18 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
                     is << bytes[i];
 
                 pGeomPtr = shared_ptr<Geometry>( wkbReader.read(is) );
+
             }
 
         }
         if (aGeomPtr && pGeomPtr)
         {
             std::shared_ptr<Point> pPtr (dynamic_pointer_cast<Point>(pGeomPtr));
-            //std::shared_ptr<const LineString> aPtr (dynamic_pointer_cast<const LineString>(aGeomPtr));
             const Coordinate* cPtr = pPtr->getCoordinate();
             const Coordinate coord = *cPtr;
 
-            //aGeomPtr darf nicht eine reference aus einem shared_ptr sein, weil das Ding sonst nach return gekillt wird!
+            //aGeomPtr must not be a reference from a shared_ptr because the object will be destroyed after the return of the function
             const ExtClosestArcAndPoint result = {closestArcID, extFromNode, extToNode, cost, capacity, coord, aGeomPtr};
-            //cout << "DBHELPER: " <<aGeomPtr->toString() << endl;
 
             qry.reset();
 
@@ -960,7 +955,7 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
     }
     catch (exception& ex)
     {
-        qry.reset(); // sonst gibts errors "library out of sequence"
+        qry.reset(); // else there are errors "library out of sequence"
         LOGGER::LogError( "Error getting closest Arc!" );
         LOGGER::LogError( ex.what() );
         throw ex;
@@ -969,7 +964,9 @@ ExtClosestArcAndPoint DBHELPER::GetClosestArcFromPoint(const geos::geom::Coordin
 
 std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromMem(const std::string& arcIDs)
 {
-//    LOGGER::LogDebug("GetArcGeometriesFromMem()");
+    #ifdef DEBUG
+    LOGGER::LogDebug("GetArcGeometriesFromMem()");
+    #endif // DEBUG
     try
     {
         vector<Geometry*> geoms;
@@ -1041,16 +1038,17 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometriesFromDB(co
         if (eliminatedArcIDs.length() > 0)
             eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
 
-        //ST_COLLECT müsste ok sein, weil der Multilinestring ja später sowieso per LineMerger mit den
-        // anderen Teilen zusammengeführt wird. Schneller ist ST_Collect ggü. ST_union.
-        //ODM_Big: 7:30 zu 8:30 min
+        // ST_COLLECT should be ok because the Multilinestring is been merged with other segments of the route through the LineMerger later on
+        // ST_COLLECT is faster than ST_UNION.
+        //ODM_Big network: 7:30 vs 8:30 min
         sqlStr = "SELECT AsBinary(CastToMultiLineString(ST_COLLECT(" + geomColumnName + ")))"+
                  " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
                         arcIDColumnName+ " IN("+ arcIDs +")";
 
-        //LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
-
-        //cout << sqlStr << endl;
+        #ifdef DEBUG
+        LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+        LOGGER::LogDebug(sqlStr);
+        #endif // DEBUG
 
         SQLite::Database& db = *connPtr;
         SQLite::Statement qry (db, sqlStr);
@@ -1114,8 +1112,9 @@ std::unique_ptr<geos::geom::MultiLineString> DBHELPER::GetArcGeometryFromDB(cons
                         " FROM "+tableName+" WHERE "+arcIDColumnName+ " = '" + arcID +"'";
             }
         }
-
-        //cout << sqlStr << endl;
+        #ifdef DEBUG
+        LOGGER::LogDebug(sqlStr);
+        #endif // DEBUG
 
         SQLite::Database& db = *connPtr;
         SQLite::Statement qry (db, sqlStr);
@@ -1239,7 +1238,9 @@ std::vector<std::unique_ptr<geos::geom::Geometry>>
         sqlStr = "SELECT AsBinary(" + barrierGeomColName + ")"+
                         " FROM "+barrierTableName ;
 
-        //cout << sqlStr << endl;
+        #ifdef DEBUG
+        LOGGER::LogDebug(sqlStr);
+        #endif // DEBUG
 
         SQLite::Database& db = *connPtr;
         SQLite::Statement qry (db, sqlStr);
@@ -1316,9 +1317,9 @@ std::unique_ptr<geos::geom::MultiPoint> DBHELPER::GetArcVertexGeometriesByBuffer
         if (eliminatedArcIDs.length() > 0)
             eliminatedArcIDs = eliminatedArcIDs.erase(0,1);
 
-        //ST_COLLECT müsste ok sein, weil der Multilinestring ja später sowieso per LineMerger mit den
-        // anderen Teilen zusammengeführt wird. Schneller ist ST_Collect ggü. ST_union.
-        //ODM_Big: 7:30 zu 8:30 min
+        // ST_COLLECT should be ok because the Multilinestring is been merged with other segments of the route through the LineMerger later on
+        // ST_COLLECT is faster than ST_UNION.
+        //ODM_Big network: 7:30 vs 8:30 min
 
         // all vertices of line geometries
 //        sqlStr = "SELECT AsBinary(CastToMultiPoint(ST_Collect(ST_DissolvePoints(" + geomColumnName + "))))"+
@@ -1336,9 +1337,10 @@ std::unique_ptr<geos::geom::MultiPoint> DBHELPER::GetArcVertexGeometriesByBuffer
 //                 " FROM "+tableName+" WHERE "+arcIDColumnName+" NOT IN ("+ eliminatedArcIDs+") AND "+
 //                      " ST_Intersects("+ geomColumnName +", ST_Buffer(MakePoint(@XCoord,@YCoord),@Buffer))";
 
-        cout << sqlStr << endl;
-        //LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
-//        sqlStr = "SELECT 1";
+        #ifdef DEBUG
+        LOGGER::LogDebug("Eliminated Arcs: "+ eliminatedArcIDs);
+        LOGGER::LogDebug(sqlStr);
+        #endif // DEBUG
 
         cout << "preparing db.." << endl;
         SQLite::Database& db = *connPtr;
@@ -1509,8 +1511,10 @@ bool DBHELPER::performInitialCommand()
         const string spatiaLiteCoreName = NETXPERT_CNFG.SpatiaLiteCoreName;
 
         const string pathBefore = UTILS::GetCurrentDir();
-        //chdir to spatiallitehome
-        //cout << "spatiaLiteHome: " << spatiaLiteHome << endl;
+
+        #ifdef DEBUG
+        LOGGER::LogDebug("spatiaLiteHome: " + spatiaLiteHome);
+        #endif // DEBUG
 
         string strSQL = "SELECT sqlite_version()";
         SQLite::Statement query(db, strSQL);
@@ -1527,6 +1531,7 @@ bool DBHELPER::performInitialCommand()
         LOGGER::LogDebug("(Internal) SQLite Version: " + version);
 
         UTILS::SetCurrentDir(spatiaLiteHome);
+
         /* Old way:
         db.enableExtensions();
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName,@spatiaLiteEntryPoint);";
@@ -1535,14 +1540,10 @@ bool DBHELPER::performInitialCommand()
         query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
         query.executeStep();
         db.disableExtensions(); */
+
         //spatialite > 4.2.0 : mod_spatialite should be used - not spatialite.dll | libspatialite.so
         //new way
-        #ifdef _WIN32
-        //on some QGIS Versions entry point is called "spatialite_init_ex" vs "sqlite3_modspatialite_init"
-        db.loadExtension(spatiaLiteCoreName.c_str(), "spatialite_init_ex");
-        #else
         db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
-        #endif
 
         strSQL = "SELECT spatialite_version()";
         SQLite::Statement query2(db, strSQL);
@@ -1560,7 +1561,6 @@ bool DBHELPER::performInitialCommand()
 
         UTILS::SetCurrentDir(pathBefore);
 
-        //cout <<  boost::filesystem::current_path() << endl;
         return true;
     }
     catch (std::exception& e) {

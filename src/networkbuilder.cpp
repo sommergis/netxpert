@@ -27,22 +27,22 @@ using namespace netxpert::utils;
 
 NetworkBuilder::NetworkBuilder(Config& cnfg)
 {
-  //FIXED = 0 Kommastellen
-  //FLOATING_SINGLE = 6 Kommastellen
-  //FLOATING = 16 Kommastellen
-  // Sollte FLOATING sein - sonst gibts evtl geometriefehler (Lücken beim CreateRouteGeometries())
-  // Grund ist, dass SpatiaLite eine hohe Präzision hat und diese beim splitten von Linien natürlich auch hoch sein
-  // muss.
+    /*
+    * Notes on precision model of the central Geometry Factory
+    *
+    * GEOS uses an internal precision model. This must fit to the model in SpatiaLite (which is also defined by GEOS internally).
+    * Because splitting of the arcs happens in the SpatiaLite DB, we must have a common precision model of the geometries.
+    * So we are tied here to FLOATING (precision of 16 floating point numbers).
+     */
 	unique_ptr<PrecisionModel> pm (new PrecisionModel( geos::geom::PrecisionModel::FLOATING));
 
 	// Initialize global factory with defined PrecisionModel
 	// and a SRID of -1 (undefined).
-	//GEO_FACTORY = unique_ptr<GeometryFactory> ( new GeometryFactory( pm.get(), -1)); //SRID = -1
     GEO_FACTORY = geos::geom::GeometryFactory::create(pm.get(), -1);
 
-  NETXPERT_CNFG = cnfg;
+    NETXPERT_CNFG = cnfg;
 
-  if (!DBHELPER::IsInitialized)
+    if (!DBHELPER::IsInitialized)
       DBHELPER::Initialize(NETXPERT_CNFG);
 }
 
@@ -245,7 +245,7 @@ void
     std::unordered_map<uint32_t, NetworkBuilderResultArc> result(this->inputArcs.size());
 
     uint32_t counter = 0;
-    //kein const_iterator, weil move() unten angewendet wird!
+    //no const_iterator because move() is being used afterwards
     std::vector<NetworkBuilderInputArc>::iterator it;
 
     LOGGER::LogDebug("Calculating edges..");
@@ -255,7 +255,7 @@ void
         //dereferencing iterator that points to unique_ptr as member of struct: njet!
         //NetworkBuilderInputArc arc = *it;
 
-        //DOUBLE FREE with unique_ptr!
+        //DOUBLE FREE corruption with unique_ptr!
         //auto linePtr = unique_ptr<LineString>( dynamic_cast<LineString*>( it->geom.get() ));
         auto linePtr = dynamic_cast<LineString*>( it->geom.get() );
 

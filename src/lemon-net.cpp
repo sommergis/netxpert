@@ -383,7 +383,7 @@ const netxpert::data::ArcData
 void
  InternalNet::SetArcData(const arc_t& arc, const ArcData& arcData) {
 
-    (*this->extArcIDMap)[arc]   = arcData.extArcID; //can be 'dummy' in case of MCF
+    (*this->extArcIDMap)[arc]   = arcData.extArcID; //may be 'dummy' in case of MCF
     (*this->costMap)[arc]       = arcData.cost;
     (*this->capMap)[arc]        = arcData.capacity;
 }
@@ -423,8 +423,6 @@ const netxpert::data::arc_t
 
 const node_t
  InternalNet::GetNodeFromOrigID(const std::string nodeID) {
-
-//    LOGGER::LogDebug("entering GetNodeFromOrigID()..");
 
     netxpert::data::node_t node = lemon::INVALID;
 
@@ -477,7 +475,6 @@ const netxpert::data::node_t
 const std::string
  InternalNet::GetOrigNodeID(const node_t& node) {
 
-//    LOGGER::LogDebug("entering GetOrigNodeID()");
     std::string nodeID;
 
     nodeID = (*this->nodeMap)[node];
@@ -567,12 +564,13 @@ const uint32_t
     return static_cast<uint32_t>(lemon::countArcs(*this->g));
 }
 
-//Vorgehen:
-//1. Hol die nächste Kante (per Spatialite) zum Knoten newNode: ArcID + Geometrie
-//2. Wurde die Kante schon aufgebrochen oder nicht?
-//3. Hole Geometrie neu wenn nötig (aus den newArcs)
-//4. isPointOnLine, position of closestPoint (Start / End ) alles in Memory (egal ob aufgebrochene Kante oder vorhandene Kante)
-//5. Splitte Kante
+//Process
+//1. Search the nearest arc (per Spatialite) to the newNode: ArcID + geometry
+//2. Has the arc already been splitted?
+//3. Fetch the splitted geometry if necessary (from the newArcs object)
+//4. isPointOnLine, position of closestPoint (Start / End ) processing will be everything in memory not in the database
+//   (regardless if splitted arc or original arc)
+//5. Split arc geometrically and logically in the graph
 const uint32_t
  InternalNet::AddNode(const netxpert::data::NewNode& newNode, const int threshold,
                       SQLite::Statement& closestArcQry, const bool withCapacity,
@@ -588,11 +586,11 @@ const uint32_t
     const Coordinate point      = newNode.coord;
     const auto nodeSupply       = newNode.supply;
 
-    //1. Suche die nächste Line und den nächsten Punkt auf der Linie zum temporaeren Punkt
+    //1. Search the nearest arc and the nearest point on the line to the given coordinate
     ExtClosestArcAndPoint closestArcAndPoint = DBHELPER::GetClosestArcFromPoint(point,
             threshold, closestArcQry, withCapacity);
 
-    // kann noch auf leeren string gesetzt werden, wenn Kante bereits aufgebrochen wurde
+    // extArcID may be set to an empty string if arc has already been splitted
     string extArcID          = closestArcAndPoint.extArcID;
     Geometry& closestArc     = *closestArcAndPoint.arcGeom;
     const string extFromNode = closestArcAndPoint.extFromNode;
@@ -600,7 +598,8 @@ const uint32_t
     const cost_t cost        = closestArcAndPoint.cost;
     const cost_t capacity    = closestArcAndPoint.capacity;
 
-    //2. Wenn die originale Kante bereits aufgebrochen wurde hol die nächste Linie zum Punkt aus den aufgebrochenen Kanten
+    //2. If the original arc already has been splitted: fetch the nearest line to the given coordinate
+    //   from the splitted arcs
 //    auto origArc = GetArcFromOrigID(std::stoul(extArcID));
     auto origArc = GetArcFromOrigID(extArcID);
     //bool isArcSplitAlready = (*this->splittedArcsMap)[origArc];
@@ -609,7 +608,7 @@ const uint32_t
     graph_t::Node resultNode = lemon::INVALID;
 
     if ( isArcUnchanged ) {
-        // Prüfe, ob der nächste Punkt gleichzeitig der Start - oder der Endpunkt einer Linie ist
+        // Check if the nearest point is start or end of the nearest arc
         auto locationOfPoint = getLocationOfPointOnLine(point, closestArc);
 
         switch ( locationOfPoint  )
@@ -617,7 +616,7 @@ const uint32_t
             case StartOrEndLocationOfLine::Start: {
                 LOGGER::LogDebug("Closest Point for start node "+extNodeID
                     +" is identical to a start node of the network!");
-                //fromNode und toNode von oben nehmen und keinen Split durchführen
+                // take fromNode and toNode from above and don't split the arc
 //                std::cout << "extFromNode " << extFromNode << " | " << " extNodeID " << extNodeID<< std::endl;
                 if (this->nodeIDMap.count(extFromNode) > 0)
                 {
@@ -648,7 +647,7 @@ const uint32_t
             case StartOrEndLocationOfLine::End: {
                 LOGGER::LogDebug("Closest Point for start node "+extNodeID
                     +" is identical to a end node of the network!");
-                //fromNode und toNode von oben nehmen und keinen Split durchführen
+                // take fromNode and toNode from above and don't split the arc
 //                std::cout << "extToNode " << extToNode << " | " << " extNodeID " << extNodeID<< std::endl;
                 if (this->nodeIDMap.count(extToNode) > 0)
                 {
@@ -699,7 +698,7 @@ const uint32_t
 //                this->nodeIDMap.insert( make_pair(extNodeID, resultNode)  );
                 this->RegisterNodeID(extNodeID, resultNode);
 
-                //arc changes
+                //save arc changes
                 (*this->arcChangesMap)[splittedLine.arc] = ArcState::originalAndSplit;
 
                 break;
@@ -991,6 +990,7 @@ const node_t
     return newNode;
 }
 
+// TODO
 void
  InternalNet::insertNewBarrierNodes(bool isDirected,
                                     netxpert::data::IntNetSplittedArc2<netxpert::data::arc_t>& clippedLine) {
@@ -1235,7 +1235,6 @@ void
     //Reset network by resetting the filtered orig arcs (and their reversed ones)
 
     //reset new arcs, arcChanges, remove addedNodes
-//    for (auto kv : (*this->arcChangesMap) ) {
     auto iter = GetArcsIter();
     int arcChangesCnt = 0;
     int arcFilterOrigCnt = 0;
@@ -1726,7 +1725,7 @@ void
             //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
 
             //load geometry from db
-            //TODO: 0,5 bis 1 sec pro Ladevorgang
+            //TODO: 0,5 bis 1 sec per load from db
             //Stopwatch<> sw;
             //sw.start();
             if (arcIDs.size() > 0) {
@@ -1861,7 +1860,7 @@ void
     //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
 
     //load geometry from db
-    //TODO: 0,5 bis 1 sec pro Ladevorgang
+    //TODO: 0,5 bis 1 sec per load from db
     //Stopwatch<> sw;
     //sw.start();
     if (arcIDs.size() > 0) {
@@ -2104,7 +2103,7 @@ void InternalNet::saveMCFResultsMem(const std::string orig, const std::string de
                 //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
 
                 //load geometry from db
-                //TODO: 0,5 bis 1 sec pro Ladevorgang
+                //TODO: 0,5 bis 1 sec per load from db
                 //Stopwatch<> sw;
                 //sw.start();
 
@@ -2228,7 +2227,7 @@ void InternalNet::saveMCFResultsMemS(const std::string orig, const std::string d
     //LOGGER::LogDebug("# "+ to_string(omp_get_thread_num()) +" : saveResults() - load from DB");
 
     //load geometry from db
-    //TODO: 0,5 bis 1 sec pro Ladevorgang
+    //TODO: 0,5 bis 1 sec per load from db
     //Stopwatch<> sw;
     //sw.start();
 
@@ -2500,7 +2499,7 @@ const netxpert::data::IntNetSplittedArc<arc_t>
         /*// search in spatial index for relevant geometry
         // with buffer around point (threshold)*/
 
-        //1. Generate Distance Table
+        //1. Generate distance table
         for ( auto nArc : this->newArcsMap )
         {
             graph_t::Arc key = nArc.first;
@@ -2895,7 +2894,7 @@ void
 //                eliminatedArcs.insert(externalArcID);*/
 //
 //                //eliminatedArcsCount = eliminatedArcsCount + 1;
-//                continue; // ignorier einfach diese fehlerhafte Kante
+//                continue; // just ignore the erroneous arc
 //            }
 //            else
 //            {
@@ -3098,52 +3097,57 @@ void
 
 void
  InternalNet::transformExtraDemand() {
-    // Dummy Angebotsknoten mit überschüssiger Nachfrage hinzufügen
-    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
-    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
-    // --> In Networkx schon
 
-    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
-    // siehe getSupplyDemandDifference()
+    /*
+    *  - create dummy supply node with extra demand
+    *  - add arcs with dummy costs (0) from new node to all other nodes in the graph
+    *    (except the nodes with supply = 0; no new arcs are required here)
+    *
+    */
+    // function handles extra supply or extra demand
+    // see also getSupplyDemandDifference()
     processSupplyOrDemand();
 }
 
 void InternalNet::transformExtraSupply() {
-    // Dummy Nachfrageknoten mit überschüssigem Angebot hinzufügen
-    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
-    // Reicht es, wenn der neue Dummy-Knoten von allen Nicht-Transshipment-Knoten (=! 0) erreichbar ist?
 
-    //OK - Funktion behandelt Angebotsüberschuss oder Nachfrageüberschuss
-    // siehe getSupplyDemandDifference()
+    /*
+    *  - create dummy demand node with extra supply
+    *  - add arcs with dummy costs (0) from new node to all other nodes in the graph
+    *    (except the nodes with supply = 0; no new arcs are required here)
+    *
+    */
+    // function handles extra supply or extra demand
+    // see also getSupplyDemandDifference()
     processSupplyOrDemand();
 }
 
 void
  InternalNet::processSupplyOrDemand() {
-    // Dummy Knoten
+
     /*uint32_t newNodeID = GetNodeCount() + 1;
     internalDistinctNodeIDs.insert(make_pair("dummy", newNodeID));
     swappedInternalDistinctNodeIDs.insert( make_pair( newNodeID, "dummy" ));*/
 
     //New dummy node
     auto newNode = this->g->addNode();
-    //std::cout << "Ausgleich: " << getSupplyDemandDifference() << std::endl;
+    //std::cout << "Balancing: " << getSupplyDemandDifference() << std::endl;
     auto diff = getSupplyDemandDifference();
 
-    //NodeSupply sup {"dummy", diff }; //Differenz ist positiv oder negativ, je nach Überschuss
+    //NodeSupply sup {"dummy", diff }; //difference may be positive or negative
     //nodeSupplies.insert( make_pair( newNodeID, sup));
     (*this->nodeSupplyMap)[newNode] = diff;
 
-    // Dummy-Kosten (0 km) in Netzwerk hinzufügen
+    // add dummy costs (0)
     const cost_t cost = 0;
     const capacity_t capacity = DOUBLE_INFINITY;
     auto nodeIter = this->GetNodesIter();
-    for (; nodeIter != lemon::INVALID; ++nodeIter) //Filter dummy und transshipment nodes (=0) raus
+    for (; nodeIter != lemon::INVALID; ++nodeIter) //Filter out dummy and transshipment nodes (=0)
     {
         auto curNode = nodeIter;
         if (curNode == newNode) //Filter new dummy
             continue;
-        if ( (*this->nodeSupplyMap)[curNode] == 0) //Filter transshipment nodes (=0)
+        if ( (*this->nodeSupplyMap)[curNode] == 0) //Filter out transshipment nodes (=0)
             continue;
 
         arc_t arc;
@@ -3177,7 +3181,7 @@ void
 
 double
  InternalNet::getSupplyDemandDifference() {
-    //can be negative or positive
+    //may be negative or positive
     return (calcTotalDemand() - calcTotalSupply());
 }
 

@@ -49,6 +49,13 @@ namespace netxpert {
     * \b Con (compared to planarization):
     * \li much more (useless) egdes and nodes in the resulting graph if the input graph is not clean (crap in - crap out..)
     *
+    * Notes on precision model of the central Geometry Factory
+    *
+    * GEOS uses an internal precision model. This must fit to the model in SpatiaLite (which is also defined by GEOS internally).
+    * Because splitting of the arcs happens in the SpatiaLite DB, we must have a common precision model of the geometries.
+    * So we are tied here to FLOATING (precision of 16 floating point numbers).
+    *
+    *
     * \return arcs in network structure with fromNode and toNode and all input attributes
     **/
     class NetworkBuilder

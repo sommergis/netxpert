@@ -77,7 +77,7 @@ void
     //this->dijk->predMap(*this->predMap);
 
     if (this->bidirectional) {
-        //std::cout << "Bidirectional Dijkstra" << std::endl;
+        std::cout << "Bidirectional Dijkstra" << std::endl;
         //this->bijk = new bijkstra_t (*this->g, *this->costMap);
         this->bijk = std::unique_ptr<bijkstra_t> (new bijkstra_t (*this->g, *this->costMap));
 

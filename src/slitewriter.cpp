@@ -161,9 +161,7 @@ void SpatiaLiteWriter::CreateNetXpertDB()
         //check for existence
         if ( UTILS::FileExists(this->dbPath) )
         {
-            //LOGGER::LogWarning("FileGDB "+ NETXPERT_CNFG.ResultDBPath + " already exists and will be overwritten!");
             LOGGER::LogWarning("SpatiaLite DB "+ this->dbPath + " already exists!");
-            //DeleteGeodatabase( newPath );
             return;
         }
         SQLite::Database db(this->dbPath, SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE);
@@ -233,7 +231,26 @@ bool SpatiaLiteWriter::performInitialCommand()
 
         const string pathBefore = UTILS::GetCurrentDir();
 
+        #ifdef DEBUG
+        LOGGER::LogDebug("spatiaLiteHome: " + spatiaLiteHome);
+        #endif // DEBUG
+
+        string strSQL = "SELECT sqlite_version()";
+        SQLite::Statement query(db, strSQL);
+
+        std::string version = "";
+        while(query.executeStep())
+        {
+            SQLite::Column col = query.getColumn(0);
+            if (!col.isNull())
+            {
+                version  = col.getText();
+            }
+        }
+        LOGGER::LogDebug("(Internal) SQLite Version: " + version);
+
         UTILS::SetCurrentDir(spatiaLiteHome);
+
         /* Old way:
         db.enableExtensions();
         const string strSQL = "SELECT load_extension(@spatiaLiteCoreName,@spatiaLiteEntryPoint);";
@@ -242,14 +259,27 @@ bool SpatiaLiteWriter::performInitialCommand()
 		query.bind("@spatiaLiteEntryPoint", "sqlite3_modspatialite_init");
         query.executeStep();
         db.disableExtensions(); */
+
+        //spatialite > 4.2.0 : mod_spatialite should be used - not spatialite.dll | libspatialite.so
         //new way
-		#ifdef _WIN32
-		db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
-		#else
-        db.loadExtension(spatiaLiteCoreName.c_str(), NULL);
-        #endif
+        db.loadExtension(spatiaLiteCoreName.c_str(), "sqlite3_modspatialite_init");
+
+        strSQL = "SELECT spatialite_version()";
+        SQLite::Statement query2(db, strSQL);
+
+        version = "";
+        while(query2.executeStep())
+        {
+            SQLite::Column col = query2.getColumn(0);
+            if (!col.isNull())
+            {
+                version  = col.getText();
+            }
+        }
+        LOGGER::LogDebug("Spatialite Version: " + version);
+
         UTILS::SetCurrentDir(pathBefore);
-        //cout <<  boost::filesystem::current_path() << endl;
+
         return true;
     }
     catch (std::exception& e) {
@@ -349,7 +379,9 @@ void SpatiaLiteWriter::createTable (const string& _tableName, const NetXpertSolv
 
     SQLite::Database& db = *connPtr;
     SQLite::Statement query(db, strSQL);
-    cout << strSQL << endl;
+    #ifdef DEBUB
+    LOGGER::LogDebug(strSQL);
+    #endif // DEBUG
     query.exec();
     query.reset();
 }
@@ -434,7 +466,10 @@ std::unique_ptr<SQLite::Statement> SpatiaLiteWriter::PrepareSaveResultArc(const 
         SQLite::Database& db = *connPtr;
         auto query = unique_ptr<SQLite::Statement>(new SQLite::Statement(db, sqlStr));
 
-        //LOGGER::LogDebug("Successfully prepared query.");
+        #ifdef DEBUG
+        LOGGER::LogDebug("Successfully prepared query.");
+        #endif // DEBUG
+
         return query;
     }
     catch (std::exception& ex)
@@ -464,7 +499,6 @@ void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const 
         query.bind("@oneway", oneway);
 
         WKBWriter writer;
-        //cout<<"WKBtest: machine byte order: "<<BYTE_ORDER<<endl;
         std::stringstream oss (ios::out|ios::binary);
 
         writer.write(arc, oss);
@@ -483,8 +517,6 @@ void SpatiaLiteWriter::SaveNetworkBuilderArc(const std::string& extArcID, const 
         const char* blob = s.c_str();
 
         query.bind("@geom", blob, static_cast<int>(offset));
-
-        //cout << "binding complete"<<endl;
 
         query.exec();
         query.reset();
