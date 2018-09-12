@@ -1,5 +1,6 @@
 # ignore all *.a and *.o files
 *.[oa]
+*.tar.gz
 # ignore all files in bin/
 bin/*
 doxygen/*
@@ -9,12 +10,20 @@ libs/FileGDB_API_32Bit/samples/*
 libs/FileGDB_API/doc/*
 libs/geos-3.6.3/doc/*
 libs/lemon-1.3.1/doc/*
+libs/lemon-1.3.1/contrib/lemon-astar/.hg/*
+libs/lemon-1.3.1/contrib/lemon-astar/doc/*
+libs/lemon-1.3.1/contrib/lemon-astar/deps/*
+libs/lemon-1.3.1/contrib/lemon-astar/CMak*
+libs/lemon-1.3.1/contrib/lemon-astar/CP*
+libs/lemon-1.3.1/contrib/lemon-astar/Makefile
+libs/lemon-1.3.1/contrib/lemon-astar/*.cmake
 test/bin/*
 test/obj/*
 test/build/*
 test/data/*
 test/tost.gdb/*
 test/test.gdb/*
+.idea/*
 # ignore the following file endings
 *.orig
 *.bak
@@ -23,3 +32,7 @@ test/test.gdb/*
 *.pyc
 doc/html/*
 doc/latex/*
+# ignore the derived files
+src/py/pynetxpert.py
+src/py/pynetxpert.cpp
+src/py/_pynetxpert.so
