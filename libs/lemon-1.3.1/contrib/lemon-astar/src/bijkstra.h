@@ -1154,21 +1154,27 @@ namespace lemon {
           const Node* temp = nodep;
           Value finalvalue = currentDist(*nodep);
           if (G->id(*nodep) == G->id(t)) finalizeNodeData(t,finalvalue);
-          else while (G->id(*nodep) != G->id(t))
+          else
           {
-            Arc e = (*_rev_pred)[*nodep];
-            Node v = G->target(e);
-            _pred->set(v,e);
-            finalvalue = OperationTraits::plus(finalvalue, (*_length)[e]);
-            finalizeNodeData(v,finalvalue);
-            nodep = &v;
-            if (_heap->state(v) == Heap::PRE_HEAP)
-            {
-              _heap->push(v,finalvalue);
-              _pred->set(v,e);
-              _heap->erase(v);
-            }
+              while ( G->id(*nodep) != G->id(t) )
+              {
+                //some magic for simulating std:.cout action
+                // otherwise the code will hang here - why??
+                std::cout.flush();
 
+                Arc e = (*_rev_pred)[*nodep];
+                Node v = G->target(e);
+                _pred->set(v,e);
+                finalvalue = OperationTraits::plus(finalvalue, (*_length)[e]);
+                finalizeNodeData(v,finalvalue);
+                nodep = &v;
+                if (_heap->state(v) == Heap::PRE_HEAP)
+                {
+                  _heap->push(v,finalvalue);
+                  _pred->set(v,e);
+                  _heap->erase(v);
+                }
+               }
           }
           delete temp;
         }
